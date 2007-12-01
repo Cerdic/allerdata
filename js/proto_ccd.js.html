@@ -1,0 +1,19 @@
+
+/* --------------------------------------------- CCD -------------------------------------------- */
+
+var CCD = {
+	show : function() {
+		$('#ccd').load('spip.php?page=ccd&p1=' + 
+			jQuery('#p1').val() + '&p2=' +
+			jQuery('#p2').val() + '&p3=' +
+			jQuery('#p3').val() + '&p4=' +
+			jQuery('#p4').val() + '&p5=' +
+			jQuery('#p5').val());
+		$('input').removeClass('actif');
+	},
+	outline_prod : function(array_prod) {
+		for (i=0;i<array_prod.length;i++) {
+			$('input[@value=' + array_prod[i] + ']').next('.x-form-text').toggleClass('actif')
+		}
+	}
+};

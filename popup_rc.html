@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" style="background:white;padding:10px; min-height:0">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<meta http-equiv="Content-Language" content="#LANG" />
+	[(#REM) Feuille de style CSS pour l'affichage du site a l'ecran ]
+	[<link rel="stylesheet" href="(#CHEMIN{spip_style.css}|direction_css)" type="text/css" media="projection, screen, tv" />]
+	<style type="text/css">
+	@import url('#URL_SITE_SPIP/css/styles.css');
+	html,body {background:white;padding:0; margin:0;min-height:0}
+	body {padding:10px 0}
+	#container {width:310px; background:white;min-height:0;}
+	#main {margin:0; width:auto; float:left;}
+	#contenu {margin:0; padding:0}
+	.spip-admin-float {display:none}
+	</style>
+</head>
+
+<body>
+
+	<div id="container">
+		<div id="contenu">
+			
+			<div id="main">
+<?php if ($auteur_session) { ?>
+	
+				<div id="blocTitArticle">
+					<h1 class="titArticle"><:reactivites_croisees:></h1>
+				</div>
+				<div class="blocContenuArticle" style="margin:0; padding:0">
+					[<table>(#ENV{p1}|rc{#ENV{p2}})</table>]
+				</div>
+
+<?php } else { ?>
+				<h1><:h1_acces_restreint:></h1>
+				
+				<p><:instructions_login:></p>
+				
+				#LOGIN_PUBLIC
+				
+				[(#REM) Inscription au site ]
+				#FORMULAIRE_INSCRIPTION
+				
+<?php } ?>
+
+			</div>
+</body>
+</html>

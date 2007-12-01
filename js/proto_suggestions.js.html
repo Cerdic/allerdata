@@ -1,0 +1,96 @@
+
+/* --------------------------------- Produits associés aux RC ------------------------------------- */
+
+var LISTE_DES_SUGGESTIONS = {
+  
+  grid : null,
+  
+  init : function(){},
+  
+  getPanel : function(){
+
+    if (!this.grid) {
+          
+      var center = function(texte) {
+        if (texte.parseFloat() != NaN) {texte = change(texte);}
+        /* visiblement ce n'est pas la bonne methode pour centrer */
+        return "<div style='text-align:center'>" + texte + "</div>";
+      }
+      
+      var change = function(val){
+        if(val > 2){
+          return '<span style="color:red;">' + val + '</span>';
+              }else if(val > 1){
+                  return '<span style="color:green;">' + val + '</span>';
+              }
+              return val;
+          }
+  
+      var change_rl = function(val){
+        if(val == 'toujours'){
+          return '<div class="rc_toujours_rl"></div>';
+        }else if( val == 'jamais'){
+            return '<div class="rc_jamais_rl"></div>';
+          } else if(  val == 'discordant'){
+                return '<div class="rc_discordant_rl"></div>';
+              }
+        return val;
+      }
+  
+      var change_lr = function(val){
+        if(val == 'toujours'){
+          return '<div class="rc_toujours_lr"></div>';
+        }else if( val == 'jamais'){
+            return '<div class="rc_jamais_lr"></div>';
+          } else if(  val == 'discordant'){
+                return '<div class="rc_discordant_lr"></div>';
+              }
+        return val;
+      }
+  
+      var ds_s = new Ext.data.Store({
+      proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_suggestions'}),
+      reader: new Ext.data.JsonReader({
+        root: 'liste_des_suggestions',
+        id : 'id_item'
+      }, [
+           {name: 'nom1'},
+           {name: 'nom2'},
+           {name: 'type_rc1'},
+           {name: 'type_rc2'}
+        ])
+      });
+      
+      // La grille proprement dite
+      this.grid = new Ext.grid.GridPanel({
+        store: ds_s,
+        columns: [
+          {id:'nom',header: SUGG_P1, width: 160, sortable: true, locked:false, dataIndex: 'nom1'},
+          {header: SUGG_P1_TO_P2, width: 154, sortable: true, locked:false, dataIndex: 'type_rc1', renderer: change_lr},
+          {header: SUGG_P2_TO_P1, width: 154, sortable: true, locked:false, dataIndex: 'type_rc2', renderer: change_rl},
+          {header: SUGG_P2, width: 160, sortable: true, locked:false, dataIndex: 'nom2'}
+        ],
+        viewConfig: {
+          forceFit: true
+        },
+        title: SUGG_GRID_TITLE
+      })
+              
+    }
+    
+    return this.grid;
+  },
+
+  // La mise à jour se fait par json
+  show_query : function() {
+  	var p1 = jQuery('#p1').val(),
+  		p2 = jQuery('#p2').val(), 
+  		p3 = jQuery('#p3').val(), 
+  		p4 = jQuery('#p4').val(), 
+  		p5 = jQuery('#p5').val(),
+  		ds_s = this.grid.getStore();
+    ds_s.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5}});
+  }
+};
+Ext.onReady(LISTE_DES_SUGGESTIONS.init, LISTE_DES_SUGGESTIONS);
+

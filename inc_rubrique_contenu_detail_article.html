@@ -1,0 +1,19 @@
+					<BOUCLE_EstMultirubrique(ARTICLES){id_article}{tout_voir}{chapo==^#}>
+					<BOUCLE_ArticleMultirubrique(ARTICLES){id_article=(#CHAPO|replace{'#',''})}>
+					<li class="listeFormation">
+						<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE</a></h3>
+						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</p>
+						[<p class="txtSommaire">(#TEXTE|couper{280})</p>
+						<p class="lireSuite"><a href="#URL_ARTICLE"><img src="images/lire_suite.gif" alt="Lire la suite" title="Lire la suite" /></a></p>]
+					</li>
+					</BOUCLE_ArticleMultirubrique>
+					</BOUCLE_EstMultirubrique>
+					<BOUCLE_Article(ARTICLES){id_article}>
+					<li class="listeFormation">
+						<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE</a></h3>
+						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</p>
+						[<p class="txtSommaire">(#TEXTE|couper{280})</p>
+						<p class="lireSuite"><a href="#URL_ARTICLE"><img src="images/lire_suite.gif" alt="Lire la suite" title="Lire la suite" /></a></p>]
+					</li>
+					</BOUCLE_Article>
+					<//B_EstMultirubrique>

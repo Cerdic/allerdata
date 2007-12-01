@@ -1,0 +1,57 @@
+<BOUCLE_EstMultirubrique(ARTICLES){id_article}{tout_voir}{chapo==^#}>
+<INCLURE{fond=article}{id_article=(#CHAPO|replace{'#',''})}{id_multirubrique=#ID_ARTICLE}>
+</BOUCLE_EstMultirubrique>
+<BOUCLE_ArticlePrincipal(ARTICLES){id_article}{tout_voir}>[
+(#INCLURE{fond=inc_header}{titrepage=#TITRE})]
+		<BOUCLE_RubriqueAriane(ARTICLES){id_article=#ENV{id_multirubrique,#ID_ARTICLE}}{tout_voir}>
+		<p id="ariane"><a href="./">Accueil</a> /<BOUCLE_FilAriane(HIERARCHIE){id_article}> <a href="#URL_RUBRIQUE">#TITRE</a> /</BOUCLE_FilAriane> <strong>#_ArticlePrincipal:TITRE</strong></p>
+		</BOUCLE_RubriqueAriane>
+		
+		<div id="contenu" class="clearfix">
+			
+			<div id="main">
+[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})
+<?php if ($auteur_session) { ?>
+[(#INCLURE{fond=inc_article_contenu}{id_article})]
+<?php } else { ?>
+				<h1>L'accès à «&nbsp;#TITRE&nbsp;» est réservé aux abonnés</h1>
+				
+				<p>Vous êtes déjà abonné ?</p>
+				
+				<p>Afin d'accéder au contenu intégral de ce site, identifiez-vous en entrant 
+				ci-dessous le nom d'utilisateur et le mot de passe qui vous ont été envoyés.</p>
+				
+				#LOGIN_PUBLIC
+				
+				[(#REM) Inscription au site ]
+				#FORMULAIRE_INSCRIPTION
+				
+<?php } ?>
+][(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '})
+[(#INCLURE{fond=inc_article_contenu}{id_article})]
+]
+
+			</div>
+			
+			<div id="sidebar">
+<BOUCLE_RubriqueMenu(ARTICLES){id_article=#ENV{id_multirubrique,#ID_ARTICLE}}{tout_voir}>
+[(#INCLURE{fond=inc_menu}{id_rubrique})]
+				<B_MemeRubrique>
+				<h2><:ad:memerubrique:></h2>
+				<ul id="memeRubrique">
+					<BOUCLE_MemeRubrique(ARTICLES){id_rubrique}{exclus}{tout_voir}>
+					<li>
+						<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+						<p>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</p>
+					</li>
+					</BOUCLE_MemeRubrique>
+				</ul>
+				</B_MemeRubrique>
+			</div>
+</BOUCLE_RubriqueMenu>
+		</div>
+	</div>
+#INCLURE{fond=inc_footer}
+
+</BOUCLE_ArticlePrincipal>
+<//B_EstMultirubrique>

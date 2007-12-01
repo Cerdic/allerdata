@@ -1,0 +1,58 @@
+/* --------------------------------------------- POPUP -------------------------------------------- */
+/* ux.IFrameComponent : link. http://extjs.com/forum/showthread.php?p=54322 */
+/* ux.ManagedIframe : link. http://extjs.com/forum/showthread.php?t=16590 */
+
+Ext.myDialog = Ext.extend(Ext.Window,{
+       closeAction: 'hide',
+       hideBorders: true,
+       deferredRender: false,
+       initComponent : function(){
+          if (this.autoTabs) {
+            var myPanel = new Ext.TabPanel({ 
+                           id: this.id, 
+                           renderTo: 'popup-dlg',
+                           contentEl: 'popup-iframe'
+                        });
+            this.items=[ myPanel ];
+            this.layout='fit';
+          }
+          Ext.myDialog.superclass.initComponent.call(this);
+       },
+});
+ 
+var dialog;
+
+Ext.onReady(function(){
+	
+  dialog = new Ext.myDialog({ 
+	        modal:true,
+	        width:350,
+	        height:450,
+	        autoTabs:true,
+          id:'fenetreModale',
+          title:'Information'
+	});
+  
+	dialog.on('beforehide',
+    function() {
+      Ext.get('popup-iframe').dom.src = 'about:blank';
+      this.setTitle('Information');
+	  }
+  );
+
+});
+
+<?php
+foreach (array(1,2,3,4,5) as $i) {
+echo "
+  jQuery('#info-s$i').click(function() {
+    if (jQuery('#p$i').val()) {
+      dialog.setTitle(jQuery('#prod_$i').val());
+      var link = 'spip.php?page=popup_item&id_item=' + jQuery('#p$i').val();
+      Ext.get('popup-iframe').dom.src = link;
+      dialog.show(Ext.get('prod_$i'));
+    }
+    return false;
+  })";
+}
+?>

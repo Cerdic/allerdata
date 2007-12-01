@@ -1,0 +1,219 @@
+/* -------------------- Mise en avant de 2 produits et de leur lien ------------------------- */
+
+var MiseEnAvant = function(){
+
+    return {
+      prod_1 : 0,
+      prod_2 : 0,
+      init : function(){
+      for (i=1;i<5;i++) {
+        for (j=i+1;j<=5;j++) {
+          jQuery('#link_'+i+'-'+j).bind(
+            'mousedown', function(e) {
+              var id = jQuery(this).attr('id');
+              var re = /link_(\d)-(\d)/;
+              var found = id.match(re);
+              var i = found[1];
+              var j = found[2];
+              jQuery('.actif').removeClass('actif');
+              if (i!=MiseEnAvant.prod_1 || j!=MiseEnAvant.prod_2) {
+                jQuery('#prod_'+i+', #prod_'+j+', #link_'+i+'-'+j).addClass('actif');
+                MiseEnAvant.prod_1 = i;
+                MiseEnAvant.prod_2 = j;                
+              } else {
+                MiseEnAvant.prod_1 = MiseEnAvant.prod_2 = 0;
+              }
+            }
+          );
+        }
+      }
+    }
+  };
+}();
+
+Ext.EventManager.onDocumentReady(MiseEnAvant.init, MiseEnAvant, true);
+
+
+/* ----------------------------- Nettoyage des comboBox ---------------------------------- */
+
+// Permet de nettoyer proprement le combo lorsque le champ de saisie perd le focus
+// Il faut nettoyer la valeur + afficher le texte par défaut + supprimer les divs de suggestion
+// pour vraiment effacer une combo
+
+Ext.form.ComboBox.prototype.doForce = function() {
+    v = this.getValue() || '';
+    console.log(this.getValue() + '!=' + $('#' + this.el.dom.id).val());
+    if(isNaN(v) && (this.getValue() != $('#' + this.el.dom.id).val())) {
+        this.clearValue();
+        this.applyEmptyText();
+    }
+}
+
+/* --------------------------------- Listes de saisie ------------------------------------- */
+
+var ZONES_SAISIE = {
+  
+  combo_1 : null,
+  combo_2 : null,
+  combo_3 : null,
+  combo_4 : null,
+  combo_5 : null,
+  
+  init : function() {
+    var store = new Ext.data.JsonStore({
+          url: 'spip.php?action=liste_des_produits',
+          root: 'produits',
+          fields : ['id_item','nom']
+    });
+
+    this.combo_1 = new Ext.form.ComboBox({
+      applyTo:'prod_1',                                     // id d'un noeud qui possede l'input
+      store: store,                                         // d'où viennent les données
+      displayField:'nom',                                   // ce qu'on affiche
+      valueField:'id_item',                                 // la valeur qui sera envoyées
+      hiddenName:'p1',                                      // le champs cché qui permet d'envoyer la valeur (et pas le texte)
+      forceSelection: true,                                 // obliger de ne saisir que ce qui est proposé
+      typeAhead: false,                                     // suggestion
+      hideClearButton: false,                               // toujours visible
+      hideTrigger: true,                                    // toujours visible (ça masque TOUS les triggers) 
+      minChars:2,                                           // nb de caractères avant requete de suggestion
+      grow:true,                                            // s'adapte au nb de résultats
+      maxHeight:300,                                        // hauteur maxi
+      selectOnFocus:true,                                   // pour éviter le pb du double-clic
+      loadingText: COMBO_LOADINGTEXT,                       // -
+      emptyText:COMBO_EMPTYTEXT,   			                    // -
+      width: 186                                            // -
+    });
+    
+    this.combo_1.on('beforequery',function(){
+        $('#info-s1').hide();
+        $('.concerne-p1').removeClass('rc_toujours');
+        $('.concerne-p1').removeClass('rc_jamais');
+        $('.concerne-p1').removeClass('rc_discordant');
+        $('#liens_infos .concerne-p1').hide();
+        }
+    );
+    this.combo_1.on('blur', function(){ this.doForce() });
+
+ 
+    this.combo_2 = new Ext.form.ComboBox({
+      applyTo:'prod_2',
+      store : store,
+      displayField : 'nom',
+      valueField : 'id_item',
+      hiddenName : 'p2',
+      forceSelection : true,
+      typeAhead : false,
+      hideClearButton : false,
+      hideTrigger : true,
+      selectOnFocus : true,                                   
+      minChars : 2,
+      grow : true,
+      maxHeight : 300,
+      loadingText : COMBO_LOADINGTEXT,
+      emptyText : COMBO_EMPTYTEXT,
+      width : 186
+    });
+    //this.combo_2.on('blur', function(){setTimeout("$('#form_penta').submit()",100)});
+    this.combo_2.on('beforequery',function(){
+        $('#info-s2').hide();
+        $('.concerne-p2').removeClass('rc_toujours');
+        $('.concerne-p2').removeClass('rc_jamais');
+        $('.concerne-p2').removeClass('rc_discordant');
+        $('#liens_infos .concerne-p2').hide();
+    }
+    );
+ 
+    this.combo_3 = new Ext.form.ComboBox({
+      applyTo:'prod_3',
+      store: store,
+      displayField:'nom',
+      valueField:'id_item',
+      forceSelection: true,
+      typeAhead: false,
+      hideClearButton: false,
+      hideTrigger: true,
+      hiddenName:'p3',
+      minChars:2,
+      grow:true,
+      maxHeight:300,
+      selectOnFocus:true,                                   
+      loadingText: COMBO_LOADINGTEXT,
+      emptyText:COMBO_EMPTYTEXT,
+      width: 186
+    });
+    this.combo_3.on('blur', function(){this.doForce()});
+    this.combo_3.on('beforequery',function(){
+        $('#info-s3').hide();
+        $('.concerne-p3').removeClass('rc_toujours');
+        $('.concerne-p3').removeClass('rc_jamais');
+        $('.concerne-p3').removeClass('rc_discordant');
+        $('#liens_infos .concerne-p3').hide();
+    });
+  
+    this.combo_4 = new Ext.form.ComboBox({
+      applyTo:'prod_4',
+      store: store,
+      displayField:'nom',
+      valueField:'id_item',
+      hiddenName:'p4',
+      forceSelection: true,
+      typeAhead: false,
+      hideTrigger: true,
+      hideClearButton: false,
+      minChars:1,
+      selectOnFocus:true,                                   
+      loadingText: COMBO_LOADINGTEXT,
+      emptyText:COMBO_EMPTYTEXT,
+      width: 186
+    });
+    this.combo_4.on('blur', function(){this.doForce()});
+    this.combo_4.on('beforequery',function(){
+            $('#info-s4').hide();
+            $('.concerne-p4').removeClass('rc_toujours');
+            $('.concerne-p4').removeClass('rc_jamais');
+            $('.concerne-p4').removeClass('rc_discordant');
+            $('#liens_infos .concerne-p4').hide();
+        }
+    );
+  
+    this.combo_5 = new Ext.form.ComboBox({
+      applyTo:'prod_5',
+      store: store,
+      displayField:'nom',
+      valueField:'id_item',
+      hiddenName:'p5',
+      forceSelection: true,
+      typeAhead: false,
+      hideClearButton: false,
+      hideTrigger: true,
+      minChars:1,
+      selectOnFocus:true,                                   
+      loadingText: COMBO_LOADINGTEXT,
+      emptyText:COMBO_EMPTYTEXT,
+      width: 186
+    });
+    this.combo_5.on('blur', function(){this.doForce()});
+    this.combo_5.on('beforequery',function(){
+            $('#info-s5').hide();
+            $('.concerne-p5').removeClass('rc_toujours');
+            $('.concerne-p5').removeClass('rc_jamais');
+            $('.concerne-p5').removeClass('rc_discordant');
+            $('#liens_infos .concerne-p5').hide();
+        }
+    );
+
+    if ($('#p1').val()) $('#info-s1').show();
+    if ($('#p2').val()) $('#info-s2').show();
+    if ($('#p3').val()) $('#info-s3').show();
+    if ($('#p4').val()) $('#info-s4').show();
+    if ($('#p5').val()) $('#info-s5').show();
+  },
+  
+  setValue : function (sobj,val){
+    debugger;
+    obj = Ext.get(sobj);
+    obj.set({value:val});
+  }
+};
+Ext.onReady(ZONES_SAISIE.init, ZONES_SAISIE);

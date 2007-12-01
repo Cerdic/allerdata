@@ -1,0 +1,9 @@
+			<form action="[(#ENV{lien})]" method="get" id="searchForm">
+				<p>
+				[(#ENV{lien}|form_hidden)]
+				[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+				<label for="search"><:info_rechercher:></label>
+				<input type="text" name="recherche" class="inputTxt" id="search" value="[(#ENV{recherche})]" />
+				<input type="image" class="inputImg" src="images/but_search.gif" alt="OK" />
+				</p>
+			</form>

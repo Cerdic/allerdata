@@ -1,0 +1,48 @@
+[(#INCLURE{fond=inc_header}{titrepage=<:info_rechercher:>: #RECHERCHE})]
+		<p id="ariane"><a href="./">Accueil</a> / <:info_rechercher:>&nbsp;: <strong>#RECHERCHE</strong></p>
+		
+		<div id="contenu" class="clearfix">
+			
+			<div id="main">
+				<h1 class="h2"><:resultats_recherche:> #RECHERCHE</h1>
+				<B_ListeArticles>
+				<h2>Articles</h2>
+				#ANCRE_PAGINATION
+				<ul class="listeArticles">
+					<BOUCLE_ListeArticles(ARTICLES){recherche}{par points}{pagination 5}>
+					<li class="listeFormation">
+						<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE</a></h3>
+						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</p>
+						<p class="txtSommaire">[(#TEXTE|couper{280})]</p>
+						<p class="lireSuite"><a href="#URL_ARTICLE"><img src="images/lire_suite.gif" alt="Lire la suite" title="Lire la suite" /></a></p>
+					</li>
+					</BOUCLE_ListeArticles>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+				</B_ListeArticles>
+				<p>Pas d'articles trouvés...</p>
+				<//B_ListeArticles>
+
+				<B_ListeItems>
+				<h2>Produits</h2>
+				#ANCRE_PAGINATION
+				<ul class="listeArticles">
+					<BOUCLE_ListeItems(tbl_items){nom==#RECHERCHE}{pagination 5}>
+					<li class="listeFormation"><a href="#URL_PAGE{item,id_item=#ID_ITEM}" class="formation">#NOM</a></li>
+					</BOUCLE_ListeItems>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+				</B_ListeItems>
+				<h2>Produits</h2>
+				<p>Pas de produit trouvés...</p>
+				<//B_ListeItems>
+
+			</div>
+			
+			<div id="sidebar">
+[(#INCLURE{fond=inc_menu}{id_rubrique})]
+			</div>
+			
+		</div>
+	</div>		
+#INCLURE{fond=inc_footer}

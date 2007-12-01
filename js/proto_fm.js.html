@@ -1,0 +1,99 @@
+
+/* --------------------------------- Familles moléculaires ------------------------------------- */
+
+var LISTE_DES_FAMILLES = {
+  
+  grid:null,
+
+  init : function(){},
+  
+  getPanel : function(){
+    if (!this.grid) {
+    
+      var dsp_libelle = function (texte) {
+        var temp = new Array(); 
+        temp = texte.split('==>');
+        var nom = temp[0],
+      	  est_dans = temp[1];
+        return "<div class='cell_fm'><a href=\"javascript:void(0)\" onclick='LISTE_DES_FAMILLES.outline_prod(" + est_dans + ")' title='" + nom + "'>" + nom + '</a></span></div>';
+      };
+    
+      var dsp_nb = function(val){
+        if(val > 2){
+          return "<div class='cell_fm' style='color:red;'>" + val + '</span></div>';
+        }else if(val > 1){
+           return "<div class='cell_fm' style='color:green;'>" + val + '</span></div>';
+         }
+        return val;
+      };
+      
+      var dsp_toInfo = function(val) {
+        var t = "<div class='cell_fm'><a class='info_fm' id='info_fm_" + val + "' style='display:block;' alt='infos' onclick='LISTE_DES_FAMILLES.popup_fm(" + val + ")'></a></div>";
+        return t;
+      };
+
+      var ds = new Ext.data.Store({
+        proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_familles'}),
+        reader: new Ext.data.JsonReader({
+          root: 'liste_des_familles',
+          id : 'id_item'
+        }, [
+             {name: 'nom'},
+             {name: 'id_item'},  
+             {name: 'nb_item'}
+          ])
+      });
+        
+      this.grid = new Ext.grid.GridPanel({
+        store:ds,
+        autoExpandColumn:'nom',
+        columns: [
+          {id:'nom',header: FM_NAME, width: 133, sortable: true, locked:false, dataIndex: 'nom', renderer: dsp_libelle},
+          {id:'info', header: '', width: 30, sortable:false, align: 'center', dataIndex: 'id_item', renderer: dsp_toInfo},
+    			{header: FM_NB, width: 28, sortable: true, align:'center', dataIndex: 'nb_item', renderer: dsp_nb}
+        ],
+        viewConfig: {
+          forceFit: true
+        },
+        title:FM_GRID_TITLE
+      })
+    }
+    
+    return this.grid;
+
+  },
+
+  // La mise à jour se fait par json
+  show_fm : function() {
+    var p1 = jQuery('#p1').val(),
+  		p2 = jQuery('#p2').val(), 
+  		p3 = jQuery('#p3').val(), 
+  		p4 = jQuery('#p4').val(), 
+  		p5 = jQuery('#p5').val(),
+  		ds = this.grid.getStore();
+    ds.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5}});
+    // Et lancer la requete pour afficher les RC
+    LISTE_DES_RC.getData(p1,p2,p3,p4,p5);
+  },
+
+	// Infos d'une FM
+	popup_fm : function(val) {
+	  Ext.get('popup-iframe').dom.src = 'spip.php?page=popup_fm&id_fm=' + val;
+	  dialog.show(Ext.get('info_fm_' + val));		
+	},
+	
+	// Mise en avant des produits concernés par une FM
+	outline_prod : function(lProd) {
+    $('.actif').removeClass('actif');
+    var num=0;
+    while (num < lProd.length)
+    {
+      var hidden_div = jQuery('#liste_des_produits input[@value='+lProd[num]+']');
+      var id = '#prod_' + hidden_div.attr('id').substr(1);
+      $(id).addClass('actif');
+      num+=1;
+    }
+	}
+	
+};
+Ext.onReady(LISTE_DES_FAMILLES.init, LISTE_DES_FAMILLES);

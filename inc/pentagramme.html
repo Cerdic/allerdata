@@ -1,0 +1,124 @@
+<div id="layout-pentagramme">
+
+	<div id="layout_rc">
+		<?php 
+			
+			function lien_rc($i, $j) {
+				if ($i==$j) return '';
+				//$type_rc = array('',' rc_toujours',' rc_jamais',' rc_discordant');
+				return "<div id='rc_".$i."-".$j."' class='rc concerne-p".$i." concerne-p".$j."'>
+					<img src='#CHEMIN{img/rc_toujours}/rc_".$i."_".$j.".gif' class='img_toujours rc_".$i."-".$j."' alt='toujours' title='toujours' />
+					<img src='#CHEMIN{img/rc_jamais}/rc_".$i."_".$j.".gif' class='img_jamais rc_".$i."-".$j."' alt='jamais ' title='jamais' />
+					<img src='#CHEMIN{img/rc_discordant}/rc_".$i."_".$j.".gif' class='img_discordant rc_".$i."-".$j."' alt='discordant' title='discordant' />
+					</div>\n";
+			}
+			
+			for ($i = 1; $i<=5; $i++) {
+				for ($j = 1; $j<=5; $j++) {
+					echo lien_rc($i, $j);
+				}
+			}
+		?>
+						
+	</div>
+	
+		<div id="liens_infos" >
+			<div id="lien_1-2_" class="ancre concerne-p1 concerne-p2">
+				<a id="infos_1-2" href="javascript:void(0)" class="lien">
+					<img id="lien_1-2" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_1-3_" class="ancre concerne-p1 concerne-p3">
+				<a id="infos_1-3" href="javascript:void(0)" class="lien">
+					<img id="lien_1-3" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_1-4_" class="ancre concerne-p1 concerne-p4">
+				<a id="infos_1-4" href="javascript:void(0)" class="lien">
+					<img id="lien_1-4" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_1-5_" class="ancre concerne-p1 concerne-p5">
+				<a id="infos_1-5" href="javascript:void(0)" class="lien">
+					<img id="lien_1-5" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_2-3_" class="ancre concerne-p2 concerne-p3">
+				<a id="infos_2-3" href="javascript:void(0)" class="lien">
+					<img id="lien_2-3" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_2-4_" class="ancre concerne-p2 concerne-p4">
+				<a id="infos_2-4" href="javascript:void(0)" class="lien">
+					<img id="lien_2-4" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_2-5_" class="ancre concerne-p2 concerne-p5">
+				<a id="infos_2-5" href="javascript:void(0)" class="lien">
+					<img id="lien_2-5" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_3-4_" class="ancre concerne-p3 concerne-p4">
+				<a id="infos_3-4" href="javascript:void(0)" class="lien">
+					<img id="lien_3-4" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt=""  />
+				</a>
+			</div>
+			<div id="lien_3-5_" class="ancre concerne-p3 concerne-p5">
+				<a id="infos_3-5" href="javascript:void(0)" class="lien">
+					<img id="lien_3-5" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt=""  />
+				</a>
+			</div>
+			<div id="lien_4-5_" class="ancre concerne-p4 concerne-p5">
+				<a id="infos_4-5" href="javascript:void(0)" class="lien">
+					<img id="lien_4-5" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt=""/>
+				</a>
+			</div>
+		</div>
+
+		<map name="map" id="map">
+			<area id="infos_1" href="javascript:void(0)" shape="circle" coords="232,10,10" alt="" class="sommet" />
+			<area id="infos_2" href="javascript:void(0)" shape="circle" coords="368,155,10" alt="" class="sommet" />
+			<area id="infos_3" href="javascript:void(0)" shape="circle" coords="233,348,10" alt="" class="sommet" />
+			<area id="infos_4" href="javascript:void(0)" shape="circle" coords="36,295,10" alt="" class="sommet" />
+			<area id="infos_5" href="javascript:void(0)" shape="circle" coords="34,61,10" alt="" class="sommet" />
+		</map>
+	
+	
+	
+	<form method="post" id="form_penta" action="" >
+		
+		<div id="liste_des_produits">
+			<div id="div-s1">
+				<input type="text" class="select_prod" id="prod_1" name="prod[1]" size="20" />
+			</div>
+			<div id="div-s2">
+				<input type="text" class="select_prod" id="prod_2" name="prod[2]" size="20" />
+			</div>
+			<div id="div-s3">
+				<input type="text" class="select_prod" id="prod_3" name="prod[3]" size="20" />
+			</div>
+			<div id="div-s4">
+				<input type="text" class="select_prod" id="prod_4" name="prod[4]" size="20" />
+			</div>
+			<div id="div-s5">
+				<input type="text" class="select_prod" id="prod_5" name="prod[5]" size="20" />
+			</div>
+			<a href="#" id="info-s1" class="info"></a>
+			<a href="#" id="info-s2" class="info"></a>
+			<a href="#" id="info-s3" class="info"></a>
+			<a href="#" id="info-s4" class="info"></a>
+			<a href="#" id="info-s5" class="info"></a>
+		</div>
+		<div>
+		<input type="image" src="#CHEMIN{img/btn_valider.gif}" name="submit" id="submit" onclick="$('input:text').removeClass('actif');"/>
+		<input type="image" src="#CHEMIN{img/btn_annuler.gif}" name="reset" id="reset" onclick="window.location='pentagramme.html';return false;" style="position:absolute;top:400px;left:500px" /> 
+		</div>
+	</form>
+
+</div>
+<div id="lienPermanent">
+	<a id="lienAdresse" href="#" style="float:right"><:get_url:></a>
+	<BOUCLE_ModeEmploiAAM(ARTICLES){titre_mot=ModeEmploiAAM}{!par date}{0,1}><a id="lienAide" href="#"  style="float:left; font-weight:bold; padding-left:10px"><:help_needed:></a>
+	</BOUCLE_ModeEmploiAAM>
+</div>
+

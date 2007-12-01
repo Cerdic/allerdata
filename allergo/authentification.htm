@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+	<title>Authentification - Allerdata</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Language" content="fr" />
+	<style type="text/css">
+	@import url('css/styles.css');
+	</style>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.treeview.pack.js"></script>
+	<script type="text/javascript" src="js/global.js"></script>
+	<!--[if lt IE 7]>
+	<script type="text/javascript" src="js/correctpng.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div id="container" class="clearfix">
+		
+		<div id="header" class="clearfix">
+			<ul id="prelude">
+				<li><a href="plan.htm">aller au plan</a></li>
+				<li><a href="#menu">aller au menu</a></li>
+				<li><a href="accesspol.htm">politique d'accessibilité</a></li>
+			</ul>
+			<p id="logo"><a href="#"><img src="images/logo.gif" alt="Retour à l'accueil, logo Allerdata" /></a></p>
+			<form action="#" method="post" id="searchForm">
+				<p>
+					<label for="search">Rechercher</label>
+					<input type="text" class="inputTxt" id="search" value="" />
+					<input type="image" class="inputImg" src="images/but_search.gif" alt="OK" />
+				</p>
+			</form>
+		</div>
+		
+		<div id="menu">
+			<ul>
+				<li><a href="#" class="formation">Formation</a> |</li>
+				<li><a href="#" class="outils">Outils</a></li>
+				<li><a href="#"><img src="images/picto_ouvert.gif" alt="Ouvert" /></a></li>
+			</ul>
+		</div>
+		
+		<p id="ariane"><a href="#">Accueil</a> / <a href="#">Les produits allergisants et les patients 
+		(notion d'exposition) (F.Rancé)</a> / <strong>Allergènes d'intérieur (indoor)</strong></p>
+		
+		<div id="contenu" class="clearfix">
+			
+			<div id="main">
+				<h1>L'accès à cette rubrique est restreint</h1>
+				
+				<form action="#" method="post" id="ident" class="forms">
+					<fieldset>
+						<legend>Identifiez-vous !</legend>
+						<p>Afin d'accéder au contenu protégé de ce site, identifiez-vous en entrant 
+						ci-dessous le nom d'utilisateur et le mot de passe qui vous ont été envoyés !</p>
+						<p>
+							<label for="nom">Votre nom ou pseudo</label>
+							<input type="text" name="nom" id="nom" class="inputTxt" value="" />
+						</p>
+						<p>
+							<label for="mdp">Votre mot de passe</label>
+							<input type="text" name="nom" id="mdp" class="inputTxt" value="" />
+						</p>
+						<p class="buttons"><input type="image" src="images/bt_valider.gif" alt="Valider" class="inputImg" /></p>
+					</fieldset>
+				</form>
+				
+			</div>
+			
+			<div id="sidebar">
+				<h2>Rubriques</h2>
+				<ul id="rubriques">
+					<li><a href="#">Etat des lieux (équipe d'Allerdata)</a></li>
+					<li><a href="#">Historique de l'allergologie moléculaire : (G.Pauli)</a></li>
+					<li><a href="#">Le site Allerdata</a></li>
+					<li class="open"><a href="#">Les produits allergisants et les patients (notion d'exposition) (F.Rancé)</a>
+						<ul>
+							<li class="open"><a href="#">Allergènes d'intérieur (indoor)</a>
+								<ul>
+									<li><a href="#">Acariens</a></li>
+									<li><a href="#">Blattes</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Allergènes d'extérieur (outdoor)</a></li>
+							<li><a href="#">Allergènes ubiquitaires</a></li>
+							<li><a href="#">Allergies alimentaires</a></li>
+							<li><a href="#">Allergènes cachés</a></li>
+							<li><a href="#">Contacts professionnels (H.Dhivert-Donnadieu)</a></li>
+							<li><a href="#">Contacts iâtrogéniques (H.Dhivert-Donnadieu) ou (P.Demoly)</a></li>
+						</ul>
+					</li>
+					<li><a href="#">ALLERDATA en pratique : l'utilisation du site</a></li>
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+		
+		<div id="footer">
+			<ul>
+				<li><a href="#">mentions légales</a> -</li>
+				<li><a href="#"><img src="images/logo_almirall.gif" alt="Logo Almirall" /></a></li>
+				<li><a href="#"><img src="images/logo_stallergenes.gif" alt="Logo Stallergenes" /></a></li>
+			</ul>
+		</div>
+
+</body>
+</html>
