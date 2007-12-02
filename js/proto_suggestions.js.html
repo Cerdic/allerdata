@@ -70,6 +70,7 @@ var LISTE_DES_SUGGESTIONS = {
           {header: SUGG_P2_TO_P1, width: 154, sortable: true, locked:false, dataIndex: 'type_rc2', renderer: change_rl},
           {header: SUGG_P2, width: 160, sortable: true, locked:false, dataIndex: 'nom2'}
         ],
+        loadMask: {msg:"modification en cours..."},
         viewConfig: {
           forceFit: true
         },
@@ -78,7 +79,7 @@ var LISTE_DES_SUGGESTIONS = {
               
     }
     
-    return this.grid;
+		return this.grid;
   },
 
   // La mise à jour se fait par json
