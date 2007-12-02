@@ -1,3 +1,44 @@
+/**
+ * Makes a ComboBox have a twin trigger that is used to clear the value from the field.
+ * User listener 'clear' to do something.
+ *
+ * @author Michael Giddens & help from Animal, jSakalos, Jack
+ * http://extjs.com/forum/showthread.php?p=76130
+ *
+ * @history 2007-10-21 jvs
+ * Combobox Mod for Ext 2.0
+ */
+Ext.ux.TwinComboBox = Ext.extend(Ext.form.ComboBox, {
+        initComponent : Ext.form.TwinTriggerField.prototype.initComponent
+    ,    getTrigger : Ext.form.TwinTriggerField.prototype.getTrigger
+    ,    initTrigger    : Ext.form.TwinTriggerField.prototype.initTrigger
+    ,    trigger1Class    :    'x-form-clear-trigger'
+    ,    hideTrigger1 : true
+//    ,    onTrigger2Click : Ext.form.ComboBox.prototype.onTriggerClick // Not sure if needed ???
+//    ,    hideTrigger2: Ext.form.ComboBox.prototype.hideTrigger      // Does not map hideTrigger ???
+
+    , reset : Ext.form.Field.prototype.reset.createSequence(function(){        
+				this.triggers[0].hide();
+        })
+    
+    , onViewClick :    Ext.form.ComboBox.prototype.onViewClick.createSequence(function(){
+        this.triggers[0].show(); // Added to show trigger
+        })
+    
+  	, onTrigger2Click : function(){
+            this.onTriggerClick();
+        }
+
+  	, onTrigger1Click : function(){
+            this.clearValue();
+            this.triggers[0].hide();
+      			this.fireEvent('clear', this);
+      			this.fireEvent('beforequery', this);
+						reload_penta();
+      }
+        
+});
+
 /* -------------------- Mise en avant de 2 produits et de leur lien ------------------------- */
 
 var MiseEnAvant = function(){
@@ -42,7 +83,6 @@ Ext.EventManager.onDocumentReady(MiseEnAvant.init, MiseEnAvant, true);
 
 Ext.form.ComboBox.prototype.doForce = function() {
     v = this.getValue() || '';
-    console.log(this.getValue() + '!=' + $('#' + this.el.dom.id).val());
     if(isNaN(v) && (this.getValue() != $('#' + this.el.dom.id).val())) {
         this.clearValue();
         this.applyEmptyText();
@@ -66,7 +106,7 @@ var ZONES_SAISIE = {
           fields : ['id_item','nom']
     });
 
-    this.combo_1 = new Ext.form.ComboBox({
+    this.combo_1 = new Ext.ux.TwinComboBox({
       applyTo:'prod_1',                                     // id d'un noeud qui possede l'input
       store: store,                                         // d'où viennent les données
       displayField:'nom',                                   // ce qu'on affiche
@@ -74,8 +114,7 @@ var ZONES_SAISIE = {
       hiddenName:'p1',                                      // le champs cché qui permet d'envoyer la valeur (et pas le texte)
       forceSelection: true,                                 // obliger de ne saisir que ce qui est proposé
       typeAhead: false,                                     // suggestion
-      hideClearButton: false,                               // toujours visible
-      hideTrigger: true,                                    // toujours visible (ça masque TOUS les triggers) 
+      hideTrigger2 : true,
       minChars:2,                                           // nb de caractères avant requete de suggestion
       grow:true,                                            // s'adapte au nb de résultats
       maxHeight:300,                                        // hauteur maxi
@@ -96,7 +135,7 @@ var ZONES_SAISIE = {
     this.combo_1.on('blur', function(){ this.doForce() });
 
  
-    this.combo_2 = new Ext.form.ComboBox({
+    this.combo_2 = new Ext.ux.TwinComboBox({
       applyTo:'prod_2',
       store : store,
       displayField : 'nom',
@@ -104,8 +143,7 @@ var ZONES_SAISIE = {
       hiddenName : 'p2',
       forceSelection : true,
       typeAhead : false,
-      hideClearButton : false,
-      hideTrigger : true,
+      hideTrigger2 : true,
       selectOnFocus : true,                                   
       minChars : 2,
       grow : true,
@@ -124,15 +162,14 @@ var ZONES_SAISIE = {
     }
     );
  
-    this.combo_3 = new Ext.form.ComboBox({
+    this.combo_3 = new Ext.ux.TwinComboBox({
       applyTo:'prod_3',
       store: store,
       displayField:'nom',
       valueField:'id_item',
       forceSelection: true,
       typeAhead: false,
-      hideClearButton: false,
-      hideTrigger: true,
+      hideTrigger2: true,
       hiddenName:'p3',
       minChars:2,
       grow:true,
@@ -151,7 +188,7 @@ var ZONES_SAISIE = {
         $('#liens_infos .concerne-p3').hide();
     });
   
-    this.combo_4 = new Ext.form.ComboBox({
+    this.combo_4 = new Ext.ux.TwinComboBox({
       applyTo:'prod_4',
       store: store,
       displayField:'nom',
@@ -159,8 +196,7 @@ var ZONES_SAISIE = {
       hiddenName:'p4',
       forceSelection: true,
       typeAhead: false,
-      hideTrigger: true,
-      hideClearButton: false,
+      hideTrigger2: true,
       minChars:1,
       selectOnFocus:true,                                   
       loadingText: COMBO_LOADINGTEXT,
@@ -177,7 +213,7 @@ var ZONES_SAISIE = {
         }
     );
   
-    this.combo_5 = new Ext.form.ComboBox({
+    this.combo_5 = new Ext.ux.TwinComboBox({
       applyTo:'prod_5',
       store: store,
       displayField:'nom',
@@ -185,8 +221,7 @@ var ZONES_SAISIE = {
       hiddenName:'p5',
       forceSelection: true,
       typeAhead: false,
-      hideClearButton: false,
-      hideTrigger: true,
+      hideTrigger2: true,
       minChars:1,
       selectOnFocus:true,                                   
       loadingText: COMBO_LOADINGTEXT,

@@ -1,28 +1,30 @@
 #CACHE{0}
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
 
+function reload_penta(){
+  jQuery('#lienAdresse').attr('href','pentagramme.html?p1='+ jQuery('#p1').val() 
+		+'&p2='+jQuery('#p2').val() + '&p3='+
+		jQuery('#p3').val() + '&p4='+
+		jQuery('#p4').val() + '&p5=' +
+		jQuery('#p5').val());
+  $('#form_penta .info').hide();
+	LISTE_DES_FAMILLES.show_fm();
+	if (jQuery('#p1').val()) jQuery('#info-s1').show();
+	if (jQuery('#p2').val()) jQuery('#info-s2').show();
+	if (jQuery('#p3').val()) jQuery('#info-s3').show();
+	if (jQuery('#p4').val()) jQuery('#info-s4').show();
+	if (jQuery('#p5').val()) jQuery('#info-s5').show();
+	LISTE_DES_SUGGESTIONS.show_query();
+	CCD.show();
+	return false;
+}
+
 function loadSpecificFunction() {
 /* Cette fonction sera appelée *après* le téléchargement du reste
    de l'appli pour que les autres "classes" aient pu s'initialiser */
 
   jQuery().ready(function() {  
-    jQuery('#form_penta').submit(function (){
-    	
-      jQuery('#lienAdresse').attr('href','pentagramme.html?p1='+ jQuery('#p1').val() 
-    		+'&p2='+jQuery('#p2').val() + '&p3='+
-    		jQuery('#p3').val() + '&p4='+
-    		jQuery('#p4').val() + '&p5=' +
-    		jQuery('#p5').val());
-    	LISTE_DES_FAMILLES.show_fm();
-    	if (jQuery('#p1').val()) jQuery('#info-s1').show();
-    	if (jQuery('#p2').val()) jQuery('#info-s2').show();
-    	if (jQuery('#p3').val()) jQuery('#info-s3').show();
-    	if (jQuery('#p4').val()) jQuery('#info-s4').show();
-    	if (jQuery('#p5').val()) jQuery('#info-s5').show();
-    	LISTE_DES_SUGGESTIONS.show_query();
-    	CCD.show();
-    	return false;
-    });
+    jQuery('#form_penta').submit(reload_penta);
   
   <?php
   
