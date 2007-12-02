@@ -33,7 +33,6 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.form.ComboBox, {
             this.clearValue();
             this.triggers[0].hide();
       			this.fireEvent('clear', this);
-      			this.fireEvent('beforequery', this);
 						reload_penta();
       }
         
@@ -124,7 +123,7 @@ var ZONES_SAISIE = {
       width: 186                                            // -
     });
     
-    this.combo_1.on('beforequery',function(){
+    this.combo_1.on('clear',function(){
         $('#info-s1').hide();
         $('.concerne-p1').removeClass('rc_toujours');
         $('.concerne-p1').removeClass('rc_jamais');
@@ -152,8 +151,7 @@ var ZONES_SAISIE = {
       emptyText : COMBO_EMPTYTEXT,
       width : 186
     });
-    //this.combo_2.on('blur', function(){setTimeout("$('#form_penta').submit()",100)});
-    this.combo_2.on('beforequery',function(){
+    this.combo_2.on('clear',function(){
         $('#info-s2').hide();
         $('.concerne-p2').removeClass('rc_toujours');
         $('.concerne-p2').removeClass('rc_jamais');
@@ -179,8 +177,7 @@ var ZONES_SAISIE = {
       emptyText:COMBO_EMPTYTEXT,
       width: 186
     });
-    this.combo_3.on('blur', function(){this.doForce()});
-    this.combo_3.on('beforequery',function(){
+    this.combo_3.on('clear',function(){
         $('#info-s3').hide();
         $('.concerne-p3').removeClass('rc_toujours');
         $('.concerne-p3').removeClass('rc_jamais');
@@ -203,8 +200,7 @@ var ZONES_SAISIE = {
       emptyText:COMBO_EMPTYTEXT,
       width: 186
     });
-    this.combo_4.on('blur', function(){this.doForce()});
-    this.combo_4.on('beforequery',function(){
+    this.combo_4.on('clear',function(){
             $('#info-s4').hide();
             $('.concerne-p4').removeClass('rc_toujours');
             $('.concerne-p4').removeClass('rc_jamais');
@@ -228,8 +224,7 @@ var ZONES_SAISIE = {
       emptyText:COMBO_EMPTYTEXT,
       width: 186
     });
-    this.combo_5.on('blur', function(){this.doForce()});
-    this.combo_5.on('beforequery',function(){
+    this.combo_5.on('clear',function(){
             $('#info-s5').hide();
             $('.concerne-p5').removeClass('rc_toujours');
             $('.concerne-p5').removeClass('rc_jamais');
