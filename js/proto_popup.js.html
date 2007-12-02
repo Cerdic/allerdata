@@ -2,44 +2,65 @@
 /* ux.IFrameComponent : link. http://extjs.com/forum/showthread.php?p=54322 */
 /* ux.ManagedIframe : link. http://extjs.com/forum/showthread.php?t=16590 */
 
-Ext.myDialog = Ext.extend(Ext.Window,{
-       closeAction: 'hide',
-       hideBorders: true,
-       deferredRender: false,
-       initComponent : function(){
-          if (this.autoTabs) {
-            var myPanel = new Ext.TabPanel({ 
-                           id: this.id, 
-                           renderTo: 'popup-dlg',
-                           contentEl: 'popup-iframe'
-                        });
-            this.items=[ myPanel ];
-            this.layout='fit';
-          }
-          Ext.myDialog.superclass.initComponent.call(this);
-       },
-});
- 
-var dialog;
+var dialog, dialog_avec_tab;
 
 Ext.onReady(function(){
 	
-  dialog = new Ext.myDialog({ 
-	        modal:true,
-	        width:350,
-	        height:450,
-	        autoTabs:true,
-          id:'fenetreModale',
-          title:'Information'
+	dialog_avec_tab = new Ext.Window({
+	    applyTo: 'tabpanel-win',
+	    layout: 'fit',
+	    width: 350,
+	    height: 450,
+	    minimizable: true,
+	    closeAction: 'hide',
+	    plain: true,
+	    items: new Ext.TabPanel({
+	        el: 'popup-dlg-tab',
+	        autoTabs: true,
+	        activeTab: 0,
+	        deferredRender: false,
+	        border: false
+	    }),
+	    buttons: [{
+	        text: 'Fermer',
+	        handler: function(){
+							$("#iframe").attr('src','');
+	            dialog_avec_tab.hide();
+	        }
+	    }]
 	});
-  
-	dialog.on('beforehide',
-    function() {
-      Ext.get('popup-iframe').dom.src = 'about:blank';
-      this.setTitle('Information');
-	  }
-  );
+	dialog_avec_tab.on('minimize', function(){
+	    dialog_avec_tab.toggleCollapse(false);
+	});
 
+
+	dialog = new Ext.Window({
+	    applyTo: 'popup-win',
+	    layout: 'fit',
+	    width: 350,
+	    height: 450,
+	    minimizable: true,
+	    closeAction: 'hide',
+	    plain: true,
+	    items: new Ext.BoxComponent({
+	        applyTo: 'popup-dlg', 
+	        autoTabs: true,
+	        activeTab: 0,
+	        deferredRender: false,
+	        border: false
+	    }),
+	    buttons: [{
+	        text: 'Fermer',
+	        handler: function(){
+							$("#iframe2").attr('src','');
+	            dialog.hide();
+	        }
+	    }]
+	});
+	dialog.on('minimize', function(){
+	    dialog.toggleCollapse(false);
+	});
+	
 });
 
 <?php
