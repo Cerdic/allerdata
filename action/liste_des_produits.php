@@ -10,7 +10,8 @@
 	$chaine = strtolower($chaine);
 	
 	session_start();
-	$produits_deja_choisis = implode(",", $_SESSION['produits_choisis']);
+	if (is_array($_SESSION['produits_choisis']))
+		$produits_deja_choisis = implode(",", $_SESSION['produits_choisis']);
 	session_write_close();
 	
 	$sql = "select id_item, nom from tbl_items where interrogeable = 1 ";
