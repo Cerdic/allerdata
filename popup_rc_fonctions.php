@@ -15,7 +15,9 @@ function rc($p1,$p2) {
 			tbl_items.nom AS p1, 
 			tbl_reactions_croisees.id_produit1, 
 			tbl_reactions_croisees.fleche_sens1, 
+			tbl_reactions_croisees.niveau_RC_sens1, 
 			tbl_reactions_croisees.fleche_sens2, 
+			tbl_reactions_croisees.niveau_RC_sens2, 
 			tbl_reactions_croisees.id_produit2, 
 			tbl_items_1.id_item AS idp2, 
 			tbl_items_1.nom AS p2, 
@@ -27,9 +29,16 @@ function rc($p1,$p2) {
 	$res = spip_query($query);
 		$result = '';
 	while ($row = spip_fetch_array($res)){
-		$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="/squelettes/css/img/rc_jamais_rl.gif" alt="Jamais" />': (($row['fleche_sens1'] === '1') ? '<img src="/squelettes/css/img/rc_toujours_rl.gif" alt="Toujours" />': ''));
-		$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="/squelettes/css/img/rc_jamais_lr.gif" alt="Jamais" />': (($row['fleche_sens2'] === '1') ? '<img src="/squelettes/css/img/rc_toujours_lr.gif" alt="Toujours" />': ''));
-		$result .= '<tr><td><!--'. $row['id_reaction_croisee'].'--><a href="?page=popup_item&amp;id_item='.$row['idp1'].'">'.$row['p1'].' '.'</a></td><td>'.$fl2.'</td><td>'.$fl1.'</td><td><a href="?page=popup_item&amp;id_item='.$row['idp2'].'">'.$row['p2'].'</a></td></tr>';
+		$querybiblio = "Select tbl_groupes_patients.id_biblio FROM tbl_reactions_croisees INNER JOIN tbl_groupes_patients ON tbl_reactions_croisees.id_groupe_patients=tbl_groupes_patients.id_groupe_patients WHERE id_reaction_croisee=".$row['id_reaction_croisee'].";";
+		$resbiblio = spip_query($querybiblio);
+		while ($rowbiblio = spip_fetch_array($resbiblio)){
+			$linkbiblio = '<a href="?page=popup_biblio&amp;id_biblio='. $rowbiblio['id_biblio'] .'">';
+		}
+		$nrc1 = (($row['niveau_RC_sens1'] <> '') ? ' ('.$row['niveau_RC_sens1'].')' : '');
+		$nrc2 = (($row['niveau_RC_sens2'] <> '') ? ' ('.$row['niveau_RC_sens2'].')' : '');
+		$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="/squelettes/css/img/rc_jamais_rl.gif" alt="Jamais" title="Jamais'.$nrc1.'" />': (($row['fleche_sens1'] === '1') ? '<img src="/squelettes/css/img/rc_toujours_rl.gif" alt="Toujours" title="Toujours'.$nrc2.'" />': ''));
+		$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="/squelettes/css/img/rc_jamais_lr.gif" alt="Jamais" title="Jamais'.$nrc1.'" />': (($row['fleche_sens2'] === '1') ? '<img src="/squelettes/css/img/rc_toujours_lr.gif" alt="Toujours" title="Toujours'.$nrc2.'" />': ''));
+		$result .= '<tr><td><!--'. $row['id_reaction_croisee'].'--><a href="?page=popup_item&amp;id_item='.$row['idp1'].'">'.$row['p1'].' '.'</a></td><td>'.$linkbiblio.$fl2.'</a></td><td>'.$linkbiblio.$fl1.'</a></td><td><a href="?page=popup_item&amp;id_item='.$row['idp2'].'">'.$row['p2'].'</a></td></tr>';
 	}
 
 	return $result;

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
 <head>
 	<title>#ENV{titrepage}&nbsp;&mdash; #NOM_SITE_SPIP</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
@@ -12,22 +12,22 @@
 	<style type="text/css">
 	@import url('#URL_SITE_SPIP/css/styles.css');
 	</style>
-	[(#ENV{aam}|=={1}|?{'',' '})
-  <script type="text/javascript" src="js/jquery.treeview.pack.js"></script>
+	<script type="text/javascript" src="js/jquery.treeview.pack.js"></script>
 	<script type="text/javascript" src="js/global.js"></script>
 	<link rel="stylesheet" href="#CHEMIN{css/jquery.tooltip.css}" type="text/css" />
 	<script src="#CHEMIN{js/jquery.bgiframe.js}" type="text/javascript"></script>
 	<script src="#CHEMIN{js/jquery.dimensions.js}" type="text/javascript"></script>
-	<!--#EVAL**{chr(91)}if lt IE 7#EVAL**{chr(93)}>
-	<script type="text/javascript" src="js/correctpng.js"></script>
-	<!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
-	]
 	<script src="#CHEMIN{js/jquery.tooltip.pack.js}" type="text/javascript"></script>
-	[(#ENV{aam}|=={1}|?{' '}) 
-		[(#SESSION|?{' '})
+	
+	[(#ENV{aam}|=={1}|?{' ',''}) 
+		[(#SESSION|?{' ',''})
 			<INCLURE{fond=inc_aam}>
 		]
 	]
+
+	<!--[if lt IE 7]>
+	<script type="text/javascript" src="js/correctpng.js"></script>
+	<![endif]-->
 </head>
 
 <body[ class="(#ENV{classbody})"]>

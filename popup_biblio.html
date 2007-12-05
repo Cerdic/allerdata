@@ -1,8 +1,8 @@
-[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Items(tbl_items){id_item}>
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Biblio(tbl_bibliographies){id_biblio}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
 <head>
-	<title>[(#NOM|sinon{NA})]</title>
+	<title><:bibliographie:></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 	<meta http-equiv="Content-Language" content="#LANG" />
 	[(#REM) Feuille de style CSS pour l'affichage du site a l'ecran ]
@@ -32,20 +32,11 @@
 <?php if ($auteur_session) { ?>
 	
 				<div id="blocTitArticle">
-					<h1 class="titArticle"><:name:>: [(#NOM|sinon{NA})]</h1>
-					<p class="auteurArticle"><:by:> Dr Henri Malandain</p>
+					<h1 class="titArticle"><:bibliographie:></h1>
 				</div>
 				<div class="blocContenuArticle" style="margin:0; padding:0">
-					<p><:other_name:>: [(#AUTRE_NOM|sinon{NA})]</p>
-					<p><:full_name:>: [(#NOM_COMPLET|sinon{NA})]</p>
-					<p><:chaine_alpha:>: [(#CHAINE_ALPHA|sinon{NA})]</p>
-					<p><:interrogeable:>: [(#INTERROGEABLE|sinon{NA})]</p>
-					<p><:testable:>: [(#TESTABLE|sinon{NA})]</p>
-					<p><:test_code:>: [(#CODE_TEST|sinon{NA})]</p>
-					<p><:iuis:>: [(#IUIS|sinon{NA})]</p>
-					<p><:masse:>: [(#MASSE|sinon{NA})]</p>
-					<p><:glyco:>: [(#GLYCO|sinon{NA})]</p>
-					<p><:allergenicite:>: [(#ALLERGENICITE|sinon{NA})]</p>
+					<p><strong><:citation:></strong>: [(#CITATION|sinon{NA})]</p>
+					<p><strong><:annee:></strong>: [(#ANNEE|sinon{NA})]</p>
 				</div>
 
 <?php } else { ?>
@@ -65,4 +56,4 @@
 	</div>
 </body>
 </html>
-</BOUCLE_Items>
+</BOUCLE_Biblio>
