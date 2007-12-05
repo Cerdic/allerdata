@@ -31,15 +31,17 @@ function suggestions($txt) {
 		AND tbl_items.id_item
 			IN ($produits ) 
 		AND tbl_items_1.id_item NOT 
-			IN ($produits) 
-		AND tbl_items_1.affichage_suggestion =1
-	GROUP BY tbl_reactions_croisees.id_reaction_croisee
+			IN ($produits) ".
+	//	AND tbl_items_1.affichage_suggestion =1
+	"GROUP BY tbl_reactions_croisees.id_reaction_croisee
 	ORDER BY tbl_items.nom
 	";
 		
 	$res = spip_query($query);
 	$liste = $suggestions = $nom = array();
 		
+	spip_log($query);
+	
 	while ($row = spip_fetch_array($res)){
 			
 		$nom[$row['idp1']] = $row['p1'];
@@ -82,15 +84,15 @@ function suggestions($txt) {
 		AND tbl_items_1.id_item
 			IN ($produits ) 
 		AND tbl_items.id_item NOT 
-			IN ($produits) 
-		AND tbl_items.affichage_suggestion =1
-	GROUP BY tbl_reactions_croisees.id_reaction_croisee
+			IN ($produits) ".
+	//	AND tbl_items.affichage_suggestion =1
+	"GROUP BY tbl_reactions_croisees.id_reaction_croisee
 	ORDER BY tbl_items_1.nom
 	";
 		
+	spip_log($query);
+	
 	$res = spip_query($query);
-	$liste = $suggestions = $nom = array();
-		
 	while ($row = spip_fetch_array($res)){
 			
 		$nom[$row['idp1']] = $row['p1'];
