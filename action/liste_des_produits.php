@@ -1,7 +1,7 @@
 <?php
 
-	if (!defined("_ECRIRE_INC_VERSION")) return;
-
+function action_liste_des_produits() {
+		
 	$chaine = strtr($_POST['query'], 'àâäåãáÂÄÀÅÃÁçÇéèêëÉÊËÈïîìíÏÎÌÍñÑöôóòõÓÔÖÒÕùûüúÜÛÙÚÿ','aaaaaaAAAAAAcCeeeeEEEEiiiiIIIInNoooooOOOOOuuuuUUUUy');
 
 	$nb_elements_retournes = 10;
@@ -44,6 +44,9 @@
 	while ($row = spip_fetch_array($q)) {$res[] = $row;}
 
 
-	if (!$nb_elements_trouves) die('{produits:'.json_encode(array(array('id_item' => 0, 'nom' => _T('nothing_found')))).'}');
-	else die('{produits:'.json_encode($res).'}');
+	if (!$nb_elements_trouves) echo('{produits:'.json_encode(array(array('id_item' => 0, 'nom' => _T('nothing_found')))).'}');
+	else echo('{produits:'.json_encode($res).'}');
+
+}
 	
+?>
