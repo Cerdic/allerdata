@@ -15,8 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'chaine_alpha' => "Chaine alpha",
-'ccd_info' => "infos / CCD",
-'ccd_name' => "Produit",
 
 // F
 'form_forum_indiquer_nom_email' => 'Indiquez ici votre nom et votre adresse email. Votre identifiant personnel vous parviendra rapidement, par courrier &eacute;lectronique.',
@@ -38,18 +36,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'iuis' => "IUIS",
 	
 // J	
+'js_ccd_name' => 'Libell&eacute;',
+'js_ccd_title' => 'CCD',
+'js_close_button' => 'Fermer',
 'js_combo_emptytext' => 'Saisissez une valeur...',
 'js_combo_loadingtext' => 'Recherche...',
+'js_error_gotdata' => "la liste des r&eacute;activit&eacute;s crois&eacute;es n'a pas pu &ecirc;tre calcul&eacute;e correctement",
+'js_fm_name' => "Libell&eacute;",
+'js_fm_nb' => "Nbr",
 'js_fm_grid_title' => 'Familles mol&eacute;culaires',
 'js_sugg_grid_title' => 'R&eacute;actions crois&eacute;es associ&eacute;es',
-'js_error_gotdata' => "la liste des r&eacute;activit&eacute;s crois&eacute;es n'a pas pu &ecirc;tre calcul&eacute;e correctement",
-'js_close_button' => 'Fermer',
 'js_sugg_p1_to_p2' => "r&eacute;action de p1 vers p2",
 'js_sugg_p1' => "Produit p1",
 'js_sugg_p2_to_p1' => "r&eacute;action de p2 vers p1",
 'js_sugg_p2' => "Produit p2",
-'js_fm_name' => "Libell&eacute;",
-'js_fm_nb' => "Nbr",
 'js_tests_cliniques_title' => "Suggestions biologiques",
 
 

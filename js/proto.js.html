@@ -11,6 +11,7 @@ MiseEnPage = function(){
 	  	
       var fmPanel = LISTE_DES_FAMILLES.getPanel();
       var suggPanel = LISTE_DES_SUGGESTIONS.getPanel();
+      var ccdPanel = CCD.getPanel();
       
   		var layout = new Ext.Panel({ 
   			layout:"border",
@@ -66,9 +67,11 @@ MiseEnPage = function(){
   			                id:"l_ccd",
   							        contentEl:"ccd",
   							        region:"south",
-  			                title:"CCD",
   							        height:125,
   			                split:true,
+  			                layout:"fit",
+                        border:false,
+                        items: [ccdPanel],
   			                collapsible:true
   			              }]
   			      }]

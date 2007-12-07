@@ -2,18 +2,83 @@
 /* --------------------------------------------- CCD -------------------------------------------- */
 
 var CCD = {
-	show : function() {
-		$('#ccd').load('spip.php?page=ccd&p1=' + 
-			jQuery('#p1').val() + '&p2=' +
-			jQuery('#p2').val() + '&p3=' +
-			jQuery('#p3').val() + '&p4=' +
-			jQuery('#p4').val() + '&p5=' +
-			jQuery('#p5').val());
-		$('input').removeClass('actif');
-	},
+	grid:null,
+	
+  init : function(){},
+  
 	outline_prod : function(array_prod) {
 		for (i=0;i<array_prod.length;i++) {
 			$('input[@value=' + array_prod[i] + ']').next('.x-form-text').toggleClass('actif')
 		}
+	},
+	
+	getPanel : function() {
+    if (!this.grid) {
+          
+      var dsp_toInfo = function(link) {
+        var t = "<div class='cell_fm'>" + link + "</div>";
+        return t;
+      };
+  
+			var ccdRow = Ext.data.Record.create([
+		    {name: 'item'},     // nom 
+		    {name: 'link'},     // infos sur l'élément (popup ou mise en avant)
+			  {name: 'type'}      // soit une rc soit une fm
+			]);
+			
+      var ds_s = new Ext.data.Store({
+      	proxy: new Ext.data.HttpProxy({url:'spip.php',
+					extraParams : {
+						page : 'ccd',
+						p1 : jQuery('#p1').val(),
+						p2 : jQuery('#p2').val(),
+						p3 : jQuery('#p3').val(),
+						p4 : jQuery('#p4').val(),
+						p5 : jQuery('#p5').val()
+					}
+				}),
+	      reader: new Ext.data.JsonReader({
+	        root: 'detail',
+	        id : 'id_item'
+	      }, ccdRow)
+      });
+      
+      // La grille proprement dite
+	    this.grid = new Ext.grid.GridPanel({
+	    	store: new Ext.data.GroupingStore({
+	            baseParams : {
+								page : 'ccd',
+								p1 : jQuery('#p1').val(),
+								p2 : jQuery('#p2').val(),
+								p3 : jQuery('#p3').val(),
+								p4 : jQuery('#p4').val(),
+								p5 : jQuery('#p5').val()
+							},
+							url:'spip.php',
+							reader: new Ext.data.JsonReader({
+				        root: 'detail',
+				        id : 'id_item'
+				      }, ccdRow),
+				      sortInfo:{field: 'item', direction: "ASC"},
+	            groupField:'type'
+	      }),
+
+	      columns: [
+	      	{header: CCD_NAME, sortable: true, dataIndex: 'item'},
+          {header: '', width: 30, sortable:false, align: 'center', dataIndex: 'link', renderer: dsp_toInfo},
+	      ],
+
+	      loadMask: {msg:"modification en cours..."},
+				title: CCD_TITLE,
+
+	      view: new Ext.grid.GroupingView({
+	      	forceFit:true,
+	        groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "&eacute;l&eacute;ments" : "&eacute;l&eacute;ment"]})'
+	      })
+	    });
+              
+    }
+    
+		return this.grid;
 	}
 };
