@@ -9,13 +9,14 @@ function reload_penta(){
 		jQuery('#p5').val());
   $('#form_penta .info').hide();
 	LISTE_DES_FAMILLES.show_fm();
+  LISTE_DES_RC.getData();
 	if (jQuery('#p1').val()) jQuery('#info-s1').show();
 	if (jQuery('#p2').val()) jQuery('#info-s2').show();
 	if (jQuery('#p3').val()) jQuery('#info-s3').show();
 	if (jQuery('#p4').val()) jQuery('#info-s4').show();
 	if (jQuery('#p5').val()) jQuery('#info-s5').show();
 	LISTE_DES_SUGGESTIONS.show_query();
-	CCD.show();
+	CCD.show_ccd();
 	return false;
 }
 

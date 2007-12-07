@@ -81,4 +81,12 @@ var CCD = {
     
 		return this.grid;
 	}
+
+
+  // La mise à jour se fait par json
+  show_ccd : function() {
+    var ds = this.grid.getStore();
+    ds.load();
+  },
+
 };
