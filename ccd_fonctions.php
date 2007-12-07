@@ -58,14 +58,14 @@ function ccd($txt) {
 	foreach ($liste_fm_ccd as $index => $nom) {
 		$final[] = array(
 			'item' => $nom, 
-			'link' => $index,
+			'link' => "<a id=\"infos_ccd_fm_".$index."\" class=\"info_fm\" href=\"javascript:void(0)\" onclick=\"Ext.get('popup-iframe').dom.src = 'spip.php?page=popup_fm&id_fm=".$index."';dialog.show(Ext.get('info_fm_".$index."'));return false;\"></a>",
 			'type' => _T("js_fm_grid_title")
 		);
 	}
 	foreach ($liste_mol_ccd as $index => $nom) {
 		$final[] = array(
 			'item' => $nom, 
-			'link' => $index,
+			'link' => "<a id=\"infos_ccd_mol_".$index."\" class=\"info_fm\" href=\"javascript:void(0)\" onclick=\"$('input[@value=".$index."]').next('.x-form-text').toggleClass('actif');return false;\"></a>",
 			'type' => _T("js_mol_title")
 		);
 	}

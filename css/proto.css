@@ -164,5 +164,5 @@ body .x-dlg-mask {
 
 /* FM */
 .cell_fm .info_fm{margin:0 auto;}
-.info_fm {background:transparent url('img/i_mini_off.gif') top left no-repeat; width:14px; height:14px; display:none;}
+.info_fm {background:transparent url('img/i_mini_off.gif') top left no-repeat; width:14px; height:14px; display:block;}
 .x-grid-row-selected .info_fm {background:#316AC5 url('img/i_mini_on.gif') top left no-repeat;}

@@ -40,11 +40,12 @@ var CCD = {
 
 	      columns: [
         	{header: '', hidden: true, dataIndex: 'type'},
-	      	{header: CCD_NAME, sortable: true, dataIndex: 'item'},
+	      	{id:'nom', header: CCD_NAME, sortable: true, dataIndex: 'item'},
           {header: '', width: 30, sortable:false, align: 'center', dataIndex: 'link', renderer: dsp_toInfo}
 	      ],
 
-	      loadMask: {msg:"modification en cours..."},
+	      autoExpandColumn:'nom',
+				loadMask: {msg:"modification en cours..."},
 				title: CCD_TITLE,
 
 	      view: new Ext.grid.GroupingView({
