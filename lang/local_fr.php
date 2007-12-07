@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 // J	
 'js_ccd_name' => 'Libell&eacute;',
+'js_ccd_resultat' => 'R&eacute;sultat',
+'js_ccd_resultats' => 'R&eacute;sultats',
 'js_ccd_title' => 'CCD',
 'js_close_button' => 'Fermer',
 'js_combo_emptytext' => 'Saisissez une valeur...',
@@ -45,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'js_fm_name' => "Libell&eacute;",
 'js_fm_nb' => "Nbr",
 'js_fm_grid_title' => 'Familles mol&eacute;culaires',
+'js_mol_title' => 'Mol&eacute;cules',
 'js_sugg_grid_title' => 'R&eacute;actions crois&eacute;es associ&eacute;es',
 'js_sugg_p1_to_p2' => "r&eacute;action de p1 vers p2",
 'js_sugg_p1' => "Produit p1",

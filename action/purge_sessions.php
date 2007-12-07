@@ -5,6 +5,7 @@
 	function action_purge_sessions() {
 	session_start();
 	$_SESSION['produits_choisis'] = array();
+	echo '{}'; // retour json vide
 	session_write_close();
 	}
 ?>

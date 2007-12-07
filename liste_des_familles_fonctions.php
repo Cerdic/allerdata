@@ -14,19 +14,19 @@ function familles_moleculaires($txt) {
 	
 	$tt = '';
 	
-	$query = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_est_dans.est_dans_id_item, tbl_items.nom as nom2, tbl_est_dans_1.est_dans_id_item as id_dans_item2
-		FROM (((tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
+	$query = "SELECT DISTINCT 
+			tbl_items_1.id_item, 
+			tbl_items_1.nom, 
+			tbl_est_dans.est_dans_id_item, 
+			tbl_items.nom as nom2, 
+			tbl_est_dans_1.est_dans_id_item as id_dans_item2
+		FROM (((tbl_items 
+			INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
 			INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items.id_item = tbl_est_dans_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item) 
 			INNER JOIN tbl_types_items ON tbl_items_1.id_type_item = tbl_types_items.id_type_item
 		WHERE (((tbl_est_dans.est_dans_id_item) In ($produits)) AND ((tbl_types_items.id_type_item)=6))
-		ORDER BY tbl_items_1.nom, tbl_est_dans.est_dans_id_item DESC;"; /* Ancienne requete sans la glyco (CCD) */
-		/*"SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_est_dans.est_dans_id_item, tbl_items.id_item as id_mol, tbl_items.nom AS nom2, tbl_items.glyco
-		FROM ((tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
-			INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items.id_item = tbl_est_dans_1.id_item) 
-			INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item
-		WHERE (((tbl_est_dans.est_dans_id_item) In ($produits)) AND ((tbl_items_1.id_type_item)=6))
-		ORDER BY tbl_items_1.nom, tbl_est_dans.est_dans_id_item DESC;";*/
+		ORDER BY tbl_items_1.nom, tbl_est_dans.est_dans_id_item DESC;"; 
 			
 	$res = spip_query($query);
 	$result = '[';
