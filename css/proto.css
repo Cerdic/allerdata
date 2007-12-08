@@ -6,6 +6,9 @@ html, body {
 	padding:0;
 	border:0 none;
 }
+body * {
+	color:#000;
+}
 body {
 	background: #000000 url(../../images/bg_body.gif) repeat-x scroll left top
 }

@@ -68,7 +68,7 @@ Ext.onReady(function(){
 	dialog_avec_tab.on('beforehide', function(){
 		main_panel.items.each(function(item){
 			if(item != main_panel.getItem('tab1')){
-				tabs.remove(item);
+				main_panel.remove(item);
 			}
 		});
 		main_panel.updateTab('tab1','','#CHEMIN{ext/resources/images/default/shared/blue-loading.gif}');
