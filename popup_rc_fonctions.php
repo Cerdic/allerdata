@@ -32,7 +32,7 @@ function rc($p1,$p2) {
 		$querybiblio = "Select tbl_groupes_patients.id_biblio FROM tbl_reactions_croisees INNER JOIN tbl_groupes_patients ON tbl_reactions_croisees.id_groupe_patients=tbl_groupes_patients.id_groupe_patients WHERE id_reaction_croisee=".$row['id_reaction_croisee'].";";
 		$resbiblio = spip_query($querybiblio);
 		while ($rowbiblio = spip_fetch_array($resbiblio)){
-			$linkbiblio = '<a href="#" onclick="main_panel.addTab(\'RC n&deg; '.$rowbiblio['id_biblio'].'\',\'?page=popup_biblio&amp;id_biblio='. $rowbiblio['id_biblio'] .'\'); return false">';
+			$linkbiblio = '<a href="#" onclick="main_panel.addTab(\'biblio n&deg; '.$rowbiblio['id_biblio'].'\',\'?page=popup_biblio&amp;id_biblio='. $rowbiblio['id_biblio'] .'\'); return false">';
 		}
 		$nrc1 = (($row['niveau_RC_sens1'] <> '') ? ' ('.$row['niveau_RC_sens1'].')' : '');
 		$nrc2 = (($row['niveau_RC_sens2'] <> '') ? ' ('.$row['niveau_RC_sens2'].')' : '');
