@@ -42,16 +42,16 @@
 	<div id="tabpanel-win" class="x-hidden" style="display:none">
 	   <div class="x-window-header">Boite de dialogue avec tabulation</div>
 	   <div id="popup-dlg-tab">
-	       <div class="x-tab" title="Tab 2">
-					<iframe id="iframe" src="javascript:false" class="x-panel-body" style="frameBorder:0;width:100%;height:100%;"></iframe>
-	       </div>
+	       <!-- div class="x-tab" title="Tab 2">
+				<iframe id="tab-iframe" src="#CHEMIN{ext/resources/images/default/shared/blue-loading.gif}" class="x-panel-body" style="frameBorder:0;width:100%;height:100%;"></iframe>
+	       </div -->
 	   </div>
 	</div>
 
 	<div id="popup-win" class="x-hidden" style="display:none">
 		<div class="x-window-header">Boite de dialogue</div>
 		<div id="popup-dlg" class="x-tab" title="test">
-			<iframe id="popup-iframe" src="javascript:false" class="x-panel-body" style="frameBorder:0;width:100%;height:100%;"></iframe>
+			<iframe id="iframe" src="#CHEMIN{ext/resources/images/default/shared/blue-loading.gif}" class="x-panel-body" style="frameBorder:0;width:100%;height:100%;"></iframe>
 		</div>
 	</div>
 	
@@ -60,7 +60,8 @@
     <script type="text/javascript" src="#CHEMIN{ext/adapter/ext/ext-base.js}"></script>
     <script type="text/javascript" src="#CHEMIN{ext/ext-all.js}"></script>
     <script type="text/javascript" src="spip.php?page=proto_custom.js&p1=#ENV{p1}&p2=#ENV{p2}&p3=#ENV{p3}&p4=#ENV{p4}&p5=#ENV{p5}"></script>
-		<script type="text/javascript" src="spip.php?page=proto.js"></script>
+	<script type="text/javascript" src="spip.php?page=proto.js"></script>
+	<script type="text/javascript" src="#CHEMIN{js/tabCloseMenu.js}"></script>
 
 		<?php } else { ?>
 				<h1><:h1_acces_restreint:></h1>

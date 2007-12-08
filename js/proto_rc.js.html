@@ -31,9 +31,10 @@ LISTE_DES_RC = {
     jQuery('.lien').click(function(){
       p1 = jQuery(this).attr('id').substr(6,1);
       p2 = jQuery(this).attr('id').substr(8,1);
-      Ext.get('popup-iframe').dom.src = 'spip.php?page=popup_rc&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val();
-      dialog.setTitle('Réaction Croisée');
-      dialog.show(Ext.get('lien_'+p1+'-'+p2+'_'));
+      main_panel.updateTab('tab1','Réactivités', 'spip.php?page=popup_rc&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+      dialog_avec_tab.setTitle('Réactivité croisée [détails]');
+      dialog_avec_tab.show(Ext.get('lien_'+p1+'-'+p2+'_'));
+	  return false;
     });
 
   },

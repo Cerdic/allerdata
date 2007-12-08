@@ -2,9 +2,46 @@
 /* ux.IFrameComponent : link. http://extjs.com/forum/showthread.php?p=54322 */
 /* ux.ManagedIframe : link. http://extjs.com/forum/showthread.php?t=16590 */
 
-var dialog, dialog_avec_tab;
+var dialog, dialog_avec_tab, main_panel;
 
 Ext.onReady(function(){
+	
+	main_panel = new Ext.TabPanel({
+		title:'Réactivités croisées',
+		autoScroll: true, 
+		activeTab:0,
+		items: [{
+			id:'tab1',
+			//iconCls: 'tabs',
+		    border: false,
+			title: 'détails',
+    		closable:false,
+    		autoScroll:true
+		}],
+		plugins: new Ext.ux.TabCloseMenu(),
+		enableTabScroll:true,
+		addTab : function(tabTitle, targetUrl){
+	        main_panel.add({
+			    title: tabTitle,
+			    //iconCls: 'tabs',
+			    autoLoad: {url: targetUrl, 	scope: this},
+			    closable:true
+			}).show();
+	    },
+	 
+	    // Update the contents of a tab if it exists, otherwise create a new one
+	    updateTab :  function(tabId,title, url) {
+	    	//debugger;
+			var tab = main_panel.getItem(tabId);
+	    	if(tab){
+	    		tab.getUpdater().update(url);
+	    		tab.setTitle(title);
+	    	}else{
+	    		tab = addTab(title,url);
+	    	}
+	    	main_panel.setActiveTab(tab);
+	    }
+	});
 	
 	dialog_avec_tab = new Ext.Window({
 	    applyTo: 'tabpanel-win',
@@ -14,26 +51,28 @@ Ext.onReady(function(){
 	    minimizable: true,
 	    closeAction: 'hide',
 	    plain: true,
-	    items: new Ext.TabPanel({
-	        el: 'popup-dlg-tab',
-	        autoTabs: true,
-	        activeTab: 0,
-	        deferredRender: false,
-	        border: false
-	    }),
+	    items: [main_panel],
 	    buttons: [{
 	        text: 'Fermer',
 	        handler: function(){
-							$("#iframe").attr('src','');
-	            dialog_avec_tab.hide();
+				dialog_avec_tab.hide();
 	        }
 	    }]
 	});
+	
 	dialog_avec_tab.on('minimize', function(){
 	    dialog_avec_tab.toggleCollapse(false);
 	});
-
-
+	
+	dialog_avec_tab.on('beforehide', function(){
+		main_panel.items.each(function(item){
+			if(item != ctxItem){
+				tabs.remove(item);
+			}
+		});
+		main_panel.updateTab('tab1','','#CHEMIN{ext/resources/images/default/shared/blue-loading.gif}');
+	});
+	
 	dialog = new Ext.Window({
 	    applyTo: 'popup-win',
 	    layout: 'fit',
@@ -52,10 +91,12 @@ Ext.onReady(function(){
 	    buttons: [{
 	        text: 'Fermer',
 	        handler: function(){
-							$("#iframe2").attr('src','');
-	            dialog.hide();
+				dialog.hide();
 	        }
 	    }]
+	});
+	dialog.on('beforehide', function(){
+	    $("#iframe").attr('src','#CHEMIN{ext/resources/images/default/shared/blue-loading.gif}');
 	});
 	dialog.on('minimize', function(){
 	    dialog.toggleCollapse(false);
@@ -70,7 +111,7 @@ echo "
     if (jQuery('#p$i').val()) {
       dialog.setTitle(jQuery('#prod_$i').val());
       var link = 'spip.php?page=popup_item&id_item=' + jQuery('#p$i').val();
-      Ext.get('popup-iframe').dom.src = link;
+      Ext.get('iframe').dom.src = link;
 			dialog.show(Ext.get('prod_$i'));
     }
     return false;

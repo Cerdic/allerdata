@@ -77,7 +77,7 @@ var LISTE_DES_FAMILLES = {
 
 	// Infos d'une FM
 	popup_fm : function(val) {
-	  Ext.get('popup-iframe').dom.src = 'spip.php?page=popup_fm&id_fm=' + val;
+	  Ext.get('iframe').dom.src = 'spip.php?page=popup_fm&id_fm=' + val;
 	  dialog.show(Ext.get('info_fm_' + val));		
 	},
 	
