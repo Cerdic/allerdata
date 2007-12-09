@@ -20,44 +20,25 @@ var LISTE_DES_SUGGESTIONS = {
       var change = function(val){
         if(val > 2){
           return '<span style="color:red;">' + val + '</span>';
-              }else if(val > 1){
-                  return '<span style="color:green;">' + val + '</span>';
-              }
-              return val;
-          }
+				}else if(val > 1){
+					return '<span style="color:green;">' + val + '</span>';
+				}
+				return val;
+			}
   
-      var change_rl = function(val){
-        if(val == 'toujours'){
-          return '<div class="rc_toujours_rl"></div>';
-        }else if( val == 'jamais'){
-            return '<div class="rc_jamais_rl"></div>';
-          } else if(  val == 'discordant'){
-                return '<div class="rc_discordant_rl"></div>';
-              }
-        return val;
-      }
-  
-      var change_lr = function(val){
-        if(val == 'toujours'){
-          return '<div class="rc_toujours_lr"></div>';
-        }else if( val == 'jamais'){
-            return '<div class="rc_jamais_lr"></div>';
-          } else if(  val == 'discordant'){
-                return '<div class="rc_discordant_lr"></div>';
-              }
-        return val;
-      }
-  
+      var dsp_toInfo = function(val) {
+        var t = "<div class='cell_fm'><a class='info_fm' id='info_fm_" + val + "' alt='infos' onclick='LISTE_DES_PRODUITS.popup_prod(" + val + ")'></a></div>";
+        return t;
+      };
+
       var ds_s = new Ext.data.Store({
       proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_suggestions'}),
       reader: new Ext.data.JsonReader({
-        root: 'liste_des_suggestions',
-        id : 'id_item'
-      }, [
-           {name: 'nom1'},
-           {name: 'nom2'},
-           {name: 'type_rc1'},
-           {name: 'type_rc2'}
+        root: 'liste_des_suggestions'
+				}, [
+           {name: 'nom'},
+           {name: 'nb'},
+           {name: 'id_mol'}
         ])
       });
       
@@ -65,12 +46,12 @@ var LISTE_DES_SUGGESTIONS = {
       this.grid = new Ext.grid.GridPanel({
         store: ds_s,
         columns: [
-          {id:'nom',header: SUGG_P1, width: 160, sortable: true, locked:false, dataIndex: 'nom1'},
-          {header: SUGG_P1_TO_P2, width: 154, sortable: true, locked:false, dataIndex: 'type_rc1', renderer: change_lr},
-          {header: SUGG_P2_TO_P1, width: 154, sortable: true, locked:false, dataIndex: 'type_rc2', renderer: change_rl},
-          {header: SUGG_P2, width: 160, sortable: true, locked:false, dataIndex: 'nom2'}
+          {id:'nom',header: SUGG_P, sortable: true, locked:false, dataIndex: 'nom'},
+          {header: SUGG_CARD, width: 30, sortable: true, locked:true, dataIndex: 'nb'},
+          {header: '(i)', width: 30, sortable: false, locked:true, dataIndex: 'id_mol'}
         ],
-        loadMask: {msg:"modification en cours..."},
+        autoExpandColumn:'nom',
+        loadMask: {msg:LOAD_MASK},
         viewConfig: {
           forceFit: true
         },

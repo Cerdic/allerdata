@@ -47,12 +47,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'js_fm_name' => "Libell&eacute;",
 'js_fm_nb' => "Nbr",
 'js_fm_grid_title' => 'Familles mol&eacute;culaires',
+'js_fm_tests' => "Tests biologiques associ&eacute;s",
+'js_load_mask' => "modification en cours...",
 'js_mol_title' => 'Mol&eacute;cules',
-'js_sugg_grid_title' => 'R&eacute;actions crois&eacute;es associ&eacute;es',
-'js_sugg_p1_to_p2' => "r&eacute;action de p1 vers p2",
-'js_sugg_p1' => "Produit p1",
-'js_sugg_p2_to_p1' => "r&eacute;action de p2 vers p1",
-'js_sugg_p2' => "Produit p2",
+'js_sugg_grid_title' => 'Croisent &eacute;galement',
+'js_sugg_p' => "Produit",
+'js_sugg_card' => "Nb",
 'js_tests_cliniques_title' => "Suggestions biologiques",
 
 

@@ -19,63 +19,63 @@ MiseEnPage = function(){
   			renderTo:"sous-container",
   			width:835,
   			height:700,
-  			    items:[{
-  			        region:"center",
-  			        layout:"border",
-                border:false,
-  			            items:[{
-  			                id:"l_suggestions",
-  							        contentEl:"suggestions",
-  							        region:"center",
-                        layout:"fit",
-                        border:false,
-                        items:[suggPanel]
-  			              },{
-  			                id:"l_pentagramme",
-                        contentEl:"pentagramme",
-  							        region:"north",
-  			                height:445,
-  							        split:true
-  			              },{
-  			                id:"l_testsCliniques",
-  							        contentEl:"testsCliniques",
-  							        region:"south",
-  			                title:TESTS_CLINIQUES_TITLE,
-  			                height:75,
-  			                split:true,
-                        collapsible:true
-  			              }]
-  			      },{
-  			        region:"east",
-  			        width:195,
-  			        minSize: 150,
-  					    maxSize: 400,
-  					    split:true,
-  			        collapsible:true,
-  			        titleCollapse:true,
-  			        layout:"border",
-                border:false,
-  			            items:[
-                      {
-  			                id:"l_grid-panel-fm",
-  							        contentEl:"grid-panel-fm",
-  							        region:"center",
-  			                layout:"fit",
-                        border:false,
-                        items: [fmPanel]
-  			              }
-                      ,{
-  			                id:"l_ccd",
-  							        contentEl:"ccd",
-  							        region:"south",
-  							        height:248,
-  			                split:true,
-  			                layout:"fit",
-                        border:false,
-                        items: [ccdPanel],
-  			                collapsible:true
-  			              }]
-  			      }]
+				items:[{
+						region:"center",
+						layout:"border",
+						border:false,
+						items:[{
+								id:"l_grid-panel-fm",
+								contentEl:"grid-panel-fm",
+								region:"center",
+								layout:"fit",
+								border:false,
+								items: [fmPanel]
+							},{
+								id:"l_pentagramme",
+								contentEl:"pentagramme",
+								region:"north",
+								height:445,
+								split:true
+							},{
+								id:"l_testsCliniques",
+								contentEl:"testsCliniques",
+								region:"south",
+								title:TESTS_CLINIQUES_TITLE,
+								height:75,
+								split:true,
+								collapsible:true
+							}]
+					},{
+						region:"east",
+						width:195,
+						minSize: 150,
+						maxSize: 400,
+						split:true,
+						collapsible:true,
+						titleCollapse:true,
+						layout:"border",
+						border:false,
+						items:[
+							{
+								id:"l_suggestions",
+								contentEl:"suggestions",
+								region:"center",
+								layout:"fit",
+								border:false,
+								items:[suggPanel]
+							}
+							,{
+								id:"l_ccd",
+								contentEl:"ccd",
+								region:"south",
+								height:125,
+								split:true,
+								layout:"fit",
+								border:false,
+								items: [ccdPanel],
+								collapsible:true
+							}]
+					}]
   			}
   		);
   
@@ -94,9 +94,3 @@ MiseEnPage = function(){
      
 }();
 Ext.onReady(MiseEnPage.init, MiseEnPage);
-
-
-jQuery.ajax({
-  type: "GET",
-  url:'spip.php?action=purge_sessions'
-});

@@ -30,7 +30,7 @@ function msort($array, $id="id", $sort_ascending=true)
 
 
 function suggestions($txt) {
-	$tableau_produits = array();
+	$tableau_produits = $suggestion = array();
 	$prem = array(17,97); /* 2 nombres premiers avant 100 avec un delta de 1/8 */
 	
 	if (is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
@@ -161,31 +161,23 @@ function suggestions($txt) {
 
 	spip_log($liste);	
 	
-	// Ventilation et calcul des types de rc
+	// Ventilation 
 	foreach ($liste as $idp1 => $l_idp1) {
 		foreach ($l_idp1 as $idp2 => $l_idp2) {
-			$sens1 = (!$l_idp2['s1'])?'':
-				((($l_idp2['s1']%$prem[0])==0)?'jamais':
-					((($l_idp2['s1']%$prem[1])==0)?'toujours':
-						'discordant'
-					)
-				);
-			$sens2 = (!$l_idp2['s2'])?'':
-				((($l_idp2['s2']%$prem[0])==0)?'jamais':
-					((($l_idp2['s2']%$prem[1])==0)?'toujours':
-						'discordant'
-					)
-				);
-			$suggestions[] = array('nom1'=>$nom[$idp1], 'nom2'=>$nom[$idp2], 'type_rc1' => $sens1, 'type_rc2' => $sens2, 'reactivite' => $l_idp2['s1'] + $l_idp2['s2']);
+			if (!$suggestion[$idp1]) {
+				$suggestion[$idp1] = array('nom' => $nom[$idp1], 'nb' => 0, 'id_mol' => $idp1, 'reactivite' => 0);
+			}
+			$suggestion[$idp1]['nb'] += 1;
+			$suggestion[$idp1]['reactivite'] += $l_idp2['s1'] + $l_idp2['s2'];
 		}
 	}
 
 	/* Ensuite on ordonne la liste des suggestions par "réactivité" inverse, en utilisant notre pondération */
-	$suggestions = msort($suggestions, "reactivite", false);
+	$suggestion = msort($suggestion, "reactivite", false);
 	
-	spip_log($suggestions);
+	spip_log($suggestion);
 	
-	return json_encode($suggestions);
+	return json_encode($suggestion);
 	
 
 }

@@ -47,11 +47,12 @@ var LISTE_DES_FAMILLES = {
       this.grid = new Ext.grid.GridPanel({
         store:ds,
         autoExpandColumn:'nom',
-        loadMask: {msg:"modification en cours..."},
+        loadMask: {msg:LOAD_MASK},
 				columns: [
-          {id:'nom',header: FM_NAME, width: 133, sortable: true, locked:false, dataIndex: 'nom', renderer: dsp_libelle},
-          {id:'info', header: '', width: 30, sortable:false, align: 'center', dataIndex: 'id_item', renderer: dsp_toInfo},
-    			{header: FM_NB, width: 28, sortable: true, align:'center', dataIndex: 'nb_item', renderer: dsp_nb}
+          {id:'nom',header: FM_NAME, width: 250, sortable: true, locked:false, dataIndex: 'nom', renderer: dsp_libelle},
+          {id:'info', header: '(i)', width: 30, locked:true, sortable:false, align: 'center', dataIndex: 'id_item', renderer: dsp_toInfo},
+    			{header: FM_NB, width: 28, locked:true, sortable: true, align:'center', dataIndex: 'nb_item', renderer: dsp_nb},
+          {id:'test',header: FM_TEST, width: 320, sortable: true, locked:false, dataIndex: 'test'}
         ],
         viewConfig: {
           forceFit: true
