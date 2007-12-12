@@ -7,85 +7,85 @@ MiseEnPage = function(){
 /* Mise en page globale */
     
   return {
-	  
+    
     init : function(){
-	  	
+      
       var fmPanel = LISTE_DES_FAMILLES.getPanel();
       var suggPanel = LISTE_DES_SUGGESTIONS.getPanel();
       var ccdPanel = CCD.getPanel();
       
-  		var layout = new Ext.Panel({ 
-  			layout:"border",
-  			renderTo:"sous-container",
-  			width:835,
-  			height:700,
-				items:[{
-						region:"center",
-						layout:"border",
-						border:false,
-						items:[{
-								id:"l_grid-panel-fm",
-								contentEl:"grid-panel-fm",
-								region:"center",
-								layout:"fit",
-								border:false,
-								items: [fmPanel]
-							},{
-								id:"l_pentagramme",
-								contentEl:"pentagramme",
-								region:"north",
-								height:445,
-								split:true
-							},{
-								id:"l_testsCliniques",
-								contentEl:"testsCliniques",
-								region:"south",
-								title:TESTS_CLINIQUES_TITLE,
-								height:75,
-								split:true,
-								collapsible:true
-							}]
-					},{
-						region:"east",
-						width:195,
-						minSize: 150,
-						maxSize: 400,
-						split:true,
-						collapsible:true,
-						titleCollapse:true,
-						layout:"border",
-						border:false,
-						items:[
-							{
-								id:"l_suggestions",
-								contentEl:"suggestions",
-								region:"center",
-								layout:"fit",
-								border:false,
-								items:[suggPanel]
-							}
-							,{
-								id:"l_ccd",
-								contentEl:"ccd",
-								region:"south",
-								height:125,
-								split:true,
-								layout:"fit",
-								border:false,
-								items: [ccdPanel],
-								collapsible:true
-							}]
-					}]
-  			}
-  		);
+      var layout = new Ext.Panel({ 
+        layout:"border",
+        renderTo:"sous-container",
+        width:835,
+        height:700,
+        items:[{
+            region:"center",
+            layout:"border",
+            border:false,
+            items:[{
+                id:"l_grid-panel-fm",
+                contentEl:"grid-panel-fm",
+                region:"center",
+                layout:"fit",
+                border:false,
+                items: [fmPanel]
+              },{
+                id:"l_pentagramme",
+                contentEl:"pentagramme",
+                region:"north",
+                height:445,
+                split:true
+              },{
+                id:"l_testsCliniques",
+                contentEl:"testsCliniques",
+                region:"south",
+                title:TESTS_CLINIQUES_TITLE,
+                height:75,
+                split:true,
+                collapsible:true
+              }]
+          },{
+            region:"east",
+            width:195,
+            minSize: 150,
+            maxSize: 400,
+            split:true,
+            collapsible:true,
+            titleCollapse:true,
+            layout:"border",
+            border:false,
+            items:[
+              {
+                id:"l_suggestions",
+                contentEl:"suggestions",
+                region:"center",
+                layout:"fit",
+                border:false,
+                items:[suggPanel]
+              }
+              ,{
+                id:"l_ccd",
+                contentEl:"ccd",
+                region:"south",
+                height:125,
+                split:true,
+                layout:"fit",
+                border:false,
+                items: [ccdPanel],
+                collapsible:true
+              }]
+          }]
+        }
+      );
   
-  		if (Ext.get('loading-mask')) {
+      if (Ext.get('loading-mask')) {
         Ext.get('loading-mask').remove();
-  	  	Ext.get('loading').fadeOut({remove: true});
-  	  }
+        Ext.get('loading').fadeOut({remove: true});
+      }
       
       /* On appelle les element specifiques propres au contexte */
-			/* ou a charger en dernier -- ne concernent pas l'affichage -- */
+      /* ou a charger en dernier -- ne concernent pas l'affichage -- */
       /* Fonction définie dans proto_custom */
       loadSpecificFunction();
       
