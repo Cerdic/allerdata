@@ -3,9 +3,9 @@
 <p id="ariane"><a href="./"><:accueil:></a> / <strong><:assistant_moleculaire:></strong></p>
 
 <div id="contenu" class="clearfix">
-	<div
+	<div id="sous-container">
 		<?php if ($auteur_session) { ?>
-		 id="sous-container">
+		
 			<INCLURE{fond=inc/loading_block}>
 			<div id="conteneur-east">
 				<div id="grid-panel-fm">
@@ -64,17 +64,9 @@
 	<script type="text/javascript" src="#CHEMIN{js/tabCloseMenu.js}"></script>
 
 		<?php } else { ?>
-				<h1><:h1_acces_restreint:></h1>
-				
-				<p><:instructions_login:></p>
-				
-				#LOGIN_PUBLIC
-				
-				[(#REM) Inscription au site ]
-				#FORMULAIRE_INSCRIPTION
-				
+[(#INCLURE{fond=inc_acces_reserve}{letitre=<:assistant_moleculaire:>})]
+		</div>
 	</div>
 </div>
 		<?php } ?>
-		
 #INCLURE{fond=inc_footer}
