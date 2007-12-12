@@ -14,7 +14,7 @@ var LISTE_DES_FAMILLES = {
         var temp = new Array(); 
         temp = texte.split('==>');
         var nom = temp[0],
-      	  est_dans = temp[1];
+          est_dans = temp[1];
         return "<div class='cell_fm'><a href=\"#\" onclick='LISTE_DES_FAMILLES.outline_prod(" + est_dans + ");return false;' title='" + nom + "'>" + nom + '</a></span></div>';
       };
     
@@ -48,10 +48,10 @@ var LISTE_DES_FAMILLES = {
         store:ds,
         autoExpandColumn:'nom',
         loadMask: {msg:LOAD_MASK},
-				columns: [
+        columns: [
           {id:'nom',header: FM_NAME, width: 250, sortable: true, locked:false, dataIndex: 'nom', renderer: dsp_libelle},
           {id:'info', header: '(i)', width: 30, locked:true, sortable:false, align: 'center', dataIndex: 'id_item', renderer: dsp_toInfo},
-    			{header: FM_NB, width: 28, locked:true, sortable: true, align:'center', dataIndex: 'nb_item', renderer: dsp_nb},
+          {header: FM_NB, width: 28, locked:true, sortable: true, align:'center', dataIndex: 'nb_item', renderer: dsp_nb},
           {id:'test',header: FM_TEST, width: 320, sortable: true, locked:false, dataIndex: 'test'}
         ],
         viewConfig: {
@@ -61,29 +61,29 @@ var LISTE_DES_FAMILLES = {
       })
     }
     
-		return this.grid;
+    return this.grid;
 
   },
 
   // La mise à jour se fait par json
   show_fm : function() {
     var p1 = jQuery('#p1').val(),
-  		p2 = jQuery('#p2').val(), 
-  		p3 = jQuery('#p3').val(), 
-  		p4 = jQuery('#p4').val(), 
-  		p5 = jQuery('#p5').val(),
-  		ds = this.grid.getStore();
+      p2 = jQuery('#p2').val(), 
+      p3 = jQuery('#p3').val(), 
+      p4 = jQuery('#p4').val(), 
+      p5 = jQuery('#p5').val(),
+      ds = this.grid.getStore();
     ds.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5}});
   },
 
-	// Infos d'une FM
-	popup_fm : function(val) {
-	  Ext.get('iframe').dom.src = 'spip.php?page=popup_fm&id_fm=' + val;
-	  dialog.show(Ext.get('info_fm_' + val));		
-	},
-	
-	// Mise en avant des produits concernés par une FM
-	outline_prod : function(lProd) {
+  // Infos d'une FM
+  popup_fm : function(val) {
+    Ext.get('iframe').dom.src = 'spip.php?page=popup_fm&id_fm=' + val;
+    dialog.show(Ext.get('info_fm_' + val));   
+  },
+  
+  // Mise en avant des produits concernés par une FM
+  outline_prod : function(lProd) {
     $('.actif').removeClass('actif');
     var num=0;
     while (num < lProd.length)
@@ -93,7 +93,7 @@ var LISTE_DES_FAMILLES = {
       $(id).addClass('actif');
       num+=1;
     }
-	}
-	
+  }
+  
 };
 Ext.onReady(LISTE_DES_FAMILLES.init, LISTE_DES_FAMILLES);

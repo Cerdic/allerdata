@@ -14,7 +14,7 @@ function action_liste_des_produits() {
 		$produits_deja_choisis = implode(",", $_SESSION['produits_choisis']);
 	session_write_close();
 	
-	$sql = "select id_item, nom from tbl_items where interrogeable = 1 ";
+	$sql = "select id_item, nom from tbl_items where id_type_item in (5,3) ";
 	if ($produits_deja_choisis)	$sql .="and id_item NOT IN(".$produits_deja_choisis.")";
 	$sql .= "	and ( nom_sans_accent like '".addslashes($chaine)."%'
 		or nom like '".addslashes($_POST['query'])."%')
@@ -29,7 +29,7 @@ function action_liste_des_produits() {
 	
 	// On complète par une recherche plus large
 	$sql = "select id_item, nom from tbl_items 
-				where interrogeable = 1 ";
+				where id_type_item in (5,3) ";
 	if ($produits_deja_choisis)	$sql .="and id_item NOT IN(".$produits_deja_choisis.")";
 	$sql .= "				and nom_sans_accent like '%".addslashes($chaine)."%' 
 					and nom_sans_accent not in (

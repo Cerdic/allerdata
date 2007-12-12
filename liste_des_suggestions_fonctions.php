@@ -63,7 +63,7 @@ function suggestions($txt) {
 			IN ($produits ) 
 		AND tbl_items_1.id_item NOT 
 			IN ($produits)
-			AND tbl_items_1.interrogeable = 1 ". 
+			AND tbl_items_1.id_type_item in (5,3) ". 
 	//	AND tbl_items_1.affichage_suggestion =1
 	"GROUP BY tbl_reactions_croisees.id_reaction_croisee
 	ORDER BY tbl_items.nom
@@ -122,7 +122,7 @@ function suggestions($txt) {
 			IN ($produits ) 
 		AND tbl_items.id_item NOT 
 			IN ($produits)
-			AND tbl_items.interrogeable = 1 ". 
+			AND tbl_items.id_type_item in (5,3) ". 
 	//	AND tbl_items.affichage_suggestion =1
 	"GROUP BY tbl_reactions_croisees.id_reaction_croisee
 	ORDER BY tbl_items_1.nom
