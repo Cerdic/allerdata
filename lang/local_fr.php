@@ -58,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //L
 'loading' => "Chargement",
+'login_login' => "Nom d'utilisateur&nbsp;:",
+'login_login2' => "Nom d'utilisateur&nbsp;:",
 
 
 // M
