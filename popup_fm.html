@@ -49,15 +49,7 @@
 				</div>
 
 <?php } else { ?>
-				<h1><:h1_acces_restreint:></h1>
-				
-				<p><:instructions_login:></p>
-								
-				#LOGIN_PUBLIC
-				
-				[(#REM) Inscription au site ]
-				#FORMULAIRE_INSCRIPTION
-				
+[(#INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]})]
 <?php } ?>
 
 			</div>
