@@ -1,17 +1,6 @@
-				<h1>L'accès à «&nbsp;#ENV{letitre}&nbsp;» est réservé aux abonnés</h1>
-				
-				<p>Vous êtes déjà abonné ?</p>
-				
-				<p>Afin d'accéder au contenu intégral de ce site, identifiez-vous en entrant 
-				ci-dessous le nom d'utilisateur et le mot de passe qui vous ont été envoyés.</p>
-				
+				<h1>«&nbsp;#ENV{letitre}&nbsp;»<:ad:acces_reserve_abonnes:></h1>
+				<:ad:intro_login:>
 				#LOGIN_PUBLIC
-				
 				[(#REM) Inscription au site ]
-				[<p>Ce site est la propriété exclusive de la société AllerData SARL.</p>
-
-<p>Il est exclusivement réservé aux professionnels.</p>
-
-<p>L'accès à la partie réservée aux abonnés ne peut se faire qu'après attribution d'un nom d'utilisateur et d'un mot de passe.</p>
-
-<p>Si vous souhaitez obtenir vos identifiants, veuillez remplir le formulaire ci-dessous&nbsp;:</p>(#MODELE{form}{id_form=3})]
+				[<:ad:blabla_inscription:>
+				(#MODELE{form}{id_form=3})]
