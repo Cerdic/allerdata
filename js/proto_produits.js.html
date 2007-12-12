@@ -10,35 +10,65 @@
  * Combobox Mod for Ext 2.0
  */
 Ext.ux.TwinComboBox = Ext.extend(Ext.form.ComboBox, {
-        initComponent : Ext.form.TwinTriggerField.prototype.initComponent
-    ,    getTrigger : Ext.form.TwinTriggerField.prototype.getTrigger
-    ,    initTrigger    : Ext.form.TwinTriggerField.prototype.initTrigger
-    ,    trigger1Class    :    'x-form-clear-trigger'
-    ,    hideTrigger1 : true
-	,	queryDelay : 10
-//    ,    onTrigger2Click : Ext.form.ComboBox.prototype.onTriggerClick // Not sure if needed ???
-//    ,    hideTrigger2: Ext.form.ComboBox.prototype.hideTrigger      // Does not map hideTrigger ???
-
-    , reset : Ext.form.Field.prototype.reset.createSequence(function(){        
-				this.triggers[0].hide();
-        })
-    
-    , onViewClick :    Ext.form.ComboBox.prototype.onViewClick.createSequence(function(){
-        this.triggers[0].show(); // Added to show trigger
-        })
-    
-  	, onTrigger2Click : function(){
-            this.onTriggerClick();
-        }
-
-  	, onTrigger1Click : function(){
-            this.clearValue();
-            this.triggers[0].hide();
-      			this.fireEvent('clear', this);
-						reload_penta();
-      }
-        
+	initComponent : function(){
+		Ext.form.TwinTriggerField.prototype.initComponent.call(this);
+		this.on('specialkey', function(f, e){
+			var k = e.getKey();
+			if (k == e.ESC){
+				if (this.lastSelectionText) {
+					this.setRawValue(this.lastSelectionText);
+				} else {
+					this.clearValue();
+					this.fireEvent('clear', this);
+					Ext.form.TextField.prototype.preFocus.call(this);
+				}
+			}
+			if (k == e.TAB){
+				Ext.form.ComboBox.superclass.onBlur.call(this);
+				if (!this.value)
+					this.onTrigger1Click();
+				else 
+					reload_penta();
+			}
+		}, this);
+  },
+	getTrigger : Ext.form.TwinTriggerField.prototype.getTrigger,
+	initTrigger : Ext.form.TwinTriggerField.prototype.initTrigger,
+  trigger1Class : 'x-form-clear-trigger',
+  hideTrigger1 : true,
+	queryDelay : 10,
+  reset : Ext.form.Field.prototype.reset.createSequence(function(){        
+		this.triggers[0].hide();
+		}),
+  onViewClick :    Ext.form.ComboBox.prototype.onViewClick.createSequence(function(){
+		this.triggers[0].show(); // Added to show trigger
+		}),
+  onTrigger2Click : function(){
+		this.onTriggerClick();
+		},
+	onTrigger1Click : function(){
+		this.clearValue();
+		this.triggers[0].hide();
+		this.fireEvent('clear', this);
+		Ext.form.ComboBox.superclass.onBlur.call(this);
+		reload_penta();
+    },
+  // Parametres supplementaires pour Allerdata
+  displayField:'nom',                                   // ce qu'on affiche
+  valueField:'id_item',                                 // la valeur qui sera envoyées
+  forceSelection: true,                                 // obliger de ne saisir que ce qui est proposé
+  typeAhead: false,                                     // suggestion
+  hideTrigger2 : true,
+  minChars:2,                                           // nb de caractères avant requete de suggestion
+  grow:true,                                            // s'adapte au nb de résultats
+  maxHeight:300,                                        // hauteur maxi
+  selectOnFocus:true,                                   // pour éviter le pb du double-clic
+  selectOnBlur:false,
+	loadingText: COMBO_LOADINGTEXT,                       // -
+  emptyText:COMBO_EMPTYTEXT,   			                    // -
+  width: 186                                            // -
 });
+
 
 /* -------------------- Mise en avant de 2 produits et de leur lien ------------------------- */
 
@@ -101,139 +131,81 @@ var ZONES_SAISIE = {
   combo_5 : null,
   
   init : function() {
-    var store = new Ext.data.JsonStore({
-          url: 'spip.php?action=liste_des_produits',
-          root: 'produits',
-          fields : ['id_item','nom']
+    cstore = new Ext.data.JsonStore({
+      url: 'spip.php?action=liste_des_produits',
+      root: 'produits',
+      fields : ['id_item','nom']
     });
 
     this.combo_1 = new Ext.ux.TwinComboBox({
-      applyTo:'prod_1',                                     // id d'un noeud qui possede l'input
-      store: store,                                         // d'où viennent les données
-      displayField:'nom',                                   // ce qu'on affiche
-      valueField:'id_item',                                 // la valeur qui sera envoyées
-      hiddenName:'p1',                                      // le champs cché qui permet d'envoyer la valeur (et pas le texte)
-      forceSelection: true,                                 // obliger de ne saisir que ce qui est proposé
-      typeAhead: false,                                     // suggestion
-      hideTrigger2 : true,
-      minChars:2,                                           // nb de caractères avant requete de suggestion
-      grow:true,                                            // s'adapte au nb de résultats
-      maxHeight:300,                                        // hauteur maxi
-      selectOnFocus:true,                                   // pour éviter le pb du double-clic
-      loadingText: COMBO_LOADINGTEXT,                       // -
-      emptyText:COMBO_EMPTYTEXT,   			                    // -
-      width: 186                                            // -
+		  store: cstore,						                             // d'où viennent les données
+      applyTo:'prod_1',
+			hiddenName:'p1'                                      // le champs cché qui permet d'envoyer la valeur (et pas le texte)
     });
     
     this.combo_1.on('clear',function(){
-        $('#info-s1').hide();
-        $('.concerne-p1').removeClass('rc_toujours');
-        $('.concerne-p1').removeClass('rc_jamais');
-        $('.concerne-p1').removeClass('rc_discordant');
-        $('#liens_infos .concerne-p1').hide();
-        }
+       $('#info-s1').hide();
+       $('.concerne-p1').removeClass('rc_toujours');
+       $('.concerne-p1').removeClass('rc_jamais');
+       $('.concerne-p1').removeClass('rc_discordant');
+       $('#liens_infos .concerne-p1').hide();
+       }
     );
     this.combo_1.on('blur', function(){ this.doForce() });
 
  
     this.combo_2 = new Ext.ux.TwinComboBox({
+		  store: cstore,						                             // d'où viennent les données
       applyTo:'prod_2',
-      store : store,
-      displayField : 'nom',
-      valueField : 'id_item',
-      hiddenName : 'p2',
-      forceSelection : true,
-      typeAhead : false,
-      hideTrigger2 : true,
-      selectOnFocus : true,                                   
-      minChars : 2,
-      grow : true,
-      maxHeight : 300,
-      loadingText : COMBO_LOADINGTEXT,
-      emptyText : COMBO_EMPTYTEXT,
-      width : 186
+      hiddenName : 'p2'
     });
     this.combo_2.on('clear',function(){
-        $('#info-s2').hide();
-        $('.concerne-p2').removeClass('rc_toujours');
-        $('.concerne-p2').removeClass('rc_jamais');
-        $('.concerne-p2').removeClass('rc_discordant');
-        $('#liens_infos .concerne-p2').hide();
+      $('#info-s2').hide();
+      $('.concerne-p2').removeClass('rc_toujours');
+      $('.concerne-p2').removeClass('rc_jamais');
+      $('.concerne-p2').removeClass('rc_discordant');
+      $('#liens_infos .concerne-p2').hide();
     }
     );
  
     this.combo_3 = new Ext.ux.TwinComboBox({
+		  store: cstore,						                             // d'où viennent les données
       applyTo:'prod_3',
-      store: store,
-      displayField:'nom',
-      valueField:'id_item',
-      forceSelection: true,
-      typeAhead: false,
-      hideTrigger2: true,
-      hiddenName:'p3',
-      minChars:2,
-      grow:true,
-      maxHeight:300,
-      selectOnFocus:true,                                   
-      loadingText: COMBO_LOADINGTEXT,
-      emptyText:COMBO_EMPTYTEXT,
-      width: 186
+      hiddenName:'p3'
     });
     this.combo_3.on('clear',function(){
-        $('#info-s3').hide();
-        $('.concerne-p3').removeClass('rc_toujours');
-        $('.concerne-p3').removeClass('rc_jamais');
-        $('.concerne-p3').removeClass('rc_discordant');
-        $('#liens_infos .concerne-p3').hide();
+      $('#info-s3').hide();
+      $('.concerne-p3').removeClass('rc_toujours');
+      $('.concerne-p3').removeClass('rc_jamais');
+      $('.concerne-p3').removeClass('rc_discordant');
+      $('#liens_infos .concerne-p3').hide();
     });
   
     this.combo_4 = new Ext.ux.TwinComboBox({
+		  store: cstore,						                             // d'où viennent les données
       applyTo:'prod_4',
-      store: store,
-      displayField:'nom',
-      valueField:'id_item',
-      hiddenName:'p4',
-      forceSelection: true,
-      typeAhead: false,
-      hideTrigger2: true,
-      minChars:1,
-      selectOnFocus:true,                                   
-      loadingText: COMBO_LOADINGTEXT,
-      emptyText:COMBO_EMPTYTEXT,
-      width: 186
+      hiddenName:'p4'
     });
     this.combo_4.on('clear',function(){
-            $('#info-s4').hide();
-            $('.concerne-p4').removeClass('rc_toujours');
-            $('.concerne-p4').removeClass('rc_jamais');
-            $('.concerne-p4').removeClass('rc_discordant');
-            $('#liens_infos .concerne-p4').hide();
-        }
-    );
+      $('#info-s4').hide();
+      $('.concerne-p4').removeClass('rc_toujours');
+      $('.concerne-p4').removeClass('rc_jamais');
+      $('.concerne-p4').removeClass('rc_discordant');
+      $('#liens_infos .concerne-p4').hide();
+  	});
   
     this.combo_5 = new Ext.ux.TwinComboBox({
+		  store: cstore,						                             // d'où viennent les données
       applyTo:'prod_5',
-      store: store,
-      displayField:'nom',
-      valueField:'id_item',
-      hiddenName:'p5',
-      forceSelection: true,
-      typeAhead: false,
-      hideTrigger2: true,
-      minChars:1,
-      selectOnFocus:true,                                   
-      loadingText: COMBO_LOADINGTEXT,
-      emptyText:COMBO_EMPTYTEXT,
-      width: 186
+      hiddenName:'p5'
     });
     this.combo_5.on('clear',function(){
-            $('#info-s5').hide();
-            $('.concerne-p5').removeClass('rc_toujours');
-            $('.concerne-p5').removeClass('rc_jamais');
-            $('.concerne-p5').removeClass('rc_discordant');
-            $('#liens_infos .concerne-p5').hide();
-        }
-    );
+      $('#info-s5').hide();
+      $('.concerne-p5').removeClass('rc_toujours');
+      $('.concerne-p5').removeClass('rc_jamais');
+      $('.concerne-p5').removeClass('rc_discordant');
+      $('#liens_infos .concerne-p5').hide();
+  	});
 
     if ($('#p1').val()) $('#info-s1').show();
     if ($('#p2').val()) $('#info-s2').show();
