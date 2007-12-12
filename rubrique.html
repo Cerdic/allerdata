@@ -7,20 +7,9 @@
 			<div id="main">
 [(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{' ',''})
 <?php if ($auteur_session) { ?>
-[(#INCLURE{fond=inc_rubrique_contenu}{id_article})]
+[(#INCLURE{fond=inc_rubrique_contenu}{id_rubrique})]
 <?php } else { ?>
-				<h1>L'accès à «&nbsp;#TITRE&nbsp;» est réservé aux abonnés</h1>
-				
-				<p>Vous êtes déjà abonné ?</p>
-				
-				<p>Afin d'accéder au contenu intégral de ce site, identifiez-vous en entrant 
-				ci-dessous le nom d'utilisateur et le mot de passe qui vous ont été envoyés.</p>
-				
-				#LOGIN_PUBLIC
-				
-				[(#REM) Inscription au site ]
-				[(#MODELE{form}{id_form=3})]
-				
+[(#INCLURE{fond=inc_acces_reserve}{letitre=#TITRE})]
 <?php } ?>
 ][(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{'',' '})
 [(#INCLURE{fond=inc_rubrique_contenu}{id_rubrique})]
