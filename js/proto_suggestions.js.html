@@ -20,11 +20,11 @@ var LISTE_DES_SUGGESTIONS = {
       var change = function(val){
         if(val > 2){
           return '<span style="color:red;">' + val + '</span>';
-				}else if(val > 1){
-					return '<span style="color:green;">' + val + '</span>';
-				}
-				return val;
-			}
+        }else if(val > 1){
+          return '<span style="color:green;">' + val + '</span>';
+        }
+        return val;
+      }
   
       var dsp_toInfo = function(val) {
         var t = "<div class='cell_fm'><a class='info_fm' id='info_fm_" + val + "' alt='infos' onclick='LISTE_DES_PRODUITS.popup_prod(" + val + ")'></a></div>";
@@ -35,7 +35,7 @@ var LISTE_DES_SUGGESTIONS = {
       proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_suggestions'}),
       reader: new Ext.data.JsonReader({
         root: 'liste_des_suggestions'
-				}, [
+        }, [
            {name: 'nom'},
            {name: 'nb'},
            {name: 'id_mol'}
@@ -60,19 +60,20 @@ var LISTE_DES_SUGGESTIONS = {
               
     }
     
-		return this.grid;
+    return this.grid;
   },
 
   // La mise à jour se fait par json
   show_query : function() {
-  	var p1 = jQuery('#p1').val(),
-  		p2 = jQuery('#p2').val(), 
-  		p3 = jQuery('#p3').val(), 
-  		p4 = jQuery('#p4').val(), 
-  		p5 = jQuery('#p5').val(),
-  		ds_s = this.grid.getStore();
+    var p1 = jQuery('#p1').val(),
+      p2 = jQuery('#p2').val(), 
+      p3 = jQuery('#p3').val(), 
+      p4 = jQuery('#p4').val(), 
+      p5 = jQuery('#p5').val(),
+      ds_s = this.grid.getStore();
     ds_s.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5}});
   }
 };
+
 Ext.onReady(LISTE_DES_SUGGESTIONS.init, LISTE_DES_SUGGESTIONS);
 
