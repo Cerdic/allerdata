@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'get_url' => "Obtenir l'adresse de cette page",
 
 // H
-'h1_acces_restreint' => "L'acc&egrave;s à cette zone est restreint",
+'h1_acces_restreint' => "L'acc&egrave;s &agrave; cette zone est restreint",
 'help_needed' => "Besoin d'Aide ?",
 
 // I
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //N
 'name' => "Nom",
-'nothing_found' => "Aucun élément n'a été trouvé",
+'nothing_found' => "Aucun élément n'a ét&eacute;t&eacute; trouv&eacute;,
 
 // O
 'other_name' => "Autre Nom",
