@@ -1,33 +1,13 @@
 <?php
 
-function msort($array, $id="id", $sort_ascending=true)
-/* http://fr3.php.net/manual/en/function.sort.php#76547 */
-/* Fonction de tri sur un clef */
+function cmp($a, $b) 
+/* fonction de tri inverse via uksort */
 {
-    $temp_array = array();
-    while (count($array)>0) {
-        $lowest_id = 0;
-        $index=0;
-        foreach($array as $item) {
-            if (isset($item[$id])) {
-                if ($array[$lowest_id][$id]) {
-                    if ($item[$id]<$array[$lowest_id][$id]) {
-                        $lowest_id = $index;
-                    }
-                }
-            }
-            $index++;
-        }
-        $temp_array[] = $array[$lowest_id];
-        $array = array_merge(array_slice($array, 0,$lowest_id), array_slice($array, $lowest_id+1));
+    if ($a == $b) {
+        return 0;
     }
-    if ($sort_ascending) {
-        return $temp_array;
-    } else {
-        return array_reverse($temp_array);
-    }
+    return ($a > $b) ? -1 : 1;
 }
-
 
 function suggestions($txt) {
 	$tableau_produits = $suggestion = array();
@@ -159,8 +139,6 @@ function suggestions($txt) {
 		
 	}
 
-	spip_log($liste);	
-	
 	// Ventilation 
 	foreach ($liste as $idp1 => $l_idp1) {
 		foreach ($l_idp1 as $idp2 => $l_idp2) {
@@ -173,11 +151,15 @@ function suggestions($txt) {
 	}
 
 	/* Ensuite on ordonne la liste des suggestions par "réactivité" inverse, en utilisant notre pondération */
-	$suggestion = msort($suggestion, "reactivite", false);
+	uksort($suggestion,"cmp");
 	
-	spip_log($suggestion);
+	/* Maintenant il faut se "débarasser des index" : il ne faut pas retourner de tableau associatif */
+	$aFinal = array();
+	foreach ($suggestion as $s) {
+		$aFinal[] = $s;
+	}
 	
-	return json_encode($suggestion);
+	return json_encode($aFinal);
 	
 
 }
