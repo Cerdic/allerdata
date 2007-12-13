@@ -3,34 +3,34 @@
 
 function reload_penta(){
   jQuery('#lienAdresse').attr('href','pentagramme.html?p1='+ jQuery('#p1').val() 
-		+'&p2='+jQuery('#p2').val() + '&p3='+
-		jQuery('#p3').val() + '&p4='+
-		jQuery('#p4').val() + '&p5=' +
-		jQuery('#p5').val());
+    +'&p2='+jQuery('#p2').val() + '&p3='+
+    jQuery('#p3').val() + '&p4='+
+    jQuery('#p4').val() + '&p5=' +
+    jQuery('#p5').val());
   $('#form_penta .info').hide();
-	LISTE_DES_FAMILLES.show_fm();
+  LISTE_DES_FAMILLES.show_fm();
   LISTE_DES_RC.getData();
-	if (jQuery('#p1').val()) jQuery('#info-s1').show();
-	if (jQuery('#p2').val()) jQuery('#info-s2').show();
-	if (jQuery('#p3').val()) jQuery('#info-s3').show();
-	if (jQuery('#p4').val()) jQuery('#info-s4').show();
-	if (jQuery('#p5').val()) jQuery('#info-s5').show();
-	LISTE_DES_SUGGESTIONS.show_query();
-	CCD.show_ccd();
-	return false;
+  if (jQuery('#p1').val()) jQuery('#info-s1').show();
+  if (jQuery('#p2').val()) jQuery('#info-s2').show();
+  if (jQuery('#p3').val()) jQuery('#info-s3').show();
+  if (jQuery('#p4').val()) jQuery('#info-s4').show();
+  if (jQuery('#p5').val()) jQuery('#info-s5').show();
+  LISTE_DES_SUGGESTIONS.show_query();
+  CCD.show_ccd();
+  return false;
 }
 
 
 Ext.onReady(function(){
-	jQuery.ajax({
-	  type: "GET",
-	  url:'spip.php?action=purge_sessions'
-	});
+  jQuery.ajax({
+    type: "GET",
+    url:'spip.php?action=purge_sessions'
+  });
   jQuery('#form_penta').submit(reload_penta);
 });
 
 function loadSpecificFunction() {
-	/* Cette fonction sera appelée *après* le téléchargement du reste
+  /* Cette fonction sera appelée *après* le téléchargement du reste
    de l'appli pour que les autres "classes" aient pu s'initialiser */
 
   jQuery().ready(function() {  
@@ -44,8 +44,8 @@ function loadSpecificFunction() {
         $p = spip_fetch_array(spip_query($q));
         if ($p) {
           $str .= "\nZONES_SAISIE.combo_$i.setValue('".addslashes($p['nom'])."');";
-					$str .= "\nZONES_SAISIE.combo_$i.triggers[0].show();";
-					$str .= "\njQuery('#p$i').val(".addslashes(_request("p$i")).");";
+          $str .= "\nZONES_SAISIE.combo_$i.triggers[0].show();";
+          $str .= "\njQuery('#p$i').val(".addslashes(_request("p$i")).");";
         }
       }
     }
@@ -60,14 +60,13 @@ function loadSpecificFunction() {
   
   <BOUCLE_ModeEmploiAAM(ARTICLES){id_article=10}{!par date}{0,1}>
     jQuery('#lienAide').click(function() {
-  		jQuery('#popup-dlg .x-dlg-hd').text('Aide');
-  		var link = 'spip.php?page=article_popup&id_article=#ID_ARTICLE';
-  		Ext.get('popup-iframe').dom.src = link;
-  		dialog.show();
-  	});
+      jQuery('#popup-dlg .x-dlg-hd').text('Aide');
+      var link = 'spip.php?page=article_popup&id_article=#ID_ARTICLE';
+      Ext.get('popup-iframe').dom.src = link;
+      dialog.show();
+    });
   </BOUCLE_ModeEmploiAAM>
   
   });
 
 }
-
