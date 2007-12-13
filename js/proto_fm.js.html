@@ -90,7 +90,7 @@ var LISTE_DES_FAMILLES = {
       var hidden_div = jQuery('#liste_des_produits input[@value='+lProd[num]+']');
       var id = 'prod_' + hidden_div.attr('id').substr(1);
 			// Il faut rectifier la feuille de style d'extjs (line 133) qui affecte une image de fond
-			Ext.get(id).setStyle('background','white').highlight();
+			Ext.get(id).setStyle('background','white').highlight("ffff9c",{ attr: 'background-color', duration: 2 });
       num+=1;
     }
   }
