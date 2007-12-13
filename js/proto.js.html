@@ -50,8 +50,6 @@ MiseEnPage = function(){
             minSize: 150,
             maxSize: 400,
             split:true,
-            collapsible:true,
-            titleCollapse:true,
             layout:"border",
             border:false,
             items:[
@@ -65,18 +63,15 @@ MiseEnPage = function(){
               }
               ,{
                 id:"l_ccd",
-                contentEl:"ccd",
                 region:"south",
                 height:125,
-                split:true,
                 layout:"fit",
-title: 'ccd',
-                border:false,
+                title: 'ccd',
                 items: new Ext.BoxComponent({
-						      applyTo: 'ccd',
-						      border: false
-						    }),
-                collapsible:true
+                  applyTo: 'ccd'
+                }),
+                titleCollapse:true,
+								collapsible:true
               }]
           }]
         }
