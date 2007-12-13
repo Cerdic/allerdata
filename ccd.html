@@ -6,9 +6,8 @@
 </div>
 <script>
 var dsp_popup = function() {
-  jQuery('#popup-dlg .x-dlg-hd').text('CCD : détails');
   var link = 'spip.php?page=popup_ccd&p1=#ENV{p1}&p2=#ENV{p2}&p3=#ENV{p3}&p4=#ENV{p4}&p5=#ENV{p5}';
-  Ext.get('popup-iframe').dom.src = link;
+  Ext.get('iframe').dom.src = link;
   dialog.show(Ext.get('infos_ccd'));
 }
 </script>
