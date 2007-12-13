@@ -153,10 +153,20 @@ function suggestions($txt) {
 	/* Ensuite on ordonne la liste des suggestions par "réactivité" inverse, en utilisant notre pondération */
 	uksort($suggestion,"cmp");
 	
+	/* On prépare un tri par nombre d'éléments concernés */
+	$aNbProd = array();
+	foreach ($suggestion as $s) {
+		if (!isset($aNbProd[$s['nb']])) $aNbProd[$s['nb']] = array();
+		$aNbProd[$s['nb']][] = $s;
+	}
+	uksort($aNbProd,"cmp");
+
 	/* Maintenant il faut se "débarasser des index" : il ne faut pas retourner de tableau associatif */
 	$aFinal = array();
-	foreach ($suggestion as $s) {
-		$aFinal[] = $s;
+	foreach ($aNbProd as $aProd) {
+		foreach ($aProd as $s) {
+			$aFinal[] = $s;
+		}
 	}
 	
 	return json_encode($aFinal);
