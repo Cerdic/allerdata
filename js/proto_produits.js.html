@@ -90,45 +90,6 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.form.ComboBox, {
   
 });
 
-
-/* -------------------- Mise en avant de 2 produits et de leur lien ------------------------- */
-
-var MiseEnAvant = function() {
-
-  return {
-    prod_1: 0,
-    prod_2: 0,
-    init: function() {
-      for (i = 1; i < 5; i++) {
-        for (j = i + 1; j <= 5; j++) {
-          jQuery('#link_' + i + '-' + j).bind(
-          'mousedown', 
-          function(e) {
-            var id = jQuery(this).attr('id');
-            var re = /link_(\d)-(\d)/;
-            var found = id.match(re);
-            var i = found[1];
-            var j = found[2];
-            jQuery('.actif').removeClass('actif');
-            if (i != MiseEnAvant.prod_1 || j != MiseEnAvant.prod_2) {
-              jQuery('#prod_' + i + ', #prod_' + j + ', #link_' + i + '-' + j).addClass('actif');
-              MiseEnAvant.prod_1 = i;
-              MiseEnAvant.prod_2 = j;
-            } else {
-              MiseEnAvant.prod_1 = MiseEnAvant.prod_2 = 0;
-            }
-          }
-          );
-        }
-      }
-    }
-  };
-
-} ();
-
-Ext.EventManager.onDocumentReady(MiseEnAvant.init, MiseEnAvant, true);
-
-
 /* ----------------------------- Nettoyage des comboBox ---------------------------------- */
 
 // Permet de nettoyer proprement le combo lorsque le champ de saisie perd le focus

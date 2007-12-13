@@ -8,7 +8,8 @@ var CCD = {
   
 	outline_prod : function(array_prod) {
 		for (i=0;i<array_prod.length;i++) {
-			$('input[@value=' + array_prod[i] + ']').next('.x-form-text').toggleClass('actif')
+			var el = Ext.get($('input[@value=' + array_prod[i] + ']').next('.x-form-text')[0]);
+			el.setStyle('background','white').highlight();
 		}
 	},
 	
