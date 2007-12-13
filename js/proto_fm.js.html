@@ -84,13 +84,13 @@ var LISTE_DES_FAMILLES = {
   
   // Mise en avant des produits concernés par une FM
   outline_prod : function(lProd) {
-    $('.actif').removeClass('actif');
     var num=0;
     while (num < lProd.length)
     {
       var hidden_div = jQuery('#liste_des_produits input[@value='+lProd[num]+']');
-      var id = '#prod_' + hidden_div.attr('id').substr(1);
-      $(id).addClass('actif');
+      var id = 'prod_' + hidden_div.attr('id').substr(1);
+			// Il faut rectifier la feuille de style d'extjs (line 133) qui affecte une image de fond
+			Ext.get(id).setStyle('background','white').highlight();
       num+=1;
     }
   }
