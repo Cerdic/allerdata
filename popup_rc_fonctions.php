@@ -3,9 +3,6 @@ function rc($p1,$p2) {
 	$tableau_produits = array();
 	if (is_numeric($p1)) $tableau_produits[] = $p1; 
 	if (is_numeric($p2)) $tableau_produits[] = $p2;
-	if (is_numeric($p3)) $tableau_produits[] = $p3;
-	if (is_numeric($p4)) $tableau_produits[] = $p4;
-	if (is_numeric($p5)) $tableau_produits[] = $p5;
 	
 	$produits = implode(",", $tableau_produits);
 	
