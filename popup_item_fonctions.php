@@ -70,9 +70,10 @@ function allergenes($produits) {
 	if (!is_numeric($produits)) return;
 	
 	$result = '';
-	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
+	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_niveaux_allergenicite.niveau_de_preuve
 					FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.est_dans_id_item) 
 						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item
+						INNER JOIN tbl_niveaux_allergenicite ON tbl_items_1.id_niveau_allergenicite = tbl_niveaux_allergenicite.id_niveau_allergenicite
 					WHERE (
 						((tbl_items.id_item)=$produits) 
 						AND ((tbl_items_1.id_type_item) IN (7,8))
@@ -80,7 +81,14 @@ function allergenes($produits) {
 					ORDER BY tbl_items_1.nom;";
 	$resallergenes = spip_query($queryallergenes);
 	while ($rowallergenes = spip_fetch_array($resallergenes)){
-		$allergenes .= '<li>Allerg&eagrave;nes&nbsp;: '.$rowallergenes['nom'].'</li>';
+		$allergenes .= '						<tr>
+						<td>'.$rowallergenes['nom'].'</td>
+						<td>???</td>
+						<td>'.$rowallergenes['masse'].'</td>
+						<td>'.$rowallergenes['iuis'].'</td>
+						<td>'.$rowallergenes['glyco'].'</td>
+						<td>'.$rowallergenes['allergenicite'].'</td>
+						</tr>';
 	}
 	$result .= $allergenes;
 

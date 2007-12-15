@@ -14,21 +14,19 @@
 				]
 				[(#ID_TYPE_ITEM|=={5}|?{' '})
 					[<h2>Ce produits a pour source</h2>
-					<p>(#ID_ITEM|source)</p>]
+					<ul>(#ID_ITEM|source)</ul>]
 					[<h2>Ce produits contient des allergènes</h2>
-					<ul>(#ID_ITEM|allergenes)</ul>]
+					<table>
+						<tr>
+						<th>Nom</th>
+						<th>Fonction</th>
+						<th>Masse</th>
+						<th>IUIS</th>
+						<th>Glyco</th>
+						<th>Niveau</th>
+						</tr>
+						(#ID_ITEM|allergenes)</table>]
 				]
-				
-					<p><:other_name:>: [(#AUTRE_NOM|sinon{NA})]</p>
-					<p><:full_name:>: [(#NOM_COMPLET|sinon{NA})]</p>
-					<p><:chaine_alpha:>: [(#CHAINE_ALPHA|sinon{NA})]</p>
-					<p><:interrogeable:>: [(#INTERROGEABLE|sinon{NA})]</p>
-					<p><:testable:>: [(#TESTABLE|sinon{NA})]</p>
-					<p><:test_code:>: [(#CODE_TEST|sinon{NA})]</p>
-					<p><:iuis:>: [(#IUIS|sinon{NA})]</p>
-					<p><:masse:>: [(#MASSE|sinon{NA})]</p>
-					<p><:glyco:>: [(#GLYCO|sinon{NA})]</p>
-					<p><:allergenicite:>: [(#ALLERGENICITE|sinon{NA})]</p>
 				</div>
 
 <?php } else { ?>
