@@ -8,6 +8,11 @@
 					<p class="auteurArticle"><:by:> Dr Henri Malandain</p>
 				</div>
 				<div class="blocContenuArticle" style="margin:0; padding:0">
+					<Boucle_EstType3(tbl_items){id_items}{id_type_item=3}>
+						[<h2>Ce groupe générique de produit contient les produits :</h2>
+						<ul>(#ID_ITEM|listetype5)</ul>]
+					</Boucle_EstType3>
+				
 					<p><:other_name:>: [(#AUTRE_NOM|sinon{NA})]</p>
 					<p><:full_name:>: [(#NOM_COMPLET|sinon{NA})]</p>
 					<p><:chaine_alpha:>: [(#CHAINE_ALPHA|sinon{NA})]</p>
