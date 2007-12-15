@@ -41,3 +41,23 @@ function listetype5($produits) {
 
 	return $result;
 }
+
+function source($produits) {
+	if (!is_numeric($produits)) return;
+	
+	$result = '';
+	$querysource = "SELECT tbl_items_1.id_item, tbl_items_1.nom
+					FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
+						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.est_dans_id_item = tbl_items_1.id_item
+					WHERE (
+						((tbl_items.id_item)=$produits) 
+						AND ((tbl_items_1.id_type_item)=4)
+						);";
+	$ressource = spip_query($querysource);
+	while ($rowsource = spip_fetch_array($ressource)){
+		$source = 'Source&nbsp;: '.$rowsource['nom'].')';
+	}
+	$result .= $source.'</li>';
+
+	return $result;
+}
