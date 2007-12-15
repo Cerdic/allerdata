@@ -15,7 +15,7 @@ function listetype5($produits) {
 	$res = spip_query($query);
 	$result = '';
 	while ($row = spip_fetch_array($res)){
-		$result .= '<li>'.$row['nom'];
+		$result .= '<li><strong>'.$row['nom'].'</strong>';
 		$querysource = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
 						FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
 							INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.est_dans_id_item = tbl_items_1.id_item
@@ -34,7 +34,7 @@ function listetype5($produits) {
 				$source .= $rowsource['nom'];
 			}
 		}
-		if ($source) $source = '(Source&nbsp;: '.$source.')';
+		if ($source) $source = ' (Source&nbsp;: '.$source.')';
 		$result .= $source;
 		$queryfamille = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
 						FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
@@ -54,7 +54,7 @@ function listetype5($produits) {
 				$famille .= $rowfamille['nom'];
 			}
 		}
-		if ($famille) $famille = '(Famille taxonomique&nbsp;: '.$famille.')';
+		if ($famille) $famille = ' (Famille taxonomique&nbsp;: '.$famille.')';
 		$result .= $famille.'</li>';
 	}
 
