@@ -1,34 +1,6 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Items(tbl_items){id_item=#ENV{id_fm}}>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
-<head>
-	<title>[(#NOM|sinon{NA})]</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-	<meta http-equiv="Content-Language" content="#LANG" />
-	[(#REM) Feuille de style CSS pour l'affichage du site a l'ecran ]
-	[<link rel="stylesheet" href="(#CHEMIN{spip_style.css}|direction_css)" type="text/css" media="projection, screen, tv" />]
-	<style type="text/css">
-	@import url('#URL_SITE_SPIP/css/styles.css');
-	html {
-			padding-left:0px!important; 
-			padding-right:0px!important; 
-			/* EXT ajoute en style inline padding-top et padding-bottom à 10px */
-			width:auto!important;
-			min-height:0;
-	}
-	html, body {background:white; padding:0px 10px; min-height:0}
-	#container {width:auto; margin: 0; background:white; min-height:0;}
-	#main {margin:0; width:auto; float:left;}
-	#contenu {margin:0; padding:0}
-	</style>
-</head>
-
-<body>
-
-	<div id="container">
-		<div id="contenu">
-			
-			<div id="main">
+<div id="main" style="margin:0;padding:0;width:auto;float:none;font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:12px;text-align:left">
+	<div id="contenu">
 <?php if ($auteur_session) { ?>
 	
 				<div id="blocTitArticle">
@@ -36,25 +8,27 @@
 					<p class="auteurArticle"><:by:> Dr Henri Malandain</p>
 				</div>
 				<div class="blocContenuArticle" style="margin:0; padding:0">
-					<p><:other_name:>: [(#AUTRE_NOM|sinon{NA})]</p>
-					<p><:full_name:>: [(#NOM_COMPLET|sinon{NA})]</p>
-					<p><:chaine_alpha:>: [(#CHAINE_ALPHA|sinon{NA})]</p>
-					<p><:interrogeable:>: [(#INTERROGEABLE|sinon{NA})]</p>
-					<p><:testable:>: [(#TESTABLE|sinon{NA})]</p>
-					<p><:test_code:>: [(#CODE_TEST|sinon{NA})]</p>
-					<p><:iuis:>: [(#IUIS|sinon{NA})]</p>
-					<p><:masse:>: [(#MASSE|sinon{NA})]</p>
-					<p><:glyco:>: [(#GLYCO|sinon{NA})]</p>
-					<p><:allergenicite:>: [(#ALLERGENICITE|sinon{NA})]</p>
+					[<h2>Cette famille moléculaire contient des allergènes</h2>
+					<table>
+						<tr>
+						<th>Nom</th>
+						<th>Fonction</th>
+						<th>Masse</th>
+						<th>IUIS</th>
+						<th>Glyco</th>
+						<th>Niveau</th>
+						</tr>
+						(#ID_ITEM|allergenes)</table>]
+					[<h2>Cette famille moléculaire a pour source</h2>
+					<ul>(#ID_ITEM|source)</ul>]
+					[<h2>Cette famille moléculaire se trouve dans les produits</h2>
+					<ul>(#ID_ITEM|produit)</ul>]
 				</div>
 
 <?php } else { ?>
 [(#INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]})]
 <?php } ?>
 
-			</div>
-		</div>
 	</div>
-</body>
-</html>
+</div>
 </BOUCLE_Items>
