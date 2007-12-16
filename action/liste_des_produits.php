@@ -18,31 +18,28 @@ function action_liste_des_produits() {
 	$sql = "select id_item, nom, source, famille from tbl_items where id_type_item in (5,3) ";
 	if ($produits_deja_choisis)	$sql .="and id_item NOT IN(".$produits_deja_choisis.")";
 	$sql .= "	and ( nom_sans_accent like '".addslashes($chaine)."%'
-		or source_sans_accent like '".addslashes($chaine)."%')
-	 	limit 0,10";
+		or source_sans_accent like '".addslashes($chaine)."%')";
 	$q = spip_query($sql);
 	
 	$nb_elements_trouves = spip_num_rows($q);
 	
 	$res = $ids = array();
 
-	$liste_noire = $_SESSION['produits_choisis'];
-	while ($row = spip_fetch_array($q)) {$res[] = $row; $liste_noire = $row['id_item'];}
+	$liste_noire = array();
+	if (is_array($_SESSION['produits_choisis'])) $liste_noire = $_SESSION['produits_choisis'];
+	while ($row = spip_fetch_array($q)) {$res[] = $row; $liste_noire[] = $row['id_item'];}
 	
-	if ($nb_elements_trouves < 10) {
-		// On complète par une recherche plus large
-		$sql = "select id_item, nom from tbl_items 
-					where id_type_item in (5,3) ";
-		if ($produits_deja_choisis)	$sql .="and id_item NOT IN(".implode(',',$produits_deja_choisis).")";
-		$sql .= "	and ( nom_sans_accent like '%".addslashes($chaine)."%'
-			or source_sans_accent like '%".addslashes($chaine)."%')
-			limit 0,".(10 - $nb_elements_trouves);
-		$q = spip_query($sql);
+	// On complète par une recherche plus large
+	$sql = "select id_item, nom from tbl_items 
+				where id_type_item in (5,3) ";
+	if ($liste_noire)	$sql .="and id_item NOT IN(".implode(',',$liste_noire).")";
+	$sql .= "	and ( nom_sans_accent like '%".addslashes($chaine)."%'
+		or source_sans_accent like '%".addslashes($chaine)."%')";
+	$q = spip_query($sql);
 
-		$nb_elements_trouves += spip_num_rows($q);
+	$nb_elements_trouves += spip_num_rows($q);
 
-		while ($row = spip_fetch_array($q)) {$res[] = $row;}
-	}
+	while ($row = spip_fetch_array($q)) {$res[] = $row;}
 
 
 	if (!$nb_elements_trouves) echo('{produits:'.json_encode(array(array('id_item' => 0, 'nom' => _T('nothing_found')))).'}');
