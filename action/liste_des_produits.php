@@ -45,7 +45,7 @@ function action_liste_des_produits() {
 	}
 
 
-	if (!$nb_elements_trouves) echo('{produits:'.json_encode(array(array('id_item' => 0, 'nom' => _T('nothing_found')))).'}');
+	if (!$nb_elements_trouves) echo('{produits:'.json_encode(array(array('id_item' => '', 'nom' => '', 'source' => _T('nothing_found')))).'}');
 	else echo('{produits:'.json_encode($res).'}');
 
 }

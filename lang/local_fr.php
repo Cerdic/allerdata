@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //N
 'name' => "Nom",
-'nothing_found' => "Aucun élément n'a ét&eacute;t&eacute; trouv&eacute;",
+'nothing_found' => "Aucun &eacute;l&eacute;ment n'a &eacute;t&eacute; trouv&eacute;",
 
 // O
 'other_name' => "Autre Nom",
