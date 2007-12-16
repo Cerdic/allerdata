@@ -2,6 +2,7 @@
 
 	$l = mysql_connect('localhost','jpyrat','allerdata007');
 	
+	// Structure  pour le calcul des produits suggérés dans une combo
 	mysql_query("ALTER TABLE  `tbl_items`  ADD `nom_sans_accent` VARCHAR( 255 ) NOT NULL AFTER `nom`,
 	ADD  `source` VARCHAR( 100 ) NOT NULL COMMENT  'de type 4' AFTER  `nom_sans_accent` ,
 	ADD  `famille` VARCHAR( 100 ) NOT NULL COMMENT  'de type 2' AFTER  `source`,
@@ -16,6 +17,7 @@
 		echo "update tbl_items set nom_sans_accent = '".addslashes($chaine)."' where id_item = ".$r['id_item'].";\n";	
 	}	
 	
+	// Mise à jour pour le calcul des produits suggérés dans une combo
 	mysql_query("UPDATE `tbl_items` a, tbl_items b, tbl_est_dans ab
 	set a.source = b.nom, a.source_sans_accent = b.nom_sans_accent
 	WHERE 
@@ -32,4 +34,7 @@
 	and b.id_type_item = 2
 	and a.id_type_item IN (3,5)");
 	
+	// Optimisation pour le calcul des RC
+	mysql_query("ALTER TABLE  `tbl_reactions_croisees` ADD INDEX (  `id_produit1` )");
+	mysql_query("ALTER TABLE  `tbl_reactions_croisees` ADD INDEX (  `id_produit2` )");
 ?>
