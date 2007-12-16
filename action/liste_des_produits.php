@@ -2,7 +2,7 @@
 
 function action_liste_des_produits() {
 		
-	$chaine = strtr(_request('query'), 'Ã Ã¢Ã¤Ã¥Ã£Ã¡Ã‚Ã„Ã€Ã…ÃƒÃÃ§Ã‡Ã©Ã¨ÃªÃ«Ã‰ÃŠÃ‹ÃˆÃ¯Ã®Ã¬Ã­ÃÃÃŒÃÃ±Ã‘Ã¶Ã´Ã³Ã²ÃµÃ“Ã”Ã–Ã’Ã•Ã¹Ã»Ã¼ÃºÃœÃ›Ã™ÃšÃ¿','aaaaaaAAAAAAcCeeeeEEEEiiiiIIIInNoooooOOOOOuuuuUUUUy');
+	$chaine = strtr(_request('query'), 'àâäåãáÂÄÀÅÃÁçÇéèêëÉÊËÈïîìíÏÎÌÍñÑöôóòõÓÔÖÒÕùûüúÜÛÙÚÿ','aaaaaaAAAAAAcCeeeeEEEEiiiiIIIInNoooooOOOOOuuuuUUUUy');
 	
 	spip_log("recherche pour "._request('query').' : '.$chaine);
 	$nb_elements_retournes = 10;
@@ -30,7 +30,7 @@ function action_liste_des_produits() {
 	if (is_array($_SESSION['produits_choisis'])) $liste_noire = $_SESSION['produits_choisis'];
 	while ($row = spip_fetch_array($q)) {$res[] = $row; $liste_noire[] = $row['id_item'];}
 	
-	// On complÃ¨te par une recherche plus large (20 maxi)
+	// On complète par une recherche plus large (20 maxi)
 	if ($nb_elements_trouves<20) {
 		$sql = "SELECT id_item, nom FROM tbl_items 
 					WHERE id_type_item IN (5,3) ";
