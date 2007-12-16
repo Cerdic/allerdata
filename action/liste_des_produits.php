@@ -2,7 +2,8 @@
 
 function action_liste_des_produits() {
 		
-	$chaine = strtr($_POST['query'], 'àâäåãáÂÄÀÅÃÁçÇéèêëÉÊËÈïîìíÏÎÌÍñÑöôóòõÓÔÖÒÕùûüúÜÛÙÚÿ','aaaaaaAAAAAAcCeeeeEEEEiiiiIIIInNoooooOOOOOuuuuUUUUy');
+	$chaine = strtr(_request('query'), 'àâäåãáÂÄÀÅÃÁçÇéèêëÉÊËÈïîìíÏÎÌÍñÑöôóòõÓÔÖÒÕùûüúÜÛÙÚÿ','aaaaaaAAAAAAcCeeeeEEEEiiiiIIIInNoooooOOOOOuuuuUUUUy');
+	$chaine = str_replace('œ','oe',$chaine);
 
 	$nb_elements_retournes = 10;
 	$nb_elements_trouves = 0;
@@ -14,34 +15,34 @@ function action_liste_des_produits() {
 		$produits_deja_choisis = implode(",", $_SESSION['produits_choisis']);
 	session_write_close();
 	
-	$sql = "select id_item, nom from tbl_items where id_type_item in (5,3) ";
+	$sql = "select id_item, nom, source, famille from tbl_items where id_type_item in (5,3) ";
 	if ($produits_deja_choisis)	$sql .="and id_item NOT IN(".$produits_deja_choisis.")";
 	$sql .= "	and ( nom_sans_accent like '".addslashes($chaine)."%'
-		or nom like '".addslashes($_POST['query'])."%')
-	 	limit 0,5";
+		or source_sans_accent like '".addslashes($chaine)."%')
+	 	limit 0,10";
 	$q = spip_query($sql);
 	
 	$nb_elements_trouves = spip_num_rows($q);
 	
-	$res=array();
+	$res = $ids = array();
 
-	while ($row = spip_fetch_array($q)) {$res[] = $row;}
+	$liste_noire = $_SESSION['produits_choisis'];
+	while ($row = spip_fetch_array($q)) {$res[] = $row; $liste_noire = $row['id_item'];}
 	
-	// On complète par une recherche plus large
-	$sql = "select id_item, nom from tbl_items 
-				where id_type_item in (5,3) ";
-	if ($produits_deja_choisis)	$sql .="and id_item NOT IN(".$produits_deja_choisis.")";
-	$sql .= "				and nom_sans_accent like '%".addslashes($chaine)."%' 
-					and nom_sans_accent not in (
-							select nom_sans_accent from tbl_items where nom_sans_accent like '".addslashes($chaine)."%'
-						)
-					limit 0,".(10 - $nb_elements_trouves);
-	$q = spip_query($sql);
-	
-	if (spip_num_rows($q)) $res[] = array('id_item' => 0, 'nom' => ''); // Séparateur
-	$nb_elements_trouves += spip_num_rows($q);
-	
-	while ($row = spip_fetch_array($q)) {$res[] = $row;}
+	if ($nb_elements_trouves < 10) {
+		// On complète par une recherche plus large
+		$sql = "select id_item, nom from tbl_items 
+					where id_type_item in (5,3) ";
+		if ($produits_deja_choisis)	$sql .="and id_item NOT IN(".implode(',',$produits_deja_choisis).")";
+		$sql .= "	and ( nom_sans_accent like '%".addslashes($chaine)."%'
+			or source_sans_accent like '%".addslashes($chaine)."%')
+			limit 0,".(10 - $nb_elements_trouves);
+		$q = spip_query($sql);
+
+		$nb_elements_trouves += spip_num_rows($q);
+
+		while ($row = spip_fetch_array($q)) {$res[] = $row;}
+	}
 
 
 	if (!$nb_elements_trouves) echo('{produits:'.json_encode(array(array('id_item' => 0, 'nom' => _T('nothing_found')))).'}');

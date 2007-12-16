@@ -79,12 +79,13 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.form.ComboBox, {
   // s'adapte au nb de résultats
   grow: true,
   // hauteur maxi
-  maxHeight: 300,
+  maxHeight: 400,
   // pour éviter le pb du double-clic
   selectOnFocus: true,
   selectOnBlur: false,
   loadingText: COMBO_LOADINGTEXT,
   emptyText: COMBO_EMPTYTEXT,
+  itemSelector: 'div.search-item',
   queryDelay: 5,
   width: 186
   
@@ -119,12 +120,21 @@ var ZONES_SAISIE = {
     var cstore = new Ext.data.JsonStore({
       url: 'spip.php?action=liste_des_produits',
       root: 'produits',
-      fields: ['id_item', 'nom']
+      fields: ['id_item', 'nom', 'source', 'famille']
     });
 
+  var resultTpl = new Ext.XTemplate(
+        '<tpl for="."><div class="search-item">',
+            '<strong>{nom}</strong>',
+            '<tpl if="source">, {source}</tpl>',
+            '<tpl if="famille">, {famille}</tpl>',
+        '</div></tpl>'
+    );
+  
     this.combo_1 = new Ext.ux.TwinComboBox({
       // d'où viennent les données
       store: cstore,
+      tpl: resultTpl,
       applyTo: 'prod_1',
       // le champs cché qui permet d'envoyer la valeur (et pas le texte)
       hiddenName: 'p1'
@@ -149,6 +159,7 @@ var ZONES_SAISIE = {
 
     this.combo_2 = new Ext.ux.TwinComboBox({
       store: cstore,
+      tpl: resultTpl,
       applyTo: 'prod_2',
       hiddenName: 'p2'
     });
@@ -165,6 +176,7 @@ var ZONES_SAISIE = {
 
     this.combo_3 = new Ext.ux.TwinComboBox({
       store: cstore,
+      tpl: resultTpl,
       applyTo: 'prod_3',
       hiddenName: 'p3'
     });
@@ -181,6 +193,7 @@ var ZONES_SAISIE = {
 
     this.combo_4 = new Ext.ux.TwinComboBox({
       store: cstore,
+      tpl: resultTpl,
       applyTo: 'prod_4',
       hiddenName: 'p4'
     });
@@ -197,6 +210,7 @@ var ZONES_SAISIE = {
 
     this.combo_5 = new Ext.ux.TwinComboBox({
       store: cstore,
+      tpl: resultTpl,
       applyTo: 'prod_5',
       hiddenName: 'p5'
     });
