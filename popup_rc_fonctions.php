@@ -34,19 +34,41 @@ function rc($p1,$p2) {
 			);";
 	$res = spip_query($query);
 	$result = '';
+	$biblio = '';
 	
 	while ($row = spip_fetch_array($res)){
 		$querybiblio = "Select tbl_groupes_patients.id_biblio FROM tbl_reactions_croisees INNER JOIN tbl_groupes_patients ON tbl_reactions_croisees.id_groupe_patients=tbl_groupes_patients.id_groupe_patients WHERE id_reaction_croisee=".$row['id_reaction_croisee'].";";
 		$resbiblio = spip_query($querybiblio);
 		while ($rowbiblio = spip_fetch_array($resbiblio)){
-			$linkbiblio = '<a href="#" onclick="main_panel.addTab(\'biblio n&deg; '.$rowbiblio['id_biblio'].'\',\'?page=popup_biblio&amp;id_biblio='. $rowbiblio['id_biblio'] .'\'); return false">';
+			$linkbiblio = '<a href="#biblio'.$rowbiblio['id_biblio'].'">';
+			$biblio .= biblio($rowbiblio['id_biblio'],$row['id_reaction_croisee']);
 		}
 		$nrc1 = (($row['niveau_RC_sens1'] <> '') ? ' ('.$row['niveau_RC_sens1'].')' : '');
 		$nrc2 = (($row['niveau_RC_sens2'] <> '') ? ' ('.$row['niveau_RC_sens2'].')' : '');
 		$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="squelettes/css/img/rc_jamais_rl.gif" alt="Jamais" title="Jamais'.$nrc1.'" />': (($row['fleche_sens1'] === '1') ? '<img src="squelettes/css/img/rc_toujours_rl.gif" alt="Toujours" title="Toujours'.$nrc2.'" />': ''));
 		$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="squelettes/css/img/rc_jamais_lr.gif" alt="Jamais" title="Jamais'.$nrc1.'" />': (($row['fleche_sens2'] === '1') ? '<img src="squelettes/css/img/rc_toujours_lr.gif" alt="Toujours" title="Toujours'.$nrc2.'" />': ''));
-		$result .= '<tr><td align=left><!--'. $row['id_reaction_croisee'].'--><a href="#" onclick="main_panel.addTab(\''.$row['p1'].'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].' '.'</a></td><td>'.$linkbiblio.$fl2.'</a></td><td>'.$linkbiblio.$fl1.'</a></td><td align=left><a href="#" onclick="main_panel.addTab(\''.$row['p2'].'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].'</a></td></tr>';
+		
+		$result .= '<tr><td align=left>'. $row['id_reaction_croisee'].'</td><td align=left><a href="#" onclick="main_panel.addTab(\''.$row['p1'].'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].' '.'</a></td><td>'.$linkbiblio.$fl2.'</a></td><td>'.$linkbiblio.$fl1.'</a></td><td align=left><a href="#" onclick="main_panel.addTab(\''.$row['p2'].'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].'</a></td></tr>';
 	}
+	if ($result) $result = '<table style="width:70%;margin:0 auto">'.$result.'</table>';
+	if ($biblio) $result .= '<h2>'._T('ad:bibliographie').'</h2><table style="width:70%;margin:0 auto">'.$biblio.'</table>';
+	return $result;
+}
+
+function biblio($id_biblio, $id_reaction_croisee) {
+	if (!is_numeric($id_biblio)) return;
+	
+	$result = '';
+	$querybiblio = "SELECT citation, annee
+					FROM tbl_bibliographies
+					WHERE (
+						((id_biblio)=$id_biblio) 
+						)";
+	$resbiblio = spip_query($querybiblio);
+	while ($rowbiblio = spip_fetch_array($resbiblio)){
+		$biblio .= '<tr><td>'.$id_reaction_croisee.'</td><td><a name="biblio'.$id_biblio.'"></a>'.$rowbiblio['citation'].'</td><td>'.$rowbiblio['annee'].'</td>';
+	}
+	$result .= $biblio;
 
 	return $result;
 }
