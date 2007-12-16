@@ -28,9 +28,14 @@ function action_liste_des_produits() {
 
 	$liste_noire = array();
 	if (is_array($_SESSION['produits_choisis'])) $liste_noire = $_SESSION['produits_choisis'];
-	while ($row = spip_fetch_array($q)) {$res[] = $row; $liste_noire[] = $row['id_item'];}
+
+	while ($row = spip_fetch_array($q)) {
+		if (!$row['nom']) $row['nom'] = '??? ('.$row['source'].')';
+		$res[] = $row; 
+		$liste_noire[] = $row['id_item'];
+	}
 	
-	// On complète par une recherche plus large (20 maxi)
+	// On complète par une recherche plus large (20 maxi, question perfs client)
 	if ($nb_elements_trouves<20) {
 		$sql = "SELECT id_item, nom FROM tbl_items 
 					WHERE id_type_item IN (5,3) ";
@@ -43,7 +48,10 @@ function action_liste_des_produits() {
 
 		$nb_elements_trouves += spip_num_rows($q);
 
-		while ($row = spip_fetch_array($q)) {$res[] = $row;}
+		while ($row = spip_fetch_array($q)) {
+			if (!$row['nom']) $row['nom'] = '??? ('.$row['source'].')';
+			$res[] = $row; 
+		}
 	}
 
 

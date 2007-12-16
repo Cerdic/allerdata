@@ -51,10 +51,7 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.form.ComboBox, {
   },
 
   onTrigger1Click: function() {
-    this.clearValue();
-    this.triggers[0].hide();
-    this.fireEvent('clear', this);
-    Ext.form.ComboBox.superclass.onBlur.call(this);
+    ZONES_SAISIE.nettoyage(this);
     reload_penta();
   },
 
@@ -91,19 +88,6 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.form.ComboBox, {
   
 });
 
-/* ----------------------------- Nettoyage des comboBox ---------------------------------- */
-
-// Permet de nettoyer proprement le combo lorsque le champ de saisie perd le focus
-// Il faut nettoyer la valeur + afficher le texte par défaut + supprimer les divs de suggestion
-// pour vraiment effacer une combo
-
-Ext.form.ComboBox.prototype.doForce = function() {
-  v = this.getValue() || '';
-  if (isNaN(v) && (this.getValue() != $('#' + this.el.dom.id).val())) {
-    this.clearValue();
-    this.applyEmptyText();
-  }
-}
 
 /* --------------------------------- Listes de saisie ------------------------------------- */
 
@@ -231,6 +215,13 @@ var ZONES_SAISIE = {
     if ($('#p4').val()) $('#info-s4').show();
     if ($('#p5').val()) $('#info-s5').show();
 
+  },
+
+  nettoyage: function(el) {
+    el.clearValue();
+    el.triggers[0].hide();
+    el.fireEvent('clear', this);
+    Ext.form.ComboBox.superclass.onBlur.call(el);
   },
 
   setValue: function(sobj, val) {
