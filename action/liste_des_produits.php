@@ -3,8 +3,8 @@
 function action_liste_des_produits() {
 		
 	$chaine = strtr(_request('query'), 'àâäåãáÂÄÀÅÃÁçÇéèêëÉÊËÈïîìíÏÎÌÍñÑöôóòõÓÔÖÒÕùûüúÜÛÙÚÿ','aaaaaaAAAAAAcCeeeeEEEEiiiiIIIInNoooooOOOOOuuuuUUUUy');
-	$chaine = str_replace('œ','oe',$chaine);
-
+	
+	spip_log("recherche pour "._request('query').' : '.$chaine);
 	$nb_elements_retournes = 10;
 	$nb_elements_trouves = 0;
 	
@@ -15,10 +15,11 @@ function action_liste_des_produits() {
 		$produits_deja_choisis = implode(",", $_SESSION['produits_choisis']);
 	session_write_close();
 	
-	$sql = "select id_item, nom, source, famille from tbl_items where id_type_item in (5,3) ";
-	if ($produits_deja_choisis)	$sql .="and id_item NOT IN(".$produits_deja_choisis.")";
-	$sql .= "	and ( nom_sans_accent like '".addslashes($chaine)."%'
-		or source_sans_accent like '".addslashes($chaine)."%')";
+	$sql = "SELECT id_item, nom, source, famille FROM tbl_items WHERE id_type_item IN (5,3) ";
+	if ($produits_deja_choisis)	$sql .="AND id_item NOT IN(".$produits_deja_choisis.")";
+	$sql .= "	AND ( nom like '".addslashes(_request('query'))."%'
+		OR source like '".addslashes(_request('query'))."%')
+		ORDER BY nom";
 	$q = spip_query($sql);
 	
 	$nb_elements_trouves = spip_num_rows($q);
@@ -31,11 +32,12 @@ function action_liste_des_produits() {
 	
 	// On complète par une recherche plus large (20 maxi)
 	if ($nb_elements_trouves<20) {
-		$sql = "select id_item, nom from tbl_items 
-					where id_type_item in (5,3) ";
-		if ($liste_noire)	$sql .="and id_item NOT IN(".implode(',',$liste_noire).")";
-		$sql .= "	and ( nom_sans_accent like '%".addslashes($chaine)."%'
-			or source_sans_accent like '%".addslashes($chaine)."%')
+		$sql = "SELECT id_item, nom FROM tbl_items 
+					WHERE id_type_item IN (5,3) ";
+		if ($liste_noire)	$sql .="AND id_item NOT IN(".implode(',',$liste_noire).")";
+		$sql .= "	AND ( nom_sans_accent like '%".addslashes($chaine)."%'
+			OR source_sans_accent like '%".addslashes($chaine)."%')
+			ORDER BY nom
 			LIMIT 0,".(20-$nb_elements_trouves);
 		$q = spip_query($sql);
 
