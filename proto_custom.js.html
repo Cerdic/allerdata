@@ -24,9 +24,10 @@ function loadSpecificFunction() {
   /* Cette fonction sera appelée *après* le téléchargement du reste
    de l'appli pour que les autres "classes" aient pu s'initialiser */
 
-  jQuery().ready(function() {  
+  Ext().onReady(function() {  
+	  jQuery('#form_penta').submit(reload_penta);
   
-  <?php
+	<?php
   
     $str =  '';
     foreach (array(1,2,3,4,5) as $i) {
