@@ -19,14 +19,14 @@ function reload_penta(){
   CCD.show_ccd();
   return false;
 }
+jQuery('#form_penta').submit(reload_penta);
 
 function loadSpecificFunction() {
   /* Cette fonction sera appelée *après* le téléchargement du reste
    de l'appli pour que les autres "classes" aient pu s'initialiser */
 
   Ext().onReady(function() {  
-	  jQuery('#form_penta').submit(reload_penta);
-  
+		
 	<?php
   
     $str =  '';
