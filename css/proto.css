@@ -107,15 +107,15 @@ body {
     border-bottom:1px solid #eeeeee;
     white-space:normal;
 		text-align:left;
+		color:#555;
 }
-.search-item strong {
+.search-item h3 {
     display:block;
     font:inherit;
     font-weight:bold;
 }
 .search-item strong {
-	font-weight:bold;
-	color:#555;
+	color: #000;
 }
 .search-item h3 span {
     float: right;
