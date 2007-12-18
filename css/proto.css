@@ -106,13 +106,17 @@ body {
     border:1px solid #fff;
     border-bottom:1px solid #eeeeee;
     white-space:normal;
+		text-align:left;
 }
-.search-item h3 {
+.search-item strong {
     display:block;
     font:inherit;
     font-weight:bold;
 }
-
+.search-item strong {
+	font-weight:bold;
+	color:#555;
+}
 .search-item h3 span {
     float: right;
     font-weight:normal;

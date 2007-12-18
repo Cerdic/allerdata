@@ -35,27 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'interrogeable' => "Interrogeable",
 'iuis' => "IUIS",
 	
-// J	
-'js_ccd_name' => 'Libell&eacute;',
-'js_ccd_resultat' => 'R&eacute;sultat',
-'js_ccd_resultats' => 'R&eacute;sultats',
-'js_ccd_title' => 'CCD',
-'js_close_button' => 'Fermer',
-'js_combo_emptytext' => 'Saisissez une valeur...',
-'js_combo_loadingtext' => 'Recherche...',
-'js_error_gotdata' => "la liste des r&eacute;activit&eacute;s crois&eacute;es n'a pas pu &ecirc;tre calcul&eacute;e correctement",
-'js_fm_name' => "Libell&eacute;",
-'js_fm_nb' => "Nbr",
-'js_fm_grid_title' => 'Familles mol&eacute;culaires',
-'js_fm_tests' => "Tests biologiques associ&eacute;s",
-'js_load_mask' => "modification en cours...",
-'js_mol_title' => 'Mol&eacute;cules',
-'js_sugg_grid_title' => 'Croisent &eacute;galement',
-'js_sugg_p' => "Produit",
-'js_sugg_card' => "Nb",
-'js_tests_cliniques_title' => "Suggestions biologiques",
-
-
 //L
 'loading' => "Chargement",
 'login_login' => "Nom d'utilisateur&nbsp;:",
@@ -68,7 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //N
 'name' => "Nom",
-'nothing_found' => "Aucun &eacute;l&eacute;ment n'a &eacute;t&eacute; trouv&eacute;",
 
 // O
 'other_name' => "Autre Nom",

@@ -109,8 +109,9 @@ var ZONES_SAISIE = {
 
   var resultTpl = new Ext.XTemplate(
         '<tpl for="."><div class="search-item">',
-            '<strong>{nom}</strong>',
-            '<tpl if="nom">, </tpl>',
+            '<strong>{nom}',
+            '<tpl if="nom"><tpl if="source">, </tpl></tpl>',
+						'</strong>',
 						'<tpl if="source">{source}</tpl>',
             '<tpl if="famille">, {famille}</tpl>',
         '</div></tpl>'

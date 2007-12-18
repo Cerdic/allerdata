@@ -2,7 +2,9 @@
 
 function action_liste_des_produits() {
 		
-	$chaine = strtr(_request('query'), 'àâäåãáÂÄÀÅÃÁçÇéèêëÉÊËÈïîìíÏÎÌÍñÑöôóòõÓÔÖÒÕùûüúÜÛÙÚÿ','aaaaaaAAAAAAcCeeeeEEEEiiiiIIIInNoooooOOOOOuuuuUUUUy');
+	include_spip('inc/charsets');
+	
+	$chaine = translitteration(_request('query'));
 	
 	spip_log("recherche pour "._request('query').' : '.$chaine);
 	$nb_elements_retournes = 10;
@@ -55,7 +57,7 @@ function action_liste_des_produits() {
 	}
 
 
-	if (!$nb_elements_trouves) echo('{produits:'.json_encode(array(array('id_item' => '', 'nom' => '', 'source' => _T('nothing_found')))).'}');
+	if (!$nb_elements_trouves) echo('{produits:'.json_encode(array(array('id_item' => '', 'nom' => '', 'source' => _T('ad:nothing_found')))).'}');
 	else echo('{produits:'.json_encode($res).'}');
 
 }
