@@ -1,6 +1,8 @@
 <?php
 
 function action_db_creer_noms_sans_accents() {
+
+	set_time_limit(0);
 	
 	include_spip('inc/charsets');
 	
