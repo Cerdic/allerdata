@@ -37,11 +37,28 @@ function rc($p1,$p2) {
 	$biblio = '';
 	
 	while ($row = spip_fetch_array($res)){
-		$querybiblio = "Select tbl_groupes_patients.id_biblio FROM tbl_reactions_croisees INNER JOIN tbl_groupes_patients ON tbl_reactions_croisees.id_groupe_patients=tbl_groupes_patients.id_groupe_patients WHERE id_reaction_croisee=".$row['id_reaction_croisee'].";";
+		$querybiblio = "SELECT tbl_bibliographies.id_biblio, tbl_bibliographies.citation, 
+							tbl_groupes_patients.id_groupe_patients, tbl_groupes_patients.pays, tbl_groupes_patients.description_groupe, tbl_groupes_patients.nb_sujets, tbl_groupes_patients.pool, tbl_groupes_patients.qualitatif,
+							tbl_reactions_croisees.id_reaction_croisee, tbl_items.id_item as i1, tbl_items.nom as p1, tbl_reactions_croisees.niveau_RC_sens1, 
+								tbl_reactions_croisees.niveau_RC_sens2, tbl_items_1.id_item as i2, tbl_items_1.nom as p2, tbl_reactions_croisees.remarques
+							FROM tbl_items AS tbl_items_1 
+								INNER JOIN (tbl_items 
+									INNER JOIN ((tbl_reactions_croisees 
+										INNER JOIN tbl_groupes_patients ON tbl_reactions_croisees.id_groupe_patients = tbl_groupes_patients.id_groupe_patients) 
+										INNER JOIN tbl_bibliographies ON tbl_groupes_patients.id_biblio = tbl_bibliographies.id_biblio) 
+									ON tbl_items.id_item = tbl_reactions_croisees.id_produit1) 
+								ON tbl_items_1.id_item = tbl_reactions_croisees.id_produit2
+						WHERE (((tbl_reactions_croisees.id_reaction_croisee)=".$row['id_reaction_croisee']."));";
 		$resbiblio = spip_query($querybiblio);
 		while ($rowbiblio = spip_fetch_array($resbiblio)){
 			$linkbiblio = '<a href="#biblio'.$rowbiblio['id_biblio'].'">';
-			$biblio .= biblio($rowbiblio['id_biblio'],$row['id_reaction_croisee']);
+			$biblio .= '<a name="biblio'.$rowbiblio['id_biblio'].'"></a><table style="text-align: left; width: 100%;"><tbody>
+							<tr><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
+							<tr><td>Pays: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
+							<tr><td>Nb sujets: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1">S&eacute;rums pool&eacute;s '.$rowbiblio['pool'].'</td><td colspan="2" rowspan="1">Test qualitatif'.$rowbiblio['qualitatif'].'</td></tr>
+							<tr><td>Produit1</td><td>RC 1-&gt; 2</td><td>RC 2-&gt;1</td><td>Produit2</td><td>Remarques</td></tr>
+							<tr><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_RC_sens1'].'</td><td>'.$rowbiblio['niveau_RC_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
+							</tbody></table><br />';
 		}
 		$nrc1 = (($row['niveau_RC_sens1'] <> '') ? ' ('.$row['niveau_RC_sens1'].')' : '');
 		$nrc2 = (($row['niveau_RC_sens2'] <> '') ? ' ('.$row['niveau_RC_sens2'].')' : '');
@@ -51,7 +68,7 @@ function rc($p1,$p2) {
 		$result .= '<tr><td align=left>'. $row['id_reaction_croisee'].'</td><td align=left><a href="#" onclick="main_panel.addTab(\''.$row['p1'].'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].' '.'</a></td><td>'.$linkbiblio.$fl2.'</a></td><td>'.$linkbiblio.$fl1.'</a></td><td align=left><a href="#" onclick="main_panel.addTab(\''.$row['p2'].'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].'</a></td></tr>';
 	}
 	if ($result) $result = '<table style="width:70%;margin:0 auto">'.$result.'</table>';
-	if ($biblio) $result .= '<h2>'._T('ad:bibliographie').'</h2><table style="width:70%;margin:0 auto">'.$biblio.'</table>';
+	if ($biblio) $result .= '<h2>'._T('ad:bibliographie').'</h2>'.$biblio;
 	return $result;
 }
 
