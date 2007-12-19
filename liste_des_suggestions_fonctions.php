@@ -60,7 +60,7 @@ function suggestions($txt) {
 	";
 		
 	$res = spip_query($query);
-	$liste = $suggestions = $nom = array();
+	$liste = $suggestions = $nom = $rc_avec = array();
 		
 	/* On stocke de façon à avoir "en premier" les produits suggérés */
 	/* D'où la permutation -- qui ne sert qu'a l'affichage */
@@ -73,9 +73,14 @@ function suggestions($txt) {
 		/* Astuce pour retrouver les discordants: 
 		  utiliser les nombres premiers */
 
-		if (!isset($liste[$row['idp2']])) $liste[$row['idp2']] = array();
+		// 'avec' mémorise les produits avec lesquels on réagit
+		// le tableau mémorise le nombre de RC (est-ce encore utile ?)
+		if (!isset($liste[$row['idp2']])) {$liste[$row['idp2']] = array();$rc_avec[$row['idp2']] = array();}
+		
 		if (!isset($liste[$row['idp2']][$row['idp1']])) 
 			$liste[$row['idp2']][$row['idp1']] = array();
+		
+		$rc_avec[$row['idp2']][$row['idp1']] = $row['idp1'];
 		if (!isset($liste[$row['idp2']][$row['idp1']])) {
 			$s1 = $s2 = 0;
 			if (!is_null($row['fleche_sens1'])) $s2 = $prem[$row['fleche_sens1']];
@@ -129,7 +134,8 @@ function suggestions($txt) {
 		/* Astuce pour retrouver les discordants: 
 		  utiliser les nombres premiers */
 		
-		if (!isset($liste[$row['idp1']])) $liste[$row['idp1']] = array();
+		$rc_avec[$row['idp1']][$row['idp2']] = $row['idp2'];
+		if (!isset($liste[$row['idp1']])) {$liste[$row['idp1']] = array();$rc_avec[$row['idp1']] = array();}
 		if (!isset($liste[$row['idp1']][$row['idp2']])) 
 			$liste[$row['idp1']][$row['idp2']] = array();
 		
@@ -153,7 +159,7 @@ function suggestions($txt) {
 	foreach ($liste as $idp1 => $l_idp1) {
 		foreach ($l_idp1 as $idp2 => $l_idp2) {
 			if (!$suggestion[$idp1]) {
-				$suggestion[$idp1] = array('nom' => $nom[$idp1], 'nb' => 0, 'id_mol' => $idp1, 'reactivite' => 0);
+				$suggestion[$idp1] = array('nom' => $nom[$idp1].'==>['.implode(',',$rc_avec[$idp1]).']', 'nb' => 0, 'id_mol' => $idp1, 'reactivite' => 0);
 			}
 			$suggestion[$idp1]['nb'] += 1;
 			$suggestion[$idp1]['reactivite'] += $l_idp2['s1'] + $l_idp2['s2'];
