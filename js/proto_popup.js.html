@@ -88,39 +88,6 @@ Ext.onReady(function() {
     main_panel.updateTab('tab1', '', '#CHEMIN{ext/resources/images/default/shared/blue-loading.gif}');
   });
 
-  dialog = new Ext.Window({
-    applyTo: 'popup-win',
-    layout: 'fit',
-    width: 750,
-    height: 450,
-    minimizable: true,
-    closeAction: 'hide',
-    plain: true,
-    items: new Ext.BoxComponent({
-      applyTo: 'popup-dlg',
-      autoTabs: true,
-      activeTab: 0,
-      deferredRender: false,
-      border: false
-    }),
-    buttons: [{
-      text: 'Fermer',
-      handler: function() {
-        dialog.hide();
-      }
-    }]
-  });
-
-  dialog.on('beforehide', 
-  function() {
-    $("#iframe").attr('src', '#CHEMIN{ext/resources/images/default/shared/blue-loading.gif}');
-  });
-
-  dialog.on('minimize', 
-  function() {
-    dialog.toggleCollapse(false);
-  });
-
 
 });
 
@@ -129,10 +96,10 @@ Ext.onReady(function() {
     echo "
       jQuery('#info-s$i').click(function() {
         if (jQuery('#p$i').val()) {
-          dialog.setTitle(jQuery('#prod_$i').val());
           var link = 'spip.php?page=popup_item&id_item=' + jQuery('#p$i').val();
-          Ext.get('iframe').dom.src = link;
-          dialog.show(Ext.get('prod_$i'));
+					main_panel.updateTab('tab1','Produit', link);
+			    dialog_avec_tab.setTitle(jQuery('#prod_$i').val());
+			    dialog_avec_tab.show(Ext.get('prod_$i'));
         }
         return false;
       })";

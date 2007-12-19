@@ -404,8 +404,9 @@ var ZONES_SAISIE = {
   },
 
 	popupProd : function(id_item) {
-    Ext.get('iframe').dom.src = 'spip.php?page=popup_item&id_item=' + id_item;
-    dialog.show(Ext.get('prod_$i'));
+    main_panel.updateTab('tab1','Item', 'spip.php?page=popup_item&id_item=' + id_item);
+    dialog_avec_tab.setTitle('Détails');
+    dialog_avec_tab.show();
     return false;
 	},
 

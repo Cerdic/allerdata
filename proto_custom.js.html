@@ -56,10 +56,10 @@ function loadSpecificFunction() {
   
   <BOUCLE_ModeEmploiAAM(ARTICLES){id_article=10}{!par date}{0,1}>
     jQuery('#lienAide').click(function() {
-      jQuery('#popup-dlg .x-dlg-hd').text('Aide');
       var link = 'spip.php?page=article_popup&id_article=#ID_ARTICLE';
-      Ext.get('popup-iframe').dom.src = link;
-      dialog.show();
+      main_panel.updateTab('tab1','Aide',link);
+      dialog_avec_tab.setTitle('Index');
+			dialog_avec_tab.show(Ext.get('lienAide'));
     });
   </BOUCLE_ModeEmploiAAM>
   
