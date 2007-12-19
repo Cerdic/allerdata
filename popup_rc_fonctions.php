@@ -57,7 +57,7 @@ function rc($p1,$p2) {
 							<tr><td>Pays: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 							<tr><td>Nb sujets: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1">S&eacute;rums pool&eacute;s '.$rowbiblio['pool'].'</td><td colspan="2" rowspan="1">Test qualitatif'.$rowbiblio['qualitatif'].'</td></tr>
 							<tr><td>Produit1</td><td>RC 1-&gt; 2</td><td>RC 2-&gt;1</td><td>Produit2</td><td>Remarques</td></tr>
-							<tr><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_RC_sens1'].'</td><td>'.$rowbiblio['niveau_RC_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
+							<tr><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['niveau_RC_sens2'].'</td><td>'.$rowbiblio['niveau_RC_sens1'].'</td><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
 							</tbody></table><br />';
 		}
 		$nrc1 = (($row['niveau_RC_sens1'] <> '') ? ' ('.$row['niveau_RC_sens1'].')' : '');
