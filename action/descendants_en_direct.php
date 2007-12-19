@@ -1,5 +1,11 @@
 <?php
 function action_descendants_en_direct() {
+	spip_query("alter table `tbl_est_dans` add index `couple` (`id_item`, `est_dans_id_item`)");
+	spip_query("alter table `tbl_est_dans` add index `id_item` (`id_item`)");
+	spip_query("alter table `tbl_est_dans` add index `est_dans_id_item` (`est_dans_id_item`)");
+	spip_query("alter table `db_allerdata`.`tbl_items` add index `id_type_item` (`id_type_item`)");
+
+
 	$query_liste_items = "SELECT tbl_items.id_item FROM tbl_items";
 	$liste_items = spip_query($query_liste_items, $allerdata) or die(mysql_error());
 	$row_liste_items = mysql_fetch_assoc($liste_items);
