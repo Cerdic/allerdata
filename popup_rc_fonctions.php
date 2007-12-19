@@ -52,11 +52,11 @@ function rc($p1,$p2) {
 		$resbiblio = spip_query($querybiblio);
 		while ($rowbiblio = spip_fetch_array($resbiblio)){
 			$linkbiblio = '<a href="#biblio'.$rowbiblio['id_biblio'].'">';
-			$biblio .= '<a name="biblio'.$rowbiblio['id_biblio'].'"></a><table style="text-align: left; width: 100%;"><tbody>
+			$biblio .= '<a name="biblio'.$rowbiblio['id_biblio'].'"></a><table style="text-align: left; width: auto; margin:1em .5em;" summary="Détails des données bibiliographiques" class="spip"><caption>Bibliographie de la RC: '.$row['id_reaction_croisee'].'</caption><tbody>
 							<tr><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
-							<tr><td>Pays: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
-							<tr><td>Nb sujets: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1">S&eacute;rums pool&eacute;s '.$rowbiblio['pool'].'</td><td colspan="2" rowspan="1">Test qualitatif'.$rowbiblio['qualitatif'].'</td></tr>
-							<tr><td>Produit1</td><td>RC 1-&gt; 2</td><td>RC 2-&gt;1</td><td>Produit2</td><td>Remarques</td></tr>
+							<tr><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
+							<tr><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums pool&eacute;s</b>: '.(($rowbiblio['pool']==1)?'Oui':'Non').'</td><td colspan="2" rowspan="1"><b>Test qualitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Oui':'Non').'</td></tr>
+							<tr><td><b>Produit1</b></td><td><b>RC 1-&gt; 2</b></td><td><b>RC 2-&gt;1</b></td><td><b>Produit2</b></td><td><b>Remarques</b></td></tr>
 							<tr><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['niveau_RC_sens2'].'</td><td>'.$rowbiblio['niveau_RC_sens1'].'</td><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
 							</tbody></table><br />';
 		}
@@ -67,8 +67,8 @@ function rc($p1,$p2) {
 		
 		$result .= '<tr><td align=left>'. $row['id_reaction_croisee'].'</td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].' '.'</a></td><td>'.$linkbiblio.$fl2.'</a></td><td>'.$linkbiblio.$fl1.'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].'</a></td></tr>';
 	}
-	if ($result) $result = '<table style="width:70%;margin:0 auto">'.$result.'</table>';
-	if ($biblio) $result .= '<h2>'._T('ad:bibliographie').'</h2>'.$biblio;
+	if ($result) $result = '<table style="width:70%;margin:0 auto" class="spip">'.$result.'</table>';
+	if ($biblio) $result .= '<h2>'._T('ad:bibliographies').'</h2>'.$biblio;
 	return $result;
 }
 
