@@ -9,16 +9,6 @@
 	if (is_numeric($_REQUEST['p4'])) $tableau_produits[] = $_REQUEST['p4'];
 	if (is_numeric($_REQUEST['p5'])) $tableau_produits[] = $_REQUEST['p5'];
 	
-	session_start();
-	$_SESSION['produits_choisis'] = $tableau_produits;
-	if ($tableau_produits) {
-		$res = spip_query("select id_item from tbl_est_dans where est_dans_id_item IN (".implode(',',$tableau_produits).")");
-		while ($row = spip_fetch_array($res)){
-			$_SESSION['produits_choisis'][] = $row['id_item'];
-		}
-	}
-	session_write_close();
-
 	$produits = implode(",", $tableau_produits);
 	
 	// Requete de recherche : il faut tenir compte des réactions entre éléments de type 3 ou 5
