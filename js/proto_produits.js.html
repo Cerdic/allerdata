@@ -14,7 +14,7 @@
  * Slight mods for Ext 2.0
  */
 Ext.ux.SelectBox = function(config){
-	this.searchResetDelay = 1000;
+	/*this.searchResetDelay = 1000;*/
 	config = config || {};
 	/*config = Ext.apply(config || {}, {
 		editable: false,
@@ -35,8 +35,8 @@ Ext.extend(Ext.ux.SelectBox, Ext.form.ComboBox, {
 	initEvents : function(){
 		Ext.ux.SelectBox.superclass.initEvents.apply(this, arguments);
 		// you need to use keypress to capture upper/lower case and shift+key, but it doesn't work in IE
-		this.el.on('keydown', this.keySearch, this, true);
-		this.cshTask = new Ext.util.DelayedTask(this.clearSearchHistory, this);
+		this.el.on('keydown', this.keySearch, this, {stopPropagation:false});
+		/*this.cshTask = new Ext.util.DelayedTask(this.clearSearchHistory, this);*/
 	},
 
 	keySearch : function(e, target, options) {
@@ -78,13 +78,14 @@ Ext.extend(Ext.ux.SelectBox, Ext.form.ComboBox, {
 
 		// skip special keys other than the shift key
 		if( (e.hasModifier() && !e.shiftKey) || e.isNavKeyPress() || e.isSpecialKey() ) {
+			e.stopEvent();
 			return;
 		}
-		if( this.lastSearchTerm == key ) {
+		/*if( this.lastSearchTerm == key ) {
 			startIndex = this.lastSelectedIndex;
 		}
 		this.search(this.displayField, key, startIndex);
-		this.cshTask.delay(this.searchResetDelay);
+		this.cshTask.delay(this.searchResetDelay);*/
 	},
 
 	onRender : function(ct, position) {
@@ -101,17 +102,18 @@ Ext.extend(Ext.ux.SelectBox, Ext.form.ComboBox, {
 			if( !skipCollapse ) {
 				this.collapse();
 			}
-			this.lastSelectedIndex = index + 1;
+			//this.lastSelectedIndex = index + 1;
 			this.fireEvent('select', this, record, index);
+			reload_penta();
 		}
 	},
 
 	render : function(ct) {
 		Ext.ux.SelectBox.superclass.render.apply(this, arguments);
-		if( Ext.isSafari ) {
+		/*if( Ext.isSafari ) {
 			this.el.swallowEvent('mousedown', true);
-		}
-		this.el.unselectable();
+		}*/
+		/*this.el.unselectable();*/
 		this.innerList.unselectable();
 		this.trigger.unselectable();
 		this.innerList.on('mouseup', function(e, target, options) {
@@ -121,32 +123,15 @@ Ext.extend(Ext.ux.SelectBox, Ext.form.ComboBox, {
 			this.onViewClick();
 		}, this);
 
-		this.innerList.on('mouseover', function(e, target, options) {
-			if( target.id && target.id == this.innerList.id ) {
-				return;
+		/*this.trigger.un('click', this.onTriggerClick, this);*/ 
+		this.el.on('mousedown', function(e, target, options) {
+			if ($(target).val()) {
+				$(target).val('');
+				$(target).focus();
+				$(target).removeClass('x-form-empty-field');
 			}
-			this.lastSelectedIndex = this.view.getSelectedIndexes()[0] + 1;
-			this.cshTask.delay(this.searchResetDelay);
 		}, this);
 
-		this.trigger.un('click', this.onTriggerClick, this);
-		this.trigger.on('mousedown', function(e, target, options) {
-			e.preventDefault();
-			this.onTriggerClick();
-		}, this);
-
-		this.on('collapse', function(e, target, options) {
-			Ext.getDoc().un('mouseup', this.collapseIf, this);
-		}, this, true);
-
-		this.on('expand', function(e, target, options) {
-			Ext.getDoc().on('mouseup', this.collapseIf, this);
-		}, this, true);
-	},
-
-	clearSearchHistory : function() {
-		this.lastSelectedIndex = 0;
-		this.lastSearchTerm = false;
 	},
 
 	selectFirst : function() {
@@ -173,19 +158,10 @@ Ext.extend(Ext.ux.SelectBox, Ext.form.ComboBox, {
 		this.focusAndSelect(this.store.getAt(index));
 	},
 
-	search : function(field, value, startIndex) {
-		field = field || this.displayField;
-		this.lastSearchTerm = value;
-		var index = this.store.find.apply(this.store, arguments);
-		if( index !== -1 ) {
-			this.focusAndSelect(index);
-		}
-	},
-
 	focusAndSelect : function(record) {
 		var index = typeof record === 'number' ? record : this.store.indexOf(record);
 		this.select(index, this.isExpanded());
-		this.onSelect(this.store.getAt(record), index, this.isExpanded());
+		//this.onSelect(this.store.getAt(record), index, this.isExpanded());
 	},
 
 	calcRowsPerPage : function() {
@@ -227,11 +203,12 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.ux.SelectBox, {
           }
         }
         if (k == Ext.EventObject.TAB || k == Ext.EventObject.ENTER) {
-					Ext.form.ComboBox.superclass.onBlur.call(this);
+					//Ext.form.ComboBox.superclass.onBlur.call(this);
           if (!this.value)
           this.onTrigger1Click();
-          else
-          reload_penta();
+          //else
+          //reload_penta();
+					//return true; // Continuer la propagation de l'evenement ?
         }
       },
     this);
@@ -278,7 +255,7 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.ux.SelectBox, {
   // hauteur maxi
   maxHeight: 400,
   // pour éviter le pb du double-clic
-  selectOnFocus: true,
+  selectOnFocus: false,
   selectOnBlur: false,
   loadingText: COMBO_LOADINGTEXT,
   emptyText: COMBO_EMPTYTEXT,
