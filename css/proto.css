@@ -173,3 +173,4 @@ body .x-dlg-mask {
 .cell_fm .info_fm, .cell_mol .info_mol{margin:0 auto;}
 .info_fm, .info_mol {background:transparent url('img/i_mini_off.gif') top left no-repeat; width:14px; height:14px; display:block;}
 /*.x-grid-row-selected .info_fm, .x-grid3-row-selected .info_mol {background:#316AC5 url('img/i_mini_on.gif') top left no-repeat;}*/
+.info_fm a, .info_mol a {display:block;}

@@ -403,6 +403,12 @@ var ZONES_SAISIE = {
     Ext.form.ComboBox.superclass.onBlur.call(el);
   },
 
+	popupProd : function(id_item) {
+    Ext.get('iframe').dom.src = 'spip.php?page=popup_item&id_item=' + id_item;
+    dialog.show(Ext.get('prod_$i'));
+    return false;
+	},
+
   setValue: function(sobj, val) {
     obj = Ext.get(sobj);
     obj.set({
