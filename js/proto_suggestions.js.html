@@ -11,30 +11,33 @@ var LISTE_DES_SUGGESTIONS = {
 
     if (!this.grid) {
           
-      var center = function(texte) {
-        if (texte.parseFloat() != NaN) {texte = change(texte);}
-        /* visiblement ce n'est pas la bonne methode pour centrer */
-        return "<div style='text-align:center'>" + texte + "</div>";
-      }
-      
-      var change = function(val){
+      var dsp_libelle = function (texte) {
+        var temp = new Array(); 
+        temp = texte.split('==>');
+        var nom = temp[0],
+          id_mol = temp[1];
+        return "<div class='cell_rc'><a href=\"#\" onclick='CCD.outline_prod([" + id_mol + "]);return false;' title='" + nom + "'>" + nom + '</a></span></div>';
+      };
+    
+      var dsp_nb = function(nb){
         if(val > 2){
-          return '<span style="color:red;">' + val + '</span>';
+          return "<div class='cell_fm' style='color:red;'>" + nb + '</span></div>';
         }else if(val > 1){
-          return '<span style="color:green;">' + val + '</span>';
-        }
+           return "<div class='cell_fm' style='color:green;'>" + nb + '</span></div>';
+         }
         return val;
-      }
-  
-      var dsp_toInfo = function(val) {
-        var t = "<div class='cell_fm'><a class='info_fm' id='info_fm_" + val + "' alt='infos' onclick='LISTE_DES_PRODUITS.popup_prod(" + val + ")'></a></div>";
+      };
+      
+      var dsp_toInfo = function(id_item) {
+        var t = "<div class='cell_rc'><a class='info_mol' id='info_mol_" + id_item + "' alt='infos' onclick='LISTE_DES_PRODUITS.popup_prod(" + id_item + ")'></a></div>";
         return t;
       };
 
       var ds_s = new Ext.data.Store({
       proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_suggestions'}),
       reader: new Ext.data.JsonReader({
-        root: 'liste_des_suggestions'
+        root: 'liste_des_suggestions',
+				id: 'id_mol',
         }, [
            {name: 'nom'},
            {name: 'nb'},
@@ -46,9 +49,9 @@ var LISTE_DES_SUGGESTIONS = {
       this.grid = new Ext.grid.GridPanel({
         store: ds_s,
         columns: [
-          {id:'nom',header: SUGG_P, sortable: true, locked:false, dataIndex: 'nom'},
-          {header: SUGG_CARD, width: 30, sortable: true, locked:true, dataIndex: 'nb'},
-          {header: '(i)', width: 30, sortable: false, locked:true, dataIndex: 'id_mol'}
+          {id:'nom',header: SUGG_P, sortable: true, locked:false, dataIndex: 'nom', renderer: dsp_libelle},
+          {header: SUGG_CARD, width: 30, sortable: true, locked:true, dataIndex: 'nb', renderer: dsp_nb},
+          {header: '(i)', width: 30, sortable: false, locked:true, dataIndex: 'id_mol',renderer: dsp_toInfo}
         ],
         autoExpandColumn:'nom',
         loadMask: {msg:LOAD_MASK},

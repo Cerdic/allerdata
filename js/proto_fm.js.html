@@ -40,7 +40,8 @@ var LISTE_DES_FAMILLES = {
         }, [
              {name: 'nom'},
              {name: 'id_item'},  
-             {name: 'nb_item'}
+             {name: 'nb_item'},
+             {name: 'id_fm'}
           ])
       });
         
@@ -48,6 +49,7 @@ var LISTE_DES_FAMILLES = {
         store:ds,
         autoExpandColumn:'nom',
         loadMask: {msg:LOAD_MASK},
+				id: 'id_fm',
         columns: [
           {id:'nom',header: FM_NAME, width: 250, sortable: true, locked:false, dataIndex: 'nom', renderer: dsp_libelle},
           {id:'info', header: '(i)', width: 30, locked:true, sortable:false, align: 'center', dataIndex: 'id_item', renderer: dsp_toInfo},

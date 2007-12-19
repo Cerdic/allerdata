@@ -14,7 +14,17 @@ var CCD = {
 	outline_prod : function(array_prod) {
 		for (i=0;i<array_prod.length;i++) {
 			var el = Ext.get($('input[@value=' + array_prod[i] + ']').next('.x-form-text').get());
-			el.setStyle('background','white').highlight("ffff9c",{ attr: 'background-color', duration: 2 });
+			el.setStyle('background','white').highlight("FDFF3F",{ attr: 'background-color', duration: 5 });
+		}
+	},
+	outline_fm : function(array_fm) {
+		var store = LISTE_DES_FAMILLES.grid.getStore();
+		for (i=0;i<array_fm.length;i++) {
+			var id = array_fm[i];
+			var record = store.getById(id);
+			
+			var el = Ext.get($('input[@value=' +  + ']').parents().find('table'));
+			el.highlight("FDFF3F",{ attr: 'background-color', duration: 5 });
 		}
 	}
 };
