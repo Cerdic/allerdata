@@ -1,20 +1,29 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Items(tbl_items){id_item}>
-<div id="main" style="margin:0;padding:0;width:auto;float:none;font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:12px;text-align:left">
+<div id="main">
 <div id="contenu">
 <?php if ($auteur_session) { ?>
 	
 				<div id="blocTitArticle">
-					<h1 class="titArticle" style="text-align:center"><:name:>: [(#NOM|sinon{NA})]</h1>
+					<h1 class="titArticle"><:name:>: [(#NOM|sinon{NA})]</h1>
 				</div>
-				<div class="blocContenuArticle" style="margin:0; padding:0">
 				[(#ID_TYPE_ITEM|=={3}|?{' '})
-					[<h2>Ce groupe générique de produit contient les produits</h2>
-					<ul>(#ID_ITEM|listetype5)</ul>]
+					[
+					<div class="blocContenuArticle">
+					<h2>Ce groupe générique contient les produits</h2>
+					<ul>(#ID_ITEM|listetype5)</ul>
+					</div>
+					]
 				]
 				[(#ID_TYPE_ITEM|=={5}|?{' '})
-					[<h2>Ce produit a pour source(s)</h2>
-					<ul>(#ID_ITEM|source)</ul>]
-					[<h2>Ce produits contient des allergènes</h2>
+					[
+					<div class="blocContenuArticle">
+					<h2>Source(s)</h2>
+					<ul>(#ID_ITEM|source)</ul>
+					</div>
+					]
+					[
+					<div class="blocContenuArticle">
+					<h2>Allergènes contenus dans ce produit</h2>
 					<table summary="Les allergènes de [(#NOM|sinon{NA})]" class="spip">
 						<thead><tr>
 						<th>Nom</th>
@@ -25,9 +34,10 @@
 						<th>Niveau</th>
 						</tr>
 						</thead>
-						(#ID_ITEM|allergenes)</table>]
+						(#ID_ITEM|allergenes)</table>
+						</div>
+					]
 				]
-				</div>
 
 <?php } else { ?>
 [(#INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]})]
