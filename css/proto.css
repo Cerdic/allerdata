@@ -174,3 +174,15 @@ body .x-dlg-mask {
 .info_fm, .info_mol {background:transparent url('img/i_mini_off.gif') top left no-repeat; width:14px; height:14px; display:block;}
 /*.x-grid-row-selected .info_fm, .x-grid3-row-selected .info_mol {background:#316AC5 url('img/i_mini_on.gif') top left no-repeat;}*/
 .cell_fm a, .cell_mol a {display:block; }
+
+/*tableaux*/
+
+table.spip {
+	border: 1px solid silver;
+}
+
+table.spip tr.row_first {
+	background: #B1D3DE none repeat scroll 0% 50%;
+}
+table.spip tr.row_odd { background: #EEE; }
+table.spip tr.row_even { background: #DDD; }
