@@ -52,7 +52,7 @@ function rc($p1,$p2) {
 		$resbiblio = spip_query($querybiblio);
 		while ($rowbiblio = spip_fetch_array($resbiblio)){
 			$linkbiblio = '<a href="#biblio'.$rowbiblio['id_biblio'].'">';
-			$biblio .= '<a name="biblio'.$rowbiblio['id_biblio'].'"></a><table style="text-align: left; width: auto; margin:1em .5em;" summary="Détails des données bibiliographiques" class="spip"><caption>Bibliographie de la RC: '.$row['id_reaction_croisee'].'</caption><tbody>
+			$biblio .= '<a name="biblio'.$rowbiblio['id_biblio'].'"></a><table summary="Détails des données bibiliographiques" class="bibliographie spip"><caption>Bibliographie de la RC: '.$row['id_reaction_croisee'].'</caption><tbody>
 							<tr><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
 							<tr><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 							<tr><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums pool&eacute;s</b>: '.(($rowbiblio['pool']==1)?'Oui':'Non').'</td><td colspan="2" rowspan="1"><b>Test qualitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Oui':'Non').'</td></tr>
@@ -67,8 +67,8 @@ function rc($p1,$p2) {
 		
 		$result .= '<tr><td align=left>'. $row['id_reaction_croisee'].'</td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].' '.'</a></td><td>'.$linkbiblio.$fl2.'</a></td><td>'.$linkbiblio.$fl1.'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].'</a></td></tr>';
 	}
-	if ($result) $result = '<table style="width:70%;margin:0 auto" class="spip">'.$result.'</table>';
-	if ($biblio) $result .= '<h2>'._T('ad:bibliographies').'</h2>'.$biblio;
+	if ($result) $result = '<div class="blocContenuArticle"><h1 class="titArticle">'._T('reactivites_croisees').'</h1><table class="liste_rc spip">'.$result.'</table></div>';
+	if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:bibliographies').'</h2>'.$biblio.'</div>';
 	return $result;
 }
 

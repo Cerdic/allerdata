@@ -1,12 +1,10 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
-<div id="main" style="margin:0;padding:0;width:auto;float:none;font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:12px;text-align:left">
+<div id="main">
 <?php if ($auteur_session) { ?>
 	
 				<a name="top" id="top"></a>
-				<h1 class="titArticle" style="text-align:center;margin-bottom:1em;"><:reactivites_croisees:></h1>
-				<div class="blocContenuArticle" style="margin:0; padding:0; text-align:center">
-					[(#ENV{p1}|rc{#ENV{p2}})]
-				</div>
+				[(#ENV{p1}|rc{#ENV{p2}})]
+				
 
 <?php } else { ?>
 [(#INCLURE{fond=inc_acces_reserve}{letitre=<:reactivites_croisees:>})]
