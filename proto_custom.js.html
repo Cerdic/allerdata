@@ -20,10 +20,14 @@ function reload_penta(){
   return false;
 }
 jQuery('#form_penta').submit(reload_penta);
-
 function loadSpecificFunction() {
   /* Cette fonction sera appelée *après* le téléchargement du reste
    de l'appli pour que les autres "classes" aient pu s'initialiser */
+
+	jQuery.ajax({
+		type: "GET",
+		url:'spip.php?action=purge_sessions'
+	});
 
   $().ready(function() {  
 		
