@@ -24,7 +24,7 @@ Ext.onReady(function() {
     plugins: new Ext.ux.TabCloseMenu(),
     enableTabScroll: true,
     addTab: function(tabTitle, targetUrl) {
-      main_panel.add({
+      var p = main_panel.add({
         title: tabTitle,
         //iconCls: 'tabs',
         autoLoad: {
@@ -32,18 +32,25 @@ Ext.onReady(function() {
           scope: this
         },
         closable: true
-      }).show();
+      });
+			p.show();
 
     },
 
-// Update the contents of a tab if it exists, otherwise create a new one
+		// Maj du contenu d'une tab si elle existe,sinon en cree une nouvelle
+		// Recherche par id pour titre
     updateTab: function(tabId, title, url) {
-      var tab = main_panel.getItem(tabId);
+      if (!tabId) {
+				var tabs = main_panel.find('title',title);
+				if (tabs.length) 
+					tabId = tabs[0].getItemId();
+			}
+			var tab = main_panel.getItem(tabId);
       if (tab) {
         tab.getUpdater().update(url);
         tab.setTitle(title);
       } else {
-        tab = addTab(title, url);
+        tab = main_panel.addTab(title, url);
       }
       main_panel.setActiveTab(tab);
     }
