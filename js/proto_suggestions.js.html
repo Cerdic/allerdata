@@ -15,8 +15,8 @@ var LISTE_DES_SUGGESTIONS = {
         var temp = new Array(); 
         temp = texte.split('==>');
         var nom = temp[0],
-          id_mol = temp[1];
-        return "<div class='cell_rc'><a href=\"#\" onclick='CCD.outline_prod([" + id_mol + "]);return false;' title='" + nom + "'>" + nom + '</a></span></div>';
+          array_items_reactifs = temp[1];
+        return "<div class='cell_rc'><a href=\"#\" onclick='CCD.outline_prod(" + array_items_reactifs + ");return false;' title='" + nom + "'>" + nom + '</a></span></div>';
       };
     
       var dsp_nb = function(nb){
