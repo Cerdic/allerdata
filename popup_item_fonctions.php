@@ -98,14 +98,16 @@ function allergenes($produits) {
 						)
 					ORDER BY tbl_items_1.nom;";
 	$resallergenes = spip_query($queryallergenes);
+	$count = 0;
 	while ($rowallergenes = spip_fetch_array($resallergenes)){
-		$allergenes .= '						<tr>
+		$count += 1;
+		$allergenes .= '						<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'>
 						<td>'.$rowallergenes['nom'].'</td>
 						<td>'.$rowallergenes['fonction_classification'].'</td>
 						<td>'.$rowallergenes['masse'].'</td>
-						<td>'.$rowallergenes['iuis'].'</td>
-						<td>'.$rowallergenes['glyco'].'</td>
-						<td>'.$rowallergenes['allergenicite'].'</td>
+						<td>'.(($rowallergenes['iuis']==1)?'Oui':'Non').'</td>
+						<td>'.(($rowallergenes['glyco']==1)?'Oui':'Non').'</td>
+						<td>'.$rowallergenes['niveau_de_preuve'].'</td>
 						</tr>';
 	}
 	$result .= $allergenes;

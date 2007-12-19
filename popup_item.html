@@ -5,7 +5,6 @@
 	
 				<div id="blocTitArticle">
 					<h1 class="titArticle" style="text-align:center"><:name:>: [(#NOM|sinon{NA})]</h1>
-					<p class="auteurArticle"><:by:> Dr Henri Malandain</p>
 				</div>
 				<div class="blocContenuArticle" style="margin:0; padding:0">
 				[(#ID_TYPE_ITEM|=={3}|?{' '})
@@ -16,8 +15,8 @@
 					[<h2>Ce produit a pour source(s)</h2>
 					<ul>(#ID_ITEM|source)</ul>]
 					[<h2>Ce produits contient des allergènes</h2>
-					<table>
-						<tr>
+					<table summary="Les allergènes de [(#NOM|sinon{NA})]" class="spip">
+						<thead><tr>
 						<th>Nom</th>
 						<th>Fonction</th>
 						<th>Masse</th>
@@ -25,6 +24,7 @@
 						<th>Glyco</th>
 						<th>Niveau</th>
 						</tr>
+						</thead>
 						(#ID_ITEM|allergenes)</table>]
 				]
 				</div>
