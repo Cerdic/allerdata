@@ -1,28 +1,26 @@
 <?php
-require_once('./bdd.php');
+function action_descendants_en_direct() {
+	$query_liste_items = "SELECT tbl_items.id_item FROM tbl_items";
+	$liste_items = spip_query($query_liste_items, $allerdata) or die(mysql_error());
+	$row_liste_items = mysql_fetch_assoc($liste_items);
+	$totalRows_liste_items = mysql_num_rows($liste_items);
 
-//on liste tous les items
-mysql_select_db($database_allerdata, $allerdata);
-$query_liste_items = "SELECT tbl_items.id_item FROM tbl_items";
-$liste_items = mysql_query($query_liste_items, $allerdata) or die(mysql_error());
-$row_liste_items = mysql_fetch_assoc($liste_items);
-$totalRows_liste_items = mysql_num_rows($liste_items);
+	//on boucle sur le résultat
+	echo 'Ca commence !<br />';
+	do {
+		//on récupère l'id de l'item en cours
+		$id_item2 = $row_liste_items['id_item'];
+		$id_item25 = $id_item2;
+		
+		// Creer la filiation sur soi-meme !
+		create_filiation($id_item2,$id_item25);
+		
+		//on lance la fonction qui recherche les enfants directs avec l'id de l'item en cours.
+		$liste_items2 = ListeEnfants("$id_item2","$id_item25");
+	} while ($row_liste_items = mysql_fetch_assoc($liste_items));
 
-//on boucle sur le résultat
-echo 'Ca commence !<br />';
-do {
-	//on récupère l'id de l'item en cours
-	$id_item2 = $row_liste_items['id_item'];
-	$id_item25 = $id_item2;
-	
-	// Creer la filiation sur soi-meme !
-	create_filiation($id_item2,$id_item25);
-	
-	//on lance la fonction qui recherche les enfants directs avec l'id de l'item en cours.
-	$liste_items2 = ListeEnfants("$id_item2","$id_item25");
-} while ($row_liste_items = mysql_fetch_assoc($liste_items));
-
-echo 'Termine ;-)';
+	echo 'Termine ;-)';
+}
 
 //Fonction de recherche des enfants direct
 function ListeEnfants($id_item,$id_parent) {
@@ -32,7 +30,7 @@ function ListeEnfants($id_item,$id_parent) {
 	$query_liste_enfants = "SELECT tbl_est_dans.id_item FROM tbl_est_dans 
 					WHERE tbl_est_dans.est_dans_id_item = '$id_item'
 					AND tbl_est_dans.id_item != tbl_est_dans.est_dans_id_item";
-	$liste_enfants = mysql_query($query_liste_enfants) or die(mysql_error());
+	$liste_enfants = spip_query($query_liste_enfants) or die(mysql_error());
 	$row_liste_enfants = mysql_fetch_assoc($liste_enfants);
 	$totalRows_liste_enfants = mysql_num_rows($liste_enfants);
 	
@@ -57,7 +55,7 @@ function create_filiation($id_item1,$id_parent) {
 		mysql_select_db("db_allerdata");
 		$query_new_parent = "SELECT tbl_est_dans.id_est_dans FROM tbl_est_dans
 							WHERE tbl_est_dans.id_item = '$id_item1' AND tbl_est_dans.est_dans_id_item = '$id_parent'";
-		$new_parent = mysql_query($query_new_parent) or die(mysql_error());
+		$new_parent = spip_query($query_new_parent) or die(mysql_error());
 		$row_new_parent = mysql_fetch_assoc($new_parent);
 		$totalRows_new_parent = mysql_num_rows($new_parent);
 		
@@ -68,8 +66,9 @@ function create_filiation($id_item1,$id_parent) {
 		else { 
 			mysql_select_db("db_allerdata");
 			$query_est_dans_indirect = "INSERT INTO tbl_est_dans (id_item,est_dans_id_item,directement_contenu) values('$id_item1','$id_parent','0')";
-			mysql_query($query_est_dans_indirect) or die(mysql_error());
+			spip_query($query_est_dans_indirect) or die(mysql_error());
 			echo $id_item1.','.$id_parent.'<br />';
 		}
 }
+
 ?>
