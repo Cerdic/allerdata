@@ -5,10 +5,10 @@ function action_db_creer_noms_sans_accents() {
 	include_spip('inc/charsets');
 	
 	// Structure  pour le calcul des produits suggeres dans une combo
-	spip_query("ALTER TABLE  `tbl_items`  ADD `nom_sans_accent` VARCHAR( 255 ) NOT NULL AFTER `nom`,
-	ADD  `source` VARCHAR( 100 ) NOT NULL COMMENT  'de type 4' AFTER  `nom_sans_accent` ,
-	ADD  `famille` VARCHAR( 100 ) NOT NULL COMMENT  'de type 2' AFTER  `source`,
-	ADD  `source_sans_accent` VARCHAR( 100 ) NOT NULL AFTER  `source` ;");
+	spip_query("ALTER TABLE  `tbl_items`  ADD `nom_sans_accent` VARCHAR( 255 ) NOT NULL AFTER `nom`");
+	spip_query("ALTER TABLE  `tbl_items`  ADD `source` VARCHAR( 100 ) NOT NULL COMMENT  'de type 4' AFTER  `nom_sans_accent` ");
+	spip_query("ALTER TABLE  `tbl_items`  ADD `famille` VARCHAR( 100 ) NOT NULL COMMENT  'de type 2' AFTER  `source`");
+	spip_query("ALTER TABLE  `tbl_items`  ADD `source_sans_accent` VARCHAR( 100 ) NOT NULL AFTER  `source` ;");
 	
 	$q = spip_query('select nom, id_item from tbl_items');
 	echo spip_num_rows($q).' LIGNES';
