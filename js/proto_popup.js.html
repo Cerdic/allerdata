@@ -13,7 +13,6 @@ Ext.onReady(function() {
     activeTab: 0,
     items: [{
       id: 'tab1',
-      //iconCls: 'tabs',
       border: false,
       title: 'détails',
       closable: false,
@@ -22,16 +21,13 @@ Ext.onReady(function() {
     plugins: new Ext.ux.TabCloseMenu(),
     enableTabScroll: true,
     addTab: function(tabTitle, targetUrl) {
-      var p = main_panel.add({
+      var tab = main_panel.add({
         title: tabTitle,
         closable: true
       });
-      p.load({
-        url: targetUrl,
-        scope: this,
-        callback: callback_popup
-      });
-      p.show();
+      tab.show();
+			// Subtile : on ne peut pas charger la callback avant d'avoir montré/créé le panel
+			tab.getUpdater().update({url:targetUrl,scope:this,callback:this.callback_popup});
     },
 
     // Maj du contenu d'une tab si elle existe,sinon en cree une nouvelle
@@ -44,17 +40,39 @@ Ext.onReady(function() {
       }
       var tab = main_panel.getItem(tabId);
       if (tab) {
-        tab.getUpdater().update({url:url,scripts:true,scope:this,callback:callback_popup});
+	      tab.getUpdater().update({url:url,scope:this,callback:this.callback_popup});
         tab.setTitle(title);
       } else {
-        tab = main_panel.addTab(title, url);
+        tab = this.addTab(title, url);
       }
       main_panel.setActiveTab(tab);
     },
 
-    test: function(){
-      alert('ok');
-    }
+		callback_popup : function() {
+		  // Détection des liens vers des ancres
+		  // puis si celles-ci sont trouvées on affecte un comportement à ce lien
+		  // Au lieu de déplacer brutalement le navigateur (fonctionne +/- bien)
+		  // Seule la partie active sera déplacée
+			var tab = main_panel.getActiveTab();
+			  $('a','#' + tab.body.id).each(function(){
+			    var link=$(this).attr('href');
+			    if (link) { 
+			      if ((link != '#') && (link == '#' + link.split('#')[1])) {
+			        // Une ancre : on bougera donc par scrollTo
+			        $(this).click(function(){
+			          var ancre_id=$(this).attr('href').split('#')[1];
+			          var el = Ext.get(ancre_id);
+			          if(el){
+			            var top = (el.getOffsetsTo(tab.body)[1]) + tab.body.dom.scrollTop;
+			            tab.body.scrollTo('top', top-25, {duration:1.5});
+			          }
+			          return(false);
+			        })
+			      }
+			    }
+			  })  
+			}
+
   });
 
   dialog_avec_tab = new Ext.Window({
@@ -91,31 +109,6 @@ Ext.onReady(function() {
 
 
 });
-
-function callback_popup() {
-  // Détection des liens vers des ancres
-  // puis si celles-ci sont trouvées on affecte un comportement à ce lien
-  // Au lieu de déplacer brutalement le navigateur (fonctionne +/- bien)
-  // Seule la partie active sera déplacée
-  var tab = main_panel.getActiveTab();
-  $('a','#' + tab.body.id).each(function(){
-    var link=$(this).attr('href');
-    if (link) { // Eviter les ancres ;)
-      if ((link != '#') && (link == '#' + link.split('#')[1])) {
-        // Une ancre : on bougera donc par scrollTo
-        $(this).click(function(){
-          var ancre_id=$(this).attr('href').split('#')[1];
-          var el = Ext.get(ancre_id);
-          if(el){
-            var top = (el.getOffsetsTo(tab.body)[1]) + tab.body.dom.scrollTop;
-            tab.body.scrollTo('top', top-25, {duration:1.5});
-          }
-          return(false);
-        })
-      }
-    }
-  })  
-}
 
 <?php
   foreach(array(1, 2, 3, 4, 5) as $i) {
