@@ -1,6 +1,5 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Items(tbl_items){id_item}>
 <div id="main">
-<div id="contenu">
 <?php if ($auteur_session) { ?>
 	
 				<div id="blocTitArticle">
@@ -34,7 +33,10 @@
 						<th>Niveau</th>
 						</tr>
 						</thead>
-						(#ID_ITEM|allergenes)</table>
+						<tbody>
+						(#ID_ITEM|allergenes)
+						</tbody>
+						</table>
 						</div>
 					]
 				]
@@ -42,6 +44,5 @@
 <?php } else { ?>
 [(#INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]})]
 <?php } ?>
-</div>
 </div>
 </BOUCLE_Items>

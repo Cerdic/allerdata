@@ -1,6 +1,5 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Biblio(tbl_bibliographies){id_biblio}>
-<div id="main" style="margin:0;padding:0;width:auto;float:none;font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:12px;text-align:left">
-<div id="contenu">
+<div id="main" >
 <?php if ($auteur_session) { ?>
 	
 				<div id="blocTitArticle">
@@ -14,6 +13,5 @@
 <?php } else { ?>
 [(#INCLURE{fond=inc_acces_reserve}{letitre=<:bibliographie:>})]
 <?php } ?>
-</div>
 </div>
 </BOUCLE_Biblio>

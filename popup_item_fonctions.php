@@ -76,7 +76,7 @@ function source($produits) {
 					ORDER BY tbl_items_1.nom;";
 	$ressource = spip_query($querysource);
 	while ($rowsource = spip_fetch_array($ressource)){
-		$source .= '<li>Source&nbsp;: '.$rowsource['nom'].'</li>';
+		$source .= '<li>Source : '.$rowsource['nom'].'</li>';
 	}
 	$result .= $source;
 

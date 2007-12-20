@@ -1,6 +1,5 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
 <div id="main">
-<div id="contenu">
 <?php if ($auteur_session) { ?>
 <BOUCLE_ArticleCCD(ARTICLES){id_article=59}>
 <div>#TEXTE</div>
@@ -8,5 +7,4 @@
 <?php } else { ?>
 [(#INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]})]
 <?php } ?>
-</div>
 </div>
