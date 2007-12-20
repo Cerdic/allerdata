@@ -32,14 +32,14 @@ function action_liste_des_produits() {
 	if (is_array($_SESSION['produits_choisis'])) $liste_noire = $_SESSION['produits_choisis'];
 
 	while ($row = spip_fetch_array($q)) {
-		if (!$row['nom']) $row['nom'] = '??? ('.$row['source'].')';
+		if (!$row['nom']) $row['nom'] = $row['source'];
 		$res[] = $row; 
 		$liste_noire[] = $row['id_item'];
 	}
 	
 	// On complète par une recherche plus large (20 maxi, question perfs client)
 	if ($nb_elements_trouves<20) {
-		$sql = "SELECT id_item, nom FROM tbl_items 
+		$sql = "SELECT id_item, nom, source, famille FROM tbl_items 
 					WHERE id_type_item IN (5,3) ";
 		if ($liste_noire)	$sql .="AND id_item NOT IN(".implode(',',$liste_noire).")";
 		$sql .= "	AND ( nom_sans_accent like '%".addslashes($chaine)."%'
@@ -51,11 +51,10 @@ function action_liste_des_produits() {
 		$nb_elements_trouves += spip_num_rows($q);
 
 		while ($row = spip_fetch_array($q)) {
-			if (!$row['nom']) $row['nom'] = '??? ('.$row['source'].')';
+			if (!$row['nom']) $row['nom'] = $row['source'];
 			$res[] = $row; 
 		}
 	}
-
 
 	if (!$nb_elements_trouves) echo('{produits:'.json_encode(array(array('id_item' => '', 'nom' => '', 'source' => _T('ad:nothing_found')))).'}');
 	else echo('{produits:'.json_encode($res).'}');
