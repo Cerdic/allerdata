@@ -1,14 +1,15 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Items(tbl_items){id_item=#ENV{id_fm}}>
-<div id="main" style="margin:0;padding:0;width:auto;float:none;font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:12px;text-align:left">
+<div id="main">
 	<div id="contenu">
 <?php if ($auteur_session) { ?>
 	
 				<div id="blocTitArticle">
 					<h1 class="titArticle"><:name:>: [(#NOM|sinon{NA})]</h1>
 				</div>
-				<div class="blocContenuArticle" style="margin:0; padding:0">
-					[<h2>Cette famille moléculaire contient des allergènes</h2>
-					<table>
+				[<div class="blocContenuArticle">
+					<h2>Cette famille moléculaire contient des allergènes</h2>
+					<table class="spip">
+						<thead>
 						<tr>
 						<th>Nom</th>
 						<th>Fonction</th>
@@ -17,12 +18,20 @@
 						<th>Glyco</th>
 						<th>Niveau</th>
 						</tr>
-						(#ID_ITEM|allergenes)</table>]
-					[<h2>Cette famille moléculaire a pour source</h2>
-					<ul>(#ID_ITEM|source)</ul>]
-					[<h2>Cette famille moléculaire se trouve dans les produits</h2>
-					<ul>(#ID_ITEM|produit)</ul>]
-				</div>
+						</thead>
+						<tbody>
+						(#ID_ITEM|allergenes)
+						</tbody>
+					</table>
+				</div>]
+				[<div class="blocContenuArticle">
+					<h2>Cette famille moléculaire a pour source</h2>
+					<ul>(#ID_ITEM|source)</ul>
+				</div>]
+				[<div class="blocContenuArticle">
+					<h2>Cette famille moléculaire se trouve dans les produits</h2>
+					<ul>(#ID_ITEM|produit)</ul>
+				</div>]
 
 <?php } else { ?>
 [(#INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]})]
