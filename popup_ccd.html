@@ -1,9 +1,12 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
-Voici la popup affichant les infos sur les CCD
-<ul>
-	<li>p1 :  [(#ENV{p1}|sinon{'inconnu'})]</li>
-	<li>p2 :  [(#ENV{p2}|sinon{'inconnu'})]</li>
-	<li>p3 :  [(#ENV{p3}|sinon{'inconnu'})]</li>
-	<li>p4 :  [(#ENV{p4}|sinon{'inconnu'})]</li>
-	<li>p5 :  [(#ENV{p5}|sinon{'inconnu'})]</li>
-</ul>
+<div id="main">
+<div id="contenu">
+<?php if ($auteur_session) { ?>
+<BOUCLE_ArticleCCD(ARTICLES){id_article=59}>
+<div>#TEXTE</div>
+</BOUCLE_ArticleCCD>
+<?php } else { ?>
+[(#INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]})]
+<?php } ?>
+</div>
+</div>
