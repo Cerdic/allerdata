@@ -15,7 +15,7 @@ var LISTE_DES_FAMILLES = {
         temp = texte.split('==>');
         var nom = temp[0],
           est_dans = temp[1];
-        return "<div class='cell_fm'><a href=\"#\" onclick='LISTE_DES_FAMILLES.outline_prod(" + est_dans + ");return false;' title='" + nom + "'>" + nom + '</a></span></div>';
+        return "<div class='cell_fm'><a href=\"#\" class='outlineLink' onclick='LISTE_DES_FAMILLES.outline_prod(" + est_dans + ");return false;' title='" + nom + "'>" + nom + '</a></span></div>';
       };
     
       var dsp_nb = function(val){

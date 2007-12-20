@@ -59,6 +59,6 @@ function ccd($txt) {
 	}
 	
 	$js_liste_prod_ccd = '['.implode(',',$liste_prod_ccd).']';
-	return "<a href='#' onclick='CCD.outline_prod($js_liste_prod_ccd);return false;'>".$nb_ccd."</a>";
+	return "<a href='#' class='outlineLink' onclick='CCD.outline_prod($js_liste_prod_ccd);return false;'>".$nb_ccd."</a>";
 }
 ?>

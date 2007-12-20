@@ -158,6 +158,7 @@ x-grid-hd-row td, .x-grid-row td {white-space:normal !important;}
 .left {float:left;}
 .right {float:right;}
 .small {font-size:0.9em;}
+.outlineLink {cursor:help;}
 
 /* fenetre modale */
 body .x-dlg-mask {
