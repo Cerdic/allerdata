@@ -1,6 +1,9 @@
 <BOUCLE_EstMultirubrique(ARTICLES){id_article}{tout_voir}{chapo==^#}>
 <INCLURE{fond=article}{id_article=(#CHAPO|replace{'#',''})}{id_multirubrique=#ID_ARTICLE}>
 </BOUCLE_EstMultirubrique>
+<BOUCLE_EstPentagramme(ARTICLES){id_article}{tout_voir}{titre_mot=Pentagramme}>
+<INCLURE{fond=proto}>
+</BOUCLE_EstPentagramme>
 <BOUCLE_ArticlePrincipal(ARTICLES){id_article}{tout_voir}>[
 (#INCLURE{fond=inc_header}{titrepage=#TITRE})]
 		<BOUCLE_RubriqueAriane(ARTICLES){id_article=#ENV{id_multirubrique,#ID_ARTICLE}}{tout_voir}>
