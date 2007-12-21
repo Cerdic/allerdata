@@ -31,7 +31,7 @@
 <?php if ($auteur_session) { ?>
 [(#INCLURE{fond=inc_article_contenu}{id_article})]
 <?php } else { ?>
-[(#INCLURE{fond=inc_acces_reserve}{letitre=#TITRE})]
+<INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
 <?php } ?>
 ][(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '})
 [(#INCLURE{fond=inc_article_contenu}{id_article})]

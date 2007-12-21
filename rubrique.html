@@ -9,7 +9,7 @@
 <?php if ($auteur_session) { ?>
 [(#INCLURE{fond=inc_rubrique_contenu}{id_rubrique})]
 <?php } else { ?>
-[(#INCLURE{fond=inc_acces_reserve}{letitre=#TITRE})]
+<INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
 <?php } ?>
 ][(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{'',' '})
 [(#INCLURE{fond=inc_rubrique_contenu}{id_rubrique})]
