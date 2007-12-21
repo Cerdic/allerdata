@@ -109,7 +109,7 @@
 	top:286px;
 }
 
-#liens_infos div {display: none;}
+#liens_infos div {display: none;cursor:hand;}
 #liens_infos div.show {display: block;}
 
 .rc img {

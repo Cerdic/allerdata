@@ -98,7 +98,7 @@ body {
 #info-s3 {position:absolute; top:332px; left:450px;}
 #info-s4 {position:absolute; top:280px; left:20px;}
 #info-s5 {position:absolute; top:93px; left:20px;}
-.info {background:transparent url('img/fd_infos.gif') top left no-repeat; width:25px; height:25px; display:none;}
+.info {background:transparent url('img/fd_infos.gif') top left no-repeat; width:25px; height:25px; display:none;cursor: hand;}
 
 #pentagramme {
 	/*background: white url(img/details.png) no-repeat scroll right 10px;*/
@@ -178,7 +178,7 @@ body .x-dlg-mask {
 /* FM et SUGGESTIONS*/
 
 .cell_fm .info_fm, .cell_mol .info_mol{margin:0 auto;}
-.info_fm, .info_mol {background:transparent url('img/i_mini_off.gif') top left no-repeat; width:14px; height:14px; display:block;}
+.info_fm, .info_mol {background:transparent url('img/i_mini_off.gif') top left no-repeat; width:14px; height:14px; display:block;cursor:hand;}
 /*.x-grid-row-selected .info_fm, .x-grid3-row-selected .info_mol {background:#316AC5 url('img/i_mini_on.gif') top left no-repeat;}*/
 .cell_fm a, .cell_mol a {display:block; }
 
