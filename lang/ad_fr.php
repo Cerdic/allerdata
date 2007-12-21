@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'js_sugg_p' => "Produit",
 	'js_sugg_card' => "Nb",
 	'js_tests_cliniques_title' => "Suggestions biologiques",
+	'js_fm_tests' => "Test biologiques",
 	
 	// M
 	'memerubrique' => 'Dans la m&ecirc;me rubrique',

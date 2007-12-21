@@ -11,7 +11,8 @@ function cmp($a, $b)
 
 function suggestions($txt) {
 	$tableau_produits = $suggestion = array();
-	$prem = array(17,97); /* 2 nombres premiers avant 100 avec un delta de 1/8 */
+	$prem = array(0,97); /* 2 nombres premiers avant 100 avec un delta de 1/8 */
+	/* Correction : ne plus tenir compte de l'absence testée de réactivité */
 	
 	if (is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
 	if (is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
@@ -172,8 +173,10 @@ function suggestions($txt) {
 	/* On prépare un tri par nombre d'éléments concernés */
 	$aNbProd = array();
 	foreach ($suggestion as $s) {
-		if (!isset($aNbProd[$s['nb']])) $aNbProd[$s['nb']] = array();
-		$aNbProd[$s['nb']][] = $s;
+		if ($s['reactivite']) {
+			if (!isset($aNbProd[$s['nb']])) $aNbProd[$s['nb']] = array();
+			$aNbProd[$s['nb']][] = $s;
+		}
 	}
 	uksort($aNbProd,"cmp");
 
