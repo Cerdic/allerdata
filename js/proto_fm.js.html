@@ -90,15 +90,14 @@ var LISTE_DES_FAMILLES = {
   // Mise en avant des produits concernés par une FM
   outline_prod : function(lProd) {
     var num=0;
+		var t_el = [];
     while (num < lProd.length)
     {
       var hidden_div = jQuery('#liste_des_produits input[@value='+lProd[num]+']');
-      var id = 'prod_' + hidden_div.attr('id').substr(1);
-			// Il faut rectifier la feuille de style d'extjs (line 133) qui affecte une image de fond
-			Ext.Fx.stopFx();
-			Ext.get(id).setStyle('background','white').highlight("FDFF3F",{ attr: 'background-color', duration: 5 });
+			t_el[num] = jQuery('#prod_' + hidden_div.attr('id').substr(1))[0];
       num+=1;
     }
+		jQuery(t_el).highlight("#FDFF3F",5000);
   }
   
 };
