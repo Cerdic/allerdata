@@ -6,7 +6,7 @@
 			<div id="edito" class="clearfix">
 				<h1><:ad:accueil_ad:></h1>
 				<BOUCLE_Edito(ARTICLES){titre_mot=Edito}{!par date}{lang}{0,1}>
-				<h2><a href="#URL_ARTICLE" class="formation">#TITRE[ - <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</a></h2>
+				<h2><a href="#URL_ARTICLE" class="formation">#TITRE[ - <:par_auteur:> (#LESAUTEURS)]</a></h2>
 				<p>[(#TEXTE|couper{280})]</p>
 				<p class="lireSuite"><a href="#URL_ARTICLE"><img src="images/lire_suite_big.gif" alt="Edito, Lien Lire la suite" title="Edito, Lire la suite" /></a></p>
 				<img src="images/plume.gif" alt="" id="plume" />
@@ -21,7 +21,7 @@
 					<BOUCLE_ArticlesAccueilGauche(ARTICLES){branche}{!par date}{0,2}>
 					<li class="listeFormation">
 						<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE</a></h3>
-						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</p>
+						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
 						<p class="txtSommaire">[(#TEXTE|couper{280})]</p>
 						<p class="lireSuite"><a href="#URL_ARTICLE"><img src="images/lire_suite.gif" alt="Lire la suite" title="Lire la suite" /></a></p>
 					</li>
@@ -39,7 +39,7 @@
 					<BOUCLE_ArticlesAccueilDroite(ARTICLES){branche}{!par date}{0,2}{tout_voir}>
 					<li class="listeOutils">
 						<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE</a></h3>
-						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</p>
+						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
 						<p class="txtSommaire">[(#TEXTE|couper{280})]</p>
 						<p class="lireSuite"><a href="#URL_ARTICLE"><img src="images/lire_suite.gif" alt="Lire la suite" title="Lire la suite" /></a></p>
 					</li>
