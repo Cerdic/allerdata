@@ -16,7 +16,7 @@ var LISTE_DES_SUGGESTIONS = {
         temp = texte.split('==>');
         var nom = temp[0],
           array_items_reactifs = temp[1];
-        return "<div class='cell_mol'><a href=\"#\" class='outlineLink' onclick='CCD.outline_prod(" + array_items_reactifs + ",\"#9BA1CF\");return false;' title='" + nom + "'>" + nom + '</a></span></div>';
+        return "<div class='cell_mol outlineLink' onclick='CCD.outline_prod(" + array_items_reactifs + ",\"#9BA1CF\");return false;'>" + nom + '</div>';
       };
     
       var dsp_nb = function(nb){
@@ -29,7 +29,7 @@ var LISTE_DES_SUGGESTIONS = {
       };
       
       var dsp_toInfo = function(id_item) {
-        var t = "<div class='cell_mol'><a class='info_mol' id='info_mol_" + id_item + "' alt='infos' onclick='ZONES_SAISIE.popupProd(" + id_item + ")'></a></div>";
+        var t = "<div class='cell_mol info_mol' id='info_mol_" + id_item + "' onclick='ZONES_SAISIE.popupProd(" + id_item + ")'></div>";
         return t;
       };
 

@@ -15,7 +15,7 @@ var LISTE_DES_FAMILLES = {
         temp = texte.split('==>');
         var nom = temp[0],
           est_dans = temp[1];
-        return "<div class='cell_fm'><a href=\"#\" class='outlineLink' onclick='LISTE_DES_FAMILLES.outline_prod(" + est_dans + ");return false;' title='" + nom + "'>" + nom + '</a></span></div>';
+        return "<div class='cell_fm outlineLink' onclick='LISTE_DES_FAMILLES.outline_prod(" + est_dans + ");return false;' >" + nom + '</div>';
       };
     
       var dsp_nb = function(val){
@@ -28,7 +28,7 @@ var LISTE_DES_FAMILLES = {
       };
       
       var dsp_toInfo = function(val) {
-        var t = "<div class='cell_fm'><a class='info_fm' id='info_fm_" + val + "' alt='infos' onclick='LISTE_DES_FAMILLES.popup_fm(" + val + ")'></a></div>";
+        var t = "<div class='cell_fm info_fm' id='info_fm_" + val + "' onclick='LISTE_DES_FAMILLES.popup_fm(" + val + ")'></div>";
         return t;
       };
 
