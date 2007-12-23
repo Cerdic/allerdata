@@ -4,6 +4,7 @@
 LISTE_DES_RC = {
 
   rcStore:null,
+	nbErrorTry:0,
   
   init: function(){
   
@@ -49,9 +50,11 @@ LISTE_DES_RC = {
   },
 
   gotData : function(record, arg, success) {
-     if (success) {
+    if (success) {
       
-      /* Nettoyage */
+      LISTE_DES_RC.nbErrorTry = 0;
+
+			/* Nettoyage */
       $('.rc').removeClass('rc_toujours');
       $('.rc').removeClass('rc_jamais');
       $('.rc').removeClass('rc_discordant');
@@ -102,7 +105,15 @@ LISTE_DES_RC = {
           $('#liens_infos div#lien_'+ id_s[i] + '-' + id_d[i] + '_').show();
       }
       	
-    } else {alert(ERROR_GOTDATA);}
+    } else {
+			if (LISTE_DES_RC.nbErrorTry > 5) {
+				alert(ERROR_GOTDATA);
+			} else {
+				// On relance (jusqu'à 5 essais) -- utile lors de l'initialisation d'une page préremplie
+				LISTE_DES_RC.nbErrorTry += 1;
+				LISTE_DES_RC.getData();
+			}
+		}
   }
 
 };

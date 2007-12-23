@@ -27,9 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'js_close_button' => 'Fermer',
 	'js_combo_emptytext' => 'Saisissez une valeur...',
 	'js_combo_loadingtext' => 'Recherche...',
-	'js_error_gotdata' => "la liste des r&eacute;activit&eacute;s crois&eacute;es n'a pas pu &ecirc;tre calcul&eacute;e correctement",
+	'js_error_gotdata' => "la liste des réactivités croisées n'a pas pu être calculée correctement. Veuillez rafraîchir la page ou réinitialiser le pentagramme.",
 	'js_fm_name' => "Libell&eacute;",
-	'js_fm_nb' => "Nbr",
+	'js_fm_nb' => "Nb",
 	'js_fm_grid_title' => 'Familles mol&eacute;culaires',
 	'js_test_cliniques_title' => "Tests biologiques associ&eacute;s",
 	'js_load_mask' => "modification en cours...",
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'js_sugg_p' => "Produit",
 	'js_sugg_card' => "Nb",
 	'js_tests_cliniques_title' => "Suggestions biologiques",
-	'js_fm_tests' => "Tests cliniques",
+	'js_fm_tests' => "Tests clininiques",
 	
 	// M
 	'memerubrique' => 'Dans la m&ecirc;me rubrique',
