@@ -24,8 +24,6 @@ function loadSpecificFunction() {
   /* Cette fonction sera appelée *après* le téléchargement du reste
    de l'appli pour que les autres "classes" aient pu s'initialiser */
 
-  $().ready(function() {  
-		
 	<?php
   
     $str =  '';
@@ -63,6 +61,5 @@ function loadSpecificFunction() {
 			url:'spip.php?action=purge_sessions'
 		});
 
-  });
 
 }
