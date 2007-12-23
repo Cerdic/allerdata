@@ -53,10 +53,10 @@ function ccd($txt) {
 	
 		// CCD
 		if ($row['glyco'] == '-1') {
-			$nb_ccd ++;
 			$liste_fm_ccd[$row['id_item']] = $row['id_item'];
 			$liste_prod_ccd[$row['est_dans_id_item']] = $row['est_dans_id_item'];
 		}
+		$nb_ccd = sizeof($liste_prod_ccd);
 	}
 	
 	$js_liste_prod_ccd = '['.implode(',',$liste_prod_ccd).']';
