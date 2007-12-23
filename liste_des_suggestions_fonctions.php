@@ -135,10 +135,10 @@ function suggestions($txt) {
 		/* Astuce pour retrouver les discordants: 
 		  utiliser les nombres premiers */
 		
-		$rc_avec[$row['idp1']][$row['idp2']] = $row['idp2'];
 		if (!isset($liste[$row['idp1']])) {$liste[$row['idp1']] = array();$rc_avec[$row['idp1']] = array();}
 		if (!isset($liste[$row['idp1']][$row['idp2']])) 
 			$liste[$row['idp1']][$row['idp2']] = array();
+		$rc_avec[$row['idp1']][$row['idp2']] = $row['idp2'];
 		
 		if (!isset($liste[$row['idp1']][$row['idp2']])) {
 			$s1 = $s2 = 0;
