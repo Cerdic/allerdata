@@ -36,8 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'js_sugg_grid_title' => 'Croisent &eacute;galement',
 	'js_sugg_p' => "Produit",
 	'js_sugg_card' => "Nb",
-	'js_tests_cliniques_title' => "Tests biologiques associ&eacute;s",
 	'js_fm_tests' => "Tests biologiques repr&eacute;sentatifs",
+	'js_tests_cliniques_title' => "Tests cliniques",
 	
 	// M
 	'memerubrique' => 'Dans la m&ecirc;me rubrique',
