@@ -47,7 +47,7 @@ function loadSpecificFunction() {
     }
   ?>
   
-  <BOUCLE_ModeEmploiAAM(ARTICLES){id_article=10}{!par date}{0,1}>
+  <BOUCLE_ModeEmploiAAM(ARTICLES){titre_mot= ModeEmploiAAM}{!par date}{0,1}>
     jQuery('#lienAide').click(function() {
       var link = 'spip.php?page=article_popup&id_article=#ID_ARTICLE';
       main_panel.updateTab('tab1','Aide',link);
