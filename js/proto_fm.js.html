@@ -52,8 +52,8 @@ var LISTE_DES_FAMILLES = {
 				id: 'id_fm',
         columns: [
           {id:'nom',header: FM_NAME, width: 250, sortable: true, locked:false, dataIndex: 'nom', renderer: dsp_libelle},
-          {id:'info', header: '(i)', width: 30, locked:true, sortable:false, align: 'center', dataIndex: 'id_item', renderer: dsp_toInfo},
-          {header: FM_NB, width: 28, locked:true, sortable: true, align:'center', dataIndex: 'nb_item', renderer: dsp_nb},
+          {id:'info', header: ' ', width: 20, locked:true, sortable:false, align: 'center', dataIndex: 'id_item', renderer: dsp_toInfo},
+          /*{header: FM_NB, width: 28, locked:true, sortable: true, align:'center', dataIndex: 'nb_item', renderer: dsp_nb},*/
           {id:'test',header: FM_TEST, width: 320, sortable: true, locked:false, dataIndex: 'test'}
         ],
         viewConfig: {

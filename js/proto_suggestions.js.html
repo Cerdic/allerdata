@@ -50,8 +50,8 @@ var LISTE_DES_SUGGESTIONS = {
         store: ds_s,
         columns: [
           {id:'nom',header: SUGG_P, sortable: true, locked:false, dataIndex: 'nom', renderer: dsp_libelle},
-          {header: SUGG_CARD, width: 30, sortable: true, locked:true, dataIndex: 'nb', renderer: dsp_nb},
-          {header: '(i)', width: 30, sortable: false, locked:true, dataIndex: 'id_mol',renderer: dsp_toInfo}
+          {header: SUGG_CARD, width: 18, sortable: true, locked:true, dataIndex: 'nb', renderer: dsp_nb},
+          {header: ' ', width: 20, sortable: false, locked:true, dataIndex: 'id_mol',renderer: dsp_toInfo}
         ],
         autoExpandColumn:'nom',
         loadMask: {msg:LOAD_MASK},
