@@ -1,12 +1,12 @@
 <?php
 
-function action_liste_des_produits() {
+function produits_suggeres($query) {
 		
 	include_spip('inc/charsets');
 	
-	$chaine = translitteration(_request('query'));
+	$chaine = translitteration($query);
 	
-	spip_log("recherche pour "._request('query').' : '.$chaine);
+	spip_log("recherche pour ".$query.' : '.$chaine);
 	$nb_elements_retournes = 10;
 	$nb_elements_trouves = 0;
 	
@@ -19,8 +19,8 @@ function action_liste_des_produits() {
 	
 	$sql = "SELECT id_item, nom, source, famille FROM tbl_items WHERE id_type_item IN (5,3) ";
 	if ($produits_deja_choisis)	$sql .="AND id_item NOT IN(".$produits_deja_choisis.")";
-	$sql .= "	AND ( nom like '".addslashes(_request('query'))."%'
-		OR source like '".addslashes(_request('query'))."%')
+	$sql .= "	AND ( nom like '".addslashes($query)."%'
+		OR source like '".addslashes($query)."%')
 		ORDER BY nom";
 	$q = spip_query($sql);
 	
@@ -56,8 +56,8 @@ function action_liste_des_produits() {
 		}
 	}
 
-	if (!$nb_elements_trouves) echo('{produits:'.json_encode(array(array('id_item' => '', 'nom' => '', 'source' => _T('ad:nothing_found')))).'}');
-	else echo('{produits:'.json_encode($res).'}');
+	if (!$nb_elements_trouves) return(json_encode(array(array('id_item' => '', 'nom' => '', 'source' => _T('ad:nothing_found')))));
+	else return(json_encode($res));
 
 }
 	

@@ -279,7 +279,7 @@ var ZONES_SAISIE = {
   init: function() {
 
     var cstore = new Ext.data.JsonStore({
-      url: 'spip.php?action=liste_des_produits',
+      url: 'spip.php?page=liste_des_produits',
       root: 'produits',
       fields: ['id_item', 'nom', 'source', 'famille']
     });
