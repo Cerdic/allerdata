@@ -13,12 +13,20 @@ function action_db_creer_noms_sans_accents() {
 	spip_query("ALTER TABLE  `tbl_items`  ADD `source_sans_accent` VARCHAR( 100 ) NOT NULL AFTER  `source` ;");
 	
 	$q = spip_query('select nom, id_item from tbl_items');
-	echo spip_num_rows($q).' LIGNES';
+	echo spip_num_rows($q).' LIGNES <ul>';
 	while($r = spip_fetch_array($q))	{
 		$chaine = translitteration($r['nom']);
+		$chaine = str_replace('(s)','', $chaine);
+		$chaine = str_replace('(toutes especes)','', $chaine);
+		$chaine = str_replace("d'",'', $chaine);
+		$chaine = str_replace('(','', $chaine);
+		$chaine = str_replace(')','', $chaine);
+		
 		spip_query("update tbl_items set nom_sans_accent = '".addslashes($chaine)."' where id_item = ".$r['id_item']);	
-		echo "update tbl_items set nom_sans_accent = '".addslashes($chaine)."' where id_item = ".$r['id_item'].";\n";	
-	}	
+		echo "<li>".addslashes($chaine)." (".$r['id_item'].")</li>";	
+	}
+	
+	echo '</ul>';
 	
 	// Mise à jour pour le calcul des produits suggérés dans une combo
 	spip_query("UPDATE `tbl_items` a, tbl_items b, tbl_est_dans ab
