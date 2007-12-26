@@ -50,6 +50,8 @@ function action_db_creer_noms_sans_accents() {
 	// Optimisation pour le calcul des RC
 	spip_query("ALTER TABLE  `tbl_reactions_croisees` ADD INDEX (  `id_produit1` )");
 	spip_query("ALTER TABLE  `tbl_reactions_croisees` ADD INDEX (  `id_produit2` )");
+	spip_query("ALTER TABLE  `tbl_est_dans` ADD INDEX (  `id_item` )");
+	spip_query("ALTER TABLE  `tbl_est_dans` ADD INDEX (  `est_dans_id_item` )");
 	
 	echo 'FINI !!';
 }	
