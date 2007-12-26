@@ -21,7 +21,7 @@ function ccd($txt) {
 	if (is_numeric($_REQUEST['p4'])) $tableau_produits[] = $_REQUEST['p4'];
 	if (is_numeric($_REQUEST['p5'])) $tableau_produits[] = $_REQUEST['p5'];
 	
-	if (!sizeof($tableau_produits)) return '[]';
+	if (!sizeof($tableau_produits)) return '';
 	
 	$produits = implode(",", $tableau_produits);
 	

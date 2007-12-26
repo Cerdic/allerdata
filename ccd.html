@@ -1,8 +1,8 @@
 #CACHE{0}
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
-<a id="infos_ccd" class="info" href="javascript:void(0)" onclick="dsp_popup();return false;"></a>
+[<a id="infos_ccd" class="info" href="javascript:void(0)" onclick="dsp_popup();return false;"></a>
 <div id="bl_ccd">
-	[(#ENV|ccd)]
+	(#ENV|ccd)
 </div>
 <script>
 var dsp_popup = function() {
@@ -12,3 +12,4 @@ var dsp_popup = function() {
   dialog_avec_tab.show(Ext.get('infos_ccd'));
 }
 </script>
+]

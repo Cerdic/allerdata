@@ -14,6 +14,7 @@ function familles_moleculaires($txt) {
 	
 	$tt = '';
 	
+	/* Note : le test clinique est stocké dans le champ "descriptif" de la FM */
 	$query = "SELECT DISTINCT 
 			tbl_items_1.id_item, 
 			tbl_items_1.nom, 
@@ -67,7 +68,6 @@ function familles_moleculaires($txt) {
 		ksort($pos);
 		foreach ($pos as $index => $ligne) {
 
-			// test clinique bidon 
 			$final[] = array(
 				'nom' => $ligne['nom'].'==>['.implode(',',$ligne['est_dans']).']', 
 				'nb_item' => $ligne['card'], 
