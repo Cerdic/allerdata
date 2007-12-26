@@ -19,13 +19,13 @@ function familles_moleculaires($txt) {
 			tbl_items_1.nom, 
 			tbl_est_dans.est_dans_id_item, 
 			tbl_items.nom as nom2, 
-			tbl_est_dans_1.est_dans_id_item as id_dans_item2
+			tbl_est_dans_1.est_dans_id_item as id_dans_item2,
+			tbl_items_1.representatif
 		FROM (((tbl_items 
 			INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
 			INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items.id_item = tbl_est_dans_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item) 
-			INNER JOIN tbl_types_items ON tbl_items_1.id_type_item = tbl_types_items.id_type_item
-		WHERE (((tbl_est_dans.est_dans_id_item) In ($produits)) AND ((tbl_types_items.id_type_item)=6))
+		WHERE (((tbl_est_dans.est_dans_id_item) In ($produits)) AND ((tbl_items_1.id_type_item)=6))
 		ORDER BY tbl_items_1.nom, tbl_est_dans.est_dans_id_item DESC;"; 
 			
 	$res = spip_query($query);
@@ -49,6 +49,7 @@ function familles_moleculaires($txt) {
 		if (!in_array($prod, $temp[$id_item]['est_dans'])) {
 			$temp[$id_item]['est_dans'][] = $prod;		
 			$temp[$id_item]['card'] +=1;
+			$temp[$id_item]['representatif'] = $row['representatif'];
 		}
 	}
 	
@@ -67,14 +68,10 @@ function familles_moleculaires($txt) {
 		foreach ($pos as $index => $ligne) {
 
 			// test clinique bidon 
-			$test_clinique = $tt[rand(0,sizeof($tt))];
-			$p = $tt[rand(0,sizeof($tt))];
-			if ($p != $test_clinique) $test_clinique .= ' et '.$p;
-					
 			$final[] = array(
 				'nom' => $ligne['nom'].'==>['.implode(',',$ligne['est_dans']).']', 
 				'nb_item' => $ligne['card'], 
-				'test' => $test_clinique,
+				'test' => $ligne['representatif'],
 				'id_item' => $ligne['id_item'],
 				'est_dans' => implode(',',$ligne['est_dans']) 
 			);
