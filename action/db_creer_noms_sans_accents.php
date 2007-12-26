@@ -19,6 +19,7 @@ function action_db_creer_noms_sans_accents() {
 		$chaine = str_replace('(s)','', $chaine);
 		$chaine = str_replace('(toutes especes)','', $chaine);
 		$chaine = str_replace('toutes especes','', $chaine);
+		$chaine = str_replace('toutes varietes','', $chaine);
 		$chaine = str_replace("d'",'', $chaine);
 		$chaine = str_replace('(','', $chaine);
 		$chaine = str_replace(')','', $chaine);
