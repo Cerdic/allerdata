@@ -65,7 +65,7 @@ function action_db_creer_noms_sans_accents() {
 	)
 	) ENGINE = MYISAM COMMENT = 'extraits de nom, nom_sans_accent, source, source_sans_accent';");
 	
-	$stopwords = array("(",")",",","toutes","espèces","spp.",'/');
+	$stopwords = array("(",")",",","toutes","espèces","spp.",'/','aux','des');
 	// On alimente la table d'indexation
 	$q = spip_query("select id_item, nom, nom_sans_accent, source, source_sans_accent from tbl_items where id_type_item IN (3,5)");
 	echo "INDEXATION : <br />";
