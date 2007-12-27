@@ -4,6 +4,8 @@ function produits_suggeres($query) {
 		
 	include_spip('inc/charsets');
 	
+	$stopwords = array("(",")",",","toutes","espèces","spp.",'/');
+	$query = str_replace($stopwords,'',trim(ereg_replace("[[:space:]]+",' ',$query)));
 	$query = strtolower($query);
 	$chaine = translitteration($query);
 	
@@ -95,6 +97,15 @@ function produits_suggeres($query) {
 			if (!$row['nom']) $row['nom'] = $row['source'];
 			$res[] = $row; 
 		}
+	}
+
+	//Mise en avant
+	foreach ($res as $key => $row) {
+		$row['nom'] = eregi_replace($query,'<b>'.$query.'</b>',$row['nom']);
+		$row['nom'] = eregi_replace($chaine,'<b>'.$chaine.'</b>',$row['nom']);
+		$row['source'] = eregi_replace($query,'<b>'.$query.'</b>',$row['source']);
+		$row['source'] = eregi_replace($chaine,'<b>'.$chaine.'</b>',$row['source']);
+		$res[$key] = $row;
 	}
 
 	if (!$nb_elements_trouves) return(json_encode(array(array('id_item' => '', 'nom' => '', 'source' => _T('ad:nothing_found')))));
