@@ -208,3 +208,5 @@ body .x-dlg-mask {
 .x-panel-body table.liste_rc {width:90%;margin:0 auto}
 .x-panel-body table.liste_rc td span {display:block; width:50px;}
 .x-panel-body table.caption {margin-top:2em;}
+
+.x-form-field {text-align:left!important;}
