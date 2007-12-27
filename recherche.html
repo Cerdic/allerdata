@@ -28,7 +28,7 @@
 				#ANCRE_PAGINATION
 				<ul class="listeArticles">
 					<BOUCLE_ListeItems(tbl_items){nom==#RECHERCHE}{pagination 5}>
-					<li class="listeFormation"><a href="#URL_PAGE{item,id_item=#ID_ITEM}" class="formation">#NOM</a></li>
+					<li class="listeFormation"><a href="#URL_PAGE{items_detail,id_item=#ID_ITEM}" class="formation">#NOM</a></li>
 					</BOUCLE_ListeItems>
 				</ul>
 				[<p class="pagination">(#PAGINATION)</p>]
