@@ -135,13 +135,14 @@ function suggestions($txt) {
 	
 	/* On récupère le nom pour construire l'assemblage final */
 	$res = spip_query("
-		SELECT id_item, nom from tbl_items
+		SELECT id_item, nom, source from tbl_items
 		where id_item in (".implode(',',$t_id_suggestion_trouvee).")
 		ORDER BY nom ASC
 	");
 	
 	while ($row = spip_fetch_array($res)){
 		$nb = sizeof($reactif_avec[$row['id_item']]);
+		if (!$row['nom']) $row['nom'] = $row['source'];
 		$t_suggestions[] = array(
 				'nb' => $nb, 
 				'nom' => $row['nom'].'==>['.implode(',',$reactif_avec[$row['id_item']]).']', 
