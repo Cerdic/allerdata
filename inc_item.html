@@ -1,0 +1,40 @@
+<BOUCLE_Items(tbl_items){id_item}>
+				<div id="blocTitArticle">
+					<h1 class="titArticle"><:name:>: [(#NOM|sinon{NA})]</h1>
+				</div>
+				[(#ID_TYPE_ITEM|=={3}|?{' '})
+					[
+					<div class="blocContenuArticle">
+					<h2>Ce groupe générique contient les produits</h2>
+					<ul>(#ID_ITEM|listetype5)</ul>
+					</div>
+					]
+				]
+				[(#ID_TYPE_ITEM|=={5}|?{' '})
+					[
+					<div class="blocContenuArticle">
+					<h2>Source(s)</h2>
+					<ul>(#ID_ITEM|source)</ul>
+					</div>
+					]
+					[
+					<div class="blocContenuArticle">
+					<h2>Allergènes contenus dans ce produit</h2>
+					<table summary="Les allergènes de [(#NOM|sinon{NA})]" class="spip">
+						<thead><tr>
+						<th>Nom</th>
+						<th>Fonction</th>
+						<th>Masse</th>
+						<th>IUIS</th>
+						<th>Glyco</th>
+						<th>Niveau</th>
+						</tr>
+						</thead>
+						<tbody>
+						(#ID_ITEM|allergenes)
+						</tbody>
+						</table>
+						</div>
+					]
+				]
+</BOUCLE_Items>

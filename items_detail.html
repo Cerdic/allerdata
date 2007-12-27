@@ -8,42 +8,7 @@
 			
 			<div id="main">
 <?php if ($auteur_session) { ?>
-<h1>Nom: [(#NOM|sinon{NA})]</h1>
-	<p>Autre Nom: [(#AUTRE_NOM|sinon{NA})]</p>
-	<p>Nom complet: [(#NOM_COMPLET|sinon{NA})]</p>
-	<p>Chaine alpha: [(#CHAINE_ALPHA|sinon{NA})]</p>
-	<p>Interrogeable: [(#INTERROGEABLE|sinon{NA})]</p>
-	<p>Testable: [(#TESTABLE|sinon{NA})]</p>
-	<p>Code test: [(#CODE_TEST|sinon{NA})]</p>
-	<p>IUIS: [(#IUIS|sinon{NA})]</p>
-	<p>Masse: [(#MASSE|sinon{NA})]</p>
-	<p>Glyco: [(#GLYCO|sinon{NA})]</p>
-	<p>Allergenicité: [(#ALLERGENICITE|sinon{NA})]</p>
-<B_ItemsEstDans>
-<h1>Est dans</h1>
-<ul>
-<BOUCLE_ItemsEstDans(tbl_est_dans){id_item}>
-	<li><a href="#URL_PAGE{items_detail,id_item=#EST_DANS_ID_ITEM}"><BOUCLE_ItemLie(tbl_items){id_item=#EST_DANS_ID_ITEM}>#NOM</BOUCLE_ItemLie></a></li>
-</BOUCLE_ItemsEstDans>
-</ul>
-</B_ItemsEstDans>
-
-<B_ItemsCroise>
-<h1>Réactions croisées directes</h1>
-<ul>
-<BOUCLE_ItemsCroise(tbl_reactions_croisees){id_produit1=#ENV{id_item}}>
-	[(#ID_PRODUIT2|unique|?{' '})<li><a href="#URL_PAGE{items_detail,id_item=#ID_PRODUIT2}"><INCLURE{fond=items_detail_croise}{id_item=#ID_PRODUIT2}></a></li>]
-</BOUCLE_ItemsCroise>
-</ul>
-</B_ItemsCroise>
-<B_ItemsCroiseInverse>
-<h1>Réactions croisées directes dans l'autre sens</h1>
-<ul>
-<BOUCLE_ItemsCroiseInverse(tbl_reactions_croisees){id_produit2=#ENV{id_item}}>
-	[(#ID_PRODUIT1|unique|?{' '})<li><a href="#URL_PAGE{items_detail,id_item=#ID_PRODUIT1}"><INCLURE{fond=items_detail_croise}{id_item=#ID_PRODUIT1}></a></li>]
-</BOUCLE_ItemsCroiseInverse>
-</ul>
-</B_ItemsCroiseInverse>
+[(#INCLURE{fond=inc_item}{id_item})]
 <?php } else { ?>
 <INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
 <?php } ?>
