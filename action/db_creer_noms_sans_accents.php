@@ -55,10 +55,11 @@ function action_db_creer_noms_sans_accents() {
 	spip_query("ALTER TABLE  `tbl_est_dans` ADD INDEX (  `id_item` )");
 	spip_query("ALTER TABLE  `tbl_est_dans` ADD INDEX (  `est_dans_id_item` )");
 	
+	spip_query("DROP TABLE IF EXISTS tbl_index_items");
 	spip_query("CREATE TABLE `tbl_index_items` (
 	`id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 	`id_item` INT NOT NULL ,
-	`keyword` VARCHAR( 255 ) CHARACTER NOT NULL ,
+	`keyword` VARCHAR( 255 ) NOT NULL ,
 	INDEX ( `id_item` , `keyword` ) ,
 	FULLTEXT (
 	`keyword` 
