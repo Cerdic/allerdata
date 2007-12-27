@@ -124,13 +124,13 @@ Ext.extend(Ext.ux.SelectBox, Ext.form.ComboBox, {
 		}, this);
 
 		/*this.trigger.un('click', this.onTriggerClick, this);*/ 
-		/*this.el.on('mousedown', function(e, target, options) {
+		this.el.on('mousedown', function(e, target, options) {
 			if ($(target).val()) {
 				$(target).val('');
 				$(target).focus();
 				$(target).removeClass('x-form-empty-field');
 			}
-		}, this);*/
+		}, this);
 
 	},
 
