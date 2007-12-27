@@ -4,24 +4,25 @@ function produits_suggeres($query) {
 		
 	include_spip('inc/charsets');
 	
+	$query = strtolower($query);
 	$chaine = translitteration($query);
 	
 	spip_log("recherche pour ".$query.' : '.$chaine);
-	$nb_elements_retournes = 10;
+	$nb_elements_retournes = 20;
 	$nb_elements_trouves = 0;
-	
-	$chaine = strtolower($chaine);
 	
 	session_start();
 	if (is_array($_SESSION['produits_choisis']))
 		$produits_deja_choisis = implode(",", $_SESSION['produits_choisis']);
 	session_write_close();
 	
-	$sql = "SELECT id_item, nom, source, famille FROM tbl_items WHERE id_type_item IN (5,3) ";
-	if ($produits_deja_choisis)	$sql .="AND id_item NOT IN(".$produits_deja_choisis.")";
-	$sql .= "	AND ( nom like '".addslashes($query)."%'
-		OR source like '".addslashes($query)."%')
-		ORDER BY nom";
+	$sql = "SELECT tbl_items.id_item, nom, source, famille, CONCAT(IF(nom IS NULL, '', CONCAT(nom,'zzz')),source) AS chaine 
+			FROM tbl_items, tbl_index_items 
+			WHERE id_type_item IN (5,3) 
+			AND tbl_items.id_item = tbl_index_items.id_item";
+	if ($produits_deja_choisis)	$sql .=" AND tbl_item.id_item NOT IN(".$produits_deja_choisis.")";
+	$sql .= "	AND keyword like '".addslashes($query)."%'
+		ORDER BY chaine";
 	$q = spip_query($sql);
 	
 	$nb_elements_trouves = spip_num_rows($q);
@@ -37,14 +38,54 @@ function produits_suggeres($query) {
 		$liste_noire[] = $row['id_item'];
 	}
 	
+	// On complète par une recherche sans accent
+	$sql = "SELECT tbl_items.id_item, nom, source, famille, CONCAT(IF(nom IS NULL, '', CONCAT(nom,'zzz')),source) AS chaine 
+			FROM tbl_items, tbl_index_items 
+			WHERE id_type_item IN (5,3) 
+			AND tbl_items.id_item = tbl_index_items.id_item";
+	if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
+	$sql .= "	AND keyword like '".addslashes($chaine)."%'
+		ORDER BY chaine";
+	$q = spip_query($sql);
+
+	$nb_elements_trouves += spip_num_rows($q);
+
+	while ($row = spip_fetch_array($q)) {
+		if (!$row['nom']) $row['nom'] = $row['source'];
+		$res[] = $row; 
+		$liste_noire[] = $row['id_item'];
+	}
+
 	// On complète par une recherche plus large (20 maxi, question perfs client)
 	if ($nb_elements_trouves<20) {
-		$sql = "SELECT id_item, nom, source, famille FROM tbl_items 
-					WHERE id_type_item IN (5,3) ";
-		if ($liste_noire)	$sql .="AND id_item NOT IN(".implode(',',$liste_noire).")";
-		$sql .= "	AND ( nom_sans_accent like '%".addslashes($chaine)."%'
-			OR source_sans_accent like '%".addslashes($chaine)."%')
-			ORDER BY nom
+		$sql = "SELECT tbl_items.id_item, nom, source, famille, CONCAT(IF(nom IS NULL, '', CONCAT(nom,'zzz')),source) AS chaine 
+				FROM tbl_items, tbl_index_items 
+				WHERE id_type_item IN (5,3) 
+				AND tbl_items.id_item = tbl_index_items.id_item";
+		if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
+		$sql .= "	AND keyword like '%".addslashes($query)."%'
+			ORDER BY chaine
+			LIMIT 0,".(20-$nb_elements_trouves);
+		$q = spip_query($sql);
+
+		$nb_elements_trouves += spip_num_rows($q);
+
+		while ($row = spip_fetch_array($q)) {
+			if (!$row['nom']) $row['nom'] = $row['source'];
+			$res[] = $row; 
+			$liste_noire[] = $row['id_item'];
+		}
+	}
+
+	// On complète par une recherche plus large (20 maxi, question perfs client)
+	if ($nb_elements_trouves<20) {
+		$sql = "SELECT tbl_items.id_item, nom, source, famille, CONCAT(IF(nom IS NULL, '', CONCAT(nom,'zzz')),source) AS chaine 
+				FROM tbl_items, tbl_index_items 
+				WHERE id_type_item IN (5,3) 
+				AND tbl_items.id_item = tbl_index_items.id_item";
+		if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
+		$sql .= "	AND keyword like '%".addslashes($chaine)."%'
+			ORDER BY chaine
 			LIMIT 0,".(20-$nb_elements_trouves);
 		$q = spip_query($sql);
 
