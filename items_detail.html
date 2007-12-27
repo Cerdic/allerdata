@@ -1,22 +1,14 @@
-#CACHE{7200}
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html dir="#LANG_DIR" lang="#LANG">
-<head>
-<title>[(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
-<INCLURE{fond=inc-head}>
-</head>
-
-<body class="page_sommaire">
-<div id="page">
-<INCLURE{fond=inc-entete}>
-
 <BOUCLE_Items(tbl_items){id_item}>
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{items}">Liste des Items</a>[ &gt; (#NOM|couper{80})]</div>
-	
-<h1>Item</h1>
-	<h2>Nom: [(#NOM|sinon{NA})]</h2>
+[(#INCLURE{fond=inc_header}{titrepage=[(#NOM|sinon{NA})]})]
+		<BOUCLE_RubriqueAriane(ARTICLES){id_article=#ENV{id_multirubrique,#ID_ARTICLE}}{tout_voir}>
+		<p id="ariane"><a href="./">Accueil</a> /<BOUCLE_FilAriane(HIERARCHIE){id_article}> <a href="#URL_RUBRIQUE">#TITRE</a> /</BOUCLE_FilAriane> <strong>#_ArticlePrincipal:TITRE</strong></p>
+		</BOUCLE_RubriqueAriane>
+		
+		<div id="contenu" class="clearfix">
+			
+			<div id="main">
+<?php if ($auteur_session) { ?>
+<h1>Nom: [(#NOM|sinon{NA})]</h1>
 	<p>Autre Nom: [(#AUTRE_NOM|sinon{NA})]</p>
 	<p>Nom complet: [(#NOM_COMPLET|sinon{NA})]</p>
 	<p>Chaine alpha: [(#CHAINE_ALPHA|sinon{NA})]</p>
@@ -27,7 +19,6 @@
 	<p>Masse: [(#MASSE|sinon{NA})]</p>
 	<p>Glyco: [(#GLYCO|sinon{NA})]</p>
 	<p>Allergenicité: [(#ALLERGENICITE|sinon{NA})]</p>
-</BOUCLE_Items>
 <B_ItemsEstDans>
 <h1>Est dans</h1>
 <ul>
@@ -53,13 +44,15 @@
 </BOUCLE_ItemsCroiseInverse>
 </ul>
 </B_ItemsCroiseInverse>
-
-
-
-<p><a href="#URL_PAGE{items}">Retour à la liste</a></p>
-
-<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
-
-</div><!-- fin page -->
-</body>
-</html>
+<?php } else { ?>
+<INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
+<?php } ?>
+			</div>
+			
+			<div id="sidebar">
+[(#INCLURE{fond=inc_menu})]
+		</div>
+	</div>
+</div>
+#INCLURE{fond=inc_footer}
+</BOUCLE_Items>
