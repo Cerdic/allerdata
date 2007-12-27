@@ -14,6 +14,7 @@ function action_db_creer_noms_sans_accents() {
 	
 	$q = spip_query('select nom, id_item from tbl_items');
 	echo spip_num_rows($q).' LIGNES <ul>';
+	ob_flush(); flush(); usleep(50);
 	while($r = spip_fetch_array($q))	{
 		$chaine = translitteration($r['nom']);
 		$chaine = str_replace('(s)','', $chaine);
@@ -21,11 +22,12 @@ function action_db_creer_noms_sans_accents() {
 		$chaine = str_replace('toutes especes','', $chaine);
 		$chaine = str_replace('toutes varietes','', $chaine);
 		$chaine = str_replace("d'",'', $chaine);
-		$chaine = str_replace('(','', $chaine);
-		$chaine = str_replace(')','', $chaine);
+		$chaine = str_replace('(',' ', $chaine);
+		$chaine = str_replace(')',' ', $chaine);
 		
 		spip_query("update tbl_items set nom_sans_accent = '".addslashes($chaine)."' where id_item = ".$r['id_item']);	
 		echo "<li>".addslashes($chaine)." (".$r['id_item'].")</li>";	
+		ob_flush(); flush(); usleep(500);
 	}
 	
 	echo '</ul>';
@@ -53,7 +55,43 @@ function action_db_creer_noms_sans_accents() {
 	spip_query("ALTER TABLE  `tbl_est_dans` ADD INDEX (  `id_item` )");
 	spip_query("ALTER TABLE  `tbl_est_dans` ADD INDEX (  `est_dans_id_item` )");
 	
-	echo 'FINI !!';
+	spip_query("CREATE TABLE `tbl_index_items` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	`id_item` INT NOT NULL ,
+	`keyword` VARCHAR( 255 ) CHARACTER NOT NULL ,
+	INDEX ( `id_item` , `keyword` ) ,
+	FULLTEXT (
+	`keyword` 
+	)
+	) ENGINE = MYISAM COMMENT = 'extraits de nom, nom_sans_accent, source, source_sans_accent';");
+	
+	$stopwords = array("(",")",",","toutes","espèces","spp.");
+	// On alimente la table d'indexation
+	$q = spip_query("select id_item, nom, nom_sans_accent, source, source_sans_accent from tbl_items where id_type_item IN (3,5)");
+	echo "INDEXATION : <br />";
+	$i = 0;
+	while($row = spip_fetch_array($q)) {
+		$t_insert = array();
+		$i++;
+		$ph = $row['nom'].' '.$row['nom_sans_accent'].' '.$row['source'].' '.$row['source_sans_accent'];
+		$ph = str_replace($stopwords,'',trim(ereg_replace("[[:space:]]+",' ',$ph)));
+		$t_index = explode(' ',$ph);
+		foreach ($t_index as $keyword) {
+			if (strlen($keyword)>=3) {
+				$ch = '(NULL,'.$row['id_item'].',"'.mysql_real_escape_string(strtolower($keyword)).'")';
+				if (!in_array($ch, $t_insert)) $t_insert[] = $ch;
+			}
+		}
+		if (sizeof($t_insert)) {
+			$query = "INSERT INTO `allerdata`.`tbl_index_items` (`id`, `id_item`, `keyword`)
+					VALUES ".implode(',',$t_insert).";";
+			echo('<hr>'.$query);
+			spip_query($query);
+			ob_flush(); flush(); usleep(50);
+		}
+	}
+	
+	echo ('FINI !!');
 }	
 
 ?>
