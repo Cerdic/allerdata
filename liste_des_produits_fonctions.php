@@ -17,8 +17,9 @@ function produits_suggeres($query) {
 		$produits_deja_choisis = implode(",", $_SESSION['produits_choisis']);
 	session_write_close();
 	
+	echo $produits_deja_choisis."\n";
 	$sql = "SELECT tbl_items.id_item, nom, source, famille, pos, CONCAT(IF(nom IS NULL, '', CONCAT(nom,'zzz')),source) AS chaine 
-			FROM tbl_items, tbl_index_items 
+			FROM tbl_items, tbl_index_items
 			WHERE id_type_item IN (5,3) 
 			AND tbl_items.id_item = tbl_index_items.id_item";
 	if ($produits_deja_choisis)	$sql .=" AND tbl_item.id_item NOT IN(".$produits_deja_choisis.")";
@@ -34,8 +35,10 @@ function produits_suggeres($query) {
 
 	while ($row = spip_fetch_array($q)) {
 		if (!$row['nom']) $row['nom'] = $row['source'];
-		$res[] = $row; 
-		$liste_noire[] = $row['id_item'];
+		if (!in_array($row['id_item'],$liste_noire)) {
+			$res[] = $row; 
+			$liste_noire[] = $row['id_item'];
+		}
 	}
 	
 	// On complète par une recherche sans accent
@@ -51,8 +54,10 @@ function produits_suggeres($query) {
 
 	while ($row = spip_fetch_array($q)) {
 		if (!$row['nom']) $row['nom'] = $row['source'];
-		$res[] = $row; 
-		$liste_noire[] = $row['id_item'];
+		if (!in_array($row['id_item'],$liste_noire)) {
+			$res[] = $row; 
+			$liste_noire[] = $row['id_item'];
+		}
 	}
 
 	// On complète par une recherche plus large (20 maxi, question perfs client)
@@ -70,8 +75,10 @@ function produits_suggeres($query) {
 
 		while ($row = spip_fetch_array($q)) {
 			if (!$row['nom']) $row['nom'] = $row['source'];
-			$res[] = $row; 
-			$liste_noire[] = $row['id_item'];
+			if (!in_array($row['id_item'],$liste_noire)) {
+				$res[] = $row; 
+				$liste_noire[] = $row['id_item'];
+			}
 		}
 	}
 
@@ -90,7 +97,10 @@ function produits_suggeres($query) {
 
 		while ($row = spip_fetch_array($q)) {
 			if (!$row['nom']) $row['nom'] = $row['source'];
-			$res[] = $row; 
+			if (!in_array($row['id_item'],$liste_noire)) {
+				$res[] = $row; 
+				$liste_noire[] = $row['id_item'];
+			}
 		}
 	}
 
