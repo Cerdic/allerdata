@@ -41,7 +41,7 @@
 				<h2>En savoir plus</h2>
 				<ul>
 				<BOUCLE_LienArticle(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
-				[<li><a href="#URL_ARTICLE">(#TITRE)</a></li>]
+				[<li><a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','spip.php?page=article_popup&id_article=#ID_ARTICLE'); return false;">(#TITRE)</a></li>]
 				</BOUCLE_LienArticle>
 				</ul>
 				</div>
