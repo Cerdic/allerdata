@@ -4,7 +4,7 @@ function action_parents_differents(){
 	set_time_limit(0);
 	
 	$query_liste_produits = "SELECT tbl_reactions_croisees.id_reaction_croisee, tbl_reactions_croisees.id_produit1, tbl_reactions_croisees.id_produit2 FROM tbl_reactions_croisees ORDER By tbl_reactions_croisees.id_produit1";
-	$liste_produits = spip_query($query_liste_produits, $allerdata) or die(mysql_error());
+	$liste_produits = spip_query($query_liste_produits);
 	$row_liste_produits = mysql_fetch_assoc($liste_produits);
 	$totalRows_liste_produits = mysql_num_rows($liste_produits);
 
@@ -21,7 +21,7 @@ function action_parents_differents(){
 		$query_liste_parents_produit1 = "SELECT tbl_est_dans.est_dans_id_item FROM tbl_items, tbl_types_items, tbl_est_dans
 								WHERE tbl_est_dans.id_item = '$id_produit1' AND tbl_items.id_item = tbl_est_dans.est_dans_id_item
 								AND tbl_items.id_type_item = tbl_types_items.id_type_item AND tbl_types_items.pentacle = '1'";
-		$liste_parents_produit1 = spip_query($query_liste_parents_produit1, $allerdata) or die(mysql_error());
+		$liste_parents_produit1 = spip_query($query_liste_parents_produit1);
 		$row_liste_parents_produit1 = mysql_fetch_assoc($liste_parents_produit1);
 		$totalRows_liste_parents_produit1 = mysql_num_rows($liste_parents_produit1);
 		
@@ -37,7 +37,7 @@ function action_parents_differents(){
 										WHERE tbl_est_dans.id_item = '$id_produit2' AND tbl_items.id_item = tbl_est_dans.est_dans_id_item
 										AND tbl_items.id_type_item = tbl_types_items.id_type_item AND tbl_types_items.pentacle = '1'
 										AND tbl_items.id_item = '$id_parent_produit1'";
-				$liste_parents_produit2 = spip_query($query_liste_parents_produit2, $allerdata) or die(mysql_error());
+				$liste_parents_produit2 = spip_query($query_liste_parents_produit2);
 				$row_liste_parents_produit2 = mysql_fetch_assoc($liste_parents_produit2);
 				$totalRows_liste_parents_produit2 = mysql_num_rows($liste_parents_produit2);
 				
@@ -56,14 +56,14 @@ function action_parents_differents(){
 			
 			$query_identique = "UPDATE tbl_reactions_croisees set produits_differents ='0'
 								WHERE id_reaction_croisee = '$id_reaction_croise'";
-			spip_query($query_identique, $allerdata) or die(mysql_error());			
+			spip_query($query_identique);			
 		}
 		else {
 			//on met à jour la bdd pour dire que la reaction ne concerne pas des parents commun
 			
 			$query_identique = "UPDATE tbl_reactions_croisees set produits_differents ='1'
 								WHERE id_reaction_croisee = '$id_reaction_croise'";
-			spip_query($query_identique, $allerdata) or die(mysql_error());					
+			spip_query($query_identique);					
 		}
 
 	} while ($row_liste_produits = mysql_fetch_assoc($liste_produits));
