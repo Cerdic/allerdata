@@ -60,13 +60,14 @@ function action_db_creer_noms_sans_accents() {
 	`id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 	`id_item` INT NOT NULL ,
 	`keyword` VARCHAR( 255 ) NOT NULL ,
+	`pos` TINYINT NOT NULL ,
 	INDEX ( `id_item` , `keyword` ) ,
 	FULLTEXT (
 	`keyword` 
 	)
 	) ENGINE = MYISAM COMMENT = 'extraits de nom, nom_sans_accent, source, source_sans_accent';");
 	
-	$stopwords = array("(",")",",","toutes","espèces","spp.",'/','aux','des');
+	$stopwords = array("(",")",",","toutes","espèces","spp.",'/','aux','des',"'");
 	// On alimente la table d'indexation
 	$q = spip_query("select id_item, nom, nom_sans_accent, source, source_sans_accent from tbl_items where id_type_item IN (3,5)");
 	echo "INDEXATION : <br />";
@@ -75,16 +76,19 @@ function action_db_creer_noms_sans_accents() {
 		$t_insert = array();
 		$i++;
 		$ph = $row['nom'].' '.$row['nom_sans_accent'].' '.$row['source'].' '.$row['source_sans_accent'];
-		$ph = str_replace($stopwords,'',trim(ereg_replace("[[:space:]]+",' ',$ph)));
+		$ph = trim(ereg_replace("[[:space:]]+",' ',str_replace($stopwords,'',$ph)));
 		$t_index = explode(' ',$ph);
-		foreach ($t_index as $keyword) {
-			if (strlen($keyword)>=3) {
-				$ch = '(NULL,'.$row['id_item'].',"'.mysql_real_escape_string(strtolower($keyword)).'")';
+		$found_items = array();
+		foreach ($t_index as $pos => $keyword) {
+			$keyword = mysql_real_escape_string(strtolower($keyword));
+			if (strlen($keyword)>=3 && (!in_array($keyword, $found_items))) {
+				$ch = '(NULL,'.$row['id_item'].',"'.$keyword.'","'.$pos.'")';
 				if (!in_array($ch, $t_insert)) $t_insert[] = $ch;
+				$found_items[] = $keyword;
 			}
 		}
 		if (sizeof($t_insert)) {
-			$query = "INSERT INTO `allerdata`.`tbl_index_items` (`id`, `id_item`, `keyword`)
+			$query = "INSERT INTO `allerdata`.`tbl_index_items` (`id`, `id_item`, `keyword`, `pos`)
 					VALUES ".implode(',',$t_insert).";";
 			echo('<hr>'.$query);
 			spip_query($query);
