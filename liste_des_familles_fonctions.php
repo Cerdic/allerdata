@@ -78,6 +78,8 @@ function familles_moleculaires($txt) {
 		}
 	}
 
+	if (_request('debug')) {var_dump($final);die();}
+	
 	return json_encode($final);
 	
 

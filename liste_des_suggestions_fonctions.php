@@ -160,6 +160,8 @@ function suggestions($txt) {
 
 	array_multisort($nb, SORT_DESC, $item, SORT_ASC, $t_suggestions);
 	
+	if (_request('debug')) {var_dump($t_suggestions);die();}
+	
 	return json_encode($t_suggestions);
 	
 

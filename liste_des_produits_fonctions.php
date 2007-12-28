@@ -17,7 +17,6 @@ function produits_suggeres($query) {
 		$produits_deja_choisis = implode(",", $_SESSION['produits_choisis']);
 	session_write_close();
 	
-	echo $produits_deja_choisis."\n";
 	$sql = "SELECT tbl_items.id_item, nom, source, famille, pos, CONCAT(IF(nom IS NULL, '', CONCAT(nom,'zzz')),source) AS chaine 
 			FROM tbl_items, tbl_index_items
 			WHERE id_type_item IN (5,3) 
@@ -125,6 +124,8 @@ function produits_suggeres($query) {
 
 	array_multisort($pos, SORT_ASC, $items, SORT_ASC, $final);
 
+	if (_request('debug')) {var_dump($final);die();}
+	
 	if (!$nb_elements_trouves) return(json_encode(array(array('id_item' => '', 'nom' => '', 'nom_mis_en_forme' => '', 'source' => _T('ad:nothing_found')))));
 	else return(json_encode($final));
 
