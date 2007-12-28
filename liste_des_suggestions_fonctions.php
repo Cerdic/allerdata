@@ -45,7 +45,7 @@ function suggestions($txt) {
 		AND tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2
 		AND tbl_est_dans.id_item = tbl_items.id_item
 		AND tbl_est_dans_1.id_item = tbl_items_1.id_item
-		AND (tbl_reactions_croisees.fleche_sens1 = 1 OR tbl_reactions_croisees.fleche_sens1 = 1)
+		AND (tbl_reactions_croisees.fleche_sens1 = 1 OR tbl_reactions_croisees.fleche_sens2 = 1)
 		AND 
 			(
 				( tbl_items.id_item IN ($produits ) 
