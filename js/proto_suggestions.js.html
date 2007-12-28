@@ -74,9 +74,34 @@ var LISTE_DES_SUGGESTIONS = {
       p4 = jQuery('#p4').val(), 
       p5 = jQuery('#p5').val(),
       ds_s = this.grid.getStore();
-    ds_s.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5}});
+    ds_s.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5},callback:dragdrop});
   }
 };
+function dragdrop(){
+  	jQuery('.cell_mol').not('.info_mol').addClass('drag').draggable({
+  			helper: 'clone',
+  			appendTo: 'body',
+  			effect: 'fade'
+  	});
+	jQuery('#div-s1,#div-s2,#div-s1,#div-s3,#div-s4,#div-s5').droppable({
+			accept: '.cell_mol',
+			activeClass: 'activedrop',
+			hoverClass: 'hoverdrop',
+			tolerance: 'touch',
+			drop: function(ev, ui) {
+				var q=jQuery(ui.draggable.element).text();
+				var s=jQuery(this).attr('id');
+				jQuery.get('spip.php',{page:'id_du_produit',query:q},function(data){
+					lId=s.replace('div-s','prod_');
+					jQuery('#'+lId).val(q);
+					lId=s.replace('div-s','p');
+					lVal=parseInt(data);
+					jQuery('#'+lId).val(lVal);
+					reload_penta();
+				});
+			}
+		});
+}
 
 Ext.onReady(LISTE_DES_SUGGESTIONS.init, LISTE_DES_SUGGESTIONS);
 
