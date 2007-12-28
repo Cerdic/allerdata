@@ -135,9 +135,8 @@ function suggestions($txt) {
 	
 	/* On récupère le nom pour construire l'assemblage final */
 	$res = spip_query("
-		SELECT id_item, nom, source , IF(nom IS NULL, LOWER(source), LOWER(nom)) as item from tbl_items
+		SELECT id_item, nom, source from tbl_items
 		where id_item in (".implode(',',$t_id_suggestion_trouvee).")
-		ORDER BY item ASC
 	");
 	
 	while ($row = spip_fetch_array($res)){
@@ -146,8 +145,7 @@ function suggestions($txt) {
 		$t_suggestions[] = array(
 				'nb' => $nb, 
 				'nom' => $row['nom'].'==>['.implode(',',$reactif_avec[$row['id_item']]).']', 
-				'id_mol' => $row['id_item'],
-        'item' => $row['item']);
+				'id_mol' => $row['id_item']);
 	}
 	
 	/* un tri sur le nombre puis on met tout à plat */
@@ -157,10 +155,10 @@ function suggestions($txt) {
 	    $nb[$key]  = $row['nb'];
 	    $nom[$key] = $row['nom'];
 	    $id_mol[$key] = $row['id_mol'];
-	    $item[$key] = $row['item'];
 	}
+  $item = array_map('strtolower', $nom);
 
-	array_multisort($nb, SORT_DESC, $item, SORT_ASC, $nom, SORT_ASC, $id_mol, SORT_ASC, $t_suggestions);
+	array_multisort($nb, SORT_DESC, $item, SORT_ASC, $t_suggestions);
 	
 	return json_encode($t_suggestions);
 	
