@@ -39,6 +39,7 @@ function action_db_creer_noms_sans_accents() {
 	a.id_item = ab.id_item
 	and ab.est_dans_id_item = b.id_item 
 	and b.id_type_item = 4
+	and NOT (b.nom LIKE '%spp.' OR b.nom LIKE '%toutes%')
 	and a.id_type_item IN (3,5)");
 	
 	spip_query("UPDATE `tbl_items` a, tbl_items b, tbl_est_dans ab
