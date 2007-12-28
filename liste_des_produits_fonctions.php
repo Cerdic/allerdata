@@ -22,7 +22,7 @@ function produits_suggeres($query) {
 			FROM tbl_items, tbl_index_items
 			WHERE id_type_item IN (5,3) 
 			AND tbl_items.id_item = tbl_index_items.id_item";
-	if ($produits_deja_choisis)	$sql .=" AND tbl_item.id_item NOT IN(".$produits_deja_choisis.")";
+	if ($produits_deja_choisis)	$sql .=" AND tbl_items.id_item NOT IN(".$produits_deja_choisis.")";
 	$sql .= "	AND keyword like '".addslashes($query)."%'";
 	$q = spip_query($sql);
 	
