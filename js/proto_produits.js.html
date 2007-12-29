@@ -270,11 +270,7 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.ux.SelectBox, {
 
 var ZONES_SAISIE = {
 
-  combo_1: null,
-  combo_2: null,
-  combo_3: null,
-  combo_4: null,
-  combo_5: null,
+  combo: [],
 
   init: function() {
 
@@ -294,7 +290,7 @@ var ZONES_SAISIE = {
         '</div></tpl>'
     );
   
-    this.combo_1 = new Ext.ux.TwinComboBox({
+    this.combo[1] = new Ext.ux.TwinComboBox({
       // d'où viennent les données
       store: cstore,
       tpl: resultTpl,
@@ -303,7 +299,7 @@ var ZONES_SAISIE = {
       hiddenName: 'p1'
     });
 
-    this.combo_1.on('clear', 
+    this.combo[1].on('clear', 
       function() {
         $('#info-s1').hide();
         $('.concerne-p1').removeClass('rc_toujours');
@@ -314,20 +310,20 @@ var ZONES_SAISIE = {
       }
     );
 
-    this.combo_1.on('blur', 
+    this.combo[1].on('blur', 
       function() {
         this.doForce()
       }
     );
 
-    this.combo_2 = new Ext.ux.TwinComboBox({
+    this.combo[2] = new Ext.ux.TwinComboBox({
       store: cstore,
       tpl: resultTpl,
       applyTo: 'prod_2',
       hiddenName: 'p2'
     });
 
-    this.combo_2.on('clear', 
+    this.combo[2].on('clear', 
       function() {
         $('#info-s2').hide();
         $('.concerne-p2').removeClass('rc_toujours');
@@ -337,14 +333,14 @@ var ZONES_SAISIE = {
       }
     );
 
-    this.combo_3 = new Ext.ux.TwinComboBox({
+    this.combo[3] = new Ext.ux.TwinComboBox({
       store: cstore,
       tpl: resultTpl,
       applyTo: 'prod_3',
       hiddenName: 'p3'
     });
 
-    this.combo_3.on('clear', 
+    this.combo[3].on('clear', 
       function() {
         $('#info-s3').hide();
         $('.concerne-p3').removeClass('rc_toujours');
@@ -354,14 +350,14 @@ var ZONES_SAISIE = {
       }
     );
 
-    this.combo_4 = new Ext.ux.TwinComboBox({
+    this.combo[4] = new Ext.ux.TwinComboBox({
       store: cstore,
       tpl: resultTpl,
       applyTo: 'prod_4',
       hiddenName: 'p4'
     });
 
-    this.combo_4.on('clear', 
+    this.combo[4].on('clear', 
       function() {
         $('#info-s4').hide();
         $('.concerne-p4').removeClass('rc_toujours');
@@ -371,14 +367,14 @@ var ZONES_SAISIE = {
       }
     );
 
-    this.combo_5 = new Ext.ux.TwinComboBox({
+    this.combo[5] = new Ext.ux.TwinComboBox({
       store: cstore,
       tpl: resultTpl,
       applyTo: 'prod_5',
       hiddenName: 'p5'
     });
 
-    this.combo_5.on('clear', 
+    this.combo[5].on('clear', 
       function() {
         $('#info-s5').hide();
         $('.concerne-p5').removeClass('rc_toujours');
