@@ -99,7 +99,6 @@ function dragdrop(){
       var lId = idDiv.replace('div-s','prod_');
       if (jQuery('#'+lId).hasClass('x-form-empty-field')) {
         var pos = idDiv.substr(5,1);
-        jQuery('#'+lId).removeClass('x-form-empty-field');
         ZONES_SAISIE.combo[pos].setValue(idMol);
         ZONES_SAISIE.combo[pos].setRawValue(nom);
         ZONES_SAISIE.combo[pos].triggers[0].show();
