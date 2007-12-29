@@ -1,6 +1,6 @@
 <BOUCLE_Items(tbl_items){id_item}>
 				<div id="blocTitArticle">
-					<h1 class="titArticle"><:name:>: [(#NOM|sinon{NA})]</h1>
+					<h1 class="titArticle">[(#NOM|sinon{NA})]</h1>
 				</div>
 				
 				<BOUCLE_Chapeau(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
@@ -18,8 +18,8 @@
 				[(#ID_TYPE_ITEM|=={5}|?{' '})
 					[
 					<div class="blocContenuArticle">
-					<h2>Source(s)</h2>
-					<ul>(#ID_ITEM|source)</ul>
+					<h2>Source</h2>
+					<p>(#ID_ITEM|source)</p>
 					</div>
 					]
 					[

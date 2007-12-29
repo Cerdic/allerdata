@@ -65,7 +65,9 @@ function source($produits) {
 	if (!is_numeric($produits)) return;
 	
 	$result = '';
-	$querysource = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
+	$t_exclude = $t_id_sources = $t_nom_sources = array();
+	
+  $querysource = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
 					FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
 						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.est_dans_id_item = tbl_items_1.id_item
 					WHERE (
@@ -75,12 +77,33 @@ function source($produits) {
 						)
 					ORDER BY tbl_items_1.nom;";
 	$ressource = spip_query($querysource);
-	while ($rowsource = spip_fetch_array($ressource)){
-		$source .= '<li>Source : '.$rowsource['nom'].'</li>';
+  
+  /* filtre pour ne pas garder le source générique */
+  while ($rowsource = spip_fetch_array($ressource)){
+		$t_id_sources[$rowsource['id_item']] = $rowsource['id_item'];
+		$t_nom_sources[$rowsource['id_item']] = $rowsource['nom'];
 	}
-	$result .= $source;
-
-	return $result;
+  foreach($t_id_sources as $id) {
+    echo "SELECT id_item
+          FROM tbl_est_dans
+          WHERE id_item = $id
+          AND est_dans_id_item IN (".implode(",",$t_id_sources).")
+          AND est_dans_id_item != id_item
+    ";
+    $filtre = spip_query("SELECT id_item
+          FROM tbl_est_dans
+          WHERE id_item = $id
+          AND est_dans_id_item IN (".implode(",",$t_id_sources).")
+          AND est_dans_id_item != id_item
+    ");
+    if (spip_num_rows($filtre)) {
+      while($row = spip_fetch_array($filtre)) {
+        unset($t_nom_sources[$row['id_item']]);
+      }
+    }
+  }
+  
+	return implode(", ", $t_nom_sources);
 }
 
 function allergenes($produits) {
