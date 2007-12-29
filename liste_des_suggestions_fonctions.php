@@ -156,7 +156,8 @@ function suggestions($txt) {
 			if (!$row['nom']) $row['nom'] = $row['source'];
 			$t_suggestions[] = array(
 					'nb' => $nb, 
-					'nom' => $row['nom'].'==>['.implode(',',$reactif_avec[$row['id_item']]).']', 
+					'nom' => $row['nom'],
+          'items_actifs' => '['.implode(',',$reactif_avec[$row['id_item']]).']', 
 					'id_mol' => $row['id_item']);
 		}
 	}

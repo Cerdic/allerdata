@@ -159,6 +159,7 @@ x-grid-hd-row td, .x-grid-row td {white-space:normal !important;}
 .right {float:right;}
 .small {font-size:0.9em;}
 .outlineLink {cursor:help;}
+.hidden {display:none;}
 
 /* fenetre modale */
 body .x-dlg-mask {

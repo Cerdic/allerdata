@@ -11,12 +11,10 @@ var LISTE_DES_SUGGESTIONS = {
 
     if (!this.grid) {
           
-      var dsp_libelle = function (texte) {
-        var temp = new Array(); 
-        temp = texte.split('==>');
-        var nom = temp[0],
-          array_items_reactifs = temp[1];
-        return "<div class='cell_mol outlineLink' onclick='CCD.outline_prod(" + array_items_reactifs + ",\"#9BA1CF\");return false;'>" + nom + '</div>';
+      var dsp_libelle = function (texte, p, record) {
+        return String.format(
+                "<div class='cell_mol outlineLink' onclick='CCD.outline_prod({2},\"#9BA1CF\");return false;'>{0}<span class='hidden'>{1}</span></div>",
+                texte, record.data.id_mol, record.data.items_actifs);
       };
     
       var dsp_nb = function(nb){
@@ -41,7 +39,8 @@ var LISTE_DES_SUGGESTIONS = {
         }, [
            {name: 'nom'},
            {name: 'nb'},
-           {name: 'id_mol'}
+           {name: 'id_mol'},
+           {name: 'items_actifs'}
         ])
       });
       
