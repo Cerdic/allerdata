@@ -1,22 +1,22 @@
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
-/* --------------------------------- Produits associés aux RC ------------------------------------- */
+/* --------------------------------- Produits associï¿½s aux RC ------------------------------------- */
 
 var LISTE_DES_SUGGESTIONS = {
-  
+
   grid : null,
-  
+
   init : function(){},
-  
+
   getPanel : function(){
 
     if (!this.grid) {
-          
+
       var dsp_libelle = function (texte, p, record) {
         return String.format(
                 "<div class='cell_mol outlineLink' onclick='CCD.outline_prod({2},\"#9BA1CF\");return false;'>{0}<span class='hidden'>{1}</span></div>",
                 texte, record.data.id_mol, record.data.items_actifs);
       };
-    
+
       var dsp_nb = function(nb){
         if(nb > 2){
           return "<div class='cell_mol' style='color:red;'>" + nb + '</span></div>';
@@ -25,7 +25,7 @@ var LISTE_DES_SUGGESTIONS = {
          }
         return nb;
       };
-      
+
       var dsp_toInfo = function(id_item) {
         var t = "<div class='cell_mol info_mol' id='info_mol_" + id_item + "' onclick='ZONES_SAISIE.popupProd(" + id_item + ")'></div>";
         return t;
@@ -43,7 +43,7 @@ var LISTE_DES_SUGGESTIONS = {
            {name: 'items_actifs'}
         ])
       });
-      
+
       // La grille proprement dite
       this.grid = new Ext.grid.GridPanel({
         store: ds_s,
@@ -59,18 +59,18 @@ var LISTE_DES_SUGGESTIONS = {
         },
         title: SUGG_GRID_TITLE
       })
-              
+
     }
-    
+
     return this.grid;
   },
 
-  // La mise à jour se fait par json
+  // La mise ï¿½ jour se fait par json
   show_query : function() {
     var p1 = jQuery('#p1').val(),
-      p2 = jQuery('#p2').val(), 
-      p3 = jQuery('#p3').val(), 
-      p4 = jQuery('#p4').val(), 
+      p2 = jQuery('#p2').val(),
+      p3 = jQuery('#p3').val(),
+      p4 = jQuery('#p4').val(),
       p5 = jQuery('#p5').val(),
       ds_s = this.grid.getStore();
     ds_s.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5},callback:dragdrop});
@@ -84,15 +84,23 @@ function dragdrop(){
     appendTo: 'body',
     effect: 'fade'
   });
-  
-  jQuery('#div-s1,#div-s2,#div-s1,#div-s3,#div-s4,#div-s5').droppable({
+
+  jQuery('#div-s1,#div-s2,#div-s1,#div-s3,#div-s4,#div-s5').filter(function() {
+		  lId=$(this).attr('id').replace('div-s','#p');
+		  lValue=$(this).find(lId).val();
+		  if (lValue > 0){
+			$(this).filter('.ui-droppable').droppableDestroy();
+			return false;
+		  }
+		  return true;
+		}).droppable({
     accept: '.cell_mol',
     activeClass: 'activedrop',
     hoverClass: 'hoverdrop',
     tolerance: 'touch',
-    
+
     drop: function(ev, ui) {
-    
+
       var idMol = jQuery("span",ui.draggable.element).remove().text();
       var nom = jQuery(ui.draggable.element).text();
       var idDiv = jQuery(this).attr('id');
@@ -102,7 +110,7 @@ function dragdrop(){
         ZONES_SAISIE.combo[pos].setValue(idMol);
         ZONES_SAISIE.combo[pos].setRawValue(nom);
         ZONES_SAISIE.combo[pos].triggers[0].show();
-        reload_penta();  
+        reload_penta();
       }
 
     }
