@@ -84,12 +84,6 @@ function source($produits) {
 		$t_nom_sources[$rowsource['id_item']] = $rowsource['nom'];
 	}
   foreach($t_id_sources as $id) {
-    echo "SELECT id_item
-          FROM tbl_est_dans
-          WHERE id_item = $id
-          AND est_dans_id_item IN (".implode(",",$t_id_sources).")
-          AND est_dans_id_item != id_item
-    ";
     $filtre = spip_query("SELECT id_item
           FROM tbl_est_dans
           WHERE id_item = $id
