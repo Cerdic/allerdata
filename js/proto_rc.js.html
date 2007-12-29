@@ -62,8 +62,7 @@ LISTE_DES_RC = {
       
   	  var dejavus = new Array(),
   		  last = null, s = null, d = null,
-  	    liste_combo = new Array(null, ZONES_SAISIE.combo_1, ZONES_SAISIE.combo_2, ZONES_SAISIE.combo_3, ZONES_SAISIE.combo_4, ZONES_SAISIE.combo_5),
-    		rc = new Array(),
+  	    rc = new Array(),
     		id_s = new Array(),
     		id_d = new Array(),
     		doublons = 0;
@@ -79,8 +78,8 @@ LISTE_DES_RC = {
     	  if (s.length > 1 && !dejavus.indexOf(rc[i].source)) {
     	    // On nettoie rc.source
       		last = $($('#liste_des_produits input[@value='+rc[i].source+']')[1]).attr('id').substr(1);
-      		liste_combo[last].setValue('');
-      		liste_combo[last].applyEmptyText();
+      		ZONES_SAISIE.combo[last].setValue('');
+      		ZONES_SAISIE.combo[last].applyEmptyText();
       		dejavus.push(rc[i].source);
       		doublons++;
     	  } else
@@ -88,8 +87,8 @@ LISTE_DES_RC = {
       	    // On nettoie rc.dest
       		last = $($('#liste_des_produits input[@value='+rc[i].dest+']')[1]).attr('id').substr(1);
       		dejavus.push(rc[i].dest);
-      		liste_combo[last].setValue('');
-      		liste_combo[last].applyEmptyText();
+      		ZONES_SAISIE.combo[last].setValue('');
+      		ZONES_SAISIE.combo[last].applyEmptyText();
       		doublons++;
     	  }
   	  }

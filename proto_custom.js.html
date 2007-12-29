@@ -32,8 +32,8 @@ function loadSpecificFunction() {
         $q = "SELECT * from tbl_items where id_item = ".addslashes(_request("p$i"));
         $p = spip_fetch_array(spip_query($q));
         if ($p) {
-          $str .= "\nZONES_SAISIE.combo_$i.setValue('".addslashes($p['nom'])."');";
-          $str .= "\nZONES_SAISIE.combo_$i.triggers[0].show();";
+          $str .= "\nZONES_SAISIE.combo[$i].setValue('".addslashes($p['nom'])."');";
+          $str .= "\nZONES_SAISIE.combo[$i].triggers[0].show();";
           $str .= "\njQuery('#p$i').val(".addslashes(_request("p$i")).");";
         }
       }
