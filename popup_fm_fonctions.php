@@ -41,7 +41,7 @@ function allergenes($produits) {
 		$count += 1;
 		$allergenes .= '						<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'>
 						<td>'.$rowallergenes['nom'].'</td>
-						<td>'.$rowallergenes['fonction_classification'].'</td>
+						<!--td>'.$rowallergenes['fonction_classification'].'</td-->
 						<td style="text-align:right;">'.$rowallergenes['masse'].'</td>
 						<td>'.(($rowallergenes['iuis']==1)?'Oui':'Non').'</td>
 						<td>'.(($rowallergenes['glyco']==1)?'Oui':'Non').'</td>

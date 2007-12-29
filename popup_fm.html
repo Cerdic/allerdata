@@ -3,7 +3,7 @@
 <?php if ($auteur_session) { ?>
 	
 				<div id="blocTitArticle">
-					<h1 class="titArticle"><:name:>: [(#NOM|sinon{NA})]</h1>
+					<h1 class="titArticle">[(#NOM|sinon{NA})]</h1>
 				</div>
 				
 				<BOUCLE_Chapeau(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
@@ -11,12 +11,12 @@
 				</BOUCLE_Chapeau>
 
 				[<div class="blocContenuArticle">
-					<h2>Cette famille moléculaire contient des allergènes</h2>
+					<h2>Cette famille moléculaire contient les allergènes suivant :</h2>
 					<table class="spip">
 						<thead>
 						<tr>
 						<th>Nom</th>
-						<th>Fonction</th>
+						<!--th>Fonction</th-->
 						<th>Masse</th>
 						<th>IUIS</th>
 						<th>Glyco</th>
