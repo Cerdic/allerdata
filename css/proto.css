@@ -210,3 +210,9 @@ body .x-dlg-mask {
 .x-panel-body table.caption {margin-top:2em;}
 
 #liste_des_produits input {text-align:left!important;}
+
+
+/* Drag n' Drop */
+
+.activedrop {border:4px dashed #8db2e3;}
+.hoverdrop {border:4px solid #8db2e3;}
