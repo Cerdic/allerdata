@@ -79,36 +79,36 @@ var LISTE_DES_SUGGESTIONS = {
 
 function dragdrop(){
 
-	jQuery('.cell_mol').not('.info_mol').addClass('drag').draggable({
-  	helper: 'clone',
-  	appendTo: 'body',
-  	effect: 'fade'
-	});
-
-	jQuery('#div-s1,#div-s2,#div-s1,#div-s3,#div-s4,#div-s5').droppable({
-		accept: '.cell_mol',
-		activeClass: 'activedrop',
-		hoverClass: 'hoverdrop',
-		tolerance: 'touch',
+  jQuery('.cell_mol').not('.info_mol').addClass('drag').draggable({
+    helper: 'clone',
+    appendTo: 'body',
+    effect: 'fade'
+  });
+  
+  jQuery('#div-s1,#div-s2,#div-s1,#div-s3,#div-s4,#div-s5').droppable({
+    accept: '.cell_mol',
+    activeClass: 'activedrop',
+    hoverClass: 'hoverdrop',
+    tolerance: 'touch',
     
-		drop: function(ev, ui) {
+    drop: function(ev, ui) {
     
-			var idMol = jQuery("span",ui.draggable.element).remove().text();
+      var idMol = jQuery("span",ui.draggable.element).remove().text();
       var nom = jQuery(ui.draggable.element).text();
-			var idDiv = jQuery(this).attr('id');
-			var lId = idDiv.replace('div-s','prod_');
+      var idDiv = jQuery(this).attr('id');
+      var lId = idDiv.replace('div-s','prod_');
       if (jQuery('#'+lId).hasClass('x-form-empty-field')) {
-				var pos = idDiv.substr(5,1);
+        var pos = idDiv.substr(5,1);
         jQuery('#'+lId).removeClass('x-form-empty-field');
-				ZONES_SAISIE.combo[pos].setValue(idMol);
-				ZONES_SAISIE.combo[pos].setRawValue(nom);
-				ZONES_SAISIE.combo[pos].triggers[0].show();
-				reload_penta();  
-			}
-      
-		}
-    
-	});
+        ZONES_SAISIE.combo[pos].setValue(idMol);
+        ZONES_SAISIE.combo[pos].setRawValue(nom);
+        ZONES_SAISIE.combo[pos].triggers[0].show();
+        reload_penta();  
+      }
+
+    }
+
+  });
 }
 
 Ext.onReady(LISTE_DES_SUGGESTIONS.init, LISTE_DES_SUGGESTIONS);
