@@ -10,9 +10,7 @@ function cmp($a, $b)
 }
 
 function suggestions($txt) {
-	$tableau_produits = $t_suggestions = array();
-	$prem = array(0,97); /* 2 nombres premiers avant 100 avec un delta de 1/8 */
-	/* Correction : ne plus tenir compte de l'absence testée de réactivité */
+	$tableau_produits = $t_suggestions = $items_famille = array();
 	
 	if (is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
 	if (is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
@@ -34,6 +32,18 @@ function suggestions($txt) {
 	
 	$produits = implode(",", $tableau_produits);
 	
+	foreach ($tableau_produits as $id_item_source) {
+		$query = "SELECT tbl_items.id_item FROM tbl_items, tbl_est_dans 
+			WHERE 
+				(est_dans_id_item = $id_item_source AND tbl_est_dans.id_item = tbl_items.id_item)
+				OR (tbl_est_dans.id_item = $id_item_source AND est_dans_id_item = tbl_items.id_item)";
+		$res = spip_query($query);
+
+		while($row = spip_fetch_array($res)) {
+			$items_famille[] = $row['id_item'];
+		}
+	}
+
 	$tt = '';
 	
 	/* Mix des sens des RC */
@@ -139,13 +149,16 @@ function suggestions($txt) {
 		where id_item in (".implode(',',$t_id_suggestion_trouvee).")
 	");
 	
+	/* En prenant garde de virer les membres des familles des items du penta */
 	while ($row = spip_fetch_array($res)){
-		$nb = sizeof($reactif_avec[$row['id_item']]);
-		if (!$row['nom']) $row['nom'] = $row['source'];
-		$t_suggestions[] = array(
-				'nb' => $nb, 
-				'nom' => $row['nom'].'==>['.implode(',',$reactif_avec[$row['id_item']]).']', 
-				'id_mol' => $row['id_item']);
+		if (!(in_array($row['id_item'],$items_famille))) {
+			$nb = sizeof($reactif_avec[$row['id_item']]);
+			if (!$row['nom']) $row['nom'] = $row['source'];
+			$t_suggestions[] = array(
+					'nb' => $nb, 
+					'nom' => $row['nom'].'==>['.implode(',',$reactif_avec[$row['id_item']]).']', 
+					'id_mol' => $row['id_item']);
+		}
 	}
 	
 	/* un tri sur le nombre puis on met tout à plat */
