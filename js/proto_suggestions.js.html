@@ -92,15 +92,17 @@ function dragdrop(){
 			drop: function(ev, ui) {
 				var q=jQuery(ui.draggable.element).text();
 				var s=jQuery(this).attr('id');
-				jQuery.get('spip.php',{page:'id_du_produit',query:q},function(data){
-					lId=s.replace('div-s','prod_');
-					jQuery('#'+lId).val(q).removeClass('x-form-empty-field');
-					lId=s.replace('div-s','p');
-					lVal=parseInt(data);
-					jQuery('#'+lId).val(lVal);
-					ZONES_SAISIE.combo[s.substr(5,1)].triggers[0].show();
-					reload_penta();
-				});
+				var lId=s.replace('div-s','prod_');
+				if (jQuery('#'+lId).hasClass('x-form-empty-field')) {
+					jQuery.get('spip.php',{page:'id_du_produit',query:q},function(data){
+						jQuery('#'+lId).val(q);
+						lId=s.replace('div-s','p');
+						lVal=parseInt(data);
+						jQuery('#'+lId).val(lVal).removeClass('x-form-empty-field');
+						ZONES_SAISIE.combo[s.substr(5,1)].triggers[0].show();
+						reload_penta();
+					});
+				}
 			}
 		});
 }
