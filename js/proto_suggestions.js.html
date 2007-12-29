@@ -93,9 +93,9 @@ function dragdrop(){
     
 		drop: function(ev, ui) {
     
-			var nom = jQuery(ui.draggable.element).text();
-			var idMol = jQuery("span",ui.draggable.element).text();
-      var idDiv = jQuery(this).attr('id');
+			var idMol = jQuery("span",ui.draggable.element).remove().text();
+      var nom = jQuery(ui.draggable.element).text();
+			var idDiv = jQuery(this).attr('id');
 			var lId = idDiv.replace('div-s','prod_');
       if (jQuery('#'+lId).hasClass('x-form-empty-field')) {
 				var pos = idDiv.substr(5,1);
