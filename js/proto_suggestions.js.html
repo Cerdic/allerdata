@@ -78,32 +78,37 @@ var LISTE_DES_SUGGESTIONS = {
 };
 
 function dragdrop(){
-  	jQuery('.cell_mol').not('.info_mol').addClass('drag').draggable({
-  			helper: 'clone',
-  			appendTo: 'body',
-  			effect: 'fade'
-  	});
+
+	jQuery('.cell_mol').not('.info_mol').addClass('drag').draggable({
+  	helper: 'clone',
+  	appendTo: 'body',
+  	effect: 'fade'
+	});
+
 	jQuery('#div-s1,#div-s2,#div-s1,#div-s3,#div-s4,#div-s5').droppable({
-			accept: '.cell_mol',
-			activeClass: 'activedrop',
-			hoverClass: 'hoverdrop',
-			tolerance: 'touch',
-			drop: function(ev, ui) {
-				var q=jQuery(ui.draggable.element).text();
-				var s=jQuery(this).attr('id');
-				var lId=s.replace('div-s','prod_');
-				if (jQuery('#'+lId).hasClass('x-form-empty-field')) {
-					jQuery.get('spip.php',{page:'id_du_produit',query:q},function(data){
-						jQuery('#'+lId).val(q);
-						lId=s.replace('div-s','p');
-						lVal=parseInt(data);
-						jQuery('#'+lId).val(lVal).removeClass('x-form-empty-field');
-						ZONES_SAISIE.combo[s.substr(5,1)].triggers[0].show();
-						reload_penta();
-					});
-				}
+		accept: '.cell_mol',
+		activeClass: 'activedrop',
+		hoverClass: 'hoverdrop',
+		tolerance: 'touch',
+    
+		drop: function(ev, ui) {
+    
+			var nom = jQuery(ui.draggable.element).text();
+			var idMol = jQuery("span",ui.draggable.element).text();
+      var idDiv = jQuery(this).attr('id');
+			var lId = idDiv.replace('div-s','prod_');
+      if (jQuery('#'+lId).hasClass('x-form-empty-field')) {
+				var pos = idDiv.substr(5,1);
+        jQuery('#'+lId).removeClass('x-form-empty-field');
+				ZONES_SAISIE.combo[pos].setValue(idMol);
+				ZONES_SAISIE.combo[pos].setRawValue(nom);
+				ZONES_SAISIE.combo[pos].triggers[0].show();
+				reload_penta();  
 			}
-		});
+      
+		}
+    
+	});
 }
 
 Ext.onReady(LISTE_DES_SUGGESTIONS.init, LISTE_DES_SUGGESTIONS);
