@@ -85,7 +85,7 @@ function dragdrop(){
     effect: 'fade'
   });
 
-  jQuery('#div-s1,#div-s2,#div-s1,#div-s3,#div-s4,#div-s5').filter(function() {
+  jQuery('#div-s1,#div-s2,#div-s3,#div-s4,#div-s5').filter(function() {
 		  lId=$(this).attr('id').replace('div-s','#p');
 		  lValue=$(this).find(lId).val();
 		  if (lValue > 0){
@@ -93,7 +93,7 @@ function dragdrop(){
 			return false;
 		  }
 		  return true;
-		}).droppable({
+		}).not('.ui-droppable').droppable({
     accept: '.cell_mol',
     activeClass: 'activedrop',
     hoverClass: 'hoverdrop',
