@@ -2,7 +2,9 @@
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
 
 function reload_penta(){
-  jQuery('#lienAdresse').attr('href','pentagramme.html?p1='+ jQuery('#p1').val() 
+  jQuery('.ui-draggable').draggableDestroy();
+  jQuery('#loading').show();
+  jQuery('#lienAdresse').attr('href','pentagramme.html?p1='+ jQuery('#p1').val()
     +'&p2='+jQuery('#p2').val() + '&p3='+
     jQuery('#p3').val() + '&p4='+
     jQuery('#p4').val() + '&p5=' +
@@ -17,15 +19,16 @@ function reload_penta(){
   if (jQuery('#p5').val()) jQuery('#info-s5').show();
   LISTE_DES_SUGGESTIONS.show_query();
   CCD.show_ccd();
+  jQuery('#loading').fadeOut(500);
   return false;
 }
 jQuery('#form_penta').submit(reload_penta);
 function loadSpecificFunction() {
-  /* Cette fonction sera appelée *après* le téléchargement du reste
+  /* Cette fonction sera appelee *apres* le telechargement du reste
    de l'appli pour que les autres "classes" aient pu s'initialiser */
 
 	<?php
-  
+
     $str =  '';
     foreach (array(1,2,3,4,5) as $i) {
       if (_request("p$i")) {
@@ -40,13 +43,13 @@ function loadSpecificFunction() {
     }
 
     echo $str;
-  
-    /* Si on est dans un accès direct par url */
+
+    /* Si on est dans un acces direct par url */
     if ($str) {
       echo "\njQuery('#form_penta').submit();";
     }
   ?>
-  
+
   <BOUCLE_ModeEmploiAAM(ARTICLES){titre_mot= ModeEmploiAAM}{!par date}{0,1}>
     jQuery('#lienAide').click(function() {
       var link = 'spip.php?page=article_popup&id_article=#ID_ARTICLE';
@@ -55,7 +58,7 @@ function loadSpecificFunction() {
 			dialog_avec_tab.show(Ext.get('lienAide'));
     });
   </BOUCLE_ModeEmploiAAM>
-  
+
 	jQuery.ajax({
 			type: "GET",
 			url:'spip.php?action=purge_sessions'

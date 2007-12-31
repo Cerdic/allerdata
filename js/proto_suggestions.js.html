@@ -79,7 +79,7 @@ var LISTE_DES_SUGGESTIONS = {
 
 function dragdrop(){
 
-  jQuery('.cell_mol').not('.info_mol').addClass('drag').draggable({
+  jQuery('.cell_mol').not('.info_mol').draggable({
     helper: 'clone',
     appendTo: 'body',
     effect: 'fade'
@@ -101,7 +101,7 @@ function dragdrop(){
 
     drop: function(ev, ui) {
 
-      var idMol = jQuery("span",ui.draggable.element).remove().text();
+	  var idMol = jQuery("span",ui.draggable.element).remove().text();
       var nom = jQuery(ui.draggable.element).text();
       var idDiv = jQuery(this).attr('id');
       var lId = idDiv.replace('div-s','prod_');

@@ -1,19 +1,19 @@
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
-/* Fichier principal de l'applicatif : il définit la mise en forme et le comportement des différents éléments */
+/* Fichier principal de l'applicatif : il definit la mise en forme et le comportement des differents elements */
 
 /* -------------------------------------- Layout general ----------------------------------------- */
 
 MiseEnPage = function(){
 /* Mise en page globale */
-    
+
   return {
-    
+
     init : function(){
-      
+
       var fmPanel = LISTE_DES_FAMILLES.getPanel();
       var suggPanel = LISTE_DES_SUGGESTIONS.getPanel();
-      
-      var layout = new Ext.Panel({ 
+
+      var layout = new Ext.Panel({
         layout:"border",
         renderTo:"sous-container",
         width:835,
@@ -68,19 +68,19 @@ MiseEnPage = function(){
           }]
         }
       );
-  
+
       if (Ext.get('loading-mask')) {
         Ext.get('loading-mask').remove();
-        Ext.get('loading').fadeOut({remove: true});
+        Ext.get('loading').fadeOut();
       }
-      
+
       /* On appelle les element specifiques propres au contexte */
       /* ou a charger en dernier -- ne concernent pas l'affichage -- */
-      /* Fonction définie dans proto_custom */
+      /* Fonction definie dans proto_custom */
       loadSpecificFunction();
-      
+
     }
   };
-     
+
 }();
 Ext.onReady(MiseEnPage.init, MiseEnPage);
