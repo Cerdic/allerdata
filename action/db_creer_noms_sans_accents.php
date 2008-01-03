@@ -89,7 +89,7 @@ function action_db_creer_noms_sans_accents() {
 			}
 		}
 		if (sizeof($t_insert)) {
-			$query = "INSERT INTO `allerdata`.`tbl_index_items` (`id`, `id_item`, `keyword`, `pos`)
+			$query = "INSERT INTO `tbl_index_items` (`id`, `id_item`, `keyword`, `pos`)
 					VALUES ".implode(',',$t_insert).";";
 			echo('<hr>'.$query);
 			spip_query($query);
