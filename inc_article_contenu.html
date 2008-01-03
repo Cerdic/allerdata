@@ -1,10 +1,10 @@
 <BOUCLE_ArticlePrincipal(ARTICLES){id_article}>
 				<div id="blocTitArticle">
-					[<img src="(#LOGO_NORMAL|extraure_attribut{src})" alt="Logo AFSSAPS" class="floatLeft" />]
+					[<img src="(#LOGO_NORMAL|extraire_attribut{src})" alt="Logo [(#TITRE|attribut_html)]" class="floatLeft" />]
 					<h1 class="titArticle">
 						#TITRE
 					</h1>
-					<p class="auteurArticle">[<:par_auteur:> (#LESAUTEURSSANSLIEN)]</p>
+					<p class="auteurArticle">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
 				</div>
 				<div class="blocContenuArticle">
 					#TEXTE
@@ -26,7 +26,7 @@
 				<BOUCLE_ArticlesConnexes(ARTICLES){id_mot}{doublons}>
 					<li class="listeFormation">
 						<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE</a></h3>
-						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURSSANSLIEN)]</p>
+						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
 						<p class="txtSommaire">[(#TEXTE|couper{280})]</p>
 						<p class="lireSuite"><a href="#URL_ARTICLE"><img src="images/lire_suite.gif" alt="Lire la suite" title="Lire la suite" /></a></p>
 					</li>
@@ -42,7 +42,7 @@
 					<h1 class="titArticle">
 						#TITRE
 					</h1>
-					<p class="auteurArticle">[<:par_auteur:> (#LESAUTEURSSANSLIEN)]</p>
+					<p class="auteurArticle">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
 				</div>
 				<div class="blocContenuArticle">
 					#TEXTE
