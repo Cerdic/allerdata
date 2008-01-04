@@ -69,7 +69,7 @@ function rc($p1,$p2) {
 			
 			while ($rowbiblio = spip_fetch_array($resbiblio)){
 				$linkbiblio = '<a href="#biblio'.$rowbiblio['id_biblio'].'">';
-				$biblio .= '<a name="biblio'.$rowbiblio['id_biblio'].'" id="biblio'.$rowbiblio['id_biblio'].'"></a><table summary="Détails des données bibiliographiques" class="bibliographie spip"><caption>Détails des travaux de réactivité croisée: '.$row['id_reaction_croisee'].'</caption><tbody>
+				$biblio .= '<a name="biblio'.$rowbiblio['id_biblio'].'" id="biblio'.$rowbiblio['id_biblio'].'"></a><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><caption>D&eacute;tails des travaux de r&eacute;activit&eacute; crois&eacute;e: '.$row['id_reaction_croisee'].'</caption><tbody>
 								<tr><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
 								<tr><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 								<tr><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums pool&eacute;s</b>: '.(($rowbiblio['pool']==1)?'Oui':'Non').'</td><td colspan="2" rowspan="1"><b>Test qualitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Oui':'Non').'</td></tr>
