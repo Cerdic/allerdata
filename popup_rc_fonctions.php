@@ -78,18 +78,27 @@ function rc($p1,$p2) {
 								</tbody></table><a class="small right" href="#top">Retour au sommet</a><br class="nettoyeur"/>';
 			}
 			
-			$nrc1 = (($row['niveau_RC_sens1'] <> '') ? ' ('.$row['niveau_RC_sens1'].')' : '');
-			$nrc2 = (($row['niveau_RC_sens2'] <> '') ? ' ('.$row['niveau_RC_sens2'].')' : '');
-			$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="squelettes/css/img/rc_jamais_lr.gif" alt="Jamais" title="Jamais'.$nrc1.'" />': (($row['fleche_sens1'] === '1') ? '<img src="squelettes/css/img/rc_toujours_lr.gif" alt="Toujours" title="Toujours'.$nrc2.'" />': '<span></span>'));
-			$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="squelettes/css/img/rc_jamais_rl.gif" alt="Jamais" title="Jamais'.$nrc1.'" />': (($row['fleche_sens2'] === '1') ? '<img src="squelettes/css/img/rc_toujours_rl.gif" alt="Toujours" title="Toujours'.$nrc2.'" />': '<span></span>'));
+			if ($p1 == $row['id_s1']) {
+				$nrc1 = (($row['niveau_RC_sens1'] <> '') ? ' ('.$row['niveau_RC_sens1'].')' : '');
+				$nrc2 = (($row['niveau_RC_sens2'] <> '') ? ' ('.$row['niveau_RC_sens2'].')' : '');
+				$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="squelettes/css/img/rc_jamais_lr.gif" alt="Jamais" title="Jamais'.$nrc1.'" />': (($row['fleche_sens1'] === '1') ? '<img src="squelettes/css/img/rc_toujours_lr.gif" alt="Toujours" title="Toujours'.$nrc2.'" />': '<span></span>'));
+				$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="squelettes/css/img/rc_jamais_rl.gif" alt="Jamais" title="Jamais'.$nrc2.'" />': (($row['fleche_sens2'] === '1') ? '<img src="squelettes/css/img/rc_toujours_rl.gif" alt="Toujours" title="Toujours'.$nrc1.'" />': '<span></span>'));
 
-			$result .= '<tr><td align=left>'. $row['id_reaction_croisee'].'</td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].' '.'</a></td><td>'.$linkbiblio.$fl1.'</a></td><td>'.$linkbiblio.$fl2.'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].'</a></td></tr>';
+				$result .= '<tr><td align=left>'. $row['id_reaction_croisee'].'</td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].' '.'</a></td><td>'.$linkbiblio.$fl1.'</a></td><td>'.$linkbiblio.$fl2.'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].'</a></td></tr>';
+			} else {
+				$nrc1 = (($row['niveau_RC_sens2'] <> '') ? ' ('.$row['niveau_RC_sens2'].')' : '');
+				$nrc2 = (($row['niveau_RC_sens1'] <> '') ? ' ('.$row['niveau_RC_sens1'].')' : '');
+				$fl1 = (($row['fleche_sens2'] === '0') ? '<img src="squelettes/css/img/rc_jamais_rl.gif" alt="Jamais" title="Jamais'.$nrc2.'" />': (($row['fleche_sens2'] === '1') ? '<img src="squelettes/css/img/rc_toujours_rl.gif" alt="Toujours" title="Toujours'.$nrc1.'" />': '<span></span>'));
+				$fl2 = (($row['fleche_sens1'] === '0') ? '<img src="squelettes/css/img/rc_jamais_lr.gif" alt="Jamais" title="Jamais'.$nrc1.'" />': (($row['fleche_sens1'] === '1') ? '<img src="squelettes/css/img/rc_toujours_lr.gif" alt="Toujours" title="Toujours'.$nrc2.'" />': '<span></span>'));
+
+				$result .= '<tr><td align=left>'. $row['id_reaction_croisee'].'</td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].' '.'</a></td><td>'.$linkbiblio.$fl2.'</a></td><td>'.$linkbiblio.$fl1.'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].'</a></td></tr>';
+			}
 
 
 		}
 		
 	}
-	if ($result) $result = '<div class="blocContenuArticle"><h1 class="titArticle">'._T('reactivites_croisees').'</h1><table class="liste_rc spip">'.$result.'</table></div>';
+	if ($result) $result = '<div class="blocContenuArticle"><h1 class="titArticle">'._T('reactivites_croisees').'</h1><table class="liste_rc spip"><th>Biblio</th><th colspan="2">'.produit($p1).'</th><th colspan="2">'.produit($p2).'</th>'.$result.'</table></div>';
 	if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:bibliographies').'</h2>'.$biblio.'</div>';
 	return $result;
 }
@@ -108,6 +117,28 @@ function biblio($id_biblio, $id_reaction_croisee) {
 		$biblio .= '<tr><td>'.$id_reaction_croisee.'</td><td><a name="biblio'.$id_biblio.'"></a>'.$rowbiblio['citation'].'</td><td>'.$rowbiblio['annee'].'</td>';
 	}
 	$result .= $biblio;
+
+	return $result;
+}
+
+function produit($produits) {
+	if (!is_numeric($produits)) return;
+	
+	$result = '';
+	$queryproduit = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
+					FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.est_dans_id_item) 
+						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item
+					WHERE (
+						((tbl_items.id_item)=$produits) 
+						AND ((tbl_items_1.id_type_item)=5)
+						AND ( NOT ISNULL(tbl_items_1.nom))
+						)
+					ORDER BY tbl_items_1.nom;";
+	$resproduit = spip_query($queryproduit);
+	while ($rowproduit = spip_fetch_array($resproduit)){
+		$produit .= $rowproduit['nom'];
+	}
+	$result .= $produit;
 
 	return $result;
 }
