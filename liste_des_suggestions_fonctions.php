@@ -10,7 +10,7 @@ function cmp($a, $b)
 }
 
 function suggestions($txt) {
-	$tableau_produits = $t_suggestions = $items_famille = array();
+	$tableau_produits = $t_suggestions = $items_famille = $t_id_suggestion_trouvee = array();
 	
 	if (is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
 	if (is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
