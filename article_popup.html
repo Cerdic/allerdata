@@ -1,6 +1,6 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
 <BOUCLE_ArticlePrincipal(ARTICLES){id_article}{tout_voir}>
-<div id="main">
+<div id="main" class="popup_aide">
 [(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})
 <?php if ($auteur_session) { ?>
 [(#INCLURE{fond=inc_article_contenu}{id_article})]
