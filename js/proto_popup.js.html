@@ -97,6 +97,11 @@ Ext.onReady(function() {
     dialog_avec_tab.toggleCollapse(false);
   });
 
+  dialog_avec_tab.on('beforeshow', 
+  function() {
+    dialog_avec_tab.center();
+  });
+
   dialog_avec_tab.on('beforehide', 
   function() {
     main_panel.items.each(function(item) {
