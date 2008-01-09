@@ -3,7 +3,7 @@ function action_descendants_en_direct() {
 	spip_query("alter table `tbl_est_dans` add index `couple` (`id_item`, `est_dans_id_item`)");
 	spip_query("alter table `tbl_est_dans` add index `id_item` (`id_item`)");
 	spip_query("alter table `tbl_est_dans` add index `est_dans_id_item` (`est_dans_id_item`)");
-	spip_query("alter table `db_allerdata`.`tbl_items` add index `id_type_item` (`id_type_item`)");
+	spip_query("alter table `tbl_items` add index `id_type_item` (`id_type_item`)");
 
 	set_time_limit(0);
 
@@ -33,7 +33,6 @@ function action_descendants_en_direct() {
 function ListeEnfants($id_item,$id_parent) {
 	
 	//on recherche les enfants direct de l'item utilisé pour appeler la fonction.
-	mysql_select_db("db_allerdata");
 	$query_liste_enfants = "SELECT tbl_est_dans.id_item FROM tbl_est_dans 
 					WHERE tbl_est_dans.est_dans_id_item = '$id_item'
 					AND tbl_est_dans.id_item != tbl_est_dans.est_dans_id_item";
@@ -59,7 +58,6 @@ function ListeEnfants($id_item,$id_parent) {
 
 function create_filiation($id_item1,$id_parent) {
 		//on recherche dans la bdd si la liaison existe déjà entre le père principal et cet enfant
-		mysql_select_db("db_allerdata");
 		$query_new_parent = "SELECT tbl_est_dans.id_est_dans FROM tbl_est_dans
 							WHERE tbl_est_dans.id_item = '$id_item1' AND tbl_est_dans.est_dans_id_item = '$id_parent'";
 		$new_parent = spip_query($query_new_parent) or die(mysql_error());
@@ -71,7 +69,6 @@ function create_filiation($id_item1,$id_parent) {
 		
 		//si la filliation n'est pas enregistré, on insère un nouvel enregistrement avec un lien indirect.
 		else { 
-			mysql_select_db("db_allerdata");
 			$query_est_dans_indirect = "INSERT INTO tbl_est_dans (id_item,est_dans_id_item,directement_contenu) values('$id_item1','$id_parent','0')";
 			spip_query($query_est_dans_indirect) or die(mysql_error());
 			echo $id_item1.','.$id_parent.'<br />';
