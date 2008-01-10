@@ -4,6 +4,7 @@ function action_descendants_en_direct() {
 	spip_query("alter table `tbl_est_dans` add index `id_item` (`id_item`)");
 	spip_query("alter table `tbl_est_dans` add index `est_dans_id_item` (`est_dans_id_item`)");
 	spip_query("alter table `tbl_items` add index `id_type_item` (`id_type_item`)");
+	spip_query("update tbl_est_dans set directement_contenu=1 where date_est_dans<>0");
 
 	set_time_limit(0);
 
