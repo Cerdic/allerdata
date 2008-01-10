@@ -22,7 +22,8 @@ function listetype5($produits) {
 						WHERE (
 							((tbl_items.id_item)=".$row['id_item'].") 
 							AND ((tbl_items_1.id_type_item)=4)
-							AND ( NOT ISNULL(tbl_items_1.nom))
+							AND ( NOT ISNULL(tbl_items_1.nom)
+							AND (directement_contenu<>0))
 							)
 						ORDER BY tbl_items_1.nom;";
 		$ressource = spip_query($querysource);
