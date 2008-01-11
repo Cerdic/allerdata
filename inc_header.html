@@ -46,7 +46,7 @@
 		<div id="menu">
 			<ul>
 				<BOUCLE_MenuHaut(RUBRIQUES){titre_mot=MenuHaut}{par num titre}{tout_voir}>
-				<li><a href="#URL_RUBRIQUE"<BOUCLE_ClasseMenuHaut(MOTS){id_rubrique}{type=ClasseMenuHaut}> class="#TITRE"</BOUCLE_ClasseMenuHaut>>#TITRE</a><BOUCLE_EstAccesRestreint(ZONES_RUBRIQUES){id_rubrique}></BOUCLE_EstAccesRestreint>[(#COMPTEUR_BOUCLE|<{#TOTAL_BOUCLE}|?{' |'})]</li>
+				<li><a href="<BOUCLE_ContientPentagramme(ARTICLES){tout_voir}{id_rubrique}{titre_mot=Pentagramme}{0,1}>#URL_ARTICLE</BOUCLE_ContientPentagramme>#URL_RUBRIQUE<//B_ContientPentagramme>"<BOUCLE_ClasseMenuHaut(MOTS){id_rubrique}{type=ClasseMenuHaut}> class="#TITRE"</BOUCLE_ClasseMenuHaut>>#TITRE</a>[(#COMPTEUR_BOUCLE|<{#TOTAL_BOUCLE}|?{' |'})]</li>
 				</BOUCLE_MenuHaut>
 				[<li><a href='#URL_LOGOUT' title="Se d&eacute;connecter (#SESSION{nom}|typo|attribut_html)"><img src="images/picto_ouvert.gif" alt="Se d&eacute;connecter" /></a></li>]
 				[<li>(#SESSION|?{'',' '})<img src="images/picto_ferme.gif" alt="D&eacute;connect&eacute;" /></li>]
