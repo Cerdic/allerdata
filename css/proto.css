@@ -213,6 +213,7 @@ body .x-dlg-mask {
 
 #liste_des_produits input {text-align:left!important;}
 
+x-tool-minimize {display:none}
 
 /* Drag n' Drop */
 
