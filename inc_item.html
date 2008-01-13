@@ -11,7 +11,17 @@
 					[
 					<div class="blocContenuArticle">
 					<h2>Ce groupe générique contient les produits</h2>
-					<ul>(#ID_ITEM|listetype5)</ul>
+					<table summary="Les allergènes de [(#NOM|sinon{NA})]" class="spip">
+						<thead><tr>
+						<th>Nom</th>
+						<th>Source</th>
+						<th>Famille taxonomique</th>
+						</tr>
+						</thead>
+						<tbody>
+						(#ID_ITEM|listetype5)
+						</tbody>
+						</table>
 					</div>
 					]
 				]

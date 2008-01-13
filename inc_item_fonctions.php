@@ -14,8 +14,10 @@ function listetype5($produits) {
 				ORDER BY tbl_items_1.nom;";
 	$res = spip_query($query);
 	$result = '';
+	$count = 0;
 	while ($row = spip_fetch_array($res)){
-		$result .= '<li><strong>'.$row['nom'].'</strong>';
+		$count += 1;
+		$result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['nom']).'\',\'?page=popup_item&amp;id_item='.$row['id_item'].'\'); return false">'.$row['nom'].'</a></td>';
 		$querysource = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
 						FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
 							INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.est_dans_id_item = tbl_items_1.id_item
@@ -35,7 +37,7 @@ function listetype5($produits) {
 				$source .= $rowsource['nom'];
 			}
 		}
-		if ($source) $source = ' (Source&nbsp;: '.$source.')';
+		$source = '<td>'.$source.'</td>';
 		$result .= $source;
 		$queryfamille = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
 						FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
@@ -55,8 +57,8 @@ function listetype5($produits) {
 				$famille .= $rowfamille['nom'];
 			}
 		}
-		if ($famille) $famille = ' (Famille taxonomique&nbsp;: '.$famille.')';
-		$result .= $famille.'</li>';
+		$famille = '<td>'.$famille.'</td>';
+		$result .= $famille.'</tr>';
 	}
 
 	return $result;
