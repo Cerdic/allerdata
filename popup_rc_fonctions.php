@@ -64,6 +64,7 @@ function rc($p1,$p2,$type_etude) {
 	$result = '';
 	$biblio = '';
 	$count = 0;
+	$premiere_ligne = true;
   
   if (!spip_num_rows($res))
     return "<h1 class='titArticle'>"._T('ad:aucun_resultat')."</h1>";
@@ -88,7 +89,6 @@ function rc($p1,$p2,$type_etude) {
 							WHERE (((tbl_reactions_croisees.id_reaction_croisee)=".$row['id_reaction_croisee']."));";
 							
 			$resbiblio = spip_query($querybiblio);
-			$premiere_ligne = true;
 			
 			while ($rowbiblio = spip_fetch_array($resbiblio)){
 				$linkbiblio = '<a href="#biblio'.$row['id_reaction_croisee'].'">';
