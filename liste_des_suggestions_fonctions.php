@@ -60,13 +60,13 @@ function suggestions($txt) {
 			(
 				( tbl_items.id_item IN ($produits ) 
 					AND tbl_items_1.id_item NOT IN ($produits)
-					AND tbl_items_1.id_type_item in (5,3)
+					AND tbl_items_1.id_type_item in (5,3,13)
 				)
 			OR
 				(
 					tbl_items_1.id_item IN ($produits ) 
 					AND tbl_items.id_item NOT IN ($produits)
-					AND tbl_items.id_type_item in (5,3)
+					AND tbl_items.id_type_item in (5,3,13)
 				)
 			)
 	GROUP BY tbl_reactions_croisees.id_reaction_croisee
