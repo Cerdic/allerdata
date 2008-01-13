@@ -45,9 +45,9 @@ function rc($p1,$p2) {
 	$res = spip_query($query);
 	$result = '';
 	$biblio = '';
-	
+	$count = 0;
 	while ($row = spip_fetch_array($res)){
-		
+		$count += 1;
 		// Trouver le parent pour tester si les 2 produits sont dans la meme famille
 		if (((isset($items_fils_de[$row['idp1']])) && (isset($items_fils_de[$row['idp2']]))
 				&& array_intersect($items_fils_de[$row['idp1']],$items_fils_de[$row['idp2']])) == false) {
@@ -70,11 +70,11 @@ function rc($p1,$p2) {
 			while ($rowbiblio = spip_fetch_array($resbiblio)){
 				$linkbiblio = '<a href="#biblio'.$row['id_reaction_croisee'].'">';
 				$biblio .= '<a name="biblio'.$row['id_reaction_croisee'].'" id="biblio'.$row['id_reaction_croisee'].'"></a><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><caption>'.$row['id_reaction_croisee'].' : D&eacute;tails des travaux de r&eacute;activit&eacute; crois&eacute;e</caption><tbody>
-								<tr><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
-								<tr><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
-								<tr><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums pool&eacute;s</b>: '.(($rowbiblio['pool']==1)?'Oui':'Non').'</td><td colspan="2" rowspan="1"><b>Test qualitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Oui':'Non').'</td></tr>
-								<tr><td><b>Produit1</b></td><td><b>RC 1-&gt; 2</b></td><td><b>RC 2-&gt;1</b></td><td><b>Produit2</b></td><td><b>Remarques</b></td></tr>
-								<tr><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_RC_sens1'].'</td><td>'.$rowbiblio['niveau_RC_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums pool&eacute;s</b>: '.(($rowbiblio['pool']==1)?'Oui':'Non').'</td><td colspan="2" rowspan="1"><b>Test qualitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Oui':'Non').'</td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Produit1</b></td><td><b>RC 1-&gt; 2</b></td><td><b>RC 2-&gt;1</b></td><td><b>Produit2</b></td><td><b>Remarques</b></td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_RC_sens1'].'</td><td>'.$rowbiblio['niveau_RC_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
 								</tbody></table><a class="small right" href="#top">Retour au sommet</a><br class="nettoyeur"/>';
 			}
 			
@@ -83,11 +83,11 @@ function rc($p1,$p2) {
 			if ($p1 == $row['id_s1']) {
 				$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="squelettes/css/img/rc_jamais_lr.gif" alt="" title="" />': (($row['fleche_sens1'] === '1') ? '<img src="squelettes/css/img/rc_toujours_lr.gif" alt="" title="" />': '<span></span>'));
 				$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="squelettes/css/img/rc_jamais_rl.gif" alt="" title="" />': (($row['fleche_sens2'] === '1') ? '<img src="squelettes/css/img/rc_toujours_rl.gif" alt="" title="" />': '<span></span>'));
-				$result .= '<tr><td align=left>'.$linkbiblio. $row['id_reaction_croisee'].'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].' '.'</a></td><td>'.$fl1.'</a></td><td>'.$fl2.'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].'</a></td></tr>';
+				$result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td align=left>'.$linkbiblio. $row['id_reaction_croisee'].'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].' '.'</a></td><td>'.$fl1.'</a></td><td>'.$fl2.'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].'</a></td></tr>';
 			} else {
 				$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="squelettes/css/img/rc_jamais_rl.gif" alt="" title="" />': (($row['fleche_sens1'] === '1') ? '<img src="squelettes/css/img/rc_toujours_rl.gif" alt="" title="" />': '<span></span>'));
 				$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="squelettes/css/img/rc_jamais_lr.gif" alt="" title="" />': (($row['fleche_sens2'] === '1') ? '<img src="squelettes/css/img/rc_toujours_lr.gif" alt="" title="" />': '<span></span>'));
-				$result .= '<tr><td align=left>'.$linkbiblio.$row['id_reaction_croisee'].'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].' '.'</a></td><td>'.$fl2.'</a></td><td>'.$fl1.'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].'</a></td></tr>';
+				$result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td align=left>'.$linkbiblio.$row['id_reaction_croisee'].'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].' '.'</a></td><td>'.$fl2.'</a></td><td>'.$fl1.'</a></td><td align=left><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].'</a></td></tr>';
 			}
 
 
