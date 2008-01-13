@@ -69,13 +69,13 @@ function rc($p1,$p2) {
 			
 			while ($rowbiblio = spip_fetch_array($resbiblio)){
 				$linkbiblio = '<a href="#biblio'.$row['id_reaction_croisee'].'">';
-				$biblio .= '<a name="biblio'.$row['id_reaction_croisee'].'" id="biblio'.$row['id_reaction_croisee'].'"></a><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><caption>'.$row['id_reaction_croisee'].' : D&eacute;tails des travaux de r&eacute;activit&eacute; crois&eacute;e</caption><tbody>
+				$biblio .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th colspan="5" rowspan="1"><a name="biblio'.$row['id_reaction_croisee'].'" id="biblio'.$row['id_reaction_croisee'].'"></a>'.$row['id_reaction_croisee'].' : D&eacute;tails des travaux de r&eacute;activit&eacute; crois&eacute;e <a class="small right" href="#top">Retour au sommet</a></th></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums pool&eacute;s</b>: '.(($rowbiblio['pool']==1)?'Oui':'Non').'</td><td colspan="2" rowspan="1"><b>Test qualitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Oui':'Non').'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Produit1</b></td><td><b>RC 1-&gt; 2</b></td><td><b>RC 2-&gt;1</b></td><td><b>Produit2</b></td><td><b>Remarques</b></td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_RC_sens1'].'</td><td>'.$rowbiblio['niveau_RC_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
-								</tbody></table><a class="small right" href="#top">Retour au sommet</a><br class="nettoyeur"/>';
+								';
 			}
 			
 			#$nrc1 = (($row['niveau_RC_sens1'] <> '') ? '('.$row['niveau_RC_sens1'].')' : '');
@@ -95,7 +95,7 @@ function rc($p1,$p2) {
 		
 	}
 	if ($result) $result = '<div class="blocContenuArticle"><h1 class="titArticle">'._T('reactivites_croisees').'</h1><table class="liste_rc spip"><th>Biblio</th><th colspan="2">'.produit($p1).'</th><th colspan="2">'.produit($p2).'</th>'.$result.'</table></div>';
-	if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:bibliographies').'</h2>'.$biblio.'</div>';
+	if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:bibliographies').'</h2><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><tbody>'.$biblio.'</tbody></table><br class="nettoyeur"/></div>';
 	return $result;
 }
 
