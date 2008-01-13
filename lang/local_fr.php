@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'accueil' => "Accueil",
 'allergenicite' => "Allergenicit&eacute;",
 'assistant_moleculaire' => "Outil",
+'aucun_resultat' => "Aucun r&eacute;sultat",
 
 
 // B

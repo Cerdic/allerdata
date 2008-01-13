@@ -14,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 					<p>L\'acc&egrave;s &agrave; la partie r&eacute;serv&eacute;e aux abonn&eacute;s ne peut se faire qu\'apr&egrave;s attribution d\'un nom d\'utilisateur et d\'un mot de passe.</p>
 					<p>Si vous souhaitez obtenir vos identifiants, veuillez remplir le formulaire ci-dessous&nbsp;:</p>',
 					
-	'bibliographies' => 'D&eacute;tails des travaux de r&eacute;activit&eacute; crois&eacute;e',
 	// I
 	'intro_login' => '<p>Vous &ecirc;tes d&eacute;j&agrave; abonn&eacute; ?</p>
 					<p>Afin d\'acc&eacute;der au contenu int&eacute;gral de ce site, identifiez-vous en entrant 
@@ -44,7 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'memerubrique' => 'Dans la m&ecirc;me rubrique',
 	
 	// N
-	'nothing_found' => "Aucun &eacute;l&eacute;ment n'a &eacute;t&eacute; trouv&eacute;"
+	'nothing_found' => "Aucun &eacute;l&eacute;ment n'a &eacute;t&eacute; trouv&eacute;",
+	
+	// T
+	'titre_bibliographies_popup_rc' => 'M&eacute;thodes et r&eacute;sultats',
+	'titre_synthese_popup_rc' => 'Synth&egrave;se des r&eacute;sultats'
 );
 
 

@@ -1,5 +1,5 @@
 <?php
-function rc($p1,$p2) {
+function rc($p1,$p2,$type_etude) {
 	$tableau_produits = $items_fils_de = array();
 	if (is_numeric($p1)) $tableau_produits[] = $p1; 
 	if (is_numeric($p2)) $tableau_produits[] = $p2;
@@ -22,7 +22,8 @@ function rc($p1,$p2) {
 			tbl_reactions_croisees.id_reaction_croisee, 
 			tbl_items.id_item AS idp1, 
 			tbl_items.nom AS p1, 
-			tbl_reactions_croisees.id_produit1,
+			tbl_items.id_type_item AS type1,
+      tbl_reactions_croisees.id_produit1,
 			tbi3.id_type_item AS id_type_item1, 
 			tbl_reactions_croisees.fleche_sens1, 
 			tbl_reactions_croisees.niveau_RC_sens1, 
@@ -32,7 +33,8 @@ function rc($p1,$p2) {
 			tbl_reactions_croisees.id_produit2, 
 			tbl_items_1.id_item AS idp2, 
 			tbl_items_1.nom AS p2, 
-			tbl_reactions_croisees.produits_differents, 
+			tbl_items_1.id_type_item AS type2,
+      tbl_reactions_croisees.produits_differents, 
 			tbl_est_dans.est_dans_id_item AS id_s1, 
 			tbl_est_dans_1.est_dans_id_item AS id_s2
 		FROM tbl_items as tbi3, tbl_items as tbi4, ((((tbl_est_dans AS tbl_est_dans_1 INNER JOIN (tbl_reactions_croisees INNER JOIN tbl_est_dans ON tbl_reactions_croisees.id_produit1 = tbl_est_dans.id_item) ON tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2) INNER JOIN tbl_items ON tbl_est_dans_1.id_item = tbl_items.id_item) INNER JOIN tbl_types_items ON tbl_items.id_type_item = tbl_types_items.id_type_item) INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item) INNER JOIN tbl_types_items AS tbl_types_items_1 ON tbl_items_1.id_type_item = tbl_types_items_1.id_type_item
@@ -41,11 +43,31 @@ function rc($p1,$p2) {
 				AND produits_differents = 1
 				AND tbl_reactions_croisees.id_produit1 = tbi3.id_item
 				AND tbl_reactions_croisees.id_produit2 = tbi4.id_item
-			);";
-	$res = spip_query($query);
+			)";
+	
+  switch ($type_etude) {
+    case 'pp' :
+      $query .= "AND (tbl_items.id_type_item IN (5,3)) AND (tbl_items_1.id_type_item IN (5,3))";
+    break;
+    case 'pa' :
+      $query .= "AND (
+                  ((tbl_items.id_type_item IN (5,3)) AND (tbl_items_1.id_type_item NOT IN (5,3)))
+                  OR ((tbl_items.id_type_item NOT IN (5,3)) AND (tbl_items_1.id_type_item IN (5,3)))
+                )";
+    break;
+    case 'aa' :
+      $query .= "AND (tbl_items.id_type_item NOT IN (5,3)) AND (tbl_items_1.id_type_item NOT IN (5,3))";
+    break;
+  }
+  
+  $res = spip_query($query);
 	$result = '';
 	$biblio = '';
 	$count = 0;
+  
+  if (!spip_num_rows($res))
+    return "<h1 class='titArticle'>"._T('ad:aucun_resultat')."</h1>";
+    
 	while ($row = spip_fetch_array($res)){
 		$count += 1;
 		// Trouver le parent pour tester si les 2 produits sont dans la meme famille
@@ -69,7 +91,7 @@ function rc($p1,$p2) {
 			
 			while ($rowbiblio = spip_fetch_array($resbiblio)){
 				$linkbiblio = '<a href="#biblio'.$row['id_reaction_croisee'].'">';
-				$biblio .= '<tr><th colspan="5" rowspan="1"><a name="biblio'.$row['id_reaction_croisee'].'" id="biblio'.$row['id_reaction_croisee'].'"></a><span class="left"><a href="#top"><img src="squelettes/img/arrow_up.gif" style="margin-bottom:-2px"/></a>&nbsp;'.$row['id_reaction_croisee'].' : D&eacute;tails des travaux de r&eacute;activit&eacute; crois&eacute;e </span><a class="small right" href="#top">Retour au sommet</a></th></tr>
+				$biblio .= '<tr><th colspan="5" rowspan="1"><a name="biblio'.$row['id_reaction_croisee'].'" id="biblio'.$row['id_reaction_croisee'].'"></a><span class="left">'.$row['id_reaction_croisee'].' : </span><a class="small right" href="#top">Retour &agrave; la synth&egrave;se <img src="squelettes/img/arrow_up.gif" style="margin-bottom:-2px"/></a></th></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums pool&eacute;s</b>: '.(($rowbiblio['pool']==1)?'Oui':'Non').'</td><td colspan="2" rowspan="1"><b>Test qualitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Oui':'Non').'</td></tr>
@@ -94,8 +116,8 @@ function rc($p1,$p2) {
 		}
 		
 	}
-	if ($result) $result = '<div class="blocContenuArticle"><h1 class="titArticle">'._T('reactivites_croisees').'</h1><table class="liste_rc spip"><th>Biblio</th><th colspan="2">'.produit($p1).'</th><th colspan="2">'.produit($p2).'</th>'.$result.'</table></div>';
-	if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:bibliographies').'</h2><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><tbody>'.$biblio.'</tbody></table><br class="nettoyeur"/></div>';
+	if ($result) $result = '<div class="blocContenuArticle"><h1 class="titArticle">'._T('ad:titre_synthese_popup_rc').'</h1><table class="liste_rc spip"><th>Biblio</th><th colspan="2">'.produit($p1).'</th><th colspan="2">'.produit($p2).'</th>'.$result.'</table></div>';
+	if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:titre_bibliographies_popup_rc').'</h2><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><tbody>'.$biblio.'</tbody></table><br class="nettoyeur"/></div>';
 	return $result;
 }
 
