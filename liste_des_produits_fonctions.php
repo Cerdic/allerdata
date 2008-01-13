@@ -21,12 +21,30 @@ function produits_suggeres($query) {
 	$liste_noire = array();
 	if (is_array($_SESSION['produits_choisis'])) $liste_noire = $_SESSION['produits_choisis'];
 	
-	// On complète par une recherche sans accent
 	$sql = "SELECT tbl_items.id_item, nom, source, famille
 			FROM tbl_items 
 			WHERE id_type_item IN (5,3) ";
 	if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
 	$sql .= "	AND chaine_alpha like '".addslashes($chaine)."%'";
+	$sql .= " ORDER BY id_type_item DESC, nom";
+	$q = spip_query($sql);
+
+	$nb_elements_trouves += spip_num_rows($q);
+
+	while ($row = spip_fetch_array($q)) {
+		if (!$row['nom']) $row['nom'] = $row['source'];
+		if (!in_array($row['id_item'],$liste_noire)) {
+			$res[] = $row; 
+			$liste_noire[] = $row['id_item'];
+		}
+	}
+
+	$sql = "SELECT tbl_items.id_item, nom, source, famille
+			FROM tbl_items 
+			WHERE id_type_item IN (5,3) ";
+	if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
+	$sql .= "	AND chaine_alpha like ' ".addslashes($chaine)."%'";
+	$sql .= " ORDER BY id_type_item DESC, nom";
 	$q = spip_query($sql);
 
 	$nb_elements_trouves += spip_num_rows($q);
@@ -46,6 +64,7 @@ function produits_suggeres($query) {
 				WHERE id_type_item IN (5,3)"; 
 		if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
 		$sql .= "	AND chaine_alpha like '%".addslashes($chaine)."%'
+			ORDER BY nom
 			LIMIT 0,".(20-$nb_elements_trouves);
 		$q = spip_query($sql);
 
@@ -71,15 +90,6 @@ function produits_suggeres($query) {
 		$row['source'] = eregi_replace($chaine,'<b>'.$chaine.'</b>',$row['source']);		
 		$final[$key] = $row;
 	}
-
-	/* un tri sur la position+alpha */
-	foreach ($final as $key => $row) {
-	    $pos[$key]  = $row['pos'];
-	    $nom[$key] = $row['nom'];
-	}
-  $items = array_map('strtolower', $nom);
-
-	array_multisort($pos, SORT_ASC, $items, SORT_ASC, $final);
 
 	if (_request('debug')) {var_dump($final);die();}
 	
