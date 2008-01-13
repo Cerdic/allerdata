@@ -12,6 +12,9 @@ body * {
 body {
 	background: #000000 url(../../images/bg_body.gif) repeat-x scroll left top
 }
+#main table.spip caption {
+  margin: 20px 0 4px;
+}
 #container #contenu {
 	padding: 0 0 45px 0;
 }
@@ -219,3 +222,5 @@ x-tool-minimize {display:none}
 
 .activedrop {border:4px dashed #8db2e3;}
 .hoverdrop {border:4px solid #8db2e3;}
+
+

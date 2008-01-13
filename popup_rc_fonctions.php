@@ -69,7 +69,7 @@ function rc($p1,$p2) {
 			
 			while ($rowbiblio = spip_fetch_array($resbiblio)){
 				$linkbiblio = '<a href="#biblio'.$row['id_reaction_croisee'].'">';
-				$biblio .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th colspan="5" rowspan="1"><a name="biblio'.$row['id_reaction_croisee'].'" id="biblio'.$row['id_reaction_croisee'].'"></a>'.$row['id_reaction_croisee'].' : D&eacute;tails des travaux de r&eacute;activit&eacute; crois&eacute;e <a class="small right" href="#top">Retour au sommet</a></th></tr>
+				$biblio .= '<tr><th colspan="5" rowspan="1"><a name="biblio'.$row['id_reaction_croisee'].'" id="biblio'.$row['id_reaction_croisee'].'"></a><span class="left"><a href="#top"><img src="squelettes/img/arrow_up.gif" style="margin-bottom:-2px"/></a>&nbsp;'.$row['id_reaction_croisee'].' : D&eacute;tails des travaux de r&eacute;activit&eacute; crois&eacute;e </span><a class="small right" href="#top">Retour au sommet</a></th></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums pool&eacute;s</b>: '.(($rowbiblio['pool']==1)?'Oui':'Non').'</td><td colspan="2" rowspan="1"><b>Test qualitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Oui':'Non').'</td></tr>
