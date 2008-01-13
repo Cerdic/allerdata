@@ -16,7 +16,7 @@
 					<li class="listeFormation">
 						<h3 class="titSommaire"><a href="#URL_RUBRIQUE" class="formation">#TITRE</a></h3>
 						[<p class="txtSommaire">(#TEXTE|couper{280})</p>
-						<p class="lireSuite"><a href="#URL_RUBRIQUE"><img src="images/lire_suite.gif" alt="Lire la suite" title="Lire la suite" /></a></p>]
+						<p class="lireSuite"><a href="#URL_RUBRIQUE"><img src="#CHEMIN{images/lire_suite.gif}" alt="Lire la suite" title="Lire la suite" /></a></p>]
 					</li>
 					</BOUCLE_ListeRubriques>
 				</ul>
@@ -27,7 +27,7 @@
 <?php global $auteur_session; if ($auteur_session) { ?>
 <BOUCLE_DemandeAcces(ARTICLES){titre_mot=DemandeAcces}>
 				<div id="blocTitArticle">
-					[<img src="(#LOGO_NORMAL|extraure_attribut{src})" alt="Logo #TITRE" class="floatLeft" />]
+					[<img src="(#LOGO_NORMAL|extraire_attribut{src})" alt="Logo #TITRE" class="floatLeft" />]
 					<h1 class="titArticle">
 						#TITRE
 					</h1>
