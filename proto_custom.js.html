@@ -2,6 +2,10 @@
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
 
 function reload_penta(){
+  if (Ext.get('loading-mask')) {
+    Ext.get('loading-mask').show();
+    Ext.get('loading').show();
+  }
   jQuery('.ui-draggable').draggableDestroy();
   jQuery('#loading').show();
   jQuery('#lienAdresse').attr('href','pentagramme.html?p1='+ jQuery('#p1').val()
@@ -19,7 +23,6 @@ function reload_penta(){
   if (jQuery('#p5').val()) jQuery('#info-s5').show();
   LISTE_DES_SUGGESTIONS.show_query();
   CCD.show_ccd();
-  jQuery('#loading').fadeOut(500);
   return false;
 }
 jQuery('#form_penta').submit(reload_penta);

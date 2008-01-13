@@ -107,6 +107,12 @@ LISTE_DES_RC = {
           $('#liens_infos div#lien_'+ id_s[i] + '-' + id_d[i] + '_').show();
       }
       	
+
+		  if (Ext.get('loading-mask')) {
+		    Ext.get('loading-mask').hide();
+		    Ext.get('loading').fadeOut();
+		  }
+
     } else {
 			if (LISTE_DES_RC.nbErrorTry > 5) {
 				alert(ERROR_GOTDATA);
