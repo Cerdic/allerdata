@@ -47,16 +47,16 @@ function rc($p1,$p2,$type_etude) {
 	
   switch ($type_etude) {
     case 'pp' :
-      $query .= "AND (tbl_items.id_type_item IN (5,3)) AND (tbl_items_1.id_type_item IN (5,3))";
+      $query .= "AND (tbl_items.id_type_item IN (5,3,13)) AND (tbl_items_1.id_type_item IN (5,3,13))";
     break;
     case 'pa' :
       $query .= "AND (
-                  ((tbl_items.id_type_item IN (5,3)) AND (tbl_items_1.id_type_item NOT IN (5,3)))
-                  OR ((tbl_items.id_type_item NOT IN (5,3)) AND (tbl_items_1.id_type_item IN (5,3)))
+                  ((tbl_items.id_type_item IN (5,3,13)) AND (tbl_items_1.id_type_item NOT IN (5,3,13)))
+                  OR ((tbl_items.id_type_item NOT IN (5,3,13)) AND (tbl_items_1.id_type_item IN (5,3,13)))
                 )";
     break;
     case 'aa' :
-      $query .= "AND (tbl_items.id_type_item NOT IN (5,3)) AND (tbl_items_1.id_type_item NOT IN (5,3))";
+      $query .= "AND (tbl_items.id_type_item NOT IN (5,3,13)) AND (tbl_items_1.id_type_item NOT IN (5,3,13))";
     break;
   }
   
