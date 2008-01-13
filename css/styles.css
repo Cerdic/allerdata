@@ -883,3 +883,9 @@ background:transparent none repeat scroll 0%;
 color:#41C0EC !important;
 text-decoration:none;
 }
+
+/* reprise du plugin eluminures typo */
+.caractencadre-spip {
+	color:#FF6600;
+	font-weight:bold;
+}
