@@ -126,8 +126,8 @@ function allergenes($produits) {
 						<td>'.$rowallergenes['nom'].'</td>
 						<td>'.$rowallergenes['fonction_classification'].'</td>
 						<td style="text-align:right;">'.$rowallergenes['masse'].'</td>
-						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['iuis']==1)?'&otimes;':'').'</td>
-						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['glyco']==1)?'&otimes;':'').'</td>
+						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['iuis']==1)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
+						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['glyco']==1)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
 						</tr>';
 	}
 	$result .= $allergenes;
