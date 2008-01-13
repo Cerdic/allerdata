@@ -98,7 +98,8 @@ var LISTE_DES_FAMILLES = {
 			t_el[num] = jQuery('#prod_' + hidden_div.attr('id').substr(1))[0];
       num+=1;
     }
-		jQuery(t_el).highlight("#FDFF3F",5000);
+		nohighlight();
+		setTimeout(function(){jQuery(t_el).highlight("#FDFF3F",5000);},200);
   }
   
 };

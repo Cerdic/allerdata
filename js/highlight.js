@@ -3,6 +3,7 @@ var myTimer = null;
 
 function nohighlight(){
 	timerRunning = false;
+	clearTimeout(myTimer);
 	jQuery('.actif').css('backgroundColor', "white");
 	jQuery('.actif').removeClass('actif');
 }
