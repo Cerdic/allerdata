@@ -14,19 +14,8 @@
  * Slight mods for Ext 2.0
  */
 Ext.ux.SelectBox = function(config){
-	/*this.searchResetDelay = 1000;*/
 	config = config || {};
-	/*config = Ext.apply(config || {}, {
-		editable: false,
-		forceSelection: true,
-		rowHeight: false,
-		lastSearchTerm: false,
-        triggerAction: 'all',
-        mode: 'local'
-    }); */
-
 	Ext.ux.SelectBox.superclass.constructor.apply(this, arguments);
-
 	this.lastSelectedIndex = this.selectedIndex || 0;
 };
 
@@ -36,10 +25,9 @@ Ext.extend(Ext.ux.SelectBox, Ext.form.ComboBox, {
 		Ext.ux.SelectBox.superclass.initEvents.apply(this, arguments);
 		// you need to use keypress to capture upper/lower case and shift+key, but it doesn't work in IE
 		this.el.on('keydown', this.keySearch, this, {stopPropagation:false});
-		/*this.cshTask = new Ext.util.DelayedTask(this.clearSearchHistory, this);*/
 	},
 
-	keySearch : function(e, target, options) {
+  keySearch : function(e, target, options) {
 		var raw = e.getKey();
 		var key = String.fromCharCode(raw);
 		var startIndex = 0;
@@ -123,14 +111,14 @@ Ext.extend(Ext.ux.SelectBox, Ext.form.ComboBox, {
 			this.onViewClick();
 		}, this);
 
-		/*this.trigger.un('click', this.onTriggerClick, this);*/ 
+		/*this.trigger.un('click', this.onTriggerClick, this);
 		this.el.on('mousedown', function(e, target, options) {
 			if ($(target).val()) {
 				$(target).val('');
 				$(target).focus();
 				$(target).removeClass('x-form-empty-field');
 			}
-		}, this);
+		}, this);*/ 
 
 	},
 
@@ -194,26 +182,34 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.ux.SelectBox, {
       function(f, e) {
         var k = e.getKey();
         if (k == Ext.EventObject.ESC) {
-          if (this.lastSelectionText) {
-            this.setRawValue(this.lastSelectionText);
-          } else {
-            this.clearValue();
-						this.fireEvent('clear', this);
-            Ext.form.TextField.prototype.preFocus.call(this);
-          }
+          this.restoreContent()
         }
         if (k == Ext.EventObject.TAB || k == Ext.EventObject.ENTER) {
-					//Ext.form.ComboBox.superclass.onBlur.call(this);
+					Ext.form.ComboBox.superclass.onBlur.call(this);
           if (!this.value)
           this.onTrigger1Click();
-          //else
-          //reload_penta();
-					//return true; // Continuer la propagation de l'evenement ?
         }
       },
     this);
+		this.on('focus', this.clearContent, this);
+		this.on('blur', this.restoreContent, this);
   },
 
+	clearContent : function(e, target, options) {
+    if (!this.getValue()) return;
+    this.setRawValue('');
+  },
+  
+	restoreContent : function(e, target, options) {
+    if (this.lastSelectionText) {
+      this.setRawValue(this.lastSelectionText);
+    } else {
+      this.clearValue();
+			this.fireEvent('clear', this);
+      Ext.form.TextField.prototype.preFocus.call(this);
+    }
+  },
+  
   reset: Ext.form.Field.prototype.reset.createSequence(function() {
     this.triggers[0].hide();
   }),
