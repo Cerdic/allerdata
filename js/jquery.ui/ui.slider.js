@@ -1,8 +1,6 @@
 (function($) {
 
-	
 	//Web Forms 2.0
-	window.webforms = 1;
 	if(window['webforms']) {
 		$(document).ready(function() {
 			
@@ -28,7 +26,7 @@
 						minValue: cur.attr("min"),
 						startValue: this.getAttribute("value"),
 						stepping: cur.attr("step"),
-						change: function(e, ui) { cur[0].value = ui.value; cur[0].setAttribute("value", ui.value); },
+						change: function(e, ui) { cur[0].value = ui.value; cur[0].setAttribute("value", ui.value); }
 					});
 					
 					slider = slider.sliderInstance();
@@ -53,7 +51,7 @@
 	}
 
 	//Make nodes selectable by expression
-	$.extend($.expr[':'], { slider: "(' '+a.className+' ').indexOf(' ui-slider ')" });
+	$.extend($.expr[':'], { slider: "(' '+a.className+' ').indexOf(' ui-slider ') != -1" });
 	
 	$.fn.slider = function(o) {
 		return this.each(function() {
@@ -266,10 +264,10 @@
 			
 			var modifier = scale || o.realValue;
 			
-			var p = this.parentSize;
+			if(!p) var p = this.parentSize;
 			var prop = this.prop;
 			
-			m = Math.round(((value)/modifier) * p);
+			var m = Math.round(((value)/modifier) * p);
 
 			if(m < 0) m = 0;
 			if(m > p) m = p;
@@ -283,12 +281,12 @@
 			$(this.interaction.element).css(prop, m+'px');
 			
 			if(!changeslide && this.interaction.pickValue != this.interaction.curValue && !p)
-				$(this.element).triggerHandler("slidechange", [e, this.prepareCallbackObj(this.interaction)], o.change);
+				$(this.element).triggerHandler("slidechange", [null, this.prepareCallbackObj(this.interaction)], o.change);
 			
 			if(changeslide)
-				$(this.element).triggerHandler("slide", [e, this.prepareCallbackObj(this.interaction)], o.slide);
+				$(this.element).triggerHandler("slide", [null, this.prepareCallbackObj(this.interaction)], o.slide);
 
 		}
 	});
 
-})($);
+})(jQuery);

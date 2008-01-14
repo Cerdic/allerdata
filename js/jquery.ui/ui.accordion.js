@@ -1,21 +1,6 @@
-/*
- * Accordion 1.5 - jQuery menu widget
- *
- * Copyright (c) 2007 Jörn Zaefferer, Frank Marcia
- *
- * http://bassistance.de/jquery-plugins/jquery-plugin-accordion/
- *
- * Dual licensed under the MIT and GPL licenses:
- *   http://www.opensource.org/licenses/mit-license.php
- *   http://www.gnu.org/licenses/gpl.html
- *
- * Revision: $Id: jquery.accordion.js 2951 2007-08-28 07:21:13Z joern.zaefferer $
- *
- */
+;(function($) {
 
-(function($) {
-
-$.ui = $.ui || {}
+$.ui = $.ui || {};
 
 $.ui.accordion = {};
 $.extend($.ui.accordion, {
@@ -24,7 +9,8 @@ $.extend($.ui.accordion, {
 		alwaysOpen: true,
 		animated: 'slide',
 		event: "click",
-		header: "a"
+		header: "a",
+		autoheight: true
 	},
 	animations: {
 		slide: function(settings, additions) {
@@ -45,8 +31,8 @@ $.extend($.ui.accordion, {
 				difference = showHeight / hideHeight;
 			settings.toShow.css({ height: 0, overflow: 'hidden' }).show();
 			settings.toHide.filter(":hidden").each(settings.finished).end().filter(":visible").animate({height:"hide"},{
-				step: function(n){
-					settings.toShow.height(Math.ceil( (hideHeight - (n)) * difference ));
+				step: function(now){
+					settings.toShow.height((hideHeight - (now)) * difference );
 				},
 				duration: settings.duration,
 				easing: settings.easing,
@@ -69,27 +55,6 @@ $.extend($.ui.accordion, {
 });
 
 $.fn.extend({
-	nextUntil: function(expr) {
-	    var match = [];
-	
-	    // We need to figure out which elements to push onto the array
-	    this.each(function(){
-	        // Traverse through the sibling nodes
-	        for( var i = this.nextSibling; i; i = i.nextSibling ) {
-	            // Make sure that we're only dealing with elements
-	            if ( i.nodeType != 1 ) continue;
-	
-	            // If we find a match then we need to stop
-	            if ( $.filter( expr, [i] ).r.length ) break;
-	
-	            // Otherwise, add it on to the stack
-	            match.push( i );
-	        }
-	    });
-	
-	    return this.pushStack( match );
-	},
-	// the plugin method itself
 	accordion: function(settings) {
 		if ( !this.length )
 			return this;
@@ -121,19 +86,19 @@ $.fn.extend({
 				maxHeight -= $(this).outerHeight();
 			});
 			var maxPadding = 0;
-			headers.nextUntil(settings.header).each(function() {
+			headers.next().each(function() {
 				maxPadding = Math.max(maxPadding, $(this).innerHeight() - $(this).height());
 			}).height(maxHeight - maxPadding);
 		} else if ( settings.autoheight ) {
 			var maxHeight = 0;
-			headers.nextUntil(settings.header).each(function() {
-				maxHeight = Math.max(maxHeight, $(this).height());
+			headers.next().each(function() {
+				maxHeight = Math.max(maxHeight, $(this).outerHeight());
 			}).height(maxHeight);
 		}
 
 		headers
 			.not(active || "")
-			.nextUntil(settings.header)
+			.next()
 			.hide();
 		active.parent().andSelf().addClass(settings.selectedClass);
 		
@@ -186,8 +151,8 @@ $.fn.extend({
 		function clickHandler(event) {
 			// called only when using activate(false) to close all parts programmatically
 			if ( !event.target && !settings.alwaysOpen ) {
-				active.toggleClass(settings.selectedClass);
-				var toHide = active.nextUntil(settings.header);
+				active.parent().andSelf().toggleClass(settings.selectedClass);
+				var toHide = active.next();
 				var toShow = active = $([]);
 				toggle( toShow, toHide );
 				return;
@@ -214,15 +179,15 @@ $.fn.extend({
 			}
 
 			// find elements to show and hide
-			var toShow = clicked.nextUntil(settings.header),
-				toHide = active.nextUntil(settings.header),
+			var toShow = clicked.next(),
+				toHide = active.next(),
 				data = [clicked, active, toShow, toHide],
 				down = headers.index( active[0] ) > headers.index( clicked[0] );
 			
 			active = clickedActive ? $([]) : clicked;
 			toggle( toShow, toHide, data, clickedActive, down );
 
-			return !toShow.length;
+			return false;
 		};
 		function activateHandler(event, index) {
 			// IE manages to call activateHandler on normal clicks
@@ -235,11 +200,14 @@ $.fn.extend({
 		};
 
 		return container
-			.bind(settings.event, clickHandler)
+			.bind(settings.event || "", clickHandler)
 			.bind("activate", activateHandler);
 	},
 	activate: function(index) {
 		return this.trigger('activate', [index]);
+	},
+	unaccordion: function() {
+		return this.find("*").andSelf().unbind().end().end();
 	}
 });
 

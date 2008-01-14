@@ -42,10 +42,6 @@
 		o = this.options;
 		var self = this;
 		
-		this.mouseBindings = [function(e) { return self.move.apply(self, [e]); },function(e) { return self.drop.apply(self, [e]); }];
-		$(this.element).bind("mousemove", this.mouseBindings[0]);
-		$(this.element).bind("mouseup", this.mouseBindings[1]);
-		
 		$.ui.ddmanager.droppables.push({ item: this, over: 0, out: 1 }); // Add the reference and positions to the manager
 		$(this.element).addClass("ui-droppable");
 			
@@ -64,8 +60,6 @@
 		},
 		destroy: function() {
 			$(this.element).removeClass("ui-droppable").removeClass("ui-droppable-disabled");
-			$(this.element).unbind("mousemove", this.mouseBindings[0]);
-			$(this.element).unbind("mouseup", this.mouseBindings[1]);
 			
 			for(var i=0;i<$.ui.ddmanager.droppables.length;i++) {
 				if($.ui.ddmanager.droppables[i].item == this) $.ui.ddmanager.droppables.splice(i,1);
@@ -197,5 +191,5 @@
 		}
 	}
 	
-})($);
+})(jQuery);
 
