@@ -6,7 +6,8 @@ function reload_penta(){
     Ext.get('loading-mask').show();
     Ext.get('loading').show();
   }
-  jQuery('.ui-draggable').draggableDestroy();
+  //jQuery('.ui-draggable').draggableDestroy();
+  jQuery('.ui-draggable').removeClass('ui-draggable');
   jQuery('#loading').show();
   jQuery('#lienAdresse').attr('href','pentagramme.html?p1='+ jQuery('#p1').val()
     +'&p2='+jQuery('#p2').val() + '&p3='+
