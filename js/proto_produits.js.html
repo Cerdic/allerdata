@@ -186,8 +186,9 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.ux.SelectBox, {
         }
         if (k == Ext.EventObject.TAB || k == Ext.EventObject.ENTER) {
 					Ext.form.ComboBox.superclass.onBlur.call(this);
-          if (!this.value)
-          this.onTrigger1Click();
+          if (!this.getValue()) {
+            this.reset();
+          }  
         }
       },
     this);
@@ -196,6 +197,7 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.ux.SelectBox, {
   },
 
 	clearContent : function(e, target, options) {
+    Ext.form.ComboBox.superclass.onFocus.call(this);
     if (!this.getValue()) return;
     this.setRawValue('');
   },
@@ -211,6 +213,8 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.ux.SelectBox, {
   },
   
   reset: Ext.form.Field.prototype.reset.createSequence(function() {
+    this.clearValue();
+    this.fireEvent('clear', this);
     this.triggers[0].hide();
   }),
 
