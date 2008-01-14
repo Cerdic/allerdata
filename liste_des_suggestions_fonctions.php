@@ -32,7 +32,8 @@ function suggestions($txt) {
 	
 	$produits = implode(",", $tableau_produits);
 	
-	foreach ($tableau_produits as $id_item_source) {
+	/* calcul de la famille : les produits trouv�s ne doivent pas en faire partie */
+  foreach ($tableau_produits as $id_item_source) {
 		$query = "SELECT tbl_items.id_item FROM tbl_items, tbl_est_dans 
 			WHERE 
 				(est_dans_id_item = $id_item_source AND tbl_est_dans.id_item = tbl_items.id_item)
@@ -48,31 +49,33 @@ function suggestions($txt) {
 	
 	/* Mix des sens des RC */
 	$query = "
-	SELECT tbl_items.id_item AS idp1, 
-		tbl_items_1.id_item AS idp2
-	FROM tbl_est_dans, tbl_est_dans AS tbl_est_dans_1, tbl_reactions_croisees, tbl_items, tbl_items AS tbl_items_1
-	WHERE tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1
+	SELECT DISTINCT tbl_items.id_item AS idp1,tbl_reactions_croisees.fleche_sens1,tbl_reactions_croisees.fleche_sens2, 
+  tbl_items_1.id_item AS idp2
+ FROM tbl_est_dans, tbl_est_dans AS tbl_est_dans_1, tbl_reactions_croisees, tbl_items, tbl_items AS tbl_items_1
+ WHERE 
+  (tbl_reactions_croisees.fleche_sens1 = 1 OR tbl_reactions_croisees.fleche_sens2 = 1)
+  AND 
+     tbl_items.id_item IN (".implode(",", $produits).") 
+     AND tbl_items_1.id_item NOT IN (".implode(",", $items_famille).")
+  AND tbl_est_dans.est_dans_id_item = tbl_items.id_item
+  AND tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item
+	AND tbl_items_1.id_type_item IN (5,3,13)
+	AND 
+	(
+	  (
+		tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1
 		AND tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2
-		AND tbl_est_dans.id_item = tbl_items.id_item
-		AND tbl_est_dans_1.id_item = tbl_items_1.id_item
-		AND (tbl_reactions_croisees.fleche_sens1 = 1 OR tbl_reactions_croisees.fleche_sens2 = 1)
-		AND 
-			(
-				( tbl_items.id_item IN ($produits ) 
-					AND tbl_items_1.id_item NOT IN ($produits)
-					AND tbl_items_1.id_type_item in (5,3,13)
-				)
-			OR
-				(
-					tbl_items_1.id_item IN ($produits ) 
-					AND tbl_items.id_item NOT IN ($produits)
-					AND tbl_items.id_type_item in (5,3,13)
-				)
-			)
-	GROUP BY tbl_reactions_croisees.id_reaction_croisee
-	";
-	
-	$res = spip_query($query);
+    )
+   OR
+    (
+		tbl_est_dans.id_item = tbl_reactions_croisees.id_produit2
+		AND tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit1
+    )
+   )
+ GROUP BY tbl_reactions_croisees.id_reaction_croisee
+  ";
+
+ 	$res = spip_query($query);
 	
 	/* $reactif_avec : elements qui réagissent avec ceux du penta 
 		chaque item contient un tableau d'éléments du penta avec lesquels il réagit
