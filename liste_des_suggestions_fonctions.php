@@ -55,7 +55,7 @@ function suggestions($txt) {
  WHERE 
   (tbl_reactions_croisees.fleche_sens1 = 1 OR tbl_reactions_croisees.fleche_sens2 = 1)
   AND 
-     tbl_items.id_item IN (".implode(",", $produits).") 
+     tbl_items.id_item IN (".$produits.") 
      AND tbl_items_1.id_item NOT IN (".implode(",", $items_famille).")
   AND tbl_est_dans.est_dans_id_item = tbl_items.id_item
   AND tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item
@@ -72,7 +72,6 @@ function suggestions($txt) {
 		AND tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit1
     )
    )
- GROUP BY tbl_reactions_croisees.id_reaction_croisee
   ";
 
  	$res = spip_query($query);
