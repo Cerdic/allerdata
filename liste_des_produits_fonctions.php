@@ -26,7 +26,7 @@ function produits_suggeres($query) {
 			WHERE id_type_item IN (5,3) ";
 	if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
 	$sql .= "	AND chaine_alpha like '".addslashes($chaine)."%'";
-	$sql .= " ORDER BY id_type_item DESC, nom";
+	$sql .= " ORDER BY id_type_item , nom";
 	$q = spip_query($sql);
 
 	$nb_elements_trouves += spip_num_rows($q);
