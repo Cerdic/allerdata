@@ -104,11 +104,11 @@ function dragdrop(){
 	  var idMol = jQuery("span",ui.draggable.element).remove().text();
       var nom = jQuery(ui.draggable.element).text();
       var idDiv = jQuery(this).attr('id');
-      var lId = idDiv.replace('div-s','prod_');
-      if (jQuery('#'+lId).hasClass('x-form-empty-field')) {
+      var lId = idDiv.replace('div-s','p');
+      if (!jQuery('#'+lId).val()) {
         var pos = idDiv.substr(5,1);
-        ZONES_SAISIE.combo[pos].setValue(idMol);
-        ZONES_SAISIE.combo[pos].setRawValue(nom);
+        ZONES_SAISIE.combo[pos].setValue(nom);
+        jQuery('#'+lId).val(idMol);
         ZONES_SAISIE.combo[pos].triggers[0].show();
         reload_penta();
       }
