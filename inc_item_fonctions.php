@@ -123,7 +123,7 @@ function allergenes($produits) {
 	while ($rowallergenes = spip_fetch_array($resallergenes)){
 		$count += 1;
 		$allergenes .= '						<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'>
-						<td>'.$rowallergenes['nom'].'</td>
+						<td>'.(($rowallergenes['fonction_classification'] == $rowallergenes['nom']) ? '':$rowallergenes['nom']).'</td>
 						<td>'.$rowallergenes['fonction_classification'].'</td>
 						<td style="text-align:right;">'.$rowallergenes['masse'].'</td>
 						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['iuis']==1)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
