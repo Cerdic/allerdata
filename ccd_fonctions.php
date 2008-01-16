@@ -27,13 +27,16 @@ function ccd($txt) {
 	
 	$tt = '';
 	
-  /* On ne tient compte que du champ "CCD possible" (ticket http://tech-nova.fr/trac/allerdata/ticket/61) */
-	$query = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_est_dans.est_dans_id_item, tbl_items.id_item AS id_mol, tbl_items.nom AS nom2, tbl_items.glyco, tbl_items_2.nom AS produit
+  /* ALGO : on recherche les familles moléculaires (F) dont font partie certains éléments (A) ayant le champ "CCD possible" égal à "1"
+	 * qui eux-même sont contenus dans certains produits (P) du penta. 
+	 * Les produits (P) du penta sont mis en avant. la valeur affichée est le nombre de (P).
+	 */
+  $query = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_est_dans.est_dans_id_item, tbl_items.id_item AS id_mol, tbl_items.nom AS nom2, tbl_items.glyco, tbl_items_2.nom AS produit
 		FROM (((tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
 			INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items.id_item = tbl_est_dans_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_2 ON tbl_est_dans.est_dans_id_item = tbl_items_2.id_item
-		WHERE (((tbl_est_dans.est_dans_id_item) IN ($produits)) AND ((tbl_items_1.ccd_possible)=1))
+		WHERE (((tbl_items_2.id_item) IN ($produits)) AND ((tbl_items_1.id_type_item)=6) AND ((tbl_items.ccd_possible)=1))
 		";
 			
 	$liste_prod_ccd = array();
