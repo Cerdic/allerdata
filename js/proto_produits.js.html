@@ -390,6 +390,17 @@ var ZONES_SAISIE = {
     if ($('#p4').val()) $('#info-s4').show();
     if ($('#p5').val()) $('#info-s5').show();
 
+    this.pStore = new Ext.data.Store({
+      proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_noms'}),
+      reader: new Ext.data.JsonReader(
+        {root: 'liste_des_noms'},Ext.data.Record.create([
+          {name:'index'},
+          {name:'nom'},
+          {name:'source'}
+        ])
+      )
+    });
+    
   },
 
   nettoyage: function(el) {
@@ -411,6 +422,26 @@ var ZONES_SAISIE = {
     obj.set({
       value: val
     });
+  },
+
+  setDetails : function() {
+    var p1 = jQuery('#p1').val(),
+  		p2 = jQuery('#p2').val(), 
+  		p3 = jQuery('#p3').val(), 
+  		p4 = jQuery('#p4').val(), 
+  		p5 = jQuery('#p5').val();
+    this.pStore.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5}, callback:ZONES_SAISIE.gotData});
+  },
+  
+  gotData : function(record, arg, success) {
+    if (success) {
+      for (i=0; i<record.length; i++) {
+        nom = record[i].data;
+        if (nom.nom) 
+          jQuery("#nom_" + nom.index).html(nom.nom + "<br><em>" + nom.source + "</em>"); 
+        else jQuery("#nom_" + nom.index).text("");
+      }
+    }
   }
 
 };
