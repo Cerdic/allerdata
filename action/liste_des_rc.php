@@ -29,10 +29,31 @@
 			tbl_reactions_croisees.produits_differents, 
 			tbl_est_dans.est_dans_id_item AS id_s1, 
 			tbl_est_dans_1.est_dans_id_item AS id_s2
-		FROM tbl_items as tbi3, tbl_items as tbi4, ((((tbl_est_dans AS tbl_est_dans_1 INNER JOIN (tbl_reactions_croisees INNER JOIN tbl_est_dans ON tbl_reactions_croisees.id_produit1 = tbl_est_dans.id_item) ON tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2) INNER JOIN tbl_items ON tbl_est_dans_1.id_item = tbl_items.id_item) INNER JOIN tbl_types_items ON tbl_items.id_type_item = tbl_types_items.id_type_item) INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item) INNER JOIN tbl_types_items AS tbl_types_items_1 ON tbl_items_1.id_type_item = tbl_types_items_1.id_type_item
-		WHERE (
-				((tbl_est_dans.est_dans_id_item) In ($produits)) AND ((tbl_est_dans_1.est_dans_id_item) In ($produits))
-				AND (produits_differents = 1)
+		FROM 
+      tbl_items as tbi3, 
+      tbl_items as tbi4, 
+      (
+        (
+          (
+            (tbl_est_dans AS tbl_est_dans_1 
+              INNER JOIN 
+                (tbl_reactions_croisees 
+                  INNER JOIN tbl_est_dans ON tbl_reactions_croisees.id_produit1 = tbl_est_dans.id_item
+                ) 
+              ON tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2
+            ) 
+            INNER JOIN tbl_items ON tbl_est_dans_1.id_item = tbl_items.id_item
+          ) 
+          INNER JOIN tbl_types_items ON tbl_items.id_type_item = tbl_types_items.id_type_item
+        ) 
+        INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item
+      ) 
+      INNER JOIN tbl_types_items AS tbl_types_items_1 ON tbl_items_1.id_type_item = tbl_types_items_1.id_type_item
+		WHERE 
+      (
+			  tbl_est_dans.est_dans_id_item In ($produits)
+        AND tbl_est_dans_1.est_dans_id_item In ($produits)
+				AND produits_differents = 1
 				AND tbl_reactions_croisees.id_produit1 = tbi3.id_item
 				AND tbl_reactions_croisees.id_produit2 = tbi4.id_item
 			);";
