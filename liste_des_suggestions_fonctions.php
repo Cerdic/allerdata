@@ -60,7 +60,8 @@ function suggestions($txt) {
   AND tbl_est_dans.est_dans_id_item = tbl_items.id_item
   AND tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item
 	AND tbl_items_1.id_type_item IN (5,3,13)
-	AND 
+	AND tbl_reactions_croisees.produits_differents = 1
+  AND
 	(
 	  (
 		tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1
@@ -108,6 +109,7 @@ function suggestions($txt) {
 				AND tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2
 				AND tbl_est_dans.id_item = tbl_items.id_item
 				AND tbl_est_dans_1.id_item = tbl_items_1.id_item
+        AND tbl_reactions_croisees.produits_differents = 1
 				AND (tbl_reactions_croisees.fleche_sens1 = 1 OR tbl_reactions_croisees.fleche_sens1 = 1)
 				AND 
 					(
