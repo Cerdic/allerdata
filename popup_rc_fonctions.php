@@ -104,14 +104,18 @@ function rc($p1,$p2,$type_etude) {
 			}
 			
 			$flag_no_color = ($type_etude == 'pp')?'':'_nb';
+      if (!in_array($row['type2'],array(7,8,9,10,13))) $link1 = '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].' '.'</a>';
+      else $link1 = $row['p2'];
+      if (!in_array($row['type1'],array(7,8,9,10,13))) '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].'</a>';
+			else $link1 = $row['p1'];
       if ($p1 == $row['id_s1']) {
 				$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="squelettes/css/img/rc_jamais_lr'.$flag_no_color.'.gif" alt="" title="" />': (($row['fleche_sens1'] === '1') ? '<img src="squelettes/css/img/rc_toujours_lr'.$flag_no_color.'.gif" alt="" title="" />': '<span></span>'));
 				$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="squelettes/css/img/rc_jamais_rl'.$flag_no_color.'.gif" alt="" title="" />': (($row['fleche_sens2'] === '1') ? '<img src="squelettes/css/img/rc_toujours_rl'.$flag_no_color.'.gif" alt="" title="" />': '<span></span>'));
-				$result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th>'.$linkbiblio. $row['id_reaction_croisee'].'</a></th><td><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].' '.'</a></td><td style="text-align:center; width:70px">'.$fl1.'</a></td><td style="text-align:center; width:70px">'.$fl2.'</a></td><td><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].'</a></td></tr>';
+        $result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th>'.$linkbiblio. $row['id_reaction_croisee'].'</a></th><td>'.$link2.'</td><td style="text-align:center; width:70px">'.$fl1.'</a></td><td style="text-align:center; width:70px">'.$fl2.'</a></td><td>'.$link1.'</td></tr>';
 			} else {
 				$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="squelettes/css/img/rc_jamais_rl'.$flag_no_color.'.gif" alt="" title="" />': (($row['fleche_sens1'] === '1') ? '<img src="squelettes/css/img/rc_toujours_rl'.$flag_no_color.'.gif" alt="" title="" />': '<span></span>'));
 				$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="squelettes/css/img/rc_jamais_lr'.$flag_no_color.'.gif" alt="" title="" />': (($row['fleche_sens2'] === '1') ? '<img src="squelettes/css/img/rc_toujours_lr'.$flag_no_color.'.gif" alt="" title="" />': '<span></span>'));
-				$result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th>'.$linkbiblio.$row['id_reaction_croisee'].'</a></th><td><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].' '.'</a></td><td style="text-align:center; width:70px">'.$fl2.'</a></td><td style="text-align:center; width:70px">'.$fl1.'</a></td><td><a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].'</a></td></tr>';
+				$result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th>'.$linkbiblio.$row['id_reaction_croisee'].'</a></th><td>'.$link1.'</td><td style="text-align:center; width:70px">'.$fl2.'</a></td><td style="text-align:center; width:70px">'.$fl1.'</a></td><td>'.$link2.'</td></tr>';
 			}
 
 
