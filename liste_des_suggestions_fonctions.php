@@ -59,7 +59,7 @@ function suggestions($txt) {
      AND tbl_items_1.id_item NOT IN (".implode(",", $items_famille).")
   AND tbl_est_dans.est_dans_id_item = tbl_items.id_item
   AND tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item
-	AND tbl_items_1.id_type_item IN (5,3,13)
+	AND tbl_items_1.id_type_item = 5
 	AND tbl_reactions_croisees.produits_differents = 1
   AND
 	(
@@ -116,14 +116,14 @@ function suggestions($txt) {
 						( tbl_items.id_item IN ($id) 
 							AND tbl_items_1.id_item NOT IN ($id)
 							AND tbl_items_1.id_item NOT IN ($produits)
-							AND tbl_items_1.id_type_item in (5,3)
+							AND tbl_items_1.id_type_item = 5
 						)
 					OR
 						(
 							tbl_items_1.id_item IN ($id)
 							AND tbl_items.id_item NOT IN ($id)
 							AND tbl_items.id_item NOT IN ($produits)
-							AND tbl_items.id_type_item in (5,3)
+							AND tbl_items.id_type_item = 5
 						)
 					)
 			GROUP BY tbl_reactions_croisees.id_reaction_croisee
