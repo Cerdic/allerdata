@@ -436,9 +436,14 @@ var ZONES_SAISIE = {
   gotData : function(record, arg, success) {
     if (success) {
       var maj = [0,0,0,0,0,0];
+      var chaine = '';
+      var nom = {};
       for (i=0; i<record.length; i++) {
+        chaine = '';
         nom = record[i].data;
-        jQuery("#nom_" + nom.index).html(nom.nom + "<br><em>" + nom.source + "</em>"); 
+        if (nom.nom) chaine = nom.nom + "<br>";
+        chaine = chaine + "<em>" + nom.source + "</em>";
+        jQuery("#nom_" + nom.index).html(chaine); 
         maj[nom.index] = 1;
       }
       for (i=1; i<=5; i++) {

@@ -104,12 +104,12 @@ body {
 #info-s5 {position:absolute; top:93px; left:20px;}
 .info {background:transparent url('img/fd_infos.gif') top left no-repeat; width:25px; height:25px; display:none;cursor: pointer;}
 
-#nom_1, #nom_2, #nom_3, #nom_4, #nom_5 {position:absolute; padding:0; font-size:10px; color:#aaa}
-#nom_1 {top:90px; left:360px; width:250px;}
-#nom_2 {top:235px; left:430px; width:190px;}
-#nom_3 {top:381px; left:240px; width:255px; text-align:right;}
-#nom_4 {top:329px; left:-3px; width:184px; text-align:right;}
-#nom_5 {top:142px; left:-3px; width:130px;}
+#nom_1, #nom_2, #nom_3, #nom_4, #nom_5 {position:absolute; padding:0; font-size:10px; color:#aaa;}
+#nom_1 {top:90px; left:410px; width:205px;}
+#nom_2 {top:235px; left:445px; width:170px;}
+#nom_3 {top:381px; left:255px; width:230px; text-align:right;}
+#nom_4 {top:329px; left:-3px; width:170px; text-align:right;}
+#nom_5 {top:142px; left:-3px; width:130px; text-align:right;}
 
 #pentagramme {
 	position: relative;

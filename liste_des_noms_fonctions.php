@@ -14,7 +14,7 @@ function noms_detailles($txt) {
     $q = "SELECT nom, source FROM tbl_items WHERE id_item = '".$tableau_produits[$i]."'";
     $res = spip_query($q);
     if ($p = spip_fetch_array($res))
-      $final[] = array('index' => $i, 'nom' => $p['nom'], 'source' => $p['source']);
+      $final[] = array('index' => $i, 'nom' => '', 'source' => $p['source']);
   }
   
   return(json_encode($final));
