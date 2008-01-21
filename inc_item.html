@@ -4,7 +4,9 @@
 				</div>
 				
 				<BOUCLE_Chapeau(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
-				[<div class="blocContenuArticle">(#CHAPO)</div>]
+				[<div class="blocContenuArticle">(#CHAPO)
+				[<p><a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','spip.php?page=article_popup&id_article=#ID_ARTICLE'); return false;">(#TITRE)</a></p>]
+				</div>]
 				</BOUCLE_Chapeau>
 				
 				[(#ID_TYPE_ITEM|=={3}|?{' '})
