@@ -5,7 +5,7 @@
 				
 				<BOUCLE_Chapeau(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
 				[<div class="blocContenuArticle">(#CHAPO)
-				[<p><a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','spip.php?page=article_popup&id_article=#ID_ARTICLE'); return false;">(#TITRE)</a></p>]
+				[<p style="text-align:right;">En savoir plus&nbsp;: <a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','spip.php?page=article_popup&id_article=#ID_ARTICLE'); return false;">(#TITRE)</a></p>]
 				</div>]
 				</BOUCLE_Chapeau>
 				
@@ -53,15 +53,5 @@
 						</div>
 					]
 				]
-				<B_LienArticle>
-				<div class="blocContenuArticle">
-				<h2>En savoir plus</h2>
-				<ul>
-				<BOUCLE_LienArticle(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
-				[<li><a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','spip.php?page=article_popup&id_article=#ID_ARTICLE'); return false;">(#TITRE)</a></li>]
-				</BOUCLE_LienArticle>
-				</ul>
-				</div>
-				</B_LienArticle>
 				
 </BOUCLE_Items>
