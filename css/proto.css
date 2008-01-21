@@ -206,7 +206,9 @@ body .x-dlg-mask {
 }
 
 .x-panel-body #main h1.titArticle, .x-panel-body #main h2.titArticle {text-align: center; margin: 1em 0;}
-.x-panel-body .blocContenuArticle {text-align: center;}
+.x-panel-body .blocContenuArticle {text-align: left;}
+.x-panel-body .blocContenuArticle strong {font-weight: bold;}
+.x-panel-body .blocContenuArticle em {font-variant: italic;}
 .x-panel-body .popup_aide .blocContenuArticle {text-align: left;}
 .x-panel-body #main h2 {text-align:center;padding:0 0 4px;}
 
