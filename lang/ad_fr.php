@@ -10,9 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// B
 	'blabla_inscription' => '<p>Ce site est la propri&eacute;t&eacute; exclusive de la soci&eacute;t&eacute; AllerData SARL.</p>
-					<p>Il est exclusivement r&eacute;serv&eacute; aux professionnels.</p>
-					<p>L\'acc&egrave;s &agrave; la partie r&eacute;serv&eacute;e aux abonn&eacute;s ne peut se faire qu\'apr&egrave;s attribution d\'un nom d\'utilisateur et d\'un mot de passe.</p>
-					<p>Si vous souhaitez obtenir vos identifiants, veuillez remplir le formulaire ci-dessous&nbsp;:</p>',
+					<p>Il contient des informations qui, mal interpr&eacute;t&eacute;es, pourraient conduire &agrave; un diagnostic et une prise en charge erron&eacute;s.</p>
+					<p>C\'est pour cela qu\'il est exclusivement r&eacute;serv&eacute; aux professionnels de sant&eacute; comp&eacute;tents en allergologie apr&egrave;s v&eacute;rification de leurs donn&eacute;es.</p>
+					<p>Si vous &ecirc;tes allergologue ou travaillez dans le domaine de l\'allergie, vous pouvez demander &agrave; b&eacute;n&eacute;ficier d\'un acc&egrave;s complet en remplissant le formulaire ci-dessous.</p>',
 					
 	// I
 	'intro_login' => '<p>Vous &ecirc;tes d&eacute;j&agrave; abonn&eacute; ?</p>
