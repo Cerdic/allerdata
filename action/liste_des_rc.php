@@ -53,7 +53,7 @@
       (
 			  tbl_est_dans.est_dans_id_item In ($produits)
         AND tbl_est_dans_1.est_dans_id_item In ($produits)
-				AND produits_differents = 1
+			
 				AND tbl_reactions_croisees.id_produit1 = tbi3.id_item
 				AND tbl_reactions_croisees.id_produit2 = tbi4.id_item
 			);";
