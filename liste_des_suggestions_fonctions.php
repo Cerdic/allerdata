@@ -71,8 +71,8 @@ function suggestions($txt) {
 	
 	foreach($t_suggestions as $id_item => $sugg) {
 		$nb = sizeof($reactif_avec[$id_item]);
-		$sugg['nb'] = $nb;
-		$sugg['items_actifs'] = '['.implode(',',$reactif_avec[$id_item]).']';
+		$t_suggestions[$id_item]['nb'] = $nb;
+		$t_suggestions[$id_item]['items_actifs'] = '['.implode(',',$reactif_avec[$id_item]).']';
 	}
 
 
