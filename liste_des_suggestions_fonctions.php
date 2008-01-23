@@ -32,140 +32,50 @@ function suggestions($txt) {
 	
 	$produits = implode(",", $tableau_produits);
 	
-	/* calcul de la famille : les produits trouv�s ne doivent pas en faire partie */
-  foreach ($tableau_produits as $id_item_source) {
-		$query = "SELECT tbl_items.id_item FROM tbl_items, tbl_est_dans 
-			WHERE 
-				(est_dans_id_item = $id_item_source AND tbl_est_dans.id_item = tbl_items.id_item)
-				OR (tbl_est_dans.id_item = $id_item_source AND est_dans_id_item = tbl_items.id_item)";
-		$res = spip_query($query);
-
-		while($row = spip_fetch_array($res)) {
-			$items_famille[] = $row['id_item'];
-		}
-	}
-
 	$tt = '';
 	
-	/* Mix des sens des RC */
+	/* Liste des suggestions */
 	$query = "
-	SELECT DISTINCT tbl_items.id_item AS idp1,tbl_reactions_croisees.fleche_sens1,tbl_reactions_croisees.fleche_sens2, 
-  tbl_items_1.id_item AS idp2
- FROM tbl_est_dans, tbl_est_dans AS tbl_est_dans_1, tbl_reactions_croisees, tbl_items, tbl_items AS tbl_items_1
- WHERE 
-  (tbl_reactions_croisees.fleche_sens1 = 1 OR tbl_reactions_croisees.fleche_sens2 = 1)
-  AND 
-     tbl_items.id_item IN (".$produits.") 
-     AND tbl_items_1.id_item NOT IN (".implode(",", $items_famille).")
-  AND tbl_est_dans.est_dans_id_item = tbl_items.id_item
-  AND tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item
-	AND tbl_items_1.id_type_item = 5
-	AND tbl_reactions_croisees.produits_differents = 1
-  AND
-	(
-	  (
-		tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1
-		AND tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2
-    )
-   OR
-    (
-		tbl_est_dans.id_item = tbl_reactions_croisees.id_produit2
-		AND tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit1
-    )
-   )
+	(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.source, tbl_items_3.nom_court
+	FROM tbl_est_dans INNER JOIN ((tbl_items AS tbl_items_3 INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item) INNER JOIN tbl_reactions_croisees ON tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2) ON tbl_est_dans.est_dans_id_item = tbl_reactions_croisees.id_produit1
+	WHERE (((tbl_items_3.id_item) Not In (SELECT distinct tbl_items_1.id_item
+	FROM tbl_items AS tbl_items_1 INNER JOIN tbl_est_dans ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
+	WHERE (((tbl_est_dans.id_item) In (".$produits."))))) AND ((tbl_est_dans.est_dans_id_item) In (".$produits.")) AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13) AND ((tbl_reactions_croisees.fleche_sens1)=1)) OR (((tbl_items_3.id_item) Not In (SELECT distinct tbl_items_1.id_item
+	FROM tbl_items AS tbl_items_1 INNER JOIN tbl_est_dans ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
+	WHERE (((tbl_est_dans.id_item) In (".$produits."))))) AND ((tbl_est_dans.est_dans_id_item) In (".$produits.")) AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13) AND ((tbl_reactions_croisees.fleche_sens2)=1)))
+
+
+	UNION
+
+	(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.source, tbl_items_3.nom_court
+	FROM tbl_items AS tbl_items_3 INNER JOIN (tbl_est_dans AS tbl_est_dans_1 INNER JOIN (tbl_est_dans INNER JOIN tbl_reactions_croisees ON tbl_est_dans.id_item = tbl_reactions_croisees.id_produit2) ON tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit1) ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item
+	WHERE (((tbl_items_3.id_item) Not In (SELECT distinct tbl_items_1.id_item
+	FROM tbl_items AS tbl_items_1 INNER JOIN tbl_est_dans ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
+	WHERE (((tbl_est_dans.id_item) In (".$produits."))))) AND ((tbl_est_dans.est_dans_id_item) In (".$produits.")) AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13) AND ((tbl_reactions_croisees.fleche_sens1)=1)) OR (((tbl_items_3.id_item) Not In (SELECT distinct tbl_items_1.id_item
+	FROM tbl_items AS tbl_items_1 INNER JOIN tbl_est_dans ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
+	WHERE (((tbl_est_dans.id_item) In (".$produits."))))) AND ((tbl_est_dans.est_dans_id_item) In (".$produits.")) AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13) AND ((tbl_reactions_croisees.fleche_sens2)=1)))
+	
   ";
 
  	$res = spip_query($query);
 	
-	/* $reactif_avec : elements qui réagissent avec ceux du penta 
-		chaque item contient un tableau d'éléments du penta avec lesquels il réagit
-		*/
-	
-	/* Tri pour avoir un tableau associatif correct */
 	while ($row = spip_fetch_array($res)){
-		if (in_array($row['idp1'],$tableau_produits)) {
-			$reactif_avec[$row['idp2']][$row['idp1']] = $row['idp1'];
-			$t_id_suggestion_trouvee[$row['idp2']] = $row['idp2']; 
-		}
-		else {
-			$reactif_avec[$row['idp1']][$row['idp2']] = $row['idp2'];
-			$t_id_suggestion_trouvee[$row['idp1']] = $row['idp1']; 
-		}
-	}
-	
-	/* Recherche sur les parents et remontée des produits réactifs */
-	foreach ($tableau_produits as $id_item) {
-		$res = spip_query("
-			SELECT id_item from tbl_est_dans
-			WHERE est_dans_id_item = $id_item
-		");
-		while ($row = spip_fetch_array($res)){
-			$id = $row['id_item'];
-			$query = "
-			SELECT tbl_items.id_item AS idp1, 
-				tbl_items_1.id_item AS idp2
-			FROM tbl_est_dans, tbl_est_dans AS tbl_est_dans_1, tbl_reactions_croisees, tbl_items, tbl_items AS tbl_items_1
-			WHERE tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1
-				AND tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2
-				AND tbl_est_dans.id_item = tbl_items.id_item
-				AND tbl_est_dans_1.id_item = tbl_items_1.id_item
-        AND tbl_reactions_croisees.produits_differents = 1
-				AND (tbl_reactions_croisees.fleche_sens1 = 1 OR tbl_reactions_croisees.fleche_sens1 = 1)
-				AND 
-					(
-						( tbl_items.id_item IN ($id) 
-							AND tbl_items_1.id_item NOT IN ($id)
-							AND tbl_items_1.id_item NOT IN ($produits)
-							AND tbl_items_1.id_type_item = 5
-						)
-					OR
-						(
-							tbl_items_1.id_item IN ($id)
-							AND tbl_items.id_item NOT IN ($id)
-							AND tbl_items.id_item NOT IN ($produits)
-							AND tbl_items.id_type_item = 5
-						)
-					)
-			GROUP BY tbl_reactions_croisees.id_reaction_croisee
-			";
-			
-			$res2 = spip_query($query);
-			
-			/* Tri pour avoir un tableau associatif correct */
-			/* astuce : on affecte au pere la RC trouvée depuis le fils */
-			while ($row2 = spip_fetch_array($res2)){
-				if ($row2['idp1'] == $id) {
-					$reactif_avec[$row2['idp2']][$id_item] = $id_item;
-					$t_id_suggestion_trouvee[$row2['idp2']] = $row2['idp2']; 
-				}
-				else {
-					$reactif_avec[$row2['idp1']][$id_item] = $id_item;
-					$t_id_suggestion_trouvee[$row2['idp1']] = $row2['idp1']; 
-				}
-			}
-
-		}
-	}
-	
-	/* On récupère le nom pour construire l'assemblage final */
-	$res = spip_query("
-		SELECT id_item, nom, source from tbl_items
-		where id_item in (".implode(',',$t_id_suggestion_trouvee).")
-	");
-	
-	/* En prenant garde de virer les membres des familles des items du penta */
-	while ($row = spip_fetch_array($res)){
-		if (!(in_array($row['id_item'],$items_famille))) {
-			$nb = sizeof($reactif_avec[$row['id_item']]);
-			if (!$row['nom']) $row['nom'] = $row['source'];
-			$t_suggestions[] = array(
-					'nb' => $nb, 
-					'nom' => $row['nom'],
-          'items_actifs' => '['.implode(',',$reactif_avec[$row['id_item']]).']', 
+		if (!isset($t_suggestions[$id_item])) {
+			$t_suggestions[$row['id_item']] = array(
+					'nom' => $row['nom_court'],
+					'source' => $row['source'],
 					'id_mol' => $row['id_item']);
 		}
+    $reactif_avec[$row['id_item']][$row['id_item_penta']] = $row['id_item_penta'];
 	}
 	
+	foreach($t_suggestions as $id_item => $sugg) {
+		$nb = sizeof($reactif_avec[$id_item]);
+		$sugg['nb'] = $nb;
+		$sugg['items_actifs'] = '['.implode(',',$reactif_avec[$id_item]).']';
+	}
+
+
 	/* un tri sur le nombre puis on met tout à plat */
 	$nb = $nom = $id_mol = $aFinal = array();
 	
