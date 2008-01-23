@@ -4,8 +4,6 @@ function produits_suggeres($query) {
 		
 	include_spip('inc/charsets');
 	
-	//$stopwords = array("(",")",",",'/');
-	//$query = str_replace($stopwords,'',trim(ereg_replace("[[:space:]]+",' ',$query)));
 	$query = strtolower($query);
 	$chaine = translitteration($query);
 	
@@ -93,7 +91,7 @@ function produits_suggeres($query) {
 
 	if (_request('debug')) {var_dump($final);die();}
 	
-	if (!$nb_elements_trouves) return(json_encode(array(array('id_item' => '', 'nom' => '', 'nom_mis_en_forme' => '', 'source' => _T('ad:nothing_found')))));
+	if (!$nb_elements_trouves) return(json_encode(array(array('id_item' => '', 'nom' => '', 'nom_mis_en_forme' => '', 'source' => _T('ad:nothing_found').' pour '.$chaine))));
 	else return(json_encode($final));
 
 }
