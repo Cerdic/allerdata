@@ -31,7 +31,7 @@ function ccd($txt) {
 	 * qui eux-même sont contenus dans certains produits (P) du penta. 
 	 * Les produits (P) du penta sont mis en avant. la valeur affichée est le nombre de (P).
 	 */
-  $query = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_2.nom AS produit
+  $query = "SELECT DISTINCT tbl_items_2.id_item, tbl_items_2.nom AS produit
 		FROM (((tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
 			INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items.id_item = tbl_est_dans_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item) 
