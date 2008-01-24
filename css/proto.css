@@ -222,6 +222,8 @@ body .x-dlg-mask {
 .x-panel-body table.liste_rc td span {display:block; width:50px;}
 .x-panel-body table.caption {margin-top:2em;}
 
+.x-panel-body thead th {text-align:center!important};
+  
 #liste_des_produits input {text-align:left!important;}
 .liste_rc td span {display:block; width: 50px}
 
