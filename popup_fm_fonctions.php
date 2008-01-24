@@ -24,20 +24,21 @@ function source($produits) {
 function allergenes($id_fm) {
 	$result = '';
   $liste_id_produit = _request('liste_produits');
-  $queryallergenes = "SELECT 
-            tbl_items_2.nom_court as nom_produit, tbl_items_2.source as source_produit, 
-            tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco
-					FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.est_dans_id_item) 
-						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item
-						INNER JOIN tbl_est_dans AS tbl_est_dans_2 ON tbl_items_1.id_item = tbl_est_dans_2.id_item
-            INNER JOIN tbl_items AS tbl_items_2 ON tbl_items_2.id_item = tbl_est_dans_2.est_dans_id_item 
-					WHERE (
-						((tbl_items.id_item)=$id_fm) 
-						AND ((tbl_items_1.id_type_item) IN (7,8,10))
-            AND (tbl_items_2.id_item IN (".$liste_id_produit."))
-						AND ( NOT ISNULL(tbl_items_1.nom))
-						)
-					ORDER BY tbl_items_1.nom;";
+  $queryallergenes = "SELECT tbl_items_2.nom_court AS nom_produit, tbl_items_2.source AS source_produit, tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_2.id_type_item
+						FROM (tbl_items 
+							INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.est_dans_id_item) 
+								INNER JOIN ((tbl_items AS tbl_items_1 
+									INNER JOIN tbl_est_dans AS tbl_est_dans_2 ON tbl_items_1.id_item = tbl_est_dans_2.id_item) 
+										INNER JOIN tbl_items AS tbl_items_2 ON tbl_est_dans_2.est_dans_id_item = tbl_items_2.id_item) ON tbl_est_dans.id_item = tbl_items_1.id_item
+						WHERE (
+								((tbl_items.id_item)=$id_fm) 
+								AND 
+								((tbl_items_1.id_type_item) In (7,8,10)) 
+								AND 
+								((tbl_items_2.id_type_item) In (3,5,13))
+							)
+						ORDER BY tbl_items_2.nom_court, tbl_items_2.source, tbl_items_1.nom;
+				";
   $resallergenes = spip_query($queryallergenes);
 	$count = 0;
 	while ($rowallergenes = spip_fetch_array($resallergenes)){
