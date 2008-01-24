@@ -37,7 +37,7 @@ function allergenes($id_fm) {
 								AND 
 								((tbl_items_2.id_type_item) In (5))
 							)
-						ORDER BY tbl_items_2.nom_court, tbl_items_2.source, tbl_items_1.nom;
+						ORDER BY tbl_items_1.nom, tbl_items_2.nom_court, tbl_items_2.source;
 				";
   $resallergenes = spip_query($queryallergenes);
 	$count = 0;
