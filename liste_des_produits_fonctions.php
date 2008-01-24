@@ -19,7 +19,7 @@ function produits_suggeres($query) {
 	$liste_noire = array();
 	if (is_array($_SESSION['produits_choisis'])) $liste_noire = $_SESSION['produits_choisis'];
 	
-	$sql = "SELECT tbl_items.id_item, nom, source, famille
+	$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
 			FROM tbl_items 
 			WHERE id_type_item IN (5,3) ";
 	if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
@@ -37,7 +37,7 @@ function produits_suggeres($query) {
 		}
 	}
 
-	$sql = "SELECT tbl_items.id_item, nom, source, famille
+	$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
 			FROM tbl_items 
 			WHERE id_type_item IN (5,3) ";
 	if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
@@ -55,9 +55,9 @@ function produits_suggeres($query) {
 		}
 	}
 
-	// On complète par une recherche plus large (20 maxi, question perfs client)
+	// On complï¿½te par une recherche plus large (20 maxi, question perfs client)
 	if ($nb_elements_trouves<20) {
-		$sql = "SELECT tbl_items.id_item, nom, source, famille
+		$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
 				FROM tbl_items 
 				WHERE id_type_item IN (5,3)"; 
 		if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";

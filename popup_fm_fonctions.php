@@ -21,31 +21,34 @@ function source($produits) {
 	return $result;
 }
 
-function allergenes($produits) {
-	if (!is_numeric($produits)) return;
-	
+function allergenes($id_fm) {
 	$result = '';
-	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_1.fonction_classification, tbl_niveaux_allergenicite.niveau_de_preuve
+  $liste_id_produit = _request('liste_produits');
+  $queryallergenes = "SELECT 
+            tbl_items_2.nom_court as nom_produit, tbl_items_2.source as source_produit, 
+            tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco
 					FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.est_dans_id_item) 
 						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item
-						INNER JOIN tbl_niveaux_allergenicite ON tbl_items_1.id_niveau_allergenicite = tbl_niveaux_allergenicite.id_niveau_allergenicite
+						INNER JOIN tbl_est_dans AS tbl_est_dans_2 ON tbl_items_1.id_item = tbl_est_dans_2.id_item
+            INNER JOIN tbl_items AS tbl_items_2 ON tbl_items_2.id_item = tbl_est_dans_2.est_dans_id_item 
 					WHERE (
-						((tbl_items.id_item)=$produits) 
-						AND ((tbl_items_1.id_type_item) IN (7,8))
+						((tbl_items.id_item)=$id_fm) 
+						AND ((tbl_items_1.id_type_item) IN (7,8,10))
+            AND (tbl_items_2.id_item IN (".$liste_id_produit."))
 						AND ( NOT ISNULL(tbl_items_1.nom))
 						)
 					ORDER BY tbl_items_1.nom;";
-	$resallergenes = spip_query($queryallergenes);
+  $resallergenes = spip_query($queryallergenes);
 	$count = 0;
 	while ($rowallergenes = spip_fetch_array($resallergenes)){
 		$count += 1;
 		$allergenes .= '						<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'>
 						<td>'.$rowallergenes['nom'].'</td>
-						<!--td>'.$rowallergenes['fonction_classification'].'</td-->
+						<td>'.$rowallergenes['nom_produit'].'</td>
+						<td>'.$rowallergenes['source_produit'].'</td>
 						<td style="text-align:right;">'.$rowallergenes['masse'].'</td>
-						<td>'.(($rowallergenes['iuis']==1)?'Oui':'Non').'</td>
-						<td>'.(($rowallergenes['glyco']==1)?'Oui':'Non').'</td>
-						<td>'.$rowallergenes['niveau_de_preuve'].'</td>
+						<td style="text-align:center;">'.(($rowallergenes['iuis']==1)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
+						<td style="text-align:center;">'.(($rowallergenes['glyco']==-1)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
 						</tr>';
 	}
 	$result .= $allergenes;

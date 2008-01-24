@@ -38,6 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'js_sugg_card' => "Nb",
 	'js_fm_tests' => "Tests biologiques repr&eacute;sentatifs",
 	'js_tests_cliniques_title' => "Tests cliniques",
+  'js_titre_onglet_par_defaut' => 'Détail',
+  'js_titre_popup_fm' => 'Famille moléculaire',
 	
 	// M
 	'memerubrique' => 'Dans la m&ecirc;me rubrique',

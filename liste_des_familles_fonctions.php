@@ -72,7 +72,7 @@ function familles_moleculaires($txt) {
 				'nom' => $ligne['nom'].'==>['.implode(',',$ligne['est_dans']).']', 
 				'nb_item' => $ligne['card'], 
 				'test' => $ligne['representatif'],
-				'id_item' => $ligne['id_item'],
+				'id_item' => '"'.$ligne['id_item'].'&liste_produits='.implode(',',$ligne['est_dans']).'"',
 				'est_dans' => implode(',',$ligne['est_dans']) 
 			);
 		}

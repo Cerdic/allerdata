@@ -240,21 +240,21 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.ux.SelectBox, {
   // Parametres supplementaires pour Allerdata
   
   // ce qu'on affiche
-  displayField: 'nom',
-  // la valeur qui sera envoyées
+  displayField: 'nom_court',
+  // la valeur qui sera envoyÃ©es
   valueField: 'id_item',
-  // obliger de ne saisir que ce qui est proposé
+  // obliger de ne saisir que ce qui est proposÃ©
   forceSelection: true,
   // suggestion
   typeAhead: false,
   hideTrigger2: true,
-  // nb de caractères avant requete de suggestion
+  // nb de caractÃ¨res avant requete de suggestion
   minChars: 3,
-  // s'adapte au nb de résultats
+  // s'adapte au nb de rÃ©sultats
   grow: true,
   // hauteur maxi
   maxHeight: 400,
-  // pour éviter le pb du double-clic
+  // pour Ã©viter le pb du double-clic
   selectOnFocus: false,
   selectOnBlur: false,
   loadingText: COMBO_LOADINGTEXT,
@@ -277,7 +277,7 @@ var ZONES_SAISIE = {
     var cstore = new Ext.data.JsonStore({
       url: 'spip.php?page=liste_des_produits',
       root: 'produits',
-      fields: ['id_item', 'nom', 'source', 'famille', 'nom_mis_en_forme']
+      fields: ['id_item', 'nom', 'source', 'nom_court', 'famille', 'nom_mis_en_forme']
     });
 
   var resultTpl = new Ext.XTemplate(
@@ -291,11 +291,11 @@ var ZONES_SAISIE = {
     );
   
     this.combo[1] = new Ext.ux.TwinComboBox({
-      // d'où viennent les données
+      // d'oÃ¹ viennent les donnÃ©es
       store: cstore,
       tpl: resultTpl,
       applyTo: 'prod_1',
-      // le champs cché qui permet d'envoyer la valeur (et pas le texte)
+      // le champs cchÃ© qui permet d'envoyer la valeur (et pas le texte)
       hiddenName: 'p1'
     });
 
@@ -412,7 +412,7 @@ var ZONES_SAISIE = {
 
 	popupProd : function(id_item) {
     main_panel.updateTab('tab1','Item', 'spip.php?page=popup_item&id_item=' + id_item);
-    dialog_avec_tab.setTitle('Détails');
+    dialog_avec_tab.setTitle(TITRE_ONGLET_PAR_DEFAUT);
     dialog_avec_tab.show();
     return false;
 	},
