@@ -35,7 +35,7 @@ function ccd($p1,$p2,$p3,$p4,$p5) {
 			INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items.id_item = tbl_est_dans_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_2 ON tbl_est_dans.est_dans_id_item = tbl_items_2.id_item
-		WHERE (((tbl_est_dans.est_dans_id_item) IN ($produits)) AND ((tbl_items_1.id_type_item)=6) AND ((tbl_items.ccd_possible)=1))
+		WHERE (((tbl_est_dans.est_dans_id_item) IN ($produits)) AND ((tbl_items_1.id_type_item)=5) AND ((tbl_items.ccd_possible)=1))
 		ORDER BY tbl_items_1.nom, tbl_est_dans.est_dans_id_item DESC;";
   
 	$liste_prod_ccd = '';

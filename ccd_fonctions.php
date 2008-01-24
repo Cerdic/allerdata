@@ -31,12 +31,12 @@ function ccd($txt) {
 	 * qui eux-même sont contenus dans certains produits (P) du penta. 
 	 * Les produits (P) du penta sont mis en avant. la valeur affichée est le nombre de (P).
 	 */
-  $query = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_est_dans.est_dans_id_item, tbl_items.id_item AS id_mol, tbl_items.nom AS nom2, tbl_items.glyco, tbl_items_2.nom AS produit
+  $query = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_2.nom AS produit
 		FROM (((tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
 			INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items.id_item = tbl_est_dans_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_2 ON tbl_est_dans.est_dans_id_item = tbl_items_2.id_item
-		WHERE (((tbl_items_2.id_item) IN ($produits)) AND ((tbl_items_1.id_type_item)=6) AND ((tbl_items.ccd_possible)=1))
+		WHERE (((tbl_items_2.id_item) IN ($produits)) AND ((tbl_items_1.id_type_item)=5) AND ((tbl_items.ccd_possible)=1))
 		";
 			
 	$liste_prod_ccd = array();
@@ -45,7 +45,7 @@ function ccd($txt) {
 	$res = spip_query($query);
 		
 	while ($row = spip_fetch_array($res)){
-		$liste_prod_ccd[$row['est_dans_id_item']] = $row['est_dans_id_item'];
+		$liste_prod_ccd[$row['id_item']] = $row['id_item'];
 	}
 	$nb_ccd = sizeof($liste_prod_ccd);
 	
