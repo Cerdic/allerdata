@@ -37,7 +37,7 @@ function listetype5($produits) {
 				$source .= $rowsource['nom'];
 			}
 		}
-		$source = '<td>'.$source.'</td>';
+		$source = '<td><i>'.$source.'</i></td>';
 		$result .= $source;
 		$queryfamille = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
 						FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
