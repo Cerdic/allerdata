@@ -35,7 +35,7 @@ function allergenes($id_fm) {
 								AND 
 								((tbl_items_1.id_type_item) In (7,8,10)) 
 								AND 
-								((tbl_items_2.id_type_item) In (3,5,13))
+								((tbl_items_2.id_type_item) In (5))
 							)
 						ORDER BY tbl_items_2.nom_court, tbl_items_2.source, tbl_items_1.nom;
 				";
