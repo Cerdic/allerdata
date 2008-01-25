@@ -178,8 +178,8 @@ body .x-dlg-mask {
 /* CCD */
 
 #ccd {height:100%; text-align:center; font-family:arial,tahoma,helvetica,sans-serif}
-#ccd #bl_ccd {margin:-30px 0; height:60px; position:absolute; top:50%;left:0;width:100% }
-#ccd #bl_ccd a {font-size:60px; font-weight:bold; padding:10px; color: #888;text-decoration:none}
+#ccd #bl_ccd {margin:-30px 0; height:30px; position:absolute; top:32px;left:0;width:100% }
+#ccd #bl_ccd a {font-size:30px; font-weight:bold; padding:10px; color: #888;text-decoration:none}
 #ccd #bl_ccd a:hover {color: #444;text-decoration:none}
 #ccd .spip-admin-float {display:none}
 #ccd #infos_ccd {position:absolute;top:5px; right:5px; display:block!important}
