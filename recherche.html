@@ -11,7 +11,7 @@
 				<ul class="listeArticles">
 					<BOUCLE_ListeArticles(ARTICLES){recherche}{!par points}{pagination 5}{tout_voir}>
 					<li class="listeFormation">
-						<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE (#POINTS)</a></h3>
+						<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE</a></h3>
 						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
 						<p class="txtSommaire">[(#TEXTE|couper{280})]</p>
 						<p class="lireSuite"><a href="#URL_ARTICLE"><img src="#CHEMIN{images/lire_suite.gif}" alt="Lire la suite" title="Lire la suite" /></a></p>
