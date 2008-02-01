@@ -9,7 +9,7 @@
 				<h2>Articles</h2>
 				#ANCRE_PAGINATION
 				<ul class="listeArticles">
-					<BOUCLE_ListeArticles(ARTICLES){recherche}{!par points}{pagination 5}>
+					<BOUCLE_ListeArticles(ARTICLES){recherche}{!par points}{pagination 5}{tout_voir}>
 					<li class="listeFormation">
 						<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE (#POINTS)</a></h3>
 						<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
