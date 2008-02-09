@@ -14,7 +14,7 @@ function action_db_creer_noms_sans_accents() {
 	
 	// Mise à jour pour le calcul des produits suggérés dans une combo
 	spip_query("UPDATE `tbl_items` a, tbl_items b, tbl_est_dans ab
-	set a.source = b.nom, a.source_sans_accent = b.nom_sans_accent
+	set a.source = b.nom, a.source_sans_accent = b.nom_court
 	WHERE 
 	a.id_item = ab.id_item
 	and ab.est_dans_id_item = b.id_item 
