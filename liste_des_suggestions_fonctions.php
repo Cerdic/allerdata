@@ -53,7 +53,7 @@ WHERE (((tbl_est_dans.est_dans_id_item) In (".$produits.")) AND ((tbl_items_3.id
 	while ($row = spip_fetch_array($res)){
 		if (!isset($t_suggestions[$id_item])) {
 			$t_suggestions[$row['id_item']] = array(
-					'nom' => $row['nom_court'],
+					'nom' => (($row['nom_court']=='')?$row['nom']:$row['nom_court']),
 					'source' => $row['source'],
 					'id_mol' => $row['id_item']);
 		}
