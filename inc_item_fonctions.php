@@ -104,7 +104,7 @@ function source($produits) {
 	return implode(", ", $t_nom_sources);
 }
 
-function allergenes($produits) {
+function allergenes($produits, $types = '7,8') {
 	if (!is_numeric($produits)) return;
 	
 	$result = '';
@@ -114,7 +114,7 @@ function allergenes($produits) {
 						INNER JOIN tbl_niveaux_allergenicite ON tbl_items_1.id_niveau_allergenicite = tbl_niveaux_allergenicite.id_niveau_allergenicite
 					WHERE (
 						((tbl_items.id_item)=$produits) 
-						AND ((tbl_items_1.id_type_item) IN (7,8))
+						AND ((tbl_items_1.id_type_item) IN ($types))
 						AND ( NOT ISNULL(tbl_items_1.nom))
 						)
 					ORDER BY tbl_items_1.nom;";

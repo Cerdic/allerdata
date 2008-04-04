@@ -21,7 +21,7 @@ function source($produits) {
 	return $result;
 }
 
-function allergenes($id_fm) {
+function allergenes($id_fm, $types = '7,8,10') {
 	$result = '';
   $liste_id_produit = _request('liste_produits');
   $queryallergenes = "SELECT tbl_items_2.nom_court AS nom_produit, tbl_items_2.source AS source_produit, tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_2.id_type_item
@@ -33,7 +33,7 @@ function allergenes($id_fm) {
 						WHERE (
 								((tbl_items.id_item)=$id_fm) 
 								AND 
-								((tbl_items_1.id_type_item) In (7,8,10)) 
+								((tbl_items_1.id_type_item) In ($types)) 
 								AND 
 								((tbl_items_2.id_type_item) In (5))
 							)
