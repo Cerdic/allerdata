@@ -11,24 +11,6 @@
 				</BOUCLE_Chapeau>
 
 				[<div class="blocContenuArticle">
-					<h2>Cette famille mol&eacute;culaire contient les allerg&egrave;nes suivant :</h2>
-					<table class="spip" width=90%>
-						<thead>
-						<tr class="row_first">
-						<th>Nom</th>
-						<th>Produit</th>
-						<th>Source</th>
-						<th>Masse</th>
-						<th>IUIS</th>
-						<th>Glyco</th>
-						</tr>
-						</thead>
-						<tbody>
-						(#ID_ITEM|allergenes)
-						</tbody>
-					</table>
-				</div>]
-				[<div class="blocContenuArticle">
 					<h2>Allergènes testables in vitro</h2>
 					<table summary="Les allergènes testables in vitro de [(#NOM|sinon{NA})]" class="spip" width=90%>
 						<thead>
@@ -43,6 +25,24 @@
 						</thead>
 						<tbody>
 						(#ID_ITEM|allergenes{'9'})
+						</tbody>
+					</table>
+				</div>]
+				[<div class="blocContenuArticle">
+					<h2>Cette famille mol&eacute;culaire contient les allerg&egrave;nes suivant :</h2>
+					<table class="spip" width=90%>
+						<thead>
+						<tr class="row_first">
+						<th>Nom</th>
+						<th>Produit</th>
+						<th>Source</th>
+						<th>Masse</th>
+						<th>IUIS</th>
+						<th>Glyco</th>
+						</tr>
+						</thead>
+						<tbody>
+						(#ID_ITEM|allergenes)
 						</tbody>
 					</table>
 				</div>]
