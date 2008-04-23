@@ -2,7 +2,7 @@
 function listetype5($produits) {
 	if (!is_numeric($produits)) return;
 	
-	$query = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom
+	$query = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.testable
 				FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.est_dans_id_item) 
 					INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item
 				WHERE (
@@ -33,8 +33,10 @@ function listetype5($produits) {
 		while ($rowsource = spip_fetch_array($ressource)){
 			if ($source) {
 				$source .= ', '.$rowsource['nom'];
+				$testable |= $rowsource['nom'];
 			} else {
 				$source .= $rowsource['nom'];
+				$testable |= $rowsource['nom'];
 			}
 		}
 		$source = '<td><i>'.$source.'</i></td>';
@@ -57,8 +59,9 @@ function listetype5($produits) {
 				$famille .= $rowfamille['nom'];
 			}
 		}
-		$famille = '<td>'.$famille.'</td>';
-		$result .= $famille.'</tr>';
+		$result .= '<td>'.$famille.'</td>';
+		$result .= '<td style="text-align:center;font-size:1.5em;">'.(($rowsource['testable']==-1)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>';
+		$result .= '</tr>';
 	}
 
 	return $result;
@@ -108,7 +111,7 @@ function allergenes($produits, $types = '7,8') {
 	if (!is_numeric($produits)) return;
 	
 	$result = '';
-	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_1.fonction_classification, tbl_niveaux_allergenicite.niveau_de_preuve
+	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_1.testable, tbl_items_1.fonction_classification, tbl_niveaux_allergenicite.niveau_de_preuve
 					FROM (tbl_items INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.est_dans_id_item) 
 						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item
 						INNER JOIN tbl_niveaux_allergenicite ON tbl_items_1.id_niveau_allergenicite = tbl_niveaux_allergenicite.id_niveau_allergenicite
@@ -128,6 +131,7 @@ function allergenes($produits, $types = '7,8') {
 						<td style="text-align:right;">'.$rowallergenes['masse'].'</td>
 						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['iuis']==1)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
 						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['glyco']==-1)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
+						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['testable']==-1)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
 						</tr>';
 	}
 	$result .= $allergenes;

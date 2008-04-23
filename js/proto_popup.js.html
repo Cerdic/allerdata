@@ -11,24 +11,18 @@ Ext.onReady(function() {
     title: 'Réactivités croisées',
     autoScroll: true,
     activeTab: 0,
-    items: [{
-      id: 'tab1',
-      border: false,
-      title: 'détails',
-      closable: false,
-      autoScroll: true
-    }],
     plugins: new Ext.ux.TabCloseMenu(),
     enableTabScroll: true,
-    addTab: function(tabTitle, targetUrl) {
+    addTab: function(tabTitle, targetUrl, isClosable) {
       var tab = main_panel.add({
         title: tabTitle,
 				autoScroll: true,
-        closable: true
+        closable: isClosable, 
+				deferredRender:true
       });
       tab.show();
-			// Subtile : on ne peut pas charger la callback avant d'avoir montré/créé le panel
-			tab.getUpdater().update({url:targetUrl,scope:this,callback:this.callback_popup});
+	    // Subtile : on ne peut pas charger la callback avant d'avoir montré/créé le panel
+	    tab.getUpdater().update({url:targetUrl,scope:this,callback:this.callback_popup});
     },
 
     // Maj du contenu d'une tab si elle existe,sinon en cree une nouvelle
@@ -44,7 +38,7 @@ Ext.onReady(function() {
 	      tab.getUpdater().update({url:url,scope:this,callback:this.callback_popup});
         tab.setTitle(title);
       } else {
-        tab = this.addTab(title, url);
+        tab = this.addTab(title, url, (tabId != 'tab1'));
       }
       main_panel.setActiveTab(tab);
     },
@@ -54,24 +48,28 @@ Ext.onReady(function() {
 		  // puis si celles-ci sont trouvées on affecte un comportement à ce lien
 		  // Au lieu de déplacer brutalement le navigateur (fonctionne +/- bien)
 		  // Seule la partie active sera déplacée
-			  $('a','#' + tab.id).each(function(){
-			    var link=$(this).attr('href');
-			    if (link) { 
-			      if ((link != '#') && (link == '#' + link.split('#')[1])) {
-			        // Une ancre : on bougera donc par scrollTo
-			        $(this).click(function(){
-			          var ancre_id=$(this).attr('href').split('#')[1];
-			          var el = Ext.get(ancre_id);
-			          if(el){
-			            var top = (el.getOffsetsTo(tab)[1]) + tab.dom.scrollTop;
-			            tab.scrollTo('top', top-25, {duration:1.5});
-			          }
-			          return(false);
-			        })
-			      }
-			    }
-			  })  
+      if (!tab.dom.textContent.trim()) {
+				tab.remove(); 
+				return(false);
 			}
+			$('a','#' + tab.id).each(function(){
+        var link=$(this).attr('href');
+        if (link) { 
+          if ((link != '#') && (link == '#' + link.split('#')[1])) {
+            // Une ancre : on bougera donc par scrollTo
+            $(this).click(function(){
+              var ancre_id=$(this).attr('href').split('#')[1];
+              var el = Ext.get(ancre_id);
+              if(el){
+                var top = (el.getOffsetsTo(tab)[1]) + tab.dom.scrollTop;
+                tab.scrollTo('top', top-25, {duration:1.5});
+              }
+              return(false);
+            })
+          }
+        }
+      });
+    }
 
   });
 
@@ -105,11 +103,8 @@ Ext.onReady(function() {
   dialog_avec_tab.on('beforehide', 
   function() {
     main_panel.items.each(function(item) {
-      if (item != main_panel.getItem('tab1')) {
         main_panel.remove(item);
-      }
     });
-    main_panel.updateTab('tab1', '', '#CHEMIN{ext/resources/images/default/shared/blue-loading.gif}');
   });
 
 

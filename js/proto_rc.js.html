@@ -30,15 +30,53 @@ LISTE_DES_RC = {
     });
     
     jQuery('.lien').click(function(){
+    /* Serie d'appels en cascade pour ajouter ou pas un onglet : 
+       Méthode du "pied dans la porte" :
+       Le premier appel retour 'OK' ssi on a un résultat
+       Il stocke le résultat en session pour aller plus vite lors du second appel
+       qui retournera le contenu à mettre dans les tabs */
       p1 = jQuery(this).attr('id').substr(6,1);
       p2 = jQuery(this).attr('id').substr(8,1);
-      main_panel.updateTab('tab1','&Eacute;tudes Produits - Produits', 'spip.php?page=popup_rc&etude=pp&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
-      main_panel.updateTab('tab2','&Eacute;tudes Produits - Allerg&egrave;nes', 'spip.php?page=popup_rc&etude=pa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
-      main_panel.updateTab('tab3','&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes', 'spip.php?page=popup_rc&etude=aa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+      jQuery.get('spip.php',
+        { page : 'popup_rc',
+          etude : 'pp',
+          reset : 'pp',
+          p1 : jQuery('#p'+p1).val(), 
+          p2 : jQuery('#p'+p2).val() },
+        function(data,textStatus) {
+          if (textStatus == "success" && data.trim() != '') {
+            main_panel.updateTab('tab1','&Eacute;tudes Produits - Produits', 'spip.php?page=popup_rc&etude=pp&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+          }
+          jQuery.get('spip.php',
+            { page : 'popup_rc',
+              etude : 'pa',
+              reset : 'pa',
+              p1 : jQuery('#p'+p1).val(), 
+              p2 : jQuery('#p'+p2).val() },
+            function(data,textStatus) {
+              if (textStatus == "success" && data.trim() != '') {
+                main_panel.updateTab('tab2','&Eacute;tudes Produits - Allerg&egrave;nes', 'spip.php?page=popup_rc&etude=pa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+              }
+              jQuery.get('spip.php',
+                { page : 'popup_rc',
+                  etude : 'aa',
+                  reset : 'aa',
+                  p1 : jQuery('#p'+p1).val(), 
+                  p2 : jQuery('#p'+p2).val() },
+                function(data,textStatus) {
+                  if (textStatus == "success" && data.trim() != '') {
+                    main_panel.updateTab('tab3','&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes', 'spip.php?page=popup_rc&etude=aa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+                  }
+                } /* Callback aa */
+              );
+            } /* Callback pa */
+          );
+        } /* Callback pp */
+      );
       dialog_avec_tab.setTitle('D&eacute;tail des r&eacute;activit&eacute;s crois&eacute;es');
-      main_panel.setActiveTab(main_panel.getItem('tab1'));
+      //main_panel.setActiveTab(main_panel.getItem(1)); // Ne fonctionne plus ?
       dialog_avec_tab.show(Ext.get('lien_'+p1+'-'+p2+'_'));
-	  return false;
+	  	return false;
     });
 
   },
