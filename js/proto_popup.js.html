@@ -48,10 +48,6 @@ Ext.onReady(function() {
 		  // puis si celles-ci sont trouvées on affecte un comportement à ce lien
 		  // Au lieu de déplacer brutalement le navigateur (fonctionne +/- bien)
 		  // Seule la partie active sera déplacée
-      if (!tab.dom.textContent.trim()) {
-				tab.remove(); 
-				return(false);
-			}
 			$('a','#' + tab.id).each(function(){
         var link=$(this).attr('href');
         if (link) { 
