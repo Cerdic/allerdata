@@ -11,7 +11,7 @@ function rc($p1,$p2,$type_etude) {
     if (isset($_SESSION['rc_' . $_REQUEST['reset']]))
       unset($_SESSION['rc_' . $_REQUEST['reset']]);
   } else {
-    if (isset($_SESSION['rc_' . $type_etude]))
+    if (isset($_SESSION['rc_' . $type_etude]) && $_SESSION['rc_' . $type_etude])
       return ($_SESSION['rc_' . $type_etude]);
   }
   
@@ -139,7 +139,10 @@ function rc($p1,$p2,$type_etude) {
 		$result = '<div class="blocContenuArticle"><a name="top_'.$type_etude.'" id="top_'.$type_etude.'"></a><h1 class="titArticle">'._T('ad:titre_synthese_popup_rc').'</h1><table class="spip" width=100%><thead><tr class="row_first"><th style="width:50px;">Biblio</th><th style="width:285px" colspan="2">'.produit($p1).'</th><th style="width:325px" colspan="2">'.produit($p2).'</th></tr></thead><tbody>'.$result.'</tbody></table></div>';
 		if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:titre_bibliographies_popup_rc').'</h2><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><tbody>'.$biblio.'</tbody></table><br class="nettoyeur"/></div>';
     $_SESSION['rc_' . $type_etude] = $result;
+if (isset($_REQUEST['reset']))
     return "OK - ".$_REQUEST['reset']."- "; // Le prochain appel retournera le contenu stocké en session
+else
+	return $result;
   }
 	else return ''; //"<h1 class='titArticle'>"._T('ad:aucun_resultat')."</h1>";
 }
