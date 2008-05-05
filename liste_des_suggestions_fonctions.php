@@ -20,17 +20,21 @@ function suggestions($txt) {
 	
 	if (!sizeof($tableau_produits)) return '[]';
 	
-	session_start();
-	// Mémoriser les produits du penta
-	$_SESSION['produits_choisis'] = $tableau_produits;
-	// ainsi que leurs parents
+  session_start();
+  // Pour ne pas les reproposer ensuite il faut :
+	// - Mémoriser les produits du penta
+  // - Leurs sous-produits
+	// - ainsi que leurs parents
 	if ($tableau_produits) {
-		$res = spip_query("select DISTINCT id_item from tbl_est_dans where est_dans_id_item IN (".implode(',',$tableau_produits).")");
+		$res = spip_query("
+      select DISTINCT est_dans_id_item as id from tbl_est_dans where id_item IN (".implode(',',$tableau_produits).")
+      UNION
+      select DISTINCT id_item as id from tbl_est_dans where est_dans_id_item IN (".implode(',',$tableau_produits).")
+    ");
 		while ($row = spip_fetch_array($res)){
-			$_SESSION['produits_choisis'][] = $row['id_item'];
+			$_SESSION['produits_choisis'][] = $row['est_dans_id_item'];
 		}
 	}
-	session_write_close();
 
 	$produits = implode(",", $tableau_produits);
 	

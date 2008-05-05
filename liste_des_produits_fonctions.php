@@ -9,16 +9,18 @@ function produits_suggeres($query) {
 	
 	$nb_elements_retournes = 20;
 	$nb_elements_trouves = 0;
-	$res = $ids = array();
+	$tableau_produits = $liste_noire = $res = $ids = array();
+  $produits_deja_choisis = '';
 	
+  // Exclure les produits déjà dans les zones de saisie du penta
+  // Ainsi que leurs parents dans l'ordre de composition
+  // Cette liste est maintenue lors du calcul des suggestions (et purgée au chargement de la page)
 	session_start();
-	if (is_array($_SESSION['produits_choisis']))
-		$produits_deja_choisis = implode(",", $_SESSION['produits_choisis']);
-	session_write_close();
-	
-	$liste_noire = array();
-	if (is_array($_SESSION['produits_choisis'])) $liste_noire = $_SESSION['produits_choisis'];
-	
+	if (isset($_SESSION['produits_choisis']) && is_array($_SESSION['produits_choisis'])) {
+    $liste_noire = $_SESSION['produits_choisis'];
+		$produits_deja_choisis = implode(",", $liste_noire);
+  } 
+  
 	$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
 			FROM tbl_items 
 			WHERE id_type_item IN (5,3) ";
@@ -55,7 +57,7 @@ function produits_suggeres($query) {
 		}
 	}
 
-	// On complï¿½te par une recherche plus large (20 maxi, question perfs client)
+	// On complete par une recherche plus large (20 maxi, question perfs client)
 	if ($nb_elements_trouves<20) {
 		$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
 				FROM tbl_items 
