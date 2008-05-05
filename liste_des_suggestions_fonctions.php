@@ -13,10 +13,10 @@ function suggestions($txt) {
 	$tableau_produits = $t_suggestions = $items_famille = $t_id_suggestion_trouvee = array();
 	
 	if (isset($_REQUEST['p1']) && is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
-	if (isset($_REQUEST['p2']) is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
-	if (isset($_REQUEST['p3']) is_numeric($_REQUEST['p3'])) $tableau_produits[] = $_REQUEST['p3'];
-	if (isset($_REQUEST['p4']) is_numeric($_REQUEST['p4'])) $tableau_produits[] = $_REQUEST['p4'];
-	if (isset($_REQUEST['p5']) is_numeric($_REQUEST['p5'])) $tableau_produits[] = $_REQUEST['p5'];
+	if (isset($_REQUEST['p2']) && is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
+	if (isset($_REQUEST['p3']) && is_numeric($_REQUEST['p3'])) $tableau_produits[] = $_REQUEST['p3'];
+	if (isset($_REQUEST['p4']) && is_numeric($_REQUEST['p4'])) $tableau_produits[] = $_REQUEST['p4'];
+	if (isset($_REQUEST['p5']) && is_numeric($_REQUEST['p5'])) $tableau_produits[] = $_REQUEST['p5'];
 	
 	if (!sizeof($tableau_produits)) return '[]';
 	
