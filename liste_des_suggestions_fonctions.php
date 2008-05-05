@@ -20,6 +20,7 @@ function suggestions($txt) {
 	
 	session_start();
 	$_SESSION['produits_choisis'] = $tableau_produits;
+
 	if ($tableau_produits) {
 		$res = spip_query("select id_item from tbl_est_dans where est_dans_id_item IN (".implode(',',$tableau_produits).")");
 		while ($row = spip_fetch_array($res)){
@@ -35,18 +36,48 @@ function suggestions($txt) {
 	$tt = '';
 	
 	/* Liste des suggestions */
-	$query = "
-	(SELECT DISTINCT tbl_est_dans.id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.source, tbl_items_3.nom_court
-FROM (tbl_est_dans INNER JOIN tbl_reactions_croisees ON tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1) INNER JOIN (tbl_items AS tbl_items_3 INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items_3.id_item = tbl_est_dans_1.id_item) ON tbl_reactions_croisees.id_produit2 = tbl_est_dans_1.id_item
-WHERE (((tbl_est_dans.id_item) In (".$produits.")) AND ((tbl_items_3.id_item) Not In (SELECT distinct  tbl_items_1.id_item FROM tbl_items AS tbl_items_1 INNER JOIN tbl_est_dans ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item WHERE (((tbl_est_dans.id_item) In (".$produits."))))) AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13) AND ((tbl_reactions_croisees.fleche_sens1)=1)) OR (((tbl_est_dans.id_item) In (".$produits.")) AND ((tbl_items_3.id_item) Not In (SELECT distinct  tbl_items_1.id_item FROM tbl_items AS tbl_items_1 INNER JOIN tbl_est_dans ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item WHERE (((tbl_est_dans.id_item) In (".$produits."))))) AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13) AND ((tbl_reactions_croisees.fleche_sens2)=1)))
+	$query = <<<EOQ
+# Requête pour trouver les items à suggérer
 
-	UNION
-
-	(SELECT DISTINCT tbl_est_dans.id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.source, tbl_items_3.nom_court
-FROM (tbl_reactions_croisees INNER JOIN tbl_est_dans ON tbl_reactions_croisees.id_produit2 = tbl_est_dans.id_item) INNER JOIN (tbl_est_dans AS tbl_est_dans_1 INNER JOIN tbl_items AS tbl_items_3 ON tbl_est_dans_1.id_item = tbl_items_3.id_item) ON tbl_reactions_croisees.id_produit1 = tbl_est_dans_1.id_item
-WHERE (((tbl_est_dans.id_item) In (".$produits.")) AND ((tbl_items_3.id_item) Not In (SELECT distinct  tbl_items_1.id_item FROM tbl_items AS tbl_items_1 INNER JOIN tbl_est_dans ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item WHERE (((tbl_est_dans.id_item) In (".$produits."))))) AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13) AND ((tbl_reactions_croisees.fleche_sens1)=1)) OR (((tbl_est_dans.id_item) In (".$produits.")) AND ((tbl_items_3.id_item) Not In (SELECT distinct  tbl_items_1.id_item FROM tbl_items AS tbl_items_1 INNER JOIN tbl_est_dans ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item WHERE (((tbl_est_dans.id_item) In (".$produits."))))) AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13) AND ((tbl_reactions_croisees.fleche_sens2)=1)))
-	
-  ";
+(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.source, tbl_items_3.nom_court
+    FROM (tbl_est_dans INNER JOIN tbl_reactions_croisees ON tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1)
+            # Ne prendre que les éléments des est_dans qui ont un lien avec tbl_reactions_croisees en source
+    INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_reactions_croisees.id_produit2 = tbl_est_dans_1.id_item
+            # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intéresse)
+    INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.id_item
+    WHERE (
+        ((tbl_est_dans.est_dans_id_item) In ($produits))
+            # Le produit est contenu dans "bouleau Esp"
+        AND ((tbl_reactions_croisees.id_produit2) Not In (
+            SELECT distinct  tbl_items_1.id_item
+            FROM tbl_items AS tbl_items_1
+            INNER JOIN tbl_est_dans
+                ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
+            WHERE (
+            ((tbl_est_dans.id_item) In ($produits))))
+        )
+            # La cible ne doit pas contenir le produit du pentagramme
+        AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13)
+            # La cible est contenu dans un produit de type "produit" ou "espèce" (c'est ce dernier qui nous intéresse)
+        AND ((tbl_reactions_croisees.fleche_sens1)=1)
+            # On est dans une relation source vers cible
+    )
+    OR(
+        ((tbl_est_dans.est_dans_id_item) In ($produits))
+        AND ((tbl_items_3.id_item) Not In (
+            SELECT distinct  tbl_items_1.id_item
+            FROM tbl_items AS tbl_items_1
+            INNER JOIN tbl_est_dans
+                ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
+            WHERE (
+                ((tbl_est_dans.id_item) In ($produits))))
+        )
+        AND ((tbl_items_3.id_type_item)=5 OR (tbl_items_3.id_type_item)=13)
+        AND ((tbl_reactions_croisees.fleche_sens2)=1)
+            # Idem que la première condition, mais on est dans une relation inverse cible vers source
+    )
+)	
+EOQ;
 
  	$res = spip_query($query);
 	
