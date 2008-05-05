@@ -12,25 +12,26 @@ function cmp($a, $b)
 function suggestions($txt) {
 	$tableau_produits = $t_suggestions = $items_famille = $t_id_suggestion_trouvee = array();
 	
-	if (is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
-	if (is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
-	if (is_numeric($_REQUEST['p3'])) $tableau_produits[] = $_REQUEST['p3'];
-	if (is_numeric($_REQUEST['p4'])) $tableau_produits[] = $_REQUEST['p4'];
-	if (is_numeric($_REQUEST['p5'])) $tableau_produits[] = $_REQUEST['p5'];
+	if (isset($_REQUEST['p1']) && is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
+	if (isset($_REQUEST['p2']) is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
+	if (isset($_REQUEST['p3']) is_numeric($_REQUEST['p3'])) $tableau_produits[] = $_REQUEST['p3'];
+	if (isset($_REQUEST['p4']) is_numeric($_REQUEST['p4'])) $tableau_produits[] = $_REQUEST['p4'];
+	if (isset($_REQUEST['p5']) is_numeric($_REQUEST['p5'])) $tableau_produits[] = $_REQUEST['p5'];
+	
+	if (!sizeof($tableau_produits)) return '[]';
 	
 	session_start();
+	// Mémoriser les produits du penta
 	$_SESSION['produits_choisis'] = $tableau_produits;
-
+	// ainsi que leurs parents
 	if ($tableau_produits) {
-		$res = spip_query("select id_item from tbl_est_dans where est_dans_id_item IN (".implode(',',$tableau_produits).")");
+		$res = spip_query("select DISTINCT id_item from tbl_est_dans where est_dans_id_item IN (".implode(',',$tableau_produits).")");
 		while ($row = spip_fetch_array($res)){
 			$_SESSION['produits_choisis'][] = $row['id_item'];
 		}
 	}
 	session_write_close();
 
-	if (!sizeof($tableau_produits)) return '[]';
-	
 	$produits = implode(",", $tableau_produits);
 	
 	$tt = '';

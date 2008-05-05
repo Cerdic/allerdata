@@ -411,7 +411,7 @@ var ZONES_SAISIE = {
   },
 
 	popupProd : function(id_item) {
-    main_panel.updateTab('tab1','Item', 'spip.php?page=popup_item&id_item=' + id_item);
+    main_panel.updateTab('tab1','Item', 'spip.php?page=popup_item&amp;id_item=' + id_item);
     dialog_avec_tab.setTitle(TITRE_ONGLET_PAR_DEFAUT);
     dialog_avec_tab.show();
     return false;
