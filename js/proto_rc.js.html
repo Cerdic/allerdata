@@ -45,7 +45,9 @@ LISTE_DES_RC = {
           p2 : jQuery('#p'+p2).val() },
         function(data,textStatus) {
           if (textStatus == "success" && data.trim() != '') {
-            main_panel.updateTab('tab1','&Eacute;tudes Produits - Produits', 'spip.php?page=popup_rc&etude=pp&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+            main_panel.updateTab('tab1','&Eacute;tudes Produits - Produits (' + parseInt(data.trim()) + ')', 'spip.php?page=popup_rc&etude=pp&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+          } else {
+            main_panel.updateTab('tab1','&Eacute;tudes Produits - Produits (0)', 'spip.php?page=popup_rc');
           }
           jQuery.get('spip.php',
             { page : 'popup_rc',
@@ -55,7 +57,9 @@ LISTE_DES_RC = {
               p2 : jQuery('#p'+p2).val() },
             function(data,textStatus) {
               if (textStatus == "success" && data.trim() != '') {
-                main_panel.updateTab('tab2','&Eacute;tudes Produits - Allerg&egrave;nes', 'spip.php?page=popup_rc&etude=pa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+                main_panel.updateTab('tab2','&Eacute;tudes Produits - Allerg&egrave;nes (' + parseInt(data.trim()) + ')', 'spip.php?page=popup_rc&etude=pa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+              } else {
+                main_panel.updateTab('tab1','&Eacute;tudes Produits - Allerg&egrave;nes (0)', 'spip.php?page=popup_rc');
               }
               jQuery.get('spip.php',
                 { page : 'popup_rc',
@@ -65,7 +69,9 @@ LISTE_DES_RC = {
                   p2 : jQuery('#p'+p2).val() },
                 function(data,textStatus) {
                   if (textStatus == "success" && data.trim() != '') {
-                    main_panel.updateTab('tab3','&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes', 'spip.php?page=popup_rc&etude=aa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+                    main_panel.updateTab('tab3','&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes (' + parseInt(data.trim()) + ')', 'spip.php?page=popup_rc&etude=aa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+                  } else {
+                    main_panel.updateTab('tab1','&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes (0)', 'spip.php?page=popup_rc');
                   }
                 } /* Callback aa */
               );
@@ -74,7 +80,7 @@ LISTE_DES_RC = {
         } /* Callback pp */
       );
       dialog_avec_tab.setTitle('D&eacute;tail des r&eacute;activit&eacute;s crois&eacute;es');
-      //main_panel.setActiveTab(main_panel.getItem(1)); // Ne fonctionne plus ?
+      main_panel.setActiveTab(main_panel.getItem('tab1'));
       dialog_avec_tab.show(Ext.get('lien_'+p1+'-'+p2+'_'));
 	  	return false;
     });

@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accueil_ad' => 'Accueil Allerdata',
 	'articlesconnexes' => 'Articles connexes',
 	'acces_reserve_abonnes' => '<br />Page &agrave; acc&egrave;s r&eacute;serv&eacute; aux abonn&eacute;s',
+	'aucune_etude_de_ce_type' => 'Aucune &eacute;tude de ce type',
 	
 	// B
 	'blabla_inscription' => '<p>Ce site est la propri&eacute;t&eacute; exclusive de la soci&eacute;t&eacute; AllerData SARL.</p>

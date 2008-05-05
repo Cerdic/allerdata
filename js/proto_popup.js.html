@@ -13,12 +13,20 @@ Ext.onReady(function() {
     activeTab: 0,
     plugins: new Ext.ux.TabCloseMenu(),
     enableTabScroll: true,
-    addTab: function(tabTitle, targetUrl, isClosable) {
+
+		items: [{ 
+	 	      id: 'tab1', 
+	 	      border: false, 
+	 	      title: 'détails', 
+	 	      closable: false, 
+	 	      autoScroll: true 
+	 	}],
+
+	  addTab: function(tabTitle, targetUrl, isClosable) {
       var tab = main_panel.add({
         title: tabTitle,
 				autoScroll: true,
-        closable: isClosable, 
-				deferredRender:true
+        closable: isClosable
       });
       tab.show();
 	    // Subtile : on ne peut pas charger la callback avant d'avoir montré/créé le panel
@@ -99,8 +107,11 @@ Ext.onReady(function() {
   dialog_avec_tab.on('beforehide', 
   function() {
     main_panel.items.each(function(item) {
+			if (item != main_panel.getItem('tab1')) {
         main_panel.remove(item);
+			}
     });
+		main_panel.updateTab('tab1', '', '#CHEMIN{ext/resources/images/default/shared/blue-loading.gif}');
   });
 
 
