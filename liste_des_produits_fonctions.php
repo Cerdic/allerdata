@@ -20,10 +20,8 @@ function produits_suggeres($query) {
 	if (isset($_SESSION['produits_choisis']) && is_array($_SESSION['produits_choisis'])) {
     $liste_noire = $_SESSION['produits_choisis'];
 		$produits_deja_choisis = implode(",", $liste_noire);
-  } 
-  /*echo '/* ';
-  var_dump($_SESSION['produits_choisis']);
-  echo ' */';*/
+  }
+  
   session_write_close();
   
 	$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
