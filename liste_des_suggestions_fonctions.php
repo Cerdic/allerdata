@@ -123,9 +123,7 @@ EOQ;
 					'source' => $row['source'],
 					'id_mol' => $row['id_item']);
 		}
-    if (in_array($row['id_item_penta'],$tableau_produits)) {
-      $reactif_avec[$row['id_item']][$row['id_item_penta']] = $row['id_item_penta'];
-    }
+    $reactif_avec[$row['id_item']][$row['id_item_penta']] = $row['id_item_penta'];
 	}
 	
 	if (_request('debug')) {echo "
