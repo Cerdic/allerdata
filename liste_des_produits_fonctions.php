@@ -4,8 +4,9 @@ function produits_suggeres($query) {
 		
 	include_spip('inc/charsets');
 	
-	$query = strtolower($query);
+	// $query = strtolower($query); // plante sur le serveur de dev de jacques ==> inversion de l'ordre des 2 lignes.
 	$chaine = translitteration($query);
+	$chaine = strtolower($chaine);
 	
 	$nb_elements_retournes = 20;
 	$nb_elements_trouves = 0;
@@ -20,9 +21,9 @@ function produits_suggeres($query) {
     $liste_noire = $_SESSION['produits_choisis'];
 		$produits_deja_choisis = implode(",", $liste_noire);
   } 
-  echo '/* ';
+  /*echo '/* ';
   var_dump($_SESSION['produits_choisis']);
-  echo ' */';
+  echo ' */';*/
   session_write_close();
   
 	$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
