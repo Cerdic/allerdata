@@ -38,15 +38,6 @@ function suggestions($txt) {
 
 	if (!sizeof($tableau_produits)) return '[]';
 	
-  // tri 
-  sort($tableau_produits);
-  $signature = implode(',', $tableau_produits);
-  $q = spip_query("select resultat_json from cache_requetes where tuple='".mysql_real_escape_string($signature)."' and page='liste_des_suggestions'");
-  if (spip_num_rows($q)) {
-    $r = spip_fetch_array($q);
-    return $r['resultat_json'];
-  }
-  
 	$produits = implode(",", $_SESSION['produits_choisis']);
   
 	$tt = '';
@@ -139,6 +130,17 @@ UNION
 
 EOQ;
 	
+  $md5_query = md5($query);
+  
+  // tri 
+  $q = spip_query("select resultat_json from cache_requetes where hash='".mysql_real_escape_string($md5_query)."' and page='liste_des_suggestions'");
+  if (spip_num_rows($q)) {
+    $r = spip_fetch_array($q);
+    return $r['resultat_json'];
+  }
+  sort($tableau_produits);
+  $signature = implode(',', $tableau_produits);
+  
  	$res = spip_query($query);
 	
 	while ($row = spip_fetch_array($res)){
@@ -178,9 +180,10 @@ EOQ;
   $suggestion = json_encode($t_suggestions);
   
   // On stocke pour un prochain appel
-  spip_query("INSERT INTO cache_requetes (page,tuple,resultat_json,date_maj) 
+  spip_query("INSERT INTO cache_requetes (page,tuple,hash,resultat_json,date_maj) 
               VALUES('liste_des_suggestions',
                      '".mysql_real_escape_string($signature)."',
+                     '".mysql_real_escape_string($md5_query)."',
                      '".mysql_real_escape_string($suggestion)."',
                      NOW())");
 

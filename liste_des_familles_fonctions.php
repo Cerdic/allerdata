@@ -2,14 +2,23 @@
 function familles_moleculaires($txt) {
 	$tableau_produits = array();
 	
-	if (is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
-	if (is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
-	if (is_numeric($_REQUEST['p3'])) $tableau_produits[] = $_REQUEST['p3'];
-	if (is_numeric($_REQUEST['p4'])) $tableau_produits[] = $_REQUEST['p4'];
-	if (is_numeric($_REQUEST['p5'])) $tableau_produits[] = $_REQUEST['p5'];
+	if (is_numeric($_REQUEST['p1'])) $tableau_produits[1] = $_REQUEST['p1']; 
+	if (is_numeric($_REQUEST['p2'])) $tableau_produits[2] = $_REQUEST['p2'];
+	if (is_numeric($_REQUEST['p3'])) $tableau_produits[3] = $_REQUEST['p3'];
+	if (is_numeric($_REQUEST['p4'])) $tableau_produits[4] = $_REQUEST['p4'];
+	if (is_numeric($_REQUEST['p5'])) $tableau_produits[5] = $_REQUEST['p5'];
 	
 	if (!sizeof($tableau_produits)) return '[]';
 	
+  // tri pour signature unique
+  sort($tableau_produits);
+  $signature = implode(',', $tableau_produits);
+  $q = spip_query("select resultat_json from cache_requetes where tuple='".mysql_real_escape_string($signature)."' and page='liste_des_familles'");
+  if (spip_num_rows($q)) {
+    $r = spip_fetch_array($q);
+    return $r['resultat_json'];
+  }
+
 	$produits = implode(",", $tableau_produits);
 	
 	$tt = '';
@@ -80,7 +89,17 @@ function familles_moleculaires($txt) {
 
 	if (_request('debug')) {var_dump($final);die();}
 	
-	return json_encode($final);
+  $output = json_encode($final);
+  
+  // On stocke pour un prochain appel
+  spip_query("INSERT INTO cache_requetes (page,tuple,resultat_json,date_maj) 
+              VALUES('liste_des_familles',
+                     '".mysql_real_escape_string($signature)."',
+                     '".mysql_real_escape_string($output)."',
+                     NOW())");
+
+	return $output;
+
 	
 
 }
