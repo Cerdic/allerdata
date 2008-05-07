@@ -15,14 +15,28 @@
 function ccd($txt) {
 	$tableau_produits = array();
 	
-	if (is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
-	if (is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
-	if (is_numeric($_REQUEST['p3'])) $tableau_produits[] = $_REQUEST['p3'];
-	if (is_numeric($_REQUEST['p4'])) $tableau_produits[] = $_REQUEST['p4'];
-	if (is_numeric($_REQUEST['p5'])) $tableau_produits[] = $_REQUEST['p5'];
+	if (is_numeric($_REQUEST['p1'])) $tableau_produits[1] = $_REQUEST['p1']; 
+	if (is_numeric($_REQUEST['p2'])) $tableau_produits[2] = $_REQUEST['p2'];
+	if (is_numeric($_REQUEST['p3'])) $tableau_produits[3] = $_REQUEST['p3'];
+	if (is_numeric($_REQUEST['p4'])) $tableau_produits[4] = $_REQUEST['p4'];
+	if (is_numeric($_REQUEST['p5'])) $tableau_produits[5] = $_REQUEST['p5'];
 	
 	if (!sizeof($tableau_produits)) return '';
 	
+  // le tuple est ordonné 
+  $signature = sprintf('%d,%d,%d,%d,%d', 
+                      $tableau_produits[1],
+                      $tableau_produits[2],
+                      $tableau_produits[3],
+                      $tableau_produits[4],
+                      $tableau_produits[5]
+                      );
+  $q = spip_query("select resultat_json from cache_requetes where tuple='".mysql_real_escape_string($signature)."' and page='ccd'");
+  if (spip_num_rows($q)) {
+    $r = spip_fetch_array($q);
+    return ($r['resultat_json']);
+  }
+
 	$produits = implode(",", $tableau_produits);
 	
 	$tt = '';
@@ -50,6 +64,14 @@ function ccd($txt) {
 	$nb_ccd = sizeof($liste_prod_ccd);
 	
 	$js_liste_prod_ccd = '['.implode(',',$liste_prod_ccd).']';
-	return "<a href='#' class='outlineLink' onclick='CCD.outline_prod($js_liste_prod_ccd);return false;'>".$nb_ccd."</a>";
+	$output = "<a href='#' class='outlineLink' onclick='CCD.outline_prod($js_liste_prod_ccd);return false;'>".$nb_ccd."</a>";
+
+  // On stocke pour un prochain appel
+  spip_query("INSERT INTO cache_requetes (page,tuple,resultat_json,date_maj) 
+              VALUES('ccd',
+                     '".mysql_real_escape_string($signature)."',
+                     '".mysql_real_escape_string($output)."',
+                     NOW())");
+  return $output;
 }
 ?>
