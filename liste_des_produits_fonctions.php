@@ -23,7 +23,10 @@ function produits_suggeres($query) {
   }
   
   session_write_close();
-  
+  echo "/*
+appel le ".date('d/m h:i:s')."
+*/";
+
 	$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
 			FROM tbl_items 
 			WHERE id_type_item IN (5,3) ";

@@ -1,5 +1,4 @@
 #CACHE{30*24*3600,cache-client}
-#HTTP_HEADER{Vary: Accept-Encoding}
 #HTTP_HEADER{'Content-Type: application/x-javascript; charset=iso-8859-1'}
 [(#REM) produits suggérés lors de la saisie]
 {produits:[(#ENV{query}|produits_suggeres)]}
