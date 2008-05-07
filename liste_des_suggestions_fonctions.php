@@ -39,6 +39,7 @@ function suggestions($txt) {
 	if (!sizeof($tableau_produits)) return '[]';
 	
 	$produits = implode(",", $_SESSION['produits_choisis']);
+	$produits_penta = implode(",", $tableau_produits);
   
 	$tt = '';
 	
@@ -53,16 +54,9 @@ function suggestions($txt) {
             # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intéresse)
     INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.id_item
     WHERE (
-        ((tbl_est_dans.est_dans_id_item) In ($produits))
+        tbl_est_dans.est_dans_id_item In ($produits_penta)
             # Le produit est contenu dans "bouleau Esp"
-        AND ((tbl_est_dans_1.est_dans_id_item) Not In (
-            SELECT distinct  tbl_items_1.id_item
-            FROM tbl_items AS tbl_items_1
-            INNER JOIN tbl_est_dans
-                ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
-            WHERE (
-            ((tbl_est_dans.id_item) In ($produits))))
-        )
+        AND tbl_est_dans_1.est_dans_id_item Not In ($produits)
             # La cible ne doit pas contenir le produit du pentagramme
         AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13)
             # La cible est contenu dans un produit de type "produit" ou "espèce" (c'est ce dernier qui nous intéresse)
@@ -70,15 +64,8 @@ function suggestions($txt) {
             # On est dans une relation source vers cible
     )
     OR(
-        ((tbl_est_dans.est_dans_id_item) In ($produits))
-        AND ((tbl_items_3.id_item) Not In (
-            SELECT distinct  tbl_items_1.id_item
-            FROM tbl_items AS tbl_items_1
-            INNER JOIN tbl_est_dans
-                ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
-            WHERE (
-                ((tbl_est_dans.id_item) In ($produits))))
-        )
+        tbl_est_dans.est_dans_id_item In ($produits_penta)
+        AND tbl_items_3.id_item Not In ($produits)
         AND ((tbl_items_3.id_type_item)=5 OR (tbl_items_3.id_type_item)=13)
         AND ((tbl_reactions_croisees.fleche_sens2)=1)
             # Idem que la première condition, mais on est dans une relation inverse cible vers source
@@ -94,16 +81,9 @@ UNION
             # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intéresse)
     INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.id_item
     WHERE (
-        ((tbl_est_dans.est_dans_id_item) In ($produits))
+        tbl_est_dans.est_dans_id_item In ($produits_penta)
             # Le produit est contenu dans "bouleau Esp"
-        AND ((tbl_est_dans_1.est_dans_id_item) Not In (
-            SELECT distinct  tbl_items_1.id_item
-            FROM tbl_items AS tbl_items_1
-            INNER JOIN tbl_est_dans
-                ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
-            WHERE (
-            ((tbl_est_dans.id_item) In ($produits))))
-        )
+        AND tbl_est_dans_1.est_dans_id_item Not In ($produits)
             # La cible ne doit pas contenir le produit du pentagramme
         AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13)
             # La cible est contenu dans un produit de type "produit" ou "espèce" (c'est ce dernier qui nous intéresse)
@@ -111,15 +91,8 @@ UNION
             # On est dans une relation source vers cible
     )
     OR(
-        ((tbl_est_dans.est_dans_id_item) In ($produits))
-        AND ((tbl_est_dans_1.est_dans_id_item) Not In (
-            SELECT distinct  tbl_items_1.id_item
-            FROM tbl_items AS tbl_items_1
-            INNER JOIN tbl_est_dans
-                ON tbl_items_1.id_item = tbl_est_dans.est_dans_id_item
-            WHERE (
-                ((tbl_est_dans.id_item) In ($produits))))
-        )
+        tbl_est_dans.est_dans_id_item In ($produits_penta)
+        AND tbl_est_dans_1.est_dans_id_item Not In ($produits)
         AND ((tbl_items_3.id_type_item)=5 OR (tbl_items_3.id_type_item)=13)
         AND ((tbl_reactions_croisees.fleche_sens2)=1)
             # Idem que la première condition, mais on est dans une relation inverse cible vers source
@@ -134,7 +107,7 @@ EOQ;
   
   // tri 
   $q = spip_query("select resultat_json from cache_requetes where hash='".mysql_real_escape_string($md5_query)."' and page='liste_des_suggestions'");
-  if (spip_num_rows($q)) {
+  if ((!_request('debug')) && spip_num_rows($q)) {
     $r = spip_fetch_array($q);
     return $r['resultat_json'];
   }
@@ -150,17 +123,28 @@ EOQ;
 					'source' => $row['source'],
 					'id_mol' => $row['id_item']);
 		}
-    if ($tableau_produits[$row['id_item_penta']]) {
+    if (in_array($row['id_item_penta'],$tableau_produits)) {
       $reactif_avec[$row['id_item']][$row['id_item_penta']] = $row['id_item_penta'];
     }
 	}
 	
+	if (_request('debug')) {echo "
+	/* REACTIF AVEC : <pre>
+	";
+	var_dump($reactif_avec);
+	echo " </pre><hr>
+	 */       
+
+	";}
+
 	foreach($t_suggestions as $id_item => $sugg) {
 		$nb = sizeof($reactif_avec[$id_item]);
     if ($nb) {
   		$t_suggestions[$id_item]['nb'] = $nb;
   		$t_suggestions[$id_item]['items_actifs'] = '['.implode(',',$reactif_avec[$id_item]).']';
-    }
+    } else {
+			unset($t_suggestions[$id_item]);
+		}
 	}
 
 	/* un tri sur le nombre puis on met tout a plat */
@@ -175,7 +159,24 @@ EOQ;
 
 	array_multisort($nb, SORT_DESC, $item, SORT_ASC, $t_suggestions);
 	
-	if (_request('debug')) {var_dump($t_suggestions);die();}
+	if (_request('debug')) {
+	echo "
+	/* SUGGESTIONS : <pre>
+	";
+	var_dump($t_suggestions);
+	echo " </pre><hr>
+	 */       
+
+	";} else {
+
+		echo "
+		/* # SUGGESTIONS : ";
+		echo sizeof($t_suggestions);
+		echo " <hr>
+		 */ ";      
+		
+	}
+
 	
   $suggestion = json_encode($t_suggestions);
   
