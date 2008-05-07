@@ -12,19 +12,18 @@ function cmp($a, $b)
 function suggestions($txt) {
 	$tableau_produits = $t_suggestions = $items_famille = $t_id_suggestion_trouvee = array();
 	
-	if (isset($_REQUEST['p1']) && is_numeric($_REQUEST['p1'])) $tableau_produits[] = $_REQUEST['p1']; 
-	if (isset($_REQUEST['p2']) && is_numeric($_REQUEST['p2'])) $tableau_produits[] = $_REQUEST['p2'];
-	if (isset($_REQUEST['p3']) && is_numeric($_REQUEST['p3'])) $tableau_produits[] = $_REQUEST['p3'];
-	if (isset($_REQUEST['p4']) && is_numeric($_REQUEST['p4'])) $tableau_produits[] = $_REQUEST['p4'];
-	if (isset($_REQUEST['p5']) && is_numeric($_REQUEST['p5'])) $tableau_produits[] = $_REQUEST['p5'];
-	
-	if (!sizeof($tableau_produits)) return '[]';
+	if (isset($_REQUEST['p1']) && is_numeric($_REQUEST['p1'])) $tableau_produits[$_REQUEST['p1']] = $_REQUEST['p1']; 
+	if (isset($_REQUEST['p2']) && is_numeric($_REQUEST['p2'])) $tableau_produits[$_REQUEST['p2']] = $_REQUEST['p2'];
+	if (isset($_REQUEST['p3']) && is_numeric($_REQUEST['p3'])) $tableau_produits[$_REQUEST['p3']] = $_REQUEST['p3'];
+	if (isset($_REQUEST['p4']) && is_numeric($_REQUEST['p4'])) $tableau_produits[$_REQUEST['p4']] = $_REQUEST['p4'];
+	if (isset($_REQUEST['p5']) && is_numeric($_REQUEST['p5'])) $tableau_produits[$_REQUEST['p5']] = $_REQUEST['p5'];
 	
   session_start();
   // Pour ne pas les reproposer ensuite il faut :
 	// - Mémoriser les produits du penta
   // - Leurs sous-produits
 	// - ainsi que leurs parents
+  $_SESSION['produits_choisis'] = array();
 	if ($tableau_produits) {
 		$res = spip_query("
       select DISTINCT est_dans_id_item as id from tbl_est_dans where id_item IN (".implode(',',$tableau_produits).")
@@ -32,12 +31,15 @@ function suggestions($txt) {
       select DISTINCT id_item as id from tbl_est_dans where est_dans_id_item IN (".implode(',',$tableau_produits).")
     ");
 		while ($row = spip_fetch_array($res)){
-			$_SESSION['produits_choisis'][] = $row['est_dans_id_item'];
+			$_SESSION['produits_choisis'][$row['id']] = $row['id'];
 		}
 	}
+  session_write_close();
 
-	$produits = implode(",", $tableau_produits);
+	if (!sizeof($tableau_produits)) return '[]';
 	
+	$produits = implode(",", $_SESSION['produits_choisis']);
+  
 	$tt = '';
 	
 	/* Liste des suggestions */
@@ -121,35 +123,40 @@ UNION
         AND ((tbl_items_3.id_type_item)=5 OR (tbl_items_3.id_type_item)=13)
         AND ((tbl_reactions_croisees.fleche_sens2)=1)
             # Idem que la première condition, mais on est dans une relation inverse cible vers source
+            # Il faut prévoir les réactions croisées qui de sont QUE dans le sens inverse
     )
 )	
 
-# Il faut prévoir les réactions croisées qui de sont QUE dans le sens inverse
-
-
 
 EOQ;
-
+	
  	$res = spip_query($query);
 	
 	while ($row = spip_fetch_array($res)){
-		if (!isset($t_suggestions[$id_item])) {
+		if (!isset($t_suggestions[$row['id_item']])) {
 			$t_suggestions[$row['id_item']] = array(
 					'nom' => (($row['nom_court']=='')?$row['nom']:$row['nom_court']),
 					'source' => $row['source'],
 					'id_mol' => $row['id_item']);
 		}
-    $reactif_avec[$row['id_item']][$row['id_item_penta']] = $row['id_item_penta'];
+    if ($tableau_produits[$row['id_item_penta']]) {
+      $reactif_avec[$row['id_item']][$row['id_item_penta']] = $row['id_item_penta'];
+    }
 	}
 	
 	foreach($t_suggestions as $id_item => $sugg) {
 		$nb = sizeof($reactif_avec[$id_item]);
-		$t_suggestions[$id_item]['nb'] = $nb;
-		$t_suggestions[$id_item]['items_actifs'] = '['.implode(',',$reactif_avec[$id_item]).']';
+    if ($nb) {
+  		$t_suggestions[$id_item]['nb'] = $nb;
+  		$t_suggestions[$id_item]['items_actifs'] = '['.implode(',',$reactif_avec[$id_item]).']';
+    }
 	}
 
+  echo '/* ';
+  var_dump($reactif_avec);
+  echo ' */';
 
-	/* un tri sur le nombre puis on met tout Ã  plat */
+	/* un tri sur le nombre puis on met tout a plat */
 	$nb = $nom = $id_mol = $aFinal = array();
 	
 	foreach ($t_suggestions as $key => $row) {
