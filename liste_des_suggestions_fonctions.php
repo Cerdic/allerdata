@@ -160,13 +160,7 @@ EOQ;
 	echo " </pre><hr>
 	 */       
 
-	";} else {
-
-		echo "
-		/* # SUGGESTIONS : ";
-		echo sizeof($t_suggestions);
-		echo " <hr>
-		 */ ";      
+	";      
 		
 	}
 
