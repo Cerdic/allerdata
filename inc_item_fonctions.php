@@ -107,7 +107,7 @@ function source($produits) {
 	return implode(", ", $t_nom_sources);
 }
 
-function allergenes($produits, $types = '7,8,9') {
+function allergenes($produits, $types = '7,8,10') {
 	if (!is_numeric($produits)) return;
 	
 	$result = '';
@@ -142,7 +142,7 @@ function allergenes_testables($produits) {
 	if (!is_numeric($produits)) return;
 	
 	$result = '';
-	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom_complet, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_1.testable, tbl_items_1.fonction_classification
+	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_1.testable, tbl_items_1.fonction_classification
 					 FROM (tbl_est_dans 
 						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item) 
 					WHERE (
@@ -157,7 +157,8 @@ function allergenes_testables($produits) {
 	while ($rowallergenes = spip_fetch_array($resallergenes)){
 		$count += 1;
 		$allergenes .= '						<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'>
-						<td>'.$rowallergenes['nom_complet'].'</td>
+						<td>'.(($rowallergenes['fonction_classification'] == $rowallergenes['nom']) ? '':$rowallergenes['nom']).'</td>
+						<td>'.$rowallergenes['fonction_classification'].'</td>
 						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['glyco']<>0)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
 						</tr>';
 	}
