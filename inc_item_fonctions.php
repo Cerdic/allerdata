@@ -137,3 +137,31 @@ function allergenes($produits, $types = '7,8,9') {
 
 	return $result;
 }
+
+function allergenes_testables($produits) {
+	if (!is_numeric($produits)) return;
+	
+	$result = '';
+	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom_complet, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_1.testable, tbl_items_1.fonction_classification
+					 FROM (tbl_est_dans 
+						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item) 
+					WHERE (
+						((tbl_est_dans.est_dans_id_item)=$produits) 
+						AND ((tbl_items_1.testable) <> 0)
+						AND ((tbl_items_1.id_type_item) IN (7,8,9,10))
+						AND ( NOT ISNULL(tbl_items_1.nom_complet))
+						)
+					ORDER BY tbl_items_1.nom_complet;";
+	$resallergenes = spip_query($queryallergenes);
+	$count = 0;
+	while ($rowallergenes = spip_fetch_array($resallergenes)){
+		$count += 1;
+		$allergenes .= '						<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'>
+						<td>'.$rowallergenes['nom_complet'].'</td>
+						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['glyco']<>0)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
+						</tr>';
+	}
+	$result .= $allergenes;
+
+	return $result;
+}
