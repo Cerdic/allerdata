@@ -36,6 +36,19 @@ function action_db_creer_noms_sans_accents() {
 	spip_query("ALTER TABLE  `tbl_est_dans` ADD INDEX (  `id_item` )");
 	spip_query("ALTER TABLE  `tbl_est_dans` ADD INDEX (  `est_dans_id_item` )");
 	
+	// Création de la table de cache des requêtes
+	spip_query("DROP TABLE IF EXISTS `cache_requetes`;");
+	spip_query("CREATE TABLE `cache_requetes` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `page` varchar(30) NOT NULL COMMENT 'la page json',
+  `tuple` varchar(50) NOT NULL COMMENT 'le tuple ordonne',
+  `hash` varchar(50) NOT NULL COMMENT 'le md5 de la requete si elle est contextuelle',
+  `resultat_json` text NOT NULL COMMENT 'le texte a retourner',
+  `date_maj` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `page` (`page`,`tuple`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='pour ne pas recalculer les requetes json ' ;");
+	
 	
 	echo ('FINI !!');
 }	
