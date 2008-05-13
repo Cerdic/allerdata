@@ -130,7 +130,6 @@ function allergenes($produits, $types = '7,8,10') {
 						<td style="text-align:right;">'.$rowallergenes['masse'].'</td>
 						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['iuis']<>0)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
 						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['glyco']<>0)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
-						<td style="text-align:center;font-size:1.5em;">'.(($rowallergenes['testable']<>0)?'<img src="squelettes/img/icon_accept.gif" />':'').'</td>
 						</tr>';
 	}
 	$result .= $allergenes;
