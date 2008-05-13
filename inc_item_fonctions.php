@@ -111,10 +111,9 @@ function allergenes($produits, $types = '7,8,9') {
 	if (!is_numeric($produits)) return;
 	
 	$result = '';
-	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_1.testable, tbl_items_1.fonction_classification, tbl_niveaux_allergenicite.niveau_de_preuve
+	$queryallergenes = "SELECT DISTINCT tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_1.testable, tbl_items_1.fonction_classification
 					 FROM (tbl_est_dans 
 						INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item) 
-						LEFT JOIN tbl_niveaux_allergenicite ON tbl_items_1.id_niveau_allergenicite = tbl_niveaux_allergenicite.id_niveau_allergenicite
 					WHERE (
 						((tbl_est_dans.est_dans_id_item)=$produits) 
 						AND ((tbl_items_1.id_type_item) IN ($types))
