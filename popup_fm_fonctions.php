@@ -83,7 +83,7 @@ function allergenes_testables($produits) {
 	if (!is_numeric($produits)) return;
 	
 	$result = '';
-	$queryallergenes = "SELECT tbl_items_2.nom_court AS nom_produit, tbl_items_2.source AS source_produit, tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_2.id_type_item
+	$queryallergenes = "SELECT DISTINCT tbl_items_2.nom_court AS nom_produit, tbl_items_2.source AS source_produit, tbl_items_1.id_item, tbl_items_1.nom, tbl_items_1.masse, tbl_items_1.iuis, tbl_items_1.glyco, tbl_items_2.id_type_item
 						FROM (tbl_items 
 							INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.est_dans_id_item) 
 								INNER JOIN ((tbl_items AS tbl_items_1 
@@ -94,7 +94,7 @@ function allergenes_testables($produits) {
 						AND ((tbl_items_1.testable) <> 0)
 						AND ((tbl_items_1.id_type_item) IN (7,8,9,10))
 						AND ( NOT ISNULL(tbl_items_1.nom))
-						/*AND ((tbl_items_2.id_type_item) In (5))*/
+						AND ((tbl_items_2.id_type_item) In (5))
 						)
 					ORDER BY tbl_items_1.nom, tbl_items_2.source;";
 	$resallergenes = spip_query($queryallergenes);
