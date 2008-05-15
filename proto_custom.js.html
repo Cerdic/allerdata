@@ -64,7 +64,7 @@ function loadSpecificFunction() {
   </BOUCLE_ModeEmploiAAM>
 
 	<?php
-		if (!isset($_GET['p1']) && !isset($_GET['p2']) && !isset($_GET['p3']) && !isset($_GET['p4']) && !isset($_GET['p5'])) :
+		if (!_request('p1') && !_request('p2') && !_request('p3') && !_request('p4') && !_request('p5')) :
 	?>
 	jQuery.ajax({
 			type: "GET",
