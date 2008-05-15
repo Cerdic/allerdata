@@ -24,7 +24,7 @@ Ext.onReady(function() {
 
 	  addTab: function(tabTitle, targetUrl, isClosable) {
       var tab = main_panel.add({
-        title: tabTitle,
+				title: tabTitle,
 				autoScroll: true,
         closable: isClosable
       });
@@ -40,6 +40,8 @@ Ext.onReady(function() {
         var tabs = main_panel.find('title',title);
         if (tabs.length) 
           tabId = tabs[0].getItemId();
+				else
+					tabId = 'tab1';
       }
       var tab = main_panel.getItem(tabId);
       if (tab) {
@@ -48,7 +50,7 @@ Ext.onReady(function() {
       } else {
         tab = this.addTab(title, url, (tabId != 'tab1'));
       }
-      main_panel.setActiveTab(tab);
+			this.activate('tab1');
     },
 
 		callback_popup : function(tab) {
