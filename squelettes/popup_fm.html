@@ -1,0 +1,71 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Items(tbl_items){id_item=#ENV{id_fm}}>
+<div id="main">
+<?php if ($auteur_session) { ?>
+	
+				<div id="blocTitArticle">
+					<h1 class="titArticle">[(#NOM|sinon{NA})]</h1>
+				</div>
+				
+				<BOUCLE_Chapeau(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
+				[<div class="blocContenuArticle">(#CHAPO)</div>]
+				</BOUCLE_Chapeau>
+
+				[<div class="blocContenuArticle">
+					<h2>Allergènes testables in vitro</h2>
+					<table summary="Les allergènes testables in vitro de [(#NOM|sinon{NA})]" class="spip">
+						<thead>
+						<tr class="row_first">
+						<th>Nom</th>
+						<th>Produit</th>
+						<th>Source</th>
+						<th>Glycosylé</th>
+						</tr>
+						</thead>
+						<tbody>
+						(#ID_ITEM|allergenes_testables)
+						</tbody>
+					</table>
+				</div>]
+				[<div class="blocContenuArticle">
+					<h2>Cette famille mol&eacute;culaire contient les allerg&egrave;nes suivants</h2>
+					<table class="spip" width=90%>
+						<thead>
+						<tr class="row_first">
+						<th>Nom</th>
+						<th>Produit</th>
+						<th>Source</th>
+						<th>Masse</th>
+						<th>IUIS</th>
+						<th>Glyco</th>
+						</tr>
+						</thead>
+						<tbody>
+						(#ID_ITEM|allergenes)
+						</tbody>
+					</table>
+				</div>]
+				[<div class="blocContenuArticle">
+					<h2>Cette famille mol&eacute;culaire a pour source</h2>
+					<ul>(#ID_ITEM|source)</ul>
+				</div>]
+				[<div class="blocContenuArticle">
+					<h2>Cette famille mol&eacute;culaire se trouve dans les produits</h2>
+					<ul>(#ID_ITEM|produit)</ul>
+				</div>]
+				<B_LienArticle>
+				<div class="blocContenuArticle">
+				<h2>En savoir plus</h2>
+				<ul>
+				<BOUCLE_LienArticle(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
+				[<li><a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','spip.php?page=article_popup&id_article=#ID_ARTICLE'); return false;">(#TITRE)</a></li>]
+				</BOUCLE_LienArticle>
+				</ul>
+				</div>
+				</B_LienArticle>
+
+<?php } else { ?>
+<INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]}>
+<?php } ?>
+
+</div>
+</BOUCLE_Items>

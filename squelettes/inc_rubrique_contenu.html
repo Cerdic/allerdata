@@ -1,0 +1,49 @@
+<BOUCLE_RubriquePrincipale(RUBRIQUES){id_rubrique}{tout_voir}>
+				<B_ListeArticles>
+				<h1 class="h2"><:articles:></h1>
+				<ul class="listeArticles">
+					<BOUCLE_ListeArticles(ARTICLES){id_rubrique}{!par date}{tout_voir}>
+[(#INCLURE{fond=inc_rubrique_contenu_detail_article}{id_article})]
+					</BOUCLE_ListeArticles>
+				</ul>
+				</B_ListeArticles>
+				
+
+				<h1 class="h2"><:rubriques:></h1>
+				<B_ListeRubriques>
+				<ul class="listeArticles">
+					<BOUCLE_ListeRubriques(RUBRIQUES){id_parent}{par num titre}{tout_voir}>
+					<li class="listeFormation">
+						<h3 class="titSommaire"><a href="#URL_RUBRIQUE" class="formation">#TITRE</a></h3>
+						[<p class="txtSommaire">(#TEXTE|couper{280})</p>
+						<p class="lireSuite"><a href="#URL_RUBRIQUE"><img src="#CHEMIN{images/lire_suite.gif}" alt="Lire la suite" title="Lire la suite" /></a></p>]
+					</li>
+					</BOUCLE_ListeRubriques>
+				</ul>
+				</B_ListeRubriques>
+
+				<//B_ListeArticles>
+</BOUCLE_RubriquePrincipale>
+<?php global $auteur_session; if ($auteur_session) { ?>
+<BOUCLE_DemandeAcces(ARTICLES){titre_mot=DemandeAcces}>
+				<div id="blocTitArticle">
+					[<img src="(#LOGO_NORMAL|extraire_attribut{src})" alt="Logo #TITRE" class="floatLeft" />]
+					<h1 class="titArticle">
+						#TITRE
+					</h1>
+					<p class="auteurArticle">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
+				</div>
+				<div class="blocContenuArticle">
+					#TEXTE
+				</div>
+				<div class="blocNotesArticle">
+					#NOTES
+				</div>
+				[<div class="blocMoreArticle">
+					<p>A lire ici : <a href="(#URL_SITE)">#NOM_SITE</a></p>
+				</div>]
+</BOUCLE_DemandeAcces>
+<?php } else { ?>
+<p>C'est vraiment surprenant d'être arrivé là !</p>
+<?php } ?>
+<//B_RubriquePrincipale>

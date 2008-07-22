@@ -1,0 +1,11 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Items(tbl_items){id_item}>
+<div id="main">
+<?php if ($auteur_session) { ?>
+	
+				[(#INCLURE{fond=inc_item}{id_item})]
+
+<?php } else { ?>
+<INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]}>
+<?php } ?>
+</div>
+</BOUCLE_Items>

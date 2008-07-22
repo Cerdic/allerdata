@@ -1,0 +1,16 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<div id="main">
+<?php if ($auteur_session) { ?>
+<BOUCLE_ArticleCCD(ARTICLES){id_article=59}>
+<div>#TEXTE</div>
+</BOUCLE_ArticleCCD>
+
+[(#REM) Suppression à la demande de #151
+[<h2>Origine des CCD</h2>
+<ul>(#ENV{p1}|ccd{#ENV{p2},#ENV{p3},#ENV{p4},#ENV{p5}})</ul>]
+]
+
+<?php } else { ?>
+<INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]}>
+<?php } ?>
+</div>

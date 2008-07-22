@@ -1,0 +1,106 @@
+#HTTP_HEADER{'Content-Type: application/x-javascript'}
+/* --------------------------------- Familles moléculaires ------------------------------------- */
+
+var LISTE_DES_FAMILLES = {
+  
+  grid:null,
+
+  init : function(){},
+  
+  getPanel : function(){
+    if (!this.grid) {
+    
+      var dsp_libelle = function (texte) {
+        var temp = new Array(); 
+        temp = texte.split('==>');
+        var nom = temp[0],
+          est_dans = temp[1];
+        return "<div class='cell_fm outlineLink' onclick='LISTE_DES_FAMILLES.outline_prod(" + est_dans + ");return false;' >" + nom + '</div>';
+      };
+    
+      var dsp_nb = function(val){
+        if(val > 2){
+          return "<div class='cell_fm' style='color:red;'>" + val + '</span></div>';
+        }else if(val > 1){
+           return "<div class='cell_fm' style='color:green;'>" + val + '</span></div>';
+         }
+        return val;
+      };
+      
+      var dsp_toInfo = function(val) {
+        var t = "<div class='cell_fm info_fm' id='info_fm_" + val + "' onclick='LISTE_DES_FAMILLES.popup_fm(" + val + ")'></div>";
+        return t;
+      };
+
+      var ds = new Ext.data.Store({
+        proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_familles'}),
+        reader: new Ext.data.JsonReader({
+          root: 'liste_des_familles',
+          id : 'id_item'
+        }, [
+             {name: 'nom'},
+             {name: 'id_item'},  
+             {name: 'nb_item'},
+             {name: 'id_fm'},
+             {name: 'test'}
+          ])
+      });
+        
+      this.grid = new Ext.grid.GridPanel({
+        store:ds,
+        autoExpandColumn:'nom',
+        loadMask: {msg:LOAD_MASK},
+				id: 'id_fm',
+        columns: [
+          {id:'nom',header: FM_NAME, width: 250, sortable: true, locked:false, dataIndex: 'nom', renderer: dsp_libelle},
+          {header: FM_NB, width: 28, locked:true, sortable: true, align:'center', dataIndex: 'nb_item', renderer: dsp_nb},
+					{id:'info', header: ' ', width: 20, locked:true, sortable:false, align: 'center', dataIndex: 'id_item', renderer: dsp_toInfo},
+          {id:'test',header: FM_TEST, width: 300, sortable: true, locked:false, dataIndex: 'test'}
+        ],
+        viewConfig: {
+          forceFit: true
+        },
+        title:FM_GRID_TITLE
+      })
+    }
+    
+    return this.grid;
+
+  },
+
+  // La mise à jour se fait par json
+  show_fm : function() {
+    var p1 = jQuery('#p1').val(),
+      p2 = jQuery('#p2').val(), 
+      p3 = jQuery('#p3').val(), 
+      p4 = jQuery('#p4').val(), 
+      p5 = jQuery('#p5').val(),
+      ds = this.grid.getStore();
+    ds.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5}});
+  },
+
+  // Infos d'une FM
+  popup_fm : function(id_fm) {
+    var link = 'spip.php?page=popup_fm&id_fm=' + id_fm;
+	  main_panel.updateTab('tab1','Détails', link);
+	  dialog_avec_tab.setTitle('Famille moléculaire');
+	  dialog_avec_tab.show(Ext.get('info_fm_' + id_fm));
+		return false;
+  },
+  
+  // Mise en avant des produits concernés par une FM
+  outline_prod : function(lProd) {
+    var num=0;
+		var t_el = [];
+    while (num < lProd.length)
+    {
+      var hidden_div = jQuery('#liste_des_produits input[@value='+lProd[num]+']');
+			t_el[num] = jQuery('#prod_' + hidden_div.attr('id').substr(1))[0];
+      num+=1;
+    }
+		nohighlight();
+		setTimeout(function(){jQuery(t_el).highlight("#FDFF3F",5000);},200);
+  }
+  
+};
+Ext.onReady(LISTE_DES_FAMILLES.init, LISTE_DES_FAMILLES);

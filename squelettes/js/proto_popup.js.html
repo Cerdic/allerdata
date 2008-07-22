@@ -1,0 +1,134 @@
+#HTTP_HEADER{'Content-Type: application/x-javascript'}
+/* --------------------------------------------- POPUP -------------------------------------------- */
+/* ux.IFrameComponent : link. http://extjs.com/forum/showthread.php?p=54322 */
+/* ux.ManagedIframe : link. http://extjs.com/forum/showthread.php?t=16590 */
+
+var dialog_avec_tab, main_panel;
+
+Ext.onReady(function() {
+
+  main_panel = new Ext.TabPanel({
+    title: 'Réactivités croisées',
+    autoScroll: true,
+    activeTab: 0,
+    plugins: new Ext.ux.TabCloseMenu(),
+    enableTabScroll: true,
+
+		items: [{ 
+	 	      id: 'tab1', 
+	 	      border: false, 
+	 	      title: 'détails', 
+	 	      closable: false, 
+	 	      autoScroll: true 
+	 	}],
+
+	  addTab: function(tabTitle, targetUrl, isClosable) {
+      var tab = main_panel.add({
+				title: tabTitle,
+				autoScroll: true,
+        closable: isClosable
+      });
+      tab.show();
+	    // Subtile : on ne peut pas charger la callback avant d'avoir montré/créé le panel
+	    tab.getUpdater().update({url:targetUrl,scope:this,callback:this.callback_popup});
+    },
+
+    // Maj du contenu d'une tab si elle existe,sinon en cree une nouvelle
+    // Recherche par id pour titre
+    updateTab: function(tabId, title, url) {
+      if (!tabId) {
+        var tabs = main_panel.find('title',title);
+        if (tabs.length) 
+          tabId = tabs[0].getItemId();
+				else
+					tabId = 'tab1';
+      }
+      var tab = main_panel.getItem(tabId);
+      if (tab) {
+	      tab.getUpdater().update({url:url,scope:this,callback:this.callback_popup});
+        tab.setTitle(title);
+      } else {
+        tab = this.addTab(title, url, (tabId != 'tab1'));
+      }
+			this.activate('tab1');
+    },
+
+		callback_popup : function(tab) {
+		  // Détection des liens vers des ancres
+		  // puis si celles-ci sont trouvées on affecte un comportement à ce lien
+		  // Au lieu de déplacer brutalement le navigateur (fonctionne +/- bien)
+		  // Seule la partie active sera déplacée
+			$('a','#' + tab.id).each(function(){
+        var link=$(this).attr('href');
+        if (link) { 
+          if ((link != '#') && (link == '#' + link.split('#')[1])) {
+            // Une ancre : on bougera donc par scrollTo
+            $(this).click(function(){
+              var ancre_id=$(this).attr('href').split('#')[1];
+              var el = Ext.get(ancre_id);
+              if(el){
+                var top = (el.getOffsetsTo(tab)[1]) + tab.dom.scrollTop;
+                tab.scrollTo('top', top-25, {duration:1.5});
+              }
+              return(false);
+            })
+          }
+        }
+      });
+    }
+
+  });
+
+  dialog_avec_tab = new Ext.Window({
+    applyTo: 'tabpanel-win',
+    layout: 'fit',
+    width: 750,
+    height: 450,
+    minimizable: true,
+    closeAction: 'hide',
+    plain: true,
+    items: [main_panel],
+    buttons: [{
+      text: 'Fermer',
+      handler: function() {
+        dialog_avec_tab.hide();
+      }
+    }]
+  });
+
+  dialog_avec_tab.on('minimize', 
+  function() {
+    dialog_avec_tab.toggleCollapse(false);
+  });
+
+  dialog_avec_tab.on('beforeshow', 
+  function() {
+    dialog_avec_tab.center();
+  });
+
+  dialog_avec_tab.on('beforehide', 
+  function() {
+    main_panel.items.each(function(item) {
+			if (item != main_panel.getItem('tab1')) {
+        main_panel.remove(item);
+			}
+    });
+  });
+
+
+});
+
+<?php
+  foreach(array(1, 2, 3, 4, 5) as $i) {
+    echo "
+      jQuery('#info-s$i').click(function() {
+        if (jQuery('#p$i').val()) {
+          var link = 'spip.php?page=popup_item&id_item=' + jQuery('#p$i').val();
+          main_panel.updateTab('tab1','Produit', link);
+          dialog_avec_tab.setTitle(jQuery('#prod_$i').val());
+          dialog_avec_tab.show(Ext.get('prod_$i'));
+        }
+        return false;
+      })";
+  }
+?>
