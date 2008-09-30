@@ -32,7 +32,8 @@ function exec_allerdata_dist(){
 	echo allerdata_barre_nav_gauche($page,array(
 	array('titre'=>_L('Allerdata'),'page'=>'allerdata','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/allerdata-64.gif"),
 	array('titre'=>_L("Comptes"),'page'=>'comptes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/compte-64.gif",'url'=>generer_url_ecrire('allerdata','page=comptes')),
-	array('titre'=>_L("Familles taxonomiques"),'page'=>'famille_taxos','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/album-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_taxos')),
+	array('titre'=>_T("allerdata:famille_taxos"),'page'=>'famille_taxos','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/album-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_taxos')),
+	array('titre'=>_T("allerdata:famille_mols"),'page'=>'famille_mols','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/album-red-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_mols')),
 	//array('titre'=>_L("Configuration"),'page'=>'cfg','icone'=>_DIR_PLUGIN_BOUTIQUE."img_pack/config-64.png",'url'=>generer_url_ecrire('allerdata','page=cfg')),
 	));
 

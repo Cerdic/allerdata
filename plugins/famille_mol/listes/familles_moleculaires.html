@@ -1,0 +1,13 @@
+<B_ftaxo>
+[<p class='plier_replier'>(#MODELE{liens_plier_deplier})</p>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items'>
+<BOUCLE_ftaxo(tbl_items){famille_mol}{pagination 20}{par #ENV{tri,nom}}{recherche?}>
+<li class='item'>#MODELE{item_famille_mol}
+#MODELE{item_famille_mol_allergenes,id_item=#ID_ITEM}
+#MODELE{boutons_action_item,id_item=#ID_ITEM,quoi=famille_mol,self=#SELF}
+</li>
+</BOUCLE_ftaxo>
+[<p class='pagination'>(#PAGINATION)</p>]
+</ul>
+</B_ftaxo>

@@ -1,0 +1,8 @@
+<h1><:allerdata:famille_mols:></h1>
+
+[(#ENV{edit}|non)
+#FORMULAIRE_RECHERCHE{#SELF}
+<INCLURE{fond=listes/familles_moleculaires}{env}{ajax}>
+[(#VAL{allerdata:icone_creer_famille_mol}|_T|icone_inline{#URL_ECRIRE{allerdata,page=famille_mols&edit=new},#CHEMIN{img_pack/album-red-24.png},'creer.gif','right'})]
+<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+]

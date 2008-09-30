@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'famille_taxos' => 'Familles Taxonomiques',
+'famille_mols' => 'Familles Mol&eacute;culaires',
 
 // I
 'icone_creer_famille_taxo' => 'Creer une famille taxonomique',

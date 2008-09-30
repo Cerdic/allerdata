@@ -63,6 +63,37 @@ function critere_tbl_items_famille_taxo_dist($idb, &$boucles, $crit) {
 
 }
 
+/**
+ * Critere {famille_mol} pour la table tbl_items
+ *
+ * @param string $idb
+ * @param array $boucles
+ * @param array $crit
+ */
+function critere_tbl_items_famille_mol_dist($idb, &$boucles, $crit) {
+	$boucle = $boucles[$idb];
+	$where = array("'='", "'$boucle->id_table." . "id_type_item'", 6);
+	if ($not)
+		$where = array("'NOT'",$where);
+	$boucle->where[] = $where;
+
+}
+
+/**
+ * Critere {allergene} pour la table tbl_items
+ *
+ * @param string $idb
+ * @param array $boucles
+ * @param array $crit
+ */
+function critere_tbl_items_allergene_dist($idb, &$boucles, $crit) {
+	$boucle = $boucles[$idb];
+	$where = array("'IN'", "'$boucle->id_table." . "id_type_item'", "'(7,8,9,10,18)'");
+	if ($not)
+		$where = array("'NOT'",$where);
+	$boucle->where[] = $where;
+
+}
 
 /**
  * Critere {source} pour la table tbl_items
