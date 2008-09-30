@@ -1,0 +1,14 @@
+<plugin>
+	<nom>Familles taxonomiques</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	[Cedric Morin->http://www.yterium.net]
+_ pour Allerdata SARL
+_ &#169; 2008 - Licence GPL
+	</auteur>
+	<version>0.1.0.0</version>
+	<version_base>0.1.0.0</version_base>
+	<etat>stable</etat>
+	<description>Administration des Familles taxonomiques</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>aller_ftaxo</prefix>
+</plugin>

@@ -1,1 +1,9 @@
 <h1>Administration d'Allerdata</h1>
+#FORMULAIRE_RECHERCHE{#SELF}
+[(#ENV{recherche}|oui)
+
+[<h2><:allerdata:famille_taxos:></h2>
+(#INCLURE{fond=listes/familles_taxonomiques}{env}{ajax})]
+
+<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+]

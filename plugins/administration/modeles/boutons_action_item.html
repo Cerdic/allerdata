@@ -1,0 +1,6 @@
+<p class='actions'> ##ID_ITEM
+[(#AUTORISER{modifier,#ENV{quoi},#ID_ITEM}|oui)
+&#91;<a href='[(#URL_ECRIRE{allerdata,page=#ENV{quoi}|concat{'s&edit=',#ID_ITEM}}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;]
+[(#AUTORISER{supprimer,#ENV{quoi},#ID_ITEM}|oui)
+&#91;<a class='ajax' href='[(#URL_ACTION_AUTEUR{supprimer_item,#ID_ITEM}|parametre_url{retour,#SELF})]'><:allerdata:bouton_supprimer:></a>&#93;]
+</p>
