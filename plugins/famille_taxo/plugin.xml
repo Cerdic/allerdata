@@ -11,4 +11,8 @@ _ &#169; 2008 - Licence GPL
 	<description>Administration des Familles taxonomiques</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>aller_ftaxo</prefix>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>aller_ftaxo_autoriser.php</inclure>
+	</pipeline>
 </plugin>

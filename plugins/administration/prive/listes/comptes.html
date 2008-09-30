@@ -1,0 +1,10 @@
+
+<B_visiteurs>
+#GRAND_TOTAL utilisateurs inscrits &agrave; Allerdata
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='items'>
+<BOUCLE_visiteurs(AUTEURS){tout}{id_zone=2}{statut=6forum}{pagination 20}{par nom}{recherche?}>
+<li class='item'><a href='#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}'>[(#NOM|sinon{#LOGIN})]</a>[, (#EMAIL)]</li>
+</BOUCLE_visiteurs>
+[<p class='pagination'>(#PAGINATION)</p>]
+</ul>

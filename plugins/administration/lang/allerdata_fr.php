@@ -7,12 +7,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'bouton_supprimer' => 'Supprimer',
 
+// C
+'confirm_suppression' => '&Ecirc;tes-vous certain de vouloir supprimer cet item ?',
+
 // F
 'famille_taxos' => 'Familles Taxonomiques',
 
 // I
 'icone_creer_famille_taxo' => 'Creer une famille taxonomique',
-	
+
+// S
+'sources' => 'Sources',
 );
 
 

@@ -4,6 +4,7 @@
 <ul class='liste_items'>
 <BOUCLE_ftaxo(tbl_items){famille_taxo}{pagination 20}{par #ENV{tri,nom}}{recherche?}>
 <li class='item'>#MODELE{item_famille_taxo}
+#MODELE{item_famille_taxo_sources,id_item=#ID_ITEM}
 #MODELE{boutons_action_item,id_item=#ID_ITEM,quoi=famille_taxo,self=#SELF}
 </li>
 </BOUCLE_ftaxo>
