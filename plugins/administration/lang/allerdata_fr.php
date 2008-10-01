@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bouton_supprimer' => 'Supprimer',
+'bouton_arborescence' => 'Arbre',
 
 // C
 'confirm_suppression' => '&Ecirc;tes-vous certain de vouloir supprimer cet item ?',
@@ -17,9 +18,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'famille_mols' => 'Familles Mol&eacute;culaires',
 
 // I
+'icone_creer_allergene' => 'Creer un allerg&egrave;ne',
 'icone_creer_famille_taxo' => 'Creer une famille taxonomique',
 'icone_creer_famille_mol' => 'Creer une famille mol&eacute;culaire',
-'icone_creer_famille_source' => 'Creer une source',
+'icone_creer_source' => 'Creer une source',
+'icone_creer_produit' => 'Creer un produit',
 
 // P
 'produits' => 'Produits',

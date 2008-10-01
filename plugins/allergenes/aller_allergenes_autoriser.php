@@ -7,7 +7,7 @@
  */
 
 /**
- * Verifier qu'on a le droit de supprimmer une source,
+ * Verifier qu'on a le droit de supprimmer un allergene,
  * ce qui se ramene au droit de supprimer un item
  *
  * @param unknown_type $faire
@@ -17,12 +17,12 @@
  * @param unknown_type $options
  * @return unknown
  */
-function autoriser_source_supprimer_dist($faire,$quoi,$id,$qui,$options){
+function autoriser_allergene_supprimer_dist($faire,$quoi,$id,$qui,$options){
 	return autoriser('supprimer','item',$id,$qui,$options);
 }
 
 /**
- * Verifier qu'on a le droit de modifier une source,
+ * Verifier qu'on a le droit de modifier un allergene,
  * ce qui se ramene au droit de modifier un item
  *
  * @param unknown_type $faire
@@ -32,12 +32,12 @@ function autoriser_source_supprimer_dist($faire,$quoi,$id,$qui,$options){
  * @param unknown_type $options
  * @return unknown
  */
-function autoriser_source_modifier_dist($faire,$quoi,$id,$qui,$options){
+function autoriser_allergene_modifier_dist($faire,$quoi,$id,$qui,$options){
 	return autoriser('modifier','item',$id,$qui,$options);
 }
 
 /**
- * Verifier qu'on a le droit de creer une source,
+ * Verifier qu'on a le droit de creer un allergene,
  * ce qui se ramene au droit de creer un item
  *
  * @param unknown_type $faire
@@ -47,7 +47,7 @@ function autoriser_source_modifier_dist($faire,$quoi,$id,$qui,$options){
  * @param unknown_type $options
  * @return unknown
  */
-function autoriser_source_creer_dist($faire,$quoi,$id,$qui,$options){
+function autoriser_allergene_creer_dist($faire,$quoi,$id,$qui,$options){
 	return autoriser('creer','item',$id,$qui,$options);
 }
 

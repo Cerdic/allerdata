@@ -39,9 +39,11 @@ function exec_allerdata_dist(){
 	if (defined('_DIR_PLUGIN_ALLER_FMOL'))
 		$barre[] = array('titre'=>_T("allerdata:famille_mols"),'page'=>'famille_mols','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/album-red-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_mols'));
 	if (defined('_DIR_PLUGIN_ALLER_SOURCES'))
-	$barre[] = array('titre'=>_T("allerdata:sources"),'page'=>'sources','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/source-64.png",'url'=>generer_url_ecrire('allerdata','page=sources'));
+		$barre[] = array('titre'=>_T("allerdata:sources"),'page'=>'sources','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/source-64.png",'url'=>generer_url_ecrire('allerdata','page=sources'));
 	if (defined('_DIR_PLUGIN_ALLER_PRODUITS'))
-	$barre[] = array('titre'=>_T("allerdata:produits"),'page'=>'produits','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/produit-64.png",'url'=>generer_url_ecrire('allerdata','page=produits'));
+		$barre[] = array('titre'=>_T("allerdata:produits"),'page'=>'produits','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/produit-64.png",'url'=>generer_url_ecrire('allerdata','page=produits'));
+	if (defined('_DIR_PLUGIN_ALLER_ALLERGENES'))
+		$barre[] = array('titre'=>_T("allerdata:allergenes"),'page'=>'allergenes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/allergene-64.png",'url'=>generer_url_ecrire('allerdata','page=allergenes'));
 	//array('titre'=>_L("Configuration"),'page'=>'cfg','icone'=>_DIR_PLUGIN_BOUTIQUE."img_pack/config-64.png",'url'=>generer_url_ecrire('allerdata','page=cfg')),
 	echo allerdata_barre_nav_gauche($page,$barre);
 

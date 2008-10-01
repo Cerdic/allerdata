@@ -61,14 +61,13 @@ function allerdata_icone_etendue($texte, $lien, $fond, $fonction="", $align="", 
 	else $atts = '';
 	$lien = "\nhref='$lien'$atts";
 
-	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'"
-	. ">\n<tr><td class='icone36$style'>"
+	$icone = "\n<div style='width:$largeur' class='icone36$style'>"
 	. ($expose?"":"<a"
 	. $lien
 	. '>')
 	. $icone
 	. ($expose?"":"</a>")
-	. "</td></tr></table>\n";
+	. "</div>\n";
 
 	if ($afficher == 'oui')	echo $icone; else return $icone;
 }

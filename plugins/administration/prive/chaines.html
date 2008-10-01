@@ -1,0 +1,8 @@
+<h1>Descendants</h1>
+#MODELE{item_descendance,id_item=#ENV{id_item},expose=#ENV{id_item}}
+<B_parents>
+<hr />
+<h1>Ascendants</h1>
+<BOUCLE_parents(tbl_items){id_item IN #ENV{id_item}|allerdata_item_racines}>
+#MODELE{item_descendance,expose=#ENV{id_item}}
+</BOUCLE_parents>

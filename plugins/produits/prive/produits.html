@@ -3,6 +3,6 @@
 [(#ENV{edit}|non)
 #FORMULAIRE_RECHERCHE{#SELF}
 <INCLURE{fond=prive/listes/items}{type_item=produit}{env}{ajax}>
-[(#VAL{allerdata:icone_creer_source}|_T|icone_inline{#URL_ECRIRE{allerdata,page=produits&edit=new},#CHEMIN{img_pack/produit-24.png},'creer.gif','right'})]
+[(#VAL{allerdata:icone_creer_produit}|_T|icone_inline{#URL_ECRIRE{allerdata,page=produits&edit=new},#CHEMIN{img_pack/produit-24.png},'creer.gif','right'})]
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 ]

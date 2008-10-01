@@ -1,0 +1,8 @@
+<h1><:allerdata:allergenes:></h1>
+
+[(#ENV{edit}|non)
+#FORMULAIRE_RECHERCHE{#SELF}
+<INCLURE{fond=prive/listes/items}{type_item=allergene}{env}{ajax}>
+[(#VAL{allerdata:icone_creer_allergene}|_T|icone_inline{#URL_ECRIRE{allerdata,page=allergenes&edit=new},#CHEMIN{img_pack/allergene-24.png},'creer.gif','right'})]
+<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+]

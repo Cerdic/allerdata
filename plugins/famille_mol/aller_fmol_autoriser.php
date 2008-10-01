@@ -7,7 +7,7 @@
  */
 
 /**
- * Verifier qu'on a le droit de supprimmer une famille taxo,
+ * Verifier qu'on a le droit de supprimmer une famille moleculaire,
  * ce qui se ramene au droit de supprimer un item
  *
  * @param unknown_type $faire
@@ -22,7 +22,7 @@ function autoriser_famille_mol_supprimer_dist($faire,$quoi,$id,$qui,$options){
 }
 
 /**
- * Verifier qu'on a le droit de modifier une famille taxo,
+ * Verifier qu'on a le droit de modifier une famille moleculaire,
  * ce qui se ramene au droit de modifier un item
  *
  * @param unknown_type $faire
@@ -37,7 +37,7 @@ function autoriser_famille_mol_modifier_dist($faire,$quoi,$id,$qui,$options){
 }
 
 /**
- * Verifier qu'on a le droit de creer une famille taxo,
+ * Verifier qu'on a le droit de creer une famille moleculaire,
  * ce qui se ramene au droit de creer un item
  *
  * @param unknown_type $faire

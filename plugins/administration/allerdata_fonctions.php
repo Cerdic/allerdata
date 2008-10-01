@@ -32,6 +32,13 @@ function allerdata_item_orphelin($id_item){
 	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_item','ed.id_est_dans='.intval($id_item));
 }
 
+/**
+ * Enter description here...
+ *
+ * @param unknown_type $id_type_item
+ * @param unknown_type $plur
+ * @return unknown
+ */
 function allerdata_type_item($id_type_item,$plur=''){
 	switch ($id_type_item){
 		case 2:
@@ -60,6 +67,13 @@ function allerdata_type_item($id_type_item,$plur=''){
 	}
 	return "type item $id_type_item";	
 }
+/**
+ * Enter description here...
+ *
+ * @param unknown_type $type
+ * @param unknown_type $tous
+ * @return unknown
+ */
 function allerdata_id_type_item($type,$tous=false){
 	switch ($type){
 		case 'famille_mol':
@@ -85,5 +99,17 @@ function allerdata_id_type_item($type,$tous=false){
 			break;
 	}
 	return array();	
+}
+
+function allerdata_item_racines($id_item){
+	// trouver les parents
+	if ($parents = sql_allfetsel('i.id_item','tbl_est_dans AS ed JOIN tbl_items AS i ON i.id_item=ed.id_est_dans','ed.id_item='.intval($id_item))){
+		$parents = array_map('reset',$parents);
+		$parents = array_map('allerdata_item_racines',$parents);
+		return call_user_func_array('array_merge',$parents);
+	}
+	else
+		// c'est une racine !
+		return array($id_item);
 }
 ?>

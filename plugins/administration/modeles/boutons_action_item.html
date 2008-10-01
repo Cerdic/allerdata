@@ -1,4 +1,5 @@
 <p class='actions'>
+&#91;<a href='[(#URL_ECRIRE{allerdata,page=chaines&id_item=#ID_ITEM})]'><:allerdata:bouton_arborescence:></a>&#93;
 [(#AUTORISER{modifier,#ENV{quoi},#ID_ITEM}|oui)
 &#91;<a href='[(#URL_ECRIRE{allerdata,page=#ENV{quoi}|concat{'s&edit=',#ID_ITEM}}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;]
 [(#AUTORISER{supprimer,#ENV{quoi},#ID_ITEM}|oui)
