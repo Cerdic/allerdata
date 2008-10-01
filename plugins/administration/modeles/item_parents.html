@@ -1,0 +1,4 @@
+#SET{fin,''}<B_enfants><div class='parents'><BOUCLE_enfants(tbl_items){contient #ID_ITEM}{', '}{par id_type_item,nom}>
+[(#ID_TYPE_ITEM|unique{p#ENV{id_item}}|oui)#GET{fin}<div class='enumeration[ (#ID_TYPE_ITEM|allerdata_type_item{s})]'>[(#VAL{allerdata:}|concat{#ID_TYPE_ITEM|allerdata_type_item{s}}|_T) ]#SET{fin,'</div>'}]
+<span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{id_item,#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>#NOM</a></span>
+</BOUCLE_enfants>[(#GET{fin})</div>]

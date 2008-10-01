@@ -19,9 +19,9 @@ function critere_tbl_items_est_dans_dist($idb, &$boucles, $crit) {
 	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 
 	$boucle->from['ed'] = 'tbl_est_dans';
-	$boucle->join['ed'] = array('tbl_items','id_est_dans','id_item');
+	$boucle->join['ed'] = array('tbl_items','id_item');
 	
-	$where = array("'='", "'ed.id_item'", $_id);
+	$where = array("'='", "'ed.id_est_dans'", $_id);
 	if ($not)
 		$where = array("'NOT'",$where);
 	$boucle->where[] = $where;
@@ -39,13 +39,32 @@ function critere_tbl_items_contient_dist($idb, &$boucles, $crit) {
 	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 
 	$boucle->from['ed'] = 'tbl_est_dans';
-	$boucle->join['ed'] = array('tbl_items','id_item');
+	$boucle->join['ed'] = array('tbl_items','id_est_dans','id_item');
 	
-	$where = array("'='", "'ed.id_est_dans'", $_id);
+	$where = array("'='", "'ed.id_item'", $_id);
 	if ($not)
 		$where = array("'NOT'",$where);
 	$boucle->where[] = $where;
 }
+
+
+/**
+ * Critere {type_item xxx} pour la table tbl_items
+ * permet de faire {type_item source}, {type_item famille_mol} ...
+ * et d'utiliser une variable pour le type
+ * 
+ * @param string $idb
+ * @param array $boucles
+ * @param array $crit
+ */
+function critere_tbl_items_type_item_dist($idb, &$boucles, $crit) {
+	$boucle = $boucles[$idb];
+	$_type = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
+	$boucle->where[] = "sql_in('".$boucle->id_table.".id_type_item',allerdata_id_type_item($_type"
+	  .($boucle->modificateur['tous']?",true":"")
+	  .")".($boucle->not?",'NOT'":"").")";
+}
+
 
 /**
  * Critere {famille_taxo} pour la table tbl_items
@@ -78,6 +97,23 @@ function critere_tbl_items_famille_mol_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = $where;
 
 }
+
+
+/**
+ * Critere {produit} pour la table tbl_items
+ *
+ * @param string $idb
+ * @param array $boucles
+ * @param array $crit
+ */
+function critere_tbl_items_produit_dist($idb, &$boucles, $crit) {
+	$boucle = $boucles[$idb];
+	$where = array("'IN'", "'$boucle->id_table." . "id_type_item'", "'(3,5,23,25,13)'");
+	if ($not)
+		$where = array("'NOT'",$where);
+	$boucle->where[] = $where;
+}
+
 
 /**
  * Critere {allergene} pour la table tbl_items

@@ -32,4 +32,58 @@ function allerdata_item_orphelin($id_item){
 	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_item','ed.id_est_dans='.intval($id_item));
 }
 
+function allerdata_type_item($id_type_item,$plur=''){
+	switch ($id_type_item){
+		case 2:
+			return 'famille_taxo'.$plur;
+			break;
+		case 3:
+		case 5:
+		case 13:
+		case 23:
+		case 25:
+			return 'produit'.$plur;
+			break;
+		case 4:
+			return 'source'.$plur;
+			break;
+		case 6:
+			return 'famille_mol.$plur';
+			break;
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 18:
+			return 'allergene'.$plur;
+			break;
+	}
+	return "type item $id_type_item";	
+}
+function allerdata_id_type_item($type,$tous=false){
+	switch ($type){
+		case 'famille_mol':
+			return array(6);
+			break;
+		case 'famille_taxo':
+			return array(2);
+			break;
+		case 'source':
+			return array(4);
+			break;
+		case 'produit':
+			if ($tous)
+				return array(3,5,13,23,25);
+			else
+				return array(3,5);
+			break;
+		case 'produit_en_attente':
+			return array(13,23,25);
+			break;
+		case 'allergene':
+			return array(7,8,9,10,18);
+			break;
+	}
+	return array();	
+}
 ?>
