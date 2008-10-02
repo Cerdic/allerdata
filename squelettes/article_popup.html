@@ -1,14 +1,12 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
-<BOUCLE_ArticlePrincipal(ARTICLES){id_article}{tout_voir}>
+<BOUCLE_testsirestreint(ARTICLES){id_article}>
+<div id="main" class="popup_aide">
+[(#INCLURE{fond=inc_article_contenu}{id_article})]
+</div>
+</BOUCLE_testsirestreint>
 <div id="main" class="popup_aide">
 [(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})
-<?php if ($GLOBALS['auteur_session']) { ?>
-[(#INCLURE{fond=inc_article_contenu}{id_article})]
-<?php } else { ?>
 <INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
-<?php } ?>
-][(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '})
-[(#INCLURE{fond=inc_article_contenu}{id_article})]
 ]
 </div>
-</BOUCLE_ArticlePrincipal>
+<//B_testsirestreint>

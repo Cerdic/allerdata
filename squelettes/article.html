@@ -13,15 +13,13 @@
 		<div id="contenu" class="clearfix">
 			
 			<div id="main">
-[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})
-<?php if ($GLOBALS['auteur_session']) { ?>
-[(#INCLURE{fond=inc_article_contenu}{id_article})]
-<?php } else { ?>
-<INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
-<?php } ?>
-][(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '})
-[(#INCLURE{fond=inc_article_contenu}{id_article})]
-]
+			<BOUCLE_testsirestreint(ARTICLES){id_article}>
+			[(#INCLURE{fond=inc_article_contenu}{id_article})]
+			</BOUCLE_testsirestreint>
+			[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})
+			<INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
+			]
+			<//B_testsirestreint>
 
 <div id="footnotes"></div>
 
