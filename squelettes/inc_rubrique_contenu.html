@@ -24,7 +24,7 @@
 
 				<//B_ListeArticles>
 </BOUCLE_RubriquePrincipale>
-<?php global $auteur_session; if ($auteur_session) { ?>
+<?php if ($GLOBALS['auteur_session']) { ?>
 <BOUCLE_DemandeAcces(ARTICLES){titre_mot=DemandeAcces}>
 				<div id="blocTitArticle">
 					[<img src="(#LOGO_NORMAL|extraire_attribut{src})" alt="Logo #TITRE" class="floatLeft" />]

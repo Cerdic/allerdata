@@ -7,7 +7,7 @@
 		<div id="contenu" class="clearfix">
 			
 			<div id="main">
-<?php if ($auteur_session) { ?>
+<?php if ($GLOBALS['auteur_session']) { ?>
 [(#INCLURE{fond=inc_item}{id_item})]
 <?php } else { ?>
 <INCLURE{fond=inc_acces_reserve}{letitre=(#NOM|sinon{NA})}>

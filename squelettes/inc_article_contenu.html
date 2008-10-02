@@ -35,7 +35,7 @@
 				</ul>
 				</B_MotsClefsArticleConnexes>
 </BOUCLE_ArticlePrincipal>
-<?php global $auteur_session; if ($auteur_session) { ?>
+<?php if ($GLOBALS['auteur_session']) { ?>
 <BOUCLE_DemandeAcces(ARTICLES){titre_mot=DemandeAcces}>
 				<div id="blocTitArticle">
 					[<img src="(#LOGO_NORMAL|extraure_attribut{src})" alt="Logo #TITRE" class="floatLeft" />]

@@ -6,7 +6,7 @@
 			
 			<div id="main">
 [(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{' ',''})
-<?php if ($auteur_session) { ?>
+<?php if ($GLOBALS['auteur_session']) { ?>
 [(#INCLURE{fond=inc_rubrique_contenu}{id_rubrique})]
 <?php } else { ?>
 <INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>

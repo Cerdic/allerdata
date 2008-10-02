@@ -1,6 +1,6 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Items(tbl_items){id_item=#ENV{id_fm}}>
 <div id="main">
-<?php if ($auteur_session) { ?>
+<?php if ($GLOBALS['auteur_session']) { ?>
 	
 				<div id="blocTitArticle">
 					<h1 class="titArticle">[(#NOM|sinon{NA})]</h1>

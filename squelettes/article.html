@@ -14,7 +14,7 @@
 			
 			<div id="main">
 [(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})
-<?php if ($auteur_session) { ?>
+<?php if ($GLOBALS['auteur_session']) { ?>
 [(#INCLURE{fond=inc_article_contenu}{id_article})]
 <?php } else { ?>
 <INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
