@@ -15,4 +15,14 @@ _ &#169; 2008 - Licence GPL
 		<nom>autoriser</nom>
 		<inclure>aller_produits_autoriser.php</inclure>
 	</pipeline>
+	<bouton id='produits' parent='allerdata'>
+		<titre>allerdata:produits</titre>
+		<icone>img_pack/produit-24.png</icone>
+		<url>allerdata</url>
+		<args>page=produits</args>
+	</bouton>
+	<necessite id='allerdata' version="[;]" />
+	<necessite id='aller_ftaxo' version="[;]" />
+	<necessite id='aller_fmol' version="[;]" />
+	<necessite id='aller_sources' version="[;]" />
 </plugin>

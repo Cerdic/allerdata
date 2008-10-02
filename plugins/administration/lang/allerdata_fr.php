@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bouton_supprimer' => 'Supprimer',
-'bouton_arborescence' => 'Arbre',
+'bouton_arborescence' => 'Chaines',
 
 // C
 'confirm_suppression' => '&Ecirc;tes-vous certain de vouloir supprimer cet item ?',

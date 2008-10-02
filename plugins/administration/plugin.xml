@@ -19,7 +19,12 @@ _ &#169; 2008 - Licence GPL
 		<icone>img_pack/allerdata-48.gif</icone>
 		<url>allerdata</url>
 	</bouton>
-	<pipeline>
+	<bouton id='comptes' parent='allerdata'>
+		<titre>allerdata:comptes</titre>
+		<icone>img_pack/compte-24.gif</icone>
+		<url>allerdata</url>
+		<args>page=comptes</args>
+	</bouton>	<pipeline>
 		<nom>rechercher_liste_des_champs</nom>
 		<inclure>allerdata_pipelines.php</inclure>
 	</pipeline>

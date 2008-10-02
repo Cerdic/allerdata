@@ -15,4 +15,13 @@ _ &#169; 2008 - Licence GPL
 		<nom>autoriser</nom>
 		<inclure>aller_sources_autoriser.php</inclure>
 	</pipeline>
+	<bouton id='sources' parent='allerdata'>
+		<titre>allerdata:sources</titre>
+		<icone>img_pack/source-24.png</icone>
+		<url>allerdata</url>
+		<args>page=sources</args>
+	</bouton>
+	<necessite id='allerdata' version="[;]" />
+	<necessite id='aller_ftaxo' version="[;]" />
+	<necessite id='aller_fmol' version="[;]" />
 </plugin>

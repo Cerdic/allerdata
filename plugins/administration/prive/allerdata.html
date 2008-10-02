@@ -1,13 +1,14 @@
 <h1>Administration d'Allerdata</h1>
 #FORMULAIRE_RECHERCHE{#SELF}
 [(#ENV{recherche}|non)
-
+#INCLURE{fond=prive/allerdata_compteurs}
 ][(#ENV{recherche}|oui)
 
 [(#INCLURE{fond=prive/listes/items}{type_item=famille_taxo}{env}{ajax})]
 [(#INCLURE{fond=prive/listes/items}{type_item=famille_mol}{env}{ajax})]
 [(#INCLURE{fond=prive/listes/items}{type_item=source}{env}{ajax})]
 [(#INCLURE{fond=prive/listes/items}{type_item=produit}{env}{ajax})]
+[(#INCLURE{fond=prive/listes/items}{type_item=allergene}{env}{ajax})]
 
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 ]

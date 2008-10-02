@@ -15,4 +15,11 @@ _ &#169; 2008 - Licence GPL
 		<nom>autoriser</nom>
 		<inclure>aller_ftaxo_autoriser.php</inclure>
 	</pipeline>
+	<bouton id='ftaxo' parent='allerdata'>
+		<titre>allerdata:famille_taxos</titre>
+		<icone>img_pack/album-24.png</icone>
+		<url>allerdata</url>
+		<args>page=famille_taxos</args>
+	</bouton>
+	<necessite id='allerdata' version="[;]" />
 </plugin>
