@@ -18,7 +18,7 @@ $GLOBALS['tables_principales']['spip_auteurs']['pass_clair']="tinytext DEFAULT '
  */
 function allerdata_item_sans_enfant($id_item){
 	include_spip('base/abstract_sql');
-	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_est_dans','ed.id_item='.intval($id_item));
+	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_item','ed.est_dans_id_item='.intval($id_item));
 }
 /**
  * Regarder si un item a des parents designes par la table de liaison tbl_est_dans.
@@ -29,7 +29,7 @@ function allerdata_item_sans_enfant($id_item){
  */
 function allerdata_item_orphelin($id_item){
 	include_spip('base/abstract_sql');
-	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_item','ed.id_est_dans='.intval($id_item));
+	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.est_dans_id_item','ed.id_item='.intval($id_item));
 }
 
 /**
@@ -55,7 +55,7 @@ function allerdata_type_item($id_type_item,$plur=''){
 			return 'source'.$plur;
 			break;
 		case 6:
-			return 'famille_mol.$plur';
+			return 'famille_mol'.$plur;
 			break;
 		case 7:
 		case 8:
@@ -101,9 +101,15 @@ function allerdata_id_type_item($type,$tous=false){
 	return array();	
 }
 
+/**
+ * Retrouver tous les items racine ascendants d'un item
+ *
+ * @param int $id_item
+ * @return array
+ */
 function allerdata_item_racines($id_item){
 	// trouver les parents
-	if ($parents = sql_allfetsel('i.id_item','tbl_est_dans AS ed JOIN tbl_items AS i ON i.id_item=ed.id_est_dans','ed.id_item='.intval($id_item))){
+	if ($parents = sql_allfetsel('i.id_item','tbl_est_dans AS ed JOIN tbl_items AS i ON i.id_item=ed.est_dans_id_item','ed.id_item='.intval($id_item).' AND ed.directement_contenu=1')){
 		$parents = array_map('reset',$parents);
 		$parents = array_map('allerdata_item_racines',$parents);
 		return call_user_func_array('array_merge',$parents);
@@ -111,5 +117,17 @@ function allerdata_item_racines($id_item){
 	else
 		// c'est une racine !
 		return array($id_item);
+}
+
+/**
+ * Afficher un message "une truc"/"N trucs"
+ *
+ * @param int $nb
+ * @return string
+ */
+function allerdata_affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
+	if (!$nb=intval($nb)) return "";
+	if ($nb>1) return _T($chaine_plusieurs, array($var => $nb));
+	else return _T($chaine_un);
 }
 ?>

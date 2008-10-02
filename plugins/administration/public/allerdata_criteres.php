@@ -8,7 +8,7 @@
 
 /**
  * Critere {est_dans xxx} pour la table tbl_items
- * pour trouver les items qui sont dans xxx
+ * pour trouver tous les items qui sont dans xxx y compris xxx
  *
  * @param string $idb
  * @param array $boucles
@@ -21,14 +21,37 @@ function critere_tbl_items_est_dans_dist($idb, &$boucles, $crit) {
 	$boucle->from['ed'] = 'tbl_est_dans';
 	$boucle->join['ed'] = array('tbl_items','id_item');
 	
-	$where = array("'='", "'ed.id_est_dans'", $_id);
+	$where = array("'='", "'ed.est_dans_id_item'", $_id);
 	if ($not)
 		$where = array("'NOT'",$where);
 	$boucle->where[] = $where;
 }
+
+/**
+ * Critere {est_directement_dans xxx} pour la table tbl_items
+ * pour trouver les items qui sont directement dans xxx sans xxx
+ *
+ * @param string $idb
+ * @param array $boucles
+ * @param array $crit
+ */
+function critere_tbl_items_est_directement_dans_dist($idb, &$boucles, $crit) {
+	$boucle = $boucles[$idb];
+	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
+
+	$boucle->from['ed'] = 'tbl_est_dans';
+	$boucle->join['ed'] = array('tbl_items','id_item');
+	
+	$where = array("'AND'",array("'='", "'ed.est_dans_id_item'", $_id),array("'='", "'ed.directement_contenu'", "1"));
+	if ($not)
+		$where = array("'NOT'",$where);
+	$boucle->where[] = $where;
+}
+
+
 /**
  * Critere {contient xxx} pour la table tbl_items
- * pour trouver les items qui contiennent xxx
+ * pour trouver tous les items qui contiennent xxx y compris xxx
  *
  * @param string $idb
  * @param array $boucles
@@ -39,9 +62,30 @@ function critere_tbl_items_contient_dist($idb, &$boucles, $crit) {
 	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 
 	$boucle->from['ed'] = 'tbl_est_dans';
-	$boucle->join['ed'] = array('tbl_items','id_est_dans','id_item');
+	$boucle->join['ed'] = array('tbl_items','est_dans_id_item','id_item');
 	
 	$where = array("'='", "'ed.id_item'", $_id);
+	if ($not)
+		$where = array("'NOT'",$where);
+	$boucle->where[] = $where;
+}
+
+/**
+ * Critere {contient_directement xxx} pour la table tbl_items
+ * pour trouver les items qui contiennent directement xxx, sans xxx
+ *
+ * @param string $idb
+ * @param array $boucles
+ * @param array $crit
+ */
+function critere_tbl_items_contient_directement_dist($idb, &$boucles, $crit) {
+	$boucle = $boucles[$idb];
+	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
+
+	$boucle->from['ed'] = 'tbl_est_dans';
+	$boucle->join['ed'] = array('tbl_items','est_dans_id_item','id_item');
+	
+	$where = array("'AND'",array("'='", "'ed.id_item'", $_id),array("'='", "'ed.directement_contenu'", "1"));
 	if ($not)
 		$where = array("'NOT'",$where);
 	$boucle->where[] = $where;

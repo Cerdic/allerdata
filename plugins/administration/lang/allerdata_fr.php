@@ -13,6 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'confirm_suppression' => '&Ecirc;tes-vous certain de vouloir supprimer cet item ?',
 
+// E
+'un_enfant' => '1 descendant',
+'enfants' => '@nb@ descendants',
+
 // F
 'famille_taxos' => 'Familles Taxonomiques',
 'famille_mols' => 'Familles Mol&eacute;culaires',
@@ -21,14 +25,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_allergene' => 'Creer un allerg&egrave;ne',
 'icone_creer_famille_taxo' => 'Creer une famille taxonomique',
 'icone_creer_famille_mol' => 'Creer une famille mol&eacute;culaire',
-'icone_creer_source' => 'Creer une source',
+'icone_creer_source' => 'Creer un organisme source',
 'icone_creer_produit' => 'Creer un produit',
 
 // P
+'un_parent' => '1 ascendant',
+'parents' => '@nb@ ascendants',
 'produits' => 'Produits',
 
 // S
-'sources' => 'Sources',
+'sources' => 'Organismes Sources',
 
 // T
 'tout_voir' => 'Tout voir',
