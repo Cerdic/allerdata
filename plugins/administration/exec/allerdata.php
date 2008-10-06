@@ -35,9 +35,9 @@ function exec_allerdata_dist(){
 		);
 
 	if (defined('_DIR_PLUGIN_ALLER_FTAXO'))
-		$barre[] = array('titre'=>_T("allerdata:famille_taxos"),'page'=>'famille_taxos','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/famille-taxo-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_taxos'));
+		$barre[] = array('titre'=>_T("allerdata:famille_taxos"),'page'=>'famille_taxos','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/famille_taxo-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_taxos'));
 	if (defined('_DIR_PLUGIN_ALLER_FMOL'))
-		$barre[] = array('titre'=>_T("allerdata:famille_mols"),'page'=>'famille_mols','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/famille-mol-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_mols'));
+		$barre[] = array('titre'=>_T("allerdata:famille_mols"),'page'=>'famille_mols','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/famille_mol-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_mols'));
 	if (defined('_DIR_PLUGIN_ALLER_SOURCES'))
 		$barre[] = array('titre'=>_T("allerdata:sources"),'page'=>'sources','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/source-64.png",'url'=>generer_url_ecrire('allerdata','page=sources'));
 	if (defined('_DIR_PLUGIN_ALLER_PRODUITS'))
