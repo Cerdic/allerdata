@@ -1,0 +1,20 @@
+<BOUCLE_item(tbl_items){id_item}>
+	#SET{type_item,#ID_TYPE_ITEM|allerdata_type_item}
+	<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=#GET{type_item}|concat{s,&id_item=,#ID_ITEM}}},#CHEMIN{img_pack/#GET{type_item}|concat{-24.png}},'',left}:>
+	<h1><:info_historique:> #NOM</h1>
+	<BOUCLE_type(tbl_types_items){id_type_item}><h2 class='soustitre'>#NOM_TYPE_ITEM</h2></BOUCLE_type>
+
+	<B_versions>
+	<div class='versions'>
+	<ul class='liste_items'>
+	<BOUCLE_versions(tbl_items_versions){id_item}{!par id_version}>
+	<li class='item'>
+	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur></h3>
+	<div class='descriptif'>#COMMENTAIRES</p>
+	[(#DIFF|allerdata_affiche_revision)]
+	</li>
+	</BOUCLE_versions>
+	</ul>
+	</div>
+	</B_versions>
+</BOUCLE_item>

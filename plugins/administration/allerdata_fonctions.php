@@ -130,4 +130,36 @@ function allerdata_affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var
 	if ($nb>1) return _T($chaine_plusieurs, array($var => $nb));
 	else return _T($chaine_un);
 }
+
+/**
+ * Afficher de facon intelligible les revisions champ par champ pour une version donnee
+ *
+ * @param array $diff
+ * @return string
+ */
+function allerdata_affiche_revision($diff){
+	if (!is_array($diff)) $diff = unserialize($diff);
+	$res = "";
+	if (is_array($diff)){
+		include_spip('inc/revisions');
+		include_spip('inc/diff');
+		foreach($diff as $k => $avap){
+			$diff = new Diff(new DiffTexte);
+			$avant = $apres = "";
+			if (is_array($avap)){
+				list($avant,$apres) = $avap;
+			}
+			$o = preparer_diff($avant);
+			$n = preparer_diff($apres);
+			$diff = afficher_diff($diff->comparer($n,$o));
+				$res .= "<tr>"
+				. "<td>$k</td>"
+				#. "<td>$avant</td>"
+				#. "<td>$apres</td>"
+				. "<td>$diff</td>"
+				. "</tr>";
+		}
+	}
+	return $res ? "<table>$res</table>":"";
+}
 ?>

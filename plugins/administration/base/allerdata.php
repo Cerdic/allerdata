@@ -57,6 +57,7 @@ function allerdata_declarer_tables_principales($tables_principales){
 	  'fonction_classification' => "varchar(50) default NULL",
 	  'nom_court' => "varchar(50) default NULL",
 		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		'remarques' => "text default NULL",
   );
 	
 	$items_key = array(

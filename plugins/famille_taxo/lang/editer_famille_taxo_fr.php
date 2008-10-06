@@ -5,7 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_nom' => 'Nom',
 'label_autre_nom' => 'Nom anciennement usit&eacute;',
-'label_remarques_item' => 'Remarques',
+'label_remarques' => 'Remarques',
 
 
 );

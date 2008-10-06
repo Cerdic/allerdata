@@ -50,6 +50,7 @@ function tbl_items_set($id_item) {
 		'interrogeable', 'testable', 'code_test', 'iuis', 'masse', 'glyco',
 		'id_niveau_allergenicite', 'affichage_suggestion', 'representatif',
 		'ccd_possible', 'information', 'fonction_classification', 'nom_court',
+		'remarques'
 	) as $champ)
 		$c[$champ] = _request($champ);
 
@@ -92,6 +93,71 @@ function revision_tbl_item ($id_item, $c=false) {
 		$c);
 
 	return ''; // pas d'erreur
+}
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_edition',
+		array(
+			'args' => array(
+				'table' => $spip_table_objet, // compatibilite
+				'table_objet' => $table_objet,
+				'spip_table_objet' => $spip_table_objet,
+				'type' =>$type,
+				'id_objet' => $id,
+				'champs' => $options['champs'],
+				'serveur' => $serveur,
+			),
+			'data' => $champs
+		)
+	);
+
+	
+function allerdata_versionne_item($x){
+	if (
+		$x['args']['action'] == 'modifier'
+	  AND $x['args']['table_objet']=='tbl_items'){
+		$id_item = $x['args']['id_objet'];
+		$maxiter = 5; // on essaye 5 fois maxi
+		while (!isset($x['data']['id_version']) AND $maxiter--) {
+			if ($row = sql_fetsel('*','tbl_items','id_item='.intval($id_item))
+			  AND isset($row['id_version'])){
+				$id_version = $row['id_version'];
+				$diff = array();
+				foreach ($row as $k=>$v) {
+					if (isset($x['data'][$k]) AND $row[$k]!=$x['data'][$k]){
+						$diff[$k] = array($row[$k],$x['data'][$k]);
+					}
+				}
+				$id_version++;
+				if (!$id_version) {
+					$id_version = sql_getfetsel('id_version','tbl_items_versions','id_item='.intval($id_item),'','id_version DESC','0,1');
+					$id_version++;
+				}
+				$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+				include_spip('inc/acces');
+				$lock = creer_uniqid();
+				sql_insertq('tbl_items_versions',array(
+					'id_item'=>$id_item,
+					'id_version'=>$id_version,
+					'id_auteur'=>$id_auteur,
+					'commentaires'=>$lock
+				));
+				if (sql_getfetsel('commentaires','tbl_items_versions','id_item='.intval($id_item).' AND id_version='.intval($id_version))==$lock){
+					sql_updateq('tbl_items_versions',array(
+					'date'=>'NOW()',
+					'commentaires'=>_request('commentaires'),
+					'diff'=>serialize($diff),
+					),'id_item='.intval($id_item).' AND id_version='.intval($id_version));
+					$x['data']['id_version'] = $id_version;
+				}
+				else
+					sleep(2); // on attends 2 secondes !
+		  }
+		}
+	  if (!isset($x['data']['id_version']))
+			$x['data']['id_version'] = -1;
+	}
+	return $x;
 }
 
 

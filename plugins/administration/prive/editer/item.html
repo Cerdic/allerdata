@@ -8,6 +8,16 @@
 	<:icone_retour|icone_inline{#ENV{retour,#SELF|parametre_url{edit,''}},#CHEMIN{img_pack/#ENV{type_item}|concat{-24.png}},'',left}:>
 	[<p>(#ENV{edit}|intval|?{allerdata:titre_cadre_modifier_,allerdata:titre_cadre_ajouter_}|concat{#ENV{type_item}}|_T)</p>]
 	[<h1>(#ENV{edit}|intval|?{##ENV{edit}})</h1>]
+	<div class='versions'>
+	<B_versions>
+	<BOUCLE_versions(tbl_items_versions){id_item=#ENV{edit}}{!par id_version}{0,1}>
+	<:info_historique:> ##ID_VERSION le #DATE par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>
+	</BOUCLE_versions>
+	<br /><a href='#URL_ECRIRE{allerdata,page=revisions&id_item=#ENV{edit}}'><:info_historique_lien:></a>
+	</B_versions>
+	Version originale
+	<//B_versions>
+	</div>
 </div>
 <div class='ajax'>
 #FORMULAIRE_{#VAL{editer_}|concat{#ENV{type_item}},#ENV{edit},#ENV{parent},#ENV{redirect},#ENV{est_dans,0}}
