@@ -55,7 +55,8 @@ function allerdata_declarer_tables_principales($tables_principales){
 	  'ccd_possible' => "tinyint(1) default NULL",
 	  'information' => "tinyint(1) default NULL",
 	  'fonction_classification' => "varchar(50) default NULL",
-	  'nom_court' => "varchar(50) default NULL"
+	  'nom_court' => "varchar(50) default NULL",
+		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
   );
 	
 	$items_key = array(
@@ -65,7 +66,7 @@ function allerdata_declarer_tables_principales($tables_principales){
 			);
 	
 	$tables_principales['tbl_items'] =
-		array('field' => "&$items, 'key' => &$items_key");
+		array('field' => &$items, 'key' => &$items_key);
 
 
 	return $tables_principales;
@@ -88,9 +89,54 @@ function allerdata_declarer_tables_auxiliaires($tables_auxiliaires){
 	);
 
 	$tables_auxiliaires['tbl_est_dans'] = array(
-		'field' => "&$tbl_est_dans,
-		'key' => "&$tbl_est_dans_key);
-		
+		'field' => &$tbl_est_dans,
+		'key' => &$tbl_est_dans_key);
+ 	
+	$tbl_types_items = array(
+		"id_type_item" => "int(11) NOT NULL auto_increment",
+		"nom_type_item" => "varchar(50) default NULL",
+		"liste_choix" => "tinyint(1) default NULL",
+		"pentacle" => "tinyint(1) default NULL",
+		"RC_type5" => "tinyint(1) default NULL",
+		"RC_type3" => "tinyint(1) default NULL",
+		"croise-egalement" => "tinyint(1) default NULL",
+		"CCD_possible" => "tinyint(1) default NULL",
+		"tableau_allergenes" => "tinyint(1) default NULL",
+		"popup_produits_type3" => "tinyint(1) default NULL",
+		"rq_type_item" => "longtext",
+	);	
+	$tbl_types_items_key = array(
+		"PRIMARY KEY"=> "id_type_item",
+	);
+	$tables_auxiliaires['tbl_types_items'] = array(
+		'field' => &$tbl_types_items,
+		'key' => &$tbl_types_items_key);
+	
+	$tbl_niveaux_allergenicite = array(
+  "id_niveau_allergenicite" => "int(11) NOT NULL",
+  "niveau_de_preuve" => "varchar(50) default NULL",
+  );
+	$tbl_niveaux_allergenicite_key = array(
+		"PRIMARY KEY"=> "id_niveau_allergenicite",
+	);
+	$tables_auxiliaires['tbl_niveaux_allergenicite'] = array(
+		'field' => &$tbl_niveaux_allergenicite,
+		'key' => &$tbl_niveaux_allergenicite_key);
+
+	$tbl_items_versions = array(
+	  'id_item' => "int(11) NOT NULL",
+		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"id_auteur"	=> "bigint(21) NOT NULL",
+		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+		"commentaires" => "text",
+		"diff" => "text", // liste des champs modifies avant/apres
+  );
+	$tbl_items_versions_key = array (
+			"PRIMARY KEY"	=> "id_item, id_version");
+	$tables_auxiliaires['tbl_items_versions'] = array(
+		'field' => &$tbl_items_versions,
+		'key' => &$tbl_items_versions_key);
+
 	return $tables_auxiliaires;
 }
 

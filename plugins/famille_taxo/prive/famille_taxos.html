@@ -3,6 +3,9 @@
 [(#ENV{edit}|non)
 #FORMULAIRE_RECHERCHE{#SELF}
 <INCLURE{fond=prive/listes/items}{type_item=famille_taxo}{env}{ajax}>
-[(#VAL{allerdata:icone_creer_famille_taxo}|_T|icone_inline{#URL_ECRIRE{allerdata,page=famille_taxos&edit=new},#CHEMIN{img_pack/album-24.png},'creer.gif','right'})]
+[(#VAL{allerdata:icone_creer_famille_taxo}|_T|icone_inline{#URL_ECRIRE{allerdata,page=famille_taxos&edit=new},#CHEMIN{img_pack/famille-taxo-24.png},'creer.gif','right'})]
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+]
+[(#ENV{edit}|oui)
+[(#INCLURE{fond=prive/editer/item}{type_item=famille_taxo}{edit}{parent=0}{redirect=#SELF|parametre_url{edit,''}})]
 ]

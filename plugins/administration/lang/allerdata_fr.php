@@ -38,6 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'tout_voir' => 'Tout voir',
+'titre_cadre_modifier_famille_taxo' => 'Modifier la famille taxonomique',
+'titre_cadre_ajouter_famille_taxo' => 'Ajouter une famille taxonomique',
 );
 
 
