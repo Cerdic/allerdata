@@ -1,0 +1,15 @@
+[(#REM)
+
+	Un petit descriptif ne serait pas superflu
+
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	<:icone_retour|icone_inline{#ENV{retour,#SELF|parametre_url{edit,''}},#CHEMIN{img_pack/#ENV{type_item}|concat{-24.png}},'',left}:>
+	[<p>(#ENV{edit}|intval|?{allerdata:titre_cadre_modifier_,allerdata:titre_cadre_ajouter_}|concat{#ENV{type_item}}|_T)</p>]
+	[<h1>(#ENV{edit}|intval|?{##ENV{edit}})</h1>]
+</div>
+<div class='ajax'>
+#FORMULAIRE_{#VAL{editer_}|concat{#ENV{type_item}},#ENV{edit},#ENV{parent},#ENV{redirect},#ENV{est_dans,0}}
+</div>
+</div>

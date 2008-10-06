@@ -12,6 +12,16 @@ li.item span.numero {display:block;float:right;}
 li.item .enfants {padding-#GET{left}:16px;background:url(#CHEMIN{img_pack/enfants-12.png}) no-repeat top left;}
 li.item .parents {padding-#GET{left}:16px;background:url(#CHEMIN{img_pack/parents-12.png}) no-repeat top left;}
 
+li.item .enfants ul {display:block;margin:0;padding:0;}
+li.item .enfants ul li,li.item .enfants ul li ul {display:inline;margin:0;padding:0;}
+li.item .enfants ul li.enumeration {display:block;}
+li.item .enfants ul li span {display:none;}
+
+li.item .parents ul {display:block;margin:0;padding:0;}
+li.item .parents ul li,li.item .parents ul li ul {display:inline;margin:0;padding:0;}
+li.item .parents ul li.enumeration {display:block;}
+li.item .parents ul li span {display:none;}
+
 ul.hierarchie {margin:0 0 2em;padding:0;}
 ul.hierarchie ul {margin:0;padding:0;}
 ul.hierarchie li {margin:0;padding:0;padding-#GET{left}:20px;list-style:none;}
@@ -20,3 +30,15 @@ ul.hierarchie li.famille_mol {background:url(#CHEMIN{img_pack/famille_mol-16.png
 ul.hierarchie li.source {background:url(#CHEMIN{img_pack/source-16.png}) no-repeat top left;}
 ul.hierarchie li.produit {background:url(#CHEMIN{img_pack/produit-16.png}) no-repeat top left;}
 ul.hierarchie li.allergene {background:url(#CHEMIN{img_pack/allergene-16.png}) no-repeat top left;}
+
+.descendants {border:1px solid #GET{foncee};margin-top:2em;padding:5px;}
+.descendants ul {margin:0px 0 0;padding:0;list-style:none;}
+.descendants ul li.enumeration {margin:10px 0 0;padding:0;}
+.descendants ul li.enumeration ul {margin-#GET{left}:10px;}
+.descendants li {border-top:1px solid #eee;clear:both;padding:2px 5px;}
+.descendants li em {display:none;}
+.descendants li a {display:block;}
+.descendants li span {display:block;float:#GET{right};width:80px;text-align:#GET{right};}
+.descendants ul li.enumeration li:hover {background:[#(#GET{claire}|couleur_eclaircir)];}
+
+.formulaire_editer .boutons .image_loading {float:#GET{left};}

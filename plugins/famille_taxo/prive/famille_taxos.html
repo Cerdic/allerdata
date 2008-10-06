@@ -7,5 +7,5 @@
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 ]
 [(#ENV{edit}|oui)
-[(#INCLURE{fond=prive/editer/item}{type_item=famille_taxo}{edit}{parent=0}{redirect=#SELF|parametre_url{edit,''}})]
+[(#INCLURE{fond=prive/editer/item}{type_item=famille_taxo}{edit}{parent=0}{redirect=#SELF|parametre_url{edit,''}}{retour})]
 ]

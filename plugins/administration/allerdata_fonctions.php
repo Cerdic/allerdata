@@ -65,7 +65,7 @@ function allerdata_type_item($id_type_item,$plur=''){
 			return 'allergene'.$plur;
 			break;
 	}
-	return "type item $id_type_item";	
+	return "type_item_$id_type_item";	
 }
 /**
  * Enter description here...

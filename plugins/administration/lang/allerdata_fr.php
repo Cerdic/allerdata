@@ -28,6 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_source' => 'Creer un organisme source',
 'icone_creer_produit' => 'Creer un produit',
 
+// L
+'label_commentaires' => 'Commentaires sur la modification',
+
 // P
 'un_parent' => '1 ascendant',
 'parents' => '@nb@ ascendants',
