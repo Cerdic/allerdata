@@ -43,6 +43,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'tout_voir' => 'Tout voir',
 'titre_cadre_modifier_famille_taxo' => 'Modifier la famille taxonomique',
 'titre_cadre_ajouter_famille_taxo' => 'Ajouter une famille taxonomique',
+'titre_cadre_modifier_famille_mol' => 'Modifier la famille mol&eacute;culaire',
+'titre_cadre_ajouter_famille_mol' => 'Ajouter une famille mol&eacute;culaire',
+'titre_cadre_modifier_source' => 'Modifier l\'organisme source',
+'titre_cadre_ajouter_source' => 'Ajouter un organisme source',
+
+// V
+'version' => 'Version',
 );
 
 

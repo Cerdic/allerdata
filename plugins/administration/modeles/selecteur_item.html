@@ -1,0 +1,7 @@
+<B_selecteur>
+<select[ name='(#ENV{name})'][ id='(#ENV{id})']>
+<BOUCLE_selecteur(tbl_items){type_item #ENV{type_item}}{par nom}>
+<option value='#ID_ITEM'[ (#EXPOSE{' '})selected='selected']>#NOM</option>
+</BOUCLE_selecteur>
+</select>
+</B_selecteur>

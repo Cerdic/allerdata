@@ -1,9 +1,11 @@
 <BOUCLE_item(tbl_items){id_item}>
-	#SET{type_item,#ID_TYPE_ITEM|allerdata_type_item}
-	<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=#GET{type_item}|concat{s,&id_item=,#ID_ITEM}}},#CHEMIN{img_pack/#GET{type_item}|concat{-24.png}},'',left}:>
-	<h1><:info_historique:> #NOM</h1>
-	<BOUCLE_type(tbl_types_items){id_type_item}><h2 class='soustitre'>#NOM_TYPE_ITEM</h2></BOUCLE_type>
-
+	<div class="entete-formulaire">
+		#SET{type_item,#ID_TYPE_ITEM|allerdata_type_item}
+		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=#GET{type_item}|concat{s,&id_item=,#ID_ITEM}}},#CHEMIN{img_pack/#GET{type_item}|concat{-24.png}},'',left}:>
+		<h1><:info_historique:> #NOM</h1>
+		<BOUCLE_type(tbl_types_items){id_type_item}><h2 class='soustitre'>#NOM_TYPE_ITEM</h2></BOUCLE_type>
+		#MODELE{boutons_action_item,quoi=#GET{type_item}}
+	</div>
 	<B_versions>
 	<div class='versions'>
 	<ul class='liste_items'>

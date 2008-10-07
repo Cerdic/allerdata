@@ -31,6 +31,11 @@
 				sql_alter("table tbl_items ADD remarques text default NULL");
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.2','non');
 			}
+			if (version_compare($current_version,'0.1.0.3','<')){
+				include_spip('base/abstract_sql');
+				sql_alter("table tbl_items ADD url varchar(255) default NULL");
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.3','non');
+			}
 		}
 	}
 	

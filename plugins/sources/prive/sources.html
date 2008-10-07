@@ -6,3 +6,6 @@
 [(#VAL{allerdata:icone_creer_source}|_T|icone_inline{#URL_ECRIRE{allerdata,page=sources&edit=new},#CHEMIN{img_pack/source-24.png},'creer.gif','right'})]
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 ]
+[(#ENV{edit}|oui)
+[(#INCLURE{fond=prive/editer/item}{type_item=source}{edit}{parent=0}{redirect=#SELF|parametre_url{edit,''}}{retour})]
+]

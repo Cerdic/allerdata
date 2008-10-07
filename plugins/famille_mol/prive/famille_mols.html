@@ -6,3 +6,6 @@
 [(#VAL{allerdata:icone_creer_famille_mol}|_T|icone_inline{#URL_ECRIRE{allerdata,page=famille_mols&edit=new},#CHEMIN{img_pack/famille_mol-24.png},'creer.gif','right'})]
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 ]
+[(#ENV{edit}|oui)
+[(#INCLURE{fond=prive/editer/item}{type_item=famille_mol}{edit}{parent=0}{redirect=#SELF|parametre_url{edit,''}}{retour})]
+]

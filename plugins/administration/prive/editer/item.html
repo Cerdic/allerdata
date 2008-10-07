@@ -11,7 +11,8 @@
 	<div class='versions'>
 	<B_versions>
 	<BOUCLE_versions(tbl_items_versions){id_item=#ENV{edit}}{!par id_version}{0,1}>
-	<:info_historique:> ##ID_VERSION le #DATE par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>
+	<:allerdata:version:> ##ID_VERSION le #DATE par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>
+	[<div class='descriptif'>(#COMMENTAIRES)</div>]
 	</BOUCLE_versions>
 	<br /><a href='#URL_ECRIRE{allerdata,page=revisions&id_item=#ENV{edit}}'><:info_historique_lien:></a>
 	</B_versions>

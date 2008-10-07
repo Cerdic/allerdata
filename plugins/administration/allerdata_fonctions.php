@@ -18,7 +18,7 @@ $GLOBALS['tables_principales']['spip_auteurs']['pass_clair']="tinytext DEFAULT '
  */
 function allerdata_item_sans_enfant($id_item){
 	include_spip('base/abstract_sql');
-	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_item','ed.est_dans_id_item='.intval($id_item));
+	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_item','ed.est_dans_id_item='.intval($id_item)." AND directement_contenu=1");
 }
 /**
  * Regarder si un item a des parents designes par la table de liaison tbl_est_dans.
@@ -29,7 +29,7 @@ function allerdata_item_sans_enfant($id_item){
  */
 function allerdata_item_orphelin($id_item){
 	include_spip('base/abstract_sql');
-	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.est_dans_id_item','ed.id_item='.intval($id_item));
+	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.est_dans_id_item','ed.id_item='.intval($id_item)." AND directement_contenu=1");
 }
 
 /**
@@ -132,6 +132,16 @@ function allerdata_affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var
 }
 
 /**
+ * exporter un champ pour l'affichage du diff de version
+ *
+ * @param unknown_type $t
+ * @return unknown
+ */
+function allerdata_field2string($t){
+	return is_array($t) ? implode(',',$t) : $t;
+}
+
+/**
  * Afficher de facon intelligible les revisions champ par champ pour une version donnee
  *
  * @param array $diff
@@ -149,11 +159,11 @@ function allerdata_affiche_revision($diff){
 			if (is_array($avap)){
 				list($avant,$apres) = $avap;
 			}
-			$o = preparer_diff($avant);
-			$n = preparer_diff($apres);
+			$o = preparer_diff(allerdata_field2string($avant));
+			$n = preparer_diff(allerdata_field2string($apres));
 			$diff = afficher_diff($diff->comparer($n,$o));
 				$res .= "<tr>"
-				. "<td>$k</td>"
+				. "<td><b>$k</b></td>"
 				#. "<td>$avant</td>"
 				#. "<td>$apres</td>"
 				. "<td>$diff</td>"
