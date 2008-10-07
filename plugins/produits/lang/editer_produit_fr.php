@@ -1,0 +1,19 @@
+<?php
+
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+'label_id_parent_1' => 'Source',
+'label_id_parent_2' => 'Est dans les produits',
+'label_id_type_item' => 'Type',
+'label_nom' => 'Nom latin correct',
+'label_nom_court' => 'Nom court',
+'label_chaine_alpha' => 'Cha&icirc;ne liste',
+'label_ccd_possible' => 'CCD_possible',
+'label_remarques' => 'Remarques',
+
+
+);
+
+
+?>

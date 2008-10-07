@@ -44,6 +44,7 @@ function allerdata_type_item($id_type_item,$plur=''){
 		case 2:
 			return 'famille_taxo'.$plur;
 			break;
+		case 1:
 		case 3:
 		case 5:
 		case 13:
@@ -87,9 +88,9 @@ function allerdata_id_type_item($type,$tous=false){
 			break;
 		case 'produit':
 			if ($tous)
-				return array(3,5,13,23,25);
+				return array(1,3,5,13,23,25);
 			else
-				return array(3,5);
+				return array(1,3,5);
 			break;
 		case 'produit_en_attente':
 			return array(13,23,25);

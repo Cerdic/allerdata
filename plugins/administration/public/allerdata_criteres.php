@@ -105,8 +105,12 @@ function critere_tbl_items_type_item_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
 	$_type = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 	$boucle->where[] = "sql_in('".$boucle->id_table.".id_type_item',allerdata_id_type_item($_type"
-	  .($boucle->modificateur['tous']?",true":"")
+	  .($boucle->modificateur['tout']?",true":"")
 	  .")".($boucle->not?",'NOT'":"").")";
+}
+
+function critere_tbl_types_items_type_item_dist($idb, &$boucles, $crit) {
+	critere_tbl_items_type_item_dist($idb, $boucles, $crit);
 }
 
 

@@ -1,0 +1,12 @@
+[(#REM) Afficher les mots selectionnes
+]<B_items><ul class='item_picked'><BOUCLE_items(tbl_items){id_item IN #ENV{selected}}{type_item #ENV{type_item,''}}>
+<li><input type="hidden" name='#ENV{name}[]' value="#ID_ITEM"
+/>#NOM <a href='#'
+onclick='jQuery(this).item_unpick();return false;'><img src='#ENV{img_unpick}' /></a><em>, </em></li>
+</BOUCLE_items></ul>
+</B_items>#SET{pasdemots,1}<//B_items>[
+[(#GET{pasdemots}|oui)<a href='#' onclick="$(this).hide().next().show();return false;"><:allerdata:ajouter_est_dans:></a><div style='display:none;'>]
+<div class='item_picker'>(#INCLURE{fond=modeles/navigateur_items}{env}{selected=''}{ajax})</div>
+<script type='text/javascript'>var img_unpick = '#ENV{img_unpick}';</script>
+<script type='text/javascript' src='#CHEMIN{javascript/item_picker.js}'></script>
+[(#GET{pasdemots}|oui)</div>]]

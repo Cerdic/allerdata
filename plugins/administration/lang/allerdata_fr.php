@@ -47,6 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_cadre_ajouter_famille_mol' => 'Ajouter une famille mol&eacute;culaire',
 'titre_cadre_modifier_source' => 'Modifier l\'organisme source',
 'titre_cadre_ajouter_source' => 'Ajouter un organisme source',
+'titre_cadre_modifier_produit' => 'Modifier le produit',
+'titre_cadre_ajouter_produit' => 'Ajouter un produit',
 
 // V
 'version' => 'Version',
