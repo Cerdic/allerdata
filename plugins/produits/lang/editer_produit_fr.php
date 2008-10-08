@@ -12,6 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_ccd_possible' => 'CCD_possible',
 'label_remarques' => 'Remarques',
 
+'erreur_nom_court_trop_long' => 'Indiquez un nom court de 25 caract&egrave;res maxium',
+
 
 );
 

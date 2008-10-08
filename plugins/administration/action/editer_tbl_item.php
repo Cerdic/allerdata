@@ -46,7 +46,7 @@ function tbl_items_set($id_item) {
 
 	$c = array();
 	foreach (array(
-		'nom', 'source', 'famille', 'autre_nom', 'nom_complet', 'chaine_alpha', 
+		'id_type_item', 'nom', 'source', 'famille', 'autre_nom', 'nom_complet', 'chaine_alpha', 
 		'interrogeable', 'testable', 'code_test', 'iuis', 'masse', 'glyco',
 		'id_niveau_allergenicite', 'affichage_suggestion', 'representatif',
 		'ccd_possible', 'information', 'fonction_classification', 'nom_court',
@@ -197,7 +197,10 @@ function allerdata_versionne_item($x){
 				$diff = array();
 				foreach ($row as $k=>$v) {
 					if (isset($x['data'][$k])) {
-						if ($row[$k]!=$x['data'][$k])
+						$change = $row[$k]!=$x['data'][$k];
+						if (is_array($row[$k]) AND is_array($x['data'][$k]))
+							$change = count(array_diff($row[$k],$x['data'][$k])) + count(array_diff($x['data'][$k],$row[$k]));
+						if ($change)
 							$diff[$k] = array($row[$k],$x['data'][$k]);
 						else 
 							unset($x['data'][$k]);

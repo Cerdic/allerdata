@@ -47,7 +47,7 @@
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='checkbox' name='#GET{name}' id='#GET{name}'[ (#ENV{#GET{name}}|oui)checked="checked"]/>
+				<input type='checkbox' name='#GET{name}' id='#GET{name}'[ (#ENV{#GET{name}}|oui)checked="checked"] value='1' />
 	    </li>
 	  	#SET{name,id_parent}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 	    <li class="editer_parent picker[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">

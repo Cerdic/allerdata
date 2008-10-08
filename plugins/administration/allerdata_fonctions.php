@@ -139,6 +139,8 @@ function allerdata_affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var
  * @return unknown
  */
 function allerdata_field2string($t){
+	if (is_array($t))
+		sort($t);
 	return is_array($t) ? implode(',',$t) : $t;
 }
 

@@ -24,6 +24,11 @@ function formulaires_editer_produit_charger_dist($id_item='new', $id_parent=0, $
 
 function formulaires_editer_produit_verifier_dist($id_item='new', $id_parent=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
 	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,array('nom','commentaires'));
+	
+	if (strlen(_request('nom_court'))>25
+	 OR (!_request('nom_court') AND strlen(_request('nom'))>25))
+	 	$erreurs['nom_court'] = _T('editer_produit:erreur_nom_court_trop_long');
+	
 	return $erreurs;
 }
 
@@ -31,6 +36,8 @@ function formulaires_editer_produit_verifier_dist($id_item='new', $id_parent=0, 
 function formulaires_editer_produit_traiter_dist($id_item='new', $id_parent=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
 	if (!_request('nom_court'))
 		set_request('nom_court',_request('nom'));
+	if (!_request('ccd_possible'))
+		set_request('ccd_possible',0);
 	
 	// vilain hack
 	set_request('action','editer_tbl_item');

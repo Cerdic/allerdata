@@ -90,32 +90,10 @@ function allerdata_create_filiation($id_items, $id_parent, $direct = true, $prop
 		if ($propage){
 			include_spip('allerdata_fonctions');
 			$racines = allerdata_item_racines($id_parent);
+			spip_log("  ! racines de $id_parent : ".implode(',',$racines),'allerdata_arbo');
 			foreach($racines as $racine)
 				allerdata_verifier_filiations($racine);
 		}
-			/*
-			if ($direct){
-				// si c'est une affiliation directe, on met a jour les enfants indirects du parent
-				// verifier la filiation des items que l'on vient d'affilier pour etre sur d'avoir tous les enfants
-				// et lister de ce fait tous les enfants indirects 
-				$les_enfants = array();
-				foreach($id_items as $id_item)
-					$les_enfants = array_merge($les_enfants,allerdata_verifier_filiations($id_item));
-				// on en profite pour ajouter le parent dans la liste, pour assurer l'auto lien sur lui meme
-				$les_enfants[] = $id_parent;
-				// et les rattacher au parent
-				allerdata_create_filiation($les_enfants, $id_parent, false);
-			}
-			else {
-				// sinon on propage les enfants indirects aux parents directs
-				$les_parents = allerdata_les_parents($id_parent);
-				if (count($les_parents))
-					foreach($les_parents as $parent){
-						// on ajoute le parent pour verifier le lien sur lui meme
-						allerdata_create_filiation(array_merge($id_items,array($parent)), $parent, false);
-					}
-			}
-		}*/
 	}
 }
 
@@ -143,6 +121,7 @@ function allerdata_remove_filiation($id_items, $id_parent, $propage = true) {
 		if ($propage){
 			include_spip('allerdata_fonctions');
 			$racines = allerdata_item_racines($id_parent);
+			spip_log("  ! racines de $id_parent : ".implode(',',$racines),'allerdata_arbo');
 			foreach($racines as $racine)
 				allerdata_verifier_filiations($racine);
 		}
@@ -152,9 +131,13 @@ function allerdata_remove_filiation($id_items, $id_parent, $propage = true) {
 function allerdata_verifier_filiations($id_item){
 	$enfants = array();
 	// verifier la filiation de tous les enfants directs
-	$enfants_directs = allerdata_les_enfants($id_parent);
-	foreach($enfants_directs as $id_item){
-		$enfants = array_merge($enfants,allerdata_verifier_filiations($id_item));
+	$enfants_directs = allerdata_les_enfants($id_item);
+	// verifier qu'il n'y a pas un lien sur lui meme avec directement_contenu=1
+	if (in_array($id_item,$enfants_directs))
+		allerdata_remove_filiation($id_item,$id_item,false);
+	foreach($enfants_directs as $id_enfant){
+		if ($id_enfant!=$id_item) // precaution
+			$enfants = array_merge($enfants,allerdata_verifier_filiations($id_enfant));
 	}
 	// ajouter lui meme dans la liste des enfants indirect pour creer l'auto lien
 	$enfants = array_merge($enfants,array($id_item));
@@ -166,7 +149,7 @@ function allerdata_verifier_filiations($id_item){
 	// verifier que l'info en base correspond bien
 	$les_enfants = allerdata_les_enfants($id_item,'',false);
 	// enlever les eventuels sur numeraires errones
-	allerdata_remove_filiation(array_diff($les_enfants,$enfants),false);
+	allerdata_remove_filiation(array_diff($les_enfants,$enfants),$id_item,false);
 
 	// renvoyer tous les enfants indirects de cet item pour que le parent se les recuperes
 	return $enfants;
