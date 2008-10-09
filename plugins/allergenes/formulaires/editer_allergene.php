@@ -23,7 +23,7 @@ function formulaires_editer_allergene_charger_dist($id_item='new', $id_parent=0,
 }
 
 function formulaires_editer_allergene_verifier_dist($id_item='new', $id_parent=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,array('nom','commentaires'));
+	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,intval($it_item)?array('nom','commentaires'):array('nom'));
 	
 	return $erreurs;
 }

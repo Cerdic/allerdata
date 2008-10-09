@@ -1,14 +1,10 @@
 <?php
-
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2008                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
+/*
+ * Plugin allerdata / Admin du site
+ * Licence GPL
+ * (c) 2008 C.Morin Yterium pour Allerdata SARL
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -73,11 +69,38 @@ function tbl_items_set($id_item) {
 
 function insert_tbl_item($id_type_item) {
 
-	$id_item = sql_insertq("tbl_items", array(
+	$max_id = array('produit'=>9999,'allergene'=>19999,'source'=>29999,'famille_taxo'=>39999,1=>59999,'famille_mol'=>49999);
+	
+	$set = array(
 		'id_type_item' => $id_type_item,
-		'id_version' => 0,
+		'id_version' => -2, // indiquer une creation
 		'date_item' => 'NOW()',
-	));
+	);
+	// trouver un id coherent !
+	// recuperer la borne max fonction de id_type ou du type au sens large :
+	$max = 0;
+	include_spip('allerdata_fonctions');
+	if (isset($max_id[$id_type_item])){
+		$max = $max_id[$id_type_item];
+		$where = 'id_type_item='.intval($id_type_item);
+	}
+	else {
+		$max = $max_id[$t=allerdata_type_item($id_type_item)];
+		$where = sql_in('id_type_item',allerdata_id_type_item($t,true));
+	}
+		
+	// en essayant 3 fois chaque methode en cas d'insertion concourante
+	$maxiter = 3;
+	while ($max AND $maxiter--) {
+		// on prend un id correspondant a max(id)+1 du meme type
+		$id_item = sql_getfetsel('id_item','tbl_items',$where . " AND id_item<".intval($max),'','id_item DESC','0,1');
+		if ($id_item
+		AND $id_item = sql_insertq("tbl_items", array_merge($set,array('id_item'=>$id_item+1))))
+			return $id_item;
+	}
+
+	// sinon faire une insertion a la fin, avec l'autoincrement
+	$id_item = sql_insertq("tbl_items", $set);
 
 	return $id_item;
 }
@@ -213,8 +236,15 @@ function allerdata_versionne_item($x){
 					return $x;
 				}
 				
-				$id_versionb = sql_getfetsel('id_version','tbl_items_versions','id_item='.intval($id_item),'','id_version DESC','0,1');
-				$id_version = max($id_version,$id_versionb)+1;
+				$commentaires = _request('commentaires');
+				if ($id_version==-2){ // creation
+					$commentaires = "Creation de l'item\n$commentaires";
+					$id_version = -1; // creation=version 0
+				}
+				if ($id_versionb = sql_getfetsel('id_version','tbl_items_versions','id_item='.intval($id_item),'','id_version DESC','0,1'))
+					$id_version = max($id_version,$id_versionb)+1;
+				else 
+					$id_version++;
 
 				$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 				include_spip('inc/acces');
@@ -228,19 +258,19 @@ function allerdata_versionne_item($x){
 				if (sql_getfetsel('commentaires','tbl_items_versions','id_item='.intval($id_item).' AND id_version='.intval($id_version))==$lock){
 					sql_updateq('tbl_items_versions',array(
 					'date'=>'NOW()',
-					'commentaires'=>_request('commentaires'),
+					'commentaires'=>$commentaires,
 					'diff'=>serialize($diff),
 					),'id_item='.intval($id_item).' AND id_version='.intval($id_version));
 					$x['data']['id_version'] = $id_version;
 				}
 				else
-					// on attends 2 secondes que la modif concourante soit finie 
+					// on attends 1 seconde que la modif concourante soit finie 
 					// pour ressayer une nouvelle fois!
-					sleep(2); 
+					sleep(1); 
 		  }
 		}
 	  if (!isset($x['data']['id_version']))
-			$x['data']['id_version'] = -1;
+			$x['data']['id_version'] = 0;
 	}
 	return $x;
 }

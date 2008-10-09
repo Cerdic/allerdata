@@ -12,7 +12,11 @@
 </BOUCLE_items>
 [<p class='pagination'>(#PAGINATION)</p>]
 </ul>
-</B_items><B_items_attente><h2>#GRAND_TOTAL [ (#VAL{allerdata:}|concat{#ENV{type_item},s}|_T) ]<:allerdata:en_attente:></h2>
+</B_items>[
+(#ENV{id_item}|oui)
+[<p class='plier_replier'>(#MODELE{liens_plier_deplier,id_item,recherche})</p>]
+]<//B_items>
+<B_items_attente><h2>#GRAND_TOTAL [ (#VAL{allerdata:}|concat{#ENV{type_item},s}|_T) ]<:allerdata:en_attente:></h2>
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id_item,recherche})</p>]
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>

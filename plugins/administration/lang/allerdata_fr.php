@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'version' => 'Version',
+'version_originale' => 'Version orginale',
 );
 
 

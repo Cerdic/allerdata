@@ -25,7 +25,7 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<textarea name='#GET{name}' id='#GET{name}' rows='7'>#ENV{#GET{name}}</textarea>
 	    </li>
-	  	#SET{name,commentaires}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	  	#SET{name,commentaires}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,#ENV{id_item}|intval|?{obligatoire}}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}">[(#VAL{allerdata}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -34,7 +34,7 @@
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='[(#ENV{id_item}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='[(#ENV{id_item}|intval|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
 	</div></form>
 	]
 </div>

@@ -15,9 +15,9 @@
 	[<div class='descriptif'>(#COMMENTAIRES)</div>]
 	</BOUCLE_versions>
 	<br /><a href='#URL_ECRIRE{allerdata,page=revisions&id_item=#ENV{edit}}'><:info_historique_lien:></a>
-	</B_versions>
-	Version originale
-	<//B_versions>
+	</B_versions>	[(#ENV{edit}|intval|oui)
+	<:allerdata:version_originale:>
+	]	<//B_versions>
 	</div>
 </div>
 <div class='ajax'>

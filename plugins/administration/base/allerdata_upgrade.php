@@ -36,6 +36,12 @@
 				sql_alter("table tbl_items ADD url varchar(255) default NULL");
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.3','non');
 			}
+			if (version_compare($current_version,'0.1.0.4','<')){
+				include_spip('base/abstract_sql');
+				sql_alter("table tbl_items CHANGE id_item id_item int(11) NOT NULL autoincrement");
+				sql_alter("TABLE tbl_items AUTO_INCREMENT =60000");
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.3','non');
+			}
 		}
 	}
 	

@@ -33,7 +33,7 @@ function allerdata_declarer_tables_principales($tables_principales){
   
 	//-- Table tbl_items ------------------------------------------
 	$items = array(
-	  'id_item' => "int(11) NOT NULL",
+	  'id_item' => "int(11) NOT NULL autoincrement",
 	  'id_type_item' => "int(11) default NULL",
 	  'nom' => "varchar(255) default NULL",
 	  'source' => "varchar(100) NOT NULL",
