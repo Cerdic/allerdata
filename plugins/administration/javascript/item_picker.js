@@ -22,15 +22,19 @@ jQuery.fn.item_pick = function(id_item,name){
 		this.parents('li.picker').find('label:first').after("<ul class='item_picked'></ul>");
 		picked = this.parents('li.picker').find('ul.item_picked');
 	}
+	if (picked.is('.select'))
+		picked.html('');
+	else
+		$('li.show',picked).removeClass('show');
 	var sel=jQuery('input[value='+id_item+']',picked);
-	$('li.show',picked).removeClass('show');
 	if (sel.length==0){
 		jQuery('li:last',picked).removeClass('last');
 		picked.append('<li class="last show">'
 		+'<input type="hidden" name="'+name+'[]" value="'+id_item+'"/>'
 		+ this.html()
-		+" <a href='#' onclick='jQuery(this).item_unpick();return false;'>"
-		+"<img src='"+img_unpick+"' /></a>"
+		+(picked.is('.select')?"":" <a href='#' onclick='jQuery(this).item_unpick();return false;'>"
+		  +"<img src='"+img_unpick+"' /></a>"
+		  )
 		+'<em>, </em></li>');
 	}
 	else

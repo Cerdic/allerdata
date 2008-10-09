@@ -14,10 +14,10 @@
 				#MODELE{afficher_grand_parent,id_parent=#ENV{#GET{name}},name=#GET{name},id=#GET{name}|concat{_source},type_item=source}
 	    </li>
 	  	#SET{name,id_parent}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	    <li class="editer_parent editer_parent_produit[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    <li class="editer_parent picker editer_parent_produit[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_produit})]">[(#FORM|concat{':label_',#GET{name}|concat{_produit}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				#MODELE{selecteur_parent,id_parent=#ENV{#GET{name}},name=#GET{name},id=#GET{name}|concat{_produit},type_item=produit}
+				#MODELE{picker_item,name=id_parent,selected=#ENV{#GET{name}},type_item=produit,select=1,img_unpick=#CHEMIN{images/croix-rouge.gif}}
 	    </li>
 	    <li class="editer_parent[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_famille_mol})]">[(#FORM|concat{':label_',#GET{name}|concat{_famille_mol}}|_T)]</label>

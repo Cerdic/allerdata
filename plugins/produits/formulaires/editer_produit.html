@@ -8,10 +8,10 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <ul>
 	  	#SET{name,id_parent}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	    <li class="editer_parent[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    <li class="editer_parent picker[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_1})]">[(#FORM|concat{':label_',#GET{name}|concat{_1}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				#MODELE{selecteur_parent,id_parent=#ENV{#GET{name}},name=#GET{name},id=#GET{name}|concat{_1},type_item=source}
+				#MODELE{picker_item,name=id_parent,selected=#ENV{#GET{name}},type_item=source,select=1,img_unpick=#CHEMIN{images/croix-rouge.gif}}
 	    </li>
 	  	#SET{name,id_type_item}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
