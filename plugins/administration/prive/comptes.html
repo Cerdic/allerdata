@@ -5,11 +5,11 @@
 (#ENV*{message})
 </div>]
 
-<INCLURE{fond=prive/listes/comptes}{env}{ajax}>
-
 <form action='#SELF' method='post'>
 [(#SELF{allerdata_creer_comptes,0,#SELF}|form_hidden)]
 <label for='creer_comptes'>Creer les comptes visiteurs pour les emails&nbsp;:</label>
-<textarea name='creer_comptes' id='liste_comptes' rows='10' cols='60'></textarea>
+<textarea name='creer_comptes' id='liste_comptes' rows='5' cols='60'></textarea>
 <p class='boutons'><input type='submit' name='creer' value='Creer' /></p>
 </form>
+
+<INCLURE{fond=prive/listes/comptes}{env}{ajax}>
