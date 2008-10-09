@@ -50,6 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_cadre_ajouter_source' => 'Ajouter un organisme source',
 'titre_cadre_modifier_produit' => 'Modifier le produit',
 'titre_cadre_ajouter_produit' => 'Ajouter un produit',
+'titre_cadre_modifier_allergene' => 'Modifier l\'allerg&egrave;ne',
+'titre_cadre_ajouter_allergene' => 'Ajouter un allerg&egrave;ne',
 
 // V
 'version' => 'Version',
