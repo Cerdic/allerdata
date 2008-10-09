@@ -1,0 +1,7 @@
+<B_selecteur>
+<select[ name='(#ENV{name})'][ id='(#ENV{id})']>
+<BOUCLE_selecteur(tbl_niveaux_allergenicite){par id_niveau_allergenicite}>
+<option value='#ID_NIVEAU_ALLERGENICITE'[ (#EXPOSE{' '})selected='selected']>#NIVEAU_DE_PREUVE</option>
+</BOUCLE_selecteur>
+</select>
+</B_selecteur>

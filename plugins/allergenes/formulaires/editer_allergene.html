@@ -1,0 +1,101 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+	  	#SET{name,id_parent}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	    <li class="editer_parent editer_grand_parent_source[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="[(#GET{name}|concat{_source})]">[(#FORM|concat{':label_',#GET{name}|concat{_source}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				#MODELE{afficher_grand_parent,id_parent=#ENV{#GET{name}},name=#GET{name},id=#GET{name}|concat{_source},type_item=source}
+	    </li>
+	  	#SET{name,id_parent}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	    <li class="editer_parent editer_parent_produit[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="[(#GET{name}|concat{_produit})]">[(#FORM|concat{':label_',#GET{name}|concat{_produit}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				#MODELE{selecteur_parent,id_parent=#ENV{#GET{name}},name=#GET{name},id=#GET{name}|concat{_produit},type_item=produit}
+	    </li>
+	    <li class="editer_parent[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="[(#GET{name}|concat{_famille_mol})]">[(#FORM|concat{':label_',#GET{name}|concat{_famille_mol}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				#MODELE{selecteur_item,id_item=#ENV{#GET{name}},name=#GET{name}|concat{#VAL{91}|chr}|concat{#VAL{93}|chr},id=#GET{name}|concat{_famille_mol},type_item=famille_mol}
+	    </li>
+	  	#SET{name,id_type_item}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				#MODELE{selecteur_type_item,id_type_item,name=#GET{name},id=#GET{name},type_item=allergene}
+	    </li>
+	  	#SET{name,nom}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	  	#SET{name,masse}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	  		#SET{name,iuis}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+				<span class='choix'>
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				<input type='checkbox' name='#GET{name}' id='#GET{name}'[ (#ENV{#GET{name}}|oui)checked="checked"] value='1' />
+				</span>
+	  		#SET{name,glyco}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+				<span class='choix'>
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				<input type='checkbox' name='#GET{name}' id='#GET{name}'[ (#ENV{#GET{name}}|oui)checked="checked"] value='1' />
+				</span>
+	    </li>
+	  	#SET{name,fonction_classification}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	  	#SET{name,remarques}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea name='#GET{name}' id='#GET{name}' rows='7'>#ENV{#GET{name}}</textarea>
+	    </li>
+	  	#SET{name,testable}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='checkbox' name='#GET{name}' id='#GET{name}'[ (#ENV{#GET{name}}|oui)checked="checked"] value='1' />
+	    </li>
+	  	#SET{name,ccd_possible}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='checkbox' name='#GET{name}' id='#GET{name}'[ (#ENV{#GET{name}}|oui)checked="checked"] value='1' />
+	    </li>
+	  	#SET{name,id_niveau_allergenicite}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				#MODELE{selecteur_niveau_allergenicite,id_niveau_allergenicite,name=#GET{name},id=#GET{name}}
+	    </li>
+	  	#SET{name,commentaires}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#VAL{allerdata}|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea name='#GET{name}' id='#GET{name}' rows='4'>#ENV{#GET{name}}</textarea>
+	    </li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='[(#ENV{id_item}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+	</div></form>
+	]
+</div>
+[<div class='descendants'>
+(#INCLURE{fond=prive/listes/enfants}{id_item})
+<div class='nettoyeur'></div>
+</div>]

@@ -17,7 +17,7 @@ _ &#169; 2008 - Licence GPL
 	</pipeline>
 	<bouton id='ftaxo' parent='allerdata'>
 		<titre>allerdata:famille_taxos</titre>
-		<icone>img_pack/album-24.png</icone>
+		<icone>img_pack/famille_taxo-24.png</icone>
 		<url>allerdata</url>
 		<args>page=famille_taxos</args>
 	</bouton>
