@@ -24,6 +24,7 @@
 	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				[<span class='explication'><a target='_blank' href='(#ENV{#GET{name}})' class='url'><:icone_voir_en_ligne:> #ENV{#GET{name}}</a></span>]
 	    </li>
 	  	#SET{name,remarques}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
