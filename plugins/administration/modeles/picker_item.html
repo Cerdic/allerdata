@@ -1,5 +1,5 @@
 [(#REM) Afficher les mots selectionnes
-]<ul class='item_picked[(#ENV{select}|oui) select]'><BOUCLE_items(tbl_items){id_item IN #ENV{selected}}{type_item #ENV{type_item,''}}>
+]<ul class='item_picked[(#ENV{select}|oui) select]'><BOUCLE_items(tbl_items){id_item IN #ENV{selected}}{type_item #ENV{type_item,''}}{tout}>
 <li><input type="hidden" name='#ENV{name}[]' value="#ID_ITEM"
 />#NOM (##ID_ITEM) [<a href='#'(#ENV{select}|non)
 onclick='jQuery(this).item_unpick();return false;'><img src='#ENV{img_unpick}' /></a>]<em>, </em></li>
