@@ -3,8 +3,10 @@
 <BOUCLE_revisions(tbl_items_versions){id_item}{0,1}>&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_item=#ID_ITEM})]'><:info_historique_titre:></a>&#93;</BOUCLE_revisions>
 [(#AUTORISER{modifier,#ENV{quoi},#ID_ITEM}|oui)
 &#91;<a href='[(#URL_ECRIRE{allerdata,page=#ENV{quoi}|concat{'s&edit=',#ID_ITEM}}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;]
+[(#REM)
 [(#AUTORISER{supprimer,#ENV{quoi},#ID_ITEM}|oui)
 &#91;<a class='ajax' 
 onclick = "return confirm('<:allerdata:confirm_suppression:>');"
 href='[(#URL_ACTION_AUTEUR{supprimer_item,#ID_ITEM}|parametre_url{redirect,#SELF|parametre_url{id_item,''}})]'><:allerdata:bouton_supprimer:></a>&#93;]
+]
 </p>
