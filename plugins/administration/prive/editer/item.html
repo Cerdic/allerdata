@@ -19,6 +19,7 @@
 	<:allerdata:version_originale:>
 	]	<//B_versions>
 	</div>
+	<BOUCLE_item(tbl_items){id_item=#ENV{edit}}{statut?}>[(#STATUT|allerdata_puce_statut)]</BOUCLE_item>
 </div>
 <div class='ajax'>
 #FORMULAIRE_{#VAL{editer_}|concat{#ENV{type_item}},#ENV{edit},#ENV{parent},#ENV{redirect},#ENV{est_dans,0}}

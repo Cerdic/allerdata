@@ -56,7 +56,7 @@ function tbl_items_set($id_item) {
 	// Modification du(des) parent(s) ?
 	$c = array();
 	foreach (array(
-		'date_item', 'id_parent'
+		'date_item', 'id_parent', 'statut'
 	) as $champ)
 		$c[$champ] = _request($champ);
 	$err .= instituer_tbl_item($id_item, $c);
@@ -138,10 +138,15 @@ function instituer_tbl_item($id_item, $c) {
 	// Verifier que le(s) parent(s) demande(s) existe(nt) et sont differents
 	// des parents actuels
 	if ($id_parent = $c['id_parent']
-	AND $id_parent != $id_parent_actuel
-	AND ($id_parent = array_map('reset',sql_allfetsel('id_item', "tbl_items", sql_in('id_item',$id_parent))))) {
+	AND $id_parent != $id_parent_actuel){
+		$id_parent = array_map('reset',sql_allfetsel('id_item', "tbl_items", sql_in('id_item',$id_parent)));
 		$champs['id_parent'] = $id_parent;
 	}
+	
+	$statut_ancien = sql_getfetsel('statut','tbl_items','id_item='.intval($id_item));
+	if ($statut = $c['statut']
+	 AND $statut!=$statut_ancien)
+		$champs['statut'] = $statut;
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',

@@ -59,6 +59,7 @@ function allerdata_declarer_tables_principales($tables_principales){
 		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
 		'remarques' => "text default NULL",
 	  'url' => "varchar(255) default NULL",
+		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
   );
 	
 	$items_key = array(

@@ -31,3 +31,18 @@
 [<p class='pagination'>(#PAGINATION)</p>]
 </ul>
 </B_items_attente>
+<B_items_poubelle><h2>#GRAND_TOTAL [ (#VAL{allerdata:}|concat{#ENV{type_item},s}|_T) ]<:allerdata:a_la_poubelle:></h2>
+[<p class='plier_replier'>(#MODELE{liens_plier_deplier,id_item,recherche}|unique)</p>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items'>
+<BOUCLE_items_poubelle(tbl_items){tout}{type_item #ENV{type_item}}{statut=poubelle}{id_item?}{pagination 10}{par #ENV{tri,nom}}{recherche?}>
+<li class='item[ (#EXPOSE)]'>
+#MODELE{item_parents}
+[(#INCLURE{fond=modeles/item_#ENV{type_item}}{id_item})]
+#MODELE{item_enfants}
+#MODELE{boutons_action_item,id_item=#ID_ITEM,quoi=#ENV{type_item},self=#SELF}
+</li>
+</BOUCLE_items_poubelle>
+[<p class='pagination'>(#PAGINATION)</p>]
+</ul>
+</B_items_poubelle>

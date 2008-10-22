@@ -184,4 +184,66 @@ function allerdata_affiche_revision($diff){
 	}
 	return $res ? "<table>$res</table>":"";
 }
+
+function allerdata_selecteur_statut($statut,$name,$id=''){
+	$etats = $GLOBALS['liste_des_etats'];
+	$res = "<select name='$name'"
+	. ($id?" id='$id'":"")
+	. ">";
+	foreach($etats as $affiche => $s){
+		if (in_array($s,array(/*'prepa',*/'publie','poubelle'))){
+			$selected = "";
+			$res .= "<option value='$s'"
+			.(($s==$statut)?' selected="selected"':'')
+			. ">"
+			._T($affiche)
+			."</option>";
+		}
+	}
+	$res .= "</selected>";
+	return $res;
+}
+
+function allerdata_puce_statut($statut){
+	include_spip('inc/puce_statut');
+	$etats = $GLOBALS['liste_des_etats'];
+
+	$res .=
+	  "<ul id='instituer_article-$id_article' class='instituer_article instituer'>" 
+	  . "<li>" 
+	  //. _T('allerdata:texte_item_statut')
+	  ."<ul>";
+	
+	foreach($etats as $affiche => $s){
+		$puce = puce_statut($s) . _T($affiche);
+		if ($s==$statut){
+			$class=' selected';
+			$res .= "<li class='$s $class'>$puce</li>";
+		}
+	}
+
+	$res .= "</ul></li></ul>";
+  
+	return $res;
+}
+
+
+//
+// <BOUCLE(tbl_items)>
+//
+// http://doc.spip.org/@boucle_ARTICLES_dist
+function boucle_tbl_items_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$mstatut = $id_table .'.statut';
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->modificateur['criteres']['statut'])) {
+		if (!$GLOBALS['var_preview']) {
+			array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
+		} else
+			array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'"));
+	}
+	return calculer_boucle($id_boucle, $boucles); 
+}
 ?>

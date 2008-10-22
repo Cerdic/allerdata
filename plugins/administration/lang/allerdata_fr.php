@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // L
 'label_commentaires' => 'Commentaires sur la modification',
+'label_statut' => 'Statut',
 
 // P
 'un_parent' => '1 ascendant',

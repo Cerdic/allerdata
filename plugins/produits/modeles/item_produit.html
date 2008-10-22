@@ -1,4 +1,4 @@
-<BOUCLE_produit(tbl_items){id_item=#ENV{id_item,#ENV{id}}}>
+<BOUCLE_produit(tbl_items){id_item=#ENV{id_item,#ENV{id}}}{statut?}>
 <div class='produit'><span class='numero'>##ID_ITEM</span>
 <h3 class='repliable'>[(#NOM|sinon{<:info_sans_titre:>})]</h3>
 [<em>(#NOM_COURT)</em>]

@@ -42,6 +42,12 @@
 				sql_alter("TABLE tbl_items AUTO_INCREMENT =60000");
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.5','non');
 			}
+			if (version_compare($current_version,'0.1.0.6','<')){
+				include_spip('base/abstract_sql');
+				sql_alter("table tbl_items ADD statut varchar(10) DEFAULT 'prepa' NOT NULL");
+				sql_updateq('tbl_items',array('statut'=>'publie'));
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.6','non');
+			}
 		}
 	}
 	

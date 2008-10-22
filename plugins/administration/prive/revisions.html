@@ -1,4 +1,4 @@
-<BOUCLE_item(tbl_items){id_item}>
+<BOUCLE_item(tbl_items){id_item}{statut?}>
 	<div class="entete-formulaire">
 		#SET{type_item,#ID_TYPE_ITEM|allerdata_type_item}
 		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=#GET{type_item}|concat{s,&id_item=,#ID_ITEM}}},#CHEMIN{img_pack/#GET{type_item}|concat{-24.png}},'',left}:>
