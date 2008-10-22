@@ -77,7 +77,14 @@ function exec_allerdata_dist(){
 			break;
 		default:
 			$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],'message'=>$message);
-			$page = recuperer_fond("prive/$page",array_merge($contexte,$_GET));
+			$get = $_GET;
+			if (is_numeric($get['recherche']) AND intval($get['recherche'])){
+				$get['id_item'] = intval($get['recherche']);
+				unset($get['recherche']);
+				set_request('recherche','');
+				unset($GLOBALS['recherche']);
+			}
+			$page = recuperer_fond("prive/$page",array_merge($contexte,$get));
 			echo allerdata_inserer_crayons($page);
 			break;
 	}

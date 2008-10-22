@@ -1,8 +1,8 @@
 <h1>Administration d'Allerdata</h1>
 #FORMULAIRE_RECHERCHE{#SELF}
-[(#ENV{recherche}|non)
+[(#ENV{recherche}|ou{#ENV{id_item}}|non)
 #INCLURE{fond=prive/allerdata_compteurs}
-][(#ENV{recherche}|oui)
+][(#ENV{recherche}|ou{#ENV{id_item}}|oui)
 
 [(#INCLURE{fond=prive/listes/items}{type_item=famille_taxo}{env}{ajax})]
 [(#INCLURE{fond=prive/listes/items}{type_item=famille_mol}{env}{ajax})]
