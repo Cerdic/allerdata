@@ -74,6 +74,7 @@ function allerdata_icone_etendue($texte, $lien, $fond, $fonction="", $align="", 
 
 function allerdata_barre_nav_gauche($page_actuelle,$liste_items){
 	$out = "<style>
+	#navigation .icone36 span {height:auto;}
 	.icone36.on{text-align:center;text-decoration:none;}
 	.icone36.on img {
 background-color:#FFFFFF;border:2px solid #666666;display:inline;margin:0pt;padding:4px;}
