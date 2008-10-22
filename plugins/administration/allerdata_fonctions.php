@@ -86,6 +86,15 @@ function allerdata_id_type_item($type,$tous=false){
 		case 'source':
 			return array(4);
 			break;
+		case 'categorie_produit':
+				return array(1);
+			break;
+		case 'produit_generique':
+			if ($tous)
+				return array(3,5,13,23,25);
+			else
+				return array(3,5);
+			break;
 		case 'produit':
 			if ($tous)
 				return array(1,3,5,13,23,25);
