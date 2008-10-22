@@ -3,7 +3,7 @@
 >#SET{fin,a}][<span (#ENV{debut}|=={#VALEUR|chr}|oui)class='on'>#SET{fin,span}][(#VALEUR|chr)]</#GET{fin}></BOUCLE_pages></p>
 	[<p class='pagination'>(#PAGINATION{page})</p>]
 	<ul><BOUCLE_items(tbl_items){type_item #ENV{type_item,''}}{nom==#GET{debut}}{par nom}{pagination 20}><li 
-class='item'><a href='#' onclick="jQuery(this).item_pick(#ID_ITEM,'#ENV{name}');return false;"
->#NOM</a></li></BOUCLE_items></ul>
+class='item'><a href='#' onclick="jQuery(this).item_pick(#ID_ITEM,'#ENV{name}');return false;" title='##ID_ITEM'
+>#NOM<span> (##ID_ITEM)</span></a></li></BOUCLE_items></ul>
 </B_items> [(#ENV{debut}|oui)<p class='pagination'><a href='[(#SELF|parametre_url{debut,''})]'><:allerdata:tous:></a></p>
 ]<//B_items>

@@ -1,7 +1,7 @@
 [(#REM) Afficher les mots selectionnes
 ]<ul class='item_picked[(#ENV{select}|oui) select]'><BOUCLE_items(tbl_items){id_item IN #ENV{selected}}{type_item #ENV{type_item,''}}>
 <li><input type="hidden" name='#ENV{name}[]' value="#ID_ITEM"
-/>#NOM [<a href='#'(#ENV{select}|non)
+/>#NOM (##ID_ITEM) [<a href='#'(#ENV{select}|non)
 onclick='jQuery(this).item_unpick();return false;'><img src='#ENV{img_unpick}' /></a>]<em>, </em></li>
 </BOUCLE_items></ul>[
 <a href='#' onclick="$(this).hide().next().show();return false;" class='ajouter_est_dans'><:allerdata:ajouter_est_dans:></a><div style='display:none;'>
