@@ -1,7 +1,6 @@
 <BOUCLE_produit(tbl_items){id_item=#ENV{id_item,#ENV{id}}}>
 <div class='allergene'><span class='numero'>##ID_ITEM</span>
 <h3 class='repliable'>[(#NOM|sinon{<:info_sans_titre:>})]</h3>
-[<em>(#MASSE)</em>]
 [<p>(#REMARQUES_ITEM)</p>]
 </div>
 </BOUCLE_produit>
