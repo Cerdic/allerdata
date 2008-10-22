@@ -7,12 +7,14 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <ul>
+	  	[(#AUTORISER{instituer,item,#ENV{id_item,nouveau}}|oui)
 	  	#SET{name,statut}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}">[(#REM|concat{'allerdata:label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				[(#ENV{#GET{name}}|allerdata_selecteur_statut{#GET{name},#GET{name}})]
 	    </li>
+	    ]
 	  	#SET{name,id_parent}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 	    <li class="editer_parent editer_grand_parent_source[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_source})]">[(#FORM|concat{':label_',#GET{name}|concat{_source}}|_T)]</label>

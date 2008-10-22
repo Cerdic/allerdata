@@ -75,6 +75,7 @@ function insert_tbl_item($id_type_item) {
 		'id_type_item' => $id_type_item,
 		'id_version' => -2, // indiquer une creation
 		'date_item' => 'NOW()',
+		'statut'=>'publie', // pour le moment
 	);
 	// trouver un id coherent !
 	// recuperer la borne max fonction de id_type ou du type au sens large :
