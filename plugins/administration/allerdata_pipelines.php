@@ -14,7 +14,7 @@
  * @return array
  */
 function allerdata_rechercher_liste_des_champs($liste){
-	$liste['tbl_item'] = array('nom'=>4,'source'=>1,'famille'=>1);
+	$liste['tbl_item'] = array('nom'=>4,'chaine_alpha'=>1,/*,'source'=>1,'famille'=>1*/);
 	return $liste;
 }
 
