@@ -45,24 +45,6 @@ appel le ".date('d/m h:i:s')."
 		}
 	}
 
-	$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
-			FROM tbl_items 
-			WHERE id_type_item IN (5,3) ";
-	if ($liste_noire)	$sql .=" AND tbl_items.id_item NOT IN(".implode(',',$liste_noire).")";
-	$sql .= "	AND chaine_alpha like '% ".addslashes($chaine)."%'";
-	$sql .= " ORDER BY id_type_item DESC, nom";
-	$q = spip_query($sql);
-
-	$nb_elements_trouves += spip_num_rows($q);
-
-	while ($row = spip_fetch_array($q)) {
-		if (!$row['nom']) $row['nom'] = $row['source'];
-		if (!in_array($row['id_item'],$liste_noire)) {
-			$res[] = $row; 
-			$liste_noire[] = $row['id_item'];
-		}
-	}
-
 	// On complete par une recherche plus large (20 maxi, question perfs client)
 	if ($nb_elements_trouves<20) {
 		$sql = "SELECT tbl_items.id_item, nom, nom_court, source, famille
