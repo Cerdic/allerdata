@@ -33,13 +33,13 @@ function loadSpecificFunction() {
 
 	<?php
 
+		include_spip('base/abstract_sql');
     $str =  '';
     foreach (array(1,2,3,4,5) as $i) {
       if (_request("p$i")) {
-        $q = "SELECT * from tbl_items where id_item = ".addslashes(_request("p$i"));
-        $p = spip_fetch_array(spip_query($q));
+        $p = sql_getfetsel("nom",'tbl_items','id_item='.intval(_request("p$i")));
         if ($p) {
-          $str .= "\nZONES_SAISIE.combo[$i].setValue('".addslashes($p['nom'])."');";
+          $str .= "\nZONES_SAISIE.combo[$i].setValue('".addslashes($p)."');";
           $str .= "\nZONES_SAISIE.combo[$i].triggers[0].show();";
           $str .= "\njQuery('#p$i').val(".addslashes(_request("p$i")).");";
         }
