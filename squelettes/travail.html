@@ -22,20 +22,21 @@
 		<B_ItemContient>
 		<ul>
 		<BOUCLE_ItemContient(tbl_est_dans){est_dans_id_item=#ID_ITEM}>
-			<B_ItemLie><li><a href="#URL_PAGE{items_detail,id_item=#ID_ITEM}"><BOUCLE_ItemLie(tbl_items){nom!=}{id_item=#ID_ITEM}>#NOM</a> [(#ID_ITEM|FamMol)]</BOUCLE_ItemLie> 
+			<B_ItemLie><li><a href="#URL_PAGE{items_detail,id_item=#ID_ITEM}"><BOUCLE_ItemLie(tbl_items){nom!=}{id_item=#ID_ITEM}>#NOM</a> 
+			<BOUCLE_fammol(tbl_items){type_item famille_mol}{contient #ID_ITEM}>#ID_ITEM (#NOM)</BOUCLE_fammol>(<span style="color:red;">Pas de Fam Mol</span>)<//B_fammol></BOUCLE_ItemLie> 
 			
 			
 				<B_ItemsCroise>
 				<ul>
 				<BOUCLE_ItemsCroise(tbl_reactions_croisees){id_produit1=#ID_ITEM}>
-					[(#ID_PRODUIT2|unique|?{' '})<li><a href="#URL_PAGE{items_detail,id_item=#ID_PRODUIT2}"><INCLURE{fond=items_detail_croise}{id_item=#ID_PRODUIT2}></a></li>]
+					[(#ID_PRODUIT2|unique|oui)<li><a href="#URL_PAGE{items_detail,id_item=#ID_PRODUIT2}"><INCLURE{fond=items_detail_croise}{id_item=#ID_PRODUIT2}></a></li>]
 				</BOUCLE_ItemsCroise>
 				</ul>
 				</B_ItemsCroise>
 				<B_ItemsCroiseInverse>
 				<ul>
 				<BOUCLE_ItemsCroiseInverse(tbl_reactions_croisees){id_produit2=#ID_ITEM}>
-					[(#ID_PRODUIT1|unique|?{' '})<li><a href="#URL_PAGE{items_detail,id_item=#ID_PRODUIT1}"><INCLURE{fond=items_detail_croise}{id_item=#ID_PRODUIT1}></a></li>]
+					[(#ID_PRODUIT1|unique|oui)<li><a href="#URL_PAGE{items_detail,id_item=#ID_PRODUIT1}"><INCLURE{fond=items_detail_croise}{id_item=#ID_PRODUIT1}></a></li>]
 				</BOUCLE_ItemsCroiseInverse>
 				</ul>
 				</B_ItemsCroiseInverse>
