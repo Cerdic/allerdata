@@ -266,20 +266,39 @@ Ext.ux.TwinComboBox = Ext.extend(Ext.ux.SelectBox, {
 });
 
 
+// une variante du jsonStore, mais en GET pour utiliser le cache de Spip
+Ext.data.GETJsonStore = function(c){
+    Ext.data.GETJsonStore.superclass.constructor.call(this, Ext.apply(c, {
+        proxy: !c.data ? new Ext.data.HttpProxy({url: c.url,method:'GET'}) : undefined,
+        reader: new Ext.data.JsonReader(c, c.fields)
+    }));
+};
+Ext.extend(Ext.data.GETJsonStore, Ext.data.Store);
 /* --------------------------------- Listes de saisie ------------------------------------- */
-
 var ZONES_SAISIE = {
 
   combo: [],
 
   init: function() {
 
-    var cstore = new Ext.data.JsonStore({
-      url: 'spip.php?page=liste_des_produits',
+    var cstore = new Ext.data.GETJsonStore({
+    	baseParams: {page:'liste_des_produits'},
+    	url:'spip.php',
       root: 'produits',
       fields: ['id_item', 'nom', 'source', 'nom_court', 'famille', 'nom_mis_en_forme']
     });
-
+		cstore.on('beforeLoad',
+			function(store,options){
+		  	var v;
+		  	var p = [];
+		  	if (v=jQuery('#p1').val()) p.push(v);
+		  	if (v=jQuery('#p2').val()) p.push(v);
+		  	if (v=jQuery('#p2').val()) p.push(v);
+		  	if (v=jQuery('#p4').val()) p.push(v);
+		  	if (v=jQuery('#p5').val()) p.push(v);
+		  	options.params = {page:'liste_des_produits',p:p};
+			}
+		);
   var resultTpl = new Ext.XTemplate(
         '<tpl for="."><div class="search-item">',
             '<tpl if="nom"><strong>',
