@@ -8,15 +8,6 @@ function familles_moleculaires($p) {
 	
 	if (!count($tableau_produits)) return '[]';
 	
-  // tri pour signature unique
-  sort($tableau_produits);
-  $signature = implode(',', $tableau_produits);
-  $q = spip_query("select resultat_json from cache_requetes where tuple='".mysql_real_escape_string($signature)."' and page='liste_des_familles'");
-  if (spip_num_rows($q)) {
-    $r = spip_fetch_array($q);
-    return $r['resultat_json'];
-  }
-
 	$produits = implode(",", $tableau_produits);
 	
 	$tt = '';
@@ -89,16 +80,7 @@ function familles_moleculaires($p) {
 	
   $output = json_encode($final);
   
-  // On stocke pour un prochain appel
-  spip_query("INSERT INTO cache_requetes (page,tuple,resultat_json,date_maj) 
-              VALUES('liste_des_familles',
-                     '".mysql_real_escape_string($signature)."',
-                     '".mysql_real_escape_string($output)."',
-                     NOW())");
-
 	return $output;
-
-	
 
 }
 ?>
