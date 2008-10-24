@@ -12,6 +12,5 @@ _ &#169; 2008 - Licence GPL
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>aller_outil</prefix>
 	<options>aller_outil_options.php</options>
-	<fonctions>aller_outil_fonctions.php</fonctions>
 	<necessite id='allerdata' version="[;]" />
 </plugin>
