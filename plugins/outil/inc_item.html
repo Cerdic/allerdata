@@ -1,0 +1,98 @@
+
+
+
+<BOUCLE_Items(tbl_items){id_item}>
+				<div id="blocTitArticle">
+					<h1 class="titArticle">[(#NOM|sinon{NA})]</h1>
+				</div>
+				
+				<BOUCLE_Chapeau(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
+				[<div class="blocContenuArticle">(#CHAPO)
+				[<p style="text-align:right;margin-top:1.5em;">En savoir plus&nbsp;: <a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','spip.php?page=article_popup&id_article=#ID_ARTICLE'); return false;">(#TITRE)</a></p>]
+				</div>]
+				</BOUCLE_Chapeau>
+				
+				<BOUCLE_it3(tbl_items){id_item}{id_type_item=3}>
+					<div class="blocContenuArticle">
+					<h2>Ce groupe g&eacute;n&eacute;rique contient les produits</h2>
+					<table summary="Les allerg&egrave;nes de [(#NOM|sinon{NA})]" class="spip">
+						<thead><tr class="row_first">
+						<th>Nom</th>
+						<th>Source</th>
+						<th>Famille taxonomique</th>
+						<th>Testable</th>
+						</tr>
+						</thead>
+						<tbody>
+							<BOUCLE_t5(tbl_items){id_type_item=5}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
+							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+							#SET{testable,0}
+							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></td>
+							<td><i><BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources></i></td>
+							<td><BOUCLE_famille_taxo(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_famille_taxo></td>
+							<td style="text-align:center;font-size:1.5em;">[(#GET{testable}|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+							</tr>
+							</BOUCLE_t5>
+						</tbody>
+						</table>
+					</div>
+				</BOUCLE_it3>
+				<BOUCLE_it5(tbl_items){id_item}{id_type_item=5}>
+					<B_sources>
+					<div class="blocContenuArticle">
+					<h2>Source</h2>
+					<p style="text-align:center;"><i>
+					<BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{', '}{!isnull nom}{par nom}>#NOM</BOUCLE_sources>
+					</i></p>
+					</div>
+					</B_sources>
+					<B_allergenes_testables>
+					<div class="blocContenuArticle">
+					<h2>Allerg&egrave;nes testables in vitro</h2>
+					<table summary="Les allerg&egrave;nes testables in vitro de [(#NOM|sinon{NA})]" class="spip" width="50%">
+						<thead><tr class="row_first">
+						<th>Nom</th>
+						<th>Fonction</th>
+						<th>Glycosyl&eacute;</th>
+						</tr>
+						</thead>
+						<tbody>
+						<BOUCLE_allergenes_testables(tbl_items){type_item allergene}{est_dans #ID_ITEM}{par nom_complet}{!isnull nom_complet}{testable!=0}>
+						<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+						<td>[(#FONCTION_CLASSIFICATION|=={#NOM}|non)#NOM]</td>
+						<td>#FONCTION_CLASSIFICATION</td>
+						<td style="text-align:center;font-size:1.5em;">[(#GLYCO|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+						</tr>
+						</BOUCLE_allergenes_testables>
+						</tbody>
+						</table>
+						</div>
+					</B_allergenes_testables>
+					<B_allergenes>
+					<div class="blocContenuArticle">
+					<h2>Allerg&egrave;nes contenus dans ce produit</h2>
+					<table summary="Les allerg&egrave;nes de [(#NOM|sinon{NA})]" class="spip" width="90%">
+						<thead><tr class="row_first">
+						<th>Nom</th>
+						<th>Fonction</th>
+						<th>Masse</th>
+						<th>IUIS</th>
+						<th>Glyco</th>
+						</tr>
+						</thead>
+						<tbody>
+						<BOUCLE_allergenes(tbl_items){type_item allergene}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
+							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+							<td>[(#FONCTION_CLASSIFICATION|=={#NOM}|non)#NOM]</td>
+							<td>#FONCTION_CLASSIFICATION</td>
+							<td style="text-align:right;">#MASSE</td>
+							<td style="text-align:center;font-size:1.5em;">[(#IUIS|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+							<td style="text-align:center;font-size:1.5em;">[(#GLYCO|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+							</tr>
+						</BOUCLE_allergenes>
+						</tbody>
+					</table>
+					</div>
+					</BOUCLE_allergenes>
+				</BOUCLE_it>				
+</BOUCLE_Items>

@@ -1,0 +1,28 @@
+<?php
+
+spip_query("
+CREATE TABLE `cache_requetes` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `page` varchar(30) NOT NULL COMMENT 'la page json',
+  `tuple` varchar(50) NOT NULL COMMENT 'le tuple ordonné',
+  `hash` varchar(50) NOT NULL COMMENT 'le md5 de la requete si elle est contextuelle',
+  `resultat_json` text NOT NULL COMMENT 'le json calculé',
+  `date_maj` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `page` (`page`,`tuple`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='pour ne pas recalculer les requetes json non contextuelles' ;
+");
+
+echo "
+CREATE TABLE `cache_requetes` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `page` varchar(30) NOT NULL COMMENT 'la page json',
+  `tuple` varchar(50) NOT NULL COMMENT 'le tuple ordonn\xe9',
+  `hash` varchar(50) NOT NULL COMMENT 'le md5 de la requete si elle est contextuelle',
+  `resultat_json` text NOT NULL COMMENT 'le json calcul\xe9',
+  `date_maj` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `page` (`page`,`tuple`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='pour ne pas recalculer les requetes json non contextuelles' ;
+";
+?>

@@ -1,0 +1,110 @@
+<div id="layout-pentagramme">
+
+	<div id="layout_rc">						
+	</div>
+	
+		<div id="liens_infos" >
+			<div id="lien_1-2_" class="ancre concerne-p1 concerne-p2">
+				<a id="infos_1-2" href="#" title="" class="lien">
+					<img id="lien_1-2" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_1-3_" class="ancre concerne-p1 concerne-p3">
+				<a id="infos_1-3" href="#" title="" class="lien">
+					<img id="lien_1-3" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_1-4_" class="ancre concerne-p1 concerne-p4">
+				<a id="infos_1-4" href="#" title="" class="lien">
+					<img id="lien_1-4" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_1-5_" class="ancre concerne-p1 concerne-p5">
+				<a id="infos_1-5" href="#" title="" class="lien">
+					<img id="lien_1-5" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_2-3_" class="ancre concerne-p2 concerne-p3">
+				<a id="infos_2-3" href="#" title="" class="lien">
+					<img id="lien_2-3" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_2-4_" class="ancre concerne-p2 concerne-p4">
+				<a id="infos_2-4" href="#" title="" class="lien">
+					<img id="lien_2-4" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_2-5_" class="ancre concerne-p2 concerne-p5">
+				<a id="infos_2-5" href="#" title="" class="lien">
+					<img id="lien_2-5" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt="" />
+				</a>
+			</div>
+			<div id="lien_3-4_" class="ancre concerne-p3 concerne-p4">
+				<a id="infos_3-4" href="#" title="" class="lien">
+					<img id="lien_3-4" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt=""  />
+				</a>
+			</div>
+			<div id="lien_3-5_" class="ancre concerne-p3 concerne-p5">
+				<a id="infos_3-5" href="#" title="" class="lien">
+					<img id="lien_3-5" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt=""  />
+				</a>
+			</div>
+			<div id="lien_4-5_" class="ancre concerne-p4 concerne-p5">
+				<a id="infos_4-5" href="#" title="" class="lien">
+					<img id="lien_4-5" src="#CHEMIN{img/lien.gif}" width="33" height="33" alt=""/>
+				</a>
+			</div>
+		</div>
+
+		<map name="map" id="map">
+			<area id="infos_1" href="#" title="" shape="circle" coords="232,10,10" alt="" class="sommet" />
+			<area id="infos_2" href="#" title="" shape="circle" coords="368,155,10" alt="" class="sommet" />
+			<area id="infos_3" href="#" title="" shape="circle" coords="233,348,10" alt="" class="sommet" />
+			<area id="infos_4" href="#" title="" shape="circle" coords="36,295,10" alt="" class="sommet" />
+			<area id="infos_5" href="#" title="" shape="circle" coords="34,61,10" alt="" class="sommet" />
+		</map>
+	
+	
+	
+	<form method="get" id="form_penta" action="" >
+		
+		<div id="liste_des_produits">
+			<div id="div-s1">
+				<input type="text" class="select_prod" id="prod_1" name="prod[1]" size="20" />
+			</div>
+			<div id="div-s2">
+				<input type="text" class="select_prod" id="prod_2" name="prod[2]" size="20" />
+			</div>
+			<div id="div-s3">
+				<input type="text" class="select_prod" id="prod_3" name="prod[3]" size="20" />
+			</div>
+			<div id="div-s4">
+				<input type="text" class="select_prod" id="prod_4" name="prod[4]" size="20" />
+			</div>
+			<div id="div-s5">
+				<input type="text" class="select_prod" id="prod_5" name="prod[5]" size="20" />
+			</div>
+			<a href="#" id="info-s1" class="info"></a>
+			<a href="#" id="info-s2" class="info"></a>
+			<a href="#" id="info-s3" class="info"></a>
+			<a href="#" id="info-s4" class="info"></a>
+			<a href="#" id="info-s5" class="info"></a>
+			<p id="nom_1" ></p>
+			<p id="nom_2" ></p>
+			<p id="nom_3" ></p>
+			<p id="nom_4" ></p>
+			<p id="nom_5" ></p>
+		</div>
+		<div>
+		<input type="image" src="#CHEMIN{img/btn_valider.gif}" name="submit" id="submit" onclick="$('input:text').removeClass('actif');"/>
+		<input type="image" src="#CHEMIN{img/btn_annuler.gif}" name="reset" id="reset" onclick="ZONES_SAISIE.nettoyage(ZONES_SAISIE.combo[1]);ZONES_SAISIE.nettoyage(ZONES_SAISIE.combo[2]);ZONES_SAISIE.nettoyage(ZONES_SAISIE.combo[3]);ZONES_SAISIE.nettoyage(ZONES_SAISIE.combo[4]);ZONES_SAISIE.nettoyage(ZONES_SAISIE.combo[5]);reload_penta();$('.x-combo-list-inner').empty();$.ajax({type:'GET',url:'spip.php?action=purge_sessions'});return false;" style="position:absolute;top:400px;left:500px" /> 
+		</div>
+	</form>
+
+</div>
+<div id="lienPermanent">
+	<a id="lienAdresse" href="#" style="float:right"><:get_url:></a>
+	<BOUCLE_ModeEmploiAAM(ARTICLES){titre_mot=ModeEmploiAAM}{!par date}{0,1}><a id="lienAide" href="#"  style="float:left; font-weight:bold; padding-left:10px"><:help_needed:></a>
+	</BOUCLE_ModeEmploiAAM>
+</div>
+

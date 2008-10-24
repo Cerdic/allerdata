@@ -101,11 +101,23 @@ function allerdata_id_type_item($type,$tous=false){
 			else
 				return array(1,3,5);
 			break;
+		case 'produit_simple':
+			if ($tous)
+				return array(5,25);
+			else
+				return array(5);
+			break;
 		case 'produit_en_attente':
 			return array(13,23,25);
 			break;
 		case 'allergene':
-			return array(7,8,9,10,18);
+			if ($tous)
+				return array(7,8,9,10,18);
+			else
+				return array(7,8,9,10);
+			break;
+		case 'allergene_en_attente':
+			return array(18);
 			break;
 	}
 	return array();	

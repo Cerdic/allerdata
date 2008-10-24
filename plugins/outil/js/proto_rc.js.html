@@ -1,0 +1,179 @@
+#HTTP_HEADER{'Content-Type: application/x-javascript'}
+/* ------------------------- Affichage de la liste des RC ------------------------------- */
+
+LISTE_DES_RC = {
+
+  rcStore:null,
+	nbErrorTry:0,
+  
+  init: function(){
+  
+    Ext.data.ObjectReader = function(meta, recordType){
+        Ext.data.ObjectReader.superclass.constructor.call(this, meta, recordType);
+    };
+    
+    Ext.extend(Ext.data.ObjectReader, Ext.data.DataReader, {
+      readRecords : function(o){
+      return o;
+      }
+    });
+    
+    this.rcStore = new Ext.data.Store({
+      proxy: new Ext.data.HttpProxy({url:'spip.php?action=liste_des_rc'}),
+      reader: new Ext.data.JsonReader(
+        {root: 'liste_des_rc'},Ext.data.Record.create([
+          {name:'source'},
+          {name:'dest'},
+          {name:'classe'}
+        ])
+      )
+    });
+    
+    jQuery('.lien').click(function(){
+    /* Serie d'appels en cascade pour ajouter ou pas un onglet : 
+       Méthode du "pied dans la porte" :
+       Le premier appel retour 'OK' ssi on a un résultat
+       Il stocke le résultat en session pour aller plus vite lors du second appel
+       qui retournera le contenu à mettre dans les tabs */
+      p1 = jQuery(this).attr('id').substr(6,1);
+      p2 = jQuery(this).attr('id').substr(8,1);
+			main_panel.beginUpdate();
+      jQuery.get('spip.php',
+        { page : 'popup_rc',
+          etude : 'pp',
+          reset : 'pp',
+          p1 : jQuery('#p'+p1).val(), 
+          p2 : jQuery('#p'+p2).val() },
+        function(data,textStatus) {
+          if (textStatus == "success" && data.trim() != '') {
+            main_panel.updateTab('tab1','&Eacute;tudes Produits - Produits (' + parseInt(data.trim()) + ')', 'spip.php?page=popup_rc&etude=pp&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+          } else {
+            main_panel.updateTab('tab1','&Eacute;tudes Produits - Produits (0)', 'spip.php?page=popup_rc');
+          }
+          jQuery.get('spip.php',
+            { page : 'popup_rc',
+              etude : 'pa',
+              reset : 'pa',
+              p1 : jQuery('#p'+p1).val(), 
+              p2 : jQuery('#p'+p2).val() },
+            function(data,textStatus) {
+              if (textStatus == "success" && data.trim() != '') {
+                main_panel.updateTab('tab2','&Eacute;tudes Produits - Allerg&egrave;nes (' + parseInt(data.trim()) + ')', 'spip.php?page=popup_rc&etude=pa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+              } else {
+                main_panel.updateTab('tab2','&Eacute;tudes Produits - Allerg&egrave;nes (0)', 'spip.php?page=popup_rc');
+              }
+              jQuery.get('spip.php',
+                { page : 'popup_rc',
+                  etude : 'aa',
+                  reset : 'aa',
+                  p1 : jQuery('#p'+p1).val(), 
+                  p2 : jQuery('#p'+p2).val() },
+                function(data,textStatus) {
+                  if (textStatus == "success" && data.trim() != '') {
+                    main_panel.updateTab('tab3','&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes (' + parseInt(data.trim()) + ')', 'spip.php?page=popup_rc&etude=aa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+                  } else {
+                    main_panel.updateTab('tab3','&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes (0)', 'spip.php?page=popup_rc');
+                  }
+                } /* Callback aa */
+              );
+            } /* Callback pa */
+          );
+        } /* Callback pp */
+      );
+      dialog_avec_tab.setTitle('D&eacute;tail des r&eacute;activit&eacute;s crois&eacute;es');
+			main_panel.endUpdate();
+      dialog_avec_tab.show(Ext.get('lien_'+p1+'-'+p2+'_'));
+	  	return false;
+    });
+
+  },
+      
+  getData : function() {
+    var p1 = jQuery('#p1').val(),
+  		p2 = jQuery('#p2').val(), 
+  		p3 = jQuery('#p3').val(), 
+  		p4 = jQuery('#p4').val(), 
+  		p5 = jQuery('#p5').val();
+    this.rcStore.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5}, callback:LISTE_DES_RC.gotData});
+  },
+
+  gotData : function(record, arg, success) {
+    if (success) {
+      
+      LISTE_DES_RC.nbErrorTry = 0;
+
+			/* Nettoyage */
+      $('.rc').removeClass('rc_toujours');
+      $('.rc').removeClass('rc_jamais');
+      $('.rc').removeClass('rc_discordant');
+      $('#liens_infos div').hide();
+      
+  	  var dejavus = new Array(),
+  		  last = null, s = null, d = null,
+  	    rc = new Array(),
+    		id_s = new Array(),
+    		id_d = new Array(),
+    		doublons = 0;
+  		
+      /* On retrouve l'id par le champ contenant la valeur de la source */
+      /* C'est un champ de type hidden, avec comme nom p1, ou p2, etc.. */
+      for (i=0; i<record.length; i++) {
+    	  rc[i] = record[i].data;
+    	  s = jQuery('#liste_des_produits input[@value='+rc[i].source+']');
+    	  d = jQuery('#liste_des_produits input[@value='+rc[i].dest+']');
+    	  id_s[i] = s.attr('id').substr(1);
+    	  id_d[i] = d.attr('id').substr(1);
+    	  if (s.length > 1 && !dejavus.indexOf(rc[i].source)) {
+    	    // On nettoie rc.source
+      		last = $($('#liste_des_produits input[@value='+rc[i].source+']')[1]).attr('id').substr(1);
+      		ZONES_SAISIE.combo[last].setValue('');
+      		ZONES_SAISIE.combo[last].applyEmptyText();
+      		dejavus.push(rc[i].source);
+      		doublons++;
+    	  } else
+    	  if (d.length > 1 && !dejavus.indexOf(rc[i].dest)) {
+      	    // On nettoie rc.dest
+      		last = $($('#liste_des_produits input[@value='+rc[i].dest+']')[1]).attr('id').substr(1);
+      		dejavus.push(rc[i].dest);
+      		ZONES_SAISIE.combo[last].setValue('');
+      		ZONES_SAISIE.combo[last].applyEmptyText();
+      		doublons++;
+    	  }
+  	  }
+  	
+    	if (doublons > 0) {
+    	  $('#form_penta').submit(); /* resubmit pour supprimer celui qui est de trop */
+    	  return false;
+    	}
+  	
+      for (i=0; i<record.length; i++) {
+    	  $('#rc_' + id_d[i] + '-' + id_s[i]).addClass(rc[i].classe);
+          $('#liens_infos div#lien_'+ id_d[i] + '-' + id_s[i] + '_').show();
+          $('#liens_infos div#lien_'+ id_s[i] + '-' + id_d[i] + '_').show();
+      }
+      	
+
+		  if (Ext.get('loading-mask')) {
+		    Ext.get('loading-mask').hide();
+		    Ext.get('loading').fadeOut();
+		  }
+
+    } else {
+			if (LISTE_DES_RC.nbErrorTry > 5) {
+				alert(ERROR_GOTDATA);
+			} else {
+				// On relance (jusqu'à 5 essais) -- utile lors de l'initialisation d'une page préremplie
+				LISTE_DES_RC.nbErrorTry += 1;
+				LISTE_DES_RC.getData();
+			}
+		}
+  }
+
+};
+
+Ext.onReady(LISTE_DES_RC.init,LISTE_DES_RC);
+
+
+
+
+

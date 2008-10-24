@@ -6,6 +6,8 @@
  *
  */
 
+include_spip('base/abstract_sql');
+
 /**
  * Recuperer les enfants d'un item
  * - eventuellement d'un type donne
@@ -21,8 +23,9 @@
 
 function allerdata_les_enfants($id_item,$type_item='',$direct=true,$tous=true){
 	include_spip('allerdata_fonctions');
+	$where = is_array($id_item)?sql_in("ed.est_dans_id_item",$id_item):'ed.est_dans_id_item='.intval($id_item);
 	return array_map('reset',sql_allfetsel('i.id_item','tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_item',
-	'ed.est_dans_id_item='.intval($id_item)
+	$where
 	.($direct?" AND ed.directement_contenu=1":"")
 	.($type_item?' AND '.sql_in('i.id_type_item',allerdata_id_type_item($type_item,$tous)):"")
 	));
@@ -43,8 +46,9 @@ function allerdata_les_enfants($id_item,$type_item='',$direct=true,$tous=true){
  */
 function allerdata_les_parents($id_item,$type_item='',$direct=true,$tous=true){
 	include_spip('allerdata_fonctions');
+	$where = is_array($id_item)?sql_in("ed.id_item",$id_item):'ed.id_item='.intval($id_item);
 	return array_map('reset',sql_allfetsel('i.id_item','tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.est_dans_id_item',
-	'ed.id_item='.intval($id_item)
+	$where
 	.($direct?" AND ed.directement_contenu=1":"")
 	.($type_item?' AND '.sql_in('i.id_type_item',allerdata_id_type_item($type_item,$tous)):"")
 	));

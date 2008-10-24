@@ -1,0 +1,89 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<BOUCLE_Items(tbl_items){id_item=#ENV{id_fm}}>
+<div id="main">
+<?php if ($GLOBALS['auteur_session']) { ?>
+	
+				<div id="blocTitArticle">
+					<h1 class="titArticle">[(#NOM|sinon{NA})]</h1>
+				</div>
+				
+				<BOUCLE_Chapeau(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
+				[<div class="blocContenuArticle">(#CHAPO)</div>]
+				</BOUCLE_Chapeau>
+
+				<B_allergenes_testables>
+				<div class="blocContenuArticle">
+					<h2>Allerg&egrave;nes testables in vitro</h2>
+					<table summary="Les allerg&egrave;nes testables in vitro de [(#NOM|sinon{NA})]" class="spip">
+						<thead>
+						<tr class="row_first">
+						<th>Nom</th>
+						<th>Produit</th>
+						<th>Source</th>
+						<th>Glycosyl&eacute;</th>
+						</tr>
+						</thead>
+						<tbody>
+						<BOUCLE_allergenes_testables(tbl_items){type_item allergene}{est_dans #ID_ITEM}{par nom}{!isnull nom}{testable!=0}>
+						<BOUCLE_prod0(tbl_items){type_item produit_simple}{contient #ID_ITEM}{par nom_court}{!isnull nom_court}>
+						#SET{tot,#GET{tot}|plus{1}}
+						<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+						<td>#_allergenes_testables:NOM</td>
+						<td>#_prod0:NOM_COURT</td>
+						<td><BOUCLE_sources0(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_sources0></td>
+						<td style="text-align:center;font-size:1.5em;">[(#_allergenes_testables:GLYCO|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+						</tr>
+						</BOUCLE_prod0>
+						</BOUCLE_allergenes_testables>
+						</tbody>
+					</table>
+				</div>
+				</B_allergenes>
+				<B_allergenes>
+				<div class="blocContenuArticle">
+					<h2>Cette famille mol&eacute;culaire contient les allerg&egrave;nes suivants</h2>
+					<table class="spip" width=90%>
+						<thead>
+						<tr class="row_first">
+						<th>Nom</th>
+						<th>Produit</th>
+						<th>Source</th>
+						<th>Masse</th>
+						<th>IUIS</th>
+						<th>Glyco</th>
+						</tr>
+						</thead>
+						<tbody>
+						<BOUCLE_allergenes(tbl_items){type_item allergene}{id_type_item!=9}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
+						<BOUCLE_prod(tbl_items){type_item produit_simple}{contient #ID_ITEM}{par nom_court}{!isnull nom_court}>
+						#SET{tot,#GET{tot}|plus{1}}
+						<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+						<td>#_allergenes:NOM</td>
+						<td>#_prod:NOM_COURT</td>
+						<td><BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_sources></td>
+						<td style="text-align:right;">#_allergenes:MASSE</td>
+						<td style="text-align:center;font-size:1.5em;">[(#_allergenes:IUIS|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+						<td style="text-align:center;font-size:1.5em;">[(#_allergenes:GLYCO|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+						</tr>
+						</BOUCLE_prod>
+						</BOUCLE_allergenes>
+						</tbody>
+					</table>
+				</div>
+				</B_allergenes>
+				<B_LienArticle>
+				<div class="blocContenuArticle">
+				<h2>En savoir plus</h2>
+				<ul>
+				<BOUCLE_LienArticle(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
+				[<li><a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','#URL_PAGE{article_popup,id_article=#ID_ARTICLE}'); return false;">(#TITRE)</a></li>]
+				</BOUCLE_LienArticle>
+				</ul>
+				</div>
+				</B_LienArticle>
+
+<?php } else { ?>
+<INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]}>
+<?php } ?>
+
+</div>
+</BOUCLE_Items>
