@@ -1,14 +1,12 @@
 <?php
-function familles_moleculaires($txt) {
+function familles_moleculaires($p) {
 	$tableau_produits = array();
 	
-	if (is_numeric($_REQUEST['p1'])) $tableau_produits[1] = $_REQUEST['p1']; 
-	if (is_numeric($_REQUEST['p2'])) $tableau_produits[2] = $_REQUEST['p2'];
-	if (is_numeric($_REQUEST['p3'])) $tableau_produits[3] = $_REQUEST['p3'];
-	if (is_numeric($_REQUEST['p4'])) $tableau_produits[4] = $_REQUEST['p4'];
-	if (is_numeric($_REQUEST['p5'])) $tableau_produits[5] = $_REQUEST['p5'];
+	if (!is_array($p))
+		$p = explode(',',$p);
+	$tableau_produits = $p;
 	
-	if (!sizeof($tableau_produits)) return '[]';
+	if (!count($tableau_produits)) return '[]';
 	
   // tri pour signature unique
   sort($tableau_produits);
