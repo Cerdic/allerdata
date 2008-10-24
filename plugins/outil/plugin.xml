@@ -1,0 +1,17 @@
+<plugin>
+	<nom>L'Outil Pentagramme</nom>
+	<auteur>Equipe Allerdata v1
+ 	&amp; [Cedric Morin->http://www.yterium.net]
+_ pour Allerdata SARL
+_ &#169; 2008 - Licence GPL
+	</auteur>
+	<version>0.1.0.0</version>
+	<version_base>0.1.0.0</version_base>
+	<etat>stable</etat>
+	<description>Tout ce qui constitue l'outil</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>aller_outil</prefix>
+	<options>aller_outil_options.php</options>
+	<fonctions>aller_outil_fonctions.php</fonctions>
+	<necessite id='allerdata' version="[;]" />
+</plugin>
