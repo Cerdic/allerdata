@@ -30,7 +30,7 @@
 						<td>#_allergenes_testables:NOM</td>
 						<td>#_prod0:NOM_COURT</td>
 						<td><BOUCLE_sources0(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_sources0></td>
-						<td style="text-align:center;font-size:1.5em;">[(#_allergenes_testables:GLYCO|oui)<img src="squelettes/img/icon_accept.gif" />]</td>
+						<td style="text-align:center;font-size:1.5em;">[(#_allergenes_testables:GLYCO|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
 						</tr>
 						</BOUCLE_prod0>
 						</BOUCLE_allergenes_testables>
@@ -61,8 +61,8 @@
 						<td>#_prod:NOM_COURT</td>
 						<td><BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_sources></td>
 						<td style="text-align:right;">#_allergenes:MASSE</td>
-						<td style="text-align:center;font-size:1.5em;">[(#_allergenes:IUIS|oui)<img src="squelettes/img/icon_accept.gif" />]</td>
-						<td style="text-align:center;font-size:1.5em;">[(#_allergenes:GLYCO|oui)<img src="squelettes/img/icon_accept.gif" />]</td>
+						<td style="text-align:center;font-size:1.5em;">[(#_allergenes:IUIS|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+						<td style="text-align:center;font-size:1.5em;">[(#_allergenes:GLYCO|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
 						</tr>
 						</BOUCLE_prod>
 						</BOUCLE_allergenes>
