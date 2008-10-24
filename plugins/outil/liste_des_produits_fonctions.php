@@ -33,8 +33,8 @@ function produits_exclus($p){
 	// - ainsi que leurs parents
 	
 	if (!is_array($p))
-		$p = array($p);
-	
+			$p = explode(',',$p);
+				
 	include_spip('inc/allerdata_arbo');
 	return array_merge(
 	$p,

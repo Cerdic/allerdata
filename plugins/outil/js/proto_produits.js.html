@@ -296,7 +296,8 @@ var ZONES_SAISIE = {
 		  	if (v=jQuery('#p2').val()) p.push(v);
 		  	if (v=jQuery('#p4').val()) p.push(v);
 		  	if (v=jQuery('#p5').val()) p.push(v);
-		  	options.params = {page:'liste_des_produits',p:p};
+		  	p.sort();
+		  	options.params = {page:'liste_des_produits',p:p.join(',')};
 			}
 		);
   var resultTpl = new Ext.XTemplate(
