@@ -411,7 +411,7 @@ var ZONES_SAISIE = {
     if ($('#p5').val()) $('#info-s5').show();
 
     this.pStore = new Ext.data.Store({
-      proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_noms'}),
+      proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_noms',method:'GET'}),
       reader: new Ext.data.JsonReader(
         {root: 'liste_des_noms'},Ext.data.Record.create([
           {name:'index'},
