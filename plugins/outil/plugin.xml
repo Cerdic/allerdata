@@ -10,7 +10,8 @@ _ &#169; 2008 - Licence GPL
 	<etat>stable</etat>
 	<description>Tout ce qui constitue l'outil</description>
 	<lien></lien> <!-- URI de documentation -->
-	<prefix>aller_outil</prefix>
-	<options>aller_outil_options.php</options>
+	<prefix>penta</prefix>
+	<options>penta_options.php</options>
+	<fonctions>penta_fonctions.php</fonctions>
 	<necessite id='allerdata' version="[;]" />
 </plugin>

@@ -12,33 +12,18 @@ function cmp($a, $b)
 function suggestions($txt) {
 	$tableau_produits = $t_suggestions = $items_famille = $t_id_suggestion_trouvee = array();
 	
-	if (isset($_REQUEST['p1']) && is_numeric($_REQUEST['p1'])) $tableau_produits[$_REQUEST['p1']] = $_REQUEST['p1']; 
-	if (isset($_REQUEST['p2']) && is_numeric($_REQUEST['p2'])) $tableau_produits[$_REQUEST['p2']] = $_REQUEST['p2'];
-	if (isset($_REQUEST['p3']) && is_numeric($_REQUEST['p3'])) $tableau_produits[$_REQUEST['p3']] = $_REQUEST['p3'];
-	if (isset($_REQUEST['p4']) && is_numeric($_REQUEST['p4'])) $tableau_produits[$_REQUEST['p4']] = $_REQUEST['p4'];
-	if (isset($_REQUEST['p5']) && is_numeric($_REQUEST['p5'])) $tableau_produits[$_REQUEST['p5']] = $_REQUEST['p5'];
-	
-  session_start();
-  // Pour ne pas les reproposer ensuite il faut :
-	// - Mémoriser les produits du penta
-  // - Leurs sous-produits
-	// - ainsi que leurs parents
-  $_SESSION['produits_choisis'] = $famille_produits = array();
-	if ($tableau_produits) {
-		$res = spip_query("
-      select DISTINCT est_dans_id_item as id from tbl_est_dans where id_item IN (".implode(',',$tableau_produits).")
-      UNION
-      select DISTINCT id_item as id from tbl_est_dans where est_dans_id_item IN (".implode(',',$tableau_produits).")
-    ");
-		while ($row = spip_fetch_array($res)){
-			$famille_produits[$row['id']] = $row['id'];
-		}
-	}
-	$_SESSION['produits_choisis'] = $famille_produits;
-  session_write_close();
+	foreach(array('p1','p2','p3','p4','p5') as $k)
+		if (_request($k) AND $v=intval(_request($k)))
+			$tableau_produits[]=$v;
 
-	if (!sizeof($tableau_produits)) return '[]';
+	if (!count($tableau_produits)) return '[]';
 	
+	$famille_produits = penta_produits_exclus($tableau_produits);
+	
+	// trions pour unifier les signatures qui ne different que par l'ordre
+  sort($tableau_produits);
+  sort($famille_produits);
+
 	$produits = implode(",", $famille_produits);
 	$produits_penta = implode(",", $tableau_produits);
   
@@ -46,7 +31,7 @@ function suggestions($txt) {
 	
 	/* Liste des suggestions */
 	$query = <<<EOQ
-# Requête pour trouver les items à suggérer
+# Requete pour trouver les items a suggerer
 
 (SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.source, tbl_items_3.nom_court
     FROM (tbl_est_dans INNER JOIN tbl_reactions_croisees ON tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1)
@@ -101,17 +86,16 @@ EOQ;
   $md5_query = md5($query);
   
   // tri 
-  $q = spip_query("select resultat_json from cache_requetes where hash='".mysql_real_escape_string($md5_query)."' and page='liste_des_suggestions'");
-  if ((!_request('debug')) && spip_num_rows($q)) {
-    $r = spip_fetch_array($q);
+  $q = sql_select("resultat_json","cache_requetes","hash='".mysql_real_escape_string($md5_query)."' and page='liste_des_suggestions'");
+  if (
+    (!_request('debug')) 
+    AND $r = sql_fetsel("resultat_json","cache_requetes","hash='".mysql_real_escape_string($md5_query)."' and page='liste_des_suggestions'")){
     return $r['resultat_json'];
   }
-  sort($tableau_produits);
-  $signature = implode(',', $tableau_produits);
   
+  $signature = implode(',', $tableau_produits);
  	$res = spip_query($query);
-	
-	while ($row = spip_fetch_array($res)){
+	while ($row = sql_fetch($res)){
 		if (!isset($t_suggestions[$row['id_item']])) {
 			$t_suggestions[$row['id_item']] = array(
 					'nom' => (($row['nom_court']=='')?$row['nom']:$row['nom_court']),
@@ -169,8 +153,7 @@ EOQ;
   
   // On stocke pour un prochain appel
   if (!_request('var_mode')) {
-		spip_query("INSERT INTO cache_requetes (page,tuple,hash,resultat_json,date_maj) 
-		              VALUES('liste_des_suggestions',
+		sql_insert('cache_requetes', '(page,tuple,hash,resultat_json,date_maj)', "('liste_des_suggestions',
 		                     '".mysql_real_escape_string($signature)."',
 		                     '".mysql_real_escape_string($md5_query)."',
 		                     '".mysql_real_escape_string($suggestion)."',
