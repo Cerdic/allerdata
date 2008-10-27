@@ -8,17 +8,7 @@ function rc($p1,$p2,$type_etude) {
 	$tableau_produits = $items_fils_de = array();
 	if (is_numeric($p1)) $tableau_produits[] = $p1; 
 	if (is_numeric($p2)) $tableau_produits[] = $p2;
-	
-  // on variable 'reset' permet de réinitialiser les sessions
-  // qui sont retournées immédiatement (lorsqu'elles existent)
-  if (isset($_REQUEST['reset'])) {
-    if (isset($_SESSION['rc_' . $_REQUEST['reset']]))
-      unset($_SESSION['rc_' . $_REQUEST['reset']]);
-  } else {
-    if (isset($_SESSION['rc_' . $type_etude]) && $_SESSION['rc_' . $type_etude])
-      return ($_SESSION['rc_' . $type_etude]);
-  }
-  
+	 
 	$produits = implode(",", $tableau_produits);
 	
 	foreach ($tableau_produits as $id_item_source) {
@@ -63,15 +53,18 @@ function rc($p1,$p2,$type_etude) {
   switch ($type_etude) {
     case 'pp' :
       $query .= "AND (tbl_items.id_type_item IN (5,3,13)) AND (tbl_items_1.id_type_item IN (5,3,13))";
+      $title = "&Eacute;tudes Produits - Produits";
     break;
     case 'pa' :
       $query .= "AND (
                   ((tbl_items.id_type_item IN (5,3,13)) AND (tbl_items_1.id_type_item NOT IN (5,3,13)))
                   OR ((tbl_items.id_type_item NOT IN (5,3,13)) AND (tbl_items_1.id_type_item IN (5,3,13)))
                 )";
+      $title = "&Eacute;tudes Produits - Allerg&egrave;nes";
     break;
     case 'aa' :
       $query .= "AND (tbl_items.id_type_item NOT IN (5,3,13)) AND (tbl_items_1.id_type_item NOT IN (5,3,13))";
+      $title = "&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes";
     break;
   }
 
@@ -82,12 +75,9 @@ function rc($p1,$p2,$type_etude) {
 	$premiere_ligne = true; 
   
   if (!spip_num_rows($res)) {
-    $_SESSION['rc_' . $type_etude] = '';
-		if (isset($_REQUEST['reset']))
-	    return 0; // Le prochain appel retournera le contenu stocké en session
-		else
-    	return "<div id='main'><h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1></div>";
-  } 
+  		$title .= " (0)";
+    	return "<div id='main'><title>$title</title><h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1></div>";
+  }
     
 	while ($row = spip_fetch_array($res)){
 		// Trouver le parent pour tester si les 2 produits sont dans la meme famille
@@ -142,17 +132,14 @@ function rc($p1,$p2,$type_etude) {
 		}
 		
 	}
+	$title .= " ($count)";
 	if ($result) {
 		$result = '<div class="blocContenuArticle"><a name="top_'.$type_etude.'" id="top_'.$type_etude.'"></a><h1 class="titArticle">'._T('ad:titre_synthese_popup_rc').'</h1><table class="spip" width=100%><thead><tr class="row_first"><th style="width:50px;">Biblio</th><th style="width:285px" colspan="2">'.produit($p1).'</th><th style="width:325px" colspan="2">'.produit($p2).'</th></tr></thead><tbody>'.$result.'</tbody></table></div>';
 		if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:titre_bibliographies_popup_rc').'</h2><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><tbody>'.$biblio.'</tbody></table><br class="nettoyeur"/></div>';
-    $_SESSION['rc_' . $type_etude] = '<div id="main">'.$result.'</div>';
   } else
 		$result = "<h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1>";
 		
-	if (isset($_REQUEST['reset']))
-    return $count; // Le prochain appel retournera le contenu stocké en session
-	else
-		return "<div id='main'>".$result."</div>";
+	return "<div id='main'><title>$title</title>".$result."</div>";
 }
 
 function biblio($id_biblio, $id_reaction_croisee) {

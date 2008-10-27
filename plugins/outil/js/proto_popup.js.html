@@ -54,6 +54,12 @@ Ext.onReady(function() {
     },
 
 		callback_popup : function(tab) {
+			// si un title est fourni dans le contenu, le mettre en title de l'onglet
+			var t = $('title','#' + tab.id);
+			if (t.length){
+				main_panel.getItem($('#'+tab.id).parents('.x-panel').eq(0).attr('id')).setTitle(t.html());
+				t.remove();
+			}
 		  // Détection des liens vers des ancres
 		  // puis si celles-ci sont trouvées on affecte un comportement à ce lien
 		  // Au lieu de déplacer brutalement le navigateur (fonctionne +/- bien)

@@ -63,17 +63,6 @@ function loadSpecificFunction() {
     });
   </BOUCLE_ModeEmploiAAM>
 
-	<?php
-		if (!_request('p1') && !_request('p2') && !_request('p3') && !_request('p4') && !_request('p5')) :
-	?>
-	jQuery.ajax({
-			type: "GET",
-			url:'spip.php?action=purge_sessions'
-		});
-	<?php
-		endif;
-	?>
-
 	/* chargement des images */
 	var content = '';
 	<?php 
