@@ -31,29 +31,7 @@ function loadSpecificFunction() {
   /* Cette fonction sera appelee *apres* le telechargement du reste
    de l'appli pour que les autres "classes" aient pu s'initialiser */
 
-	<?php
-
-		include_spip('base/abstract_sql');
-    $str =  '';
-    foreach (array(1,2,3,4,5) as $i) {
-      if (_request("p$i")) {
-        $p = sql_getfetsel("nom",'tbl_items','id_item='.intval(_request("p$i")));
-        if ($p) {
-          $str .= "\nZONES_SAISIE.combo[$i].setValue('".addslashes($p)."');";
-          $str .= "\nZONES_SAISIE.combo[$i].triggers[0].show();";
-          $str .= "\njQuery('#p$i').val(".addslashes(_request("p$i")).");";
-        }
-      }
-    }
-
-    echo $str;
-
-    /* Si on est dans un acces direct par url */
-    if ($str) {
-      echo "\njQuery('#form_penta').submit();";
-    }
-  ?>
-
+  loadFormPenta();
   <BOUCLE_ModeEmploiAAM(ARTICLES){titre_mot= ModeEmploiAAM}{!par date}{0,1}>
     jQuery('#lienAide').click(function() {
       var link = 'spip.php?page=article_popup&id_article=#ID_ARTICLE';
