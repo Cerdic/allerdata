@@ -1,4 +1,9 @@
 <?php
+/**
+ * Aucun appel a cette action dans l'outil
+ * semble obsolete
+ *
+ */
 
 function action_db_creer_noms_sans_accents() {
 

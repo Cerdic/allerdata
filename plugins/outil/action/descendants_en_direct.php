@@ -1,4 +1,9 @@
 <?php
+/**
+ * Aucun appel a cette action dans l'outil
+ * semble obsolete
+ *
+ */
 function action_descendants_en_direct() {
 	spip_query("alter table `tbl_est_dans` add index `couple` (`id_item`, `est_dans_id_item`)");
 	spip_query("alter table `tbl_est_dans` add index `id_item` (`id_item`)");

@@ -1,5 +1,6 @@
 <?php
 function familles_moleculaires($p) {
+	include_spip('base/abstract_sql');	
 	$tableau_produits = array();
 	
 	if (!is_array($p))
@@ -24,7 +25,7 @@ function familles_moleculaires($p) {
 			INNER JOIN tbl_est_dans ON tbl_items.id_item = tbl_est_dans.id_item) 
 			INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items.id_item = tbl_est_dans_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item) 
-		WHERE (((tbl_est_dans.est_dans_id_item) In ($produits)) AND ((tbl_items_1.id_type_item)=6))
+		WHERE (((tbl_est_dans.est_dans_id_item) In ($produits)) AND ((tbl_items_1.id_type_item)=6)) AND (tbl_items_1.statut='publie')
 		ORDER BY tbl_items_1.nom, tbl_est_dans.est_dans_id_item DESC;"; 
 			
 	$res = spip_query($query);
@@ -34,7 +35,7 @@ function familles_moleculaires($p) {
 	$liste_produit = $temp = $tri = $final = array();
 	$pos = 0;
 		
-	while ($row = spip_fetch_array($res)){
+	while ($row = sql_fetch($res)){
 		$pos += 1;
 	
 		$prod = $row['est_dans_id_item'];

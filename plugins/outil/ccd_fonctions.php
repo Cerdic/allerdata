@@ -31,7 +31,7 @@ function compte_ccd($produits) {
 			INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_items.id_item = tbl_est_dans_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans_1.est_dans_id_item = tbl_items_1.id_item) 
 			INNER JOIN tbl_items AS tbl_items_2 ON tbl_est_dans.est_dans_id_item = tbl_items_2.id_item
-		WHERE (((tbl_items_2.id_item) IN ($produits)) AND ((tbl_items_1.id_type_item)=5) AND ((tbl_items.ccd_possible)=1))
+		WHERE (((tbl_items_2.id_item) IN ($produits)) AND (tbl_items_2.statut='publie') AND ((tbl_items_1.id_type_item)=5) AND ((tbl_items.ccd_possible)=1))
 		";
 			
 	$liste_prod_ccd = array();

@@ -1,6 +1,7 @@
 <?php
 session_start();
 function rc($p1,$p2,$type_etude) {
+	include_spip('base/abstract_sql');
 	
 	$img_path = find_in_path('squelettes/img');
 	$css_path = find_in_path('squelettes/css');
@@ -14,10 +15,11 @@ function rc($p1,$p2,$type_etude) {
 	foreach ($tableau_produits as $id_item_source) {
 		$query = "SELECT tbl_items.id_item FROM tbl_items, tbl_est_dans 
 			WHERE est_dans_id_item = $id_item_source
-			AND tbl_est_dans.id_item = tbl_items.id_item";
+			AND tbl_est_dans.id_item = tbl_items.id_item
+			AND tbl_items.statut='publie'";
 		$res = spip_query($query);
 
-		while($row = spip_fetch_array($res)) {
+		while($row = sql_fetch($res)) {
 			$items_fils_de[$row['id_item']][] = $id_item_source;
 		}
 	}
@@ -48,6 +50,8 @@ function rc($p1,$p2,$type_etude) {
 				
 				AND tbl_reactions_croisees.id_produit1 = tbi3.id_item
 				AND tbl_reactions_croisees.id_produit2 = tbi4.id_item
+				AND tbl_items.statut='publie'
+				AND tbl_items_1.statut='publie'
 			)";
 	
   switch ($type_etude) {
@@ -73,13 +77,13 @@ function rc($p1,$p2,$type_etude) {
 	$biblio = '';
 	$count = 0;
 	$premiere_ligne = true; 
-  
-  if (!spip_num_rows($res)) {
+
+	if (!sql_count($res)) {
   		$title .= " (0)";
     	return "<div id='main'><title>$title</title><h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1></div>";
   }
     
-	while ($row = spip_fetch_array($res)){
+	while ($row = sql_fetch($res)){
 		// Trouver le parent pour tester si les 2 produits sont dans la meme famille
 		if (((isset($items_fils_de[$row['idp1']])) && (isset($items_fils_de[$row['idp2']]))
 				&& array_intersect($items_fils_de[$row['idp1']],$items_fils_de[$row['idp2']])) == false) {
@@ -100,7 +104,7 @@ function rc($p1,$p2,$type_etude) {
 							
 			$resbiblio = spip_query($querybiblio);
 			
-			while ($rowbiblio = spip_fetch_array($resbiblio)){
+			while ($rowbiblio = sql_fetch($resbiblio)){
 				$linkbiblio = '<a href="#biblio'.$row['id_reaction_croisee'].'">';
 				if (!$premiere_ligne) $biblio .= '<tr><td colspan="5">&nbsp;</td></tr>';
 				$premiere_ligne = false;
@@ -142,38 +146,10 @@ function rc($p1,$p2,$type_etude) {
 	return "<div id='main'><title>$title</title>".$result."</div>";
 }
 
-function biblio($id_biblio, $id_reaction_croisee) {
-	if (!is_numeric($id_biblio)) return;
-	
-	$result = '';
-	$querybiblio = "SELECT citation, annee
-					FROM tbl_bibliographies
-					WHERE (
-						((id_biblio)=$id_biblio) 
-						)";
-	$resbiblio = spip_query($querybiblio);
-	while ($rowbiblio = spip_fetch_array($resbiblio)){
-		$biblio .= '<tr><td>'.$id_reaction_croisee.'</td><td><a name="biblio'.$id_biblio.'"></a>'.$rowbiblio['citation'].'</td><td>'.$rowbiblio['annee'].'</td>';
-	}
-	$result .= $biblio;
-
-	return $result;
-}
-
 function produit($produits) {
 	if (!is_numeric($produits)) return;
+	include_spip('base/abstract_sql');
 	
 	$result = '';
-	$queryproduit = "SELECT nom
-					FROM tbl_items
-					WHERE (
-						((tbl_items.id_item)=$produits) 
-						);";
-	$resproduit = spip_query($queryproduit);
-	while ($rowproduit = spip_fetch_array($resproduit)){
-		$produit .= $rowproduit['nom'];
-	}
-	$result .= $produit;
-
-	return $result;
+	return sql_getfetsel('nom','tbl_items','id_item='.intval($produits)." AND statut='publie'");
 }

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Aucun appel a cette action dans l'outil
+ * semble obsolete
+ *
+ */
+
 function action_parents_differents(){
 
 	set_time_limit(0);

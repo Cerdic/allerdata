@@ -1,6 +1,7 @@
 <?php
 
 	function lise_des_rc($produits) {
+		include_spip('base/abstract_sql');
 
 		// par precaution, pour ne pas se faire injecter n'importe quoi
     $tableau_produits = array_map('intval',explode(',',$produits));
@@ -51,6 +52,8 @@
   			
   				AND tbl_reactions_croisees.id_produit1 = tbi3.id_item
   				AND tbl_reactions_croisees.id_produit2 = tbi4.id_item
+  				AND tbl_items.statut='publie'
+  				AND tbl_items_1.statut='publie'
   			);";
   	
   	$res = spip_query($query);
@@ -58,7 +61,7 @@
   	// $arc[a][b] correspond à l'arc de a vers b
   	$arc = array();
   	
-  	while ($row = spip_fetch_array($res)){
+  	while ($row = sql_fetch($res)){
   		
   		$id_s1 = $row['id_s1'];
   		$id_s2 = $row['id_s2'];

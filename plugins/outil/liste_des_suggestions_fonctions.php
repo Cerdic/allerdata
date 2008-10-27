@@ -35,13 +35,15 @@ function liste_des_suggestions($produits_penta) {
             # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intéresse)
     INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.id_item
     WHERE (
-				# RC avec id_produit1 comme fils des elements du penta, et id_produit2 qui n'est pas dans la famille
+				    # RC avec id_produit1 comme fils des elements du penta, et id_produit2 qui n'est pas dans la famille
         tbl_est_dans.est_dans_id_item In ($produits_penta)
+    		    # l'item est publie ...
+    		AND tbl_items_3.statut='publie'
             # Le produit est contenu dans "bouleau Esp"
         AND tbl_items_3.id_item Not In ($produits)
             # La cible ne doit pas contenir le produit du pentagramme
         AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13)
-            # La cible est contenu dans un produit de type "produit" ou "espèce" (c'est ce dernier qui nous intéresse)
+            # La cible est contenu dans un produit de type "produit" ou "espece" (c'est ce dernier qui nous interesse)
         AND (
 					tbl_reactions_croisees.fleche_sens1=1
 					OR
@@ -62,6 +64,8 @@ UNION
     WHERE (
 				# RC avec id_produit2 comme fils des elements du penta, et id_produit1 qui n'est pas dans la famille
         tbl_est_dans.est_dans_id_item In ($produits_penta)
+    		    # l'item est publie ...
+    		AND tbl_items_3.statut='publie'
             # Le produit est contenu dans "bouleau Esp"
         AND tbl_items_3.id_item Not In ($produits)
             # La cible ne doit pas contenir le produit du pentagramme
