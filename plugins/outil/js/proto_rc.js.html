@@ -19,7 +19,7 @@ LISTE_DES_RC = {
     });
     
     this.rcStore = new Ext.data.Store({
-      proxy: new Ext.data.HttpProxy({url:'spip.php?action=liste_des_rc',method:'GET'}),
+      proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_rc',method:'GET'}),
       reader: new Ext.data.JsonReader(
         {root: 'liste_des_rc'},Ext.data.Record.create([
           {name:'source'},
@@ -48,17 +48,14 @@ LISTE_DES_RC = {
   },
       
   getData : function() {
-  	var nbp=0;
-  	for (k=1;k<=5;k++){
-  		if (jQuery('#p'+k).val()) nbp++;
-  	}
-  	if (nbp>1){
-	    var p1 = jQuery('#p1').val(),
-	  		p2 = jQuery('#p2').val(), 
-	  		p3 = jQuery('#p3').val(), 
-	  		p4 = jQuery('#p4').val(), 
-	  		p5 = jQuery('#p5').val();
-	    this.rcStore.load({params:{'p1':p1,'p2':p2,'p3':p3,'p4':p4,'p5':p5}, callback:LISTE_DES_RC.gotData});
+    var p = [];
+    for (var k=1;k<=5;k++)
+    	if (v=jQuery('#p'+k).val()) p.push(v);
+    if (p.length){
+    	// on trie les p de facon a utiliser au maximum le cache spip
+			p.sort();
+			p=p.join(',');
+	    this.rcStore.load({params:{'p':p}, callback:LISTE_DES_RC.gotData});
 	  }
 	  else {
 	  	LISTE_DES_RC.gotData([],1,1);

@@ -1,31 +1,9 @@
 <?php
 
-	if (!defined("_ECRIRE_INC_VERSION")) return;
+	function lise_des_rc($produits) {
 
-	function action_liste_des_rc() {
-	  
-    $tableau_produits = array();
-  	if (is_numeric($_REQUEST['p1'])) $tableau_produits[1] = $_REQUEST['p1']; 
-  	if (is_numeric($_REQUEST['p2'])) $tableau_produits[2] = $_REQUEST['p2'];
-  	if (is_numeric($_REQUEST['p3'])) $tableau_produits[3] = $_REQUEST['p3'];
-  	if (is_numeric($_REQUEST['p4'])) $tableau_produits[4] = $_REQUEST['p4'];
-  	if (is_numeric($_REQUEST['p5'])) $tableau_produits[5] = $_REQUEST['p5'];
-  	
-    // le tuple est ordonné 
-    $signature = sprintf('%d,%d,%d,%d,%d', 
-                        $tableau_produits[1],
-                        $tableau_produits[2],
-                        $tableau_produits[3],
-                        $tableau_produits[4],
-                        $tableau_produits[5]
-                        );
-    $q = spip_query("select resultat_json from cache_requetes where tuple='".mysql_real_escape_string($signature)."' and page='liste_des_rc'");
-    if (spip_num_rows($q)) {
-      $r = spip_fetch_array($q);
-      echo ($r['resultat_json']);
-      die();
-    }
-  
+		// par precaution, pour ne pas se faire injecter n'importe quoi
+    $tableau_produits = array_map('intval',explode(',',$produits));
   	$produits = implode(",", $tableau_produits);
   	
   	// Requete de recherche : il faut tenir compte des réactions entre éléments de type 3 ou 5
@@ -129,16 +107,7 @@
   		}
   	}
   	
-    $output = '{liste_des_rc:'.json_encode($liste_des_rc).'}';
-    
-    // On stocke pour un prochain appel
-    spip_query("INSERT INTO cache_requetes (page,tuple,resultat_json,date_maj) 
-                VALUES('liste_des_rc',
-                       '".mysql_real_escape_string($signature)."',
-                       '".mysql_real_escape_string($output)."',
-                       NOW())");
-  
-  	echo ($output);
-  
+    return json_encode($liste_des_rc);
+ 
   }
 ?>
