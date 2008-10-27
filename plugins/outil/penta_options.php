@@ -1,6 +1,6 @@
 <?php
 define('_FEED_GLOBALS', true);
-include_spip('inc/vieilles_defs');
+#include_spip('inc/vieilles_defs');
 
 # patch compatibilite php < 5.1
 if (!function_exists('json_encode')){
