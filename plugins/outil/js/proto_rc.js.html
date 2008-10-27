@@ -19,7 +19,7 @@ LISTE_DES_RC = {
     });
     
     this.rcStore = new Ext.data.Store({
-      proxy: new Ext.data.HttpProxy({url:'spip.php?action=liste_des_rc'}),
+      proxy: new Ext.data.HttpProxy({url:'spip.php?action=liste_des_rc',method:'GET'}),
       reader: new Ext.data.JsonReader(
         {root: 'liste_des_rc'},Ext.data.Record.create([
           {name:'source'},
@@ -30,11 +30,9 @@ LISTE_DES_RC = {
     });
     
     jQuery('.lien').click(function(){
-    /* Serie d'appels en cascade pour ajouter ou pas un onglet : 
-       Méthode du "pied dans la porte" :
-       Le premier appel retour 'OK' ssi on a un résultat
-       Il stocke le résultat en session pour aller plus vite lors du second appel
-       qui retournera le contenu à mettre dans les tabs */
+    	/* Mise a jour des onglets : une requete simple par onglet,
+    	  le contenu de chaque onglet contient un <title>...</title>
+    	  utilise pour mettre a jour le titre de l'onglet. */
       p1 = jQuery(this).attr('id').substr(6,1);
       p2 = jQuery(this).attr('id').substr(8,1);
 			main_panel.beginUpdate();
