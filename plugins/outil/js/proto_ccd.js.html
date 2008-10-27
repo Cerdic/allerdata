@@ -3,12 +3,14 @@
 
 var CCD = {
 	show_ccd : function() {
-		$('#ccd').load('spip.php?page=ccd&p1=' + 
-			jQuery('#p1').val() + '&p2=' +
-			jQuery('#p2').val() + '&p3=' +
-			jQuery('#p3').val() + '&p4=' +
-			jQuery('#p4').val() + '&p5=' +
-			jQuery('#p5').val());
+    var p = [];
+    for (var k=1;k<=5;k++)
+    	if (v=jQuery('#p'+k).val()) p.push(v);
+   	// on trie les p de facon a utiliser au maximum le cache spip
+    if (p.length)
+			p.sort();
+		p=p.join('%2C');
+		$('#ccd').load('spip.php?page=ccd&p=' + p);
 		$('input').removeClass('actif');
 	},
 	outline_prod : function(array_prod, color) {
