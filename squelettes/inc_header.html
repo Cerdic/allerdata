@@ -7,16 +7,16 @@
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<meta http-equiv="Content-Language" content="#LANG" />
 	#INSERT_HEAD
-	[(#ENV{aam}|=={1}|?{'',' '}) 
-		<script type="text/javascript" src="#CHEMIN{js/jquery.treeview.pack.js}"></script>
+	[(#ENV{aam}|non) 
+		<script type="text/javascript" src="#CHEMIN{js/jquery.treeview.js}"></script>
 		<script type="text/javascript" src="#CHEMIN{js/global.js}"></script>
 		<script type="text/javascript" src="#CHEMIN{js/biblio_footnotes.js}"></script>
 		<link rel="stylesheet" href="#CHEMIN{css/jquery.tooltip.css}" type="text/css" />
 		<script src="#CHEMIN{js/jquery.bgiframe.js}" type="text/javascript"></script>
 		<script src="#CHEMIN{js/jquery.dimensions.js}" type="text/javascript"></script>
-		<script src="#CHEMIN{js/jquery.tooltip.pack.js}" type="text/javascript"></script>
+		<script src="#CHEMIN{js/jquery.tooltip.js}" type="text/javascript"></script>
 	]
-	[(#ENV{aam}|=={1}|?{' ',''}) 
+	[(#ENV{aam}|oui)
 		<INCLURE{fond=inc_aam}>
 	]
 
