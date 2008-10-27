@@ -28,8 +28,8 @@
 							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 							#SET{testable,0}
 							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></td>
-							<td><i><BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources></i></td>
-							<td><BOUCLE_famille_taxo(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_famille_taxo></td>
+							<td><i><BOUCLE_sources5(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5></i></td>
+							<td><BOUCLE_famille_taxo5(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_famille_taxo5></td>
 							<td style="text-align:center;font-size:1.5em;">[(#GET{testable}|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
 							</tr>
 							</BOUCLE_t5>
@@ -94,5 +94,5 @@
 					</table>
 					</div>
 					</BOUCLE_allergenes>
-				</BOUCLE_it>				
+				</BOUCLE_it5>				
 </BOUCLE_Items>
