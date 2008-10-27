@@ -9,24 +9,19 @@ function cmp($a, $b)
     return ($a > $b) ? -1 : 1;
 }
 
-function suggestions($txt) {
+function liste_des_suggestions($produits_penta) {
 	$tableau_produits = $t_suggestions = $items_famille = $t_id_suggestion_trouvee = array();
 	
-	foreach(array('p1','p2','p3','p4','p5') as $k)
-		if (_request($k) AND $v=intval(_request($k)))
-			$tableau_produits[]=$v;
-
+	// par precaution, pour ne pas se faire injecter n'importe quoi
+  $tableau_produits = array_map('intval',explode(',',$produits_penta));
+	$produits_penta = implode(",", $tableau_produits);
+	
 	if (!count($tableau_produits)) return '[]';
 	
 	$famille_produits = penta_produits_exclus($tableau_produits);
-	
-	// trions pour unifier les signatures qui ne different que par l'ordre
-  sort($tableau_produits);
-  sort($famille_produits);
-
 	$produits = implode(",", $famille_produits);
-	$produits_penta = implode(",", $tableau_produits);
-  
+
+ 
 	$tt = '';
 	
 	/* Liste des suggestions */
@@ -83,17 +78,7 @@ UNION
 
 EOQ;
 
-  $md5_query = md5($query);
-  
-  // tri 
-  $q = sql_select("resultat_json","cache_requetes","hash='".mysql_real_escape_string($md5_query)."' and page='liste_des_suggestions'");
-  if (
-    (!_request('debug')) 
-    AND $r = sql_fetsel("resultat_json","cache_requetes","hash='".mysql_real_escape_string($md5_query)."' and page='liste_des_suggestions'")){
-    return $r['resultat_json'];
-  }
-  
-  $signature = implode(',', $tableau_produits);
+
  	$res = spip_query($query);
 	while ($row = sql_fetch($res)){
 		if (!isset($t_suggestions[$row['id_item']])) {
@@ -148,20 +133,8 @@ EOQ;
 		
 	}
 
-	
   $suggestion = json_encode($t_suggestions);
   
-  // On stocke pour un prochain appel
-  if (!_request('var_mode')) {
-		sql_insert('cache_requetes', '(page,tuple,hash,resultat_json,date_maj)', "('liste_des_suggestions',
-		                     '".mysql_real_escape_string($signature)."',
-		                     '".mysql_real_escape_string($md5_query)."',
-		                     '".mysql_real_escape_string($suggestion)."',
-		                     NOW())");
-	}
-
 	return $suggestion;
-	
-
 }
 ?>

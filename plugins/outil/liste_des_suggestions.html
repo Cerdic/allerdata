@@ -1,4 +1,5 @@
 #CACHE{30*24*3600}
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
-[(#REM) Liste des "croisent également" en zone Est du penta]
-{liste_des_suggestions:[(#ENV|suggestions)]}
+[(#REM) Liste des "croisent egalement" en zone Est du penta]
+/* #ENV{date} */
+{liste_des_suggestions:[(#ENV{p}|liste_des_suggestions)]}
