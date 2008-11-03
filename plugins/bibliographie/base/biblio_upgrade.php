@@ -43,6 +43,25 @@
 		
 	}
 	
+	function biblio_importe_notes(){
+		include_spip('inc/biblio');
+		// importer la table
+		$importer_csv = charger_fonction('importer_csv','inc');
+		$refs = $importer_csv(find_in_path('base/tbl_notes_biblio.csv'),true);
+		foreach($refs as $champs){
+			$ins = array();
+			$ins['id_biblio_note'] = $champs['id_notes_biblio'];
+			$ins['id_bibliographie'] = $champs['id_biblio'];
+			$ins['id_auteur'] = 14; // import : tout vient de HM
+			$ins['texte'] = $champs['notes_biblio'];
+			$ins['date'] = date('Y-m-d H:i:s',strtotime($champs['date_notes_biblio']));
+			if (sql_getfetsel('id_biblio_note','tbl_biblio_notes','id_biblio_note='.intval($ins['id_biblio_note'])))
+				sql_updateq('tbl_biblio_notes',$ins,'id_biblio_note='.intval($ins['id_biblio_note']));
+			else
+				sql_insertq('tbl_biblio_notes',$ins);
+		}		
+	}
+	
 	
 	function biblio_upgrade($nom_meta_base_version,$version_cible){
 		$current_version = 0.0;
@@ -76,6 +95,30 @@
 				maj_tables('tbl_bibliographies');
 				biblio_importe_references();
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.1','non');
+			}
+			if (version_compare($current_version,'0.1.0.2','<')){
+				include_spip('base/abstract_sql');
+				include_spip('base/aux');
+				include_spip('base/create');
+				maj_tables('spip_bibliographies_articles');
+				include_spip('inc/biblio');
+				$res = sql_select('id_article,texte,chapo','spip_articles');
+				while ($row = sql_fetch($res)){
+					marquer_liens_biblios($row,$row['id_article'],'article','id_article','articles','spip_articles');
+				}
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.2','non');
+			}
+			if (version_compare($current_version,'0.1.0.3','<')){
+				include_spip('base/abstract_sql');
+				// un oubli !
+				sql_alter('table tbl_groupes_patients CHANGE id_biblio id_bibliographie int(11) NOT NULL');
+
+				// les notes biblios
+				include_spip('base/serial');
+				include_spip('base/create');
+				maj_tables('tbl_biblio_notes');
+				biblio_importe_notes();
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.3','non');
 			}
 		}
 	}
