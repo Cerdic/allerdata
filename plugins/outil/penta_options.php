@@ -10,6 +10,10 @@ if (!function_exists('json_encode')){
 	}
 }
 
+// le contexte de spip doit ignorer les variables _dc_xxx ajoutees par l'ajax de ext
+// pour tromper le cache navigateur
+// mais qui n'a pas d'impact sur le calcul de la page, et ne doit donc pas
+// forcer un calcul
 @define('_CONTEXTE_IGNORE_VARIABLES',"/(^var_|^PHPSESSID$|^_dc$)/");
 
 
