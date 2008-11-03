@@ -9,7 +9,8 @@
 
 function biblio_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
-	//$interface['table_des_tables']['items']='tbl_items';
+	$interface['table_des_tables']['journals']='tbl_journals';
+	$interface['table_des_tables']['bibilographies']='tbl_bibilographies';
 	
 	//-- Jointures ----------------------------------------------------
 	/*$interface['tables_jointures']['spip_evenements'][]= 'mots'; // a placer avant la jointure sur articles
@@ -31,7 +32,7 @@ function biblio_declarer_tables_interfaces($interface){
 
 function biblio_declarer_tables_principales($tables_principales){
   
-	//-- Table tbl_items ------------------------------------------
+	//-- Table tbl_journals ------------------------------------------
 	// une grosse faute de francais pour rester spipien ...
 	$journals = array(
 	  'id_journal' => "int(11) NOT NULL",
@@ -45,6 +46,37 @@ function biblio_declarer_tables_principales($tables_principales){
 	
 	$tables_principales['tbl_journals'] =
 		array('field' => &$journals, 'key' => &$journals_key);
+
+	//-- Table tbl_bibliographies ------------------------------------------
+	$bibliographies = array(
+		'id_bibliographie' => "int(11) NOT NULL",
+		"auteurs"	=> "text DEFAULT '' NOT NULL",
+		"titre"	=> "text DEFAULT '' NOT NULL",
+		'id_journal' => "int(11) NOT NULL",
+		'annee' => "int(11) NOT NULL",
+		'volume'=>"varchar(10) DEFAULT ''",
+		'premiere_page'=>"varchar(10) DEFAULT ''",
+		'derniere_page'=>"varchar(10) DEFAULT ''",
+		'numero'=>"varchar(10) DEFAULT ''",
+		'supplement'=>"varchar(10) DEFAULT ''",
+		"url"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
+		"autre_media"	=> "longtext DEFAULT '' NOT NULL",
+		"abstract"	=> "longtext DEFAULT '' NOT NULL",
+		"url_full_text"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
+		'full_text_disponible' => "tinyint(1) DEFAULT 0 NOT NULL",
+		'sans_interet' => "tinyint(1) DEFAULT 0 NOT NULL",
+		'citation' => "text DEFAULT '' NOT NULL",
+		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		'date' => "datetime default NULL",
+	);
+	
+	$bibliographies_key = array(
+			"PRIMARY KEY"	=> "id_bibliographie",
+			"index"	=> "id_journal",
+	);
+	
+	$tables_principales['tbl_bibliographies'] =
+		array('field' => &$bibliographies, 'key' => &$bibliographies_key);
 
 
 	return $tables_principales;
