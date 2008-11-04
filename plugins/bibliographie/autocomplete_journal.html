@@ -1,0 +1,6 @@
+#HTTP_HEADER{Content-type:text/plain;charset=#CHARSET}
+#SET{q,#VAL{%}|concat{#ENV{q,''}|replace{\s+,%},%}}
+<BOUCLE_journaux(tbl_journals){nom like #GET{q}}{0,20}>#NOM*
+</BOUCLE_journaux>
+<:biblio:aucun_journal_connu:>
+<//B_journaux>

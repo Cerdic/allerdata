@@ -1,0 +1,42 @@
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+
+/* cas particuliers formulaires */
+/* biblio */
+.formulaire_editer_bibliographie li.editer_annee {float:left;width:60px;}
+.formulaire_editer_bibliographie li.editer_annee label {margin-#GET{left}:0;width:50px;}
+.formulaire_editer_bibliographie li.editer_annee input {width:50px;}
+.formulaire_editer_bibliographie li.editer_volume {float:left;width:55px;clear:none;padding-#GET{left}:0;}
+.formulaire_editer_bibliographie li.editer_volume label {margin-#GET{left}:0;width:50px;}
+.formulaire_editer_bibliographie li.editer_volume input {width:50px;}
+.formulaire_editer_bibliographie li.editer_pages {float:left;width:105px;clear:none;padding-#GET{left}:0;}
+.formulaire_editer_bibliographie li.editer_pages label {margin-#GET{left}:0;width:100px;}
+.formulaire_editer_bibliographie li.editer_pages input {width:40px;}
+.formulaire_editer_bibliographie li.editer_pages label.second {float:none;display:inline;}
+.formulaire_editer_bibliographie li.editer_supplement {float:left;width:55px;clear:none;padding-#GET{left}:0;}
+.formulaire_editer_bibliographie li.editer_supplement label {margin-#GET{left}:0;width:50px;}
+.formulaire_editer_bibliographie li.editer_supplement input {width:50px;}
+.formulaire_editer_bibliographie li.editer_numero {float:left;width:45px;clear:none;padding-#GET{left}:0;}
+.formulaire_editer_bibliographie li.editer_numero label {margin-#GET{left}:0;width:40px;}
+.formulaire_editer_bibliographie li.editer_numero input {width:40px;}
+
+
+/* autocompletion */
+/*.ac_input {	width: 200px; }*/
+.ac_results {	padding: 0px;	border: 1px solid WindowFrame;	background-color: Window;	overflow: hidden;text-align:left;z-index:1000;}
+.ac_results ul {	width: 100%;	list-style-position: outside;	list-style: none;	padding: 0;	margin: 0;}
+.ac_results iframe {
+	display:none;/*sorry for IE5*/
+	display/**/:block;/*sorry for IE5*/
+	position:absolute;	top:0;	left:0;	z-index:-1;	filter:mask();	width:3000px;	height:3000px;}
+
+.ac_results li {	margin: 0px;	padding: 2px 5px;	cursor: pointer;	display: block;	width: 100%;	font-size: x-small;	overflow: hidden;}
+.formulaire input.ac_loading {	background-image : url(#CHEMIN{img_pack/searching.gif});background-position: right center;background-repeat: no-repeat;}
+.ac_over {	background-color: Highlight;	color: HighlightText;}
+
+
+/* biblio */
+li.item .biblio h3 {font-size:1.1em;}

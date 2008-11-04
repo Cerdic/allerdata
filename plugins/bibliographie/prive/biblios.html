@@ -1,0 +1,11 @@
+<h1><:allerdata:bibliographie:></h1>
+
+[(#ENV{edit}|non)
+#FORMULAIRE_RECHERCHE{#SELF}
+<INCLURE{fond=prive/listes/biblios}{env}{ajax}>
+[(#VAL{allerdata:icone_creer_biblio}|_T|icone_inline{#URL_ECRIRE{allerdata,page=biblio&edit=new},#CHEMIN{img_pack/bibliographie-24.png},'creer.gif','right'})]
+<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+]
+[(#ENV{edit}|oui)
+[(#INCLURE{fond=prive/editer/biblio}{edit}{redirect=#SELF|parametre_url{edit,''}}{retour})]
+]

@@ -1,0 +1,27 @@
+[(#REM)
+
+	Un petit descriptif ne serait pas superflu
+
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	<:icone_retour|icone_inline{#ENV{retour,#SELF|parametre_url{edit,''}},#CHEMIN{img_pack/bibliographie-24.png},'',left}:>
+	[<p>(#ENV{edit}|intval|?{<:biblio:titre_cadre_modifier_reference:>,<:biblio:titre_cadre_ajouter_reference:>})</p>]
+	[<h1>(#ENV{edit}|intval|?{##ENV{edit}})</h1>]
+	<div class='versions'>
+	<B_versions>
+	<BOUCLE_versions(tbl_bibliographies_versions){id_bibliographie=#ENV{edit}}{!par id_version}{0,1}>
+	<:allerdata:version:> ##ID_VERSION le #DATE par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>
+	[<div class='descriptif'>(#COMMENTAIRES)</div>]
+	</BOUCLE_versions>
+	<br /><a href='#URL_ECRIRE{allerdata,page=revisions&id_item=#ENV{edit}}'><:info_historique_lien:></a>
+	</B_versions>	[(#ENV{edit}|intval|oui)
+	<:allerdata:version_originale:>
+	]	<//B_versions>
+	</div>
+	<BOUCLE_biblio(tbl_bibliographhies){id_bibliographie=#ENV{edit}}{statut?}>[(#STATUT|allerdata_puce_statut)]</BOUCLE_biblio>
+</div>
+<div class='ajax'>
+#FORMULAIRE_EDITER_BIBLIOGRAPHIE{#ENV{edit},#ENV{redirect}}
+</div>
+</div>

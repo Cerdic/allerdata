@@ -6,6 +6,8 @@
  *
  */
 
+define('_URL_PUBMED','http://www.ncbi.nlm.nih.gov/pubmed/');
+
 function biblio_rechercher_journal($nom,$like=false){
 	$liste = array();
 	if ($like)
@@ -53,5 +55,35 @@ function marquer_liens_biblios($champs,$id,$type,$id_table_objet,$table_objet,$s
 			sql_insertq("spip_bibliographies_$table_objet", array($id_table_objet=>$id, 'id_bibliographie' => $row['id_bibliographie']));
 		}
 	}
+}
+
+//@define('_REGLE_AUTEURS',";^([\w]+(\s+[A-Z]{1,3}(\s+(Jr|Sr))?)?[.]\s*)+;u");
+@define('_REGLE_AUTEURS',";^([^.]+?[\s]+[A-Z\-0-9]{1,4}[.]\s*)+$;u");
+@define('_REGLE_AUTEURS_SPLIT',";[^.]+?[\s]+[A-Z\-0-9]{1,4}[.]\s*;u");
+function biblio_extrait_auteurs($auteurs){
+	$auteurs = trim($auteurs);
+	$auteurs = rtrim($auteurs,'.').'.'; // s'assurer qu'on a un point a la fin
+	if (preg_match(',et al.$,',$auteurs))
+		return false;
+	
+	if (!preg_match(_REGLE_AUTEURS,$auteurs,$r))
+		return false;
+
+	preg_match_all(_REGLE_AUTEURS_SPLIT,$auteurs,$r);
+	return $r;
+}
+
+function biblio_citer_auteurs($auteurs){
+	if (!$liste = biblio_extrait_auteurs($auteurs))
+		return $auteurs;
+	$cite = array();
+	$max = 6;
+	while (count($liste) AND $max--)
+		$cite [] = array_shift($liste);
+	$cite = implode(', ',$cite);
+	if (count($liste))
+		$cite .= " et al";
+	$cite .= ".";
+	return $cite;
 }
 ?>

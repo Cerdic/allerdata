@@ -1,0 +1,114 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+	  	[(#AUTORISER{instituer,bibliographie,#ENV{id_item,nouveau}}|oui)
+	  	#SET{name,statut}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				[(#ENV{#GET{name}}|allerdata_selecteur_statut{#GET{name},#GET{name}})]
+	    </li>
+	    ]
+	  	#SET{name,auteurs}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea name='#GET{name}' id='#GET{name}' rows='4'>#ENV{#GET{name}}</textarea>
+	    </li>
+	  	#SET{name,titre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea name='#GET{name}' id='#GET{name}' rows='4'>#ENV{#GET{name}}</textarea>
+	    </li>
+	  	#SET{name,journal}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	  	#SET{name,annee}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	  	#SET{name,volume}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	    <li class="editer_pages[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	  	#SET{name,premiere_page}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	  	#SET{name,derniere_page}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    	<label class='second' for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	  	#SET{name,supplement}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	  	#SET{name,numero}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	  	#SET{name,url}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				[<span class='explication'><a target='_blank' href='(#ENV{#GET{name}})' class='url'><:icone_voir_en_ligne:> #ENV{#GET{name}}</a></span>]
+	    </li>
+	  	#SET{name,autre_media}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea name='#GET{name}' id='#GET{name}' rows='7'>#ENV{#GET{name}}</textarea>
+	    </li>
+	    <li class='fieldset'>
+	    <fieldset><h3 class='legend'><:bibliographie:abstract:></h3><ul>
+	  	#SET{name,abstract}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea name='#GET{name}' id='#GET{name}' rows='10'>#ENV{#GET{name}}</textarea>
+	    </li>
+	  	#SET{name,url_full_text}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				[<span class='explication'><a target='_blank' href='(#ENV{#GET{name}})' class='url'><:icone_voir_en_ligne:> #ENV{#GET{name}}</a></span>]
+	    </li>
+	    </ul>
+	    </fieldset>
+	    </li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='[(#ENV{id_bibliographie}|intval|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+	</div></form>
+	]
+</div>
+<script type='text/javascript' src='#CHEMIN{javascript/jquery.autocompleter.js}'></script>
+<script type='text/javascript' src='#CHEMIN{formulaires/editer_bibliographie.js}'></script>
+<script type='text/javascript'>var url_autocomp_journal='#URL_PAGE{autocomplete_journal}';</script>
+[<div class='utilisations'>
+(#INCLURE{fond=prive/listes/utilisations}{id_bibliographie})
+<div class='nettoyeur'></div>
+</div>]

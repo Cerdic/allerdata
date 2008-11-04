@@ -6,7 +6,7 @@ _ pour Allerdata SARL
 _ &#169; 2008 - Licence GPL
 	</auteur>
 	<version>0.1.0.0</version>
-	<version_base>0.1.0.3</version_base>
+	<version_base>0.1.0.4</version_base>
 	<etat>stable</etat>
 	<description>Administration des Biblios</description>
 	<lien></lien> <!-- URI de documentation -->
@@ -24,11 +24,15 @@ _ &#169; 2008 - Licence GPL
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/biblio.php</inclure>
 	</pipeline>
-	<bouton id='sources' parent='allerdata'>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>biblio_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='biblio' parent='allerdata'>
 		<titre>allerdata:bibliographie</titre>
 		<icone>img_pack/bibliographie-24.png</icone>
 		<url>allerdata</url>
-		<args>page=biblio</args>
+		<args>page=biblios</args>
 	</bouton>
 	<necessite id='allerdata' version="[;]" />
 </plugin>

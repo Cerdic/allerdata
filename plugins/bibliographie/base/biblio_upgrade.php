@@ -120,6 +120,13 @@
 				biblio_importe_notes();
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.3','non');
 			}
+			if (version_compare($current_version,'0.1.0.4','<')){
+				include_spip('base/abstract_sql');
+				include_spip('inc/biblio');
+				sql_update('tbl_bibliographies',array('url'=>"concat('"._URL_PUBMED."',url)"),"url REGEXP '^[0-9]+$'");
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.4','non');
+			}
+
 		}
 	}
 	

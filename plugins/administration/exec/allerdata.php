@@ -33,6 +33,8 @@ function exec_allerdata_dist(){
 		array('titre'=>_L('Allerdata'),'page'=>'allerdata','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/allerdata-64.gif"),
 		array('titre'=>_L("Comptes"),'page'=>'comptes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/compte-64.gif",'url'=>generer_url_ecrire('allerdata','page=comptes'))
 		);
+	if (defined('_DIR_PLUGIN_BIBLIO'))
+		$barre[] = array('titre'=>_T("allerdata:bibliographie"),'page'=>'biblios','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/bibliographie-64.png",'url'=>generer_url_ecrire('allerdata','page=biblios'));
 
 	if (defined('_DIR_PLUGIN_ALLER_FTAXO'))
 		$barre[] = array('titre'=>_T("allerdata:famille_taxos"),'page'=>'famille_taxos','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/famille_taxo-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_taxos'));
