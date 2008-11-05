@@ -126,7 +126,18 @@
 				sql_update('tbl_bibliographies',array('url'=>"concat('"._URL_PUBMED."',url)"),"url REGEXP '^[0-9]+$'");
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.4','non');
 			}
-
+			if (version_compare($current_version,'0.1.0.5','<')){
+				include_spip('base/abstract_sql');
+				sql_alter("table tbl_bibliographies ADD doublons_refs VARCHAR(255) DEFAULT '' NOT NULL");
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.5','non');
+			}
+			if (version_compare($current_version,'0.1.0.6','<')){
+				include_spip('base/abstract_sql');
+				include_spip('base/aux');
+				include_spip('base/create');
+				maj_tables('tbl_bibliographies_versions');
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.6','non');
+			}
 		}
 	}
 	

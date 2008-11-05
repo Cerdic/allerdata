@@ -71,6 +71,7 @@ function biblio_declarer_tables_principales($tables_principales){
 		'citation' => "text DEFAULT '' NOT NULL",
 		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
 		'date' => "datetime default NULL",
+		"doublons_refs"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
 	);
 	
 	$bibliographies_key = array(
@@ -112,6 +113,20 @@ function biblio_declarer_tables_auxiliaires($tables_auxiliaires){
 	);
 	$tables_auxiliaires['spip_bibliographies_articles'] =
 		array('field' => &$spip_bibliographies_articles, 'key' => &$spip_bibliographies_articles_key);
+		
+	$tbl_bibliographies_versions = array(
+	  'id_bibliographie' => "int(11) NOT NULL",
+		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"id_auteur"	=> "bigint(21) NOT NULL",
+		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+		"commentaires" => "text",
+		"diff" => "text", // liste des champs modifies avant/apres
+  );
+	$tbl_bibliographies_versions_key = array (
+			"PRIMARY KEY"	=> "id_bibliographie, id_version");
+	$tables_auxiliaires['tbl_bibliographies_versions'] = array(
+		'field' => &$tbl_bibliographies_versions,
+		'key' => &$tbl_bibliographies_versions_key);
 	
 	return $tables_auxiliaires;
 }

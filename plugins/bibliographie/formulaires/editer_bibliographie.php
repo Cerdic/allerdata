@@ -10,6 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/biblio');
 
 function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
 
@@ -23,6 +24,11 @@ function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', 
 	}
 	}
 	else echo (":".$valeurs['id_bibliographie'].':'.$valeurs['auteurs'].':<br />');*/
+	$liste = biblio_trouver_sembables($valeurs['auteurs'],$valeurs['titre'],$valeurs['autre_media'],$valeurs['id_journal'],$valeurs['annee'],$valeurs['volume'],$valeurs['numero'],$valeurs['supplement'],$valeurs['premiere_page']);
+	if (intval($id_bibliographie))
+		$liste = array_diff($liste,array($id_bibliographie));
+	if ($valeurs['doublons_ref']!=implode(',',$liste))
+		$valeurs['_semblables'] = $liste;
 
 	$valeurs['journal'] = sql_getfetsel('nom','tbl_journals','id_journal='.intval($valeurs['id_journal']));
 	return $valeurs;
@@ -31,7 +37,6 @@ function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', 
 function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new', $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
 	$erreurs = formulaires_editer_objet_verifier('tbl_bibliographie',$id_bibliographie,array('titre','auteurs','premiere_page'));
 	
-	include_spip('inc/biblio');
 	// Verifier la syntaxe des auteurs
 	if (!_request('forcer_auteurs') AND !biblio_extrait_auteurs(_request('auteurs'))){
 		$erreurs['auteurs'] = _T('editer_bibliographie:confirmer_auteurs')."<input type='checkbox' name='confirmer_auteurs' class='checkbox' value='1' />";
@@ -64,7 +69,7 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 			$erreurs['derniere_page'] = _T('editer_bibliographie:incorrecte');
 	
 	foreach(array('url','url_full_text') as $c)
-		if ($u=_request($c)){
+		if ($u=trim(_request($c))){
 			if (is_numeric($u)){
 				$u = _URL_PUBMED . $u;
 				set_request($c,$u);
@@ -77,12 +82,25 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 		
 	// verifier si une reference ressemblante n'existe pas deja
 	if (!_request('confirmer_ajout_reference')){
+		$liste = biblio_trouver_sembables(_request('auteurs'),_request('titre'),_request('autre_media'),_request('id_journal'),_request('annee'),_request('volume'),_request('numero'),_request('supplement'),_request('premiere_page'));
+		// enlever la reference en cours si elle est dedans
+		if (intval($id_bibliographie)){
+			$liste = array_diff($liste,array($id_bibliographie));
+			// passer sous silence si les references ont deja ete reperees
+			$doublons_connus = sql_getfetsel('doublons_refs','tbl_bibliogaphies','id_bibliographie='.intval($id_bibliographie));
+			if ($doublons_connus==implode(',',$liste))
+				$liste = array();
+		}
+		if (count($liste)){
+			$erreurs['message_erreur'] = _T('editer_bibliographie:confirmer_ajout_reference')."<input type='checkbox' name='confirmer_ajout_reference' class='checkbox' value='1' />";
+			$erreurs['semblables'] = $liste;
+		}
 		// ...
 	}
 	return $erreurs;
 }
 
-/*
+
 function formulaires_editer_bibliographie_traiter_dist($id_bibliographie='new', $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
 	// ajout du journal si besoin
 	if (strlen($j = _request('journal'))
@@ -90,10 +108,17 @@ function formulaires_editer_bibliographie_traiter_dist($id_bibliographie='new', 
 		$id_journal = sql_insertq('tbl_journals',array('nom'=>$j));
 		set_request('id_journal',$id_journal);
 	}
+	$liste = biblio_trouver_sembables(_request('auteurs'),_request('titre'),_request('autre_media'),_request('id_journal'),_request('annee'),_request('volume'),_request('numero'),_request('supplement'),_request('premiere_page'));
+	// enlever la reference en cours si elle est dedans
+	if (intval($id_bibliographie)){
+		$liste = array_diff($liste,array($id_bibliographie));
+	set_request('doublons_ref',implode(',',$liste));
 	
+	// vilain hack
+	set_request('action','editer_tbl_bibliographie');
 	// hop traitons tout cela
 	return formulaires_editer_objet_traiter('tbl_bibliographie',$id_bibliographie,0,$lier,$retour,$config_fonc,$row,$hidden);
 }
-*/
+
 
 ?>

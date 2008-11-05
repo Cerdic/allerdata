@@ -4,11 +4,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// A
+'abstract' => 'Abstract',
 
 // C
 'confirmer_auteurs' => 'Les auteurs ne respectent pas la convention "Nom Compose INI.". <br />Citer les auteurs tels quels ',
 'confirmer_ajout_journal' => 'Ce journal n\'existe pas. Confirmer son ajout ',
-
+'confirmer_ajout_reference' => 'Des r&eacute;f&eacute;rences bibliographiques semblables sont d&eacute;j&agrave; enregistr&eacute;es. Confirmer l\'ajout de cette r&eacute;f&eacute;rence',
 // L
 'label_statut'=>'Statut',
 'label_auteurs'=>'Auteurs',

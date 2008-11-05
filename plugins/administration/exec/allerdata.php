@@ -81,7 +81,9 @@ function exec_allerdata_dist(){
 			$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],'message'=>$message);
 			$get = $_GET;
 			if (is_numeric($get['recherche']) AND intval($get['recherche'])){
-				$get['id_item'] = intval($get['recherche']);
+				$_id = 'id_item';
+				if ($page=='biblios') $_id = 'id_bibliographie';
+				$get[$_id] = intval($get['recherche']);
 				unset($get['recherche']);
 				set_request('recherche','');
 				unset($GLOBALS['recherche']);

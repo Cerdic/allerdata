@@ -1,0 +1,13 @@
+<B_biblios><h2>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{biblio:une_references_bliblio_semblable,biblio:des_references_bliblios_semblables})]</h2>
+[<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_bibliographie,''},recherche})</p>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items'>
+<BOUCLE_biblios(tbl_bibliographies){id_bibliographie IN #ENV{refs}}{pagination 10}{par #ENV{tri,titre}}>
+<li class='item'>
+[(#INCLURE{fond=modeles/reference}{id=#ID_BIBLIOGRAPHIE})]
+#MODELE{boutons_action_item,id_item=#ID_BIBLIOGRAPHIE,quoi=biblio,self=#SELF}
+</li>
+</BOUCLE_biblios>
+[<p class='pagination'>(#PAGINATION)</p>]
+</ul>
+</B_biblios>

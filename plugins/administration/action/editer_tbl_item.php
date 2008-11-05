@@ -183,7 +183,11 @@ function instituer_tbl_item($id_item, $c) {
 		array(
 			'args' => array(
 				'table' => 'tbl_items',
-				'id_objet' => $id_item
+				'table_objet' => 'tbl_items',
+				'spip_table_objet' => 'tbl_items',
+				'id_objet' => $id_item,
+				'type' => 'tbl_item',
+				'action'=>'instituer'
 			),
 			'data' => $champs
 		)
@@ -205,19 +209,22 @@ function instituer_tbl_item($id_item, $c) {
 function allerdata_versionne_item($x){
 	if (
 		in_array($x['args']['action'],array('modifier','instituer'))
-	  AND $x['args']['table_objet']=='tbl_items'){
-		$id_item = $x['args']['id_objet'];
+	  AND in_array($x['args']['table_objet'],array('tbl_items','tbl_bibliographies'))){
+	  
+	  $_table = $x['args']['table_objet'];
+	  $_id_table = 'id_'.rtrim(substr($_table,4),'s');
+		$id = $x['args']['id_objet'];
 		$maxiter = 5; // on essaye 5 fois maxi
 		while (!isset($x['data']['id_version']) AND $maxiter--) {
-			if ($row = sql_fetsel('*','tbl_items','id_item='.intval($id_item))
+			if ($row = sql_fetsel('*',$_table,"$_id_table=".intval($id))
 			  AND isset($row['id_version'])){
 				$id_version = $row['id_version'];
 				
 				// si le(s) parent(s) est(sont) modifies
 				// charger les parents actuels
-				if (isset($x['data']['id_parent'])){
+				if ($_table=='tbl_items' AND isset($x['data']['id_parent'])){
 					include_spip('inc/alledata_arbo');
-					$row['id_parent'] = allerdata_les_parents($id_item);
+					$row['id_parent'] = allerdata_les_parents($id);
 				}
 				
 				// on note les champs modifies
@@ -244,10 +251,10 @@ function allerdata_versionne_item($x){
 				
 				$commentaires = _request('commentaires');
 				if ($id_version==-2){ // creation
-					$commentaires = "Creation de l'item\n$commentaires";
+					$commentaires = "Creation de l'$_id_table\n$commentaires";
 					$id_version = -1; // creation=version 0
 				}
-				if ($id_versionb = sql_getfetsel('id_version','tbl_items_versions','id_item='.intval($id_item),'','id_version DESC','0,1'))
+				if ($id_versionb = sql_getfetsel('id_version',$_table.'_versions',"$_id_table=".intval($id),'','id_version DESC','0,1'))
 					$id_version = max($id_version,$id_versionb)+1;
 				else 
 					$id_version++;
@@ -255,18 +262,18 @@ function allerdata_versionne_item($x){
 				$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 				include_spip('inc/acces');
 				$lock = creer_uniqid();
-				sql_insertq('tbl_items_versions',array(
-					'id_item'=>$id_item,
+				sql_insertq($_table.'_versions',array(
+					$_id_table=>$id,
 					'id_version'=>$id_version,
 					'id_auteur'=>$id_auteur,
 					'commentaires'=>$lock
 				));
-				if (sql_getfetsel('commentaires','tbl_items_versions','id_item='.intval($id_item).' AND id_version='.intval($id_version))==$lock){
-					sql_updateq('tbl_items_versions',array(
+				if (sql_getfetsel('commentaires',$_table.'_versions',"$_id_table=".intval($id).' AND id_version='.intval($id_version))==$lock){
+					sql_updateq($_table.'_versions',array(
 					'date'=>'NOW()',
 					'commentaires'=>$commentaires,
 					'diff'=>serialize($diff),
-					),'id_item='.intval($id_item).' AND id_version='.intval($id_version));
+					),"$_id_table=".intval($id).' AND id_version='.intval($id_version));
 					$x['data']['id_version'] = $id_version;
 				}
 				else
