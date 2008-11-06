@@ -118,7 +118,8 @@ function formulaires_editer_bibliographie_traiter_dist($id_bibliographie='new', 
 	if (intval($id_bibliographie))
 		$liste = array_diff($liste,array($id_bibliographie));
 	set_request('doublons_ref',implode(',',$liste));
-	
+	set_request('citation',biblio_citer(_request('auteurs'),_request('titre'),_request('autre_media'),_request('journal'),_request('annee'),_request('volume'),_request('numero'),_request('supplement'),_request('premiere_page'),_request('derniere_page')));
+
 	// vilain hack
 	set_request('action','editer_tbl_bibliographie');
 	// hop traitons tout cela

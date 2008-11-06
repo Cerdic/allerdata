@@ -5,6 +5,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
+	<blockquote class='citation'>[(#ENV{auteurs}|biblio_citer{#ENV{titre},#ENV{autre_media},#ENV{journal},#ENV{annee},#ENV{volume},#ENV{numero},#ENV{supplement},#ENV{premiere_page},#ENV{derniere_page}})]</blockquote>
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
@@ -111,7 +112,8 @@
 </div>
 <script type='text/javascript' src='#CHEMIN{javascript/jquery.autocompleter.js}'></script>
 <script type='text/javascript' src='#CHEMIN{formulaires/editer_bibliographie.js}'></script>
-<script type='text/javascript'>var url_autocomp_journal='#URL_PAGE{autocomplete_journal}';</script>
+<script type='text/javascript'>var url_autocomp_journal='#URL_PAGE{autocomplete_journal}';
+var url_cite='#URL_PAGE{citation}';</script>
 [<div class='utilisations'>
 (#INCLURE{fond=prive/listes/utilisations}{id_bibliographie})
 <div class='nettoyeur'></div>

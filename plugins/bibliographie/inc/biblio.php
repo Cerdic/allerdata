@@ -70,7 +70,7 @@ function biblio_extrait_auteurs($auteurs){
 		return false;
 
 	preg_match_all(_REGLE_AUTEURS_SPLIT,$auteurs,$r);
-	return $r;
+	return reset($r);
 }
 
 function biblio_citer_auteurs($auteurs){
@@ -79,7 +79,7 @@ function biblio_citer_auteurs($auteurs){
 	$cite = array();
 	$max = 6;
 	while (count($liste) AND $max--)
-		$cite [] = array_shift($liste);
+		$cite [] = rtrim(trim(array_shift($liste)),'.');
 	$cite = implode(', ',$cite);
 	if (count($liste))
 		$cite .= " et al";
@@ -118,4 +118,26 @@ function biblio_trouver_sembables($auteurs,$titre,$autre_media,$id_journal,$anne
 	sort($liste);
 	return $liste;
 }
+
+function biblio_citer($auteurs,$titre,$autre_media,$journal,$annee,$volume,$numero,$supplement,$premiere_page,$derniere_page){
+	$auteurs = biblio_citer_auteurs($auteurs);
+	if (!strlen(trim($journal)))
+		return "$auteurs $titre. $autre_media";
+	
+	if (preg_match(',ahead,',$autre_media))
+		return "$auteurs $titre. $autre_media";
+
+	if (!strlen(trim($supplement)))
+		return 
+		  "$auteurs $titre. $journal $annee;$volume" .
+		  (strlen(trim($numero))?"($numero)":"") .
+		  ":$premiere_page" .
+		  (strlen(trim($derniere_page))?"-$derniere_page":"");
+
+	return 
+	  "$auteurs $titre. $journal $annee;$volume" .
+	  (strlen(trim($supplement))?"($supplement)":"") .
+	  ":$premiere_page" .(strlen(trim($derniere_page))?"-$derniere_page":"");
+}
+
 ?>
