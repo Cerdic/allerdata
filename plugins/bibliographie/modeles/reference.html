@@ -1,5 +1,6 @@
 <BOUCLE_Biblio(tbl_bibliographies){id_bibliographie=#ENV{id}}>
 <div class='biblio'><span class='numero'>##ID_BIBLIOGRAPHIE</span>
 <h3 class='repliable'>#CITATION</h3>
+<BOUCLE_utilisations(ARTICLES){id_bibliographie} />[(#TOTAL_BOUCLE|oui)<span class='utilisations'>[(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{biblio:une_utilisation,biblio:des_utilisations})]</span>]<//B_utilisations>
 </div>
 </BOUCLE_Biblio>

@@ -18,5 +18,18 @@ function biblio_rechercher_liste_des_champs($liste){
 	return $liste;
 }
 
+/**
+ * pipeline affiche_droite
+ * pour afficher la liste des references utilisees dans un article
+ *
+ * @param unknown_type $flux
+ */
+function biblio_affiche_droite($flux){
+	if ($flux['args']['exec']=='articles'
+	  AND $id_article= $flux['args']['id_article']){
+		$flux['data'] .= recuperer_fond('prive/boite_references',array_merge($_GET,array('id_article'=>$id_article)));
+	}
+	return $flux;
+}
 
 ?>

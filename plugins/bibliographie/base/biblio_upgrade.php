@@ -101,11 +101,6 @@
 				include_spip('base/aux');
 				include_spip('base/create');
 				maj_tables('spip_bibliographies_articles');
-				include_spip('inc/biblio');
-				$res = sql_select('id_article,texte,chapo','spip_articles');
-				while ($row = sql_fetch($res)){
-					marquer_liens_biblios($row,$row['id_article'],'article','id_article','articles','spip_articles');
-				}
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.2','non');
 			}
 			if (version_compare($current_version,'0.1.0.3','<')){
@@ -137,6 +132,18 @@
 				include_spip('base/create');
 				maj_tables('tbl_bibliographies_versions');
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.6','non');
+			}
+			if (version_compare($current_version,'0.1.0.7','<')){
+				include_spip('base/abstract_sql');
+				include_spip('base/aux');
+				// on refait les liens !
+				sql_delete('spip_bibliographies_articles');
+				include_spip('inc/biblio');
+				$res = sql_select('id_article,texte,chapo','spip_articles');
+				while ($row = sql_fetch($res)){
+					marquer_liens_biblios($row,$row['id_article'],'article','id_article','articles','spip_articles');
+				}
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.7','non');
 			}
 		}
 	}

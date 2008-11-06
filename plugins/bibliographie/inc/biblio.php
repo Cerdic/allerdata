@@ -43,6 +43,8 @@ function marquer_liens_biblios($champs,$id,$type,$id_table_objet,$table_objet,$s
 	include_spip('inc/texte');
 	include_spip('inc/lien');
 	include_spip('base/abstract_sql');
+	// raz :p
+	$GLOBALS['doublons_bibliographies_inclus']=array();
 	$texte = traiter_modeles($champs['chapo'].$champs['texte'],array('bibliographies'=>array('biblio'))); // detecter les doublons bibliographies
 	sql_delete("spip_bibliographies_$table_objet", "$id_table_objet=$id");
 	if (count($GLOBALS['doublons_bibliographies_inclus'])){
@@ -91,29 +93,33 @@ function biblio_trouver_sembables($auteurs,$titre,$autre_media,$id_journal,$anne
 	$liste = array();
 	// trouver les biblios avec auteur semblable
 	// si au moins 2 auteurs ou non analysable
-	if (!($les_auteurs=biblio_extrait_auteurs($auteurs)) OR count($les_auteurs)>1){
+	if ($auteurs AND (!($les_auteurs=biblio_extrait_auteurs($auteurs)) OR count($les_auteurs)>1)){
 		$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies','auteurs='.sql_quote($auteurs))));
 	}
-	// biblio avec le meme titre ?
-	$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies','titre='.sql_quote($titre))));
-	// biblio avec le meme autre_media ?
-	if (strlen($autre_media))
-		$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies','($id_journal=0) AND autre_media='.sql_quote($autre_media))));
-	
-	if (!$numero AND !$supplement){
-		$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies',
-		  '(numero=\'\' OR numero IS NULL) AND (supplement=\'\' OR supplement IS NULL) 
-		  AND concat(id_journal,\'-\',annee,\'-\',volume,\'-\',premiere_page)='.sql_quote("$id_journal-$annee-$volume-$premiere_page"))));
-	}
-	elseif (!$supplement){
-		$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies',
-		  '(supplement=\'\' OR supplement IS NULL) 
-		  AND concat(id_journal,\'-\',annee,\'-\',volume,\'-\',numero,\'-\',premiere_page)='.sql_quote("$id_journal-$annee-$volume-$numero-$premiere_page"))));
-	}
-	elseif (!$numero){
-		$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies',
-		  '(numero=\'\' OR numero IS NULL) 
-		  AND concat(id_journal,\'-\',annee,\'-\',volume,\'-\',supplement,\'-\',premiere_page)='.sql_quote("$id_journal-$annee-$volume-$supplement-$premiere_page"))));
+	if ($titre)
+		// biblio avec le meme titre ?
+		$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies','titre='.sql_quote($titre))));
+	if ($autre_media)
+		// biblio avec le meme autre_media ?
+		if (strlen($autre_media))
+			$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies','($id_journal=0) AND autre_media='.sql_quote($autre_media))));
+
+	if ($annee AND $volume AND $premiere_page){
+		if (!$numero AND !$supplement){
+			$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies',
+			  '(numero=\'\' OR numero IS NULL) AND (supplement=\'\' OR supplement IS NULL) 
+			  AND concat(id_journal,\'-\',annee,\'-\',volume,\'-\',premiere_page)='.sql_quote("$id_journal-$annee-$volume-$premiere_page"))));
+		}
+		elseif (!$supplement){
+			$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies',
+			  '(supplement=\'\' OR supplement IS NULL) 
+			  AND concat(id_journal,\'-\',annee,\'-\',volume,\'-\',numero,\'-\',premiere_page)='.sql_quote("$id_journal-$annee-$volume-$numero-$premiere_page"))));
+		}
+		elseif (!$numero){
+			$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies',
+			  '(numero=\'\' OR numero IS NULL) 
+			  AND concat(id_journal,\'-\',annee,\'-\',volume,\'-\',supplement,\'-\',premiere_page)='.sql_quote("$id_journal-$annee-$volume-$supplement-$premiere_page"))));
+		}
 	}
 	sort($liste);
 	return $liste;

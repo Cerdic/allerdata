@@ -3,7 +3,7 @@
 [(#AUTORISER{modifier,#ENV{quoi,biblio},#ID_BIBLIOGRAPHIE}|oui)
 &#91;<a href='[(#URL_ECRIRE{allerdata,page=#ENV{quoi,biblio}|concat{'s&edit=',#ID_BIBLIOGRAPHIE}}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;]
 [(#REM)
-[(#AUTORISER{supprimer,#ENV{quoi,biblio},#ID_ITEM}|oui)
+[(#AUTORISER{supprimer,#ENV{quoi,biblio},#ID_BIBLIOGRAPHIE}|oui)
 &#91;<a class='ajax' 
 onclick = "return confirm('<:allerdata:confirm_suppression:>');"
 href='[(#URL_ACTION_AUTEUR{supprimer_biblio,#ID_BIBLIOGRAPHIE}|parametre_url{redirect,#SELF|parametre_url{id_bibliographie,''}})]'><:allerdata:bouton_supprimer:></a>&#93;]

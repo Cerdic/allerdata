@@ -1,0 +1,10 @@
+<B_references>
+<h3>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{biblio:une_reference,biblio:des_references})]</h3>
+[<p class='pagination'>(#PAGINATION{page})</p>]
+<ul class='liste_items'>
+<BOUCLE_references(tbl_bibliographies){id_article}{pagination 10}{par id_bibliographie}>
+<li class='item'><a href='#URL_ECRIRE{allerdata,page=biblios&id_bibliographie=#ID_BIBLIOGRAPHIE}' title='##ID_BIBLIOGRAPHIE'>#CITATION</a></li>
+</BOUCLE_references>
+</ul>
+[<p class='pagination'>(#PAGINATION{page})</p>]
+</B_references>

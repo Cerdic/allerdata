@@ -212,7 +212,7 @@ function allerdata_selecteur_statut($statut,$name,$id=''){
 			."</option>";
 		}
 	}
-	$res .= "</selected>";
+	$res .= "</select>";
 	return $res;
 }
 
