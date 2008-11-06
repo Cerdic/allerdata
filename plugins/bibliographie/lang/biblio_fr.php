@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // N
 'une_note' => '1 Note',
 'des_notes' => '@nb@ Notes',
+'notes_lecture' => 'Notes de lecture',
 
 // R
 'references_bliblios' => 'R&eacute;f&eacute;rences bibliographiques',
