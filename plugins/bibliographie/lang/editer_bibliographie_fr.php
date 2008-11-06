@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_numero'=>'No',
 'label_url'=>'URL',
 'label_autre_media'=>'Autre m&eacute;dia',
+'label_sans_interet' => 'Sans int&eacute;r&ecirc;t',
 
 'label_abstract'=>'Abstract',
 'label_url_full_text'=>'URL Full text',

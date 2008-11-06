@@ -27,13 +27,14 @@ function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', 
 	$liste = biblio_trouver_sembables($valeurs['auteurs'],$valeurs['titre'],$valeurs['autre_media'],$valeurs['id_journal'],$valeurs['annee'],$valeurs['volume'],$valeurs['numero'],$valeurs['supplement'],$valeurs['premiere_page']);
 	if (intval($id_bibliographie))
 		$liste = array_diff($liste,array($id_bibliographie));
-	if ($valeurs['doublons_ref']!=implode(',',$liste))
+	if ($valeurs['doublons_refs']!=implode(',',$liste))
 		$valeurs['_semblables'] = $liste;
 
 	$valeurs['journal'] = sql_getfetsel('nom','tbl_journals','id_journal='.intval($valeurs['id_journal']));
 	
 	// le checkbox de confirmation
 	$valeurs['confirmer_journal']='';
+	$valeurs['confirmer_ajout_reference']='';
 	return $valeurs;
 }
 
@@ -92,7 +93,7 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 		if (intval($id_bibliographie)){
 			$liste = array_diff($liste,array($id_bibliographie));
 			// passer sous silence si les references ont deja ete reperees
-			$doublons_connus = sql_getfetsel('doublons_refs','tbl_bibliogaphies','id_bibliographie='.intval($id_bibliographie));
+			$doublons_connus = sql_getfetsel('doublons_refs','tbl_bibliographies','id_bibliographie='.intval($id_bibliographie));
 			if ($doublons_connus==implode(',',$liste))
 				$liste = array();
 		}
@@ -117,8 +118,10 @@ function formulaires_editer_bibliographie_traiter_dist($id_bibliographie='new', 
 	// enlever la reference en cours si elle est dedans
 	if (intval($id_bibliographie))
 		$liste = array_diff($liste,array($id_bibliographie));
-	set_request('doublons_ref',implode(',',$liste));
+	set_request('doublons_refs',implode(',',$liste));
 	set_request('citation',biblio_citer(_request('auteurs'),_request('titre'),_request('autre_media'),_request('journal'),_request('annee'),_request('volume'),_request('numero'),_request('supplement'),_request('premiere_page'),_request('derniere_page')));
+	if (!_request('sans_interet'))
+		set_request('sans_interet',0);
 
 	// vilain hack
 	set_request('action','editer_tbl_bibliographie');
