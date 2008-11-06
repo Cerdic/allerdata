@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plusieurs_journaux_correspondent' => 'Plusieurs journaux peuvent correspondre &agrave; ce nom !',
 
 // U
-'url_invalide' => 'URL invalide ou l\'adress indiqu&eacute; n\existe pas',
+'url_invalide' => 'URL invalide ou l\'adresse indiqu&eacute; n\'existe pas',
 
 );
 

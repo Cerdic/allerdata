@@ -14,7 +14,7 @@
 	<:allerdata:version:> ##ID_VERSION le #DATE par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>
 	[<div class='descriptif'>(#COMMENTAIRES)</div>]
 	</BOUCLE_versions>
-	<br /><a href='#URL_ECRIRE{allerdata,page=revisions&id_item=#ENV{edit}}'><:info_historique_lien:></a>
+	<br /><a href='#URL_ECRIRE{allerdata,page=revisions&id_bibliographie=#ENV{edit}}'><:info_historique_lien:></a>
 	</B_versions>	[(#ENV{edit}|intval|oui)
 	<:allerdata:version_originale:>
 	]	<//B_versions>

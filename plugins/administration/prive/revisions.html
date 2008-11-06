@@ -20,3 +20,22 @@
 	</div>
 	</B_versions>
 </BOUCLE_item>
+<BOUCLE_biblio(tbl_bibliographies){id_bibliographie}{statut?}>
+	<div class="entete-formulaire">
+		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=biblios&id_bibliographie=#ID_BIBLIOGRAPHIE}},#CHEMIN{img_pack/bibliographie-24.png},'',left}:>
+		<h1><:info_historique:> #CITATION</h1>
+		#MODELE{boutons_action_biblio,id_bibliographie=#ID_BIBLIOGRAPHIE}
+	</div>
+	<B_versionsb>
+	<div class='versions'>
+	<ul class='liste_items'>
+	<BOUCLE_versionsb(tbl_bibliographies_versions){id_bibliographie}{!par id_version}>
+	<li class='item'>
+	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur></h3>
+	[(#DIFF|allerdata_affiche_revision)]
+	</li>
+	</BOUCLE_versionsb>
+	</ul>
+	</div>
+	</B_versionsb>
+</BOUCLE_biblio>

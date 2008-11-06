@@ -31,6 +31,9 @@ function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', 
 		$valeurs['_semblables'] = $liste;
 
 	$valeurs['journal'] = sql_getfetsel('nom','tbl_journals','id_journal='.intval($valeurs['id_journal']));
+	
+	// le checkbox de confirmation
+	$valeurs['confirmer_journal']='';
 	return $valeurs;
 }
 
@@ -48,11 +51,13 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 	else if($liste = biblio_rechercher_journal($j)){
 		if (count($liste)>1)
 			$erreurs['journal'] = _T('editer_bibliographie:plusieurs_journaux_correspondent');
-		else
+		else{
+			$liste = array_keys($liste);
 			set_request('id_journal',reset($liste));
+		}
 	}
 	else {
-		if (!_request('ajout_journal'))
+		if (!_request('confirmer_journal'))
 			// un journal est indique mais introuvable
 			$erreurs['journal'] = _T('editer_bibliographie:confirmer_ajout_journal')."<input type='checkbox' name='confirmer_journal' class='checkbox' value='1' />";
 	}
@@ -76,7 +81,7 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 			}
 			include_spip('inc/distant');
 			if (!recuperer_page($u))
-				$erreur[$c] = _T('editer_bibliographie:url_invalide');
+				$erreurs[$c] = _T('editer_bibliographie:url_invalide');
 		}
 	
 		
@@ -110,7 +115,7 @@ function formulaires_editer_bibliographie_traiter_dist($id_bibliographie='new', 
 	}
 	$liste = biblio_trouver_sembables(_request('auteurs'),_request('titre'),_request('autre_media'),_request('id_journal'),_request('annee'),_request('volume'),_request('numero'),_request('supplement'),_request('premiere_page'));
 	// enlever la reference en cours si elle est dedans
-	if (intval($id_bibliographie)){
+	if (intval($id_bibliographie))
 		$liste = array_diff($liste,array($id_bibliographie));
 	set_request('doublons_ref',implode(',',$liste));
 	

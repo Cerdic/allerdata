@@ -49,7 +49,7 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 	    </li>
-	    <li class="editer_pages[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    <li class="editer_pages[ (#GET{obli})][ (#ENV**{erreurs}|table_valeur{premiere_page}|oui)erreur][ (#ENV**{erreurs}|table_valeur{derniere_page}|oui)erreur]">
 	  	#SET{name,premiere_page}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]

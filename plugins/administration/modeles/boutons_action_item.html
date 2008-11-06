@@ -1,6 +1,5 @@
 <p class='actions'>
-[(#ENV{quoi}|match{biblio}|non)
-&#91;<a href='[(#URL_ECRIRE{allerdata,page=chaines&id_item=#ID_ITEM})]'><:allerdata:bouton_arborescence:></a>&#93;]
+&#91;<a href='[(#URL_ECRIRE{allerdata,page=chaines&id_item=#ID_ITEM})]'><:allerdata:bouton_arborescence:></a>&#93;
 <BOUCLE_revisions(tbl_items_versions){id_item}{0,1}>&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_item=#ID_ITEM})]'><:info_historique_titre:></a>&#93;</BOUCLE_revisions>
 [(#AUTORISER{modifier,#ENV{quoi},#ID_ITEM}|oui)
 &#91;<a href='[(#URL_ECRIRE{allerdata,page=#ENV{quoi}|concat{'s&edit=',#ID_ITEM}}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;]

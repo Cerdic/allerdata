@@ -5,7 +5,7 @@
 <BOUCLE_biblios(tbl_bibliographies){id_bibliographie?}{pagination 10}{par #ENV{tri,titre}}{recherche?}>
 <li class='item[ (#EXPOSE)]'>
 [(#INCLURE{fond=modeles/reference}{id=#ID_BIBLIOGRAPHIE})]
-#MODELE{boutons_action_item,id_item=#ID_BIBLIOGRAPHIE,quoi=biblio,self=#SELF}
+#MODELE{boutons_action_biblio,id_bibliographie=#ID_BIBLIOGRAPHIE,self=#SELF}
 </li>
 </BOUCLE_biblios>
 [<p class='pagination'>(#PAGINATION)</p>]
