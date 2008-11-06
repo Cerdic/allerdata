@@ -1,0 +1,20 @@
+<B_notes>
+<h3>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{biblio:une_note,biblio:des_notes})]</h3>
+[<p class='pagination'>(#PAGINATION{page})</p>]
+<ul class='liste_items biblio_notes'>
+<BOUCLE_notes(tbl_biblio_notes){id_bibliographie}{pagination 10}{!par date}>
+<li class='item'><div class='texte'>#TEXTE</div>
+<div class='credits'><BOUCLE_auteur(AUTEURS){id_auteur}><:par:> #NOM,</BOUCLE_auteur> le [(#DATE|affdate)]
+[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui)
+<p class='actions'>&#91;<a href='#URL_ACTION_AUTEUR{supprimer_biblio_note,#ID_BIBLIO_NOTE,#SELF}' class='ajax'
+onclick="return confirm('<:editer_biblio_note:confirmer_supprimer_note|attribut_html:>');"><:editer_biblio_note:supprimer_note:></a>&#93;
+&#91;<a href='#'
+onclick="jQuery('#note-texte').html('[(#TEXTE*|texte_script)]');jQuery('#note-id_biblio_note').attr('value','#ID_BIBLIO_NOTE');
+jQuery(this).parents('li.item').addClass('on').siblings('li').removeClass('on');jQuery('#note-lien-nouvelle').show();return false;"
+><:editer_biblio_note:modifier_note:></a>&#93;
+</p>
+]</div></li>
+</BOUCLE_notes>
+</ul>
+[<p class='pagination'>(#PAGINATION{page})</p>]
+</B_notes>

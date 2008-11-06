@@ -96,13 +96,13 @@ function biblio_trouver_sembables($auteurs,$titre,$autre_media,$id_journal,$anne
 	if ($auteurs AND (!($les_auteurs=biblio_extrait_auteurs($auteurs)) OR count($les_auteurs)>1)){
 		$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies','auteurs='.sql_quote($auteurs))));
 	}
-	if ($titre)
+	if (strlen(trim($titre)))
 		// biblio avec le meme titre ?
 		$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies','titre='.sql_quote($titre))));
-	if ($autre_media)
-		// biblio avec le meme autre_media ?
-		if (strlen($autre_media))
-			$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies','($id_journal=0) AND autre_media='.sql_quote($autre_media))));
+		
+	// biblio avec le meme autre_media ?
+	if (strlen(trim($autre_media)))
+		$liste = array_merge($liste,array_map('reset',sql_allfetsel('id_bibliographie','tbl_bibliographies','(id_journal=0) AND autre_media='.sql_quote($autre_media))));
 
 	if ($annee AND $volume AND $premiere_page){
 		if (!$numero AND !$supplement){

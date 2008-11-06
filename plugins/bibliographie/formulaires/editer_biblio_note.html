@@ -1,0 +1,31 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input name='id_auteur' value='#SESSION{id_auteur}' type='hidden' />
+		<input name='id_bibliographie' value='#ID_BIBLIOGRAPHIE' type='hidden' />
+		<input id='note-id_biblio_note' name='id_biblio_note' value='#ID_BIBLIO_NOTE' type='hidden' />
+	  <ul>
+	  	#SET{name,texte}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea name='#GET{name}' id='note-#GET{name}' rows='4'>#ENV{#GET{name}}</textarea>
+	    </li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'>
+	  <a href='#' 
+		onclick="jQuery('#note-id_biblio_note').attr('value','new');jQuery('#note-texte').html('');jQuery(this).hide();return false;" 
+		[(#ID_BIBLIO_NOTE|intval|non)style='display:none;']
+		id='note-lien-nouvelle'><:editer_biblio_note:nouvelle_note:></a>
+	  <span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
+<INCLURE{fond=prive/listes/biblio_notes}{id_bibliographie}{ajax}{env}>

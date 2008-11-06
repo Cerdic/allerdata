@@ -24,4 +24,13 @@
 <div class='ajax'>
 #FORMULAIRE_EDITER_BIBLIOGRAPHIE{#ENV{edit},#ENV{redirect}}
 </div>
+
+<h2><:biblio:notes_lecture:></h2>
+<div class='ajax'>
+#FORMULAIRE_EDITER_BIBLIO_NOTE{new,#ENV{edit}}
+</div>
+
+[<div class='utilisations'>
+(#INCLURE{fond=prive/listes/utilisations}{ajax}{env}{id_bibliographie})
+<div class='nettoyeur'></div>]
 </div>
