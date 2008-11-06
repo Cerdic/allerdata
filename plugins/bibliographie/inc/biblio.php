@@ -126,6 +126,8 @@ function biblio_trouver_sembables($auteurs,$titre,$autre_media,$id_journal,$anne
 }
 
 function biblio_citer($auteurs,$titre,$autre_media,$journal,$annee,$volume,$numero,$supplement,$premiere_page,$derniere_page){
+	if (!strlen($titre))
+		return "";
 	$auteurs = biblio_citer_auteurs($auteurs);
 	if (!strlen(trim($journal)))
 		return "$auteurs $titre. $autre_media";

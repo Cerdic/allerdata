@@ -10,7 +10,7 @@
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	<blockquote class='citation'>[(#ENV{auteurs}|biblio_citer{#ENV{titre},#ENV{autre_media},#ENV{journal},#ENV{annee},#ENV{volume},#ENV{numero},#ENV{supplement},#ENV{premiere_page},#ENV{derniere_page}})]</blockquote>
+	<blockquote class='citation'>[(#ENV{auteurs}|biblio_citer{#ENV{titre},#ENV{autre_media},#ENV{journal},#ENV{annee},#ENV{volume},#ENV{numero},#ENV{supplement},#ENV{premiere_page},#ENV{derniere_page}}|sinon{#CITATION})]</blockquote>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
