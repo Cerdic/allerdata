@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
+'aucune_note' => 'Aucune note de lecture',
 'une_note' => '1 Note',
 'des_notes' => '@nb@ Notes',
 'notes_lecture' => 'Notes de lecture',

@@ -42,7 +42,7 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 	$erreurs = formulaires_editer_objet_verifier('tbl_bibliographie',$id_bibliographie,array('titre','auteurs','premiere_page'));
 	
 	// Verifier la syntaxe des auteurs
-	if (!_request('forcer_auteurs') AND !biblio_extrait_auteurs(_request('auteurs'))){
+	if (!isset($erreurs['auteurs']) AND !_request('forcer_auteurs') AND !biblio_extrait_auteurs(_request('auteurs'))){
 		$erreurs['auteurs'] = _T('editer_bibliographie:confirmer_auteurs')."<input type='checkbox' name='confirmer_auteurs' class='checkbox' value='1' />";
 	}
 	// verifier que le journal existe et est non ambigu
