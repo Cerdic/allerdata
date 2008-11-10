@@ -1,7 +1,15 @@
 <p class='actions'>
 <BOUCLE_revisions(tbl_bibliographies_versions){id_bibliographie}{0,1}>&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_bibliographie=#ID_BIBLIOGRAPHIE})]'><:info_historique_titre:></a>&#93;</BOUCLE_revisions>
+<BOUCLE_cohortes(tbl_groupes_patients){id_bibliographie} />
+&#91;
+[(#TOTAL_BOUCLE|oui)[<a href='#URL_ECRIRE{allerdata,page=cohortes&id_bibliographie=#ID_BIBLIOGRAPHIE}'>(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{cohorte:une_cohorte,cohorte:des_cohortes})]</a></span>]
+[(#TOTAL_BOUCLE|non)<a href='#URL_ECRIRE{allerdata,page=cohortes&edit=new&id_bibliographie=#ID_BIBLIOGRAPHIE}'><:cohorte:icone_creer_premiere_cohorte:></a></span>]
+&#93;
+<//B_cohortes>
 [(#AUTORISER{modifier,#ENV{quoi,biblio},#ID_BIBLIOGRAPHIE}|oui)
 &#91;<a href='[(#URL_ECRIRE{allerdata,page=#ENV{quoi,biblio}|concat{'s&edit=',#ID_BIBLIOGRAPHIE}}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;]
+
+
 [(#REM)
 [(#AUTORISER{supprimer,#ENV{quoi,biblio},#ID_BIBLIOGRAPHIE}|oui)
 &#91;<a class='ajax' 

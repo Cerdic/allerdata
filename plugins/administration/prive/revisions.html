@@ -11,7 +11,7 @@
 	<ul class='liste_items'>
 	<BOUCLE_versions(tbl_items_versions){id_item}{!par id_version}>
 	<li class='item'>
-	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur></h3>
+	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>#NOM</BOUCLE_auteur></h3>
 	<div class='descriptif'>#COMMENTAIRES</p>
 	[(#DIFF|allerdata_affiche_revision)]
 	</li>
@@ -31,7 +31,7 @@
 	<ul class='liste_items'>
 	<BOUCLE_versionsb(tbl_bibliographies_versions){id_bibliographie}{!par id_version}>
 	<li class='item'>
-	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur></h3>
+	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteurb(AUTEURS){id_auteur}{tout}>#NOM</BOUCLE_auteurb></h3>
 	[(#DIFF|allerdata_affiche_revision)]
 	</li>
 	</BOUCLE_versionsb>
@@ -39,3 +39,22 @@
 	</div>
 	</B_versionsb>
 </BOUCLE_biblio>
+<BOUCLE_cohorte(tbl_groupes_patients){id_groupes_patient}{statut?}>
+	<div class="entete-formulaire">
+		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=cohortes&id_groupes_patient=#ID_GROUPES_PATIENT}},#CHEMIN{img_pack/cohorte-24.png},'',left}:>
+		<h1><:info_historique:> #NOM</h1>
+		#MODELE{boutons_action_cohorte,id_groupes_patient=#ID_GROUPES_PATIENT}
+	</div>
+	<B_versionsc>
+	<div class='versions'>
+	<ul class='liste_items'>
+	<BOUCLE_versionsc(tbl_groupes_patients_versions){id_groupes_patient}{!par id_version}>
+	<li class='item'>
+	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteurc(AUTEURS){id_auteur=#ID_AUTEUR}{tout}>#NOM</BOUCLE_auteurc></h3>
+	[(#DIFF|allerdata_affiche_revision)]
+	</li>
+	</BOUCLE_versionsc>
+	</ul>
+	</div>
+	</B_versionsc>
+</BOUCLE_cohorte>

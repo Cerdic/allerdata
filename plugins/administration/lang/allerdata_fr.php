@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'confirm_suppression' => '&Ecirc;tes-vous certain de vouloir supprimer cet item ?',
+'cohortes' => 'Groupes de patients',
 
 // E
 'un_enfant' => '1 descendant',

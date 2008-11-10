@@ -1,0 +1,31 @@
+[(#REM)
+
+	Un petit descriptif ne serait pas superflu
+
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	<:icone_retour|icone_inline{#ENV{retour,#SELF|parametre_url{edit,''}},#CHEMIN{img_pack/cohorte-24.png},'',left}:>
+	[<p>(#ENV{edit}|intval|?{<:cohorte:titre_cadre_modifier_cohorte:>,<:cohorte:titre_cadre_ajouter_cohorte:>})</p>]
+	#SET{id_biblio,#ENV{id_bibliographie}}
+	<BOUCLE_cohorte(tbl_groupes_patients){id_groupes_patient=#ENV{edit}}><h1>##ID_GROUPES_PATIENT</h1>
+	#SET{id_biblio,#ID_BIBLIOGRAPHIE}</BOUCLE_cohorte>
+	<div class='versions'>
+	<B_versions>
+	<BOUCLE_versions(tbl_groupes_patients_versions){id_groupes_patient=#ENV{edit}}{!par id_version}{0,1}>
+	<:allerdata:version:> ##ID_VERSION le #DATE par <BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>
+	[<div class='descriptif'>(#COMMENTAIRES)</div>]
+	</BOUCLE_versions>
+	<br /><a href='#URL_ECRIRE{allerdata,page=revisions&id_groupes_patient=#ENV{edit}}'><:info_historique_lien:></a>
+	</B_versions>	[(#ENV{edit}|intval|oui)
+	<:allerdata:version_originale:>
+	]	<//B_versions>
+	</div>
+	<BOUCLE_biblio(tbl_bibliographies){id_bibliographie=#GET{id_biblio}}><blockquote>#CITATION #MODELE{biblio}</blockquote></BOUCLE_biblio>
+	<BOUCLE_statut(tbl_groupes_patients){id_groupes_patient=#ENV{edit}}{statut?}>[(#STATUT|allerdata_puce_statut)]</BOUCLE_statut>
+</div>
+<div class='ajax'>
+#FORMULAIRE_EDITER_COHORTE{#ENV{edit},#ENV{id_bibliographie},#ENV{redirect}}
+</div>
+
+</div>

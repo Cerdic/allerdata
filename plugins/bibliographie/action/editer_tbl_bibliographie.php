@@ -64,12 +64,10 @@ function tbl_bibliographies_set($id_bibliographie) {
 
 function insert_tbl_bibliographie() {
 
-	$max_id = array('produit'=>9999,'allergene'=>19999,'source'=>29999,'famille_taxo'=>39999,1=>59999,'famille_mol'=>49999);
-	
 	$set = array(
 		'id_version' => -2, // indiquer une creation
 		'date' => 'NOW()',
-		'statut'=>'publie', // pour le moment
+		//'statut'=>'publie', // pour le moment
 	);
 
 	// faire une insertion a la fin, avec l'autoincrement

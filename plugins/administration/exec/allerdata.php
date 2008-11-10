@@ -77,13 +77,27 @@ function exec_allerdata_dist(){
 			echo $config->formulaire();
 			echo fin_cadre_trait_couleur(true);
 			break;
-		default:
+		case 'biblios':
+		case 'cohortes':
+			if (!_request('edit')){
+			if (defined('_DIR_PLUGIN_COHORTE'))
+				$sbarre[] = array('titre'=>_T("allerdata:cohortes"),'page'=>'cohortes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/cohorte-64.png",'url'=>generer_url_ecrire('allerdata','page=cohortes'));
+			echo allerdata_barre_nav_gauche($page,$sbarre);
+			}
+		default:			
 			$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],'message'=>$message);
 			$get = $_GET;
 			if (is_numeric($get['recherche']) AND intval($get['recherche'])){
 				$_id = 'id_item';
 				if ($page=='biblios') $_id = 'id_bibliographie';
+				if ($page=='cohortes') $_id = 'id_groupes_patient';
 				$get[$_id] = intval($get['recherche']);
+				unset($get['recherche']);
+				set_request('recherche','');
+				unset($GLOBALS['recherche']);
+			}
+			if ($page=='cohortes' AND preg_match(',^[0-9]+-$,',$get['recherche'])){
+				$get['id_bibliographie'] = intval($get['recherche']);
 				unset($get['recherche']);
 				set_request('recherche','');
 				unset($GLOBALS['recherche']);

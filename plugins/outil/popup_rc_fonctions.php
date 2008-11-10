@@ -90,13 +90,13 @@ function rc($p1,$p2,$type_etude) {
 			
 			$count += 1;
 			$querybiblio = "SELECT tbl_bibliographies.id_bibliographie, tbl_bibliographies.citation, 
-								tbl_groupes_patients.id_groupe_patients, tbl_groupes_patients.pays, tbl_groupes_patients.description_groupe, tbl_groupes_patients.nb_sujets, tbl_groupes_patients.pool, tbl_groupes_patients.qualitatif,
+								tbl_groupes_patients.id_groupes_patient, tbl_groupes_patients.pays, tbl_groupes_patients.description as description_groupe, tbl_groupes_patients.nb_sujets, tbl_groupes_patients.pool, tbl_groupes_patients.qualitatif,
 								tbl_reactions_croisees.id_reaction_croisee, tbl_items.id_item as i1, tbl_items.nom as p1, tbl_reactions_croisees.niveau_RC_sens1, 
 									tbl_reactions_croisees.niveau_RC_sens2, tbl_items_1.id_item as i2, tbl_items_1.nom as p2, tbl_reactions_croisees.remarques
 								FROM tbl_items AS tbl_items_1 
 									INNER JOIN (tbl_items 
 										INNER JOIN ((tbl_reactions_croisees 
-											INNER JOIN tbl_groupes_patients ON tbl_reactions_croisees.id_groupe_patients = tbl_groupes_patients.id_groupe_patients) 
+											INNER JOIN tbl_groupes_patients ON tbl_reactions_croisees.id_groupes_patient = tbl_groupes_patients.id_groupes_patient) 
 											INNER JOIN tbl_bibliographies ON tbl_groupes_patients.id_bibliographie = tbl_bibliographies.id_bibliographie) 
 										ON tbl_items.id_item = tbl_reactions_croisees.id_produit1) 
 									ON tbl_items_1.id_item = tbl_reactions_croisees.id_produit2

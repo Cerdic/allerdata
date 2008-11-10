@@ -73,14 +73,22 @@ function allerdata_icone_etendue($texte, $lien, $fond, $fonction="", $align="", 
 }
 
 function allerdata_barre_nav_gauche($page_actuelle,$liste_items){
-	$out = "<style>
-	#navigation .icone36 span {height:auto;}
-	.icone36.on{text-align:center;text-decoration:none;}
-	.icone36.on img {
+	static $deja_style=false;
+	$out = "";
+	if (!$deja_style){
+		$out = "<style>
+#navigation .icone36 span {height:auto;}
+.icone36.on{text-align:center;text-decoration:none;}
+.icone36.on img {
 background-color:#FFFFFF;border:2px solid #666666;display:inline;margin:0pt;padding:4px;}
 .icone36.on span {color:#000000;display:block;font-family:Verdana,Arial,Sans,sans-serif;font-size:10px;font-weight:bold;margin:2px;width:100%;}
 .barre_nav .pointeur {margin-bottom:0.5em;}
-</style><div class='barre_nav'>";
+
+#contenu .barre_nav {float:right;}
+</style>";
+		$deja_style = true;
+	}
+	$out .= "<div class='barre_nav'>";
 	foreach($liste_items as $item){
 		$out .= allerdata_icone_etendue($item['titre'], isset($item['url'])?$item['url']:generer_url_ecrire($item['page']), $item['icone'], isset($item['action'])?$item['action']:"rien.gif","", false, $page_actuelle==$item['page']);
 	}

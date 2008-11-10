@@ -1,0 +1,13 @@
+<h1><:allerdata:cohortes:></h1>
+
+[(#ENV{edit}|non)
+#FORMULAIRE_RECHERCHE{#SELF}
+<INCLURE{fond=prive/listes/cohortes}{env}{ajax}>
+[(#ENV{id_bibliographie}|oui)
+[(#VAL{cohorte:icone_creer_cohorte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=cohortes&edit=new&id_bibliographie=#ID_BIBLIOGRAPHIE},#CHEMIN{img_pack/cohorte-24.png},'creer.gif','right'})]
+]
+<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+]
+[(#ENV{edit}|oui)
+[(#INCLURE{fond=prive/editer/cohorte}{edit}{id_bibliographie}{redirect=#SELF|parametre_url{edit,''}}{retour})]
+]
