@@ -53,6 +53,7 @@ function cohorte_declarer_tables_principales($tables_principales){
 		'fleche_sens1' => "tinyint(1) DEFAULT NULL",
 		'fleche_sens2' => "tinyint(1) DEFAULT NULL",
 		'produits_differents' => "tinyint(1) DEFAULT 0 NOT NULL",
+		'risque_ccd' =>"tinyint(1) DEFAULT 0 NOT NULL",
 	);
 	
 	$reactions_croisees_key = array(

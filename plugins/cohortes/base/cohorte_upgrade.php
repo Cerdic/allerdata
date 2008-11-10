@@ -36,6 +36,7 @@
 				sql_alter("table tbl_reactions_croisees CHANGE date_reaction_croisee date datetime default NULL");
 				sql_alter("table tbl_reactions_croisees CHANGE fleche_sens1 fleche_sens1 tinyint(1) DEFAULT NULL");
 				sql_alter("table tbl_reactions_croisees CHANGE fleche_sens2 fleche_sens2 tinyint(1) DEFAULT NULL");
+				sql_alter("table tbl_reactions_croisees ADD risque_ccd tinyint(1) DEFAULT 0 NOT NULL");
 				#ecrire_meta($nom_meta_base_version,$current_version='0.1.0.1','non');
 			}
 

@@ -14,6 +14,7 @@
 		<input type='hidden' name='_liste_rc' value='[(#ENV{_liste_rc}|implode{','})]' />
 		<table>
 		<tr>
+		<th class='id'>#</th>
 		<th class='editer_produit1'>Item 1</th>
 		<th class='editer_niveau_RC_sens1'>1<span style='font-size:1.2em;font-weight:bold;'>&rarr;</span>2</th>
 		<th class='editer_niveau_RC_sens2'>2<span style='font-size:1.2em;font-weight:bold;'>&rarr;</span>1</th>
@@ -23,6 +24,7 @@
 		[(#REM) #ENV{_liste_rc} contient une liste d'ids de rc que l'on utilise pour construire le tableau de saisie ]
 		<BOUCLE_rcs(POUR){tableau #ENV{_liste_rc}}>
 		<tr id='editer_rc-#VALEUR'>
+			<td class='id'>[(#VALEUR|intval|oui)#VALEUR]</td>
 	  	#SET{name,produit1-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_produit1 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
