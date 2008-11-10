@@ -58,3 +58,21 @@
 	</div>
 	</B_versionsc>
 </BOUCLE_cohorte>
+<BOUCLE_rc(tbl_reactions_croisees){id_reactions_croisee}{statut?}>
+	<div class="entete-formulaire">
+		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=cohortes&edit=#ID_GROUPES_PATIENT}},#CHEMIN{img_pack/cohorte-24.png},'',left}:>
+		<h1><:info_historique:> #NOM</h1>
+	</div>
+	<B_versionsd>
+	<div class='versions'>
+	<ul class='liste_items'>
+	<BOUCLE_versionsd(tbl_reactions_croisees_versions){id_reactions_croisee}{!par id_version}>
+	<li class='item'>
+	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteurd(AUTEURS){id_auteur=#ID_AUTEUR}{tout}>#NOM</BOUCLE_auteurd></h3>
+	[(#DIFF|allerdata_affiche_revision)]
+	</li>
+	</BOUCLE_versionsd>
+	</ul>
+	</div>
+	</B_versionsd>
+</BOUCLE_rc>

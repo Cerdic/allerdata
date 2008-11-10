@@ -10,8 +10,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_editer_tbl_reactions_croisee_dist($id_reactions_croisee=0,$post=null) {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	//$securiser_action = charger_fonction('securiser_action', 'inc');
+	//$arg = $securiser_action();
 
 	// si id_reactions_croisee n'est pas un nombre, c'est une creation 
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
@@ -35,7 +35,8 @@ function tbl_reactions_croisees_set($id_reactions_croisee, $post=null) {
 
 	$c = array();
 	foreach (array(
-		"id_produit1","molecules1",'niveau_RC_sens1','niveau_RC_sens2','id_produit2','molecules2','remarques','risque_ccd',
+		"id_produit1","molecules1",'niveau_rc_sens1','niveau_rc_sens2','id_produit2','molecules2','fleche_sens1','fleche_sens2',
+		'remarques','risque_ccd',
 	) as $champ)
 		$c[$champ] = _request($champ, $post);
 

@@ -33,9 +33,9 @@ function rc($p1,$p2,$type_etude) {
       tbl_reactions_croisees.id_produit1,
 			tbi3.id_type_item AS id_type_item1, 
 			tbl_reactions_croisees.fleche_sens1, 
-			tbl_reactions_croisees.niveau_RC_sens1, 
+			tbl_reactions_croisees.niveau_rc_sens1, 
 			tbl_reactions_croisees.fleche_sens2, 
-			tbl_reactions_croisees.niveau_RC_sens2, 
+			tbl_reactions_croisees.niveau_rc_sens2, 
 			tbi4.id_type_item AS id_type_item2, 
 			tbl_reactions_croisees.id_produit2, 
 			tbl_items_1.id_item AS idp2, 
@@ -91,8 +91,8 @@ function rc($p1,$p2,$type_etude) {
 			$count += 1;
 			$querybiblio = "SELECT tbl_bibliographies.id_bibliographie, tbl_bibliographies.citation, 
 								tbl_groupes_patients.id_groupes_patient, tbl_groupes_patients.pays, tbl_groupes_patients.description as description_groupe, tbl_groupes_patients.nb_sujets, tbl_groupes_patients.pool, tbl_groupes_patients.qualitatif,
-								tbl_reactions_croisees.id_reactions_croisee, tbl_items.id_item as i1, tbl_items.nom as p1, tbl_reactions_croisees.niveau_RC_sens1, 
-									tbl_reactions_croisees.niveau_RC_sens2, tbl_items_1.id_item as i2, tbl_items_1.nom as p2, tbl_reactions_croisees.remarques
+								tbl_reactions_croisees.id_reactions_croisee, tbl_items.id_item as i1, tbl_items.nom as p1, tbl_reactions_croisees.niveau_rc_sens1, 
+									tbl_reactions_croisees.niveau_rc_sens2, tbl_items_1.id_item as i2, tbl_items_1.nom as p2, tbl_reactions_croisees.remarques
 								FROM tbl_items AS tbl_items_1 
 									INNER JOIN (tbl_items 
 										INNER JOIN ((tbl_reactions_croisees 
@@ -113,7 +113,7 @@ function rc($p1,$p2,$type_etude) {
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums test&eacute;s individuellement</b>: '.(($rowbiblio['pool']==1)?'Non':'Oui').'</td><td colspan="2" rowspan="1"><b>Test quantitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Non':'Oui').'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Produit1</b></td><td><b>RC 1-&gt; 2</b></td><td><b>RC 2-&gt;1</b></td><td><b>Produit2</b></td><td><b>Remarques</b></td></tr>
-								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_RC_sens1'].'</td><td>'.$rowbiblio['niveau_RC_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_rc_sens1'].'</td><td>'.$rowbiblio['niveau_rc_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
 								';
 			}
 			

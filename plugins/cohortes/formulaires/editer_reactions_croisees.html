@@ -1,9 +1,6 @@
 <B_rcs>
 <h2><:cohorte:rc:></h2>
 <div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
@@ -16,28 +13,28 @@
 		<tr>
 		<th class='id'>#</th>
 		<th class='editer_produit1'>Item 1</th>
-		<th class='editer_niveau_RC_sens1'>1<span style='font-size:1.2em;font-weight:bold;'>&rarr;</span>2</th>
-		<th class='editer_niveau_RC_sens2'>2<span style='font-size:1.2em;font-weight:bold;'>&rarr;</span>1</th>
+		<th class='editer_niveau_rc_sens1'>1<span style='font-size:1.2em;font-weight:bold;'>&rarr;</span>2</th>
+		<th class='editer_niveau_rc_sens2'>2<span style='font-size:1.2em;font-weight:bold;'>&rarr;</span>1</th>
 		<th class='editer_produit2'>Item 2</th>
 		<th class='editer_remarques'>Remarques</th>
 		<th class='editer_risque_CCD'>CCD</th></tr>
 		[(#REM) #ENV{_liste_rc} contient une liste d'ids de rc que l'on utilise pour construire le tableau de saisie ]
 		<BOUCLE_rcs(POUR){tableau #ENV{_liste_rc}}>
-		<tr id='editer_rc-#VALEUR'>
-			<td class='id'>[(#VALEUR|intval|oui)#VALEUR]</td>
+		<tr id='editer_rc-#VALEUR'>#SET{close,''}
+			<td class='id'>[[(#ENV{id_version-#VALEUR,''}|strlen|oui)<a href='#URL_ECRIRE{allerdata,page=revisions&id_reactions_croisee=#VALEUR}' title='Version #ENV{id_version-#VALEUR}'>#SET{close,'</a>'}](#VALEUR|intval|oui)#VALEUR]#GET{close}</td>
 	  	#SET{name,produit1-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_produit1 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 				<input type='hidden' name='id_#GET{name}' id='id_#GET{name}' value="#ENV{id_#GET{name}}" />
 			</td>
-	  	#SET{name,niveau_RC_sens1-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
-			<td class="editer_niveau_RC_sens1 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	  	#SET{name,niveau_rc_sens1-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+			<td class="editer_niveau_rc_sens1 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 			</td>
-	  	#SET{name,niveau_RC_sens2-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-			<td class="editer_niveau_RC_sens2 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	  	#SET{name,niveau_rc_sens2-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			<td class="editer_niveau_rc_sens2 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 			</td>
@@ -52,7 +49,7 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<textarea name='#GET{name}' id='#GET{name}' rows='1'>#ENV{#GET{name}}</textarea>
 			</td>
-	  	#SET{name,risque_CCD-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	  	#SET{name,risque_ccd-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_risque_CCD editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='checkbox' name='#GET{name}' id='#GET{name}'[ (#ENV{#GET{name}}|oui)checked="checked"] value='1' />
@@ -60,9 +57,15 @@
 		</tr>
 		</BOUCLE_rcs>
 		</table>
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 </div>
+<script type='text/javascript' src='#CHEMIN{javascript/jquery.autocompleter.js}'></script>
+<script type='text/javascript' src='#CHEMIN{formulaires/editer_reactions_croisees.js}'></script>
+<script type='text/javascript'>var url_autocomp_produit_rc='#URL_PAGE{autocomplete_produit_rc}';
+var url_cite='#URL_PAGE{citation}';</script>
 </B_rcs>

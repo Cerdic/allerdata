@@ -1,5 +1,6 @@
 if (window.jQuery) {
 // from http://www.dyve.net/jquery/?autocomplete
+// ajout le 10/11/2008 : passage de $input a la fonction callback ItemSelect() 
 jQuery.autocomplete = function(input, options) {
 	// Create a link to self
 	var me = this;
@@ -217,7 +218,7 @@ jQuery.autocomplete = function(input, options) {
 		$input.val(v);
 		hideResultsNow();
 		if (options.onItemSelect) {
-			setTimeout(function() { options.onItemSelect(li) }, 1);
+			setTimeout(function() { options.onItemSelect(li,$input) }, 1);
 		}
 	};
 

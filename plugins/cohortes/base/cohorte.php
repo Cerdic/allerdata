@@ -44,16 +44,17 @@ function cohorte_declarer_tables_principales($tables_principales){
 		'id_groupes_patient' => "int(11) NOT NULL",
 		'id_produit1' => "int(11) NOT NULL",
 		'molecules1'=>"varchar(50) DEFAULT ''",
-		'niveau_RC_sens1'=>"varchar(50) DEFAULT ''",
-		'niveau_RC_sens2'=>"varchar(50) DEFAULT ''",
+		'niveau_rc_sens1'=>"varchar(50) DEFAULT ''",
+		'niveau_rc_sens2'=>"varchar(50) DEFAULT ''",
 		'id_produit2' => "int(11) NOT NULL",
 		'molecules2'=>"varchar(50) DEFAULT ''",
 		'remarques' => "text DEFAULT '' NOT NULL",
 		'date' => "datetime default NULL",
-		'fleche_sens1' => "tinyint(1) DEFAULT NULL",
-		'fleche_sens2' => "tinyint(1) DEFAULT NULL",
+		'fleche_sens1' => "char(1) DEFAULT ''",
+		'fleche_sens2' => "char(1) DEFAULT ''",
 		'produits_differents' => "tinyint(1) DEFAULT 0 NOT NULL",
 		'risque_ccd' =>"tinyint(1) DEFAULT 0 NOT NULL",
+		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
 	);
 	
 	$reactions_croisees_key = array(
@@ -81,7 +82,21 @@ function cohorte_declarer_tables_auxiliaires($tables_auxiliaires){
 	$tables_auxiliaires['tbl_groupes_patients_versions'] = array(
 		'field' => &$groupes_patients_versions,
 		'key' => &$groupes_patients_versions_key);
-	
+
+	$reactions_croisees_versions = array(
+	  'id_reactions_croisee' => "int(11) NOT NULL",
+		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"id_auteur"	=> "bigint(21) NOT NULL",
+		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+		"commentaires" => "text",
+		"diff" => "text", // liste des champs modifies avant/apres
+  );
+	$reactions_croisees_versions_key = array (
+			"PRIMARY KEY"	=> "id_reactions_croisee, id_version");
+	$tables_auxiliaires['tbl_reactions_croisees_versions'] = array(
+		'field' => &$reactions_croisees_versions,
+		'key' => &$reactions_croisees_versions_key);
+
 	return $tables_auxiliaires;
 }
 
