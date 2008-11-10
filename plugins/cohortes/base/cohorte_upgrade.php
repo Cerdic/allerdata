@@ -43,7 +43,7 @@
 				sql_alter("table tbl_reactions_croisees CHANGE niveau_RC_sens1 niveau_rc_sens1 varchar(50) DEFAULT ''");
 				sql_alter("table tbl_reactions_croisees CHANGE niveau_RC_sens2 niveau_rc_sens2 varchar(50) DEFAULT ''");
 
-				#ecrire_meta($nom_meta_base_version,$current_version='0.1.0.1','non');
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.1','non');
 			}
 		}
 	}
