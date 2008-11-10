@@ -27,6 +27,17 @@
 
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.0','non');
 			}
+			if (version_compare($current_version,'0.1.0.1','<')){
+				include_spip('base/abstract_sql');
+				include_spip('base/serial');
+				sql_alter('table tbl_reactions_croisees CHANGE id_reaction_croisee id_reactions_croisee int(11) NOT NULL auto_increment');
+				sql_alter('table tbl_reactions_croisees CHANGE id_groupe_patients id_groupes_patient int(11) NOT NULL');
+				sql_alter("table tbl_reactions_croisees CHANGE remarques remarques text DEFAULT '' NOT NULL");
+				sql_alter("table tbl_reactions_croisees CHANGE date_reaction_croisee date datetime default NULL");
+				sql_alter("table tbl_reactions_croisees CHANGE fleche_sens1 fleche_sens1 tinyint(1) DEFAULT NULL");
+				sql_alter("table tbl_reactions_croisees CHANGE fleche_sens2 fleche_sens2 tinyint(1) DEFAULT NULL");
+				#ecrire_meta($nom_meta_base_version,$current_version='0.1.0.1','non');
+			}
 
 		}
 	}

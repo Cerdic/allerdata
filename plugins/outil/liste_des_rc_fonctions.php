@@ -9,7 +9,7 @@
   	
   	// Requete de recherche : il faut tenir compte des réactions entre éléments de type 3 ou 5
   	$query = "SELECT DISTINCT 
-  			tbl_reactions_croisees.id_reaction_croisee, 
+  			tbl_reactions_croisees.id_reactions_croisee, 
   			tbl_items.id_item AS idp1, 
   			tbl_items.nom AS p1, 
   			tbl_reactions_croisees.id_produit1,

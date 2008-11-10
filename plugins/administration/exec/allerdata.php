@@ -17,13 +17,13 @@ function exec_allerdata_dist(){
 	$titre = "Allerdata";
 	$commencer_page = charger_fonction('commencer_page','inc');
 
-	echo $commencer_page("&laquo; $titre &raquo;", "allerdata", "allerdata","");
+	$page = _request('page');
+	echo $commencer_page("&laquo; $titre &raquo;", "allerdata", "allerdata $page","");
 	if (!autoriser('administrer','allerdata')) {
 		echo _T('acces_interdit');
 		echo fin_page();
 		exit();
 	}
-	$page = _request('page');
 	if ($page==null)
 		$page= 'allerdata';
 

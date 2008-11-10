@@ -16,7 +16,6 @@ function cohorte_declarer_tables_interfaces($interface){
 
 function cohorte_declarer_tables_principales($tables_principales){
   
-	//-- Table tbl_bibliographies ------------------------------------------
 	$groupes_patients = array(
 		'id_groupes_patient' => "int(11) NOT NULL",
 		'nom'	=> "text DEFAULT '' NOT NULL",
@@ -34,12 +33,35 @@ function cohorte_declarer_tables_principales($tables_principales){
 	
 	$groupes_patients_key = array(
 			"PRIMARY KEY"	=> "id_bibliographie",
-			"index"	=> "id_journal",
+			"INDEX"	=> "id_bibliographie",
 	);
 	
 	$tables_principales['tbl_groupes_patients'] =
 		array('field' => &$groupes_patients, 'key' => &$groupes_patients_key);
 
+	$reactions_croisees = array(
+		'id_reactions_croisee' => "int(11) NOT NULL",
+		'id_groupes_patient' => "int(11) NOT NULL",
+		'id_produit1' => "int(11) NOT NULL",
+		'molecules1'=>"varchar(50) DEFAULT ''",
+		'niveau_RC_sens1'=>"varchar(50) DEFAULT ''",
+		'niveau_RC_sens2'=>"varchar(50) DEFAULT ''",
+		'id_produit2' => "int(11) NOT NULL",
+		'molecules2'=>"varchar(50) DEFAULT ''",
+		'remarques' => "text DEFAULT '' NOT NULL",
+		'date' => "datetime default NULL",
+		'fleche_sens1' => "tinyint(1) DEFAULT NULL",
+		'fleche_sens2' => "tinyint(1) DEFAULT NULL",
+		'produits_differents' => "tinyint(1) DEFAULT 0 NOT NULL",
+	);
+	
+	$reactions_croisees_key = array(
+			"PRIMARY KEY"	=> "id_reactions_croisee",
+			"INDEX"	=> "id_groupes_patient",
+	);
+	
+	$tables_principales['tbl_reactions_croisees'] =
+		array('field' => &$reactions_croisees, 'key' => &$reactions_croisees_key);
 	return $tables_principales;
 }
 

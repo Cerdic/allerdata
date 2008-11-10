@@ -9,7 +9,7 @@ function action_parents_differents(){
 
 	set_time_limit(0);
 	
-	$query_liste_produits = "SELECT tbl_reactions_croisees.id_reaction_croisee, tbl_reactions_croisees.id_produit1, tbl_reactions_croisees.id_produit2 FROM tbl_reactions_croisees ORDER By tbl_reactions_croisees.id_produit1";
+	$query_liste_produits = "SELECT tbl_reactions_croisees.id_reactions_croisee, tbl_reactions_croisees.id_produit1, tbl_reactions_croisees.id_produit2 FROM tbl_reactions_croisees ORDER By tbl_reactions_croisees.id_produit1";
 	$liste_produits = spip_query($query_liste_produits);
 	$row_liste_produits = mysql_fetch_assoc($liste_produits);
 	$totalRows_liste_produits = mysql_num_rows($liste_produits);
@@ -20,7 +20,7 @@ function action_parents_differents(){
 		//on récupère l'id des produits concerné et l'id de la relation concernée
 		$id_produit1 = $row_liste_produits['id_produit1'];
 		$id_produit2 = $row_liste_produits['id_produit2'];
-		$id_reaction_croise = $row_liste_produits['id_reaction_croisee'];
+		$id_reactions_croisee = $row_liste_produits['id_reactions_croisee'];
 		
 		//on séléctionne ses parents de type pentacle.
 		
@@ -61,14 +61,14 @@ function action_parents_differents(){
 			//on met à jour la bdd pour dire que la reaction concerne des parents commun
 			
 			$query_identique = "UPDATE tbl_reactions_croisees set produits_differents ='0'
-								WHERE id_reaction_croisee = '$id_reaction_croise'";
+								WHERE id_reactions_croisee = '$id_reactions_croisee'";
 			spip_query($query_identique);			
 		}
 		else {
 			//on met à jour la bdd pour dire que la reaction ne concerne pas des parents commun
 			
 			$query_identique = "UPDATE tbl_reactions_croisees set produits_differents ='1'
-								WHERE id_reaction_croisee = '$id_reaction_croise'";
+								WHERE id_reactions_croisee = '$id_reactions_croisee'";
 			spip_query($query_identique);					
 		}
 

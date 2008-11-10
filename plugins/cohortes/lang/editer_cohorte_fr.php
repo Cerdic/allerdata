@@ -4,6 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+//
+
 // C
 'label_nom' => 'Groupe de patient',
 'label_description' => 'Recrutement',
@@ -13,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_inexploitable' => 'Pas de RC test&eacute;e, m&eacute;thode non valide, manquent d&eacute;tails',
 'label_remarques' => 'Remarques',
 
-
+'format_rc_invalide' => 'Format incorrect&nbsp;: + ou 0 ou X/Y',
 
 );
 

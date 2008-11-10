@@ -26,7 +26,7 @@ function rc($p1,$p2,$type_etude) {
 
 	// Requete identique a action/liste_des_rc
 	$query = "SELECT DISTINCT 
-			tbl_reactions_croisees.id_reaction_croisee, 
+			tbl_reactions_croisees.id_reactions_croisee, 
 			tbl_items.id_item AS idp1, 
 			tbl_items.nom AS p1, 
 			tbl_items.id_type_item AS type1,
@@ -91,7 +91,7 @@ function rc($p1,$p2,$type_etude) {
 			$count += 1;
 			$querybiblio = "SELECT tbl_bibliographies.id_bibliographie, tbl_bibliographies.citation, 
 								tbl_groupes_patients.id_groupes_patient, tbl_groupes_patients.pays, tbl_groupes_patients.description as description_groupe, tbl_groupes_patients.nb_sujets, tbl_groupes_patients.pool, tbl_groupes_patients.qualitatif,
-								tbl_reactions_croisees.id_reaction_croisee, tbl_items.id_item as i1, tbl_items.nom as p1, tbl_reactions_croisees.niveau_RC_sens1, 
+								tbl_reactions_croisees.id_reactions_croisee, tbl_items.id_item as i1, tbl_items.nom as p1, tbl_reactions_croisees.niveau_RC_sens1, 
 									tbl_reactions_croisees.niveau_RC_sens2, tbl_items_1.id_item as i2, tbl_items_1.nom as p2, tbl_reactions_croisees.remarques
 								FROM tbl_items AS tbl_items_1 
 									INNER JOIN (tbl_items 
@@ -100,15 +100,15 @@ function rc($p1,$p2,$type_etude) {
 											INNER JOIN tbl_bibliographies ON tbl_groupes_patients.id_bibliographie = tbl_bibliographies.id_bibliographie) 
 										ON tbl_items.id_item = tbl_reactions_croisees.id_produit1) 
 									ON tbl_items_1.id_item = tbl_reactions_croisees.id_produit2
-							WHERE (((tbl_reactions_croisees.id_reaction_croisee)=".$row['id_reaction_croisee']."));";
+							WHERE (((tbl_reactions_croisees.id_reactions_croisee)=".$row['id_reactions_croisee']."));";
 							
 			$resbiblio = spip_query($querybiblio);
 			
 			while ($rowbiblio = sql_fetch($resbiblio)){
-				$linkbiblio = '<a href="#biblio'.$row['id_reaction_croisee'].'">';
+				$linkbiblio = '<a href="#biblio'.$row['id_reactions_croisee'].'">';
 				if (!$premiere_ligne) $biblio .= '<tr><td colspan="5">&nbsp;</td></tr>';
 				$premiere_ligne = false;
-				$biblio .= '<tr class="row_first"><th colspan="5"><a name="biblio'.$row['id_reaction_croisee'].'" id="biblio'.$row['id_reaction_croisee'].'"></a><span class="left">'.$row['id_reaction_croisee'].' : </span><a class="small right" href="#top_'.$type_etude.'">Retour &agrave; la synth&egrave;se <img src="'.$img_path.'/arrow_up.gif" style="margin-bottom:-2px"/></a></th></tr>
+				$biblio .= '<tr class="row_first"><th colspan="5"><a name="biblio'.$row['id_reactions_croisee'].'" id="biblio'.$row['id_reactions_croisee'].'"></a><span class="left">'.$row['id_reactions_croisee'].' : </span><a class="small right" href="#top_'.$type_etude.'">Retour &agrave; la synth&egrave;se <img src="'.$img_path.'/arrow_up.gif" style="margin-bottom:-2px"/></a></th></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums test&eacute;s individuellement</b>: '.(($rowbiblio['pool']==1)?'Non':'Oui').'</td><td colspan="2" rowspan="1"><b>Test quantitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Non':'Oui').'</td></tr>
@@ -125,11 +125,11 @@ function rc($p1,$p2,$type_etude) {
       if ($p1 == $row['id_s1']) {
 				$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="'.$css_path.'/img/rc_jamais_lr'.$flag_no_color.'.gif" alt="" title="" />': (($row['fleche_sens1'] === '1') ? '<img src="'.$css_path.'/img/rc_toujours_lr'.$flag_no_color.'.gif" alt="" title="" />': '<span></span>'));
 				$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="'.$css_path.'/img/rc_jamais_rl'.$flag_no_color.'.gif" alt="" title="" />': (($row['fleche_sens2'] === '1') ? '<img src="'.$css_path.'/img/rc_toujours_rl'.$flag_no_color.'.gif" alt="" title="" />': '<span></span>'));
-        $result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th>'.$linkbiblio. $row['id_reaction_croisee'].'</a></th><td>'.$link2.'</td><td style="text-align:center; width:70px">'.$fl1.'</a></td><td style="text-align:center; width:70px">'.$fl2.'</a></td><td>'.$link1.'</td></tr>';
+        $result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th>'.$linkbiblio. $row['id_reactions_croisee'].'</a></th><td>'.$link2.'</td><td style="text-align:center; width:70px">'.$fl1.'</a></td><td style="text-align:center; width:70px">'.$fl2.'</a></td><td>'.$link1.'</td></tr>';
 			} else {
 				$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="'.$css_path.'/img/rc_jamais_rl'.$flag_no_color.'.gif" alt="" title="" />': (($row['fleche_sens1'] === '1') ? '<img src="'.$css_path.'/img/rc_toujours_rl'.$flag_no_color.'.gif" alt="" title="" />': '<span></span>'));
 				$fl2 = (($row['fleche_sens2'] === '0') ? '<img src="'.$css_path.'/img/rc_jamais_lr'.$flag_no_color.'.gif" alt="" title="" />': (($row['fleche_sens2'] === '1') ? '<img src="'.$css_path.'/img/rc_toujours_lr'.$flag_no_color.'.gif" alt="" title="" />': '<span></span>'));
-				$result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th>'.$linkbiblio.$row['id_reaction_croisee'].'</a></th><td>'.$link1.'</td><td style="text-align:center; width:70px">'.$fl2.'</a></td><td style="text-align:center; width:70px">'.$fl1.'</a></td><td>'.$link2.'</td></tr>';
+				$result .= '<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><th>'.$linkbiblio.$row['id_reactions_croisee'].'</a></th><td>'.$link1.'</td><td style="text-align:center; width:70px">'.$fl2.'</a></td><td style="text-align:center; width:70px">'.$fl1.'</a></td><td>'.$link2.'</td></tr>';
 			}
 
 
