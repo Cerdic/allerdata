@@ -31,7 +31,7 @@ LISTE_DES_RC = {
     
     jQuery('.lien').click(function(){
     	/* Mise a jour des onglets : une requete simple par onglet,
-    	  le contenu de chaque onglet contient un <title>...</title>
+    	  le contenu de chaque onglet contient un <h1 class='title'>...</h1>
     	  utilise pour mettre a jour le titre de l'onglet. */
       p1 = jQuery(this).attr('id').substr(6,1);
       p2 = jQuery(this).attr('id').substr(8,1);

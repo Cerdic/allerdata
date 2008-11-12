@@ -79,7 +79,7 @@ function rc($p1,$p2,$type_etude) {
 
 	if (!sql_count($res)) {
   		$title .= " (0)";
-    	return "<div id='main'><title>$title</title><h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1></div>";
+    	return "<div id='main'><h1 class='title' style='display:none;'>$title</h1><h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1></div>";
   }
     
 	while ($row = sql_fetch($res)){
@@ -142,7 +142,7 @@ function rc($p1,$p2,$type_etude) {
   } else
 		$result = "<h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1>";
 		
-	return "<div id='main'><title>$title</title>".$result."</div>";
+	return "<div id='main'><h1 class='title' style='display:none;'>$title</h1>".$result."</div>";
 }
 
 function produit($produits) {

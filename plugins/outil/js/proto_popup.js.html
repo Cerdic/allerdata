@@ -55,7 +55,7 @@ Ext.onReady(function() {
 
 		callback_popup : function(tab) {
 			// si un title est fourni dans le contenu, le mettre en title de l'onglet
-			var t = $('title','#' + tab.id);
+			var t = $('h1.title','#' + tab.id);
 			if (t.length){
 				main_panel.getItem($('#'+tab.id).parents('.x-panel').eq(0).attr('id')).setTitle(t.html());
 				t.remove();
