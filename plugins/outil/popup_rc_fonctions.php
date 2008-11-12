@@ -3,7 +3,6 @@ session_start();
 function rc($p1,$p2,$type_etude) {
 	include_spip('base/abstract_sql');
 	
-	$img_path = find_in_path('squelettes/img');
 	$css_path = find_in_path('squelettes/css');
 	
 	$tableau_produits = $items_fils_de = array();
@@ -108,7 +107,7 @@ function rc($p1,$p2,$type_etude) {
 				$linkbiblio = '<a href="#biblio'.$row['id_reactions_croisee'].'">';
 				if (!$premiere_ligne) $biblio .= '<tr><td colspan="5">&nbsp;</td></tr>';
 				$premiere_ligne = false;
-				$biblio .= '<tr class="row_first"><th colspan="5"><a name="biblio'.$row['id_reactions_croisee'].'" id="biblio'.$row['id_reactions_croisee'].'"></a><span class="left">'.$row['id_reactions_croisee'].' : </span><a class="small right" href="#top_'.$type_etude.'">Retour &agrave; la synth&egrave;se <img src="'.$img_path.'/arrow_up.gif" style="margin-bottom:-2px"/></a></th></tr>
+				$biblio .= '<tr class="row_first"><th colspan="5"><a name="biblio'.$row['id_reactions_croisee'].'" id="biblio'.$row['id_reactions_croisee'].'"></a><span class="left">'.$row['id_reactions_croisee'].' : </span><a class="small right" href="#top_'.$type_etude.'">Retour &agrave; la synth&egrave;se <img src="'.find_in_path('img/arrow_up.gif').'" style="margin-bottom:-2px"/></a></th></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums test&eacute;s individuellement</b>: '.(($rowbiblio['pool']==1)?'Non':'Oui').'</td><td colspan="2" rowspan="1"><b>Test quantitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Non':'Oui').'</td></tr>
