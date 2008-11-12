@@ -53,4 +53,19 @@ function penta_exergue($nom,$query){
 	$nom = preg_replace("/".preg_quote($chaine[$query])."/i",'<b>'.$chaine[$query].'</b>',$nom);
 	return $nom;
 }
+
+function penta_ascendant_le_plus_proche($id_item, $type_item){
+	$sources = allerdata_les_parents($id_item,$type_item,true);
+	if (count($sources)) return reset($sources);
+
+	$parents = allerdata_les_parents($id_item,'',true);
+	if (count($parents)){
+		foreach($parents as $p)
+			if ($s = penta_ascendant_le_plus_proche($p, $type_item))
+				return $s;
+	}
+	
+	return 0;
+}
+
 ?>
