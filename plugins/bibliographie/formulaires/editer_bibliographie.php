@@ -65,6 +65,12 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 			// un journal est indique mais introuvable
 			$erreurs['journal'] = _T('editer_bibliographie:confirmer_ajout_journal')."<input type='checkbox' name='confirmer_journal' class='checkbox' value='1' />";
 	}
+	
+	// verifier qu'on a bien un journal ou un autre_media
+	if (!_request('id_journal') AND !_request('autre_media')){
+		$erreurs['journal'] = _T('editer_bibliographie:journal_ou_autre_media_obligatoire');
+		$erreurs['autre_media'] = _T('editer_bibliographie:journal_ou_autre_media_obligatoire');
+	}
 
 	// verifier l'annee qui est soit en chiffre superieur a 1900, soit Epub soit vide
 	if (strlen($a=_request('annee')) AND !(intval($a)>1900 AND intval($a)<=date('Y')+1) AND $a!=='Epub')
@@ -90,7 +96,8 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 	
 		
 	// verifier si une reference ressemblante n'existe pas deja
-	if (!_request('confirmer_ajout_reference')){
+	if (!isset($erreurs['message_erreur']) 
+	  AND !_request('confirmer_ajout_reference')){
 		$liste = biblio_trouver_sembables(_request('auteurs'),_request('titre'),_request('autre_media'),_request('id_journal'),_request('annee'),_request('volume'),_request('numero'),_request('supplement'),_request('premiere_page'));
 		// enlever la reference en cours si elle est dedans
 		if (intval($id_bibliographie)){
