@@ -67,7 +67,7 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 	}
 	
 	// verifier qu'on a bien un journal ou un autre_media
-	if (!_request('id_journal') AND !_request('autre_media')){
+	if (!_request('journal') AND !_request('autre_media')){
 		$erreurs['journal'] = _T('editer_bibliographie:journal_ou_autre_media_obligatoire');
 		$erreurs['autre_media'] = _T('editer_bibliographie:journal_ou_autre_media_obligatoire');
 	}
