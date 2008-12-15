@@ -42,7 +42,11 @@ function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', 
 }
 
 function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new', $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('tbl_bibliographie',$id_bibliographie,array('titre','premiere_page'));
+	$oblis = array('titre','premiere_page');
+	if (strlen(_request('journal')))
+		$oblis[] = 'annee';
+	
+	$erreurs = formulaires_editer_objet_verifier('tbl_bibliographie',$id_bibliographie,$oblis);
 
 	if (!_request('auteurs') AND !_request('confirmer_auteur_vide')){
 		$erreurs['auteurs'] = _T('editer_bibliographie:confirmer_pas_d_auteur')."<input type='checkbox' name='confirmer_auteur_vide' class='checkbox' value='1' />";
