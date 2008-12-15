@@ -69,6 +69,8 @@ function formulaires_editer_reactions_croisees_verifier_dist($id_groupes_patient
 			foreach (array('id_produit1','id_produit2','niveau_rc_sens1') as $obli)
 				if (!$post[$obli])
 					$erreurs[preg_replace(',^id_,','',"$obli-$id_rc")] = _T('info_obligatoire');
+			if ($post['id_produit1']==$post['id_produit2'])
+				$erreurs["produit2-$id_rc"] = _T('editer_cohorte:erreur_produit_identique');
 			// verifier le format des niveau_rc_sensx
 			foreach (array('niveau_rc_sens1','niveau_rc_sens2') as $check){
 				if (strlen($rc = $post[$check])

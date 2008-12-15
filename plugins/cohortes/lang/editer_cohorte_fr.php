@@ -16,7 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_remarques' => 'Remarques',
 
 'format_rc_invalide' => 'Format incorrect&nbsp;: + ou 0 ou X/Y',
-'incoherent' => 'Incoh&eacute;rent'
+'incoherent' => 'Incoh&eacute;rent',
+'erreur_produit_identique' => 'Choisissez un item diff&eacute;rent de l\'item 1',
 
 );
 
