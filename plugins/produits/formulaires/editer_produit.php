@@ -28,6 +28,21 @@ function formulaires_editer_produit_verifier_dist($id_item='new', $id_parent=0, 
 	if (strlen(_request('nom_court'))>25
 	 OR (!_request('nom_court') AND strlen(_request('nom'))>25))
 	 	$erreurs['nom_court'] = _T('editer_produit:erreur_nom_court_trop_long');
+
+	
+	// verifier qu'une source n'existe pas deja avec ce nom
+	include_spip('allerdata_fonctions');
+	if ($rows = sql_allfetsel("id_item,nom",'tbl_items',array(
+		sql_in('id_type_item',allerdata_id_type_item('produit')),
+	  "nom=".sql_quote(_request('nom'))." AND NOT(id_item=".intval($id_item).")"))
+	  ){
+		$liens = array();
+		foreach($rows as $row){
+			$liens[] = "<a href='".generer_url_ecrire('allerdata','page=produits&id_item='.$row['id_item'])."' title='#".$row['id_item']."'>".$row['nom']."</a>";
+		}
+		$liens = implode(", ",$liens);
+		$erreurs['nom'] = _T("editer_produit:item_deja_existant_avec_meme_nom").$liens;
+	}
 	
 	return $erreurs;
 }

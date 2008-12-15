@@ -59,7 +59,7 @@
 						<tbody>
 						<BOUCLE_allergenes_testables(tbl_items){type_item allergene}{est_dans #ID_ITEM}{par nom_complet}{!isnull nom_complet}{testable!=0}>
 						<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
-						<td>[(#FONCTION_CLASSIFICATION|=={#NOM}|non)#NOM]</td>
+						<td>[(#FONCTION_CLASSIFICATION|=={#NOM}|non)[(#NOM_COMPLET|sinon{#NOM})]]</td>
 						<td>#FONCTION_CLASSIFICATION</td>
 						<td style="text-align:center;font-size:1.5em;">[(#GLYCO|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
 						</tr>

@@ -26,6 +26,19 @@ function formulaires_editer_famille_mol_verifier_dist($id_item='new', $id_parent
 			$erreurs['url'] = "Url invalide : <a href='$url'>$url</a>";
 		}
 	}
+	
+	// verifier qu'une famille moleculaire n'existe pas deja avec ce nom
+	if ($rows = sql_allfetsel("id_item,nom",'tbl_items',
+	  "id_type_item=6 AND nom=".sql_quote(_request('nom'))." AND NOT(id_item=".intval($id_item).")")
+	  ){
+		$liens = array();
+		foreach($rows as $row){
+			$liens[] = "<a href='".generer_url_ecrire('allerdata','page=famille_mols&id_item='.$row['id_item'])."' title='#".$row['id_item']."'>".$row['nom']."</a>";
+		}
+		$liens = implode(", ",$liens);
+		$erreurs['nom'] = _T("editer_famille_mol:item_deja_existant_avec_meme_nom").$liens;
+	}
+
 	return $erreurs;
 }
 

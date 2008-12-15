@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_url' => 'URL Allfam',
 'label_remarques' => 'Remarques',
 
+'item_deja_existant_avec_meme_nom' => 'Il existe d&eacute;j&agrave; une famille avec ce nom&nbsp;: ',
 
 );
 

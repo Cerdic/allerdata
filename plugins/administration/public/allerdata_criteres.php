@@ -21,7 +21,7 @@ function critere_tbl_items_est_dans_dist($idb, &$boucles, $crit) {
 	$boucle->from['ed'] = 'tbl_est_dans';
 	$boucle->join['ed'] = array('tbl_items','id_item');
 	
-	$where = array("'='", "'ed.est_dans_id_item'", $_id);
+	$where = array("'='", "'ed.est_dans_id_item'", "intval(".$_id.")");
 	if ($not)
 		$where = array("'NOT'",$where);
 	$boucle->where[] = $where;
@@ -42,7 +42,7 @@ function critere_tbl_items_est_directement_dans_dist($idb, &$boucles, $crit) {
 	$boucle->from['ed'] = 'tbl_est_dans';
 	$boucle->join['ed'] = array('tbl_items','id_item');
 	
-	$where = array("'AND'",array("'='", "'ed.est_dans_id_item'", $_id),array("'='", "'ed.directement_contenu'", "1"));
+	$where = array("'AND'",array("'='", "'ed.est_dans_id_item'", "intval(".$_id.")"),array("'='", "'ed.directement_contenu'", "1"));
 	if ($not)
 		$where = array("'NOT'",$where);
 	$boucle->where[] = $where;

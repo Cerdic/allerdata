@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'erreur_nom_court_trop_long' => 'Indiquez un nom court de 25 caract&egrave;res maxium',
 
+'item_deja_existant_avec_meme_nom' => 'Il existe d&eacute;j&agrave; un produit avec ce nom&nbsp;: ',
 
 );
 
