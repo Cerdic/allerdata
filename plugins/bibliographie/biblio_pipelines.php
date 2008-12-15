@@ -14,9 +14,18 @@
  * @return array
  */
 function biblio_rechercher_liste_des_champs($liste){
-	$liste['tbl_bibliographie'] = array('titre'=>2,'auteurs'=>2,'citation'=>2,'abstract'=>1);
+	$liste['tbl_bibliographie'] = array('titre'=>2,'auteurs'=>2,'citation'=>2,'autre_media'=>1,'abstract'=>1);
 	return $liste;
 }
+
+function biblio_rechercher_liste_des_jointures($liste){
+	$liste['tbl_bibliographie'] = array(
+	'tbl_journal' => array('nom'=>2),
+	);
+	return $liste;
+}
+
+
 
 /**
  * pipeline affiche_droite
