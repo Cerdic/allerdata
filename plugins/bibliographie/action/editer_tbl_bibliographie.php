@@ -103,11 +103,14 @@ function instituer_tbl_bibliographie($id_bibliographie, $c) {
 	include_spip('inc/allerdata_arbo');
 
 	$champs = array();
-
-	$statut_ancien = sql_getfetsel('statut','tbl_bibliographies','id_bibliographie='.intval($id_bibliographie));
-	if ($statut = $c['statut']
-	 AND $statut!=$statut_ancien)
-		$champs['statut'] = $statut;
+	
+	if (isset($c['statut'])){
+		$statut_ancien = sql_getfetsel('statut','tbl_bibliographies','id_bibliographie='.intval($id_bibliographie));
+		if ($statut = $c['statut']
+		 AND $statut!=$statut_ancien)
+			$champs['statut'] = $statut;
+	}
+	if (!count($champs)) return;
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',

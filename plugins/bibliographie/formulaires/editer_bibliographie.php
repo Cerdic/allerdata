@@ -159,6 +159,8 @@ function formulaires_editer_bibliographie_traiter_dist($id_bibliographie='new', 
 	set_request('citation',biblio_citer(_request('auteurs'),_request('titre'),_request('autre_media'),_request('journal'),_request('annee'),_request('volume'),_request('numero'),_request('supplement'),_request('premiere_page'),_request('derniere_page')));
 	if (!_request('sans_interet'))
 		set_request('sans_interet',0);
+	if (!_request('full_text_disponible'))
+		set_request('full_text_disponible',0);
 
 	// vilain hack
 	set_request('action','editer_tbl_bibliographie');
