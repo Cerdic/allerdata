@@ -42,10 +42,13 @@ function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', 
 }
 
 function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new', $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('tbl_bibliographie',$id_bibliographie,array('titre','auteurs','premiere_page'));
-	
+	$erreurs = formulaires_editer_objet_verifier('tbl_bibliographie',$id_bibliographie,array('titre','premiere_page'));
+
+	if (!_request('auteurs') AND !_request('confirmer_auteur_vide')){
+		$erreurs['auteurs'] = _T('editer_bibliographie:confirmer_pas_d_auteur')."<input type='checkbox' name='confirmer_auteur_vide' class='checkbox' value='1' />";
+	}
 	// Verifier la syntaxe des auteurs
-	if (!isset($erreurs['auteurs']) AND !_request('forcer_auteurs') AND !biblio_extrait_auteurs(_request('auteurs'))){
+	if (_request('auteurs') AND !isset($erreurs['auteurs']) AND !_request('forcer_auteurs') AND !biblio_extrait_auteurs(_request('auteurs'))){
 		$erreurs['auteurs'] = _T('editer_bibliographie:confirmer_auteurs')."<input type='checkbox' name='confirmer_auteurs' class='checkbox' value='1' />";
 	}
 	// verifier que le journal existe et est non ambigu

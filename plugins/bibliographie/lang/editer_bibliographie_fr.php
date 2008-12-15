@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confirmer_auteurs' => 'Les auteurs ne respectent pas la convention "Nom Compose INI.". <br />Citer les auteurs tels quels ',
 'confirmer_ajout_journal' => 'Ce journal n\'existe pas. Confirmer son ajout ',
 'confirmer_ajout_reference' => 'Des r&eacute;f&eacute;rences bibliographiques semblables sont d&eacute;j&agrave; enregistr&eacute;es. Confirmer l\'ajout de cette r&eacute;f&eacute;rence',
+'confirmer_pas_d_auteur' => 'Confirmer que cette reference n\'a pas d\'auteurs',
 
 // J
 'journal_ou_autre_media_obligatoire' => 'Vous devez indiquer un journal ou un Autre media !',
