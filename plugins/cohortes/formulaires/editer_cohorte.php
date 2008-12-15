@@ -44,6 +44,11 @@ function formulaires_editer_cohorte_verifier_dist($id_groupes_patient='new', $id
 	// verifier qu'on a bien une biblio de referencee !
 	if (!_request('id_bibliographie'))
 		$erreurs['message_erreur'] = _T('editer_cohorte:aucune_biblio_definie');
+		
+	if (_request('inexploitable')
+	AND (_request('tests_individuels') OR _request('tests_quantitatifs'))){
+		$erreurs['inexploitable'] = _T('editer_cohorte:incoherent');
+	}
 
 	return $erreurs;
 }

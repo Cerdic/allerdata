@@ -103,14 +103,18 @@ function instituer_tbl_groupes_patient($id_groupes_patient, $c) {
 
 	$champs = array();
 
-	$statut_ancien = sql_getfetsel('statut','tbl_groupes_patients','id_groupes_patient='.intval($id_groupes_patient));
-	if ($statut = $c['statut']
-	 AND $statut!=$statut_ancien)
-		$champs['statut'] = $statut;
+	if (isset($c['statut'])){
+		$statut_ancien = sql_getfetsel('statut','tbl_groupes_patients','id_groupes_patient='.intval($id_groupes_patient));
+		if ($statut = $c['statut']
+		 AND $statut!=$statut_ancien)
+			$champs['statut'] = $statut;
+	}
 
 	if ($id_bibliographie = $c['id_bibliographie']
 	 AND $id_bibliographie!=sql_getfetsel('id_bibliographie','tbl_groupes_patients','id_groupes_patient='.intval($id_groupes_patient)))
 		$champs['id_bibliographie'] = $id_bibliographie;
+
+	if (!count($champs)) return;
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
