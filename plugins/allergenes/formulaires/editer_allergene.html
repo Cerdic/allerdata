@@ -27,6 +27,7 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				#MODELE{picker_item,name=id_parent,selected=#ENV{#GET{name}},type_item=produit,img_unpick=#CHEMIN{images/croix-rouge.gif}}
 	    </li>
+	    #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}|concat{_famille_mol}}}
 	    <li class="editer_parent[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_famille_mol})]">[(#FORM|concat{':label_',#GET{name}|concat{_famille_mol}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]

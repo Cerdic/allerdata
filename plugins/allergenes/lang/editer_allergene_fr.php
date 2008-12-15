@@ -17,6 +17,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_remarques' => 'Remarques',
 'label_id_niveau_allergenicite' => 'Niveau allerg&eacute;nicit&eacute;',
 
+'item_deja_existant_avec_meme_nom' => 'Il existe d&eacute;j&agrave; un allerg&egrave;ne avec ce nom dans le m&ecirc;me produit&nbsp;: ',
+'item_deja_existant_avec_meme_fonction_classification' => 'Il existe d&eacute;j&agrave; un allerg&egrave;ne avec cette fonction dans le m&ecirc;me produit&nbsp;: ',
+'item_deja_existant_avec_meme_famille' => 'Il existe d&eacute;j&agrave; un allerg&egrave;ne avec la m&ecirc;me famille dans le m&ecirc;me produit&nbsp;: ',
+'confirmer_ajout_allergne' => 'Confirmer l\'ajout de cet allerg&egrave;ne ',
+'item_deja_existant_avec_meme_nom_meme_source' => 'Il existe d&eacute;j&agrave; un allerg&egrave;ne avec ce nom dans un produit de la m&ecirc;me source&nbsp;: ',
 
 );
 ?>

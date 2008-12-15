@@ -30,10 +30,10 @@ function formulaires_editer_produit_verifier_dist($id_item='new', $id_parent=0, 
 	 	$erreurs['nom_court'] = _T('editer_produit:erreur_nom_court_trop_long');
 
 	
-	// verifier qu'une source n'existe pas deja avec ce nom
+	// verifier qu'un produit n'existe pas deja avec ce nom
 	include_spip('allerdata_fonctions');
 	if ($rows = sql_allfetsel("id_item,nom",'tbl_items',array(
-		sql_in('id_type_item',allerdata_id_type_item('produit')),
+		sql_in('id_type_item',allerdata_id_type_item('produit',true)),
 	  "nom=".sql_quote(_request('nom'))." AND NOT(id_item=".intval($id_item).")"))
 	  ){
 		$liens = array();
