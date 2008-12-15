@@ -3,7 +3,7 @@ function formulaire_biblio_init(){
 		$('#journal').autocomplete(url_autocomp_journal, {minChars:3, matchSubset:0, matchContains:1, cacheLength:10 });
 	}
 }
-$('document').ready(function(){
+jQuery('document').ready(function(){
 	formulaire_biblio_init();
 	onAjaxLoad(formulaire_biblio_init);
 	$('#auteurs,#titre,#journal,#annee,#volume,#premiere_page,#derniere_page,#supplement,#numero').bind('change',function(){
@@ -16,8 +16,9 @@ $('document').ready(function(){
 			premiere_page:$('#premiere_page').attr('value'),
 			derniere_page:$('#derniere_page').attr('value'),
 			supplement:$('#supplement').attr('value'),
-			numero:$('#numero').attr('value'),
-		},function(){
+			numero:$('#numero').attr('value')
+		},
+		function(){
 			$('blockquote.citation').css('background','#FFFFCF');
 			setTimeout(function() {$('blockquote.citation').css('background','#FFFFDF');
 				setTimeout(function() {$('blockquote.citation').css('background','transparent');},1000);
