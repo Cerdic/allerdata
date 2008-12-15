@@ -101,6 +101,15 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 	AND $d<$p)
 			$erreurs['derniere_page'] = _T('editer_bibliographie:incorrecte');
 	
+	if ($p = _request('premiere_page')
+	  AND !preg_match(",^[A-Z0-9]+$,i",$p)){
+			$erreurs['premiere_page'] = _T('editer_bibliographie:incorrecte');
+	}
+	if ($d = _request('derniere_page')
+	  AND !preg_match(",^[A-Z0-9]+$,i",$d)){
+			$erreurs['derniere_page'] = _T('editer_bibliographie:incorrecte');
+	}
+	
 	foreach(array('url','url_full_text') as $c)
 		if ($u=trim(_request($c))){
 			if (is_numeric($u)){

@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confirmer_ajout_reference' => 'Des r&eacute;f&eacute;rences bibliographiques semblables sont d&eacute;j&agrave; enregistr&eacute;es. Confirmer l\'ajout de cette r&eacute;f&eacute;rence',
 'confirmer_pas_d_auteur' => 'Confirmer que cette reference n\'a pas d\'auteurs',
 
+// I
+'incorrecte' => 'incorrecte',
 // J
 'journal_ou_autre_media_obligatoire' => 'Vous devez indiquer un journal ou un Autre media !',
 
