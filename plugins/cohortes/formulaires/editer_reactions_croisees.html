@@ -47,7 +47,7 @@
 	  	#SET{name,remarques-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_remarques editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<textarea name='#GET{name}' id='#GET{name}' rows='1'>#ENV{#GET{name}}</textarea>
+				<textarea name='#GET{name}' id='#GET{name}' rows='[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{4,#ENV{#GET{name}}|strlen|div{20}|ceil|max{2}})]'>#ENV{#GET{name}}</textarea>
 			</td>
 	  	#SET{name,risque_ccd-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_risque_CCD editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
