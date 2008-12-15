@@ -24,11 +24,14 @@ function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', 
 	}
 	}
 	else echo (":".$valeurs['id_bibliographie'].':'.$valeurs['auteurs'].':<br />');*/
+
+	/* #216 : ne pas montrer la liste des biblio semblables tant qu'on essaye pas d'enregistrer
 	$liste = biblio_trouver_sembables($valeurs['auteurs'],$valeurs['titre'],$valeurs['autre_media'],$valeurs['id_journal'],$valeurs['annee'],$valeurs['volume'],$valeurs['numero'],$valeurs['supplement'],$valeurs['premiere_page']);
 	if (intval($id_bibliographie))
 		$liste = array_diff($liste,array($id_bibliographie));
 	if ($valeurs['doublons_refs']!=implode(',',$liste))
 		$valeurs['_semblables'] = $liste;
+	*/
 
 	$valeurs['journal'] = sql_getfetsel('nom','tbl_journals','id_journal='.intval($valeurs['id_journal']));
 	
