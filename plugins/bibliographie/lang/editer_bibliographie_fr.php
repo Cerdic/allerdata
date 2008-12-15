@@ -40,6 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // U
 'url_invalide' => 'URL invalide ou l\'adresse indiqu&eacute; n\'existe pas',
 
+//
+'volume_ou_numero_obligatoire' => 'Vous devez indiquer un volume ou un num&eacute;ro!',
+
+
 );
 
 
