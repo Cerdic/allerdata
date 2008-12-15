@@ -97,9 +97,9 @@ function allerdata_id_type_item($type,$tous=false){
 			break;
 		case 'produit':
 			if ($tous)
-				return array(1,3,5,13,23,25);
+				return array(/*1,*/3,5,13,23,25); // ticket #243
 			else
-				return array(1,3,5);
+				return array(/*1,*/3,5); // ticket #243
 			break;
 		case 'produit_simple':
 			if ($tous)
