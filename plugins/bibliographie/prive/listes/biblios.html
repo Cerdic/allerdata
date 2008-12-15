@@ -2,7 +2,7 @@
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_bibliographie,''},recherche})</p>]
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
-<BOUCLE_biblios(tbl_bibliographies){id_bibliographie?}{pagination 10}{par #ENV{tri,titre}}{recherche?}>
+<BOUCLE_biblios(tbl_bibliographies){id_bibliographie?}{pagination 10}{par #ENV{tri,id_bibliographie}}{recherche?}>
 <li class='item[ (#EXPOSE)]'>
 [(#INCLURE{fond=modeles/reference}{id=#ID_BIBLIOGRAPHIE})]
 #MODELE{boutons_action_biblio,id_bibliographie=#ID_BIBLIOGRAPHIE,self=#SELF}
