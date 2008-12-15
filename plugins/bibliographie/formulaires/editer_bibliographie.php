@@ -42,9 +42,10 @@ function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', 
 }
 
 function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new', $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$oblis = array('titre','premiere_page');
+	$oblis = array('titre');
 	if (strlen(_request('journal'))){
 		$oblis[] = 'annee';
+		$oblis[] = 'premiere_page';
 	}
 	
 	$erreurs = formulaires_editer_objet_verifier('tbl_bibliographie',$id_bibliographie,$oblis);
