@@ -1,7 +1,8 @@
-<BOUCLE_taxo(tbl_items){id_item=#ENV{id_item,#ENV{id}}}{statut?}>
+<BOUCLE_source(tbl_items){id_item=#ENV{id_item,#ENV{id}}}{statut?}>
 <div class='ftaxo'><span class='numero'>##ID_ITEM</span>
+<span class='origine'><BOUCLE_taxo(tbl_items){id_item=#ID_ITEM|penta_ascendant_le_plus_proche{famille_taxo}}> Famille taxonomique: <a href='#URL_ECRIRE{allerdata,page=famille_taxos&id_item=#ID_ITEM}'>#NOM</a></BOUCLE_taxo></span>
 <h3 class='repliable'>#NOM</h3>
 [<em>(#AUTRE_NOM)</em>]
 [<p>(#REMARQUES_ITEM)</p>]
 </div>
-</BOUCLE_taxo>
+</BOUCLE_source>

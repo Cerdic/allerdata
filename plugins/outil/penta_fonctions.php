@@ -55,6 +55,7 @@ function penta_exergue($nom,$query){
 }
 
 function penta_ascendant_le_plus_proche($id_item, $type_item){
+	include_spip('inc/allerdata_arbo');
 	$sources = allerdata_les_parents($id_item,$type_item,true);
 	if (count($sources)) return reset($sources);
 
