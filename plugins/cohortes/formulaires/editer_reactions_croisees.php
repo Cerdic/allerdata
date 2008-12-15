@@ -73,9 +73,15 @@ function formulaires_editer_reactions_croisees_verifier_dist($id_groupes_patient
 				$erreurs["produit2-$id_rc"] = _T('editer_cohorte:erreur_produit_identique');
 			// verifier le format des niveau_rc_sensx
 			foreach (array('niveau_rc_sens1','niveau_rc_sens2') as $check){
-				if (strlen($rc = $post[$check])
-				AND !preg_match(",^([+0]|[0-9]+/[0-9]+)$,",$rc))
-					$erreurs["$check-$id_rc"] = _T('editer_cohorte:format_rc_invalide');
+				if (strlen($rc = $post[$check])){
+					if (!preg_match(",^([+0]|[0-9]+/[0-9]+)$,",$rc))
+						$erreurs["$check-$id_rc"] = _T('editer_cohorte:format_rc_invalide');
+					else {
+						$fraction = explode('/',$rc);
+						if (count($fraction)==2 AND intval(reset($fraction))>intval(end($fraction)))
+							$erreurs["$check-$id_rc"] = _T('editer_cohorte:format_rc_invalide');
+					}
+				}
 			}
 			if (intval($id_rc)){
 				$conflits = controler_md5($post, $_POST, 'tbl_reactions_croisee', $id_rc, '', "ctr-$id_rc-");
