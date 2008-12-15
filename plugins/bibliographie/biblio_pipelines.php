@@ -14,7 +14,7 @@
  * @return array
  */
 function biblio_rechercher_liste_des_champs($liste){
-	$liste['tbl_bibliographie'] = array('titre'=>4,'auteurs'=>4,'abstract'=>1);
+	$liste['tbl_bibliographie'] = array('titre'=>2,'auteurs'=>2,'citation'=>2,'abstract'=>1);
 	return $liste;
 }
 
