@@ -36,6 +36,7 @@ function allerdata_creer_comptes(){
 	if (!autoriser('creer', 'auteur', 0, NULL))
 		return array("Acces interdit",array());
 	
+	$cpt=0;
 	foreach($liste as $email){
 		if (email_valide($email)){
 			$res = sql_select("*","spip_auteurs","email=".sql_quote($email)." OR login=".sql_quote($email));
@@ -66,7 +67,7 @@ function allerdata_creer_comptes(){
 			if ($row = sql_fetch($res)){
 				$droit = (autoriser('modifier', 'auteur',  $row['id_auteur'], NULL, array('mail'=>1)));				
 				$ids[] = $row['id_auteur'];
-				$out .= "<tr>"
+				$out .= "<tr class='".($cpt++&2?'row_even':'row_odd')."'>"
 				. "<td>".$row['id_auteur']."</td>"
 				. "<td><a href='".generer_url_ecrire('auteur_infos','id_auteur='.$row['id_auteur'])."'>".$row['login']."</a>"."</td>"
 				. "<td>".$row['email']."</td>"
@@ -80,7 +81,7 @@ function allerdata_creer_comptes(){
 			}
 		}
 		else {
-				$out .= "<tr>"
+				$out .= "<tr class='".($cpt++&2?'row_even':'row_odd')."'>"
 				. "<td>"."</td>"
 				. "<td>"."email invalide"."</td>"
 				. "<td>".$email."</td>"
@@ -89,8 +90,8 @@ function allerdata_creer_comptes(){
 		}
 		
 	}
-	$out ="<table><tr><td>ID</td><td>login</td><td>email</td><td>mot de passe</td></tr>".
-	"$out</table>";
+	$out ="<table class='spip'><thead><tr><th>ID</th><th>login</th><th>email</th><th>mot de passe</th></tr></thead>".
+	"<tbody>$out</tbody></table>";
 	return array($out,$ids);	
 }
 
