@@ -4,7 +4,13 @@
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
 <BOUCLE_visiteurs(AUTEURS){tout}{id_zone=2}{statut=6forum}{pagination 20}{par nom}{recherche?}>
-<li class='item'><a href='#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}'>[(#NOM|sinon{#LOGIN})]</a>[, (#EMAIL)]</li>
+<li class='item'>
+<span class='email'>
+<a href='#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}'>[(#NOM|sinon{#LOGIN})]</a>[, (#EMAIL)]
+</span>[(#AUTORISER{modifier,auteur,#ID_AUTEUR})
+[<span class='pass'>&#91;<em>(#PASS_CLAIR)</em>&#93;</span>]]
+</li>
+
 </BOUCLE_visiteurs>
 [<p class='pagination'>(#PAGINATION)</p>]
 </ul>

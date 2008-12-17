@@ -18,5 +18,15 @@ function allerdata_rechercher_liste_des_champs($liste){
 	return $liste;
 }
 
-
+function allerdata_afficher_contenu_objet($flux){
+	if ($flux['args']['type']=='auteur'){
+		$id_auteur = $flux['args']['id_objet'];
+		if ($row = sql_fetsel('pass,pass_clair,alea_actuel','spip_auteurs','id_auteur='.intval($id_auteur))){
+			if ($row['pass']==md5($row['alea_actuel'].$row['pass_clair'])){
+				$flux['data'].= "<span class='pass_clair'>Mot de passe : <em>".$row['pass_clair']."</em></span>";
+			}
+		}
+	}
+	return $flux;
+}
 ?>
