@@ -297,24 +297,6 @@ label {
 	padding-bottom: 10px;
 }
 
-.forms label {
-	display: block;
-	float: left;
-	text-align: right;
-	font-size: 11px;
-	width: 130px;
-	padding: 0 30px 0 0;
-}
-
-.forms p {
-	clear: both;
-	line-height: 1.5em;
-}
-
-.forms .inputTxt {
-	width: 200px;
-}
-
 input, select, textarea {
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 	font-size: 10px;
@@ -815,24 +797,49 @@ label.over-apply {
 .clearfix, .listeArticles li { display:block; }
 /* End hide from IE-mac */
 
-/* Pour styler les formulaires de F&T */
-.spip_forms {
+/* Pour styler les formulaires de spip */
+.formulaire_spip {
 color:black;
 font-family:Verdana,Arial,Helvetica,sans-serif;
 font-weight:normal;
 margin:0px 0px 16px;
 padding:6px;
+border:none;
 }
 
-.spip_forms fieldset {
+.formulaire_spip fieldset {
 margin:0.5em 0pt;
 padding:0.4em 0.4em 1em 1em;
+border: solid 1px #41C0EC;
+}
+.formulaire_spip ul li {padding-left:160px;}
+.formulaire_spip ul li.fieldset {padding-left:0;}
+
+.formulaire_spip label {
+	display: block;
+	float: left;
+	text-align: right;
+	font-size: 11px;
+	width: 130px;
+	padding: 0;
+	margin-left:-160px;
+	position:relative;
+	display:inline;
+}
+.label_obligatoire {display:block;}
+.formulaire_spip .choix label {width:auto;float:none;display:inline;text-align:left;margin:0;}
+
+.formulaire_spip .boutons {
+	clear: both;
+	line-height: 1.5em;
 }
 
-.spip_forms .forml, .spip_forms .fondl {
-background:#FFFDE7 none repeat scroll 0% 50%;
-color:#4A4336;
-width:90%;
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,.formulaire_spip select {
+	width: 300px;
+	background:#FFFDE7 none repeat scroll 0% 50%;
+	color:#4A4336;
 }
 
 .formInfo a, .formInfo a:active, forminfo a:visited {
@@ -847,7 +854,7 @@ text-decoration:none;
 
 a.jTip{background:none;text-decoration:none;color:red!important;}
 
-.spip_forms .spip_bouton input {
+.formulaire_spip .boutons input.submit {
 background:white none repeat scroll 0% 50%;
 border:1px solid #409EC4;
 color:#409EC4;
@@ -858,7 +865,7 @@ font-weight:bold;
 padding:0.4em;
 width:100px;
 }
-.spip_forms .spip_form_label {
+.formulaire_spip label {
 margin-top:0.4em;
 }
 
@@ -876,8 +883,6 @@ margin:1em 0pt 0pt;
 padding:0.6em;
 }
 
-.spip_forms{border:none;}
-.spip_forms fieldset {border: solid 1px #41C0EC;}
 a.jTip {
 background:transparent none repeat scroll 0%;
 color:#41C0EC !important;
