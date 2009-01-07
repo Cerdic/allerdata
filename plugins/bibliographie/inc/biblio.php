@@ -60,8 +60,8 @@ function marquer_liens_biblios($champs,$id,$type,$id_table_objet,$table_objet,$s
 }
 
 //@define('_REGLE_AUTEURS',";^([\w]+(\s+[A-Z]{1,3}(\s+(Jr|Sr))?)?[.]\s*)+;u");
-@define('_REGLE_AUTEURS',";^([^.]+?[\s]+[A-Z\-0-9]{1,4}[.]\s*)+$;u");
-@define('_REGLE_AUTEURS_SPLIT',";[^.]+?[\s]+[A-Z\-0-9]{1,4}[.]\s*;u");
+@define('_REGLE_AUTEURS',";^([^.,]+?[\s]+[A-Z\-0-9]{1,4}[,.]\s*)+$;u");
+@define('_REGLE_AUTEURS_SPLIT',";[^.,]+?[\s]+[A-Z\-0-9]{1,4}[,.]\s*;u");
 function biblio_extrait_auteurs($auteurs){
 	$auteurs = trim($auteurs);
 	$auteurs = rtrim($auteurs,'.').'.'; // s'assurer qu'on a un point a la fin
@@ -81,7 +81,7 @@ function biblio_citer_auteurs($auteurs){
 	$cite = array();
 	$max = 6;
 	while (count($liste) AND $max--)
-		$cite [] = rtrim(trim(array_shift($liste)),'.');
+		$cite [] = preg_replace(";[,.]$;","",trim(array_shift($liste)));
 	$cite = implode(', ',$cite);
 	if (count($liste))
 		$cite .= " et al";
