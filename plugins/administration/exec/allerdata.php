@@ -87,11 +87,11 @@ function exec_allerdata_dist(){
 		default:			
 			$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],'message'=>$message);
 			$get = $_GET;
-			if (is_numeric($get['recherche']) AND intval($get['recherche'])){
+			if (preg_match(',^#[0-9]+$,',$get['recherche']) AND $id = intval(substr($get['recherche'],1))){
 				$_id = 'id_item';
 				if ($page=='biblios') $_id = 'id_bibliographie';
 				if ($page=='cohortes') $_id = 'id_groupes_patient';
-				$get[$_id] = intval($get['recherche']);
+				$get[$_id] = $id;
 				unset($get['recherche']);
 				set_request('recherche','');
 				unset($GLOBALS['recherche']);
