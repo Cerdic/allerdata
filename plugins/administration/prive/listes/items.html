@@ -1,8 +1,11 @@
 <B_items><h2>#GRAND_TOTAL [ (#VAL{allerdata:}|concat{#ENV{type_item},s}|_T) ]</h2>
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_item,''},recherche})</p>]
+<p class='pagination tri'>[(#TRI{<,#CHEMIN{img_pack/tri_asc-16.png}|tag_img}) | ][(#TRI{>,#CHEMIN{img_pack/tri_desc-16.png}|tag_img}) | ]
+[(#TRI{id_item,'#id'}) | ][(#TRI{nom,nom}) | ]
+</p>
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
-<BOUCLE_items(tbl_items){type_item #ENV{type_item}}{id_item?}{pagination 10}{par #ENV{tri,nom}}{recherche?}>
+<BOUCLE_items(tbl_items){type_item #ENV{type_item}}{id_item?}{pagination 10}{tri nom}{recherche?}>
 <li class='item[ (#EXPOSE)]'>
 #MODELE{item_parents}
 [(#INCLURE{fond=modeles/item_#ENV{type_item}}{id_item})]
