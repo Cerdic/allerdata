@@ -6,8 +6,7 @@
 #navigation .icone36 {width:76px;float:left;margin-right:5px;}
 
 .clicable {cursor:hand;cursor:pointer;}
-ul.liste_items li.item.court p,
-ul.liste_items li.item.court .enumeration { display: none; }
+ul.liste_items li.item.court .enfants, ul.liste_items li.item.court .parents { display: none; }
 .plier_deplier { float: right; font-size: 0.9em; }
 
 li.item span.numero {display:block;float:right;}
@@ -15,14 +14,35 @@ li.item .enfants {padding-#GET{left}:16px;background:url(#CHEMIN{img_pack/enfant
 li.item .parents {padding-#GET{left}:16px;background:url(#CHEMIN{img_pack/parents-12.png}) no-repeat top left;}
 
 li.item .enfants ul {display:block;margin:0;padding:0;}
+/*
 li.item .enfants ul li,li.item .enfants ul li ul {display:inline;margin:0;padding:0;}
 li.item .enfants ul li.enumeration {display:block;}
 li.item .enfants ul li span {display:none;}
+*/
+li.item .enfants ul {margin:0px 0 0;padding:0;list-style:none;}
+li.item .enfants ul li.enumeration {margin:10px 0 0;padding:0;}
+li.item .enfants ul li.enumeration ul {margin-#GET{left}:10px;}
+li.item .enfants li {border-top:1px solid #eee;clear:both;padding:2px 5px;}
+li.item .enfants li em {display:none;}
+li.item .enfants li a {display:block;}
+li.item .enfants li span {display:block;float:#GET{right};width:80px;text-align:#GET{right};}
+li.item .enfants ul li.enumeration li:hover {background:[#(#GET{claire}|couleur_eclaircir)];}
 
 li.item .parents ul {display:block;margin:0;padding:0;}
+/*
 li.item .parents ul li,li.item .parents ul li ul {display:inline;margin:0;padding:0;}
 li.item .parents ul li.enumeration {display:block;}
 li.item .parents ul li span {display:none;}
+*/
+li.item .parents ul {margin:0px 0 0;padding:0;list-style:none;}
+li.item .parents ul li.enumeration {margin:10px 0 0;padding:0;}
+li.item .parents ul li.enumeration ul {margin-#GET{left}:10px;}
+li.item .parents li {border-top:1px solid #eee;clear:both;padding:2px 5px;}
+li.item .parents li em {display:none;}
+li.item .parents li a {display:block;}
+li.item .parents li span {display:block;float:#GET{right};width:80px;text-align:#GET{right};}
+li.item .parents ul li.enumeration li:hover {background:[#(#GET{claire}|couleur_eclaircir)];}
+
 
 ul.hierarchie {margin:0 0 2em;padding:0;}
 ul.hierarchie ul {margin:0;padding:0;}

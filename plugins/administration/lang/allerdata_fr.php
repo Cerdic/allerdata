@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'sources' => 'Organismes Sources',
+'sans_nom_francais' => 'Nom fran&ccedil;ais manquant',
 
 // T
 'tout_voir' => 'Tout voir',
