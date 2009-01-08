@@ -72,6 +72,7 @@ function biblio_declarer_tables_principales($tables_principales){
 		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
 		'date' => "datetime default NULL",
 		"doublons_refs"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
+		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 	);
 	
 	$bibliographies_key = array(

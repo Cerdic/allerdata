@@ -51,7 +51,7 @@ function marquer_liens_biblios($champs,$id,$type,$id_table_objet,$table_objet,$s
 		// on repasse par une requete sur tbl_bibliographies pour verifier que les biblio existent bien !
 		$in_liste = sql_in('id_bibliographie',
 			$GLOBALS['doublons_bibliographies_inclus']);
-		$res = sql_select("id_bibliographie", "tbl_bibliographies", $in_liste);
+		$res = sql_select("id_bibliographie", "tbl_bibliographies", $in_liste." AND statut='publie'");
 		while ($row = sql_fetch($res)) {
 			// Creer le lien s'il n'existe pas deja
 			sql_insertq("spip_bibliographies_$table_objet", array($id_table_objet=>$id, 'id_bibliographie' => $row['id_bibliographie']));

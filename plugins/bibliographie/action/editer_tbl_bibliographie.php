@@ -67,7 +67,7 @@ function insert_tbl_bibliographie() {
 	$set = array(
 		'id_version' => -2, // indiquer une creation
 		'date' => 'NOW()',
-		//'statut'=>'publie', // pour le moment
+		'statut'=>'publie', // on utilise que publie et poubelle
 	);
 
 	// faire une insertion a la fin, avec l'autoincrement

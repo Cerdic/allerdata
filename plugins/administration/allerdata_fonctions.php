@@ -243,7 +243,6 @@ function allerdata_puce_statut($statut){
 //
 // <BOUCLE(tbl_items)>
 //
-// http://doc.spip.org/@boucle_ARTICLES_dist
 function boucle_tbl_items_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;

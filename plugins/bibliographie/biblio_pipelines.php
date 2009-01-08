@@ -6,6 +6,59 @@
  *
  */
 
+
+/**
+ * Autorisation de supprimer une reference biblio
+ *
+ * @param unknown_type $faire
+ * @param unknown_type $quoi
+ * @param unknown_type $id
+ * @param unknown_type $qui
+ * @param unknown_type $options
+ * @return unknown
+ */
+function autoriser_bibliographie_supprimer($faire,$quoi,$id,$qui,$options){
+	if (!$qui['statut']=='0minirezo') return false;
+	if ($qui['restreint']) return false;
+	include_spip('base/abstract_sql');
+	// verifier que le statut n'est pas deja poubelle
+	if ($statut=$options['statut']
+	 OR $statut = sql_getfetsel('statut','tbl_bibliographies','id_bibliographie='.intval($id)))
+		if ($statut=='poubelle') return false;
+	// interdit si la biblio est utilisee dans un article
+	if (sql_countsel('spip_bibliographies_articles','id_bibliographie='.intval($id)))
+		return false;
+	// interdit si la biblio est utilisee par un groupe de patient publie
+	if (sql_countsel('tbl_groupes_patients','id_bibliographie='.intval($id)))
+		return false;
+	return true;
+}
+
+
+/**
+ * Autorisation de changer de statut une reference biblio
+ * necessite d'etre admin, et qu'elle soit inutilisee
+ *
+ * @param unknown_type $faire
+ * @param unknown_type $quoi
+ * @param unknown_type $id
+ * @param unknown_type $qui
+ * @param unknown_type $options
+ * @return unknown
+ */
+function autoriser_bibliographie_instituer($faire,$quoi,$id,$qui,$options){
+	if (!$qui['statut']=='0minirezo') return false;
+	if ($qui['restreint']) return false;
+	include_spip('base/abstract_sql');
+	// si le statut est deja poubelle, on autorise !
+	$statut = sql_getfetsel('statut','tbl_bibliographies','id_bibliographie='.intval($id));
+	if ($statut=='poubelle') return true;
+	return autoriser('supprimer','bibliographie',$id,$qui,array('statut'=>$statut));
+}
+
+
+
+
 /**
  * Declaration des champs pour la recherche sur la tbl_items
  * utilisee dans le back office

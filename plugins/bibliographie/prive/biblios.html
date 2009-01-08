@@ -2,8 +2,11 @@
 
 [(#ENV{edit}|non)
 #FORMULAIRE_RECHERCHE{#SELF}
-<INCLURE{fond=prive/listes/biblios}{env}{ajax}>
+<INCLURE{fond=prive/listes/biblios}{statut=publie}{env}{ajax}>
 [(#VAL{allerdata:icone_creer_biblio}|_T|icone_inline{#URL_ECRIRE{allerdata,page=biblios&edit=new},#CHEMIN{img_pack/bibliographie-24.png},'creer.gif','right'})]
+
+[<h1><:allerdata:bibliographie_poubelle:></h1>
+(#INCLURE{fond=prive/listes/biblios}{statut=poubelle}{env}{ajax})]
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 ]
 [(#ENV{edit}|oui)

@@ -2,7 +2,7 @@
 <h3>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{biblio:une_utilisation,biblio:des_utilisations})]</h3>
 [<p class='pagination'>(#PAGINATION{page})</p>]
 <ul class='liste_items'>
-<BOUCLE_utilisations(ARTICLES){id_bibliographie}{pagination 10}{par titre}>
+<BOUCLE_utilisations(ARTICLES){id_bibliographie}{pagination 10}{par titre}{statut?}>
 <li class='item'><a href='#URL_ARTICLE' title='##ID_ARTICLE'>#TITRE</a></li>
 </BOUCLE_utilisations>
 </ul>
