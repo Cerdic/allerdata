@@ -14,6 +14,6 @@
 [<p class='pagination'>(#PAGINATION)</p>]
 </ul>
 </B_biblios>[
-(#ENV{id_bibliographie}|oui)
+(#ENV{id_bibliographie}|et{#ENV{statut}|=={publie}}|oui)
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_bibliographie,''},recherche}|unique)</p>]
 ]<//B_biblios>

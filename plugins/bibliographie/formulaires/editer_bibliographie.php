@@ -94,11 +94,12 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 	if (strlen($a=_request('annee')) AND !(intval($a)>1900 AND intval($a)<=date('Y')+1) AND $a!=='Epub')
 			$erreurs['annee'] = _T('editer_bibliographie:incorrecte');
 	
+	// si il y a une premiere et une derniere page,
+	// la derniere page doit etre differente de la premiere
 	if ($p = _request('premiere_page')
 	AND $d=_request('derniere_page')
-	AND is_numeric($p)
-	AND is_numeric($d)
-	AND $d<$p)
+	AND (is_numeric($p)	AND is_numeric($d)	AND $d<=$p)
+	OR ($d==$p))
 			$erreurs['derniere_page'] = _T('editer_bibliographie:incorrecte');
 	
 	if ($p = _request('premiere_page')
