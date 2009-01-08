@@ -4,9 +4,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// B
+'biblio_toutes_cohortes' => 'Groupes de cette biblio.',
+
 // C
 'une_cohorte' => '1 groupe de patients',
 'des_cohortes' => '@nb@ groupes de patients',
+'cohortes_poubelle' => 'Groupes patients supprim&eacute;s',
 
 // G
 'groupes_patients' => 'groupes de patients',

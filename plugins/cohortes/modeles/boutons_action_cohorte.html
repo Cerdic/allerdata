@@ -1,4 +1,5 @@
 <p class='actions'>
+<BOUCLE_biblio(tbl_groupes_patients){id_groupes_patient}{statut?}>[<a href="[(#URL_ECRIRE{allerdata,page=cohortes&id_bibliographie=#ID_BIBLIOGRAPHIE})]"><:cohorte:biblio_toutes_cohortes:></a>]</BOUCLE_biblio>
 <BOUCLE_revisions(tbl_groupes_patients_versions){id_groupes_patient}{0,1}>&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_groupes_patient=#ID_GROUPES_PATIENT})]'><:info_historique_titre:></a>&#93;</BOUCLE_revisions>
 [(#AUTORISER{modifier,#ENV{quoi,groupes_patient},#ID_GROUPES_PATIENT}|oui)
 &#91;<a href='[(#URL_ECRIRE{allerdata,page=cohortes&edit=#ID_GROUPES_PATIENT}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;]

@@ -53,7 +53,7 @@ function tbl_groupes_patients_set($id_groupes_patient) {
 	// Modification du statut ?
 	$c = array();
 	foreach (array(
-		'date'//, 'statut'
+		'date', 'statut'
 	) as $champ)
 		$c[$champ] = _request($champ);
 	$err .= instituer_tbl_groupes_patient($id_groupes_patient, $c);
@@ -67,7 +67,7 @@ function insert_tbl_groupes_patient($id_bibliographie) {
 		'id_version' => -2, // indiquer une creation
 		'date' => 'NOW()',
 		'id_bibliographie' => $id_bibliographie,
-		//'statut'=>'publie', // pour le moment
+		'statut'=>'publie',
 	);
 
 	// faire une insertion a la fin, avec l'autoincrement

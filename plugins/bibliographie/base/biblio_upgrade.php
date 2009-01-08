@@ -151,7 +151,7 @@
 					sql_alter("table tbl_bibliographies ADD statut varchar(10) DEFAULT 'prepa' NOT NULL");
 					sql_updateq('tbl_bibliographies',array('statut'=>'publie'));
 				}
-				#ecrire_meta($nom_meta_base_version,$current_version='0.1.0.8','non');
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.8','non');
 			}
 		}
 	}

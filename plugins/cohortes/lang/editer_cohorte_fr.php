@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_tests_quantitatifs' => 'Inhibitions chiffr&eacute;es',
 'label_inexploitable' => 'Pas de RC test&eacute;e, m&eacute;thode non valide, manquent d&eacute;tails',
 'label_remarques' => 'Remarques',
+'label_statut' => 'Statut',
 
 'format_rc_invalide' => 'Format incorrect&nbsp;: + ou 0 ou X/Y',
 'incoherent' => 'Incoh&eacute;rent',

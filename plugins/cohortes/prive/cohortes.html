@@ -2,10 +2,14 @@
 
 [(#ENV{edit}|non)
 #FORMULAIRE_RECHERCHE{#SELF}
-<INCLURE{fond=prive/listes/cohortes}{env}{ajax}>
+<INCLURE{fond=prive/listes/cohortes}{statut=publie}{env}{ajax}>
 [(#ENV{id_bibliographie}|oui)
 [(#VAL{cohorte:icone_creer_cohorte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=cohortes&edit=new&id_bibliographie=#ID_BIBLIOGRAPHIE},#CHEMIN{img_pack/cohorte-24.png},'creer.gif','right'})]
 ]
+
+[<h1><:cohorte:cohortes_poubelle:></h1>
+(#INCLURE{fond=prive/listes/cohortes}{statut=poubelle}{env}{ajax})]
+
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 ]
 [(#ENV{edit}|oui)

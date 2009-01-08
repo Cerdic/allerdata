@@ -29,6 +29,7 @@ function cohorte_declarer_tables_principales($tables_principales){
 		'pays'=>"varchar(50) DEFAULT ''",
 		'remarques' => "text DEFAULT '' NOT NULL",
 		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 	);
 	
 	$groupes_patients_key = array(

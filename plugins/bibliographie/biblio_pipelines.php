@@ -29,7 +29,7 @@ function autoriser_bibliographie_supprimer($faire,$quoi,$id,$qui,$options){
 	if (sql_countsel('spip_bibliographies_articles','id_bibliographie='.intval($id)))
 		return false;
 	// interdit si la biblio est utilisee par un groupe de patient publie
-	if (sql_countsel('tbl_groupes_patients','id_bibliographie='.intval($id)))
+	if (sql_countsel('tbl_groupes_patients',"statut='publie' AND id_bibliographie=".intval($id)))
 		return false;
 	return true;
 }
