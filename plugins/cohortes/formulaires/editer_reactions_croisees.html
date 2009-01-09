@@ -22,7 +22,7 @@
 		<BOUCLE_rcs(POUR){tableau #ENV{_liste_rc}}>
 		<tr id='editer_rc-#VALEUR'>#SET{close,''}
 			<td class='id'>[(#VALEUR|intval|oui)#VALEUR[/<a href='#URL_ECRIRE{allerdata,page=revisions&id_reactions_croisee=#VALEUR}' title='Version #ENV{id_version-#VALEUR}' target='_blank'>v(#ENV{id_version-#VALEUR,''})</a>]
-			<br />
+			<br /><br />
 			<input type='checkbox' class='checkbox' value='poubelle' name='statut-#VALEUR' id='supprimer-#VALEUR' /><label for='supprimer-#VALEUR'><img src='#CHEMIN{img_pack/supprimer-16.png}' alt='<:supprimer|attribut_html:>' width='16' height='16' /></label>]
 			</td>
 	  	#SET{name,produit1-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
