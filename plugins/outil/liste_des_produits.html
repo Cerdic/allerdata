@@ -4,8 +4,8 @@
 [(#EVAL{_request('var_mode')}|oui)/* [(#ENV{date})]
 Exclus : [(#GET{exclus}|implode{','})]*/]
 {produits:[#SET{restant,20}#SET{virg,''}
-<BOUCLE_prod(tbl_items){type_item produit_generique}{chaine_alpha==^#ENV{query}}{id_item !IN #GET{exclus}}{par id_type_item,nom}{doublons}{0,20}>
+<BOUCLE_prod(tbl_items){type_item produit_generique}{chaine_alpha LIKE #ENV{query}|concat{'%'}}{id_item !IN #GET{exclus}}{par id_type_item,nom}{doublons}{0,20}>
 #GET{virg}#SET{virg,','}{"id_item":[(#ID_ITEM|penta_var2js)],"nom":[(#NOM|penta_var2js)],"nom_court":[(#NOM_COURT|penta_var2js)],"source":<BOUCLE_source(tbl_items){id_item=#ID_ITEM|penta_ascendant_le_plus_proche{source}}{0,1}>[(#NOM|penta_exergue{#ENV{query}}|penta_var2js)]</BOUCLE_source>""<//B_source>,"famille":<BOUCLE_famille(tbl_items){id_item=#ID_ITEM|penta_ascendant_le_plus_proche{famille_taxo}}{0,1}>[(#NOM|penta_var2js)]</BOUCLE_famille>""<//B_famille>,"nom_mis_en_forme":[(#NOM|penta_exergue{#ENV{query}}|penta_var2js)]}</BOUCLE_prod>#SET{restant,#GET{restant}|moins{#TOTAL_BOUCLE}}</B_prod>
-<BOUCLE_prod2(tbl_items){type_item produit_generique}{chaine_alpha==#ENV{query}}{id_item !IN #GET{exclus}}{par id_type_item,nom}{doublons}{pagination #GET{restant}}>
+<BOUCLE_prod2(tbl_items){type_item produit_generique}{chaine_alpha LIKE #VAL{'%'}|concat{#ENV{query},'%'}}{id_item !IN #GET{exclus}}{par id_type_item,nom}{doublons}{pagination #GET{restant}}>
 #GET{virg}#SET{virg,','}{"id_item":[(#ID_ITEM|penta_var2js)],"nom":[(#NOM|penta_var2js)],"nom_court":[(#NOM_COURT|penta_var2js)],"source":<BOUCLE_source2(tbl_items){id_item=#ID_ITEM|penta_ascendant_le_plus_proche{source}}{0,1}>[(#NOM|penta_exergue{#ENV{query}}|penta_var2js)]</BOUCLE_source2>""<//B_source2>,"famille":<BOUCLE_famille2(tbl_items){id_item=#ID_ITEM|penta_ascendant_le_plus_proche{famille_taxo}}{0,1}>[(#NOM|penta_var2js)]</BOUCLE_famille2>""<//B_famille2>,"nom_mis_en_forme":[(#NOM|penta_exergue{#ENV{query}}|penta_var2js)]}</BOUCLE_prod2>
 ]}
