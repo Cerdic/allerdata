@@ -99,7 +99,9 @@ function rc($p1,$p2,$type_etude) {
 											INNER JOIN tbl_bibliographies ON tbl_groupes_patients.id_bibliographie = tbl_bibliographies.id_bibliographie) 
 										ON tbl_items.id_item = tbl_reactions_croisees.id_produit1) 
 									ON tbl_items_1.id_item = tbl_reactions_croisees.id_produit2
-							WHERE (((tbl_reactions_croisees.id_reactions_croisee)=".$row['id_reactions_croisee']."));";
+							WHERE tbl_reactions_croisees.id_reactions_croisee=".intval($row['id_reactions_croisee'])."
+							  AND tbl_groupes_patients.statut='publie'
+							  AND tbl_bibliographies.statut='publie'";
 							
 			$resbiblio = spip_query($querybiblio);
 			
