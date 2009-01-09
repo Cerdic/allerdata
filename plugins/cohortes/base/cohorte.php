@@ -56,6 +56,7 @@ function cohorte_declarer_tables_principales($tables_principales){
 		'produits_differents' => "tinyint(1) DEFAULT 0 NOT NULL",
 		'risque_ccd' =>"tinyint(1) DEFAULT 0 NOT NULL",
 		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 	);
 	
 	$reactions_croisees_key = array(

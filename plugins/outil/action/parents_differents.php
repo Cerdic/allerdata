@@ -9,7 +9,7 @@ function action_parents_differents(){
 
 	set_time_limit(0);
 	
-	$query_liste_produits = "SELECT tbl_reactions_croisees.id_reactions_croisee, tbl_reactions_croisees.id_produit1, tbl_reactions_croisees.id_produit2 FROM tbl_reactions_croisees ORDER By tbl_reactions_croisees.id_produit1";
+	$query_liste_produits = "SELECT tbl_reactions_croisees.id_reactions_croisee, tbl_reactions_croisees.id_produit1, tbl_reactions_croisees.id_produit2 FROM tbl_reactions_croisees WHERE statut='publie' ORDER By tbl_reactions_croisees.id_produit1";
 	$liste_produits = spip_query($query_liste_produits);
 	$row_liste_produits = mysql_fetch_assoc($liste_produits);
 	$totalRows_liste_produits = mysql_num_rows($liste_produits);

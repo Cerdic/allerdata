@@ -5,6 +5,7 @@
 <INCLURE{fond=prive/listes/cohortes}{statut=publie}{env}{ajax}>
 [(#ENV{id_bibliographie}|oui)
 [(#VAL{cohorte:icone_creer_cohorte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=cohortes&edit=new&id_bibliographie=#ID_BIBLIOGRAPHIE},#CHEMIN{img_pack/cohorte-24.png},'creer.gif','right'})]
+<div class='nettoyeur'></div>
 ]
 
 [<h1><:cohorte:cohortes_poubelle:></h1>

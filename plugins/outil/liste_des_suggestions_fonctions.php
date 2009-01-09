@@ -49,6 +49,7 @@ function liste_des_suggestions($produits_penta) {
 					OR
 					tbl_reactions_croisees.fleche_sens2=1
 				)
+				AND tbl_reactions_croisees.statut='publie'
     )
 )	
 
@@ -76,6 +77,7 @@ UNION
 					OR
 					tbl_reactions_croisees.fleche_sens2=1
 				)
+				AND tbl_reactions_croisees.statut='publie'
     )
 )	
 

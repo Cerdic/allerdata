@@ -51,6 +51,7 @@ function rc($p1,$p2,$type_etude) {
 				AND tbl_reactions_croisees.id_produit2 = tbi4.id_item
 				AND tbl_items.statut='publie'
 				AND tbl_items_1.statut='publie'
+				AND tbl_reactions_croisees.statut='publie'
 			)";
 	
   switch ($type_etude) {
@@ -101,7 +102,8 @@ function rc($p1,$p2,$type_etude) {
 									ON tbl_items_1.id_item = tbl_reactions_croisees.id_produit2
 							WHERE tbl_reactions_croisees.id_reactions_croisee=".intval($row['id_reactions_croisee'])."
 							  AND tbl_groupes_patients.statut='publie'
-							  AND tbl_bibliographies.statut='publie'";
+							  AND tbl_bibliographies.statut='publie'
+							  AND tbl_reactions_croisees.statut='publie'";
 							
 			$resbiblio = spip_query($querybiblio);
 			

@@ -54,6 +54,7 @@
   				AND tbl_reactions_croisees.id_produit2 = tbi4.id_item
   				AND tbl_items.statut='publie'
   				AND tbl_items_1.statut='publie'
+  				AND tbl_reactions_croisees.statut='publie'
   			);";
   	
   	$res = spip_query($query);

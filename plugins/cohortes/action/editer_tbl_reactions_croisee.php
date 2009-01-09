@@ -46,9 +46,9 @@ function tbl_reactions_croisees_set($id_reactions_croisee, $post=null) {
 	// Modification du statut ?
 	$c = array();
 	foreach (array(
-		'date'//, 'statut'
+		'date', 'statut'
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = _request($champ, $post);
 	$err .= instituer_tbl_reactions_croisee($id_reactions_croisee, $c);
 
 	return $err;
@@ -60,7 +60,7 @@ function insert_tbl_reactions_croisee($id_groupes_patient) {
 		'id_version' => -2, // indiquer une creation
 		'date' => 'NOW()',
 		'id_groupes_patient' => $id_groupes_patient,
-		//'statut'=>'publie', // pour le moment
+		'statut'=>'publie', // pour le moment
 	);
 
 	// faire une insertion a la fin, avec l'autoincrement
@@ -95,11 +95,11 @@ function instituer_tbl_reactions_croisee($id_reactions_croisee, $c) {
 	include_spip('inc/modifier');
 
 	$champs = array();
-/*
+
 	$statut_ancien = sql_getfetsel('statut','tbl_reactions_croisees','id_reactions_croisee='.intval($id_reactions_croisee));
 	if ($statut = $c['statut']
 	 AND $statut!=$statut_ancien)
-		$champs['statut'] = $statut;*/
+		$champs['statut'] = $statut;
 
 	if ($id_groupes_patient = $c['id_groupes_patient']
 	 AND $id_groupes_patient!=sql_getfetsel('id_groupes_patient','tbl_reactions_croisees','id_reactions_croisee='.intval($id_reactions_croisee)))

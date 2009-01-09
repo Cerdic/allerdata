@@ -16,7 +16,7 @@ function formulaires_editer_reactions_croisees_charger_dist($id_groupes_patient)
 	$champs = array('id_produit1','id_produit2','niveau_rc_sens1','niveau_rc_sens2','remarques','risque_ccd') ;
 
 	if (intval($id_groupes_patient)){
-		$res = sql_select('id_reactions_croisee,id_version,'.implode(',',$champs),'tbl_reactions_croisees','id_groupes_patient='.intval($id_groupes_patient),'','id_reactions_croisee');
+		$res = sql_select('id_reactions_croisee,id_version,'.implode(',',$champs),'tbl_reactions_croisees',"statut='publie' AND id_groupes_patient=".intval($id_groupes_patient),'','id_reactions_croisee');
 		$valeurs["id_produit1-new"] = '';
 		$valeurs["produit1-new"] = '';
 		$valeurs["id_produit2-new"] = '';
@@ -114,6 +114,9 @@ function formulaires_editer_reactions_croisees_traiter_dist($id_groupes_patient)
 			$post = array('id_reactions_croisee'=>$id_rc,'id_groupes_patient'=>$id_groupes_patient);
 			foreach($champs as $c)
 				$post[$c] = _request("$c-$id_rc");
+			// suppression eventuelle
+			if (($s=_request("statut-$id_rc")) AND $s=='poubelle')
+				$post['statut'] = $s;
 			$post['risque_ccd'] = intval($post['risque_ccd']);
 			$post['fleche_sens1'] = strlen($post['niveau_rc_sens1'])?
 				($post['niveau_rc_sens1']=='+' OR intval($post['niveau_rc_sens1']))?'1':'0'
