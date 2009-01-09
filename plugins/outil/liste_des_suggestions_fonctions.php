@@ -28,7 +28,7 @@ function liste_des_suggestions($produits_penta) {
 	$query = <<<EOQ
 # Requete pour trouver les items a suggerer
 
-(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.source, tbl_items_3.nom_court
+(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.nom_court
     FROM (tbl_est_dans INNER JOIN tbl_reactions_croisees ON tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1)
             # Ne prendre que les éléments des est_dans qui ont un lien avec tbl_reactions_croisees en source
     INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_reactions_croisees.id_produit2 = tbl_est_dans_1.id_item
@@ -55,7 +55,7 @@ function liste_des_suggestions($produits_penta) {
 UNION
 
 # Sens inverse : on prend tous ceux qui pointent (en rc->id_produit2) vers un fils des produits du penta
-(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.source, tbl_items_3.nom_court
+(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.nom_court
     FROM (tbl_est_dans INNER JOIN tbl_reactions_croisees ON tbl_est_dans.id_item = tbl_reactions_croisees.id_produit2)
             # Ne prendre que les éléments des est_dans qui ont un lien avec tbl_reactions_croisees en source
     INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_reactions_croisees.id_produit1 = tbl_est_dans_1.id_item
@@ -88,7 +88,7 @@ EOQ;
 		if (!isset($t_suggestions[$row['id_item']])) {
 			$t_suggestions[$row['id_item']] = array(
 					'nom' => (($row['nom_court']=='')?$row['nom']:$row['nom_court']),
-					'source' => $row['source'],
+					'source' => sql_getfetsel("nom","tbl_items","id_item=".intval(penta_ascendant_le_plus_proche($row['id_item'],'source'))),
 					'id_mol' => $row['id_item']);
 		}
     $reactif_avec[$row['id_item']][$row['id_item_penta']] = $row['id_item_penta'];
