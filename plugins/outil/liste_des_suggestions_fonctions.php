@@ -33,7 +33,7 @@ function liste_des_suggestions($produits_penta) {
             # Ne prendre que les éléments des est_dans qui ont un lien avec tbl_reactions_croisees en source
     INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_reactions_croisees.id_produit2 = tbl_est_dans_1.id_item
             # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intéresse)
-    INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.id_item
+    INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item
     WHERE (
 				    # RC avec id_produit1 comme fils des elements du penta, et id_produit2 qui n'est pas dans la famille
         tbl_est_dans.est_dans_id_item In ($produits_penta)
@@ -61,7 +61,7 @@ UNION
             # Ne prendre que les éléments des est_dans qui ont un lien avec tbl_reactions_croisees en source
     INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_reactions_croisees.id_produit1 = tbl_est_dans_1.id_item
             # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intéresse)
-    INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.id_item
+    INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item
     WHERE (
 				# RC avec id_produit2 comme fils des elements du penta, et id_produit1 qui n'est pas dans la famille
         tbl_est_dans.est_dans_id_item In ($produits_penta)
