@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_id_parent_famille_mol' => 'Famille mol&eacute;culaire',
 'label_id_type_item' => 'Type item',
 'label_nom' => 'Nom',
+'label_nom_complet' => 'Nom complet',
 'label_masse' => 'Masse',
 'label_iuis' => 'IUIS',
 'label_glyco' => 'Glycosyl&eacute;',
