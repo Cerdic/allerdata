@@ -20,6 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'incoherent' => 'Incoh&eacute;rent',
 'erreur_produit_identique' => 'Choisissez un item diff&eacute;rent de l\'item 1',
 
+'bouton_enregistrer_cohorte' => 'Enregistrer le Groupe de patients',
+'bouton_enregistrer_rc' => 'Enregistrer les RC',
+
 );
 
 

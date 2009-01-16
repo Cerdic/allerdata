@@ -28,8 +28,6 @@
 #FORMULAIRE_EDITER_COHORTE{#ENV{edit},#ENV{id_bibliographie},#ENV{redirect}}
 </div>
 
-<div class='ajax'>
-#FORMULAIRE_EDITER_REACTIONS_CROISEES{#ENV{edit}}
-</div>
+[(#INCLURE{fond=prive/editer/cohorte_rc}{ajax}{env})]
 
 </div>

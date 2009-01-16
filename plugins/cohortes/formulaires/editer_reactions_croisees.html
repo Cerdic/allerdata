@@ -64,7 +64,7 @@
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class='boutons'><span class='image_loading'></span><a href='#SELF' class='ajax'>annuler les modifications</a> ou <input type='submit' class='submit' value='<:editer_cohorte:bouton_enregistrer_rc:>' /></p>
 	</div></form>
 </div>
 <script type='text/javascript' src='#CHEMIN{javascript/jquery.autocompleter.js}'></script>
