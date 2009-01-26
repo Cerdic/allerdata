@@ -6,7 +6,7 @@
 <BOUCLE_visiteurs(AUTEURS){tout}{id_zone=2}{pagination 20}{par nom}{recherche?}>
 <li class='item'>
 <span class='email'>
-<a href='#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}'>[(#NOM|sinon{#LOGIN})]</a>[, (#EMAIL)]
+<a href='#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}'>[(#NOM|sinon{#LOGIN})]</a>
 </span>[(#AUTORISER{modifier,auteur,#ID_AUTEUR})
 [<span class='pass'>&#91;<em>(#PASS_CLAIR)</em>&#93;</span>]]
 </li>
