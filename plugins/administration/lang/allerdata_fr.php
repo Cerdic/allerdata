@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'allergenes' => 'Allerg&egrave;nes',
 'ajouter_est_dans' => 'Modifier',
+'annuler_recherche'=> 'Annuler la recherche',
 
 // B
 'bouton_supprimer' => 'Supprimer',

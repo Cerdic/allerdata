@@ -3,6 +3,7 @@
 [(#ENV{recherche}|ou{#ENV{id_item}}|non)
 #INCLURE{fond=prive/allerdata_compteurs}
 ][(#ENV{recherche}|ou{#ENV{id_item}}|oui)
+<a href='[(#SELF|parametre_url{recherche|id_item|x|y,''})]'><:allerdata:annuler_recherche:></a>
 
 [(#INCLURE{fond=prive/listes/items}{type_item=famille_taxo}{env}{ajax})]
 [(#INCLURE{fond=prive/listes/items}{type_item=famille_mol}{env}{ajax})]
