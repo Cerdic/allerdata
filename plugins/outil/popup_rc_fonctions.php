@@ -91,8 +91,8 @@ function rc($p1,$p2,$type_etude) {
 			$count += 1;
 			$querybiblio = "SELECT tbl_bibliographies.id_bibliographie, tbl_bibliographies.citation, 
 								tbl_groupes_patients.id_groupes_patient, tbl_groupes_patients.pays, tbl_groupes_patients.description as description_groupe, tbl_groupes_patients.nb_sujets, tbl_groupes_patients.pool, tbl_groupes_patients.qualitatif,
-								tbl_reactions_croisees.id_reactions_croisee, tbl_items.id_item as i1, tbl_items.nom as p1, tbl_reactions_croisees.niveau_rc_sens1, 
-									tbl_reactions_croisees.niveau_rc_sens2, tbl_items_1.id_item as i2, tbl_items_1.nom as p2, tbl_reactions_croisees.remarques
+								tbl_reactions_croisees.id_reactions_croisee, tbl_items.id_item as i1, tbl_items.nom as p1,tbl_items.fonction_classification as p1_fonction, tbl_reactions_croisees.niveau_rc_sens1, 
+									tbl_reactions_croisees.niveau_rc_sens2, tbl_items_1.id_item as i2, tbl_items_1.nom as p2,tbl_items_1.fonction_classification as p2_fonction, tbl_reactions_croisees.remarques
 								FROM tbl_items AS tbl_items_1 
 									INNER JOIN (tbl_items 
 										INNER JOIN ((tbl_reactions_croisees 
@@ -121,9 +121,9 @@ function rc($p1,$p2,$type_etude) {
 			}
 			
 			$flag_no_color = ($type_etude == 'pp')?'':'_nb';
-      if (!in_array($row['type2'],array(7,8,9,10,13))) $link2 = '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'spip.php?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].' '.'</a>';
+      if (!in_array($row['type2'],array(7,8,9,10,13))) $link2 = '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'spip.php?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].($row['p2_fonction']?' ('.$row['p2_fonction'].')':'').'</a>';
       else $link2 = $row['p2'];
-      if (!in_array($row['type1'],array(7,8,9,10,13))) $link1 = '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'spip.php?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].'</a>';
+      if (!in_array($row['type1'],array(7,8,9,10,13))) $link1 = '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'spip.php?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].($row['p1_fonction']?' ('.$row['p1_fonction'].')':'').'</a>';
 			else $link1 = $row['p1'];
       if ($p1 == $row['id_s1']) {
 				$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="'.$css_path.'/img/rc_jamais_lr'.$flag_no_color.'.gif" alt="" title="" />': (($row['fleche_sens1'] === '1') ? '<img src="'.$css_path.'/img/rc_toujours_lr'.$flag_no_color.'.gif" alt="" title="" />': '<span></span>'));
