@@ -64,7 +64,7 @@
 	  		#SET{name,glyco}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 				<span class='choix'>
 	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
-				<input type='checkbox' name='#GET{name}' id='#GET{name}'[ (#ENV{#GET{name}}|oui)checked="checked"] value='1' />
+				<input type='checkbox' name='#GET{name}' id='#GET{name}'[ (#ENV{#GET{name}}|oui)checked="checked"] value='-1' />
 				</span>
 	    </li>
 	  	#SET{name,fonction_classification}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
