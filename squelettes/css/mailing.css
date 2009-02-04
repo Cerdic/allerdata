@@ -1,0 +1,97 @@
+
+/****************************************************/
+/* Blocs spécifiques (mailing) */
+/****************************************************/
+
+
+/* mailing */
+
+#codes{
+padding : 10px;
+width : 300px;
+}
+
+#edito {
+	width: 650px;
+	padding: 15px 35px 5px 44px;
+	margin: 20px 0 20px 30px;
+	border: 2px solid #98b8c8;
+	-moz-border-radius : 12px;
+	line-height: 1.5em;
+	position: relative;
+}
+
+#edito {
+	width: 654px;
+}
+
+#edito h1 {
+	position: absolute;
+	left: -1000em;
+}
+
+#edito h2 {
+	line-height: 1.5em;
+	padding: 0;
+}
+
+#edito p {
+	line-height: 1.5em;
+	font-size: 18px;
+}
+
+#edito #plume {
+	position: absolute;
+	top: -30px;
+	left: 313px;
+}
+
+.sommaire {
+	width: 95%;
+	float: left;
+	padding-top: 20px;
+	padding-right: 30px;
+	padding-bottom: 20px;
+	padding-left: 0;
+}
+
+.sommaire h2 {
+	padding: 0;
+}
+
+.sommaire .listeArticles {
+	padding: 0;
+	background-image: none;
+}
+
+.sommaire li {
+	width: 95%;
+	padding: 0 0 0 25px;
+	background-position: 5px 5px;
+}
+
+.sommaire .lireSuite {
+	margin-top: -15px;
+}
+
+#sommaire1 {
+	background-image: none;
+	border: 2px solid #98b8c8;
+	margin: 0 0 0 35px;
+	padding: 0 0 0 14px;
+}
+
+#sommaire2 {
+margin: 0 0 0 35px;
+padding: 0 0 0 14px;
+border: 2px solid #98b8c8;
+}
+
+
+
+
+/* identification */
+
+#ident {
+	width: 460px;
+}
