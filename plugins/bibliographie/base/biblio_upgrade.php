@@ -24,6 +24,7 @@
 				if (count($journaux)!=1){
 					echo 'journal '.$champs['journal'].'introuvable ou ambigu :'.var_export(count($journaux),true);
 					var_dump($champs);
+					var_dump($journaux);
 					die();
 				}
 			}
@@ -77,7 +78,8 @@
 				$journaux = $importer_csv(find_in_path('base/tbl_journaux.csv'));
 				$ins = array();
 				foreach($journaux as $champs)
-					$ins[] = array('nom'=>reset($champs));
+					if (!sql_countsel('tbl_journals','nom='.sql_quote(reset($champs))))
+						$ins[] = array('nom'=>reset($champs));
 				sql_insertq_multi('tbl_journals',$ins);
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.0','non');
 			}
