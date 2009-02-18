@@ -9,6 +9,7 @@ $table_des_traitements['TITRE'][]= 'typo(trim(supprimer_numero(%s)))';
 
 #$GLOBALS['type_urls'] = 'propres2';
 
-$GLOBALS['debut_intertitre'] = '<h2>';
+$GLOBALS['debut_intertitre'] = "<h2 class='spip'>";
 $GLOBALS['fin_intertitre'] = '</h2>';
+
 ?>
