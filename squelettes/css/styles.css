@@ -322,7 +322,7 @@ input, select, textarea {
 /** Structure **/
 /***************/
 
-/* blocs flottés */
+/* blocs flottï¿½s */
 
 .floatLeft {
 	float: left;
@@ -385,7 +385,7 @@ body {
 }
 
 
-/* détails des blocs principaux dans l'ordre de l'html */
+/* dï¿½tails des blocs principaux dans l'ordre de l'html */
 
 #prelude {
 	float: right;
@@ -498,7 +498,7 @@ label.over-apply {
 
 
 /****************************************************/
-/* Blocs spécifiques (sous-nav, sommaire, 404, etc) */
+/* Blocs spï¿½cifiques (sous-nav, sommaire, 404, etc) */
 /****************************************************/
 
 /* Page 404 */
@@ -521,7 +521,7 @@ label.over-apply {
 	line-height: 1.5em;
 }
 
-/* Accès à l'espace privé */
+/* Accï¿½s ï¿½ l'espace privï¿½ */
 
 #accesPrive {
 	width: 445px;
@@ -674,7 +674,7 @@ label.over-apply {
 	font-weight: bold;
 }
 
-/* articles de la même rubrique */
+/* articles de la mï¿½me rubrique */
 
 #memeRubrique {
 	margin: 20px 0 0 0;
@@ -716,7 +716,7 @@ label.over-apply {
 	text-decoration: none;
 }
 
-/*listes imbriquées dans les articles de spip*/
+/*listes imbriquï¿½es dans les articles de spip*/
 
 .spip li { 
 	background: transparent url(../images/pucearticle01.png) left .6em no-repeat;
@@ -812,7 +812,7 @@ margin:0.5em 0pt;
 padding:0.4em 0.4em 1em 1em;
 border: solid 1px #41C0EC;
 }
-.formulaire_spip ul li {padding-left:160px;}
+.formulaire_spip ul li {padding-left:160px;clear:both;padding-bottom:10px;}
 .formulaire_spip ul li.fieldset {padding-left:0;}
 
 .formulaire_spip label {
