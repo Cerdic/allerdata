@@ -6,7 +6,18 @@
  *
  */
 	include_spip('inc/meta');
-	
+
+	function cohorte_importe_ccd(){
+		include_spip('base/abstract_sql');
+		// importer la table
+		$importer_csv = charger_fonction('importer_csv','inc');
+		$refs = $importer_csv(find_in_path('base/tbl_risque_ccd.csv'),true);
+		$set = array();
+		foreach($refs as $champs){
+			$set[] = intval(reset($champs));
+		}
+		sql_updateq("tbl_reactions_croisees",array('risque_ccd'=>1),sql_in('id_reactions_croisee', $set));
+	}
 	
 	function cohorte_upgrade($nom_meta_base_version,$version_cible){
 		$current_version = 0.0;
@@ -60,6 +71,10 @@
 					sql_updateq('tbl_reactions_croisees',array('statut'=>'publie'));
 				}
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.3','non');
+			}
+			if (version_compare($current_version,'0.1.0.4','<')){
+				cohorte_importe_ccd();
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.4','non');
 			}
 		}
 	}
