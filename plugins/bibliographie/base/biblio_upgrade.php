@@ -7,12 +7,28 @@
  */
 
 	include_spip('inc/meta');
+
+	function biblio_nettoie_doublons_journaux(){
+		$journaux = array_map('reset',sql_allfetsel("id_journal","tbl_journals","nom='Rev Esp Alergol Immunol Clin'"));
+		if (count($journaux)>1){
+			if ($id_journal = intval(array_shift($journaux))){
+				foreach($journaux as $k=>$v){
+					$journaux[$k] = intval($v);
+					if (!$journaux[$k])
+						unset($journaux[$k]);
+				}
+				sql_updateq('tbl_bibliographies',array('id_journal'=>$id_journal),sql_in("id_journal",$journaux));
+				sql_delete('tbl_journals', sql_in("id_journal",$journaux));
+			}
+		}
+	}
 	
 	function biblio_importe_references(){
+		biblio_nettoie_doublons_journaux();
 		include_spip('inc/biblio');
 		// importer la table
 		$importer_csv = charger_fonction('importer_csv','inc');
-		$refs = $importer_csv(find_in_path('base/tbl_bibliographies.csv'),true);
+		$refs = $importer_csv(find_in_path('base/tbl_bibliographies_2.csv'),true);
 		foreach($refs as $champs){
 			$ins = array();
 			$ins['id_bibliographie'] = $champs['id_biblio'];
@@ -20,22 +36,30 @@
 				$ins[$c] = $champs[$c];
 			
 			if (strlen($champs['journal'])){
+				// trouver le journal
 				$journaux = biblio_rechercher_journal($champs['journal']);
-				if (count($journaux)!=1){
+				if (count($journaux)==0){
+					$ins['id_journal'] = sql_insertq('tbl_journals',array('nom'=>$champs['journal']));
+					echo "journal ". $ins['id_journal']. '/' .$champs['journal']. ' ajoute<br />';
+				}
+				elseif (count($journaux)!=1){
 					echo 'journal '.$champs['journal'].'introuvable ou ambigu :'.var_export(count($journaux),true);
 					var_dump($champs);
 					var_dump($journaux);
 					die();
 				}
+				else {
+					$journaux = array_keys($journaux);
+					$ins['id_journal'] = reset($journaux);
+				}
 			}
-			// trouver le journal
-			$journaux = array_keys($journaux);
-			$ins['id_journal'] = reset($journaux);
 			$ins['premiere_page'] = $champs['prem_page'];
 			$ins['derniere_page'] = $champs['dern_page'];
-			$ins['url'] = $champs['lien_ressource_web'];
+			if (isset($champs['lien_ressource_web']))
+				$ins['url'] = $champs['lien_ressource_web'];
 			$ins['full_text_disponible'] = $champs['full_text_disponible']=='VRAI'?1:0;
-			$ins['date'] = date('Y-m-d H:i:s',strtotime($champs['date_biblio']));
+			if ($champs['date_biblio'])
+				$ins['date'] = date('Y-m-d H:i:s',strtotime($champs['date_biblio']));
 			if (sql_getfetsel('id_bibliographie','tbl_bibliographies','id_bibliographie='.intval($ins['id_bibliographie'])))
 				sql_updateq('tbl_bibliographies',$ins,'id_bibliographie='.intval($ins['id_bibliographie']));
 			else
@@ -92,10 +116,10 @@
 				// le type du champ citation
 				sql_alter("table tbl_bibliographies CHANGE citation citation text DEFAULT '' NOT NULL");
 				// virer un index bien inutile
-				sql_alter("table tbl_bibliographies DROP INDEX `n¡ article`");
+				sql_alter("table tbl_bibliographies DROP INDEX `nï¿½ article`");
 				// mettre a jour le reste de la table
 				maj_tables('tbl_bibliographies');
-				biblio_importe_references();
+				#biblio_importe_references();
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.1','non');
 			}
 			if (version_compare($current_version,'0.1.0.2','<')){
@@ -154,6 +178,11 @@
 					sql_updateq('tbl_bibliographies',array('statut'=>'publie'));
 				}
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.8','non');
+			}
+			if (version_compare($current_version,'0.1.0.9','<')){
+				include_spip('base/abstract_sql');
+				biblio_importe_references();
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.9','non');
 			}
 		}
 	}
