@@ -6,6 +6,21 @@
  *
  */
 
+	function allerdata_importe_rq_items(){
+		include_spip('base/abstract_sql');
+		// importer la table
+		$importer_csv = charger_fonction('importer_csv','inc');
+		$refs = $importer_csv(find_in_path('base/tbl_remarques_items.csv'),true);
+		foreach($refs as $champs){
+			$ins = array();
+			$ins['remarques'] = $champs['remarques'];
+			if (!sql_getfetsel('id_item','tbl_items','id_item='.intval($champs['id_item']))){
+				echo "id_item ".$champs['id_item']." introuvable <br />";
+			}
+			else
+				sql_updateq('tbl_items',$ins,'id_item='.intval($champs['id_item']));
+		}
+	}
 
 	include_spip('inc/meta');
 	function allerdata_upgrade($nom_meta_base_version,$version_cible){
@@ -57,7 +72,10 @@
 				}
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.7','non');
 			}
-			
+			if (version_compare($current_version,'0.1.0.8','<')){
+				allerdata_importe_rq_items();
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.8','non');
+			}
 		}
 	}
 	
