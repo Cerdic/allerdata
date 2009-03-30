@@ -1,0 +1,35 @@
+/*
+ * Ext JS Library 2.0.1
+ * Copyright(c) 2006-2008, Ext JS, LLC.
+ * licensing@extjs.com
+ * 
+ * http://extjs.com/license
+ */
+
+
+/* Window */
+.x-window-tc {
+	background-image:url(../images/allerdata/window/top-bottom.png);
+}
+.x-window-tl {
+	background-image:url(../images/allerdata/window/left-corners.png);
+}
+.x-window-tr {
+	background-image:url(../images/allerdata/window/right-corners.png);
+}
+.x-window-bc {
+	background-image:url(../images/allerdata/window/top-bottom.png);
+}
+.x-window-bl {
+	background-image:url(../images/allerdata/window/left-corners.png);
+}
+.x-window-br {
+	background-image:url(../images/allerdata/window/right-corners.png);
+}
+
+.x-window-ml {
+	background-image:url(../images/allerdata/window/left-right.png);
+}
+.x-window-mr {
+	background-image:url(../images/allerdata/window/left-right.png);
+}
