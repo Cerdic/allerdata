@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_tests_individuels' => 'S&eacute;rums test&eacute;s s&eacute;parement',
 'label_tests_quantitatifs' => 'Inhibitions chiffr&eacute;es',
 'label_inexploitable' => 'Pas de RC test&eacute;e, m&eacute;thode non valide, manquent d&eacute;tails',
+'label_pays' => 'Pays',
 'label_remarques' => 'Remarques',
 'label_statut' => 'Statut',
 
