@@ -98,8 +98,7 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 	// la derniere page doit etre differente de la premiere
 	if ($p = _request('premiere_page')
 	AND $d=_request('derniere_page')
-	AND (is_numeric($p)	AND is_numeric($d)	AND $d<=$p)
-	OR ($d==$p))
+	AND ((is_numeric($p)	AND is_numeric($d)	AND $d<=$p)	OR ($d==$p)))
 			$erreurs['derniere_page'] = _T('editer_bibliographie:incorrecte');
 	
 	if ($p = _request('premiere_page')
