@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'journal_ou_autre_media_obligatoire' => 'Vous devez indiquer un journal ou un Autre media !',
 
 // L
+'label_id_bibliographie'=>'ID biblio ?',
 'label_statut'=>'Statut',
 'label_auteurs'=>'Auteurs',
 'label_titre'=>'Titre',
@@ -39,6 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'plusieurs_journaux_correspondent' => 'Plusieurs journaux peuvent correspondre &agrave; ce nom !',
+
+// R
+'reference_existante' => 'Une r&eacute;f&eacute;rence existe d&eacute;j&agrave; avec ce num&eacute;ro',
 
 // U
 'url_invalide' => 'URL invalide ou l\'adresse indiqu&eacute; n\'existe pas',
