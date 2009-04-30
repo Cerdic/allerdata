@@ -19,7 +19,7 @@
 	    <li class="editer_parent[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				#MODELE{selecteur_item,id_item=#ENV{#GET{name}},name=#GET{name},id=#GET{name},type_item=famille_taxo}
+				#MODELE{selecteur_item,id_item=#ENV{#GET{name}},name=#GET{name},id=#GET{name},type_item=famille_taxo,obli=non}
 	    </li>
 	  	#SET{name,nom}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">

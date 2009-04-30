@@ -138,7 +138,7 @@ function instituer_tbl_item($id_item, $c) {
 
 	// Verifier que le(s) parent(s) demande(s) existe(nt) et sont differents
 	// des parents actuels
-	if ($id_parent = $c['id_parent']
+	if (!is_null($id_parent = $c['id_parent'])
 	AND $id_parent != $id_parent_actuel){
 		$id_parent = array_map('reset',sql_allfetsel('id_item', "tbl_items", sql_in('id_item',$id_parent)));
 		$champs['id_parent'] = $id_parent;
@@ -167,7 +167,7 @@ function instituer_tbl_item($id_item, $c) {
 	if (!count($champs)) return;
 
 	// Envoyer les modifs.
-	if ($champs['id_parent']){
+	if (isset($champs['id_parent'])){
 		allerdata_modifier_les_parents($id_item,$champs['id_parent']);
 		unset($champs['id_parent']);
 	}
