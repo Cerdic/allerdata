@@ -16,7 +16,7 @@ function action_editer_tbl_bibliographie_dist() {
 	// si id_bibliographie n'est pas un nombre, c'est une creation 
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_bibliographie = intval($arg)) {
-		$id_bibliographie = insert_tbl_bibliographie();
+		$id_bibliographie = insert_tbl_bibliographie(_request('id_bibliographie'));
 		if (!$id_bibliographie) return array(0,_L('impossible d\'ajouter une bibliographie'));
 	}
 
@@ -62,7 +62,7 @@ function tbl_bibliographies_set($id_bibliographie) {
 	return $err;
 }
 
-function insert_tbl_bibliographie() {
+function insert_tbl_bibliographie($id = 0) {
 
 	$set = array(
 		'id_version' => -2, // indiquer une creation
@@ -70,8 +70,15 @@ function insert_tbl_bibliographie() {
 		'statut'=>'publie', // on utilise que publie et poubelle
 	);
 
+	if (intval($id))
+		$set['id_bibliographie'] = intval($id);
+
 	// faire une insertion a la fin, avec l'autoincrement
-	$id_bibliographie = sql_insertq("tbl_bibliographies", $set);
+	// ou a un id fourni
+	// et verifier que l'insertion a fonctionne
+	if ($id_bibliographie = sql_insertq("tbl_bibliographies", $set)
+		OR (isset($set['id_bibliographie']) AND $id_bibliographie = $set['id_bibliographie']))
+		$id_bibliographie = sql_getfetsel('id_bibliographie','tbl_bibliographies','id_bibliographie='.intval($id_bibliographie));
 
 	return $id_bibliographie;
 }

@@ -38,6 +38,10 @@ function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', 
 	// le checkbox de confirmation
 	$valeurs['confirmer_journal']='';
 	$valeurs['confirmer_ajout_reference']='';
+
+	// possibilite de saisir l'id ?
+	if (!intval($id_bibliographie))
+		$valeurs['_saisie_id_bibliographie']=' ';
 	return $valeurs;
 }
 
@@ -49,6 +53,14 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 	}
 	
 	$erreurs = formulaires_editer_objet_verifier('tbl_bibliographie',$id_bibliographie,$oblis);
+
+	// si c'est une nouvelle ref, et que l'id est saisi et deja pris, erreur
+	if (!intval($id_bibliographie)
+	  AND $id = _request('id_bibliographie')
+	  AND sql_fetsel('id_bibliographie','tbl_bibliographies','id_bibliographie='.intval($id))){
+		$erreurs['id_bibliographie'] = _T('editer_bibliographie:reference_existante');
+	}
+
 	
 	if (!_request('auteurs') AND !_request('confirmer_auteur_vide')){
 		$erreurs['auteurs'] = _T('editer_bibliographie:confirmer_pas_d_auteur')."<input type='checkbox' name='confirmer_auteur_vide' class='checkbox' value='1' />";
