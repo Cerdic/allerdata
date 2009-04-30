@@ -23,7 +23,15 @@ function formulaires_editer_produit_charger_dist($id_item='new', $id_parent=0, $
 }
 
 function formulaires_editer_produit_verifier_dist($id_item='new', $id_parent=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,intval($it_item)?array('nom','commentaires'):array('nom'));
+
+	$oblis = array();
+	if (!in_array(_request('id_type_item'),array(23,25)))
+		$oblis[] = 'nom';
+
+	if (intval($id_item))
+		$oblis[] = 'commentaires';
+
+	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,$oblis);
 	
 	if (strlen(_request('nom_court'))>25
 	 OR (!_request('nom_court') AND strlen(_request('nom'))>25))

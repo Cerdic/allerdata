@@ -111,7 +111,7 @@ function revision_tbl_item ($id_item, $c=false) {
 
 	modifier_contenu('tbl_item', $id_item,
 		array(
-			'nonvide' => array('nom' => _T('info_sans_titre')),
+			'nonvide' => array(/*'nom' => _T('info_sans_titre')*/),
 			'date_modif' => 'date_item' // champ a mettre a NOW() s'il y a modif
 		),
 		$c);
