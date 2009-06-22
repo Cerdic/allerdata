@@ -25,4 +25,27 @@ function boucle_tbl_bibliographies_dist($id_boucle, &$boucles) {
 }
 
 
+function biblio_trous(){
+	$res = sql_fetsel("count(id_bibliographie) as n,max(id_bibliographie) as m","tbl_bibliographies");
+	if ($res['m']>$res['n']){
+		$max = intval($res['m']);
+		$i=0;
+		$trous = array();
+		do{
+			$j = $i;
+			$i = min($i+1000,$max);
+			$exists = sql_allfetsel('id_bibliographie',"tbl_bibliographies","id_bibliographie>$j AND id_bibliographie<=$i");
+			$exists = array_map('reset',$exists);
+			$exists = array_flip($exists);
+			for($k=$j+1;$k<=$i AND $k<=$max;$k++){
+				if (!isset($exists[$k]))
+					$trous[] = $k;
+			}
+
+		} while($i<$max);
+		$total = count($trous);
+		return "<a href='#' onclick='jQuery(this).next().toggle(\"fast\");return false;'>$total biblio manquante(s)...</a>"
+		. "<div style='display:none;'>" . implode(", ",$trous)."</div>";
+	}
+}
 ?>
