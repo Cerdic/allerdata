@@ -45,9 +45,22 @@ function formulaires_editer_cohorte_verifier_dist($id_groupes_patient='new', $id
 	if (!_request('id_bibliographie'))
 		$erreurs['message_erreur'] = _T('editer_cohorte:aucune_biblio_definie');
 		
-	if (_request('inexploitable')
-	AND (_request('tests_individuels') OR _request('tests_quantitatifs'))){
-		$erreurs['inexploitable'] = _T('editer_cohorte:incoherent');
+	if (_request('inexploitable')){
+		// on ne peut pas cocher cette case et en meme temps une des deux autres
+		if (_request('tests_individuels') OR _request('tests_quantitatifs')){
+			$erreurs['inexploitable'] = _T('editer_cohorte:incoherent');
+		}
+		// on ne peut pas cocher cette case si on sa des RC !
+		elseif(intval($id_groupes_patient)) {
+			if (sql_countsel('tbl_reactions_croisees','statut!=\'poubelle\' AND id_groupes_patient='.intval($id_groupes_patient)))
+				$erreurs['inexploitable'] = _T('editer_cohorte:incoherent_RC_existent');
+		}
+	}
+
+	if (count($erreurs)){
+		set_request('tests_individuels',intval(_request('tests_individuels')));
+		set_request('tests_quantitatifs',intval(_request('tests_quantitatifs')));
+		set_request('inexploitable',intval(_request('inexploitable')));
 	}
 
 	return $erreurs;
