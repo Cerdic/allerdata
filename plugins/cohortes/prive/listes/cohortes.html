@@ -1,9 +1,11 @@
 <B_cohortes><h2>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{cohorte:une_cohorte,cohorte:des_cohortes})]</h2>
 [(#ENV{statut}|=={publie}|oui)
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_groupes_patient,#ENV{id_bibliographie,''}},recherche})</p>]
-][<p class='pagination'>(#PAGINATION)</p>]
+]<p class='pagination tri'>[(#TRI{<,#CHEMIN{img_pack/tri_asc-16.png}|tag_img}) | ][(#TRI{>,#CHEMIN{img_pack/tri_desc-16.png}|tag_img}) | ]
+[(#TRI{id_bibliographie,'#id_biblio'}) | ][(#TRI{date,date}) | ]
+</p>[<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
-<BOUCLE_cohortes(tbl_groupes_patients){id_groupes_patient?}{id_bibliographie?}{pagination 10}{par num nom}{recherche?}{statut?}>
+<BOUCLE_cohortes(tbl_groupes_patients){id_groupes_patient?}{id_bibliographie?}{pagination 10}{tri id_bibliographie,#ARRAY{'',1,date,-1}}{recherche?}{statut?}>
 <li class='item[ (#EXPOSE)]'>
 [(#INCLURE{fond=modeles/cohorte}{id_groupes_patient})]
 #MODELE{boutons_action_cohorte,id_groupes_patient=#ID_GROUPES_PATIENT,self=#SELF,id_bibliographie=#ID_BIBLIOGRAPHIE}
