@@ -44,6 +44,10 @@ function formulaires_editer_reactions_croisees_charger_dist($id_groupes_patient)
 			$valeurs["id_produit1-new"] = $valeurs["id_produit1-$id"];
 			$valeurs["produit1-new"] = $valeurs["produit1-$id"];
 
+			// proposer le dernier produit2 pour la prochaine saisie
+			$valeurs["id_produit2-new"] = $valeurs["id_produit2-$id"];
+			$valeurs["produit2-new"] = $valeurs["produit2-$id"];
+
 			// ajouter cet id aux rc
 			$valeurs['_liste_rc'][] = $id;
 		}
@@ -134,8 +138,6 @@ function formulaires_editer_reactions_croisees_traiter_dist($id_groupes_patient)
 					// annuler la saisie sur id new pour ne pas pre-remplir abusivement
 					set_request('niveau_rc_sens1-new','');
 					set_request('niveau_rc_sens2-new','');
-					set_request('produit2-new','');
-					set_request('id_produit2-new','');
 					set_request('remarques-new','');
 					set_request('risque_ccd-new','');
 				}
