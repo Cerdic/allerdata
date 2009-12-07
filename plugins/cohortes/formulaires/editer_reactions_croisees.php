@@ -15,7 +15,8 @@ function formulaires_editer_reactions_croisees_charger_dist($id_groupes_patient)
 	$valeurs = array();
 	$champs = array('id_produit1','id_produit2','niveau_rc_sens1','niveau_rc_sens2','remarques','risque_ccd') ;
 
-	if (intval($id_groupes_patient)){
+	if ($id_groupes_patient = intval($id_groupes_patient)){
+		$valeurs["id"] = $id_groupes_patient;
 		$res = sql_select('id_reactions_croisee,id_version,'.implode(',',$champs),'tbl_reactions_croisees',"statut='publie' AND id_groupes_patient=".intval($id_groupes_patient),'','id_reactions_croisee');
 		$valeurs["id_produit1-new"] = '';
 		$valeurs["produit1-new"] = '';

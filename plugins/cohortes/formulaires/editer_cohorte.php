@@ -77,10 +77,23 @@ function formulaires_editer_cohorte_traiter_dist($id_groupes_patient='new', $id_
 	set_request('qualitatif',1-intval(_request('tests_quantitatifs')));
 	set_request('inexploitable',intval(_request('inexploitable')));
 
+
 	// vilain hack
 	set_request('action','editer_tbl_groupes_patient');
 	// hop traitons tout cela
-	return formulaires_editer_objet_traiter('tbl_groupes_patient',$id_groupes_patient,0,$lier,$retour,$config_fonc,$row,$hidden);
+	$res = formulaires_editer_objet_traiter('tbl_groupes_patient',$id_groupes_patient,0,$lier,$retour,$config_fonc,$row,$hidden);
+
+	// si c'est une creation qui a reussi et qu'on a pas coche 'pas de RC'
+	// rester sur la meme page pour permettre la saisie des RC
+	if (!$res['message_erreur']
+		AND !intval($id_groupes_patient)
+		AND !intval(_request('inexploitable'))){
+		$id = $res['id_groupes_patient'];
+		$res['redirect'] = parametre_url(self(),'edit',$id);
+		$res['redirect'] = ancre_url($res['redirect'],"formulaire_editer_reactions_croisees-$id");
+	}
+
+	return $res;
 }
 
 
