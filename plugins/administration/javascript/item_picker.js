@@ -46,3 +46,10 @@ jQuery.fn.item_unpick = function(){
 	this.parent().remove();
 	picked.find('>li').removeClass('last').find(':last').addClass('last');
 }
+
+
+jQuery.fn.pick_selected = function(name){
+	jQuery(this).find('option:selected').each(function(){jQuery(this).item_pick(jQuery(this).val(),name);});
+	jQuery(this).focus();
+	return this; // don't break the chain
+}
