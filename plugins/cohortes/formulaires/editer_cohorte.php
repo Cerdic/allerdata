@@ -39,7 +39,11 @@ function formulaires_editer_cohorte_charger_dist($id_groupes_patient='new', $id_
 }
 
 function formulaires_editer_cohorte_verifier_dist($id_groupes_patient='new', $id_bibliographie=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('tbl_groupes_patient',$id_groupes_patient,array('description'));
+	$oblis = array();
+	if (!_request('inexploitable'))
+		$oblis[] = 'description';
+
+	$erreurs = formulaires_editer_objet_verifier('tbl_groupes_patient',$id_groupes_patient,$oblis);
 
 	// verifier qu'on a bien une biblio de referencee !
 	if (!_request('id_bibliographie'))
