@@ -25,10 +25,12 @@
 #FORMULAIRE_EDITER_BIBLIOGRAPHIE{#ENV{edit},#ENV{redirect}}
 </div>
 
+[(#ENV{edit}|intval|oui)
 <h2><:biblio:notes_lecture:></h2>
 <div class='ajax'>
 #FORMULAIRE_EDITER_BIBLIO_NOTE{new,#ENV{edit}}
 </div>
+]
 
 [<hr />
 <div class='utilisations'>
