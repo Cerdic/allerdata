@@ -4,9 +4,9 @@
 #FORMULAIRE_RECHERCHE{#SELF}
 [(#ENV{recherche}|ou{#ENV{id_item}}|oui)<a href='[(#SELF|parametre_url{recherche|id_item|x|y,''})]'><:allerdata:annuler_recherche:></a>]
 
+[<div class="bouton_creer">(#VAL{cohorte:icone_creer_cohorte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=cohortes&edit=new&id_bibliographie=#ID_BIBLIOGRAPHIE},#CHEMIN{img_pack/cohorte-24.png},'creer.gif','right'})</div>]
 <INCLURE{fond=prive/listes/cohortes}{statut=publie}{env}{ajax}>
 [(#ENV{id_bibliographie}|oui)
-[(#VAL{cohorte:icone_creer_cohorte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=cohortes&edit=new&id_bibliographie=#ID_BIBLIOGRAPHIE},#CHEMIN{img_pack/cohorte-24.png},'creer.gif','right'})]
 <div class='nettoyeur'></div>
 ]
 
