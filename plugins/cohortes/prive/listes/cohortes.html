@@ -1,3 +1,16 @@
+	<B_inc1>
+		<div class="alerte">
+		<ul class='liste_items'>
+		<BOUCLE_inc1(tbl_groupes_patients){id_groupes_patient?}{id_bibliographie?}{recherche?}{statut?}{statut=publie}{inexploitable=1}><BOUCLE_rc(tbl_reactions_croisees){id_groupes_patient}{0,1}>
+			<li class='item[ (#EXPOSE)]'>
+			[(#INCLURE{fond=modeles/cohorte}{id_groupes_patient})]
+			Inexploitable !
+			#MODELE{boutons_action_cohorte,id_groupes_patient=#ID_GROUPES_PATIENT,self=#SELF,id_bibliographie=#ID_BIBLIOGRAPHIE}
+			</li>
+		</BOUCLE_rc></BOUCLE_inc1>
+		</ul>
+		</div>
+	</B_inc1>
 <B_cohortes><h2>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{cohorte:une_cohorte,cohorte:des_cohortes})]</h2>
 [(#ENV{statut}|=={publie}|oui)
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_groupes_patient,#ENV{id_bibliographie,''}},recherche})</p>]
