@@ -1,5 +1,5 @@
 #HTTP_HEADER{Content-type:text/plain;charset=#CHARSET}
-<BOUCLE_items(tbl_items){recherche #ENV{q}}{0,20}{id_type_item IN 5,13,7,8,9,10}{par nom}>[<span>(#NOM*)</span>][(#MODELE{item_detail_rc,id_item})]|#ID_ITEM
+<BOUCLE_items(tbl_items){recherche #ENV{q}}{0,20}{id_type_item IN 13,7,8,9,10}{par nom}>[<span>(#NOM*)</span>][(#MODELE{item_detail_rc,id_item})]|#ID_ITEM
 </BOUCLE_items>
 <:cohorte:aucun_item:>
 <//B_items>
