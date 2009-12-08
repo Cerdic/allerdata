@@ -1,5 +1,5 @@
 #HTTP_HEADER{Content-type:text/plain;charset=#CHARSET}
-<BOUCLE_items(tbl_items){recherche #ENV{q}}{0,20}{id_type_item IN 5,13,7,8,9,10}>[(#NOM*)]<BOUCLE_produit(tbl_items){id_item=#ID_ITEM|penta_ascendant_le_plus_proche{produit}}><br />Produit: #NOM</BOUCLE_produit><BOUCLE_source(tbl_items){id_item=#ID_ITEM|penta_ascendant_le_plus_proche{source}}><br />Source: #NOM</BOUCLE_source>|#ID_ITEM
+<BOUCLE_items(tbl_items){recherche #ENV{q}}{0,20}{id_type_item IN 5,13,7,8,9,10}{par nom}>[<span>(#NOM*)</span>][(#MODELE{item_detail_rc,id_item})]|#ID_ITEM
 </BOUCLE_items>
 <:cohorte:aucun_item:>
 <//B_items>

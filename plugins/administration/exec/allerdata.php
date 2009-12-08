@@ -35,6 +35,8 @@ function exec_allerdata_dist(){
 		);
 	if (defined('_DIR_PLUGIN_BIBLIO'))
 		$barre[] = array('titre'=>_T("allerdata:bibliographie"),'page'=>'biblios','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/bibliographie-64.png",'url'=>generer_url_ecrire('allerdata','page=biblios'));
+	if (defined('_DIR_PLUGIN_COHORTE'))
+		$barre[] = array('titre'=>_T("allerdata:cohortes"),'page'=>'cohortes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/cohorte-64.png",'url'=>generer_url_ecrire('allerdata','page=cohortes'));
 
 	if (defined('_DIR_PLUGIN_ALLER_FTAXO'))
 		$barre[] = array('titre'=>_T("allerdata:famille_taxos"),'page'=>'famille_taxos','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/famille_taxo-64.png",'url'=>generer_url_ecrire('allerdata','page=famille_taxos'));
@@ -77,13 +79,6 @@ function exec_allerdata_dist(){
 			echo $config->formulaire();
 			echo fin_cadre_trait_couleur(true);
 			break;
-		case 'biblios':
-		case 'cohortes':
-			if (!_request('edit')){
-			if (defined('_DIR_PLUGIN_COHORTE'))
-				$sbarre[] = array('titre'=>_T("allerdata:cohortes"),'page'=>'cohortes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/cohorte-64.png",'url'=>generer_url_ecrire('allerdata','page=cohortes'));
-			echo allerdata_barre_nav_gauche($page,$sbarre);
-			}
 		default:			
 			$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],'message'=>$message);
 			$get = $_GET;

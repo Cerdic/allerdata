@@ -19,10 +19,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'format_rc_invalide' => 'Format incorrect&nbsp;: + ou 0 ou X/Y',
 'incoherent' => 'Incoh&eacute;rent',
+'incoherent_RC_existent' => 'Incoh&eacute;rent, il y a des RC saisies pour ce groupe.',
 'erreur_produit_identique' => 'Choisissez un item diff&eacute;rent de l\'item 1',
+'rc_doublonne' => 'Une RC existe d&eacute;j&agrave; avec les m&ecirc;mes produits',
 
 'bouton_enregistrer_cohorte' => 'Enregistrer le Groupe de patients',
 'bouton_enregistrer_rc' => 'Enregistrer les RC',
+'bouton_finir_la_saisie' => 'Finir la saisie des RC',
 
 );
 

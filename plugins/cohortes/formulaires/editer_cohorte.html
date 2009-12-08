@@ -69,6 +69,18 @@
 				<textarea name='#GET{name}' id='#GET{name}' rows='4'>#ENV{#GET{name}}</textarea>
 	    </li>
 	  </ul>
+		<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery('#inexploitable').change(function(){
+					if (jQuery(this).val())
+						jQuery('#tests_individuels,#tests_quantitatifs').attr('checked','');}
+				);
+				jQuery('#tests_individuels,#tests_quantitatifs').change(function(){
+					if (jQuery(this).val())
+						jQuery('#inexploitable').attr('checked','');
+				});
+			});
+		</script>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='[(#ENV{id_bibliographie}|intval|?{<:editer_cohorte:bouton_enregistrer_cohorte:>,<:bouton_ajouter:>})]' /></p>

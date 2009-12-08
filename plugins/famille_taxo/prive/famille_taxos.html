@@ -4,8 +4,8 @@
 #FORMULAIRE_RECHERCHE{#SELF}
 [(#ENV{recherche}|ou{#ENV{id_item}}|oui)<a href='[(#SELF|parametre_url{recherche|id_item|x|y,''})]'><:allerdata:annuler_recherche:></a>]
 
+[<div class="bouton_creer">(#VAL{allerdata:icone_creer_famille_taxo}|_T|icone_inline{#URL_ECRIRE{allerdata,page=famille_taxos&edit=new},#CHEMIN{img_pack/famille_taxo-24.png},'creer.gif','right'})</div>]
 <INCLURE{fond=prive/listes/items}{type_item=famille_taxo}{env}{ajax}>
-[(#VAL{allerdata:icone_creer_famille_taxo}|_T|icone_inline{#URL_ECRIRE{allerdata,page=famille_taxos&edit=new},#CHEMIN{img_pack/famille_taxo-24.png},'creer.gif','right'})]
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 ]
 [(#ENV{edit}|oui)

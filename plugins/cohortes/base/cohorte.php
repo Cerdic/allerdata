@@ -10,7 +10,11 @@
 function cohorte_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['groupes_patients']='tbl_groupes_patients';
-	
+
+	// jointures
+	$interface['tables_jointures']['tbl_groupes_patients']='tbl_reactions_croisees';
+	$interface['tables_jointures']['tbl_reactions_croisees']='tbl_groupes_patients';
+
 	return $interface;
 }
 

@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'confirmer_supprimer_note' => 'Voulez-vous vraiment supprimer cette note de lecture ?',
 
+// E
+'bouton_enregistrer_la_note' => 'Enregistrer la note de lecture',
+
 // L
 'label_texte'=>'Saisissez vos notes',
 

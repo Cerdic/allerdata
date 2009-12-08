@@ -1,9 +1,14 @@
+[(#REM)<style>]
 #SET{claire,##ENV{couleur_claire,edf3fe}}
 #SET{foncee,##ENV{couleur_foncee,3874b0}}
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
+.alerte {background:red;}
+
 #navigation .icone36 {width:76px;float:left;margin-right:5px;}
+
+#contenu .bouton_creer a.icone36 {margin-top:-40px;display:block;}
 
 .clicable {cursor:hand;cursor:pointer;}
 ul.liste_items li.item.court .enfants, ul.liste_items li.item.court .parents { display: none; }
@@ -85,6 +90,8 @@ ul.hierarchie li.allergene {background:url(#CHEMIN{img_pack/allergene-16.png}) n
 .formulaire_editer_allergene li.editer_grand_parent_source {padding-bottom:2px;}
 .formulaire_editer_allergene li.editer_parent_produit {border:0;padding-bottom:2px;padding-top:2px;}
 .formulaire_editer_allergene li.editer_parent {border-top:0;padding-top:2px;}
+
+.formulaire_editer button {float:right;margin-bottom:1em;}
 
 /* biblio */
 li.item .biblio h3 {font-size:1.1em;}

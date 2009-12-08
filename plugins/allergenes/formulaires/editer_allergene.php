@@ -31,6 +31,9 @@ function formulaires_editer_allergene_verifier_dist($id_item='new', $id_parent=0
 	include_spip('penta_fonctions');
 	// trouver le produit de l'allergene
 	$id_produit = sql_getfetsel('id_item','tbl_items',array(sql_in('id_type_item',allerdata_id_type_item('produit',true)),sql_in('id_item',_request('id_parent'))));
+	if (!$id_produit){
+		$erreurs['id_parent'] = _T('editer_allergene:produit_obligatoire');
+	}
 	// trouver la source de l'allergene
 	$id_source = penta_ascendant_le_plus_proche($id_produit,'source');
 	// chercher le meme nom dans le meme produit ou la meme source

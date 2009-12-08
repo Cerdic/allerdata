@@ -95,9 +95,10 @@ function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new',
 
 	// verifier qu'on a bien un volume ou un numero si c'est un journal
 	if (strlen(_request('journal'))){
-		if (!_request('volume') AND !_request('numero')) {
+		if (!_request('volume') AND !_request('numero') AND !_request('supplement')) {
 			$erreurs['volume'] = _T('editer_bibliographie:volume_ou_numero_obligatoire');
 			$erreurs['numero'] = _T('editer_bibliographie:volume_ou_numero_obligatoire');
+			$erreurs['supplement'] = _T('editer_bibliographie:volume_ou_numero_obligatoire');
 		}
 	}
 	

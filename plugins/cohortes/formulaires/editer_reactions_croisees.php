@@ -11,11 +11,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_editer_reactions_croisees_charger_dist($id_groupes_patient){
+function formulaires_editer_reactions_croisees_charger_dist($id_groupes_patient, $retour){
 	$valeurs = array();
 	$champs = array('id_produit1','id_produit2','niveau_rc_sens1','niveau_rc_sens2','remarques','risque_ccd') ;
 
-	if (intval($id_groupes_patient)){
+	if ($id_groupes_patient = intval($id_groupes_patient)){
+		$valeurs["id"] = $id_groupes_patient;
 		$res = sql_select('id_reactions_croisee,id_version,'.implode(',',$champs),'tbl_reactions_croisees',"statut='publie' AND id_groupes_patient=".intval($id_groupes_patient),'','id_reactions_croisee');
 		$valeurs["id_produit1-new"] = '';
 		$valeurs["produit1-new"] = '';
@@ -43,6 +44,10 @@ function formulaires_editer_reactions_croisees_charger_dist($id_groupes_patient)
 			$valeurs["id_produit1-new"] = $valeurs["id_produit1-$id"];
 			$valeurs["produit1-new"] = $valeurs["produit1-$id"];
 
+			// proposer le dernier produit2 pour la prochaine saisie
+			$valeurs["id_produit2-new"] = $valeurs["id_produit2-$id"];
+			$valeurs["produit2-new"] = $valeurs["produit2-$id"];
+
 			// ajouter cet id aux rc
 			$valeurs['_liste_rc'][] = $id;
 		}
@@ -53,7 +58,7 @@ function formulaires_editer_reactions_croisees_charger_dist($id_groupes_patient)
 }
 
 
-function formulaires_editer_reactions_croisees_verifier_dist($id_groupes_patient){
+function formulaires_editer_reactions_croisees_verifier_dist($id_groupes_patient, $retour){
 	$erreurs = array();
 	$liste_des_rc = explode(',',_request('_liste_rc'));
 	$champs = array('id_produit1','id_produit2','niveau_rc_sens1','niveau_rc_sens2','remarques','risque_ccd') ;
@@ -61,6 +66,7 @@ function formulaires_editer_reactions_croisees_verifier_dist($id_groupes_patient
 	// regarder si on doit ajouter une nouvelle ligne !
 	$ajoute_new = (_request('niveau_rc_sens1-new') OR _request('niveau_rc_sens2-new') OR _request('produit2-new') OR _request('remarques-new') OR _request('risque_CCD-new'));
 
+	$couplets = array();
 	foreach($liste_des_rc as $id_rc){
 		if (intval($id_rc) OR $ajoute_new){
 			$post = array();
@@ -71,6 +77,15 @@ function formulaires_editer_reactions_croisees_verifier_dist($id_groupes_patient
 					$erreurs[preg_replace(',^id_,','',"$obli-$id_rc")] = _T('info_obligatoire');
 			if ($post['id_produit1']==$post['id_produit2'])
 				$erreurs["produit2-$id_rc"] = _T('editer_cohorte:erreur_produit_identique');
+
+			// verifier qu'on a pas 2 RC avec les memes produits
+			if (count(array_diff(array($post['id_produit1']."/".$post['id_produit2'],$post['id_produit2']."/".$post['id_produit1']),$couplets))<2){
+				$erreurs["produit1-$id_rc"] = _T('editer_cohorte:rc_doublonne');
+				$erreurs["produit2-$id_rc"] = _T('editer_cohorte:rc_doublonne');
+			}
+			else
+				$couplets[] = $post['id_produit1']."/".$post['id_produit2'];
+
 			// verifier le format des niveau_rc_sensx
 			foreach (array('niveau_rc_sens1','niveau_rc_sens2') as $check){
 				if (strlen($rc = $post[$check])){
@@ -98,7 +113,7 @@ function formulaires_editer_reactions_croisees_verifier_dist($id_groupes_patient
 }
 
 
-function formulaires_editer_reactions_croisees_traiter_dist($id_groupes_patient){
+function formulaires_editer_reactions_croisees_traiter_dist($id_groupes_patient, $retour){
 	$liste_des_rc = explode(',',_request('_liste_rc'));
 	$champs = array('id_produit1','id_produit2','niveau_rc_sens1','niveau_rc_sens2','remarques','risque_ccd') ;
 	// vilain hack
@@ -133,8 +148,6 @@ function formulaires_editer_reactions_croisees_traiter_dist($id_groupes_patient)
 					// annuler la saisie sur id new pour ne pas pre-remplir abusivement
 					set_request('niveau_rc_sens1-new','');
 					set_request('niveau_rc_sens2-new','');
-					set_request('produit2-new','');
-					set_request('id_produit2-new','');
 					set_request('remarques-new','');
 					set_request('risque_ccd-new','');
 				}
@@ -142,8 +155,11 @@ function formulaires_editer_reactions_croisees_traiter_dist($id_groupes_patient)
 			}
 		}
 	}
-	if ($res['message_ok'])
+	if ($res['message_ok']){
 		$res['message_ok']  = 'rc ' . $res['message_ok']. 'enregistr&eacute;es';
+		if (_request('finir'))
+			$res['redirect'] = parametre_url($retour,'id_groupes_patient',$id_groupes_patient);
+	}
 
 	return $res;
 }

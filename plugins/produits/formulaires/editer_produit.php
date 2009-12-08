@@ -32,9 +32,11 @@ function formulaires_editer_produit_verifier_dist($id_item='new', $id_parent=0, 
 		$oblis[] = 'commentaires';
 
 	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,$oblis);
-	
-	if (strlen(_request('nom_court'))>25
+
+	if ((strlen(_request('nom_court'))>25
 	 OR (!_request('nom_court') AND strlen(_request('nom'))>25))
+	 // le nom court n'est pas necessaire pour les produits en attente
+   AND (!in_array(_request('id_type_item'),array(23,25))))
 	 	$erreurs['nom_court'] = _T('editer_produit:erreur_nom_court_trop_long');
 
 	

@@ -39,15 +39,32 @@ function formulaires_editer_cohorte_charger_dist($id_groupes_patient='new', $id_
 }
 
 function formulaires_editer_cohorte_verifier_dist($id_groupes_patient='new', $id_bibliographie=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('tbl_groupes_patient',$id_groupes_patient,array('description'));
+	$oblis = array();
+	if (!_request('inexploitable'))
+		$oblis[] = 'description';
+
+	$erreurs = formulaires_editer_objet_verifier('tbl_groupes_patient',$id_groupes_patient,$oblis);
 
 	// verifier qu'on a bien une biblio de referencee !
 	if (!_request('id_bibliographie'))
 		$erreurs['message_erreur'] = _T('editer_cohorte:aucune_biblio_definie');
 		
-	if (_request('inexploitable')
-	AND (_request('tests_individuels') OR _request('tests_quantitatifs'))){
-		$erreurs['inexploitable'] = _T('editer_cohorte:incoherent');
+	if (_request('inexploitable')){
+		// on ne peut pas cocher cette case et en meme temps une des deux autres
+		if (_request('tests_individuels') OR _request('tests_quantitatifs')){
+			$erreurs['inexploitable'] = _T('editer_cohorte:incoherent');
+		}
+		// on ne peut pas cocher cette case si on sa des RC !
+		elseif(intval($id_groupes_patient)) {
+			if (sql_countsel('tbl_reactions_croisees','statut!=\'poubelle\' AND id_groupes_patient='.intval($id_groupes_patient)))
+				$erreurs['inexploitable'] = _T('editer_cohorte:incoherent_RC_existent');
+		}
+	}
+
+	if (count($erreurs)){
+		set_request('tests_individuels',intval(_request('tests_individuels')));
+		set_request('tests_quantitatifs',intval(_request('tests_quantitatifs')));
+		set_request('inexploitable',intval(_request('inexploitable')));
 	}
 
 	return $erreurs;
@@ -60,10 +77,23 @@ function formulaires_editer_cohorte_traiter_dist($id_groupes_patient='new', $id_
 	set_request('qualitatif',1-intval(_request('tests_quantitatifs')));
 	set_request('inexploitable',intval(_request('inexploitable')));
 
+
 	// vilain hack
 	set_request('action','editer_tbl_groupes_patient');
 	// hop traitons tout cela
-	return formulaires_editer_objet_traiter('tbl_groupes_patient',$id_groupes_patient,0,$lier,$retour,$config_fonc,$row,$hidden);
+	$res = formulaires_editer_objet_traiter('tbl_groupes_patient',$id_groupes_patient,0,$lier,$retour,$config_fonc,$row,$hidden);
+
+	// si c'est une creation qui a reussi et qu'on a pas coche 'pas de RC'
+	// rester sur la meme page pour permettre la saisie des RC
+	if (!$res['message_erreur']
+		AND !intval($id_groupes_patient)
+		AND !intval(_request('inexploitable'))){
+		$id = $res['id_groupes_patient'];
+		$res['redirect'] = parametre_url(self(),'edit',$id);
+		$res['redirect'] = ancre_url($res['redirect'],"formulaire_editer_reactions_croisees-$id");
+	}
+
+	return $res;
 }
 
 
