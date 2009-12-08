@@ -76,6 +76,11 @@
 				allerdata_importe_rq_items();
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.8','non');
 			}
+			if (version_compare($current_version,'0.1.1.0','<')){
+				include_spip('base/abstract_sql');
+				sql_alter("table tbl_items ADD nom_anglosaxon varchar(255) default NULL");
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.1.0','non');
+			}
 		}
 	}
 	

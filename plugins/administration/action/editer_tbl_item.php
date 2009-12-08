@@ -45,7 +45,7 @@ function tbl_items_set($id_item) {
 		'id_type_item', 'nom', 'source', 'famille', 'autre_nom', 'nom_complet', 'chaine_alpha', 
 		'interrogeable', 'testable', 'code_test', 'iuis', 'masse', 'glyco',
 		'id_niveau_allergenicite', 'affichage_suggestion', 'representatif',
-		'ccd_possible', 'information', 'fonction_classification', 'nom_court',
+		'ccd_possible', 'information', 'fonction_classification', 'nom_court', 'nom_anglosaxon',
 		'remarques', 'url'
 	) as $champ)
 		$c[$champ] = _request($champ);

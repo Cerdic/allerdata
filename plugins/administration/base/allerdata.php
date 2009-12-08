@@ -36,6 +36,7 @@ function allerdata_declarer_tables_principales($tables_principales){
 	  'id_item' => "int(11) NOT NULL",
 	  'id_type_item' => "int(11) default NULL",
 	  'nom' => "varchar(255) default NULL",
+	  'nom_anglosaxon' => "varchar(255) default NULL",
 	  'source' => "varchar(100) NOT NULL",
 	  'source_sans_accent' => "varchar(100) NOT NULL",
 	  'famille' => "varchar(100) NOT NULL

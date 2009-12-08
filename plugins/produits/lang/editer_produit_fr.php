@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_id_parent_3' => 'Est dans les produits',
 'label_id_type_item' => 'Type',
 'label_nom' => 'Nom',
+'label_nom_anglosaxon' => 'D&eacute;nomination Anglo-saxonne',
 'label_nom_court' => 'Nom court',
 'label_chaine_alpha' => 'Cha&icirc;ne liste',
 'label_ccd_possible' => 'CCD_possible',
