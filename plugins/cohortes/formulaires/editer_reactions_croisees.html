@@ -30,8 +30,9 @@
 	  	#SET{name,produit1-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_produit1 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 				<input type='hidden' name='id_#GET{name}' id='id_#GET{name}' value="#ENV{id_#GET{name}}" />
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				<div class="more">#MODELE{item_detail_rc,id_item=#ENV{id_#GET{name}},connect=''}</div>
 			</td>
 	  	#SET{name,niveau_rc_sens1-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_niveau_rc_sens1 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -46,8 +47,9 @@
 	  	#SET{name,produit2-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_produit2 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 				<input type='hidden' name='id_#GET{name}' id='id_#GET{name}' value="#ENV{id_#GET{name}}" />
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				<div class="more">#INCLURE{fond=modeles/item_detail_rc,id_item=#ENV{id_#GET{name}}}</div>
 			</td>
 	  	#SET{name,remarques-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_remarques editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -66,7 +68,16 @@
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'></span><a href='#SELF' class='ajax'>annuler les modifications</a> ou <input type='submit' class='submit' value='<:editer_cohorte:bouton_enregistrer_rc:>' /></p>
+	  <p class='boutons enregistre'><span class='image_loading'></span><a href='#SELF' class='ajax'>annuler les modifications</a> ou <input type='submit' class='submit' value='<:editer_cohorte:bouton_enregistrer_rc:>' /></p>
+	  <p class='boutons suite'><span class='image_loading'></span><a href='#' onclick="ajouter_nouvelle_rc(this);return false;">ajouter une autre RC</a> ou <input type='submit' class='submit' name="finir" value='<:editer_cohorte:bouton_finir_la_saisie:>' onclick="jQuery('#editer_rc-new').remove()"/></p>
+		<script type="text/javascript">
+			if (!jQuery('#editer_rc-new').find('.erreur_message').length){
+				jQuery('#editer_rc-new').css('visibility','hidden');
+				jQuery('#formulaire_#FORM-#ENV{id,nouveau}'+' p.boutons.enregistre').hide();
+			}
+			else
+				jQuery('#formulaire_#FORM-#ENV{id,nouveau}'+' p.boutons.suite').hide();
+		</script>
 	</div></form>
 </div>
 <script type='text/javascript' src='#CHEMIN{javascript/jquery.autocompleter.js}'></script>
