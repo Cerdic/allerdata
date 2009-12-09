@@ -10,10 +10,11 @@
 function biblio_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['journals']='tbl_journals';
-	$interface['table_des_tables']['bibilographies']='tbl_bibilographies';
+	$interface['table_des_tables']['bibliographies']='tbl_bibilographies';
 	
 	$interface['tables_jointures']['spip_articles'][]= 'bibliographies_articles';
 	$interface['tables_jointures']['tbl_bibliographies'][]= 'bibliographies_articles';
+	$interface['tables_jointures']['tbl_bibliographies'][]= 'tbl_bibliographies_versions';
 	
 	//-- Jointures ----------------------------------------------------
 	/*$interface['tables_jointures']['spip_evenements'][]= 'mots'; // a placer avant la jointure sur articles

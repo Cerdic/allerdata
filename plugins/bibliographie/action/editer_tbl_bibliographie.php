@@ -66,7 +66,7 @@ function insert_tbl_bibliographie($id = 0) {
 
 	$set = array(
 		'id_version' => -2, // indiquer une creation
-		'date' => 'NOW()',
+		'date' => 'NOW()', // date de creation
 		'statut'=>'publie', // on utilise que publie et poubelle
 	);
 

@@ -24,6 +24,34 @@ function boucle_tbl_bibliographies_dist($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
+function critere_tbl_bibliographies_derniere_version_dist($idb, &$boucles, $crit){
+	$boucle = $boucles[$idb];
+	$boucle->from['version'] = 'tbl_bibliographies_versions';
+	$boucle->join['version'] = array("'tbl_bibliographies'","'id_bibliographie'","'id_bibliographie'","'version.id_version=tbl_bibliographies.id_version'");
+	$boucle->from_type['version'] = 'LEFT';
+
+	$boucle->select['date_modif_version'] = 'version.date AS date_modif_version';
+	$boucle->select['id_auteur_version'] = 'version.id_auteur AS id_auteur_version';
+}
+
+// Si on est hors d'une boucle {derniere_version}, ne pas "prendre" cette balise
+function balise_DATE_MODIF_VERSION_dist($p) {
+	$p = rindex_pile($p, 'date_modif_version', 'derniere_version');
+	if (!$p->code or $p->code=="''"){
+		$p->code = champ_sql('date_modif_version', $p);
+	}
+	return $p;
+}
+// Si on est hors d'une boucle {derniere_version}, ne pas "prendre" cette balise
+function balise_ID_AUTEUR_VERSION_dist($p) {
+	$p = rindex_pile($p, 'id_auteur_version', 'derniere_version');
+	if (!$p->code or $p->code=="''"){
+		$p->code = champ_sql('id_auteur_version', $p);
+	}
+	return $p;
+}
+
+
 
 function biblio_trous(){
 	$res = sql_fetsel("count(id_bibliographie) as n,max(id_bibliographie) as m","tbl_bibliographies");
