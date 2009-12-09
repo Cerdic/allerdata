@@ -62,7 +62,7 @@ function critere_tbl_items_contient_dist($idb, &$boucles, $crit) {
 	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 
 	$boucle->from['ed'] = 'tbl_est_dans';
-	$boucle->join['ed'] = array('tbl_items','est_dans_id_item','id_item');
+	$boucle->join['ed'] = array("'tbl_items'","'est_dans_id_item'","'id_item'");
 	
 	$where = array("'='", "'ed.id_item'", $_id);
 	if ($not)
