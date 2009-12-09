@@ -13,6 +13,22 @@
 </BOUCLE_biblios>
 [<p class='pagination'>(#PAGINATION)</p>]
 </ul>
+<script>
+jQuery(".liste_items .biblio h3").each(function(){jQuery(this).qtip({
+		content: {
+			text: jQuery(this).siblings('.abstract')
+		},
+		style: {
+			tip: true,
+			name: 'blue', // Inherit from preset style
+			width: { max:220}
+		},
+		position: {
+		 corner: { target: 'leftTop', tooltip: 'rightTop' }
+		}
+	})
+});
+</script>
 </B_biblios>[
 (#ENV{id_bibliographie}|et{#ENV{statut}|=={publie}}|oui)
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_bibliographie,''},recherche}|unique)</p>]
