@@ -29,4 +29,9 @@ function allerdata_afficher_contenu_objet($flux){
 	}
 	return $flux;
 }
+
+function allerdata_header_prive($texte){
+	$texte .= "<script type='text/javascript' src='".find_in_path('javascript/jquery.qtip-1.0.0-rc3.js')."'></script>";
+	return $texte;
+}
 ?>

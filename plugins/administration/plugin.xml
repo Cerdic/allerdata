@@ -26,6 +26,10 @@ _ &#169; 2008 - Licence GPL
 		<args>page=comptes</args>
 	</bouton>
 	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>allerdata_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/allerdata.php</inclure>
 	</pipeline>
