@@ -33,5 +33,12 @@ _ &#169; 2008 - Licence GPL
 		<nom>autoriser</nom>
 		<inclure>cohorte_pipelines.php</inclure>
 	</pipeline>
+	<bouton id='cohorte' parent='allerdata'>
+		<titre>allerdata:cohortes</titre>
+		<icone>img_pack/cohorte-24.png</icone>
+		<url>allerdata</url>
+		<args>page=cohortes</args>
+	</bouton>
 	<necessite id='allerdata' version="[;]" />
+	<necessite id='biblio' version="[;]" />
 </plugin>
