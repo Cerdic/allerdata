@@ -134,6 +134,8 @@ function allerdata_declarer_tables_auxiliaires($tables_auxiliaires){
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"commentaires" => "text",
 		"diff" => "text", // liste des champs modifies avant/apres
+		"vu_id_auteur"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"vu_date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
   );
 	$tbl_items_versions_key = array (
 			"PRIMARY KEY"	=> "id_item, id_version");

@@ -76,6 +76,14 @@
 				cohorte_importe_ccd();
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.4','non');
 			}
+			if (version_compare($current_version,'0.1.0.5','<')){
+				include_spip('base/abstract_sql');
+				sql_alter("table tbl_groupes_patients_versions ADD vu_id_auteur bigint(21) DEFAULT 0 NOT NULL");
+				sql_alter("table tbl_groupes_patients_versions ADD vu_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+				sql_alter("table tbl_reactions_croisees_versions ADD vu_id_auteur bigint(21) DEFAULT 0 NOT NULL");
+				sql_alter("table tbl_reactions_croisees_versions ADD vu_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.5','non');
+			}
 		}
 	}
 	

@@ -82,6 +82,8 @@ function cohorte_declarer_tables_auxiliaires($tables_auxiliaires){
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"commentaires" => "text",
 		"diff" => "text", // liste des champs modifies avant/apres
+		"vu_id_auteur"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"vu_date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
   );
 	$groupes_patients_versions_key = array (
 			"PRIMARY KEY"	=> "id_groupes_patient, id_version");
@@ -96,6 +98,8 @@ function cohorte_declarer_tables_auxiliaires($tables_auxiliaires){
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"commentaires" => "text",
 		"diff" => "text", // liste des champs modifies avant/apres
+		"vu_id_auteur"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"vu_date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
   );
 	$reactions_croisees_versions_key = array (
 			"PRIMARY KEY"	=> "id_reactions_croisee, id_version");
