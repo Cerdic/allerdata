@@ -26,6 +26,9 @@ function allerdata_declarer_tables_interfaces($interface){
 		
 	$interface['table_date']['evenements'] = 'date_debut';*/
 
+
+	$interface['table_des_traitements']['COMMENTAIRES'][]= _TRAITEMENT_RACCOURCIS;
+
 	return $interface;
 }
 

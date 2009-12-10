@@ -7,6 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'allergenes' => 'Allerg&egrave;nes',
 'ajouter_est_dans' => 'Modifier',
 'annuler_recherche'=> 'Annuler la recherche',
+'accepter_revision' => 'Accepter la modification',
+'accepter_toutes_revisions' => 'Accepter toutes les modifications',
 
 // B
 'bouton_supprimer' => 'Supprimer',
@@ -62,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 'version' => 'Version',
 'version_originale' => 'Version orginale',
+'voir_modifications' => 'Voir les modifications',
 );
 
 

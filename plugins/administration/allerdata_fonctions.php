@@ -177,6 +177,7 @@ function allerdata_affiche_revision($diff){
 	if (is_array($diff)){
 		include_spip('inc/revisions');
 		include_spip('inc/diff');
+		$i=0;
 		foreach($diff as $k => $avap){
 			$diff = new Diff(new DiffTexte);
 			$avant = $apres = "";
@@ -186,15 +187,15 @@ function allerdata_affiche_revision($diff){
 			$o = preparer_diff(allerdata_field2string($avant));
 			$n = preparer_diff(allerdata_field2string($apres));
 			$diff = afficher_diff($diff->comparer($n,$o));
-				$res .= "<tr>"
-				. "<td><b>$k</b></td>"
+				$res .= "<tr class='row_".(($i++&1)?'even':'odd')."'>"
+				. "<td class='champ'><b>$k</b></td>"
 				#. "<td>$avant</td>"
 				#. "<td>$apres</td>"
-				. "<td>$diff</td>"
+				. "<td class='diff'>$diff</td>"
 				. "</tr>";
 		}
 	}
-	return $res ? "<table>$res</table>":"";
+	return $res ? "<table class='spip'><thead><tr class='row_first'><th class='champ'>Champ</th><th class='diff'>Modification</th></tr></thead><tbody>$res</tbody></table>":"";
 }
 
 function allerdata_selecteur_statut($statut,$name,$id=''){
