@@ -30,6 +30,8 @@ function biblio_declarer_tables_interfaces($interface){
 	$interface['exceptions_des_tables']['evenements']['id_rubrique']=array('spip_articles', 'id_rubrique');
 		
 	$interface['table_date']['evenements'] = 'date_debut';*/
+	
+	$interface['table_des_traitements']['ABSTRACT'][]= _TRAITEMENT_RACCOURCIS;
 
 	return $interface;
 }

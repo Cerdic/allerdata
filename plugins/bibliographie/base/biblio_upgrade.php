@@ -86,6 +86,28 @@
 				sql_insertq('tbl_biblio_notes',$ins);
 		}		
 	}
+
+	function biblio_importe_abstracts(){
+		if (lire_fichier(find_in_path('base/abstracts.txt'),$abstracts)){
+			$abstracts = explode("\n",$abstracts);
+			foreach($abstracts as $a){
+				if (preg_match(',^([0-9]+)[\s]+,',$a,$regs)){
+					$id_biblio = intval($regs[1]);
+					$a = substr($a,strlen($regs[0]));
+					if (strpos($a,"£££")!==FALSE){
+						$a = str_replace("£££","\n\n",$a);
+						#echo "$id_biblio:$a";
+						#die();
+					}
+					sql_updateq('tbl_bibliographies',array('abstract'=>$a),'id_bibliographie='.intval($id_biblio));
+				}
+				else {
+					echo "Erreur (ligne incomprehensible) : ".$a;
+					die();
+				}
+			}
+		}
+	}
 	
 	
 	function biblio_upgrade($nom_meta_base_version,$version_cible){
@@ -184,6 +206,12 @@
 				biblio_importe_references();
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.9','non');
 			}
+			if (version_compare($current_version,'0.1.1.0','<')){
+				include_spip('base/abstract_sql');
+				biblio_importe_abstracts();
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.1.0','non');
+			}
+
 		}
 	}
 	
