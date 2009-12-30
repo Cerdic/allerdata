@@ -87,6 +87,20 @@
 				sql_alter("table tbl_items_versions ADD vu_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.1.1','non');
 			}
+			if (version_compare($current_version,'0.1.1.3','<')){
+				include_spip('base/abstract_sql');
+				if (lire_fichier(find_in_path("base/noms-anglais.txt"),$noms_anglais)){
+					$noms_anglais = explode("\n",$noms_anglais);
+					include_spip('base/abstract_sql');
+					foreach($noms_anglais as $k=>$v){
+						$v = explode("\t",trim($v));
+						$id_item=intval($v[0]);
+						$nom=trim($v[1]);
+						sql_updateq("tbl_items", array('nom_anglosaxon'=>$nom),'id_item='.intval($id_item));
+					}
+				}
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.1.3','non');
+			}
 		}
 	}
 	
