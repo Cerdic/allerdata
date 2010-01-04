@@ -5,8 +5,8 @@
 </p>
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
-<BOUCLE_items(tbl_items){type_item #ENV{type_item}}{id_item?}{pagination 10}{tri nom}{recherche?}>
-<li class='item[ (#EXPOSE)]'>
+<BOUCLE_items(tbl_items){type_item #ENV{type_item}}{id_item?}{pagination 10}{tri nom}{recherche?}{statut IN prop,publie}>
+<li class='item[ (#EXPOSE)][ statut_(#STATUT)]' id="item#ID_ITEM">
 #MODELE{item_parents}
 [(#INCLURE{fond=modeles/item_#ENV{type_item}}{id_item})]
 #MODELE{item_enfants}
@@ -23,8 +23,8 @@
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id_item,recherche}|unique)</p>]
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
-<BOUCLE_items_attente(tbl_items){type_item #ENV{type_item}|concat{_en_attente}}{id_item?}{pagination 10}{par #ENV{tri,nom}}{recherche?}>
-<li class='item[ (#EXPOSE)]'>
+<BOUCLE_items_attente(tbl_items){type_item #ENV{type_item}|concat{_en_attente}}{id_item?}{pagination 10}{par #ENV{tri,nom}}{recherche?}{statut IN prop,publie}>
+<li class='item[ (#EXPOSE)][ statut_(#STATUT)]' id="item#ID_ITEM">
 #MODELE{item_parents}
 [(#INCLURE{fond=modeles/item_#ENV{type_item}}{id_item})]
 #MODELE{item_enfants}
@@ -39,7 +39,7 @@
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
 <BOUCLE_items_poubelle(tbl_items){tout}{type_item #ENV{type_item}}{statut=poubelle}{id_item?}{pagination 10}{par #ENV{tri,nom}}{recherche?}>
-<li class='item[ (#EXPOSE)]'>
+<li class='item[ (#EXPOSE)][ statut_(#STATUT)]' id="item#ID_ITEM">
 #MODELE{item_parents}
 [(#INCLURE{fond=modeles/item_#ENV{type_item}}{id_item})]
 #MODELE{item_enfants}

@@ -47,7 +47,18 @@ function formulaires_editer_famille_mol_traiter_dist($id_item='new', $id_parent=
 	// vilain hack
 	set_request('action','editer_tbl_item');
 	// hop traitons tout cela
-	return formulaires_editer_objet_traiter('tbl_item',$id_item,$id_parent,$lier,$retour,$config_fonc,$row,$hidden);
+	$res = formulaires_editer_objet_traiter('tbl_item',$id_item,$id_parent,$lier,$retour,$config_fonc,$row,$hidden);
+	if (!$res['message_erreur'] AND $retour){
+		$retour = parametre_url($retour,'retour|debut_items|debut_items_poubelle|debut_items_attente', '');
+		$debut = "debut_items";
+		$row = sql_fetsel("statut, id_type_item",'tbl_items','id_item='.intval($res['id_item']));
+		if ($row['statut']=='poubelle')
+			$debut = "debut_items_poubelle";
+		elseif(in_array($row['id_type_item'],allerdata_id_type_item('famille_mol_en_attente')))
+			$debut = "debut_items_attente";
+		$res['redirect'] = ancre_url(parametre_url($retour,$debut,'@'.$res['id_item']),'item'.$res['id_item']);
+	}
+	return $res;
 }
 
 
