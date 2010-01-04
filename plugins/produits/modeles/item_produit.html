@@ -3,7 +3,7 @@
 <span class='origine'><BOUCLE_source(tbl_items){id_item=#ID_ITEM|penta_ascendant_le_plus_proche{source}}> Source: <a href='#URL_ECRIRE{allerdata,page=sources&id_item=#ID_ITEM}'>#NOM</a></BOUCLE_source></span>
 <span class='numero'>##ID_ITEM</span>
 <h3 class='repliable'>[(#NOM|sinon{<:info_sans_titre:>})]</h3>
-[<em>(#NOM_COURT)</em>]
+[<em>(#NOM_ANGLOSAXON|sinon{indisponible})</em>]
 [<p>(#REMARQUES_ITEM)</p>]
 </div>
 </BOUCLE_produit>
