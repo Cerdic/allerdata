@@ -14,9 +14,17 @@
  * @return array
  */
 function allerdata_rechercher_liste_des_champs($liste){
-	$liste['tbl_item'] = array('nom'=>4,'chaine_alpha'=>1,/*,'source'=>1,'famille'=>1*/);
+	$liste['tbl_item'] = array('nom'=>4,'nom_anglosaxon'=>4,'nom_court'=>2,'chaine_alpha'=>2,/*,'source'=>1,'famille'=>1*/);
 	return $liste;
 }
+
+function allerdata_rechercher_liste_des_jointures($liste){
+	$liste['tbl_item'] = array(
+		'tbl_item' => array('nom'=>4,'nom_anglosaxon'=>4,'nom_court'=>2,'chaine_alpha'=>2,/*,'source'=>1,'famille'=>1*/)
+		);
+	return $liste;
+}
+
 
 function allerdata_afficher_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur'){

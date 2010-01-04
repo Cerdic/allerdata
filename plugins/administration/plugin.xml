@@ -46,6 +46,10 @@ _ &#169; 2008 - Licence GPL
 		<inclure>allerdata_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>rechercher_liste_des_jointures</nom>
+		<inclure>allerdata_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>allerdata_autoriser.php</inclure>
 	</pipeline>
