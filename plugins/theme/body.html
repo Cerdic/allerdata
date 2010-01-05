@@ -1,0 +1,32 @@
+<div id="container" class="clearfix">
+
+	<div id="header" class="clearfix">
+		[(#REM)	HEADER / ENTETE ]
+		<INCLURE{fond=inclure/entete,env}>
+	</div>
+
+	<div id="menu">
+		[(#REM)	MAIN NAVIGATION / NAVIGATION PRINCIPALE ]
+		<INCLURE{fond=inclure/barre-nav,env}>
+	</div>
+	<p id="ariane"><a href="#">Accueil</a> / <strong>Erreur 404</strong></p>
+
+	<div id="contenu" class="clearfix">
+		<div id="main">
+			[(#REM)	CONTENT / CONTENU ]
+			<INCLURE{fond=contenu/#ENV{type},env}>
+		</div>
+		<div id="sidebar">
+			[(#REM)	SECONDARY NAVIGATION SIDEBAR / Navigation laterale secondaire ]
+			<INCLURE{fond=navigation/#ENV{type},env}>
+
+			[(#REM)	EXTRA INFORMATIONS / Informations complementaires
+			Also in "sidebar" as this template has only two columns]
+			<INCLURE{fond=extra/#ENV{type},env}>
+		</div>
+	</div>
+	<div id="footer">
+			[(#REM)	FOOTER / Pied de page ]
+			<INCLURE{fond=inclure/pied,env}>
+	</div>
+</div>

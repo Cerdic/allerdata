@@ -1,0 +1,13 @@
+<plugin>
+	<nom>Habillage visuel d'Allerdata</nom>
+	<auteur>Allerdata</auteur>
+	<licence>Tous droits réservés</licence>
+  <version>1.0</version>
+	<description>
+	Habillage visuel de d'Allerdata v1.
+	</description>
+  <icon>vignette.jpg</icon>
+  <etat>stable</etat>
+  <prefix>theme</prefix>
+	<utilise id="Z" version="[1.2.0;]" />
+</plugin>
