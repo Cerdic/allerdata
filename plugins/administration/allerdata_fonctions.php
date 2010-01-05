@@ -116,6 +116,9 @@ function allerdata_id_type_item($type,$tous=false){
 			else
 				return array(7,8,9,10);
 			break;
+		case 'allergene_recombinant':
+				return array(9);
+			break;
 		case 'allergene_en_attente':
 			return array(18);
 			break;

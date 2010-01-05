@@ -16,6 +16,7 @@
  */
 function critere_tbl_items_est_dans_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 
 	$boucle->from['ed'] = 'tbl_est_dans';
@@ -37,6 +38,7 @@ function critere_tbl_items_est_dans_dist($idb, &$boucles, $crit) {
  */
 function critere_tbl_items_est_directement_dans_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 
 	$boucle->from['ed'] = 'tbl_est_dans';
@@ -59,6 +61,7 @@ function critere_tbl_items_est_directement_dans_dist($idb, &$boucles, $crit) {
  */
 function critere_tbl_items_contient_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 
 	$boucle->from['ed'] = 'tbl_est_dans';
@@ -80,6 +83,7 @@ function critere_tbl_items_contient_dist($idb, &$boucles, $crit) {
  */
 function critere_tbl_items_contient_directement_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$_id = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 
 	$boucle->from['ed'] = 'tbl_est_dans';
@@ -103,10 +107,11 @@ function critere_tbl_items_contient_directement_dist($idb, &$boucles, $crit) {
  */
 function critere_tbl_items_type_item_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$_type = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
 	$boucle->where[] = "sql_in('".$boucle->id_table.".id_type_item',allerdata_id_type_item($_type"
 	  .($boucle->modificateur['tout']?",true":"")
-	  .")".($boucle->not?",'NOT'":"").")";
+	  .")".($not?",'NOT'":"").")";
 }
 
 function critere_tbl_types_items_type_item_dist($idb, &$boucles, $crit) {
@@ -123,6 +128,7 @@ function critere_tbl_types_items_type_item_dist($idb, &$boucles, $crit) {
  */
 function critere_tbl_items_famille_taxo_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$where = array("'='", "'$boucle->id_table." . "id_type_item'", 2);
 	if ($not)
 		$where = array("'NOT'",$where);
@@ -139,6 +145,7 @@ function critere_tbl_items_famille_taxo_dist($idb, &$boucles, $crit) {
  */
 function critere_tbl_items_famille_mol_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$where = array("'='", "'$boucle->id_table." . "id_type_item'", 6);
 	if ($not)
 		$where = array("'NOT'",$where);
@@ -156,6 +163,7 @@ function critere_tbl_items_famille_mol_dist($idb, &$boucles, $crit) {
  */
 function critere_tbl_items_produit_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$where = array("'IN'", "'$boucle->id_table." . "id_type_item'", "'(3,5,23,25,13)'");
 	if ($not)
 		$where = array("'NOT'",$where);
@@ -172,6 +180,7 @@ function critere_tbl_items_produit_dist($idb, &$boucles, $crit) {
  */
 function critere_tbl_items_allergene_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$where = array("'IN'", "'$boucle->id_table." . "id_type_item'", "'(7,8,9,10,18)'");
 	if ($not)
 		$where = array("'NOT'",$where);
@@ -188,6 +197,7 @@ function critere_tbl_items_allergene_dist($idb, &$boucles, $crit) {
  */
 function critere_tbl_items_source_dist($idb, &$boucles, $crit) {
 	$boucle = $boucles[$idb];
+	$not = $crit->not;
 	$where = array("'='", "'$boucle->id_table." . "id_type_item'", 4);
 	if ($not)
 		$where = array("'NOT'",$where);

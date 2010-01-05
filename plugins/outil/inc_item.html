@@ -81,7 +81,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<BOUCLE_allergenes(tbl_items){type_item allergene}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
+						<BOUCLE_allergenes(tbl_items){type_item allergene}{!type_item allergene_recombinant}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
 							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 							<td>[(#FONCTION_CLASSIFICATION|=={#NOM}|non)#NOM]</td>
 							<td>#FONCTION_CLASSIFICATION</td>
