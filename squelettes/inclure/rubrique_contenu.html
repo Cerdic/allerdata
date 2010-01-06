@@ -3,7 +3,7 @@
 				<h1 class="h2"><:articles:></h1>
 				<ul class="listeArticles">
 					<BOUCLE_ListeArticles(ARTICLES){id_rubrique}{!par date}{tout_voir}>
-[(#INCLURE{fond=inc_rubrique_contenu_detail_article}{id_article})]
+					[(#INCLURE{fond=inclure/rubrique_contenu_detail_article}{id_article})]
 					</BOUCLE_ListeArticles>
 				</ul>
 				</B_ListeArticles>
@@ -44,6 +44,6 @@
 				</div>]
 </BOUCLE_DemandeAcces>
 <?php } else { ?>
-<p>C'est vraiment surprenant d'être arrivé là !</p>
+<p>C'est vraiment surprenant d'etre arrive la !</p>
 <?php } ?>
 <//B_RubriquePrincipale>

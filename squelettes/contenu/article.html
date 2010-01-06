@@ -1,0 +1,17 @@
+<BOUCLE_EstPentagramme(ARTICLES){id_article}{tout_voir}{titre_mot=Pentagramme}>
+<INCLURE{fond=contenu/article-proto}{env}/>
+</BOUCLE_EstPentagramme>
+<BOUCLE_RubriqueAriane(ARTICLES){id_article=#ENV{id_multirubrique,#ID_ARTICLE}}{tout_voir}>
+<p id="ariane"><a href="./">Accueil</a> /<BOUCLE_FilAriane(HIERARCHIE){id_article}> <a href="#URL_RUBRIQUE">#TITRE</a> /</BOUCLE_FilAriane> <strong>#TITRE</strong></p>
+</BOUCLE_RubriqueAriane>
+
+<BOUCLE_testsirestreint(ARTICLES){id_article}>
+[(#INCLURE{fond=inclure/article_contenu}{id_article})]
+</BOUCLE_testsirestreint>
+[(#ID_ARTICLE|AccesRestreint_article_restreint|oui)
+<INCLURE{fond=inclure/acces_reserve}{letitre=#TITRE}>
+]
+<//B_testsirestreint>
+
+<div id="footnotes"></div>
+<//B_EstPentagramme>

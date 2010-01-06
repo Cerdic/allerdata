@@ -1,24 +1,3 @@
-<BOUCLE_RubriquePrincipale(RUBRIQUES){id_rubrique}{tout_voir}>[
-(#INCLURE{fond=inc_header}{titrepage=#TITRE})]
-		<p id="ariane"><a href="./">Accueil</a> /<BOUCLE_FilAriane(HIERARCHIE){id_rubrique}> <a href="#URL_RUBRIQUE">#TITRE</a> /</BOUCLE_FilAriane> <strong>#TITRE</strong></p>
-		
-		<div id="contenu" class="clearfix">
-			
-			<div id="main">
-			<BOUCLE_testrubrestreinte(RUBRIQUES){id_rubrique}>
-				[(#INCLURE{fond=inc_rubrique_contenu}{id_rubrique})]
-			</BOUCLE_testrubrestreinte>
-				[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|oui)
-				<INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
-				]
-			<//B_testrubrestreinte>
-			</div>
-			
-			<div id="sidebar">
-			[(#INCLURE{fond=inc_menu}{id_rubrique})]
-			</div>
-			
-		</div>
-	</div>
-[(#INCLURE{fond=inc_footer}{id_rubrique})]
-</BOUCLE_RubriquePrincipale>
+<BOUCLE_principale_rubrique(RUBRIQUES){id_rubrique}{tout_voir}>
+<INCLURE{fond=structure}{env}{type=rubrique}{composition} />
+</BOUCLE_principale_rubrique>

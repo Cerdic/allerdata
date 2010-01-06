@@ -1,0 +1,12 @@
+<BOUCLE_RubriquePrincipale(RUBRIQUES){id_rubrique}{tout_voir}>
+<p id="ariane"><a href="./">Accueil</a> /<BOUCLE_FilAriane(HIERARCHIE){id_rubrique}> <a href="#URL_RUBRIQUE">#TITRE</a> /</BOUCLE_FilAriane> <strong>#TITRE</strong></p>
+		
+<BOUCLE_testrubrestreinte(RUBRIQUES){id_rubrique}>
+	[(#INCLURE{fond=inclure/rubrique_contenu}{id_rubrique})]
+</BOUCLE_testrubrestreinte>
+	[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|oui)
+	<INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
+	]
+<//B_testrubrestreinte>
+
+</BOUCLE_RubriquePrincipale>

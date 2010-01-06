@@ -1,0 +1,15 @@
+<BOUCLE_RubriqueMenu(ARTICLES){id_article=#ENV{id_multirubrique,#ID_ARTICLE}}{tout_voir}>
+				[(#INCLURE{fond=navigation/rubrique}{id_rubrique})]
+				<B_MemeRubrique>
+				<h2><:ad:memerubrique:></h2>
+				<ul id="memeRubrique">
+					<BOUCLE_MemeRubrique(ARTICLES){id_rubrique}{exclus}{tout_voir}>
+					<li>
+						<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+						<p>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
+					</li>
+					</BOUCLE_MemeRubrique>
+				</ul>
+				</B_MemeRubrique>
+			</div>
+</BOUCLE_RubriqueMenu>

@@ -1,12 +1,4 @@
 [(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
-<BOUCLE_testsirestreint(ARTICLES){id_article}>
 <div id="main" class="popup_aide">
-[(#INCLURE{fond=inc_article_contenu}{id_article})]
+[(#INCLURE{fond=contenu/article}{id_article})]
 </div>
-</BOUCLE_testsirestreint>
-<div id="main" class="popup_aide">
-[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})
-<INCLURE{fond=inc_acces_reserve}{letitre=#TITRE}>
-]
-</div>
-<//B_testsirestreint>
