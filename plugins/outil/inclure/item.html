@@ -11,7 +11,42 @@
 				[<p style="text-align:right;margin-top:1.5em;">En savoir plus&nbsp;: <a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','spip.php?page=article_popup&id_article=#ID_ARTICLE'); return false;">(#TITRE)</a></p>]
 				</div>]
 				</BOUCLE_Chapeau>
-				
+
+				<B_famille_taxo>
+				<div class="blocContenuArticle">
+				<h2><:allerdata:famille_taxo:></h2>
+				<p style="text-align:center;"><i>
+				<BOUCLE_famille_taxo(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{id_item!=#ID_ITEM}{', '}{!isnull nom}{par nom}>
+					<a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a>
+				</BOUCLE_famille_taxo>
+				</i></p>
+				</div>
+				</B_famille_taxo>
+
+				<BOUCLE_it_ft(tbl_items){id_item}{type_item famille_taxo}>
+					<div class="blocContenuArticle">
+					<h2><:allerdata:famille_taxo_contient_produits:></h2>
+					<table summary="Les allerg&egrave;nes de [(#NOM|sinon{NA})]" class="spip">
+						<thead><tr class="row_first">
+						<th>Nom</th>
+						<th>Source</th>
+						<th>Testable</th>
+						</tr>
+						</thead>
+						<tbody>
+							<BOUCLE_t5ft(tbl_items){id_type_item=5}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
+							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
+							#SET{testable,0}
+							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></td>
+							<td><i><BOUCLE_sources5ft(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5ft></i></td>
+							<td style="text-align:center;font-size:1.5em;">[(#GET{testable}|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+							</tr>
+							</BOUCLE_t5ft>
+						</tbody>
+						</table>
+					</div>
+				</BOUCLE_it_ft>
+
 				<BOUCLE_it3(tbl_items){id_item}{id_type_item=3}>
 					<div class="blocContenuArticle">
 					<h2>Ce groupe g&eacute;n&eacute;rique contient les produits</h2>
@@ -29,7 +64,7 @@
 							#SET{testable,0}
 							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></td>
 							<td><i><BOUCLE_sources5(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5></i></td>
-							<td><BOUCLE_famille_taxo5(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_famille_taxo5></td>
+							<td><BOUCLE_famille_taxo5(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par nom}{!isnull nom}{', '}><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></BOUCLE_famille_taxo5></td>
 							<td style="text-align:center;font-size:1.5em;">[(#GET{testable}|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
 							</tr>
 							</BOUCLE_t5>

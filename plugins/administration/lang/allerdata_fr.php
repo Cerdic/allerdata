@@ -24,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'enfants' => '@nb@ descendants',
 
 // F
+'famille_taxo' => 'Famille Taxonomique',
+'famille_taxo_contient_produits' => 'Cette famille taxonomique contient les produits',
 'famille_taxos' => 'Familles Taxonomiques',
 'famille_mols' => 'Familles Mol&eacute;culaires',
 
