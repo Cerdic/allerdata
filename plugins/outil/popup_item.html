@@ -3,10 +3,10 @@
 <div id="main">
 <?php if ($GLOBALS['auteur_session']) { ?>
 	
-				[(#INCLURE{fond=inc_item}{id_item})]
+				[(#INCLURE{fond=inclure/item}{id_item})]
 
 <?php } else { ?>
-<INCLURE{fond=inc_acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]}>
+<INCLURE{fond=inclure/acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]}>
 <?php } ?>
 </div>
 </BOUCLE_Items>

@@ -1,0 +1,60 @@
+<p id="ariane"><a href="./"><:accueil:></a> / <strong><:assistant_moleculaire:></strong></p>
+
+  <div id="sous-container">
+    <?php if ($GLOBALS['auteur_session']) { ?>
+    
+      <INCLURE{fond=inc/loading_block}>
+      <div id="conteneur-east">
+        <div id="grid-panel-fm">
+          <div class="x-dlg-bd">
+            <div id="grid-liste-fm"></div>
+          </div>
+        </div>
+        <div id="ccd">
+          <iframe id="ccd-iframe" frameborder="0" style="border:0px none;overflow:auto;" scrolling="auto"></iframe>
+        </div>
+      </div>   
+      <div id="content">
+        <div id="pentagramme">
+          <div class="x-dlg-bd">
+            <INCLURE{fond=inc/pentagramme}>
+          </div>
+        </div>
+        <div id="inner1">
+          <div id="testsCliniques">
+            <div class="x-dlg-bd">
+            </div>    
+          </div>
+          <div id="suggestions">
+              <div class="x-dlg-bd">
+                <div id="grid-liste-sugg"></div>
+              </div>
+					</div>
+				</div>
+			</div>
+	</div>
+  <div id="tabpanel-win" class="x-hidden" style="display:none">
+     <div class="x-window-header">Boite de dialogue avec tabulation</div>
+     <div id="popup-dlg-tab">
+     </div>
+  </div>
+
+  [(#INCLURE{fond=inc-proto-scripts}|compacte_head)]
+	<script type='text/javascript'>
+		jQuery(document).ready(function(){jQuery('#tabpanel-win').remove().appendTo(jQuery('body'))});
+		function loadFormPenta(){
+			<BOUCLE_pour(POUR){tableau 1:5}><BOUCLE_p(tbl_items){id_item=#ENV{p#VALEUR}}>
+					ZONES_SAISIE.combo[#VALEUR].setValue('[(#NOM|texte_script)]');
+					ZONES_SAISIE.combo[#VALEUR].triggers[0].show();
+					jQuery('#p#VALEUR').val('[(#ENV{p#VALEUR}|texte_script)]');
+			</BOUCLE_p></BOUCLE_pour>
+			jQuery('#form_penta').submit();
+			</B_pour>
+		}
+	</script>
+
+	<?php } else { ?>
+		<div style="padding:0 60px">
+		<INCLURE{fond=inclure/acces_reserve}{letitre=<:assistant_moleculaire:>}>
+		</div>
+	<?php } ?>

@@ -1,0 +1,12 @@
+<BOUCLE_Items(tbl_items){id_item}>
+	<BOUCLE_RubriqueAriane(ARTICLES){id_article=#ENV{id_multirubrique,#ID_ARTICLE}}{tout_voir}>
+	<p id="ariane"><a href="./">Accueil</a> /<BOUCLE_FilAriane(HIERARCHIE){id_article}> <a href="#URL_RUBRIQUE">#TITRE</a> /</BOUCLE_FilAriane> <strong>#_ArticlePrincipal:TITRE</strong></p>
+	</BOUCLE_RubriqueAriane>
+		
+	<?php if ($GLOBALS['auteur_session']) { ?>
+	[(#INCLURE{fond=inclure/item}{id_item})]
+	<?php } else { ?>
+	<INCLURE{fond=inclure/acces_reserve}{letitre=(#NOM|sinon{NA})}>
+	<?php } ?>
+
+</BOUCLE_Items>

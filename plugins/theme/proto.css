@@ -10,13 +10,14 @@ body * {
 	color:#000;
 }
 body {
-	background: #000000 url(../../images/bg_body.gif) repeat-x scroll left top
+	background: #000000 url(images/bg_body.gif) repeat-x scroll left top
 }
 #main table.spip caption {
   margin: 20px 0 4px;
 }
 #container #contenu {
-	padding: 0 0 45px 0;
+	padding-right:0;
+	padding-left:0;
 }
 #sous-container {
 	width: 835px;

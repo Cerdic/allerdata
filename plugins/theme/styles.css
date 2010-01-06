@@ -1,7 +1,7 @@
 html, body { 
 	margin: 0; 
 	padding: 0; 
-	background: #000;
+	background: #709BD4;
 	color: #fff; 
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -111,7 +111,7 @@ a:hover {
 
 ul.listeArticles {
 	padding: 0 0 40px 0 !important;
-	background: transparent url(../images/bg_listeArticles.gif) bottom center no-repeat;
+	background: transparent url(images/bg_listeArticles.gif) bottom center no-repeat;
 }
 
 ul.articlesEntiers {
@@ -132,11 +132,11 @@ ul.articlesEntiers {
 }
 
 .listeArticles li.listeFormation {
-	background-image: url(../images/puce_sommaire_formation.gif);
+	background-image: url(images/puce_sommaire_formation.gif);
 }
 
 .listeArticles li.listeOutils {
-	background-image: url(../images/puce_sommaire_outils.gif);
+	background-image: url(images/puce_sommaire_outils.gif);
 }
 
 p.dateSommaire {
@@ -243,7 +243,7 @@ acronym.spip_acronym {
 
 div.hrspip {
 	clear: both;
-	background: #fff url(../images/bg_listeArticles.gif) no-repeat center bottom;
+	background: #fff url(images/bg_listeArticles.gif) no-repeat center bottom;
 	margin: 8px auto;
 	height: 1px;
 	border: 0 none;
@@ -322,7 +322,7 @@ input, select, textarea {
 /** Structure **/
 /***************/
 
-/* blocs flott�s */
+/* blocs flottes */
 
 .floatLeft {
 	float: left;
@@ -337,7 +337,7 @@ input, select, textarea {
 }
 
 body {
-	background: #000 url(../images/bg_body.gif) top left repeat-x;
+	background: #709BD4 url(images/bg_body.jpg) top left repeat-x;
 	padding: 43px 0 5px 0;
 }
 
@@ -352,30 +352,28 @@ body {
 	height: auto !important;
 	min-height: 948px;
 	height: 948px;
-	background: transparent url(../images/bg_container.png) top left repeat-y;
+	background: #FFFFFF;
 	color: #414042;
 }
 
 * html #container {
 	height: 100%;
-	background-image: none;
-	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/bg_container.png', sizingMethod='scale');
 }
 
 #header {
-	background: transparent url(../images/bg_header.gif) top left no-repeat;
+	background: none;
 	margin: 0 0 25px 0;
 	position: relative;
 }
 
 #contenu {
 	margin: 0 3px;
-	padding: 0 57px 45px 30px;
+	padding: 2.5em 57px 45px 30px;
 	position: relative;
 }
 
 #footer {
-	background: transparent url(../images/bg_footer.gif) bottom left no-repeat;
+	background: #FFFFFF;
 	width: 841px;
 	margin: 0 auto 0 auto;
 	position: relative;
@@ -385,7 +383,7 @@ body {
 }
 
 
-/* d�tails des blocs principaux dans l'ordre de l'html */
+/* details des blocs principaux dans l'ordre de l'html */
 
 #prelude {
 	float: right;
@@ -438,7 +436,7 @@ label.over-apply {
 #menu {
 	clear: both;
 	text-align: center;
-	background: transparent url(../images/bg_top_menu.gif) top center no-repeat;
+	background: transparent url(images/bg_top_menu.gif) top center no-repeat;
 	padding: 4px 0 0 0;
 	margin: 0 3px;
 	font-size: 15px;
@@ -447,8 +445,8 @@ label.over-apply {
 }
 
 #menu ul {
-	/*background: transparent url(../images/bg_bottom_menu.gif) bottom center no-repeat;*/
-	background: transparent url(../images/bg_top_menu.gif) bottom center no-repeat;
+	/*background: transparent url(images/bg_bottom_menu.gif) bottom center no-repeat;*/
+	background: transparent url(images/bg_top_menu.gif) bottom center no-repeat;
 	padding: 0 0 7px 0;
 }
 
@@ -464,10 +462,13 @@ label.over-apply {
 	color: #414042;
 }
 
-#ariane {
+#ariane,#hierarchie {
+	padding:0;
 	font-size: 10px;
-	margin: 10px 60px;
-	position: relative;
+	margin: 10px 57px;
+	position: absolute;
+	top:0;
+	left:0;
 }
 
 #main {
@@ -475,14 +476,16 @@ label.over-apply {
 	width: 530px;
 	margin: 30px 0 0 0;
 }
+.page_sommaire #main,.page_plan #main,.page_404 #main,.article_proto #main {float:none;width:auto;margin:0;padding:0;}
 
 #sidebar {
 	float: left;
 	width: 165px;
 	padding: 0 25px 0 0;
 	margin: 30px 0 0 0;
-	background: transparent url(../images/bg_sommaire.gif) center right no-repeat;
+	background: transparent url(images/bg_sommaire.gif) center right no-repeat;
 }
+.page_sommaire #sidebar,.page_plan #sidebar,.page_404 #sidebar,.article_proto #sidebar {display:none;}
 
 #footer, #footer a {
 	color: #666567;
@@ -576,27 +579,27 @@ label.over-apply {
 	float: left;
 }
 
-.sommaire h2 {
+#main .sommaire h2 {
 	padding: 0;
 }
 
-.sommaire .listeArticles {
+#main .sommaire .listeArticles {
 	padding: 0;
 	background-image: none;
 }
 
-.sommaire li {
+#main .sommaire li {
 	width: 305px;
 	padding: 0 0 0 25px;
 	background-position: 5px 5px;
 }
 
-.sommaire .lireSuite {
+#main .sommaire .lireSuite {
 	margin-top: -15px;
 }
 
 #sommaire1 {
-	background: transparent url(../images/bg_sommaire.gif) center right no-repeat;
+	background: transparent url(images/bg_sommaire.gif) center right no-repeat;
 	margin: 0 0 0 35px;
 }
 
@@ -642,32 +645,32 @@ label.over-apply {
 
 #rubriques li {
 	padding: 0 0 2px 12px;
-	background: transparent url(../images/puce_rubriques_n1_f.gif) left .4em no-repeat;
+	background: transparent url(images/puce_rubriques_n1_f.gif) left .4em no-repeat;
 	clear: both;
 }
 
 #rubriques li.collapsable {
-	background-image: url(../images/puce_rubriques_n1_o.gif);
+	background-image: url(images/puce_rubriques_n1_o.gif);
 }
 
 #rubriques li.expandable {
-	background-image: url(../images/puce_rubriques_n1_f.gif);
+	background-image: url(images/puce_rubriques_n1_f.gif);
 }
 
 #rubriques li li.collapsable {
-	background-image: url(../images/puce_rubriques_n2_o.gif);
+	background-image: url(images/puce_rubriques_n2_o.gif);
 }
 
 #rubriques li li.expandable, #rubriques li li {
-	background-image: url(../images/puce_rubriques_n2_f.gif);
+	background-image: url(images/puce_rubriques_n2_f.gif);
 }
 
 #rubriques li li li.collapsable {
-	background-image: url(../images/puce_rubriques_n3_o.gif);
+	background-image: url(images/puce_rubriques_n3_o.gif);
 }
 
 #rubriques li li li.expandable, #rubriques li li li {
-	background-image: url(../images/puce_rubriques_n3_f.gif);
+	background-image: url(images/puce_rubriques_n3_f.gif);
 }
 
 #rubriques li.open > a {
@@ -681,12 +684,12 @@ label.over-apply {
 	padding: 0 0 20px 0;
 	font-size: 9px;
 	font-family: Arial, Helvetica, sans-serif;
-	background: transparent url(../images/bg_memeRubrique.gif) bottom center no-repeat;
+	background: transparent url(images/bg_memeRubrique.gif) bottom center no-repeat;
 }
 
 #memeRubrique li {
 	padding: 0 0 0 12px;
-	background: transparent url(../images/puce_memeRubrique.gif) left .4em no-repeat;
+	background: transparent url(images/puce_memeRubrique.gif) left .4em no-repeat;
 }
 
 #memeRubrique li h3 {
@@ -699,7 +702,7 @@ label.over-apply {
 .blocContenuArticle, .blocMoreArticle {
 	padding: 0 0 15px 0;
 	margin: 0 0 20px 0;
-	background: transparent url(../images/bg_listeArticles.gif) bottom center no-repeat;
+	background: transparent url(images/bg_listeArticles.gif) bottom center no-repeat;
 }
 
 .blocMoreArticle {
@@ -719,7 +722,7 @@ label.over-apply {
 /*listes imbriqu�es dans les articles de spip*/
 
 .spip li { 
-	background: transparent url(../images/pucearticle01.png) left .6em no-repeat;
+	background: transparent url(images/pucearticle01.png) left .6em no-repeat;
 	padding-left: 13px;
 	margin: 0 0 5px 5px;
 }
@@ -729,13 +732,13 @@ label.over-apply {
 }
 
 .spip .spip li { 
-   background-image: url(../images/pucearticle02.png);
+   background-image: url(images/pucearticle02.png);
 	margin-left: -13px;
 	padding-left: 26px;
 } 
 
 .spip .spip .spip li { 
-   background-image: url(../images/pucearticle03.png);
+   background-image: url(images/pucearticle03.png);
 	padding-left: 39px;
 	margin-left: -26px;
 }
@@ -751,7 +754,7 @@ label.over-apply {
 #plan h2 {
 	font-weight: normal;
 	font-size: 1em;
-	background: transparent url(../images/puce_plan.gif) center left no-repeat;
+	background: transparent url(images/puce_plan.gif) center left no-repeat;
 	padding: 0 0 0 15px;
 }
 
