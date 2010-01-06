@@ -866,7 +866,7 @@ font-family:Verdana,Arial,Helvetica,sans-serif;
 font-size:1em;
 font-weight:bold;
 padding:0.4em;
-width:100px;
+min-width:100px;
 }
 .formulaire_spip label {
 margin-top:0.4em;
