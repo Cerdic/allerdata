@@ -1,0 +1,21 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]<B_revisionsb>
+<h3 class="title">Biblios (#GRAND_TOTAL)</h3>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items'>
+<BOUCLE_revisionsb(tbl_bibliographies_versions){vu_id_auteur=0}{!par date}{pagination 10}>
+<li class='item'>[(#DATE|date_relative)] ##ID_VERSION [par (#INFO_NOM{auteur,#ID_AUTEUR})]
+[(#INCLURE{fond=modeles/reference}{id=#ID_BIBLIOGRAPHIE})]
+<div class="actions">
+	[(#AUTORISER{accepterrevision,item,#ID_ITEM})
+	[&#91;(#BOUTON_ACTION{<:allerdata:accepter_revision:>,#URL_ACTION_AUTEUR{accepter_revision,tbl_bibliographies_versions-#ID_BIBLIOGRAPHIE-#ID_VERSION,#SELF},ajax})&#93;]
+	]&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_bibliographie=#ID_BIBLIOGRAPHIE}|parametre_url{retour,#SELF})]'><:allerdata:voir_modifications:></a>&#93;
+</div>
+</BOUCLE_revisionsb>
+</ul>
+</B_revisionsb>

@@ -1,0 +1,26 @@
+<BOUCLE_rc(tbl_reactions_croisees){id_reactions_croisee}{statut?}>
+<div class='rc'><span class='numero'>##ID_REACTIONS_CROISEE</span>
+<BOUCLE_cohorte(tbl_groupes_patients){id_groupes_patient}{statut?}>
+<span class='groupe'><a href="#URL_ECRIRE{allerdata,page=cohorte&id_groupes_patient=#ID_GROUPES_PATIENT}">Groupe #NOM</a>[ (#INCLURE{fond=modeles/biblio}{id=#ID_BIBLIOGRAPHIE})]</span>
+</BOUCLE_cohorte>
+	<table class="spip">
+		<thead>
+			<tr class="first_row">
+				<th>Produit 1</th>
+				<th>&rarr;</th>
+				<th>&larr;</th>
+				<th>Produit 2</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="row_odd">
+				<td><BOUCLE_item1(tbl_items){id_item=#ID_PRODUIT1}>[<span>(#NOM*)</span>][(#MODELE{item_detail_rc,id_item})]</BOUCLE_item1></td>
+				<td>#NIVEAU_RC_SENS1</td>
+				<td>#NIVEAU_RC_SENS2</td>
+				<td><BOUCLE_item2(tbl_items){id_item=#ID_PRODUIT2}>[<span>(#NOM*)</span>][(#MODELE{item_detail_rc,id_item})]</BOUCLE_item2></td>
+			</tr>
+		</tbody>
+	</table>
+[<div class='description'>(#REMARQUES)</div>]
+</div>
+</BOUCLE_rc>
