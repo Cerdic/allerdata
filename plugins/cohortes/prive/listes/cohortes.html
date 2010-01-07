@@ -1,7 +1,7 @@
 	<B_inc1>
 		<div class="alerte">
 		<ul class='liste_items'>
-		<BOUCLE_inc1(tbl_groupes_patients){id_groupes_patient?}{id_bibliographie?}{recherche?}{statut?}{statut=publie}{inexploitable=1}><BOUCLE_rc(tbl_reactions_croisees){id_groupes_patient}{0,1}>
+		<BOUCLE_inc1(tbl_groupes_patients){id_groupes_patient?}{id_bibliographie?}{recherche?}{statut?}{statut IN publie,prop}{inexploitable=1}><BOUCLE_rc(tbl_reactions_croisees){id_groupes_patient}{0,1}>
 			<li class='item[ (#EXPOSE)]'>
 			[(#INCLURE{fond=modeles/cohorte}{id_groupes_patient})]
 			Inexploitable !
@@ -18,7 +18,7 @@
 [(#TRI{id_bibliographie,'#id_biblio'}) | ][(#TRI{date,date}) | ]
 </p>[<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
-<BOUCLE_cohortes(tbl_groupes_patients){id_groupes_patient?}{id_bibliographie?}{pagination 10 #VAL{c_}|concat{#ENV{statut}}}{tri id_bibliographie,#ARRAY{'',1,date,-1}}{recherche?}{statut?}>
+<BOUCLE_cohortes(tbl_groupes_patients){id_groupes_patient?}{id_bibliographie?}{pagination 10 #VAL{c_}|concat{#ENV{statut}|implode{'_'}}}{tri id_bibliographie,#ARRAY{'',1,date,-1}}{recherche?}{statut?}>
 <li class='item[ (#EXPOSE)][ statut_(#STATUT)]' id="cohorte#ID_GROUPES_PATIENT">
 [(#INCLURE{fond=modeles/cohorte}{id_groupes_patient})]
 #MODELE{boutons_action_cohorte,id_groupes_patient=#ID_GROUPES_PATIENT,self=#SELF,id_bibliographie=#ID_BIBLIOGRAPHIE}

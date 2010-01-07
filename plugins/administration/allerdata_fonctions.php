@@ -207,7 +207,7 @@ function allerdata_selecteur_statut($statut,$name,$id=''){
 	. ($id?" id='$id'":"")
 	. ">";
 	foreach($etats as $affiche => $s){
-		if (in_array($s,array(/*'prepa',*/'publie','poubelle'))){
+		if (in_array($s,array('prop','publie','poubelle'))){
 			$selected = "";
 			$res .= "<option value='$s'"
 			.(($s==$statut)?' selected="selected"':'')

@@ -2,12 +2,16 @@
 
 [(#ENV{edit}|non)
 #FORMULAIRE_RECHERCHE{#SELF}
-[(#ENV{recherche}|ou{#ENV{id_item}}|oui)<a href='[(#SELF|parametre_url{recherche|id_item|x|y,''})]'><:allerdata:annuler_recherche:></a>]
+
+[(#ENV{recherche}|ou{#ENV{id_bibliographie}}|ou{#ENV{id_groupes_patient}}|oui)<a href='[(#SELF|parametre_url{recherche|id_bibliographie|id_groupes_patient|x|y,''})]'><:allerdata:annuler_recherche:></a>]
 
 [(#ENV{id_bibliographie}|oui)
 [<div class="bouton_creer">(#VAL{cohorte:icone_creer_cohorte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=cohortes&edit=new&id_bibliographie=#ID_BIBLIOGRAPHIE},#CHEMIN{img_pack/cohorte-24.png},'creer.gif','right'})</div>]
+<h2>Reference</h2>
+<div class="item cohorte_biblio">#MODELE{reference,id=#ENV{id_bibliographie}}</div>
 ]
-<INCLURE{fond=prive/listes/cohortes}{statut=publie}{env}{ajax}>
+
+[(#INCLURE{fond=prive/listes/cohortes,statut=#ARRAY{0,publie,1,prop},env,ajax}|sinon{#ENV{id_bibliographie}|?{Aucun groupe pour cette reference biblio}})]
 
 [<h1><:cohorte:cohortes_poubelle:></h1>
 (#INCLURE{fond=prive/listes/cohortes}{statut=poubelle}{env}{ajax})]

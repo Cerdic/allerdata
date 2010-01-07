@@ -33,9 +33,9 @@ function autoriser_item_instituer($faire,$quoi,$id,$qui,$options){
 	if (!$qui['statut']=='0minirezo') return false;
 	if ($qui['restreint']) return false;
 	include_spip('base/abstract_sql');
-	// si le statut est deja poubelle, on autorise !
+	// si le statut est non publie, on autorise !
 	$statut = sql_getfetsel('statut','tbl_items','id_item='.intval($id));
-	if ($statut=='poubelle') return true;
+	if ($statut!=='publie') return true;
 	return autoriser('supprimer','item',$id,$qui,array('statut'=>$statut));
 }
 

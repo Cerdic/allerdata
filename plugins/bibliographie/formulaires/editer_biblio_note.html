@@ -19,7 +19,7 @@
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'>
+	  <p class='boutons notes'>
 	  <a href='#' 
 		onclick="jQuery('#note-id_biblio_note').attr('value','new');jQuery('#note-texte').html('');jQuery(this).hide();return false;" 
 		[(#ID_BIBLIO_NOTE|intval|non)style='display:none;']
@@ -28,4 +28,10 @@
 	</div></form>
 	]
 </div>
+<script type="text/javascript">
+	jQuery(function() {
+		jQuery("#note-texte").keypress(function(){jQuery(".boutons.notes .submit").show();});
+		jQuery(".boutons.notes .submit").hide();
+	});
+</script>
 <INCLURE{fond=prive/listes/biblio_notes}{id_bibliographie}{ajax}{env}>

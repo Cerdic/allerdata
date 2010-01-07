@@ -3,10 +3,10 @@
 
 [(#ENV{edit}|non)
 #FORMULAIRE_RECHERCHE{#SELF}
-[(#ENV{recherche}|ou{#ENV{id_item}}|oui)<a href='[(#SELF|parametre_url{recherche|id_item|x|y,''})]'><:allerdata:annuler_recherche:></a>]
+[(#ENV{recherche}|ou{#ENV{id_bibliographie}}|oui)<a href='[(#SELF|parametre_url{recherche|id_bibliographie|id_groupes_patient|x|y,''})]'><:allerdata:annuler_recherche:></a>]
 
 [<div class="bouton_creer">(#VAL{allerdata:icone_creer_biblio}|_T|icone_inline{#URL_ECRIRE{allerdata,page=biblios&edit=new},#CHEMIN{img_pack/bibliographie-24.png},'creer.gif','right'})</div>]
-<INCLURE{fond=prive/listes/biblios}{statut=publie}{env}{ajax}>
+<INCLURE{fond=prive/listes/biblios}{statut=#ARRAY{0,publie,1,prop}}{env}{ajax}>
 
 [<h1><:allerdata:bibliographie_poubelle:></h1>
 (#INCLURE{fond=prive/listes/biblios}{statut=poubelle}{env}{ajax})]

@@ -26,7 +26,7 @@ function autoriser_cohorte_supprimer($faire,$quoi,$id,$qui,$options){
 	 OR $statut = sql_getfetsel('statut','tbl_groupes_patients','id_groupes_patient='.intval($id)))
 		if ($statut=='poubelle') return false;
 	// interdit si la cohorte a des RC
-	if (sql_countsel('tbl_reactions_croisees','id_groupes_patient='.intval($id)))
+	if (sql_countsel('tbl_reactions_croisees',"statut!='poubelle' AND id_groupes_patient=".intval($id)))
 		return false;
 	return true;
 }
@@ -47,9 +47,9 @@ function autoriser_cohorte_instituer($faire,$quoi,$id,$qui,$options){
 	if (!$qui['statut']=='0minirezo') return false;
 	if ($qui['restreint']) return false;
 	include_spip('base/abstract_sql');
-	// si le statut est deja poubelle, on autorise !
+	// si le statut est non publie, on autorise !
 	$statut = sql_getfetsel('statut','tbl_groupes_patients','id_groupes_patient='.intval($id));
-	if ($statut=='poubelle') return true;
+	if ($statut!=='publie') return true;
 	return autoriser('supprimer','cohorte',$id,$qui,array('statut'=>$statut));
 }
 

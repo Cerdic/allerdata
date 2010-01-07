@@ -93,8 +93,8 @@ function formulaires_editer_cohorte_traiter_dist($id_groupes_patient='new', $id_
 		$res['redirect'] = ancre_url($res['redirect'],"formulaire_editer_reactions_croisees-$id");
 	}
 	elseif (!$res['message_erreur'] AND $retour){
-		$retour = parametre_url($retour,'retour|debutc_publie|debutc_poubelle', '');
-		$debut = "debutc_publie";
+		$retour = parametre_url($retour,'retour|debutc_publie_prop|debutc_poubelle', '');
+		$debut = "debutc_publie_prop";
 		if (sql_getfetsel("statut", "tbl_groupes_patients", "id_groupes_patient=".intval($res['id_groupes_patient']))=='poubelle')
 			$debut = "debutc_poubelle";
 		$res['redirect'] = ancre_url(parametre_url($retour,$debut,'@'.$res['id_groupes_patient']),'cohorte'.$res['id_groupes_patient']);

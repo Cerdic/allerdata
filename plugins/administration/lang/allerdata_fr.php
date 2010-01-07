@@ -14,10 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_supprimer' => 'Supprimer',
 'bouton_arborescence' => 'Chaines',
 'bibliographie' => 'Bibliographie',
+'biblio_interdit_instituer' => 'Cette r&eacute;f&eacute;rence est utilis&eacute;e et ne peut &ecirc;tre depubli&eacute;e',
 
 // C
 'confirm_suppression' => '&Ecirc;tes-vous certain de vouloir supprimer cet item ?',
 'cohortes' => 'Groupes de patients',
+'cohorte_interdit_instituer' => 'Ce groupe de patient est associ&eacute; a des RC et ne peut &ecirc;tre depubli&eacute;',
 
 // E
 'un_enfant' => '1 descendant',
@@ -36,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_source' => 'Creer un organisme source',
 'icone_creer_produit' => 'Creer un produit',
 'icone_creer_biblio' => 'Ajouter une r&eacute;f&eacute;rence',
+'item_interdit_instituer' => 'Cet item a des enfants et ne peut &ecirc;tre depubli&eacute;',
 
 // L
 'label_commentaires' => 'Commentaires sur la modification',

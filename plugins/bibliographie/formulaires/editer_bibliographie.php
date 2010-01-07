@@ -180,8 +180,8 @@ function formulaires_editer_bibliographie_traiter_dist($id_bibliographie='new', 
 	// hop traitons tout cela
 	$res = formulaires_editer_objet_traiter('tbl_bibliographie',$id_bibliographie,0,$lier,$retour,$config_fonc,$row,$hidden);
 	if (!$res['message_erreur'] AND $retour){
-		$retour = parametre_url($retour,'retour|debutb_publie|debutb_poubelle', '');
-		$debut = "debutb_publie";
+		$retour = parametre_url($retour,'retour|debutb_publie_prop|debutb_poubelle', '');
+		$debut = "debutb_publie_prop";
 		if (sql_getfetsel("statut", "tbl_bibliographies", "id_bibliographie=".intval($res['id_bibliographie']))=='poubelle')
 			$debut = "debutb_poubelle";
 		$res['redirect'] = ancre_url(parametre_url($retour,$debut,'@'.$res['id_bibliographie']),'biblio'.$res['id_bibliographie']);
