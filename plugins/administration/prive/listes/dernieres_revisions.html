@@ -1,14 +1,14 @@
 <h2>Derni&egrave;res modifications &agrave; relire</h2>
-<div id="modifications" class="ui-tabs">
+<div id="listes" class="ui-tabs">
 #SET{nomodif,'Aucune modification'}
 
-[<div id="modifItems" class="modif">(#INCLURE{fond=prive/listes/revisions_items}{env}{ajax})</div>
+[<div id="modifItems" class="tabListe">(#INCLURE{fond=prive/listes/revisions_items}{env}{ajax})</div>
 #SET{nomodif,''}]
-[<div id="modifBilio" class="modif">(#INCLURE{fond=prive/listes/revisions_biblio}{env}{ajax})</div>
+[<div id="modifBilio" class="tabListe">(#INCLURE{fond=prive/listes/revisions_biblio}{env}{ajax})</div>
 #SET{nomodif,''}]
-[<div id="modifCohortes" class="modif">(#INCLURE{fond=prive/listes/revisions_cohortes}{env}{ajax})</div>
+[<div id="modifCohortes" class="tabListe">(#INCLURE{fond=prive/listes/revisions_cohortes}{env}{ajax})</div>
 #SET{nomodif,''}]
-[<div id="modifRC" class="modif">(#INCLURE{fond=prive/listes/revisions_rc}{env}{ajax})</div>
+[<div id="modifRC" class="tabListe">(#INCLURE{fond=prive/listes/revisions_rc}{env}{ajax})</div>
 #SET{nomodif,''}]
 
 [<strong>(#GET{nomodif})</strong>]
@@ -16,27 +16,7 @@
 <BOUCLE_test(CONDITION){si #GET{nomodif}|non}>
 <script type="text/javascript" src="[(#CHEMIN{javascript/ui.core.js}|compacte)]"></script>
 <script type="text/javascript" src="[(#CHEMIN{javascript/ui.tabs.js}|compacte)]"></script>
-<script type="text/javascript">
-	jQuery(function() {
-		var ul = jQuery("<ul></ul>");
-		jQuery("#modifications > .modif").each(function(){
-			var id = jQuery(this).attr('id');
-			ul.append("<li class='"+id+"'><a href='#"+id+"'>"+jQuery("h3.title",this).eq(0).html()+"</a></li>");
-		});
-		jQuery("#modifications").prepend(ul);
-		jQuery('#modifications > ul').tabs({ fx: { opacity: 'toggle' } });
-	});
-	function update_tab_titles(){
-		jQuery("#modifications > .modif").each(function(){
-			var id = jQuery(this).attr('id');
-			var title = '-';
-			if (jQuery("h3.title",this).length)
-				title = jQuery("h3.title",this).eq(0).html();
-			jQuery('#modifications > ul > li.'+id+' > a').html(title);
-		});
-	}
-	onAjaxLoad(update_tab_titles);
-</script>
+<script type="text/javascript" src="[(#CHEMIN{javascript/allerdata.home.js}|compacte)]"></script>
 <style type="text/css">
 	@import url([(#CHEMIN{ui-lightness/ui.tabs.css}|compacte)]);
 	.ui-tabs {font-size: 0.75em;}

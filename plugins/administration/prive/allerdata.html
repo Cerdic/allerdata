@@ -1,15 +1,7 @@
 <h1>Administration d'Allerdata</h1>
 #FORMULAIRE_RECHERCHE{#SELF}
 [(#ENV{recherche}|ou{#ENV{id_item}}|non)
-#INCLURE{fond=prive/allerdata_compteurs}
+#INCLURE{fond=prive/allerdata_compteurs,env}
 ][(#ENV{recherche}|ou{#ENV{id_item}}|oui)
-<a href='[(#SELF|parametre_url{recherche|id_item|x|y,''})]'><:allerdata:annuler_recherche:></a>
-
-[(#INCLURE{fond=prive/listes/items}{type_item=famille_taxo}{env}{ajax})]
-[(#INCLURE{fond=prive/listes/items}{type_item=famille_mol}{env}{ajax})]
-[(#INCLURE{fond=prive/listes/items}{type_item=source}{env}{ajax})]
-[(#INCLURE{fond=prive/listes/items}{type_item=produit}{env}{ajax})]
-[(#INCLURE{fond=prive/listes/items}{type_item=allergene}{env}{ajax})]
-
-<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+#INCLURE{fond=prive/home_recherche,env}
 ]

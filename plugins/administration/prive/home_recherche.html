@@ -1,0 +1,30 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+<a href='[(#SELF|parametre_url{recherche|id_item|x|y,''})]'><:allerdata:annuler_recherche:></a>
+<div id="listes" class="ui-tabs">
+#SET{noresults,'Aucun r&eacute;sultat'}
+
+[<div id="resultsTaxo" class="tabListe">(#INCLURE{fond=prive/listes/items}{type_item=famille_taxo}{env}{ajax})</div>#SET{noresults,''}]
+[<div id="resultsMol" class="tabListe">(#INCLURE{fond=prive/listes/items}{type_item=famille_mol}{env}{ajax})</div>#SET{noresults,''}]
+[<div id="resultsSource" class="tabListe">(#INCLURE{fond=prive/listes/items}{type_item=source}{env}{ajax})</div>#SET{noresults,''}]
+[<div id="resultsProduit" class="tabListe">(#INCLURE{fond=prive/listes/items}{type_item=produit}{env}{ajax})</div>#SET{noresults,''}]
+[<div id="resultsAllergene" class="tabListe">(#INCLURE{fond=prive/listes/items}{type_item=allergene}{env}{ajax})</div>#SET{noresults,''}]
+
+[<strong>(#GET{noresults})</strong>]
+</div>
+<BOUCLE_test(CONDITION){si #GET{noresults}|non}>
+<script type='text/javascript' src='[(#CHEMIN{js/allerdata.repliable.js}|compacte)]'></script>
+<script type="text/javascript" src="[(#CHEMIN{javascript/ui.core.js}|compacte)]"></script>
+<script type="text/javascript" src="[(#CHEMIN{javascript/ui.tabs.js}|compacte)]"></script>
+<script type="text/javascript" src="[(#CHEMIN{javascript/allerdata.home.js}|compacte)]"></script>
+<style type="text/css">
+	@import url([(#CHEMIN{ui-lightness/ui.tabs.css}|compacte)]);
+	.ui-tabs {font-size: 0.75em;}
+	.ui-tabs-panel h2 {display:none;}
+</style>
+</BOUCLE_test>
