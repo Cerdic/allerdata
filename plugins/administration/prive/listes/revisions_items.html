@@ -4,7 +4,7 @@
   (c) 2009 xxx
   Distribue sous licence GPL
 
-]<B_revisions>
+]#SET{tous,''}<B_revisions>
 <h3 class="title">Items (#GRAND_TOTAL)</h3>
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
@@ -14,10 +14,16 @@
 [(#INCLURE{fond=modeles/item_#GET{type_item}}{id_item})]</BOUCLE_item>
 	<div class="actions">
 		[(#AUTORISER{accepterrevision,item,#ID_ITEM})
-		[&#91;(#BOUTON_ACTION{<:allerdata:accepter_revision:>,#URL_ACTION_AUTEUR{accepter_revision,tbl_items_versions-#ID_ITEM-#ID_VERSION,#SELF},ajax})&#93;]
+		[&#91;(#BOUTON_ACTION{<:allerdata:accepter_revision:>,#URL_ACTION_AUTEUR{accepter_revision,tbl_items_versions-#ID_ITEM:#ID_VERSION,#SELF},ajax})&#93;]
 		]&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_item=#ID_ITEM}|parametre_url{retour,#SELF})]'><:allerdata:voir_modifications:></a>&#93;
+		#SET{tous,#GET{tous}|concat{'-',#ID_ITEM,':',#ID_VERSION}}
 	</div>
 </li>
 </BOUCLE_revisions>
 </ul>
+[(#TOTAL_BOUCLE|>{1}|oui)
+<div class="actions">
+	[&#91;(#BOUTON_ACTION{#VAL{Accepter ces }|concat{#TOTAL_BOUCLE,' modifications'},#URL_ACTION_AUTEUR{accepter_revision,tbl_items_versions#GET{tous},#SELF},ajax})&#93;]
+</div>
+]
 </B_revisions>

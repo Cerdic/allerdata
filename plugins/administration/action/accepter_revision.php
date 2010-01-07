@@ -10,6 +10,10 @@ function action_accepter_revision_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$arg = $securiser_action();
 
+	// tbl_items_versions-#ID_ITEM:#ID_VERSION
+	// tbl_items_versions-#ID_ITEM:#ID_VERSION-#ID_ITEM:#ID_VERSION-#ID_ITEM:#ID_VERSION
+	// tbl_items_versions-#ID_ITEM:ALL
+	// tbl_items_versions-ALL:ALL
 	$arg = explode('-',$arg);
 	$table = array_shift($arg);
 	$trouver_table = charger_fonction('trouver_table','base');
@@ -22,13 +26,20 @@ function action_accepter_revision_dist(){
 	$set = array('vu_id_auteur' => $GLOBALS['visiteur_session']['id_auteur'],'vu_date' => 'NOW()');
 	
 	include_spip('base/abstract_sql');
-	// mettre a jour la revision, avec une secu sur double ecriture :
-	$where = "vu_id_auteur=0";
-	$where .= " AND ".$primary[0]."=".intval($arg[0]);
-	if ($arg[1]!=="ALL")
-		$where .= " AND ".$primary[1]."=".intval($arg[1]);
-	// le premier qui passe est conserve
-	sql_updateq($table,$set,$where);
+	foreach($arg as $item){
+		list($id,$version) = explode(':',$item);
+		// mettre a jour la revision, avec une secu sur double ecriture :
+		$where = "vu_id_auteur=0";
+
+		if ($id!=="ALL"){
+			$where .= " AND ".$primary[0]."=".intval($id);
+			// toutes les revisions d'un objet
+			if ($version!=="ALL")
+				$where .= " AND ".$primary[1]."=".intval($version);
+			// le premier qui passe est conserve
+		}
+		sql_updateq($table,$set,$where);
+	}
 
 }
 
