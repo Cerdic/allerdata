@@ -845,6 +845,8 @@ border: solid 1px #41C0EC;
 	color:#4A4336;
 }
 
+.formulaire_menu_langue label {margin-left:0;float: none;display:block;width:auto;}
+
 .formInfo a, .formInfo a:active, forminfo a:visited {
 color:#FFFFFF;
 float:right;
