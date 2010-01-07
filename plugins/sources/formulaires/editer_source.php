@@ -54,8 +54,8 @@ function formulaires_editer_source_traiter_dist($id_item='new', $id_parent=0, $r
 		$row = sql_fetsel("statut, id_type_item",'tbl_items','id_item='.intval($res['id_item']));
 		if ($row['statut']=='poubelle')
 			$debut = "debut_items_poubelle";
-		elseif(in_array($row['id_type_item'],allerdata_id_type_item('source_en_attente')))
-			$debut = "debut_items_attente";
+		//elseif(in_array($row['id_type_item'],allerdata_id_type_item('source_en_attente')))
+		//	$debut = "debut_items_attente";
 		$res['redirect'] = ancre_url(parametre_url($retour,$debut,'@'.$res['id_item']),'item'.$res['id_item']);
 	}
 	return $res;
