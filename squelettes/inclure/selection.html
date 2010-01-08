@@ -6,15 +6,15 @@
 
 ]
 <B_selections>
-	<div id="selection" class="liste selection">
-		<h2><:ma_selection:></h2>
+	<div class="liste favoris">
+		<h2><:mesfavoris:mes_favoris:></h2>
 		[<p class="pagination">(#PAGINATION)</p>]
 		<ul class="liste-items">
-			<BOUCLE_selections(NOTATIONS){!par maj}{id_auteur}{pagination 10}>
+			<BOUCLE_selections(FAVORIS){!par maj}{id_auteur}{pagination 10}>
 				<li class="item">
 					<a href="#INFO_URL{#OBJET,#ID_OBJET}">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
 					<span class="date"><span class="sep"> - </span>[<:ajoute_le:> (#MAJ|affdate_court)]</span>
-					[(#BOUTON_ACTION{<:jaimeplus:>,#URL_ACTION_AUTEUR{supprimer_notation,#ID_NOTATION,#SELF},ajax})]
+					[(#BOUTON_ACTION{<:mesfavoris:remove:>,#URL_ACTION_AUTEUR{supprimer_favori,#ID_FAVORI,#SELF},ajax})]
 				</li>
 			</BOUCLE_selections>
 		</ul>

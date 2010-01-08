@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // M
 'masse' => "Masse",
 'mon_profil' => 'Mon profil',
-'ma_selection' => 'Ma selection d\'articles',
+'mes_favoris' => 'Ma selection d\'articles',
 
 
 //N

@@ -9,7 +9,7 @@
 <BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
 	<div id="blocTitArticle"><h1 class="titArticle">#NOM</h1></div>
 
-	[(#INCLURE{fond=inclure/selection}{env}{id_auteur}{ajax})]
+	[(#INCLURE{fond=inclure/mesfavoris}{env}{id_auteur}{ajax})]
 
 </BOUCLE_auteur>
 <INCLURE{fond=inclure/acces_reserve}{letitre=<:mon_profil:>}>
