@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'allergenicite' => "Allergenicit&eacute;",
 'assistant_moleculaire' => "Outil",
 'aucun_resultat' => "Aucun r&eacute;sultat",
+'ajoute_le' => 'Ajout&eacute; le',
 
 
 // B
@@ -35,7 +36,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 				ci-dessous le nom d'utilisateur et le mot de passe qui vous ont &eacute;t&eacute; envoy&eacute;s !",
 'interrogeable' => "Interrogeable",
 'iuis' => "IUIS",
-	
+
+// J
+'jaime' => 'Selectionner',
+'jaimeplus' => 'Retirer',
+
 //L
 'loading' => "Chargement",
 'login_login' => "Nom d'utilisateur&nbsp;:",
@@ -44,6 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'masse' => "Masse",
+'mon_profil' => 'Mon profil',
+'ma_selection' => 'Ma selection d\'articles',
 
 
 //N

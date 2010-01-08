@@ -1,0 +1,16 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+<p id="ariane"><a href="./"><:accueil:></a> / <strong><:mon_profil:></strong></p>
+<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+	<div id="blocTitArticle"><h1 class="titArticle">#NOM</h1></div>
+
+	[(#INCLURE{fond=inclure/selection}{env}{id_auteur}{ajax})]
+
+</BOUCLE_auteur>
+<INCLURE{fond=inclure/acces_reserve}{letitre=<:mon_profil:>}>
+<//B_auteur>

@@ -2,7 +2,7 @@
 <BOUCLE_EstPentagramme(MOTS){id_article}{titre=Pentagramme}>
 <INCLURE{fond=contenu/article-proto}{env}/>
 </BOUCLE_EstPentagramme>
-<p id="ariane"><a href="./">Accueil</a> /<BOUCLE_FilAriane(HIERARCHIE){id_article}> <a href="#URL_RUBRIQUE">#TITRE</a> /</BOUCLE_FilAriane> <strong>#TITRE</strong></p>
+<p id="ariane"><a href="./"><:accueil:></a> /<BOUCLE_FilAriane(HIERARCHIE){id_article}> <a href="#URL_RUBRIQUE">#TITRE</a> /</BOUCLE_FilAriane> <strong>#TITRE</strong></p>
 
 <BOUCLE_testsirestreint(ARTICLES){id_article}>
 [(#INCLURE{fond=inclure/article_contenu}{id_article})]
