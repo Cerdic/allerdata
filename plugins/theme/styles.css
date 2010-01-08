@@ -891,6 +891,58 @@ margin:1em 0pt 0pt;
 padding:0.6em;
 }
 
+
+.formulaire_notation {float:right;width:150px}
+.formulaire_notation .note,.formulaire_notation .star-rating {display:none;}
+.formulaire_notation form {float:right;text-align:right;}
+.formulaire_notation form .jaime {padding-bottom:26px;background:url(images/bookmark-grey-add-24.png) no-repeat bottom right;}
+.formulaire_notation form .jaime:hover {background-image:url(images/bookmark-add-24.png);}
+.formulaire_notation form .jaimeplus {padding-bottom:26px;background:url(images/bookmark-grey-remove-24.png) no-repeat bottom right;}
+.formulaire_notation form .jaimeplus:hover {background-image:url(images/bookmark-remove-24.png);}
+.formulaire_jaime form .submit:hover {font-weight:normal;font-style:italic;}
+
+
+.liste > h2 {text-align:left;}
+.menu-liste, .liste-items  {list-style:none;}
+.liste-items {padding:0;margin:0;border-bottom:1px solid #eee;}
+.liste-items .item {padding:5px;clear:both;overflow:hidden;border-top:1px solid #eee;}
+#contenu .liste-items {padding:0;}
+
+.menu-liste {
+	list-style: none;
+	text-align: left;
+	margin: 7px 0px 8px;
+	padding: 0;
+	text-decoration: none;
+	border-top: 1px solid #C6C6C6;
+}
+.menu-liste .menu-entree {
+	list-style: none;
+	padding: 4px 5px;
+	margin: 0 2px;
+	color: #777;
+	border-bottom: 1px solid #C6C6C6;
+}
+* html body .menu-liste .menu-entree {
+	height: 1%;
+}
+.menu-liste .menu-entree a {text-decoration: none;	color: #1773BC; }
+.menu-liste .menu-entree a:hover {color: #333;}
+.menu-liste .menu-liste { margin-left: 5px; }
+.menu-liste .menu-liste .menu-entree { border: none; }
+
+/* selection articles */
+#main .liste.selection > h2 {padding-left:30px;background:url(images/bookmark-24.png) no-repeat left 30px;}
+.selection .item .date {font-style:italic;color:#999;font-size:0.9em;}
+
+form.bouton_action_post {display:inline;}
+form.bouton_action_post input.submit {margin:0;font-weight:normal;}
+form.bouton_action_post input.submit {background:none;border:0;cursor:pointer;padding:0 0 1px;}
+form.bouton_action_post input.submit:hover {font-style:italic;}
+#main .selection .item form.bouton_action_post {display:block;float:right;}
+
+
+
 a.jTip {
 background:transparent none repeat scroll 0%;
 color:#41C0EC !important;
