@@ -201,8 +201,14 @@ function allerdata_affiche_revision($diff){
 	return $res ? "<table class='spip'><thead><tr class='row_first'><th class='champ'>Champ</th><th class='diff'>Modification</th></tr></thead><tbody>$res</tbody></table>":"";
 }
 
+$GLOBALS['liste_des_etats_items'] = array(
+		'allerdata:item_statut_propose_evaluation' => 'prop',
+		'texte_statut_publie' => 'publie',
+		'texte_statut_poubelle' => 'poubelle',
+	);
 function allerdata_selecteur_statut($statut,$name,$id=''){
-	$etats = $GLOBALS['liste_des_etats'];
+	$etats = $GLOBALS['liste_des_etats_items'];
+
 	$res = "<select name='$name'"
 	. ($id?" id='$id'":"")
 	. ">";
@@ -222,7 +228,7 @@ function allerdata_selecteur_statut($statut,$name,$id=''){
 
 function allerdata_puce_statut($statut){
 	include_spip('inc/puce_statut');
-	$etats = $GLOBALS['liste_des_etats'];
+	$etats = $GLOBALS['liste_des_etats_items'];
 
 	$res .=
 	  "<ul id='instituer_article-$id_article' class='instituer_article instituer'>" 
