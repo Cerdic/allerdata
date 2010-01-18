@@ -5,7 +5,7 @@
 />#NOM (##ID_ITEM)[(#ID_TYPE_ITEM|in_array{#GET{type_att}}|oui)&#91;En attente&#93;] [<a href='#'(#ENV{select}|non)
 onclick='jQuery(this).item_unpick();return false;'><img src='#ENV{img_unpick}' /></a>]<em>, </em></li>
 </BOUCLE_items></ul>[
-<a href='#' onclick="$(this).hide().next().show();return false;" class='ajouter_est_dans'><:allerdata:ajouter_est_dans:></a><div style='display:none;'>
+<a href='#' onclick="$(this).hide().next().show().find('select').get(0).focus();return false;" class='ajouter_est_dans'><:allerdata:ajouter_est_dans:></a><div style='display:none;'>
 <div class='item_picker'>(#INCLURE{fond=modeles/navigateur_items}{env}{selected=''}{ajax}{type_att=#GET{type_att}})</div>
 <script type='text/javascript'>var img_unpick = '#ENV{img_unpick}';</script>
 <script type='text/javascript' src='#CHEMIN{javascript/item_picker.js}'></script>
