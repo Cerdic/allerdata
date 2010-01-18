@@ -1,5 +1,5 @@
 <BOUCLE_item(tbl_items){id_item}{statut?}>
-	<div class="entete-formulaire">
+	<div class="entete-formulaire revisions">
 		#SET{type_item,#ID_TYPE_ITEM|allerdata_type_item}
 		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=#GET{type_item}|concat{s,&id_item=,#ID_ITEM}}},#CHEMIN{img_pack/#GET{type_item}|concat{-24.png}},'',left}:>
 		<h1><:info_historique:> #NOM</h1>
@@ -30,7 +30,7 @@
 	</B_versions>
 </BOUCLE_item>
 <BOUCLE_biblio(tbl_bibliographies){id_bibliographie}{statut?}>
-	<div class="entete-formulaire">
+	<div class="entete-formulaire revisions">
 		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=biblios&id_bibliographie=#ID_BIBLIOGRAPHIE}},#CHEMIN{img_pack/bibliographie-24.png},'',left}:>
 		<h1><:info_historique:> #CITATION</h1>
 		#MODELE{boutons_action_biblio,id_bibliographie=#ID_BIBLIOGRAPHIE}
@@ -59,7 +59,7 @@
 	</B_versionsb>
 </BOUCLE_biblio>
 <BOUCLE_cohorte(tbl_groupes_patients){id_groupes_patient}{statut?}>
-	<div class="entete-formulaire">
+	<div class="entete-formulaire revisions">
 		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=cohortes&id_groupes_patient=#ID_GROUPES_PATIENT}},#CHEMIN{img_pack/cohorte-24.png},'',left}:>
 		<h1><:info_historique:> #NOM</h1>
 		#MODELE{boutons_action_cohorte,id_groupes_patient=#ID_GROUPES_PATIENT}
@@ -87,9 +87,11 @@
 	</B_versionsc>
 </BOUCLE_cohorte>
 <BOUCLE_rc(tbl_reactions_croisees){id_reactions_croisee}{statut?}>
-	<div class="entete-formulaire">
+	<div class="entete-formulaire revisions">
 		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{allerdata,page=cohortes&edit=#ID_GROUPES_PATIENT}},#CHEMIN{img_pack/cohorte-24.png},'',left}:>
-		<h1><:info_historique:> #NOM</h1>
+		<h1><:info_historique:> RC #ID_REACTIONS_CROISEE <BOUCLE_nomcohorte(tbl_groupes_patients){id_groupes_patient}{statut==.*}>/ Groupe de Patients #NOM</BOUCLE_nomcohorte>
+		</h1>
+		#MODELE{boutons_action_rc,id_reactions_croisee=#ID_REACTIONS_CROISEE}
 	</div>
 	<B_versionsd>
 	<div class='versions'>

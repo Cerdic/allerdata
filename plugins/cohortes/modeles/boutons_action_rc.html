@@ -1,0 +1,7 @@
+<p class='actions'>
+<BOUCLE_rc(tbl_reactions_croisees){id_reactions_croisee}{statut?}>
+<BOUCLE_revisions(tbl_reactions_croisees){id_reactions_croisee}{0,1}><span class="voir_revisions">&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_reactions_croisee=#ID_REACTIONS_CROISEE})]'><:info_historique_titre:></a>&#93;</span></BOUCLE_revisions>
+[(#AUTORISER{modifier,#ENV{quoi,groupes_patient},#ID_GROUPES_PATIENT}|oui)
+&#91;<a href='[(#URL_ECRIRE{allerdata,page=cohortes&edit=#ID_GROUPES_PATIENT}|parametre_url{retour,#SELF}|ancre_url{editer_rc-#ID_REACTIONS_CROISEE})]'><:bouton_modifier:></a>&#93;]
+</BOUCLE_rc>
+</p>

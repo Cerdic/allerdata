@@ -932,14 +932,14 @@ padding:0.6em;
 .menu-liste .menu-liste .menu-entree { border: none; }
 
 /* selection articles */
-#main .liste.selection > h2 {padding-left:30px;background:url(images/bookmark-24.png) no-repeat left 30px;}
-.selection .item .date {font-style:italic;color:#999;font-size:0.9em;}
+#main .liste.favoris > h2 {padding-left:30px;background:url(images/bookmark-24.png) no-repeat left 30px;}
+.favoris .item .date {font-style:italic;color:#999;font-size:0.9em;}
 
 form.bouton_action_post {display:inline;}
 form.bouton_action_post input.submit {margin:0;font-weight:normal;}
 form.bouton_action_post input.submit {background:none;border:0;cursor:pointer;padding:0 0 1px;}
 form.bouton_action_post input.submit:hover {font-style:italic;}
-#main .selection .item form.bouton_action_post {display:block;float:right;}
+#main .favoris .item form.bouton_action_post {display:block;float:right;}
 
 
 
