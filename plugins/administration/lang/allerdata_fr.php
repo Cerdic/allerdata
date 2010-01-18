@@ -7,8 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'allergenes' => 'Allerg&egrave;nes',
 'ajouter_est_dans' => 'Modifier',
 'annuler_recherche'=> 'Annuler la recherche',
-'accepter_revision' => 'Accepter la modification',
-'accepter_toutes_revisions' => 'Accepter toutes les modifications',
+'accepter_revision' => 'Lu',
+'accepter_toutes_revisions' => 'Tout Lu',
+'accepter_ces_n_revisions' => '@total@ modifications lues',
 
 // B
 'bouton_supprimer' => 'Supprimer',
@@ -39,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_produit' => 'Creer un produit',
 'icone_creer_biblio' => 'Ajouter une r&eacute;f&eacute;rence',
 'item_interdit_instituer' => 'Cet item a des enfants et ne peut &ecirc;tre depubli&eacute;',
+'item_statut_propose_evaluation' => 'propos&eacute; &agrave; la publication',
 
 // L
 'label_commentaires' => 'Commentaires sur la modification',
