@@ -26,6 +26,8 @@
 </div>
 
 [(#ENV{edit}|intval|oui)
+<:icone_retour|icone_inline{#ENV{retour,#SELF|parametre_url{edit,''}},#CHEMIN{img_pack/bibliographie-24.png},'',left}:>
+<div class="nettoyeur"></div>
 <h2><:biblio:notes_lecture:></h2>
 <div class='ajax'>
 #FORMULAIRE_EDITER_BIBLIO_NOTE{new,#ENV{edit}}
