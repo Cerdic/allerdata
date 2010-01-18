@@ -9,7 +9,7 @@
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
 <BOUCLE_revisionsc(tbl_groupes_patients_versions){vu_id_auteur=0}{!par date}{pagination 10}>
-<li class='item'>[(#DATE|date_relative)] ##ID_VERSION [par (#INFO_NOM{auteur,#ID_AUTEUR})]
+<li class='item'>[(#DATE|affdate_court) [(#DATE|heures)h][(#DATE|minutes)]] ##ID_VERSION [par (#INFO_NOM{auteur,#ID_AUTEUR})]
 [(#INCLURE{fond=modeles/cohorte}{id_groupes_patient})]
 <div class="actions">
 	[(#AUTORISER{accepterrevision,item,#ID_ITEM})
