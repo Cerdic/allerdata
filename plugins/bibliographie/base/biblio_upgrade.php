@@ -89,6 +89,9 @@
 
 	function biblio_importe_abstracts(){
 		if (lire_fichier(find_in_path('base/abstracts.txt'),$abstracts)){
+			// on vide tous les abstracts d'abord, car un abstract non present dans le fichier
+			// est suppose etre efface (cf mails du 19/01/2010)
+			sql_updateq('tbl_bibliographies',array('abstract'=>''));
 			$abstracts = explode("\n",$abstracts);
 			foreach($abstracts as $a){
 				if (preg_match(',^([0-9]+)[\s]+,',$a,$regs)){
@@ -206,16 +209,16 @@
 				biblio_importe_references();
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.9','non');
 			}
-			if (version_compare($current_version,'0.1.1.0','<')){
-				include_spip('base/abstract_sql');
-				biblio_importe_abstracts();
-				ecrire_meta($nom_meta_base_version,$current_version='0.1.1.0','non');
-			}
 			if (version_compare($current_version,'0.1.1.1','<')){
 				include_spip('base/abstract_sql');
 				sql_alter("table tbl_bibliographies_versions ADD vu_id_auteur bigint(21) DEFAULT 0 NOT NULL");
 				sql_alter("table tbl_bibliographies_versions ADD vu_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.1.1','non');
+			}
+			if (version_compare($current_version,'0.1.1.2','<')){
+				include_spip('base/abstract_sql');
+				biblio_importe_abstracts();
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.1.2','non');
 			}
 
 		}
