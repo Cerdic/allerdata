@@ -11,10 +11,14 @@
 <BOUCLE_revisionsb(tbl_bibliographies_versions){vu_id_auteur=0}{!par date}{pagination 10}>
 <li class='item'>[(#DATE|affdate_court) ][(#ID_VERSION|allerdata_numero_version) ][par (#INFO_NOM{auteur,#ID_AUTEUR})]
 [(#INCLURE{fond=modeles/reference}{id=#ID_BIBLIOGRAPHIE})]
+<a href='#' onclick="jQuery(this).next().toggle();return false;"><:allerdata:voir_la_modification:></a>
+<div class="detail_modif" style="display:none;">
+#MODELE{version_biblio,id_bibliographie,id_version}
+</div>
 <div class="actions">
 	[(#AUTORISER{accepterrevision,item,#ID_ITEM})
 	[&#91;(#BOUTON_ACTION{<:allerdata:accepter_revision:>,#URL_ACTION_AUTEUR{accepter_revision,tbl_bibliographies_versions-#ID_BIBLIOGRAPHIE:#ID_VERSION,#SELF},ajax})&#93;]
-	]&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_bibliographie=#ID_BIBLIOGRAPHIE}|parametre_url{retour,#SELF})]'><:allerdata:voir_modifications:></a>&#93;
+	]
 	#SET{tous,#GET{tous}|concat{'-',#ID_BIBLIOGRAPHIE,':',#ID_VERSION}}
 </div>
 </BOUCLE_revisionsb>

@@ -11,10 +11,14 @@
 <BOUCLE_revisionsc(tbl_groupes_patients_versions){vu_id_auteur=0}{!par date}{pagination 10}>
 <li class='item'>[(#DATE|affdate_court) [(#DATE|heures)h][(#DATE|minutes)] ][(#ID_VERSION|allerdata_numero_version) ][par (#INFO_NOM{auteur,#ID_AUTEUR})]
 [(#INCLURE{fond=modeles/cohorte}{id_groupes_patient})]
+<a href='#' onclick="jQuery(this).next().toggle();return false;"><:allerdata:voir_la_modification:></a>
+<div class="detail_modif" style="display:none;">
+#MODELE{version_cohorte,id_groupes_patient,id_version}
+</div>
 <div class="actions">
 	[(#AUTORISER{accepterrevision,item,#ID_ITEM})
 	[&#91;(#BOUTON_ACTION{<:allerdata:accepter_revision:>,#URL_ACTION_AUTEUR{accepter_revision,tbl_groupes_patients_versions-#ID_GROUPES_PATIENT:#ID_VERSION,#SELF},ajax})&#93;]
-	]&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_groupes_patient=#ID_GROUPES_PATIENT}|parametre_url{retour,#SELF})]'><:allerdata:voir_modifications:></a>&#93;
+	]
 	#SET{tous,#GET{tous}|concat{'-',#ID_GROUPES_PATIENT,':',#ID_VERSION}}
 </div>
 </BOUCLE_revisionsc>

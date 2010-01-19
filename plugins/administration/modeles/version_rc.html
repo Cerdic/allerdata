@@ -1,0 +1,12 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+<BOUCLE_version(tbl_reactions_croisees_versions){id_version}{id_reactions_croisee}>
+	<h3>[(#ID_VERSION|allerdata_numero_version) ] du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par #INFO_NOM{auteur,#ID_AUTEUR}</h3>
+	[<div class="acceptation">(#VU_ID_AUTEUR|oui)Vu[ par (#INFO_NOM{auteur,#VU_ID_AUTEUR})][, le (#VU_DATE|affdate_court)]</div>]
+	[(#DIFF|allerdata_affiche_revision)]
+</BOUCLE_version>

@@ -2,13 +2,13 @@
 <div id="listes" class="ui-tabs">
 #SET{nomodif,'Aucune modification'}
 
-[<div id="modifItems" class="tabListe">(#INCLURE{fond=prive/listes/revisions_items}{env}{ajax})</div>
+[<div id="modifItems" class="tabListe">(#INCLURE{fond=prive/listes/revisions_alire_items}{env}{ajax})</div>
 #SET{nomodif,''}]
-[<div id="modifBilio" class="tabListe">(#INCLURE{fond=prive/listes/revisions_biblio}{env}{ajax})</div>
+[<div id="modifBilio" class="tabListe">(#INCLURE{fond=prive/listes/revisions_alire_biblio}{env}{ajax})</div>
 #SET{nomodif,''}]
-[<div id="modifCohortes" class="tabListe">(#INCLURE{fond=prive/listes/revisions_cohortes}{env}{ajax})</div>
+[<div id="modifCohortes" class="tabListe">(#INCLURE{fond=prive/listes/revisions_alire_cohortes}{env}{ajax})</div>
 #SET{nomodif,''}]
-[<div id="modifRC" class="tabListe">(#INCLURE{fond=prive/listes/revisions_rc}{env}{ajax})</div>
+[<div id="modifRC" class="tabListe">(#INCLURE{fond=prive/listes/revisions_alire_rc}{env}{ajax})</div>
 #SET{nomodif,''}]
 
 [<strong>(#GET{nomodif})</strong>]
