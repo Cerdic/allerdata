@@ -9,7 +9,7 @@
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
 <BOUCLE_revisionsd(tbl_reactions_croisees_versions){vu_id_auteur=0}{!par date}{pagination 10}>
-<li class='item'>[(#DATE|affdate_court) [(#DATE|heures)h][(#DATE|minutes)]] ##ID_VERSION [par (#INFO_NOM{auteur,#ID_AUTEUR})]
+<li class='item'>[(#DATE|affdate_court) [(#DATE|heures)h][(#DATE|minutes)] ][(#ID_VERSION|allerdata_numero_version) ][par (#INFO_NOM{auteur,#ID_AUTEUR})]
 [(#INCLURE{fond=modeles/rc}{id_reactions_croisee})]
 <div class="actions">
 	[(#AUTORISER{accepterrevision,item,#ID_ITEM})

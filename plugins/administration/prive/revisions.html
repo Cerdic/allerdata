@@ -14,7 +14,7 @@
 	<ul class='liste_items'>
 	<BOUCLE_versions(tbl_items_versions){id_item}{!par id_version}>
 	<li class='item'>
-	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>#NOM</BOUCLE_auteur></h3>
+	<h3>[(#ID_VERSION|allerdata_numero_version) ] du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>#NOM</BOUCLE_auteur></h3>
 	[<div class="acceptation">(#VU_ID_AUTEUR|oui)Vu[ par (#INFO_NOM{auteur,#VU_ID_AUTEUR})][, le (#VU_DATE|affdate_court)]</div>]
 	<div class='descriptif'>#COMMENTAIRES</div>
 	[(#DIFF|allerdata_affiche_revision)]
@@ -43,7 +43,7 @@
 	<ul class='liste_items'>
 	<BOUCLE_versionsb(tbl_bibliographies_versions){id_bibliographie}{!par id_version}>
 	<li class='item'>
-	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteurb(AUTEURS){id_auteur}{tout}>#NOM</BOUCLE_auteurb></h3>
+	<h3>[(#ID_VERSION|allerdata_numero_version) ] du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteurb(AUTEURS){id_auteur}{tout}>#NOM</BOUCLE_auteurb></h3>
 	[<div class="acceptation">(#VU_ID_AUTEUR|oui)Vu[ par (#INFO_NOM{auteur,#VU_ID_AUTEUR})][, le (#VU_DATE|affdate_court)]</div>]
 	[(#DIFF|allerdata_affiche_revision)]
 	[<div class="actions">
@@ -72,7 +72,7 @@
 	<ul class='liste_items'>
 	<BOUCLE_versionsc(tbl_groupes_patients_versions){id_groupes_patient}{!par id_version}>
 	<li class='item'>
-	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteurc(AUTEURS){id_auteur=#ID_AUTEUR}{tout}>#NOM</BOUCLE_auteurc></h3>
+	<h3>[(#ID_VERSION|allerdata_numero_version) ] du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteurc(AUTEURS){id_auteur=#ID_AUTEUR}{tout}>#NOM</BOUCLE_auteurc></h3>
 	[<div class="acceptation">(#VU_ID_AUTEUR|oui)Vu[ par (#INFO_NOM{auteur,#VU_ID_AUTEUR})][, le (#VU_DATE|affdate_court)]</div>]
 	[(#DIFF|allerdata_affiche_revision)]
 	[<div class="actions">
@@ -101,7 +101,7 @@
 	<ul class='liste_items'>
 	<BOUCLE_versionsd(tbl_reactions_croisees_versions){id_reactions_croisee}{!par id_version}>
 	<li class='item'>
-	<h3>##ID_VERSION du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteurd(AUTEURS){id_auteur=#ID_AUTEUR}{tout}>#NOM</BOUCLE_auteurd></h3>
+	<h3>[(#ID_VERSION|allerdata_numero_version) ] du [(#DATE|affdate_court) [(#DATE|heures)]:[(#DATE|minutes)]] par <BOUCLE_auteurd(AUTEURS){id_auteur=#ID_AUTEUR}{tout}>#NOM</BOUCLE_auteurd></h3>
 	[<div class="acceptation">(#VU_ID_AUTEUR|oui)Vu[ par (#INFO_NOM{auteur,#VU_ID_AUTEUR})][, le (#VU_DATE|affdate_court)]</div>]
 	[(#DIFF|allerdata_affiche_revision)]
 	[<div class="actions">

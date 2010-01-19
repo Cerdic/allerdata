@@ -70,7 +70,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'version' => 'Version',
+'version_creation' => 'Cr&eacute;ation',
+'version_modification' => 'Modif',
 'version_originale' => 'Version orginale',
+
 'voir_modifications' => 'Voir les modifications',
 );
 

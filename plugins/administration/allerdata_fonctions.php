@@ -249,6 +249,13 @@ function allerdata_puce_statut($statut){
 	return $res;
 }
 
+function allerdata_numero_version($id_version){
+	if ($id_version==0)
+		return "<strong>"._T('allerdata:version_creation')."</strong>";
+	else
+		return _T('allerdata:version_modification')."<strong>#$id_version</strong>";
+}
+
 
 //
 // <BOUCLE(tbl_items)>
