@@ -1,9 +1,9 @@
 <B_items>
 	<select name="selector-#ENV{name}" size="10">
-		<BOUCLE_items(tbl_items){type_item #ENV{type_item,''}}{par nom}{doublons}{nom!=''}{tout}>
+		<BOUCLE_items(tbl_items){type_item #ENV{type_item,''}}{par nom}{doublons}{nom!=''}>
 			<option value="#ID_ITEM">#NOM<span> (##ID_ITEM)</span>[(#ID_TYPE_ITEM|in_array{#ENV{type_att}}|oui)&#91;En attente&#93;]</option>
 		</BOUCLE_items>
-		<BOUCLE_items_attente(tbl_items){type_item #ENV{type_item,''}}{par nom}{tout}{doublons}>
+		<BOUCLE_items_attente(tbl_items){type_item #ENV{type_item,''}}{par nom}{doublons}>
 			<option value="#ID_ITEM">#NOM<span> (##ID_ITEM)</span>[(#ID_TYPE_ITEM|in_array{#ENV{type_att}}|oui)&#91;En attente&#93;]</option>
 		</BOUCLE_items_attente>
 	</select>
