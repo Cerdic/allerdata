@@ -7,17 +7,17 @@ function set_id_item(li,$input){
 	// virer les span fermants
 	reg=new RegExp("</span>", "gi");
 	texte = texte.replace(reg,'');
-	alert(texte);
+	//alert(texte);
 	reg=new RegExp("<span>", "i");
 	texte = texte.split(reg);
-	alert(texte);
+	//alert(texte);
 	var nom = texte.shift();
 	if (!nom) // FF et Safari renvoient une premiere capture vide (avant le span), IE non
 		nom = texte.shift();
 	jQuery($input).val(nom); // le nom
 	// le reste va en description
 	texte = "<span>"+texte.join('</span><span>')+'</span>';
-	alert(texte);
+	//alert(texte);
 	jQuery($input).siblings('.more').html(texte);
 	jQuery($input).get(0).focus();
 }
