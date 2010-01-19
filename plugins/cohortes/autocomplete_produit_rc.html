@@ -1,5 +1,8 @@
 #HTTP_HEADER{Content-type:text/plain;charset=#CHARSET}
-<BOUCLE_items(tbl_items){recherche #ENV{q}}{0,20}{id_type_item IN 13,7,8,9,10}{par nom}>[<span>(#NOM*)</span>][(#MODELE{item_detail_rc,id_item})]|#ID_ITEM
-</BOUCLE_items>
+#SET{restant,20}
+<BOUCLE_items(tbl_items){recherche #ENV{q}}{nom LIKE #ENV{q}|concat{%}}{doublons}{0,20}{id_type_item IN 13,7,8,9,10}{par nom}>[<span>(#NOM*|penta_exergue{#ENV{q}})</span>][(#MODELE{item_detail_rc,id_item}|penta_exergue{#ENV{q}})]|#ID_ITEM
+</BOUCLE_items>#SET{restant,#GET{restant}|moins{#TOTAL_BOUCLE}}</B_items><BOUCLE_items1(tbl_items){recherche #ENV{q}}{doublons}{pagination #GET{restant}}{id_type_item IN 13,7,8,9,10}{!par points}>[<span>(#NOM*|penta_exergue{#ENV{q}})</span>][(#MODELE{item_detail_rc,id_item}|penta_exergue{#ENV{q}})]|#ID_ITEM
+</BOUCLE_items1>#SET{restant,#GET{restant}|moins{#TOTAL_BOUCLE}}</B_items1>[
+(#GET{restant}|=={20}|oui)
 <:cohorte:aucun_item:>
-<//B_items>
+]

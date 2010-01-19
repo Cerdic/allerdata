@@ -2,12 +2,18 @@ function set_id_item(li,$input){
 	var id_item = li.extra[0];
 	jQuery($input).siblings('input[@type=hidden]').val(id_item);
 	var texte = jQuery($input).val();
-	var reg=new RegExp("(</?span>)", "i");
+	var reg=new RegExp("(<b>|</b>)", "gi");
+	texte = texte.replace(reg,'');
+	alert(texte);
+	reg=new RegExp("(<[/]?span>)", "i");
 	texte = texte.split(reg);
-	if (!texte.shift())
-		texte.shift();
-	jQuery($input).val(texte.shift());
-	texte.shift()
+	alert(texte);
+	texte.shift(); // enlever avant le premier span (du vide)
+	texte.shift(); // enlever le premier span
+	jQuery($input).val(texte.shift()); // le nom
+	texte.shift() // le span fermant
+	// le reste va en description
+	alert(texte.join(''));
 	jQuery($input).siblings('.more').html(texte.join(''));
 	jQuery($input).get(0).focus();
 }
