@@ -4,17 +4,19 @@ function set_id_item(li,$input){
 	var texte = jQuery($input).val();
 	var reg=new RegExp("(<b>|</b>)", "gi");
 	texte = texte.replace(reg,'');
+	// virer les span fermants
+	reg=new RegExp("</span>", "gi");
+	texte = texte.replace(reg,'');
 	alert(texte);
-	reg=new RegExp("(<[/]?span>)", "i");
+	reg=new RegExp("<span>", "i");
 	texte = texte.split(reg);
 	alert(texte);
 	texte.shift(); // enlever avant le premier span (du vide)
-	texte.shift(); // enlever le premier span
 	jQuery($input).val(texte.shift()); // le nom
-	texte.shift() // le span fermant
 	// le reste va en description
-	alert(texte.join(''));
-	jQuery($input).siblings('.more').html(texte.join(''));
+	texte = "<span>"+texte.join('</span><span>')+'</span>';
+	alert(texte);
+	jQuery($input).siblings('.more').html(texte);
 	jQuery($input).get(0).focus();
 }
 function formulaire_rc_init(){
