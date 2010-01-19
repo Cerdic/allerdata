@@ -11,8 +11,10 @@ function set_id_item(li,$input){
 	reg=new RegExp("<span>", "i");
 	texte = texte.split(reg);
 	alert(texte);
-	texte.shift(); // enlever avant le premier span (du vide)
-	jQuery($input).val(texte.shift()); // le nom
+	var nom = texte.shift();
+	if (!nom) // FF et Safari renvoient une premiere capture vide (avant le span), IE non
+		nom = texte.shift();
+	jQuery($input).val(nom); // le nom
 	// le reste va en description
 	texte = "<span>"+texte.join('</span><span>')+'</span>';
 	alert(texte);
