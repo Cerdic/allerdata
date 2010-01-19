@@ -12,7 +12,11 @@
 <li class='item[(#ID_TYPE_ITEM|in_array{#ARRAY{13,13,18,18,23,23,25,25}}|oui)attente]'>[(#DATE|affdate_court) [(#DATE|heures)h][(#DATE|minutes)] ][(#ID_VERSION|allerdata_numero_version) ][par (#INFO_NOM{auteur,#ID_AUTEUR})]
 <BOUCLE_item(tbl_items){id_item}{statut==.}>#SET{type_item,#ID_TYPE_ITEM|allerdata_type_item}
 [(#INCLURE{fond=modeles/item_#GET{type_item}}{id_item})]</BOUCLE_item>
-	<a href='#' onclick="jQuery(this).next().toggle();return false;"><:allerdata:voir_la_modification:></a>
+	<div class="details">
+	<a href='#' onclick="jQuery(this).parent().next().toggle();return false;"><:allerdata:voir_la_modification:></a>
+	[(#AUTORISER{modifier,#GET{type_item},#ID_ITEM}|oui)
+	| <a href='[(#URL_ECRIRE{allerdata,page=#GET{type_item}|concat{'s&edit=',#ID_ITEM}}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>]
+	</div>
 	<div class="detail_modif" style="display:none;">
 	#MODELE{version_item,id_item,id_version}
 	</div>

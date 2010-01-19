@@ -11,7 +11,11 @@
 <BOUCLE_revisionsc(tbl_groupes_patients_versions){vu_id_auteur=0}{!par date}{pagination 10}>
 <li class='item'>[(#DATE|affdate_court) [(#DATE|heures)h][(#DATE|minutes)] ][(#ID_VERSION|allerdata_numero_version) ][par (#INFO_NOM{auteur,#ID_AUTEUR})]
 [(#INCLURE{fond=modeles/cohorte}{id_groupes_patient})]
-<a href='#' onclick="jQuery(this).next().toggle();return false;"><:allerdata:voir_la_modification:></a>
+<div class="details">
+	<a href='#' onclick="jQuery(this).parent().next().toggle();return false;"><:allerdata:voir_la_modification:></a>
+	[(#AUTORISER{modifier,#ENV{quoi,groupes_patient},#ID_GROUPES_PATIENT}|oui)
+	| <a href='[(#URL_ECRIRE{allerdata,page=cohortes&edit=#ID_GROUPES_PATIENT}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>]
+</div>
 <div class="detail_modif" style="display:none;">
 #MODELE{version_cohorte,id_groupes_patient,id_version}
 </div>

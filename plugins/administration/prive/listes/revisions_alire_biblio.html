@@ -11,7 +11,11 @@
 <BOUCLE_revisionsb(tbl_bibliographies_versions){vu_id_auteur=0}{!par date}{pagination 10}>
 <li class='item'>[(#DATE|affdate_court) ][(#ID_VERSION|allerdata_numero_version) ][par (#INFO_NOM{auteur,#ID_AUTEUR})]
 [(#INCLURE{fond=modeles/reference}{id=#ID_BIBLIOGRAPHIE})]
-<a href='#' onclick="jQuery(this).next().toggle();return false;"><:allerdata:voir_la_modification:></a>
+<div class="details">
+	<a href='#' onclick="jQuery(this).parent().next().toggle();return false;"><:allerdata:voir_la_modification:></a>
+	[(#AUTORISER{modifier,#ENV{quoi,biblio},#ID_BIBLIOGRAPHIE}|oui)
+	| <a href='[(#URL_ECRIRE{allerdata,page=#ENV{quoi,biblio}|concat{'s&edit=',#ID_BIBLIOGRAPHIE}}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>]
+</div>
 <div class="detail_modif" style="display:none;">
 #MODELE{version_biblio,id_bibliographie,id_version}
 </div>
