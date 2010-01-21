@@ -74,6 +74,7 @@ function biblio_rechercher_liste_des_champs($liste){
 function biblio_rechercher_liste_des_jointures($liste){
 	$liste['tbl_bibliographie'] = array(
 	'tbl_journal' => array('nom'=>2),
+	'tbl_biblio_note' => array('texte'=>1),
 	);
 	return $liste;
 }

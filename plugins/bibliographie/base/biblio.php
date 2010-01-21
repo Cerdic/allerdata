@@ -15,6 +15,9 @@ function biblio_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_articles'][]= 'bibliographies_articles';
 	$interface['tables_jointures']['tbl_bibliographies'][]= 'bibliographies_articles';
 	$interface['tables_jointures']['tbl_bibliographies'][]= 'tbl_bibliographies_versions';
+
+	$interface['tables_jointures']['tbl_bibliographies'][]= 'tbl_biblio_notes';
+	$interface['tables_jointures']['tbl_biblio_notes'][]= 'tbl_bibliographies';
 	
 	//-- Jointures ----------------------------------------------------
 	/*$interface['tables_jointures']['spip_evenements'][]= 'mots'; // a placer avant la jointure sur articles
