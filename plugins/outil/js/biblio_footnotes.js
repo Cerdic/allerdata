@@ -1,3 +1,5 @@
+/*
+ *
 $().ready(function footnotes()
 {
 	var notes = 0;
@@ -10,3 +12,4 @@ $().ready(function footnotes()
 	);
 		
 });
+*/

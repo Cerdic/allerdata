@@ -76,4 +76,37 @@ function biblio_trous(){
 		. "<div style='display:none;'>" . implode(", ",$trous)."</div>";
 	}
 }
+
+
+function extraire_biblios_notes($texte){
+	$refs = array();
+	$notes = "";
+	$n = 1;
+	$biblios = preg_match_all(',<img class="biblio" rel="biblio([0-9]+)"[^>]*>,Uims', $texte, $matches,PREG_SET_ORDER);
+	foreach($matches as $match){
+		$img = $match[0];
+		$id_biblio = $match[1];
+		if (!isset($refs[$id_biblio])){
+			$refs[$id_biblio] = sql_fetsel('citation,abstract','tbl_bibliographies','id_bibliographie='.intval($id_biblio));
+		}
+
+		$img2 = str_replace("rel=\"biblio$id_biblio\"","",$img);
+		$img2 = "<a name='nlink$n' href='#note$n'>".$img2."</a>";
+		if ($p=strpos($texte,$img)) {
+			$texte = substr_replace($texte, $img2, $p, strlen($img)); // remplacer la premiere occurence de l'image par un lien
+
+			$notes.=
+				"\n<div class='footnote'><a name='note$n'></a>[<a href='#nlink$n' title='retour au texte'>$n</a>] - "
+				. "<a href='#' class='citation' onclick='jQuery(this).next().toggle(\"fast\");return false;'>".$refs[$id_biblio]['citation']."</a>"
+				. "<div class='abstract'>" . $refs[$id_biblio]['abstract'] . "</div>"
+				. " <a href='#nlink$n' title='retour au texte'>&#8617;</a></div>"
+			;
+		}
+		$n++;
+	}
+
+
+	$notes = "<div id='footnotes'>" . $notes . "</div>";
+	return $texte . $notes;
+}
 ?>

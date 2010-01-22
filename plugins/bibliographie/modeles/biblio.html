@@ -1,5 +1,5 @@
 <BOUCLE_Biblio(tbl_bibliographies){id_bibliographie=#ENV{id}}>
 [(#REM|test_espace_prive|oui)
 <a href='#URL_ECRIRE{allerdata,page=biblios&id_bibliographie=#ID_BIBLIOGRAPHIE}'>#SET{close,'</a>'}]
-<img class="biblio" src="#CHEMIN{images/book_open.png}" width="16" height="16" title=" - [(#CITATION|attribut_html)]" alt="" />#GET{close}
+<img class="biblio" rel="biblio#ID_BIBLIOGRAPHIE" src="#CHEMIN{images/book_open.png}" width="16" height="16" title=" - [(#CITATION|attribut_html)]" alt="" />#GET{close}
 </BOUCLE_Biblio>

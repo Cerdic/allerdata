@@ -955,5 +955,9 @@ text-decoration:none;
 	font-weight:bold;
 }
 
+.footnote {padding:2px 0;}
+.footnote a.citation {}
+.footnote .abstract {font-size:0.9em;padding:5px;display:none;}
+
 #spip-debug {color:#000;}
 #spip-debug a {color:#303;}
