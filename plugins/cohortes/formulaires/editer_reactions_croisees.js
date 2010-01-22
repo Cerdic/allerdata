@@ -25,7 +25,7 @@ function formulaire_rc_init(){
 	var s = jQuery('td.editer_produit1 input.text,td.editer_produit2 input.text');
 	if (s.get(0).autocompleter==undefined) {
 		s.autocomplete(url_autocomp_produit_rc, 
-		{minChars:3, matchSubset:0, matchContains:1, cacheLength:10, width:"360px", resultsClass:"ac_results ac_produits_rc", onItemSelect:set_id_item }
+		{minChars:3, matchSubset:0, matchContains:1, cacheLength:10, width:"400px", resultsClass:"ac_results ac_produits_rc", onItemSelect:set_id_item }
 		);
 	}
 	var err = jQuery('.formulaire_editer_reactions_croisees td.erreur').find('input:visible,textarea:visible');
