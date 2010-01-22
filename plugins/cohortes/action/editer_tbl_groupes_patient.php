@@ -38,14 +38,14 @@ function action_editer_tbl_groupes_patient_dist() {
 // Appelle toutes les fonctions de modification d'un tbl_groupes_patient
 // $err est de la forme '&trad_err=1'
 // http://doc.spip.org/@tbl_groupes_patients_set
-function tbl_groupes_patients_set($id_groupes_patient) {
+function tbl_groupes_patients_set($id_groupes_patient, $v=null) {
 	$err = '';
 
 	$c = array();
 	foreach (array(
 		"nom","description",'nb_sujets','pool','qualitatif','pays','remarques','inexploitable',
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = _request($champ,$v);
 
 	include_spip('inc/modifier');
 	revision_tbl_groupes_patient($id_groupes_patient, $c);

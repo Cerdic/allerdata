@@ -157,8 +157,15 @@ function formulaires_editer_reactions_croisees_traiter_dist($id_groupes_patient,
 	}
 	if ($res['message_ok']){
 		$res['message_ok']  = 'rc ' . $res['message_ok']. 'enregistr&eacute;es';
-		if (_request('finir'))
-			$res['redirect'] = parametre_url($retour,'id_groupes_patient',$id_groupes_patient);
+		if (_request('finir')){
+			if ($retour){
+				$retour = parametre_url($retour,'retour|debutc_publie_prop|debutc_poubelle', '');
+				$debut = "debutc_publie_prop";
+				if (sql_getfetsel("statut", "tbl_groupes_patients", "id_groupes_patient=".intval($id_groupes_patient))=='poubelle')
+				$debut = "debutc_poubelle";
+				$res['redirect'] = ancre_url(parametre_url($retour,$debut,'@'.$id_groupes_patient),'cohorte'.$id_groupes_patient);
+			}
+		}
 	}
 
 	return $res;

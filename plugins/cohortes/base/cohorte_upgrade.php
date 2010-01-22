@@ -18,7 +18,68 @@
 		}
 		sql_updateq("tbl_reactions_croisees",array('risque_ccd'=>1),sql_in('id_reactions_croisee', $set));
 	}
-	
+
+	function cohorte_importe_cohortes(){
+		include_spip('base/abstract_sql');
+		// importer la table
+		$importer_csv = charger_fonction('importer_csv','inc');
+		$cohortes = $importer_csv(find_in_path('base/tbl_groupes_patients.csv'),true);
+		echo "Nombre de groupes a importer :".count($cohortes)."<br />";
+
+		// la table remplace l'existant, mais il ne faut pas perdre les cle primaires
+		// on commence par verifier si il y a des cohortes a virer
+		$noms = array_map('reset',$cohortes);
+
+		$not = sql_allfetsel("id_groupes_patient", "tbl_groupes_patients", "statut!='poubelle' AND ".sql_in('nom',$noms,"NOT"));
+		$not = array_map('reset',$not);
+		if (count($not)){
+			echo count($not). " groupes de patient vont etre supprimes<br />";
+			foreach($not as $id_groupes_patient){
+				echo "Suppression du groupe de patients $id_groupes_patient<br />";
+				$rc = sql_allfetsel("id_reactions_croisee", "tbl_reactions_croisees", "statut!='poubelle' AND ".'id_groupes_patient='.intval($id_groupes_patient));
+				if (count($rc)){
+					$rc = array_map('reset',$rc);
+					echo "Suppression des RC associees :".implode(', ',$rc)."<br />";
+					sql_updateq("tbl_reactions_croisees", array('statut'=>'poubelle'),sql_in('id_reactions_croisee',$rc));
+				}
+				sql_updateq("tbl_groupes_patients", array('statut'=>'poubelle'),'id_groupes_patient='.intval($id_groupes_patient));
+			}
+		}
+
+		include_spip('action/editer_tbl_groupes_patient');
+
+		$update = $crea = 0;
+		foreach($cohortes as $values){
+			#var_dump($values);
+			$set = array(
+				'nom' => $values['groupe de patient'],
+ 				'description' => $values['recrutement'],
+				'date' => date('Y-m-d H:i:s',strtotime($values['date'])),
+				'nb_sujets' => $values['nombre de sujets'],
+				'pool' => $values['serums testes separement']?0:1,
+				'qualitatif' => $values['inhibitions chiffrees']?0:1,
+				'inexploitable' => $values['pas de RC testee etc']?1:0,
+				'pays' => $values['pays'],
+				'remarques' => $values['remarques'],
+				'statut' => 'publie',
+			);
+			if (!($id_groupes_patient = sql_getfetsel('id_groupes_patient', 'tbl_groupes_patients', 'nom='.sql_quote($set[nom]), $groupby, $orderby))){
+				list($id_bibliographie,$n) = explode('-',$set['nom']);
+				echo "Creation d'un groupe pour $id_bibliographie.<br />";
+				#var_dump($set);
+				$crea++;
+				$id_groupes_patient = insert_tbl_groupes_patient($id_bibliographie);
+			}
+			else
+				$update++;
+			tbl_groupes_patients_set($id_groupes_patient, $set);
+		}
+		$in = sql_allfetsel("id_groupes_patient", "tbl_groupes_patients", sql_in('nom',$noms));
+		echo "Nombre de groupes crees :$crea<br />";
+		echo "Nombre de groupes maj :$update<br />";
+		echo "Nombre de groupes en base :".sql_countsel('tbl_groupes_patients')."<br />";
+	}
+
 	function cohorte_upgrade($nom_meta_base_version,$version_cible){
 		$current_version = 0.0;
 		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
@@ -83,6 +144,10 @@
 				sql_alter("table tbl_reactions_croisees_versions ADD vu_id_auteur bigint(21) DEFAULT 0 NOT NULL");
 				sql_alter("table tbl_reactions_croisees_versions ADD vu_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.5','non');
+			}
+			if (version_compare($current_version,'0.1.0.6','<')){
+				cohorte_importe_cohortes();
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.6','non');
 			}
 		}
 	}
