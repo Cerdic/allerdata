@@ -32,7 +32,7 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<input type='hidden' name='id_#GET{name}' id='id_#GET{name}' value="#ENV{id_#GET{name}}" />
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
-				<div class="more">#MODELE{item_detail_rc,id_item=#ENV{id_#GET{name}},connect=''}</div>
+				<div class="more">#INCLURE{fond=modeles/item_detail_rc,id_item=#ENV{id_#GET{name}}}</div>
 			</td>
 	  	#SET{name,niveau_rc_sens1-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_niveau_rc_sens1 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
