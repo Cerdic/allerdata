@@ -1,0 +1,32 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]<B_items>
+	Verifiez la n&eacute;cessit&eacute; de cr&eacute;er un produit g&eacute;n&eacute;rique.
+	<input type="hidden" name="check_generique" value="[(#ENV*{items}|implode{','})]" />
+	<table class="spip">
+		<thead>
+			<tr class="row_first">
+				<th>Produit</th>
+				<th>Type produit</th>
+				<th>Cat&eacute;gorie de produit</th>
+				<th>Source</th>
+				<th>Est dans le produit</th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_items(tbl_items){id_item IN #ENV{items}}{type_item produit}{par nom}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td>#NOM</td>
+				<td><BOUCLE_type(tbl_types_items){id_type_item}>#NOM_TYPE_ITEM</BOUCLE_type></td>
+				<td><BOUCLE_cat(tbl_items){type_item categorie_produit}{contient #ID_ITEM}>#NOM</BOUCLE_cat></td>
+				<td><BOUCLE_src(tbl_items){type_item source}{contient #ID_ITEM}>#NOM</BOUCLE_src></td>
+				<td><BOUCLE_parent(tbl_items){type_item produit}{contient #ID_ITEM}{', '}>#NOM</BOUCLE_parent></td>
+			</tr>
+</BOUCLE_items>
+		</tbody>
+	</table>
+</B_items>

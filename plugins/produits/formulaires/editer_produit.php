@@ -39,21 +39,8 @@ function formulaires_editer_produit_verifier_dist($id_item='new', $id_parent=0, 
    AND (!in_array(_request('id_type_item'),array(23,25))))
 	 	$erreurs['nom_court'] = _T('editer_produit:erreur_nom_court_trop_long');
 
-	
-	// verifier qu'un produit n'existe pas deja avec ce nom
-	include_spip('allerdata_fonctions');
-	if ($rows = sql_allfetsel("id_item,nom",'tbl_items',array(
-		sql_in('id_type_item',allerdata_id_type_item('produit',true)),
-	  "nom=".sql_quote(_request('nom'))." AND NOT(id_item=".intval($id_item).")"))
-	  ){
-		$liens = array();
-		foreach($rows as $row){
-			$liens[] = "<a href='".generer_url_ecrire('allerdata','page=produits&id_item='.$row['id_item'])."' title='#".$row['id_item']."'>".$row['nom']."</a>";
-		}
-		$liens = implode(", ",$liens);
-		$erreurs['nom'] = _T("editer_produit:item_deja_existant_avec_meme_nom").$liens;
-	}
-	
+	verifier_produit_coherent($id_item,_request('id_type_item'),_request('id_parent'),$erreurs);
+
 	return $erreurs;
 }
 
@@ -81,5 +68,61 @@ function formulaires_editer_produit_traiter_dist($id_item='new', $id_parent=0, $
 	return $res;
 }
 
+
+function verifier_produit_coherent($id_item,$id_type_item,$id_parent,&$erreurs){
+		// verifier qu'un produit n'existe pas deja avec ce nom
+	include_spip('allerdata_fonctions');
+	if ($rows = sql_allfetsel("id_item,nom",'tbl_items',array(
+		sql_in('id_type_item',allerdata_id_type_item('produit',true)),
+	  "nom=".sql_quote(_request('nom'))." AND NOT(id_item=".intval($id_item).")"))
+	  ){
+		$liens = array();
+		foreach($rows as $row){
+			$liens[] = "<a href='".generer_url_ecrire('allerdata','page=produits&id_item='.$row['id_item'])."' title='#".$row['id_item']."'>".$row['nom']."</a>";
+		}
+		$liens = implode(", ",$liens);
+		$erreurs['nom'] = _T("editer_produit:item_deja_existant_avec_meme_nom").$liens;
+	}
+	elseif (in_array($id_type_item,array(5,13))){
+		$trace = "";
+		// trouver la categorie du produit
+		$id_type_item = allerdata_id_type_item('categorie_produit');
+		$categorie = sql_fetsel("id_item,nom","tbl_items",sql_in('id_type_item',$id_type_item)." AND ".sql_in('id_item',$id_parent));
+		$id_cat = $categorie['id_item'];
+		$trace .= "categorie : $id_cat<br />";
+
+		// trouver la source du produit
+		$id_type_item = allerdata_id_type_item('source');
+		$source = sql_fetsel("id_item,nom","tbl_items",sql_in('id_type_item',$id_type_item)." AND ".sql_in('id_item',$id_parent));
+		$id_source = $source['id_item'];
+		$nom_source = $source['nom'];
+		$trace .= "source :$id_source $nom_source<br />";
+
+		// trouver les autres sources ressemblantes
+		$nom_source = explode(' ',$nom_source);
+		$nom_source = reset($nom_source);
+		$id_type_item = allerdata_id_type_item('source');
+		$sources = sql_allfetsel("id_item,nom","tbl_items",sql_in('id_type_item',$id_type_item)." AND nom LIKE ".sql_quote("$nom_source %"));
+		$trace .= "sources :".implode(',',array_map('end',$sources))."<br />";
+		$sources = array_map('reset',$sources);
+
+		// trouver les autres produits dans la meme categorie
+		include_spip('inc/allerdata_arbo');
+		$frerescat = allerdata_les_enfants($id_cat,'produit');
+		$trace .= "meme cat :".implode(',',$frerescat)."<br />";
+		// trouver les autres produits dans une source semblable (meme debut de nom)
+		$sourcessemblables = allerdata_les_enfants($sources,'produit',false);
+		$trace .= "source semb :".implode(',',$sourcessemblables)."<br />";
+
+		#$erreurs['nom'] .= $trace;
+		// intersection, et soustraction de l'item present
+		$semblables = array_intersect($frerescat, $sourcessemblables);
+		$semblables = array_diff($semblables,array($id_item));
+		sort($semblables);
+		if (count($semblables) AND implode(',',$semblables)!==_request('check_generique')){
+			$erreurs['nom'] .= recuperer_fond('modeles/produits_semblables',array('items'=>$semblables));
+		}
+	}
+}
 
 ?>
