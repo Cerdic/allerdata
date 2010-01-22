@@ -8,7 +8,7 @@ var dialog_avec_tab, main_panel;
 Ext.onReady(function() {
 
   main_panel = new Ext.TabPanel({
-    title: 'Réactivités croisées',
+    title: 'R&eacute;activit&eacute;s crois&eacute;es',
     autoScroll: true,
     activeTab: 0,
     plugins: new Ext.ux.TabCloseMenu(),
@@ -17,7 +17,7 @@ Ext.onReady(function() {
 		items: [{ 
 	 	      id: 'tab1', 
 	 	      border: false, 
-	 	      title: 'détails', 
+	 	      title: 'd&eacute;tails',
 	 	      closable: false, 
 	 	      autoScroll: true 
 	 	}],
@@ -29,7 +29,7 @@ Ext.onReady(function() {
         closable: isClosable
       });
       tab.show();
-	    // Subtile : on ne peut pas charger la callback avant d'avoir montré/créé le panel
+	    // Subtile : on ne peut pas charger la callback avant d'avoir montre/cree le panel
 	    tab.getUpdater().update({url:targetUrl,scope:this,callback:this.callback_popup});
     },
 
@@ -41,7 +41,7 @@ Ext.onReady(function() {
         if (tabs.length) 
           tabId = tabs[0].getItemId();
 				else
-					tabId = 'tab1';
+					tabId = 'tab'+(main_panel.items.length+1);
       }
       var tab = main_panel.getItem(tabId);
       if (tab) {
@@ -50,7 +50,7 @@ Ext.onReady(function() {
       } else {
         tab = this.addTab(title, url, (tabId != 'tab1'));
       }
-			this.activate('tab1');
+			this.activate(tab);
     },
 
 		callback_popup : function(tab) {
@@ -60,10 +60,10 @@ Ext.onReady(function() {
 				main_panel.getItem($('#'+tab.id).parents('.x-panel').eq(0).attr('id')).setTitle(t.html());
 				t.remove();
 			}
-		  // Détection des liens vers des ancres
-		  // puis si celles-ci sont trouvées on affecte un comportement à ce lien
-		  // Au lieu de déplacer brutalement le navigateur (fonctionne +/- bien)
-		  // Seule la partie active sera déplacée
+		  // Detection des liens vers des ancres
+		  // puis si celles-ci sont trouvees on affecte un comportement a ce lien
+		  // Au lieu de deplacer brutalement le navigateur (fonctionne +/- bien)
+		  // Seule la partie active sera deplacee
 			$('a','#' + tab.id).each(function(){
         var link=$(this).attr('href');
         if (link) { 
