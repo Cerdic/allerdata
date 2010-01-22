@@ -27,6 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_enregistrer_rc' => 'Enregistrer les RC',
 'bouton_finir_la_saisie' => 'Finir la saisie des RC',
 
+'confirmer_pays_vide' => 'Confirmez que le pays n\'est pas connu pour ce groupe ',
+'confirmer_nb_sujets_vide' => 'Confirmez que le nombre de sujets n\'est pas connu pour ce groupe ',
+
 );
 
 

@@ -33,8 +33,10 @@ function formulaires_editer_cohorte_charger_dist($id_groupes_patient='new', $id_
 		$numero++;
 		$valeurs['nom'] = "$id_bibliographie-$numero";
 	}
-	
 
+	$valeurs['confirmer_pays_vide'] = '';
+	$valeurs['confirmer_nb_sujets_vide'] = '';
+	
 	return $valeurs;
 }
 
@@ -60,6 +62,12 @@ function formulaires_editer_cohorte_verifier_dist($id_groupes_patient='new', $id
 				$erreurs['inexploitable'] = _T('editer_cohorte:incoherent_RC_existent');
 		}
 	}
+
+	if (!_request('pays') AND !_request('confirmer_pays_vide'))
+			$erreurs['pays'] = _T('editer_cohorte:confirmer_pays_vide')."<input type='checkbox' name='confirmer_pays_vide' class='checkbox' value='1' />";
+	if (!_request('nb_sujets') AND !_request('confirmer_nb_sujets_vide'))
+			$erreurs['nb_sujets'] = _T('editer_cohorte:confirmer_nb_sujets_vide')."<input type='checkbox' name='confirmer_nb_sujets_vide' class='checkbox' value='1' />";
+
 
 	if (count($erreurs)){
 		set_request('tests_individuels',intval(_request('tests_individuels')));
