@@ -89,7 +89,7 @@ function rc($p1,$p2,$type_etude) {
 				&& array_intersect($items_fils_de[$row['idp1']],$items_fils_de[$row['idp2']])) == false) {
 			
 			$count += 1;
-			$querybiblio = "SELECT tbl_bibliographies.id_bibliographie, tbl_bibliographies.citation, 
+			$querybiblio = "SELECT tbl_bibliographies.id_bibliographie, tbl_bibliographies.citation, tbl_bibliographies.abstract,
 								tbl_groupes_patients.id_groupes_patient, tbl_groupes_patients.pays, tbl_groupes_patients.description as description_groupe, tbl_groupes_patients.nb_sujets, tbl_groupes_patients.pool, tbl_groupes_patients.qualitatif,
 								tbl_reactions_croisees.id_reactions_croisee, tbl_items.id_item as i1, tbl_items.nom as p1,tbl_items.fonction_classification as p1_fonction, tbl_reactions_croisees.niveau_rc_sens1, 
 									tbl_reactions_croisees.niveau_rc_sens2, tbl_items_1.id_item as i2, tbl_items_1.nom as p2,tbl_items_1.fonction_classification as p2_fonction, tbl_reactions_croisees.remarques
@@ -112,7 +112,10 @@ function rc($p1,$p2,$type_etude) {
 				if (!$premiere_ligne) $biblio .= '<tr><td colspan="5">&nbsp;</td></tr>';
 				$premiere_ligne = false;
 				$biblio .= '<tr class="row_first"><th colspan="5"><a name="biblio'.$row['id_reactions_croisee'].'" id="biblio'.$row['id_reactions_croisee'].'"></a><span class="left">'.$row['id_reactions_croisee'].' : </span><a class="small right" href="#top_'.$type_etude.'">Retour &agrave; la synth&egrave;se <img src="'.find_in_path('img/arrow_up.gif').'" style="margin-bottom:-2px"/></a></th></tr>
-								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td colspan="5" rowspan="1">'.$rowbiblio['citation'].'</td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td colspan="5" rowspan="1">'
+				."<a onclick=\"jQuery(this).next().toggle('fast');return false;\">".$rowbiblio['citation']."</a>"
+				."<div style='display:none;padding:5px;font-size:0.9em;'>".$rowbiblio['abstract']."</div>"
+				. '</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums test&eacute;s individuellement</b>: '.(($rowbiblio['pool']==1)?'Non':'Oui').'</td><td colspan="2" rowspan="1"><b>Test quantitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Non':'Oui').'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Produit1</b></td><td><b>RC 1-&gt; 2</b></td><td><b>RC 2-&gt;1</b></td><td><b>Produit2</b></td><td><b>Remarques</b></td></tr>
