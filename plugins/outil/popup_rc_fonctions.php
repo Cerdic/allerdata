@@ -3,7 +3,7 @@ session_start();
 function rc($p1,$p2,$type_etude) {
 	include_spip('base/abstract_sql');
 	
-	$css_path = find_in_path('squelettes/css');
+	$css_path = dirname(find_in_path('proto.css'));
 	
 	$tableau_produits = $items_fils_de = array();
 	if (is_numeric($p1)) $tableau_produits[] = $p1; 

@@ -33,15 +33,9 @@
 				</div>
 			</div>
 	</div>
-  <div id="tabpanel-win" class="x-hidden" style="display:none">
-     <div class="x-window-header">Boite de dialogue avec tabulation</div>
-     <div id="popup-dlg-tab">
-     </div>
-  </div>
 
   [(#INCLURE{fond=inc-proto-scripts}|compacte_head)]
 	<script type='text/javascript'>
-		jQuery(document).ready(function(){jQuery('#tabpanel-win').remove().appendTo(jQuery('body'))});
 		function loadFormPenta(){
 			<BOUCLE_pour(POUR){tableau 1:5}><BOUCLE_p(tbl_items){id_item=#ENV{p#VALEUR}}>
 					ZONES_SAISIE.combo[#VALEUR].setValue('[(#NOM|texte_script)]');
