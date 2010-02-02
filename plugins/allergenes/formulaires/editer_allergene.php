@@ -29,10 +29,18 @@ function formulaires_editer_allergene_verifier_dist($id_item='new', $id_parent=0
 	// verifier qu'un allergene n'existe pas deja avec ce nom, dans le meme produit ou la meme source
 	include_spip('allerdata_fonctions');
 	include_spip('penta_fonctions');
-	// trouver le produit de l'allergene
+	
+		// trouver le produit de l'allergene
 	$id_produit = sql_getfetsel('id_item','tbl_items',array(sql_in('id_type_item',allerdata_id_type_item('produit',true)),sql_in('id_item',_request('id_parent'))));
 	if (!$id_produit){
 		$erreurs['id_parent'] = _T('editer_allergene:produit_obligatoire');
+	}
+	else {
+		// verifier les produits en attente et alerter
+		$res = sql_select('id_item,nom','tbl_items',array(sql_in('id_type_item',allerdata_id_type_item('produit_en_attente')),sql_in('id_item',_request('id_parent'))));
+		while ($row = sql_fetch($res)){
+			$erreurs['id_parent'] .= _T('editer_allergene:produit_en_attente', array('nom'=>$row['nom']."(#".$row['id_item'].")",'url'=>generer_url_ecrire('allerdata','page=produits&edit='.$row['id_item'])))."<br />";
+		}
 	}
 	// trouver la source de l'allergene
 	$id_source = penta_ascendant_le_plus_proche($id_produit,'source');
