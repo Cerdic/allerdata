@@ -8,7 +8,7 @@
 }
 
 .rc {position:absolute}
-
+/*
 #rc_1_2 {background-position: -310px -100px; left: 310px; top: 100px; width: 43px; height: 80px}
 #rc_1_3 {background-position: -270px -535px; left: 231px; top: 178px; width: 60px; height: 135px}
 #rc_1_4 {background-position: -50px -840px; left: 36px; top: 126px; width: 70px; height: 150px}
@@ -33,14 +33,15 @@
 .rc_jamais {background: url("img/fd_rc_jamais.png") top left no-repeat;}
 .rc_toujours {background: url("img/fd_rc_toujours.png") top left no-repeat;}
 .rc_discordant {background: url("img/fd_rc_discordant.png") top left no-repeat;}
-
-.rc_jamais_rl {height:15px; width:49px; margin:auto; background: url("img/rc_jamais_rl.gif") center center no-repeat;}
-.rc_toujours_rl {height:15px; width:49px; margin:auto; background: url("img/rc_toujours_rl.gif") center center no-repeat;}
-.rc_discordant_rl {height:15px; width:49px; margin:auto; background: url("img/rc_discordant_rl.gif") center center no-repeat;}
-.rc_jamais_lr {height:15px; width:49px; margin:auto; background: url("img/rc_jamais_lr.gif") center center no-repeat;}
-.rc_toujours_lr {height:15px; width:49px; margin:auto; background: url("img/rc_toujours_lr.gif") center center no-repeat;}
-.rc_discordant_lr {height:15px; width:49px; margin:auto; background: url("img/rc_discordant_lr.gif") center center no-repeat;}
-
+*/
+/*
+.rc_jamais_rl {height:15px; width:49px; margin:auto; background: url("img/rc_jamais_rl2.gif") center center no-repeat;}
+.rc_toujours_rl {height:15px; width:49px; margin:auto; background: url("img/rc_toujours_rl2.gif") center center no-repeat;}
+.rc_discordant_rl {height:15px; width:49px; margin:auto; background: url("img/rc_discordant_rl2.gif") center center no-repeat;}
+.rc_jamais_lr {height:15px; width:49px; margin:auto; background: url("img/rc_jamais_lr2.gif") center center no-repeat;}
+.rc_toujours_lr {height:15px; width:49px; margin:auto; background: url("img/rc_toujours_lr2.gif") center center no-repeat;}
+.rc_discordant_lr {height:15px; width:49px; margin:auto; background: url("img/rc_discordant_lr2.gif") center center no-repeat;}
+*/
 /* #imagemap {position:absolute;} */
 
 #liens_infos {
