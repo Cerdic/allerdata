@@ -8,14 +8,14 @@
 
 // l'argument align n'est plus jamais fourni
 // http://doc.spip.org/@icone
-function allerdata_icone_etendue($texte, $lien, $fond, $fonction="", $align="", $afficher='oui', $expose=false){
+function allerdata_icone_etendue($texte, $lien, $fond, $fonction="", $align="", $afficher='oui', $expose=false,$style=''){
 	global $spip_display;
 
 	if ($fonction == "supprimer.gif") {
-		$style = '-danger';
+		$style = '-danger '.$style;
 	} else {
-		$style = '';
-		if ($expose) $style=' on';
+		$style = ' '.$style;
+		if ($expose) $style.=' on';
 		if (strlen($fonction) < 3) $fonction = "rien.gif";
 	}
 
@@ -89,8 +89,9 @@ background-color:#FFFFFF;border:2px solid #666666;display:inline;margin:0pt;padd
 		$deja_style = true;
 	}
 	$out .= "<div class='barre_nav'>";
+	$k = 0;
 	foreach($liste_items as $item){
-		$out .= allerdata_icone_etendue($item['titre'], isset($item['url'])?$item['url']:generer_url_ecrire($item['page']), $item['icone'], isset($item['action'])?$item['action']:"rien.gif","", false, $page_actuelle==$item['page']);
+		$out .= allerdata_icone_etendue($item['titre'], isset($item['url'])?$item['url']:generer_url_ecrire($item['page']), $item['icone'], isset($item['action'])?$item['action']:"rien.gif","", false, $page_actuelle==$item['page'],($k++%2==0)?'odd':'even');
 	}
 	return $out."</div>";
 }
