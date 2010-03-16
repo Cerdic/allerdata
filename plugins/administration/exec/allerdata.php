@@ -49,7 +49,7 @@ function exec_allerdata_dist(){
 	if (defined('_DIR_PLUGIN_ALLER_ALLERGENES'))
 		$barre[] = array('titre'=>_T("allerdata:allergenes"),'page'=>'allergenes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/allergene-64.png",'url'=>generer_url_ecrire('allerdata','page=allergenes'));
 	if (defined('_DIR_PLUGIN_MINITEXT'))
-		$barre[] = array('titre'=>_T("allerdata:minitext"),'page'=>'minitextes','icone'=>_DIR_PLUGIN_MINITEXT."img_pack/minitext-64.png",'url'=>generer_url_ecrire('allerdata','page=minitextes'));
+		$barre[] = array('titre'=>_T("allerdata:minitextes"),'page'=>'minitextes','icone'=>_DIR_PLUGIN_MINITEXT."img_pack/minitexte-64.png",'url'=>generer_url_ecrire('allerdata','page=minitextes'));
 	//array('titre'=>_L("Configuration"),'page'=>'cfg','icone'=>_DIR_PLUGIN_BOUTIQUE."img_pack/config-64.png",'url'=>generer_url_ecrire('allerdata','page=cfg')),
 	echo allerdata_barre_nav_gauche($page,$barre);
 

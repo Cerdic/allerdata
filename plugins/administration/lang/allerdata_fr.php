@@ -41,10 +41,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_biblio' => 'Ajouter une r&eacute;f&eacute;rence',
 'item_interdit_instituer' => 'Cet item a des enfants et ne peut &ecirc;tre depubli&eacute;',
 'item_statut_propose_evaluation' => 'propos&eacute; &agrave; la publication',
+'icone_creer_minitexte' => 'Creer un mini-texte',
 
 // L
 'label_commentaires' => 'Commentaires sur la modification',
 'label_statut' => 'Statut',
+
+'minitextes' => 'Mini-textes',
+'minitexte_interdit_instituer' => 'Il n\'est pas possible de modifier ce statut',
 
 // P
 'un_parent' => '1 ascendant',

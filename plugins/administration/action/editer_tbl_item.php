@@ -209,7 +209,7 @@ function instituer_tbl_item($id_item, $c) {
 function allerdata_versionne_item($x){
 	if (
 		in_array($x['args']['action'],array('modifier','instituer'))
-	  AND in_array($x['args']['table_objet'],array('tbl_items','tbl_bibliographies','tbl_groupes_patients','tbl_reactions_croisees'))){
+	  AND in_array($x['args']['table_objet'],array('tbl_items','tbl_bibliographies','tbl_groupes_patients','tbl_reactions_croisees','tbl_minitextes'))){
 	  
 	  $_table = $x['args']['table_objet'];
 	  $_id_table = 'id_'.rtrim(substr($_table,4),'s');
