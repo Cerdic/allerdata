@@ -1,0 +1,42 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[(#ENV{editable}|non)
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,minitext}
+	  <ul>
+	  	#SET{name,statut}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				[(#AUTORISER{instituer,minitexte,#ENV{id_minitexte,nouveau}}|?{
+				[(#ENV{#GET{name}}|allerdata_selecteur_statut{#GET{name},#GET{name}})],
+				<:allerdata:minitexte_interdit_instituer:>
+				})]
+	    </li>
+	  	#SET{name,texte}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<textarea name='#GET{name}' id='#GET{name}' rows='12'>#ENV{#GET{name}}</textarea>
+	    </li>
+	  	#SET{name,incidence_rav}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+	    </li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='[(#ENV{id_bibliographie}|intval|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+	</div></form>
+	]
+</div>

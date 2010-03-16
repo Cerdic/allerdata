@@ -1,0 +1,29 @@
+[(#REM)
+
+	Un petit descriptif ne serait pas superflu
+
+]
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	<:icone_retour|icone_inline{#ENV{retour,#SELF|parametre_url{edit,''}},#CHEMIN{img_pack/minitexte-24.png},'',left}:>
+	[<p>(#ENV{edit}|intval|?{<:minitext:titre_cadre_modifier_minitexte:>,<:minitext:titre_cadre_ajouter_minitexte:>})</p>]
+	[<h1>(#ENV{edit}|intval|?{##ENV{edit}})</h1>]
+	<div class='versions'>
+	<B_versions>
+	<BOUCLE_versions(tbl_minitextes_versions){id_minitexte=#ENV{edit}}{!par id_version}{0,1}>
+	<:allerdata:version:> ##ID_VERSION le #DATE[, par (#INFO_NOM{auteur,#ID_AUTEUR})]
+	[<div class='descriptif'>(#COMMENTAIRES)</div>]
+	</BOUCLE_versions>
+	<br /><a href='#URL_ECRIRE{allerdata,page=revisions&id_minitexte=#ENV{edit}}'><:info_historique_lien:></a>
+	</B_versions>	[(#ENV{edit}|intval|oui)
+	<:allerdata:version_originale:>
+	]	<//B_versions>
+	</div>
+	<BOUCLE_biblio(tbl_minitextes){id_minitexte=#ENV{edit}}{statut?}>[(#STATUT|allerdata_puce_statut)]</BOUCLE_biblio>
+</div>
+<div class='ajax'>
+#FORMULAIRE_EDITER_MINITEXTE{#ENV{edit},#ENV{redirect}}
+</div>
+
+
+</div>

@@ -10,7 +10,7 @@ function minitext_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		if (version_compare($current_version,'0.1.0.0','<')){
+		if (version_compare($current_version,'0.1.0.2','<')){
 			include_spip('base/abstract_sql');
 			include_spip('base/serial');
 			include_spip('base/aux');
@@ -19,8 +19,9 @@ function minitext_upgrade($nom_meta_base_version,$version_cible){
 			maj_tables('tbl_minitextes');
 			maj_tables('tbl_minitextes_items');
 			maj_tables('tbl_items');
+			maj_tables('tbl_minitextes_versions');
 
-			ecrire_meta($nom_meta_base_version,$current_version='0.1.0.0','non');
+			ecrire_meta($nom_meta_base_version,$current_version='0.1.0.2','non');
 		}
 	}
 }
@@ -48,6 +49,8 @@ function minitext_declarer_tables_principales($tables_principales){
 	  'id_minitexte' => "bigint(21) NOT NULL",
 		"texte"	=> "longtext DEFAULT '' NOT NULL",
 		'incidence_rav' => "bigint(21) NOT NULL",
+		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
+		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
   );
 	
 	$minitextes_key = array(
@@ -78,6 +81,21 @@ function minitext_declarer_tables_auxiliaires($tables_auxiliaires){
 	$tables_auxiliaires['tbl_minitextes_items'] =
 		array('field' => &$minitextes_items, 'key' => &$minitextes_items_key);
 
+	$tbl_minitextes_versions = array(
+	  'id_minitexte' => "int(11) NOT NULL",
+		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"id_auteur"	=> "bigint(21) NOT NULL",
+		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+		"commentaires" => "text",
+		"diff" => "text", // liste des champs modifies avant/apres
+		"vu_id_auteur"	=> "bigint(21) DEFAULT 0 NOT NULL",
+		"vu_date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+  );
+	$tbl_minitextes_versions_key = array (
+			"PRIMARY KEY"	=> "id_minitexte, id_version");
+	$tables_auxiliaires['tbl_minitextes_versions'] = array(
+		'field' => &$tbl_minitextes_versions,
+		'key' => &$tbl_minitextes_versions_key);
 	
 	return $tables_auxiliaires;
 }

@@ -6,7 +6,7 @@ _ pour Allerdata SARL
 _ &#169; 2008 - Licence GPL
 	</auteur>
 	<version>0.1.0.0</version>
-	<version_base>0.1.0.0</version_base>
+	<version_base>0.1.0.2</version_base>
 	<etat>stable</etat>
 	<description>Gestion des mini-textes sur produits et couples de produits</description>
 	<lien></lien> <!-- URI de documentation -->
@@ -33,10 +33,11 @@ _ &#169; 2008 - Licence GPL
 		<inclure>minitext_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='minitext' parent='allerdata'>
-		<titre>allerdata:minitext</titre>
-		<icone>img_pack/minitext-24.png</icone>
+		<titre>allerdata:minitextes</titre>
+		<icone>img_pack/minitexte-24.png</icone>
 		<url>allerdata</url>
 		<args>page=minitextes</args>
 	</bouton>
 	<necessite id='allerdata' version="[;]" />
+	<utilise id='aller_allergenes' version="[;]" />
 </plugin>
