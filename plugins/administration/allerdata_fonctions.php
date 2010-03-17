@@ -101,6 +101,12 @@ function allerdata_id_type_item($type,$tous=false){
 			else
 				return array(/*1,*/3,5); // ticket #243
 			break;
+		case 'produit_et_categorie':
+			if ($tous)
+				return array(1,3,5,13,23,25);
+			else
+				return array(1,3,5);
+			break;
 		case 'produit_simple':
 			if ($tous)
 				return array(5,25);
