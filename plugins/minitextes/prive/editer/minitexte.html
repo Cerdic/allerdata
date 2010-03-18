@@ -22,7 +22,7 @@
 	<BOUCLE_biblio(tbl_minitextes){id_minitexte=#ENV{edit}}{statut?}>[(#STATUT|allerdata_puce_statut)]</BOUCLE_biblio>
 </div>
 <div class='ajax'>
-#FORMULAIRE_EDITER_MINITEXTE{#ENV{edit},#ENV{redirect}}
+#FORMULAIRE_EDITER_MINITEXTE{#ENV{edit},#ENV{parent},#ENV{redirect}}
 </div>
 
 

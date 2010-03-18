@@ -1,0 +1,7 @@
+<p class='actions'>
+[&#91;<a href='[(#URL_ECRIRE{allerdata,page=revisions&id_minitexte=#ID_MINITEXTE})]'><:allerdata:version:> #(#ID_VERSION|?{#ID_VERSION})</a>[ du (#DATE_MODIF_VERSION|affdate_court)][, par (#INFO_NOM{auteur,#ID_AUTEUR_VERSION})]&#93;]
+
+[(#AUTORISER{modifier,#ENV{quoi,minitexte},#ID_MINITEXTE}|oui)
+&#91;<a href='[(#URL_ECRIRE{allerdata,page=#ENV{quoi,minitexte}|concat{'s&edit=',#ID_MINITEXTE}}|parametre_url{retour,#SELF})]'><:bouton_modifier:></a>&#93;]
+
+</p>

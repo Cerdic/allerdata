@@ -11,9 +11,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('allerdata_fonctions');
 
 function formulaires_editer_minitexte_charger_dist($id_minitexte='new', $id_parent=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('tbl_minitextes',$id_minitexte,0,$lier,$retour,$config_fonc,$row,$hidden);
+	$valeurs = formulaires_editer_objet_charger('tbl_minitexte',$id_minitexte,0,$lier,$retour,$config_fonc,$row,$hidden);
 	$valeurs['commentaires'] = '';
 
 	$valeurs['id_items'] = array();

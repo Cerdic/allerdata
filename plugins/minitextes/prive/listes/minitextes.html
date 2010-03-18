@@ -1,0 +1,19 @@
+<B_minitextes><h2>[(#GRAND_TOTAL|singulier_ou_pluriel{minitext:un_minitexte,minitext:des_minitextes})]</h2>
+[<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_minitexte,''},recherche})</p>]
+<p class='pagination tri'>[(#TRI{<,#CHEMIN{img_pack/tri_asc-16.png}|tag_img}) | ][(#TRI{>,#CHEMIN{img_pack/tri_desc-16.png}|tag_img}) | ]
+[(#TRI{id_minitexte,'#id'}) | ][(#TRI{date_modif_version,'date de modif'}) | ][(#TRI{id_auteur_version,'redacteur'}) | ]
+</p>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items'>
+<BOUCLE_minitextes(tbl_minitextes){id_minitexte?}{derniere_version}{pagination 10 #VAL{b_}|concat{#ENV{statut}|implode{'_'}}}{statut?}{tri id_minitexte}{recherche?}>
+<li class='item[ (#EXPOSE)][ statut_(#STATUT)]' id="minitexte#ID_MINITEXTE">
+[(#INCLURE{fond=modeles/minitexte}{id=#ID_MINITEXTE})]
+#MODELE{boutons_action_minitexte,id_minitexte=#ID_MINITEXTE,self=#SELF,id_version,date_modif_version=#DATE_MODIF_VERSION,id_auteur_version=#ID_AUTEUR_VERSION}
+</li>
+</BOUCLE_minitextes>
+[<p class='pagination'>(#PAGINATION)</p>]
+</ul>
+</B_minitextes>[
+(#ENV{id_minitexte}|et{#ENV{statut}|=={publie}}|oui)
+[<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_minitexte,''},recherche}|unique)</p>]
+]<//B_minitextes>

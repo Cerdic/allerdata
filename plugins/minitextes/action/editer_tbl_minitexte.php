@@ -121,7 +121,7 @@ function instituer_tbl_minitexte($id_minitexte, $c) {
 		if ($type = $c['type']
 		 AND $type!=$ancien_type)
 			$champs['type'] = $type;
-		$champs['statut'] = $c['type'];
+		$champs['type'] = $c['type'];
 	}
 	else
 		$type = $ancien_type;
@@ -137,7 +137,9 @@ function instituer_tbl_minitexte($id_minitexte, $c) {
 			  AND $id_parent_1 = sql_getfetsel('id_item', 'tbl_items', 'id_item='.intval($id_parent_1))
 			  AND $id_parent_2 = sql_getfetsel('id_item', 'tbl_items', 'id_item='.intval($id_parent_2))
 				)
-				$champs['id_parent'] = array(sort(array($id_parent_1,$id_parent_2)));
+				$champs['id_parent'] = array($id_parent_1,$id_parent_2);
+				sort($champs['id_parent']);
+				$champs['id_parent'] = array($champs['id_parent']);
 			break;
 		case 3:
 			if ($id_parent = $c['id_item'])
