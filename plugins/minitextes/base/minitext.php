@@ -10,7 +10,7 @@ function minitext_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		if (version_compare($current_version,'0.1.0.3','<')){
+		if (version_compare($current_version,'0.1.0.4','<')){
 			include_spip('base/abstract_sql');
 			include_spip('base/serial');
 			include_spip('base/aux');
@@ -21,7 +21,7 @@ function minitext_upgrade($nom_meta_base_version,$version_cible){
 			maj_tables('tbl_items');
 			maj_tables('tbl_minitextes_versions');
 
-			ecrire_meta($nom_meta_base_version,$current_version='0.1.0.3','non');
+			ecrire_meta($nom_meta_base_version,$current_version='0.1.0.4','non');
 		}
 	}
 }
@@ -51,6 +51,7 @@ function minitext_declarer_tables_principales($tables_principales){
 		"texte"	=> "longtext DEFAULT '' NOT NULL",
 		'incidence_rav' => "bigint(21) NOT NULL",
 		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
+		'date' => "datetime default NULL",
 		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
   );
 	
