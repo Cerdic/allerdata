@@ -6,6 +6,7 @@
 
 [<div class="bouton_creer">(#VAL{allerdata:icone_creer_minitexte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=minitextes&edit=new},#CHEMIN{img_pack/minitexte-24.png},'creer.gif','right'})</div>]
 <INCLURE{fond=prive/listes/minitextes}{env}{ajax}>
+<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 ]
 [(#ENV{edit}|oui)
 [(#INCLURE{fond=prive/editer/minitexte}{edit}{parent=0}{redirect=#SELF|parametre_url{edit,''}}{retour})]

@@ -1,0 +1,23 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+#SET{virgule,''}#SET{fin,''}<B_it>
+	<ul><BOUCLE_it(tbl_items){id_minitexte}{par id_type_item,nom}>
+	[(#ID_TYPE_ITEM|unique{e#ENV{id_item}}|oui)#GET{fin}<li class='enumeration[ (#ID_TYPE_ITEM|allerdata_type_item{s})]'>#MODELE{type_item_nom,id_type_item}<ul>#SET{fin,'</ul></li>'}#SET{virgule,''}]
+	<li>#GET{virgule}<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>#SET{virgule,'<em>, </em>'}</li>
+	</BOUCLE_it>[(#GET{fin})</ul>]
+</B_it>
+	<B_couple><ul><BOUCLE_couple(tbl_minitextes_items){id_minitexte}>
+	<li>#GET{virgule}
+	<BOUCLE_item(tbl_items){id_item IN #ID_ITEM_1,#ID_ITEM_2}>
+	<span class="singleton[ (#COMPTEUR_BOUCLE|alterner{first,second})]">
+	<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>
+	</span>
+	</BOUCLE_item>#SET{virgule,'<em>, </em>'}</li>
+	</BOUCLE_couple></ul></B_couple>
+<//B_it>
+
