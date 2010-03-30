@@ -1,6 +1,7 @@
-<BOUCLE_minitext(tbl_minitextes){id_minitexte=#ENV{id}}{statut?}>
+<BOUCLE_minitext(tbl_minitextes){id_minitexte=#ENV{id,#ENV{id_minitexte}}}{statut?}>
 <div class='minitexte'><span class='numero'>##ID_MINITEXTE</span>
-<h3 class='repliable'>[(#TEXTE|couper{60})]</h3>
+<h3 class='repliable'>[(#ENV{lien,''}|oui)<a href="[(#URL_ECRIRE{allerdata}|parametre_url{page,minitextes}|parametre_url{debutm_publie_prop,@#ID_MINITEXTE}|ancre_url{minitexte#ID_MINITEXTE})]"
+		>][(#TEXTE|couper{60})][</a>(#ENV{lien,''}|oui)]</h3>
 [<div class="texte">(#TEXTE)</div>]
 </div>
 [<div class="enfants">(#INCLURE{fond=prive/listes/minitexte-items,id_minitexte})</div>]

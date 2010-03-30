@@ -5,19 +5,28 @@
   Distribue sous licence GPL
 
 ]
-#SET{virgule,''}#SET{fin,''}<B_it>
-	<ul><BOUCLE_it(tbl_items){id_minitexte}{par id_type_item,nom}>
-	[(#ID_TYPE_ITEM|unique{e#ENV{id_item}}|oui)#GET{fin}<li class='enumeration[ (#ID_TYPE_ITEM|allerdata_type_item{s})]'>#MODELE{type_item_nom,id_type_item}<ul>#SET{fin,'</ul></li>'}#SET{virgule,''}]
+#SET{virgule,''}
+<B_prod>
+	[(#TOTAL_BOUCLE|singulier_ou_pluriel{allerdata:produit,allerdata:produits_nb})]
+	<ul><BOUCLE_prod(tbl_items){id_minitexte}{type_item produit_et_categorie}{par nom}>
 	<li>#GET{virgule}<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>#SET{virgule,'<em>, </em>'}</li>
-	</BOUCLE_it>[(#GET{fin})</ul>]
-</B_it>
-	<B_couple><ul><BOUCLE_couple(tbl_minitextes_items){id_minitexte}>
-	<li>#GET{virgule}
-	<BOUCLE_item(tbl_items){id_item IN #ID_ITEM_1,#ID_ITEM_2}>
-	<span class="singleton[ (#COMPTEUR_BOUCLE|alterner{first,second})]">
-	<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>
-	</span>
-	</BOUCLE_item>#SET{virgule,'<em>, </em>'}</li>
-	</BOUCLE_couple></ul></B_couple>
-<//B_it>
+	</BOUCLE_prod>[(#GET{fin})</ul>]
+</B_prod>
+	<B_fmol>
+	[(#TOTAL_BOUCLE|singulier_ou_pluriel{allerdata:famille_moleculaire,allerdata:famille_mols_nb})]
+	<ul><BOUCLE_fmol(tbl_items){id_minitexte}{par id_type_item,nom}>
+	<li>#GET{virgule}<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>#SET{virgule,'<em>, </em>'}</li>
+	</BOUCLE_fmol>[(#GET{fin})</ul>]
+	</B_fmol>
+
+		<B_couple><ul><BOUCLE_couple(tbl_minitextes_items){id_minitexte}>
+		<li>#GET{virgule}
+		<BOUCLE_item(tbl_items){id_item IN #ID_ITEM_1,#ID_ITEM_2}>
+		<span class="singleton[ (#COMPTEUR_BOUCLE|alterner{first,second})]">
+		<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>
+		<em> - </em></span>
+		</BOUCLE_item>#SET{virgule,'<em>, </em>'}</li>
+		</BOUCLE_couple></ul></B_couple>
+	<//B_fmol>
+<//B_prod>
 

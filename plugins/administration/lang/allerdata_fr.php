@@ -21,6 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confirm_suppression' => '&Ecirc;tes-vous certain de vouloir supprimer cet item ?',
 'cohortes' => 'Groupes de patients',
 'cohorte_interdit_instituer' => 'Ce groupe de patient est associ&eacute; a des RC et ne peut &ecirc;tre depubli&eacute;',
+'ce_produit_associe_au_minitexte' => 'Ce produit est associ&eacute; au mini-texte :',
+'cette_famille_associee_au_minitexte' => 'Cette famille est associ&eacute;e au mini-texte :',
 
 // E
 'un_enfant' => '1 descendant',
@@ -30,7 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'famille_taxo' => 'Famille Taxonomique',
 'famille_taxo_contient_produits' => 'Cette famille taxonomique contient les produits',
 'famille_taxos' => 'Familles Taxonomiques',
+'famille_mol' => 'Famille Mol&eacute;culaire',
 'famille_mols' => 'Familles Mol&eacute;culaires',
+'famille_mols_nb' => '@nb@ familles mol&eacute;culaires',
 
 // I
 'icone_creer_allergene' => 'Creer un allerg&egrave;ne',
@@ -53,7 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'un_parent' => '1 ascendant',
 'parents' => '@nb@ ascendants',
+'produit' => 'Produit',
 'produits' => 'Produits',
+'produits_nb' => '@nb@ produits',
 
 // S
 'sources' => 'Organismes Sources',

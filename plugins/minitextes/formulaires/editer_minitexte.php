@@ -77,10 +77,10 @@ function formulaires_editer_minitexte_traiter_dist($id_minitexte='new', $id_pare
 	$res = formulaires_editer_objet_traiter('tbl_minitexte',$id_minitexte,$id_parent,$lier,$retour,$config_fonc,$row,$hidden);
 	if (!$res['message_erreur'] AND $retour){
 		$retour = parametre_url($retour,'retour|debut_minitextes', '');
-		$debut = "debut_minitextes";
+		$debut = "debutm_publie_prop";
 		$row = sql_fetsel("statut, id_minitexte",'tbl_minitextes','id_minitexte='.intval($res['id_minitexte']));
 		if ($row['statut']=='poubelle')
-			$debut = "debut_id_minitextes_poubelle";
+			$debut = "debutm_poubelle";
 		//elseif(in_array($row['id_type_item'],allerdata_id_type_item('allergene_en_attente')))
 		//	$debut = "debut_items_attente";
 		$res['redirect'] = ancre_url(parametre_url($retour,$debut,'@'.$res['id_minitexte']),'iminitexte'.$res['id_minitexte']);
