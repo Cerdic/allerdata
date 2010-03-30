@@ -37,14 +37,18 @@ function action_editer_tbl_minitexte_dist() {
 // Appelle toutes les fonctions de modification d'un tbl_minitexte
 // $err est de la forme '&trad_err=1'
 // http://doc.spip.org/@tbl_minitextes_set
-function tbl_minitextes_set($id_minitexte) {
+function tbl_minitextes_set($id_minitexte,$set=null) {
 	$err = '';
 
-	$c = array();
-	foreach (array(
-		"texte",'incidence_rav'
-	) as $champ)
-		$c[$champ] = _request($champ);
+	if (is_null($set)){
+		$c = array();
+		foreach (array(
+			"texte",'incidence_rav'
+		) as $champ)
+			$c[$champ] = _request($champ);
+	}
+	else
+		$c = $set;
 
 	include_spip('inc/modifier');
 	revision_tbl_minitexte($id_minitexte, $c);
@@ -54,7 +58,7 @@ function tbl_minitextes_set($id_minitexte) {
 	foreach (array(
 		'statut',"type",'id_item','id_items','id_item_1','id_item_2',
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = _request($champ,$set);
 	$err .= instituer_tbl_minitexte($id_minitexte, $c);
 
 	return $err;
@@ -136,10 +140,11 @@ function instituer_tbl_minitexte($id_minitexte, $c) {
 				AND $id_parent_2 = $c['id_item_2']
 			  AND $id_parent_1 = sql_getfetsel('id_item', 'tbl_items', 'id_item='.intval($id_parent_1))
 			  AND $id_parent_2 = sql_getfetsel('id_item', 'tbl_items', 'id_item='.intval($id_parent_2))
-				)
+				){
 				$champs['id_parent'] = array($id_parent_1,$id_parent_2);
 				sort($champs['id_parent']);
 				$champs['id_parent'] = array($champs['id_parent']);
+			}
 			break;
 		case 3:
 			if ($id_parent = $c['id_item'])
@@ -148,7 +153,7 @@ function instituer_tbl_minitexte($id_minitexte, $c) {
 	}
 
 	if (!count($champs)) return;
-
+	
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
 		array(

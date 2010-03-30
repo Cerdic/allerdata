@@ -23,6 +23,65 @@ function minitext_upgrade($nom_meta_base_version,$version_cible){
 
 			ecrire_meta($nom_meta_base_version,$current_version='0.1.0.4','non');
 		}
+		if (version_compare($current_version,'0.1.1.0','<')){
+			$importer_csv = charger_fonction('importer_csv','inc');
+			$mts = $importer_csv(find_in_path('base/mt_import.csv'),true);
+			include_spip('action/editer_tbl_minitexte');
+			foreach($mts as $mt){
+				$id = $mt['id_mini_texte'];
+				if (!sql_getfetsel('id_minitexte', 'tbl_minitextes', 'id_minitexte='.intval($id)))
+					$id = insert_tbl_minitexte($id);
+				if ($id){
+					$set = array(
+						'type' => ($mt['type_mini_texte'] == 'P')?1:(($mt['type_mini_texte'] == 'RC')?2:3),
+						'texte' =>
+						  "{{{".$mt['titre_mini_texte']."}}}\n"
+						  .$mt['Intro']."\n\n"
+						  .(strlen($s=$mt['Allerg_principaux'])?"{{Allergènes principaux}}\n_ $s\n\n":"")
+						  .(strlen($s=$mt['Diagn_molec'])?"{{Diagnostic moléculaire}}\n_ $s\n\n":"")
+						  .(strlen($s=$mt['Allerg_representatifs'])?"{{Allergènes représentatifs}}\n_ $s\n\n":"")
+						);
+					tbl_minitextes_set($id,$set);
+				}
+			}
+
+			$liens = $importer_csv(find_in_path('base/mt_import_liens.csv'),true);
+			$links = array();
+			while (count($liens)){
+				$z = array_shift($liens);
+				$links[$z['id_mini_texte']][] = $z['id_item'];
+			}
+			foreach($links as $id => $items){
+				$type = sql_getfetsel("type", "tbl_minitextes", "id_minitexte=".intval($id));
+				$set = array();
+				switch ($type){
+					case 1:
+						$set['id_items'] = $items;
+						$set['statut'] = 'publie';
+						break;
+					case 2:
+						if (count($items)!=2) {
+							var_dump($items);
+							die("Erreur minitexte $id, type 2");
+						}
+						$set['id_item_1'] = array_shift($items);
+						$set['id_item_2'] = array_shift($items);
+						$set['statut'] = 'publie';
+						break;
+					case 3:
+						if (count($items)!=1){
+							var_dump($items);
+							die("Erreur minitexte $id, type 3");
+						}
+						$set['id_item'] = array_shift($items);
+						$set['statut'] = 'publie';
+						break;
+				}
+				tbl_minitextes_set($id,$set);
+			}
+			ecrire_meta($nom_meta_base_version,$current_version='0.1.1.0','non');
+		}
+
 	}
 }
 
@@ -49,7 +108,7 @@ function minitext_declarer_tables_principales($tables_principales){
 	  'id_minitexte' => "bigint(21) NOT NULL",
 	  'type' => "tinyint(1) NOT NULL",
 		"texte"	=> "longtext DEFAULT '' NOT NULL",
-		'incidence_rav' => "bigint(21) NOT NULL",
+		#'incidence_rav' => "bigint(21) NOT NULL",
 		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 		'date' => "datetime default NULL",
 		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",

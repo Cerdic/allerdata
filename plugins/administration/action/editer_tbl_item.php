@@ -223,10 +223,14 @@ function allerdata_versionne_item($x){
 				// si le(s) parent(s) est(sont) modifies
 				// charger les parents actuels
 				if ($_table=='tbl_items' AND isset($x['data']['id_parent'])){
-					include_spip('inc/alledata_arbo');
+					include_spip('inc/allerdata_arbo');
 					$row['id_parent'] = allerdata_les_parents($id);
 				}
-				
+				if ($_table=='tbl_minitextes' AND isset($x['data']['id_parent'])){
+					include_spip('inc/minitext');
+					$row['id_parent'] = minitext_les_parents($id);
+				}
+
 				// on note les champs modifies
 				// ceux que l'on ne voit pas modifies sont enleves de la revision
 				// on ne prend aucun risque !

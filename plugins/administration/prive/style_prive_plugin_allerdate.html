@@ -15,6 +15,9 @@
 ul.liste_items li.item.court .enfants, ul.liste_items li.item.court .parents { display: none; }
 .liste_items.minitextes li.item.court .texte { display: none; }
 
+ul.liste_items.minitextes li.item h3.repliable {display:none;}
+ul.liste_items.minitextes li.item.court h3.repliable {display:block;}
+
 .plier_deplier { float: right; font-size: 0.9em; }
 
 li.item.statut_publie,li.item.statut_prop,li.item.statut_poubelle {
@@ -40,7 +43,7 @@ li.item .enfants ul li span {display:none;}
 li.item .enfants ul {margin:0px 0 0;padding:0;list-style:none;}
 li.item .enfants ul li.enumeration {margin:10px 0 0;padding:0;}
 li.item .enfants ul li.enumeration ul {margin-#GET{left}:10px;}
-li.item .enfants li {border-top:1px solid #eee;clear:both;padding:2px 5px;}
+li.item .enfants li {border-top:1px solid #eee;clear:both;padding:2px 5px;overflow: hidden;}
 li.item .enfants li em {display:none;}
 li.item .enfants li a {display:block;}
 li.item .enfants li span {display:block;float:#GET{right};width:80px;text-align:#GET{right};}
@@ -55,12 +58,13 @@ li.item .parents ul li span {display:none;}
 li.item .parents ul {margin:0px 0 0;padding:0;list-style:none;}
 li.item .parents ul li.enumeration {margin:10px 0 0;padding:0;}
 li.item .parents ul li.enumeration ul {margin-#GET{left}:10px;}
-li.item .parents li {border-top:1px solid #eee;clear:both;padding:2px 5px;}
+li.item .parents li {border-top:1px solid #eee;clear:both;padding:2px 5px;overflow: hidden;}
 li.item .parents li em {display:none;}
 li.item .parents li a {display:block;}
 li.item .parents li span {display:block;float:#GET{right};width:80px;text-align:#GET{right};}
 li.item .parents ul li.enumeration li:hover {background:[#(#GET{claire}|couleur_eclaircir)];}
 
+li.item .enfants li span.singleton {float:#GET{left};margin-#GET{right}:10px;}
 
 ul.hierarchie {margin:0 0 2em;padding:0;}
 ul.hierarchie ul {margin:0;padding:0;}

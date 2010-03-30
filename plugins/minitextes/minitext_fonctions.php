@@ -19,4 +19,9 @@ function critere_tbl_minitextes_derniere_version_dist($idb, &$boucles, $crit){
 }
 
 
+function minitext_extraire_titre($texte){
+	if (preg_match(",^\s*<h([1-6])[^>]*>(.*)</h\\1>,Uims",$texte,$regs))
+		return textebrut($regs[2]);
+	return couper($texte,60);
+}
 ?>
