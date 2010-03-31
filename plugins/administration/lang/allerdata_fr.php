@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_commentaires' => 'Commentaires sur la modification',
 'label_statut' => 'Statut',
 
+'minitexte' => 'Mini-texte',
 'minitextes' => 'Mini-textes',
 'minitexte_interdit_instituer' => 'Il n\'est pas possible de modifier ce statut',
 
@@ -86,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'voir_modifications' => 'Voir les modifications',
 'voir_la_modification' => 'Voir la modification',
+'voir_minitexte' => 'Voir le mini-texte',
 );
 
 
