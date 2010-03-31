@@ -24,4 +24,33 @@ function minitext_extraire_titre($texte){
 		return textebrut($regs[2]);
 	return couper($texte,60);
 }
+
+function boucle_tbl_minitextes_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$mstatut = $id_table .'.statut';
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->modificateur['criteres']['statut'])) {
+		if (!$GLOBALS['var_preview']) {
+			array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
+		} else
+			array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'"));
+	}
+	return calculer_boucle($id_boucle, $boucles);
+}
+
+
+function critere_tbl_minitextes_rc_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$_id1 = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	$_id2 = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+
+	$boucle->join['rc']=array("'".$boucle->id_table."'","'".$boucle->primary."'");
+	$boucle->from['rc']='tbl_minitextes_items';
+
+	$boucle->where[] = array("'OR'","'(rc.id_item_1='.intval($_id1).' AND rc.id_item_2='.intval($_id2).')'","'(rc.id_item_1='.intval($_id2).' AND rc.id_item_2='.intval($_id1).')'");
+}
+
+
 ?>

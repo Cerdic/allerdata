@@ -33,6 +33,7 @@
 				<input type='hidden' name='id_#GET{name}' id='id_#GET{name}' value="#ENV{id_#GET{name}}" />
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 				<div class="more">#INCLURE{fond=modeles/item_detail_rc,id_item=#ENV{id_#GET{name}}}</div>
+				#SET{id_item_1,#ENV{id_#GET{name}}}
 			</td>
 	  	#SET{name,niveau_rc_sens1-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_niveau_rc_sens1 editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -50,11 +51,13 @@
 				<input type='hidden' name='id_#GET{name}' id='id_#GET{name}' value="#ENV{id_#GET{name}}" />
 				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 				<div class="more">#INCLURE{fond=modeles/item_detail_rc,id_item=#ENV{id_#GET{name}}}</div>
+				#SET{id_item_2,#ENV{id_#GET{name}}}
 			</td>
 	  	#SET{name,remarques-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_remarques editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<textarea name='#GET{name}' id='#GET{name}' rows='[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{4,#ENV{#GET{name}}|strlen|div{20}|ceil|max{2}})]'>#ENV{#GET{name}}</textarea>
+				<INCLURE{fond=modeles/minitexte-rc}{id_item_1=#GET{id_item_1}}{id_item_2=#GET{id_item_2}}>
 			</td>
 	  	#SET{name,risque_ccd-#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 			<td class="editer_risque_CCD editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
