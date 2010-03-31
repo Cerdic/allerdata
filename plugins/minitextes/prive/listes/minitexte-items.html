@@ -19,11 +19,16 @@
 	</BOUCLE_fmol>[(#GET{fin})</ul>]
 	</B_fmol>
 
-		<B_couple>RC<ul><BOUCLE_couple(tbl_minitextes_items){id_minitexte}>
+		<B_couple><:allerdata:cohortes:><ul><BOUCLE_couple(tbl_minitextes_items){id_minitexte}>
+		<BOUCLE_rc(tbl_reactions_croisees){produits #ID_ITEM_1,#ID_ITEM_2}>
+			<li>#MODELE{cohorte,id_groupes_patient}
+			<p class="actions"><a href="#URL_ECRIRE{allerdata,page=cohortes&edit=#ID_GROUPES_PATIENT}"><:allerdata:voir:></a></p>
+			</li>
+		</BOUCLE_rc>
 		<li>#GET{virgule}
 		<BOUCLE_item(tbl_items){id_item IN #ID_ITEM_1,#ID_ITEM_2}>
 		<span class="singleton[ (#COMPTEUR_BOUCLE|alterner{first,second})]">
-		<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>
+		<span>##ID_ITEM</span> <a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>
 		<em> - </em></span>
 		</BOUCLE_item>#SET{virgule,'<em>, </em>'}</li>
 		</BOUCLE_couple></ul></B_couple>

@@ -41,4 +41,13 @@ function boucle_tbl_reactions_croisees_dist($id_boucle, &$boucles) {
 	}
 	return calculer_boucle($id_boucle, $boucles); 
 }
+
+function critere_tbl_reactions_croisees_produits_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$_id1 = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	$_id2 = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+
+	$boucle->where[] = array("'OR'","'(id_produit1='.intval($_id1).' AND id_produit2='.intval($_id2).')'","'(id_produit1='.intval($_id2).' AND id_produit2='.intval($_id1).')'");
+}
+
 ?>

@@ -15,8 +15,8 @@
 ul.liste_items li.item.court .enfants, ul.liste_items li.item.court .parents { display: none; }
 .liste_items.minitextes li.item.court .texte { display: none; }
 
-ul.liste_items.minitextes li.item h3.repliable {display:none;}
-ul.liste_items.minitextes li.item.court h3.repliable {display:block;}
+ul.liste_items.minitextes li.item .minitexte > h3.repliable {display:none;}
+ul.liste_items.minitextes li.item.court .minitexte > h3.repliable {display:block;}
 
 li.item .actions .minitexte {display:block;float:#GET{left};margin-#GET{right}:10px;}
 
@@ -50,6 +50,10 @@ li.item .enfants li em {display:none;}
 li.item .enfants li a {display:block;}
 li.item .enfants li span {display:block;float:#GET{right};width:80px;text-align:#GET{right};}
 li.item .enfants ul li.enumeration li:hover {background:[#(#GET{claire}|couleur_eclaircir)];}
+li.item .enfants li span.rcs {display:block;float:none;text-align:#GET{left};width:auto;}
+li.item .enfants li span.singleton {float:#GET{left};margin-#GET{right}:10px;width:40%;text-align:#GET{left};}
+li.item .enfants li span.singleton span,li.item .enfants li span.singleton a {float:none;display:inline;}
+li.item .enfants li h3 a {display:inline;}
 
 li.item .parents ul {display:block;margin:0;padding:0;}
 /*
@@ -66,7 +70,6 @@ li.item .parents li a {display:block;}
 li.item .parents li span {display:block;float:#GET{right};width:80px;text-align:#GET{right};}
 li.item .parents ul li.enumeration li:hover {background:[#(#GET{claire}|couleur_eclaircir)];}
 
-li.item .enfants li span.singleton {float:#GET{left};margin-#GET{right}:10px;}
 
 ul.hierarchie {margin:0 0 2em;padding:0;}
 ul.hierarchie ul {margin:0;padding:0;}
