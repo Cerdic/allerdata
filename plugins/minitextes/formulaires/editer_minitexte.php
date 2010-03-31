@@ -22,6 +22,24 @@ function formulaires_editer_minitexte_charger_dist($id_minitexte='new', $id_pare
 	$valeurs['id_item_1'] = '';
 	$valeurs['id_item_2'] = '';
 
+	// regarder si on arrive avec une pre-selection
+	if ($item = _request('item')){
+		$id_type_item = sql_getfetsel("id_type_item", "tbl_items", "id_item=".intval($item));
+		if (($t = allerdata_type_item($id_type_item))=='produit'){
+			$valeurs['id_items'][] = $item;
+			$valeurs['type'] = 1;
+		}
+		elseif ($t == 'famille_mol'){
+			$valeurs['id_item'] = $item;
+			$valeurs['type'] = 3;
+		}
+	}
+	else if ($item_1 = _request('item_1') AND $item_2 = _request('item_2')) {
+		$valeurs['id_item_1'] = $item_1;
+		$valeurs['id_item_2'] = $item_2;
+		$valeurs['type'] = 2;
+	}
+
 	$valeurs['type'] = _request($type)?_request($type):$valeurs['type'];
 	if ($valeurs['type']==1){
 		if ($id_minitexte = intval($id_minitexte)){

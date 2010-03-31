@@ -46,6 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_interdit_instituer' => 'Cet item a des enfants et ne peut &ecirc;tre depubli&eacute;',
 'item_statut_propose_evaluation' => 'propos&eacute; &agrave; la publication',
 'icone_creer_minitexte' => 'Creer un mini-texte',
+'icone_creer_minitexte_et_associer_produit' => 'Creer un mini-texte pour ce produit',
+'icone_creer_minitexte_et_associer_famille' => 'Creer un mini-texte pour cette famille',
 
 // L
 'label_commentaires' => 'Commentaires sur la modification',

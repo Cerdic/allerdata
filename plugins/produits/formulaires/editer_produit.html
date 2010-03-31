@@ -96,6 +96,12 @@
 
 [<div class='item-minitexte descendants'>
 <h2><:allerdata:ce_produit_associe_au_minitexte:></h2>
+<a class="voir"
+	 href="[(#URL_ECRIRE{allerdata}|parametre_url{page,minitextes}|parametre_url{debutm_publie_prop,@#ID_MINITEXTE}|ancre_url{minitexte#ID_MINITEXTE})]"
+		><:allerdata:voir_minitexte:></a>
 (#INCLURE{fond=modeles/minitexte}{id_minitexte}{lien=oui})
 <div class='nettoyeur'></div>
 </div>]
+[(#ID_MINITEXTE|non)
+[<div class="creer">(#URL_ECRIRE{allerdata,page=minitextes&edit=new}|parametre_url{'item',#ID_ITEM}|icone{<:allerdata:icone_creer_minitexte_et_associer_produit:>,#CHEMIN{img_pack/minitexte-24.png},right,creer.gif,'',' target="_blank"'})</div>]
+]
