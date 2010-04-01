@@ -16,6 +16,7 @@ include_spip('allerdata_fonctions');
 function formulaires_editer_minitexte_charger_dist($id_minitexte='new', $id_parent=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('tbl_minitexte',$id_minitexte,0,$lier,$retour,$config_fonc,$row,$hidden);
 	$valeurs['commentaires'] = '';
+	$valeurs['id'] = $id_minitexte;
 
 	$valeurs['id_items'] = array();
 	$valeurs['id_item'] = '';
@@ -40,9 +41,11 @@ function formulaires_editer_minitexte_charger_dist($id_minitexte='new', $id_pare
 		$valeurs['type'] = 2;
 	}
 
-	$valeurs['type'] = _request($type)?_request($type):$valeurs['type'];
+	$valeurs['type'] = _request('type')?_request('type'):$valeurs['type'];
 	if ($valeurs['type']==1){
-		if ($id_minitexte = intval($id_minitexte)){
+		if ($r=_request('id_items'))
+			$valeurs['id_items'] = $r;
+		elseif ($id_minitexte = intval($id_minitexte)){
 				$valeurs['id_items'] = array_map('reset',sql_allfetsel("id_item", "tbl_items", "id_minitexte=".intval($id_minitexte)." AND ".sql_in('id_type_item',allerdata_id_type_item('produit_et_categorie'))));
 		}
 	}
@@ -56,6 +59,8 @@ function formulaires_editer_minitexte_charger_dist($id_minitexte='new', $id_pare
 		if ($id_minitexte = intval($id_minitexte))
 			$valeurs['id_item'] = sql_getfetsel("id_item", "tbl_items", "id_minitexte=".intval($id_minitexte)." AND ".sql_in('id_type_item',allerdata_id_type_item('famille_mol')));
 	}
+
+	$valeurs['_hidden'] .= "<input type='hidden' name='ctrl_items' value='".ctrl_md5_items($valeurs['id_items'])."' />";
 	return $valeurs;
 }
 
@@ -65,8 +70,15 @@ function formulaires_editer_minitexte_verifier_dist($id_minitexte='new', $id_par
 
 	switch ($type=_request('type')){
 		case 1:
-			if (!_request('id_items'))
+			if (!($items = _request('id_items')))
 				$erreurs['id_items'] = _T('info_obligatoire');
+			else {
+				$ctrl = ctrl_md5_items($items);
+				if ($ctrl!=_request('ctrl_items')
+					OR sql_countsel('tbl_items', 'id_minitexte>0 AND id_minitexte<>'.intval($id_minitexte)." AND ".sql_in('id_item',$items))
+					)
+					$erreurs['id_items'] = _T('minitext:erreur_verifier_items');
+			}
 			break;
 		case 2:
 			if (!_request('id_item_1'))
@@ -105,5 +117,13 @@ function formulaires_editer_minitexte_traiter_dist($id_minitexte='new', $id_pare
 		$res['redirect'] = ancre_url(parametre_url($retour,$debut,'@'.$res['id_minitexte']),'iminitexte'.$res['id_minitexte']);
 	}
 	return $res;
+}
+
+
+function ctrl_md5_items($items){
+	if (!is_array($items) OR !count($items))
+		return '';
+	sort($items);
+	return md5(implode(',',$items));
 }
 ?>

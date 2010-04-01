@@ -22,7 +22,7 @@ function critere_tbl_items_est_dans_dist($idb, &$boucles, $crit) {
 	$boucle->from['ed'] = 'tbl_est_dans';
 	$boucle->join['ed'] = array('tbl_items','id_item');
 	
-	$where = array("'='", "'ed.est_dans_id_item'", "intval(".$_id.")");
+	$where = "is_array(\$inid=($_id))?sql_in('ed.est_dans_id_item',\$inid):array('=', 'ed.est_dans_id_item', intval(\$inid))";
 	if ($not)
 		$where = array("'NOT'",$where);
 	$boucle->where[] = $where;

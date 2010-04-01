@@ -36,7 +36,10 @@
 	    <li class="editer_parent picker editer_parent_produit[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_produit})]">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				#MODELE{picker_item,name=#GET{name},selected=#ENV{#GET{name}},type_item=produit_et_categorie,img_unpick=#CHEMIN{images/croix-rouge.gif}}
+				[(#MODELE{minitexte_produits_possibles,name=#GET{name},selected=#ENV{#GET{name}},id_minitexte=#ENV{id}})]
+				[<div class="ajouter_picker">
+					(#MODELE{picker_item,name=#GET{name},selected=#ARRAY{},type_item=produit_et_categorie,img_unpick=#CHEMIN{images/croix-rouge.gif}})
+				 </div>]
 	    </li>
 			]
 			[(#ENV{type,1}|=={3}|oui)

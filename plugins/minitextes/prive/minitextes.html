@@ -6,8 +6,8 @@
 
 [<div class="bouton_creer">(#VAL{allerdata:icone_creer_minitexte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=minitextes&edit=new},#CHEMIN{img_pack/minitexte-24.png},'creer.gif','right'})</div>]
 <INCLURE{fond=prive/listes/minitextes}{statut=#ARRAY{0,publie,1,prop}}{env}{ajax}>
-[<h1><:allerdata:minitextes_poubelle:></h1>
-(#INCLURE{fond=prive/listes/minitextes}{statut=poubelle}{env}{ajax})]
+[(#REM)<h1><:allerdata:minitextes_poubelle:></h1>
+(# INCLURE{fond=prive/listes/minitextes}{statut=poubelle}{env}{ajax})]
 
 <script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 

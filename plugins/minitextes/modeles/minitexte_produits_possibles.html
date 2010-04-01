@@ -1,0 +1,31 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+<div class="nettoyeur"></div>#SET{id,#VAL{proposer_}|concat{#ENV{name},'_',#ENV{id_minitexte}}}
+<B_suggest>
+<div class="proposer_#ENV{name}" id="#GET{id}">
+<BOUCLE_suggest(tbl_items){type_item produit_et_categorie}{par nom}{est_dans #ENV{selected}}{fusion tbl_items.id_item}>
+	<div class="choix[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
+		#SET{nohas,#ID_MINITEXTE|non|ou{#ID_MINITEXTE|=={#ENV{id_minitexte}}|oui}}
+		[(#GET{nohas})
+		<input class="checkbox" type="checkbox" name="[(#ENV{name})][(#VAL{91}|chr)][(#VAL{93}|chr)]" id="[(#ENV{name})_#ID_ITEM]" value="#ID_ITEM"[(#ID_ITEM|in_any{#ENV{selected}}|oui)checked="checked"] />
+		<label for="[(#ENV{name})_#ID_ITEM]"[(#ID_ITEM|in_any{#ENV{selected}}|oui)class="presel"]><a
+				href="#URL_ECRIRE{allerdata,page=produits&edit=#ID_ITEM}" target="_blank" title="##ID_ITEM">[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a></label>
+		][(#GET{nohas}|non)
+		<a class="mtlink" href="#URL_ECRIRE{allerdata,page=minitextes&edit=#ID_MINITEXTE}" target="_blank" title="<:allerdata:voir_minitexte|attribut_html:>">[(#CHEMIN{img_pack/minitexte-16.png}|balise_img)]</a>
+		<a href="#URL_ECRIRE{allerdata,page=produits&edit=#ID_ITEM}" target="_blank" title="##ID_ITEM">[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>
+		]
+	</div>
+</BOUCLE_suggest>
+<div class="nettoyeur"></div>
+<p class="actions">
+<a href="#" onclick="jQuery('#[(#GET{id})] input.checkbox').attr('checked',true);return false;"><:allerdata:tout_cocher:></a>
+| <a href="#" onclick="jQuery('#[(#GET{id})] input.checkbox').attr('checked',false);jQuery('#[(#GET{id})] label.presel').siblings('input.checkbox').attr('checked',true);return false;"><:allerdata:retablir:></a>
+| <a href="#" onclick="jQuery('#[(#GET{id})] input.checkbox').attr('checked',false);return false;"><:allerdata:tout_decocher:></a>
+</p>
+</div>
+</B_suggest>
