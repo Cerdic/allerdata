@@ -48,6 +48,7 @@
 	    	<label for="[(#GET{name}|concat{_produit})]">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				#MODELE{selecteur_item,name=#GET{name},id=#GET{name},id_item=#ENV{#GET{name}},type_item=famille_mol,obli=oui}
+				<a href="#URL_ECRIRE{allerdata,page=produits&edit=#ID_ITEM}" target="_blank" title="##ENV{#GET{name}}">[(#INFO_NOM{tbl_item,#ENV{#GET{name}}}|sinon{<:allerdata:sans_nom_francais:>})]</a>
 	    </li>
 			]
 			[(#ENV{type,1}|=={2}|oui)

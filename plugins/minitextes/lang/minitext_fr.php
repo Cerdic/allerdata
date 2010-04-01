@@ -17,7 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_id_item_2' => 'Produit 2',
 
 'erreur_verifier_items' => 'Verifier la liste des produits et enregistrez',
-
+'erreur_famille_mol_deja_minitexte' => 'Cette famille est dej&agrave; associ&eacute;e à un mini-texte',
+	
 // R
 'un_minitexte' => '1 mini-texte',
 'des_minitextes' => '@nb@ mini-textes',

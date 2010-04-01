@@ -87,8 +87,10 @@ function formulaires_editer_minitexte_verifier_dist($id_minitexte='new', $id_par
 				$erreurs['id_item_2'] = _T('info_obligatoire');
 			break;
 		case 3:
-			if (!_request('id_item'))
+			if (!($item=_request('id_item')))
 				$erreurs['id_item'] = _T('info_obligatoire');
+			elseif (sql_getfetsel('id_item','tbl_items', 'id_minitexte>0 AND id_minitexte<>'.intval($id_minitexte)." AND id_item=".intval($item)))
+				$erreurs['id_item'] = _T('minitext:erreur_famille_mol_deja_minitexte');
 			break;
 		default:
 			$erreurs['type'] = _T('info_obligatoire');
