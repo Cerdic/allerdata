@@ -5,6 +5,8 @@
   Distribue sous licence GPL
 
 ]
-<BOUCLE_has(tbl_minitextes){rc #ENV{id_item_1},#ENV{id_item_2}}{0,1}>
-	<a href="[(#URL_ECRIRE{allerdata}|parametre_url{page,minitextes}|parametre_url{debutm_publie_prop,@#ID_MINITEXTE}|ancre_url{minitexte#ID_MINITEXTE})]"><:allerdata:minitexte:></a>
+<BOUCLE_has(tbl_minitextes){rc #ENV{id_item_1},#ENV{id_item_2}}{statut?}{0,1}>
+	<a href="[(#URL_ECRIRE{allerdata,page=minitextes}|parametre_url{debutm_publie_prop,@#ID_MINITEXTE}|ancre_url{minitexte#ID_MINITEXTE})]"><:allerdata:minitexte:></a>
 </BOUCLE_has>
+	<a href="[(#URL_ECRIRE{allerdata,page=minitextes&edit=new}|parametre_url{item_1,#ENV{id_item_1}}|parametre_url{item_2,#ENV{id_item_2}})]"><:allerdata:icone_creer_minitexte_et_associer_rc:></a>
+<//B_has>

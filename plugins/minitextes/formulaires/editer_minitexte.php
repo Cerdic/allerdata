@@ -46,10 +46,11 @@ function formulaires_editer_minitexte_charger_dist($id_minitexte='new', $id_pare
 				$valeurs['id_items'] = array_map('reset',sql_allfetsel("id_item", "tbl_items", "id_minitexte=".intval($id_minitexte)." AND ".sql_in('id_type_item',allerdata_id_type_item('produit_et_categorie'))));
 		}
 	}
-	if ($valeurs['type']==2){
-		$item = sql_fetsel("*", "tbl_minitextes_items", "id_minitexte=".intval($id_minitexte));
-		$valeurs['id_item_1'] = $item['id_item_1'];
-		$valeurs['id_item_2'] = $item['id_item_2'];
+	if ($valeurs['type']==2 AND intval($id_minitexte)){
+		if ($item = sql_fetsel("*", "tbl_minitextes_items", "id_minitexte=".intval($id_minitexte))){
+			$valeurs['id_item_1'] = $item['id_item_1'];
+			$valeurs['id_item_2'] = $item['id_item_2'];
+		}
 	}
 	if ($valeurs['type']==3){
 		if ($id_minitexte = intval($id_minitexte))
