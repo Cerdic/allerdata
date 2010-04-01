@@ -16,8 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_id_item_1' => 'Produit 1',
 'label_id_item_2' => 'Produit 2',
 
-'erreur_verifier_items' => 'Verifier la liste des produits et enregistrez',
+'erreur_verifier_items' => 'Verifiez la liste des produits et enregistrez',
 'erreur_famille_mol_deja_minitexte' => 'Cette famille est dej&agrave; associ&eacute;e à un mini-texte',
+'warning_mini_texte_existe_sur_RC' => 'Un <a href="@url@" target="_blank">mini-texte</a> existe pour la RC&nbsp;: ',
+'erreur_verifier_produits_rc' => 'Verifiez les produits de la RC et enregistrez',
 	
 // R
 'un_minitexte' => '1 mini-texte',

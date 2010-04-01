@@ -81,10 +81,43 @@ function formulaires_editer_minitexte_verifier_dist($id_minitexte='new', $id_par
 			}
 			break;
 		case 2:
-			if (!_request('id_item_1'))
+			if (!($item_1 = _request('id_item_1')))
 				$erreurs['id_item_1'] = _T('info_obligatoire');
-			if (!_request('id_item_2'))
+			if (!($item_2 = _request('id_item_2')))
 				$erreurs['id_item_2'] = _T('info_obligatoire');
+			// TODO : chercher MT sur RC analogue
+			if ($item_1 AND $item_2 AND _request('ctrl_items_rc')!=ctrl_md5_items(array($item_1,$item_2))){
+				include_spip('inc/allerdata_arbo');
+				$items1 = array($item_1);
+				$items1 = array_merge($items1,allerdata_les_enfants($item_1,'produit',false));
+				$items1 = array_merge($items1,allerdata_les_parents($item_1,'produit',false));
+				$items2 = array($item_2);
+				$items2 = array_merge($items2,allerdata_les_enfants($item_2,'produit',false));
+				$items2 = array_merge($items2,allerdata_les_parents($item_2,'produit',false));
+				$semblables = sql_allfetsel("id_minitexte,id_item_1,id_item_2", "tbl_minitextes_items",
+								"("
+								.sql_in('id_item_1',$items1)." AND ".sql_in('id_item_2',$items2)
+								.") OR ("
+								.sql_in('id_item_1',$items2)." AND ".sql_in('id_item_2',$items1)
+								.")");
+				if (count($semblables)){
+					$rcs = array();
+					foreach($semblables AS $s){
+						$m = _T('minitext:warning_mini_texte_existe_sur_RC',array('url'=>generer_url_ecrire("allerdata","minitextes&edit=".$s['id_minitexte'])));
+						$m .= '<a href="'.generer_url_ecrire('allerdata','page=produits&edit='.$s['id_item_1']).'" target="_blank">'
+										. sql_getfetsel('nom', 'tbl_items', 'id_item='.intval($s['id_item_1'])) . "</a>";
+						$m .= " - ";
+						$m .= '<a href="'.generer_url_ecrire('allerdata','page=produits&edit='.$s['id_item_2']).'" target="_blank">'
+										. sql_getfetsel('nom', 'tbl_items', 'id_item='.intval($s['id_item_2'])) . "</a>";
+						$rcs[] = $m;
+					}
+					$rcs = implode('<br />',$rcs);
+					$erreurs['id_item_1'] =
+					  _T('minitext:erreur_verifier_produits_rc')
+					  ."<br />".$rcs."<br />"
+					  .'<input type="hidden" name="ctrl_items_rc" value="'.ctrl_md5_items(array($item_1,$item_2)).'" />';
+				}
+			}
 			break;
 		case 3:
 			if (!($item=_request('id_item')))
