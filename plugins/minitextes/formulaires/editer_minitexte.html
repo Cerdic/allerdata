@@ -48,7 +48,7 @@
 	    	<label for="[(#GET{name}|concat{_produit})]">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				#MODELE{selecteur_item,name=#GET{name},id=#GET{name},id_item=#ENV{#GET{name}},type_item=famille_mol,obli=oui}
-				<a href="#URL_ECRIRE{allerdata,page=produits&edit=#ID_ITEM}" target="_blank" title="##ENV{#GET{name}}">[(#INFO_NOM{tbl_item,#ENV{#GET{name}}}|sinon{<:allerdata:sans_nom_francais:>})]</a>
+				<a href="#URL_ECRIRE{allerdata,page=famille_mols&edit=#ENV{#GET{name}}}" target="_blank" title="##ENV{#GET{name}}">[(#INFO_NOM{tbl_item,#ENV{#GET{name}}}|sinon{<:allerdata:sans_nom_francais:>})]</a>
 	    </li>
 			]
 			[(#ENV{type,1}|=={2}|oui)
@@ -57,12 +57,14 @@
 	    	<label for="[(#GET{name}|concat{_produit})]">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				#MODELE{selecteur_item,name=#GET{name},id=#GET{name},id_item=#ENV{#GET{name}},type_item=produit,obli=non}
+				<a href="#URL_ECRIRE{allerdata,page=produits&edit=#ENV{#GET{name}}}" target="_blank" title="##ENV{#GET{name}}">[(#INFO_NOM{tbl_item,#ENV{#GET{name}}}|sinon{<:allerdata:sans_nom_francais:>})]</a>
 	    </li>
 	  	#SET{name,id_item_2}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obli'}
 			<li class="editer_parent picker editer_parent_produit[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_produit})]">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				#MODELE{selecteur_item,name=#GET{name},id=#GET{name},id_item=#ENV{#GET{name}},type_item=produit,obli=non}
+				<a href="#URL_ECRIRE{allerdata,page=produits&edit=#ENV{#GET{name}}}" target="_blank" title="##ENV{#GET{name}}">[(#INFO_NOM{tbl_item,#ENV{#GET{name}}}|sinon{<:allerdata:sans_nom_francais:>})]</a>
 	    </li>]
 	  	#SET{name,texte}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
