@@ -144,12 +144,23 @@ function rc($p1,$p2,$type_etude) {
 	}
 	$title .= " ($count)";
 	if ($result) {
-		$result = '<div class="blocContenuArticle"><a name="top_'.$type_etude.'" id="top_'.$type_etude.'"></a><h1 class="titArticle">'._T('ad:titre_synthese_popup_rc').'</h1><table class="spip" width=100%><thead><tr class="row_first"><th style="width:50px;">Biblio</th><th style="width:285px" colspan="2">'.produit($p1).'</th><th style="width:325px" colspan="2">'.produit($p2).'</th></tr></thead><tbody>'.$result.'</tbody></table></div>';
+		$result = '<div class="blocContenuArticle"><a name="top_'.$type_etude.'" id="top_'.$type_etude.'"></a><h1 class="titArticle">'._T('ad:titre_synthese_popup_rc').'</h1>'
+		  .get_minitexte($p1,$p2)
+		  .'<table class="spip" width=100%><thead><tr class="row_first"><th style="width:50px;">Biblio</th><th style="width:285px" colspan="2">'.produit($p1).'</th><th style="width:325px" colspan="2">'.produit($p2).'</th></tr></thead><tbody>'.$result.'</tbody></table></div>';
 		if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:titre_bibliographies_popup_rc').'</h2><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><tbody>'.$biblio.'</tbody></table><br class="nettoyeur"/></div>';
   } else
 		$result = "<h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1>";
 		
 	return "<div id='main'><h1 class='title' style='display:none;'>$title</h1>".$result."</div>";
+}
+
+function get_minitexte($p1,$p2){
+	$texte = sql_getfetsel("texte",
+					"tbl_minitextes AS M JOIN tbl_minitextes_items as L ON L.id_minitexte=M.id_minitexte",
+					"(L.id_item_1=".intval($p1)." AND L.id_item_2=".intval($p2).") OR (L.id_item_1=".intval($p2)." AND L.id_item_2=".intval($p1).")");
+	if (!$texte) return "";
+	$texte = '<div class="blocContenuArticle minitexte">'.interdire_scripts(propre($texte)).'</div>';
+	return $texte;
 }
 
 function produit($produits) {

@@ -7,9 +7,11 @@
 					<h1 class="titArticle">[(#NOM|sinon{NA})]</h1>
 				</div>
 				
-				<BOUCLE_Chapeau(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
-				[<div class="blocContenuArticle">(#CHAPO)</div>]
-				</BOUCLE_Chapeau>
+				<BOUCLE_minitexte(tbl_minitextes){id_minitexte}>
+				[<div class="blocContenuArticle minitexte">
+				(#TEXTE)
+				</div>]
+				</BOUCLE_minitexte>
 
 				<B_allergenes_testables>
 				<div class="blocContenuArticle">
