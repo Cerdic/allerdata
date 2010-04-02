@@ -22,7 +22,7 @@
 	</div>
 </BOUCLE_suggest>
 <div class="nettoyeur"></div>
-[(#TOTAL_BOUCLE|>{2})
+[(#TOTAL_BOUCLE|>{2}|oui)
 <p class="actions">
 <a href="#" onclick="jQuery('#[(#GET{id})] input.checkbox').attr('checked',true);return false;"><:allerdata:tout_cocher:></a>
 | <a href="#" onclick="jQuery('#[(#GET{id})] input.checkbox').attr('checked',false);jQuery('#[(#GET{id})] label.presel').siblings('input.checkbox').attr('checked',true);return false;"><:allerdata:retablir:></a>
