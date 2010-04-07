@@ -194,6 +194,7 @@ body .x-dlg-mask {
 
 .cell_fm .info_fm, .cell_mol .info_mol{margin:0 auto;}
 .info_fm, .info_mol {background:transparent url('img/i_mini_off.gif') 0 0 no-repeat; width:16px; height:14px; margin-left:-2px; display:block;cursor:pointer;}
+.hasMT .info_fm, .hasMT .info_mol {background-image:url('img/i_mini_on.gif');}
 /*.x-grid-row-selected .info_fm, .x-grid3-row-selected .info_mol {background:#316AC5 url('img/i_mini_on.gif') top left no-repeat;}*/
 .cell_fm a, .cell_mol a {display:block; }
 
