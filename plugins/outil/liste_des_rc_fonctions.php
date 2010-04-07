@@ -7,7 +7,7 @@
     $tableau_produits = array_map('intval',explode(',',$produits));
   	$produits = implode(",", $tableau_produits);
   	
-  	// Requete de recherche : il faut tenir compte des réactions entre éléments de type 3 ou 5
+  	// Requete de recherche : il faut tenir compte des reactions entre elements de type 3 ou 5
   	$query = "SELECT DISTINCT 
   			tbl_reactions_croisees.id_reactions_croisee, 
   			tbl_items.id_item AS idp1, 
@@ -58,8 +58,8 @@
   			);";
   	
   	$res = spip_query($query);
-  	// $arc contient les arcs orientés 
-  	// $arc[a][b] correspond à l'arc de a vers b
+  	// $arc contient les arcs orientes
+  	// $arc[a][b] correspond a l'arc de a vers b
   	$arc = array();
   	
   	while ($row = sql_fetch($res)){
@@ -97,8 +97,8 @@
   	$liste_des_rc = array();
   	
   	// Affectation des classes
-  	// 1 correspond à 'toujours'
-  	// 0 à 'jamais'
+  	// 1 correspond a 'toujours'
+  	// 0 a 'jamais'
   	// entre les 2 c'est 'discordant'
   	foreach ($arc as $origine => $liens) {
   		foreach ($liens as $destination => $valeur) {
@@ -107,7 +107,7 @@
   			elseif ($valeur == 0) $className = 'rc_jamais';
   			else $className = 'rc_discordant';
   			
-  			$liste_des_rc[] = array('source' => $origine, 'dest' => $destination, 'classe' => $className);
+  			$liste_des_rc[] = array('source' => $origine, 'dest' => $destination, 'classe' => $className, 'mt'=>minitext_find_rc($origine,$destination));
   		}
   	}
   	

@@ -709,7 +709,7 @@ label.over-apply {
 .blocContenuArticle.famille_taxo h2,.blocContenuArticle.famille_taxo p {display:inline;}
 .blocContenuArticle.source h2,.blocContenuArticle.source p {display:inline;}
 
-.blocContenuArticle.minitexte {text-align:center;font-size:90%;}
+.blocContenuArticle.minitexte {text-align:left;font-size:90%;width:80%;margin-left:auto;margin-right:auto;}
 #main .blocContenuArticle.minitexte h2.spip {padding:5px 0;}
 .blocContenuArticle.minitexte h2:first-child {display:none;}
 

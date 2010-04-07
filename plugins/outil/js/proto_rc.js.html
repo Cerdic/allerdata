@@ -1,4 +1,5 @@
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
+[(#REM)<script>//]
 /* ------------------------- Affichage de la liste des RC ------------------------------- */
 
 LISTE_DES_RC = {
@@ -24,7 +25,8 @@ LISTE_DES_RC = {
         {root: 'liste_des_rc'},Ext.data.Record.create([
           {name:'source'},
           {name:'dest'},
-          {name:'classe'}
+          {name:'classe'},
+          {name:'mt'}
         ])
       )
     });
@@ -115,6 +117,9 @@ LISTE_DES_RC = {
     	  $('#rc_' + id_d[i] + '-' + id_s[i]).addClass(rc[i].classe);
           $('#liens_infos div#lien_'+ id_d[i] + '-' + id_s[i] + '_').show();
           $('#liens_infos div#lien_'+ id_s[i] + '-' + id_d[i] + '_').show();
+					if (rc[i].mt) {
+						$('#liens_infos #infos_'+ id_s[i] + '-' + id_d[i]).addClass('hasMT');
+					}
       }
       	
 

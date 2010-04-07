@@ -104,6 +104,10 @@ body {
 #info-s4 {position:absolute; top:280px; left:20px;}
 #info-s5 {position:absolute; top:93px; left:20px;}
 .info {background:transparent url('img/fd_infos.gif') top left no-repeat; width:25px; height:25px; display:none;cursor: pointer;}
+.info.hasMT {background-image:url('img/fd_infos_on.png');}
+
+.lien.hasMT img {visibility: hidden;}
+.lien.hasMT {background:transparent url('img/lien_on.png') no-repeat center; width:33px; height:33px; display:block;}
 
 #nom_1, #nom_2, #nom_3, #nom_4, #nom_5 {position:absolute; padding:0; font-size:10px; color:#aaa;}
 #nom_1 {top:90px; left:410px; width:205px;}

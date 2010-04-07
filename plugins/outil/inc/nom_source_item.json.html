@@ -1,2 +1,2 @@
 #CACHE{30*24*3600}
-<BOUCLE_nom(tbl_items){id_item}>"nom":""<BOUCLE_source(tbl_items){type_item source}{contient #ID_ITEM}{0,1}>,"source":[(#NOM|penta_var2js)]</BOUCLE_source></BOUCLE_nom>
+<BOUCLE_nom(tbl_items){id_item}>"nom":""[,"mt":"(#ID_MINITEXTE|?{1,''})"]<BOUCLE_source(tbl_items){type_item source}{contient #ID_ITEM}{0,1}>,"source":[(#NOM|penta_var2js)]</BOUCLE_source></BOUCLE_nom>

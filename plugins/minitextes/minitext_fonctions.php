@@ -53,4 +53,12 @@ function critere_tbl_minitextes_rc_dist($idb, &$boucles, $crit) {
 }
 
 
+function minitext_find_rc($p1,$p2){
+	if ($id = sql_getfetsel("id_minitexte", "tbl_minitextes_items AS rc",
+					'(rc.id_item_1='.intval($p1).' AND rc.id_item_2='.intval($p2).
+					') OR ('.
+					'rc.id_item_1='.intval($p2).' AND rc.id_item_2='.intval($p1).')'))
+		return $id;
+	return '';
+}
 ?>
