@@ -1,5 +1,6 @@
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
-/* --------------------------------- Familles moléculaires ------------------------------------- */
+[(#REM)<script>//]
+/* --------------------------------- Familles moleculaires ------------------------------------- */
 
 var LISTE_DES_FAMILLES = {
   
@@ -42,7 +43,8 @@ var LISTE_DES_FAMILLES = {
              {name: 'id_item'},  
              {name: 'nb_item'},
              {name: 'id_fm'},
-             {name: 'test'}
+             {name: 'test'},
+             {name: 'mt'}
           ])
       });
         
@@ -58,7 +60,13 @@ var LISTE_DES_FAMILLES = {
           {id:'test',header: FM_TEST, width: 300, sortable: true, locked:false, dataIndex: 'test'}
         ],
         viewConfig: {
-          forceFit: true
+          forceFit: true,
+					getRowClass: function(record, index) {
+							var mt = record.get('mt');
+							if (mt > 0) {
+									return 'hasMT';
+							}
+					}
         },
         title:FM_GRID_TITLE
       })
@@ -68,7 +76,7 @@ var LISTE_DES_FAMILLES = {
 
   },
 
-  // La mise à jour se fait par json
+  // La mise a jour se fait par json
   show_fm : function() {
     var ds = this.grid.getStore();
     var p = [];
@@ -82,13 +90,13 @@ var LISTE_DES_FAMILLES = {
   // Infos d'une FM
   popup_fm : function(id_fm) {
     var link = 'spip.php?page=popup_fm&id_fm=' + id_fm;
-	  main_panel.updateTab('tab1','Détails', link);
-	  dialog_avec_tab.setTitle('Famille moléculaire');
+	  main_panel.updateTab('tab1','D&eacute;tails', link);
+	  dialog_avec_tab.setTitle('Famille mol&eacute;culaire');
 	  dialog_avec_tab.show(Ext.get('info_fm_' + id_fm));
 		return false;
   },
   
-  // Mise en avant des produits concernés par une FM
+  // Mise en avant des produits concernes par une FM
   outline_prod : function(lProd) {
     var num=0;
 		var t_el = [];

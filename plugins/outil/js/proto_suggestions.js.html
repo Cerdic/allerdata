@@ -1,5 +1,6 @@
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
-/* --------------------------------- Produits associï¿½s aux RC ------------------------------------- */
+[(#REM)<script>//]
+/* --------------------------------- Produits associes aux RC ------------------------------------- */
 
 var LISTE_DES_SUGGESTIONS = {
 
@@ -45,7 +46,8 @@ var LISTE_DES_SUGGESTIONS = {
              {name: 'nom'},
              {name: 'nb'},
              {name: 'id_mol'},
-             {name: 'items_actifs'}
+             {name: 'items_actifs'},
+						 {name: 'mt'}
           ]
         )
       });
@@ -61,7 +63,13 @@ var LISTE_DES_SUGGESTIONS = {
         autoExpandColumn:'nom',
         loadMask: {msg:LOAD_MASK},
         viewConfig: {
-          forceFit: true
+          forceFit: true,
+					getRowClass: function(record, index) {
+							var mt = record.get('mt');
+							if (mt > 0) {
+									return 'hasMT';
+							}
+					}
         },
         title: SUGG_GRID_TITLE
       })
@@ -71,7 +79,7 @@ var LISTE_DES_SUGGESTIONS = {
     return this.grid;
   },
 
-  // La mise à jour se fait par json
+  // La mise ï¿½ jour se fait par json
   show_query : function() {
     ds_s = this.grid.getStore();
     var p = [];

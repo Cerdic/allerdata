@@ -28,11 +28,11 @@ function liste_des_suggestions($produits_penta) {
 	$query = <<<EOQ
 # Requete pour trouver les items a suggerer
 
-(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.nom_court
+(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.nom_court, tbl_items_3.id_minitexte
     FROM (tbl_est_dans INNER JOIN tbl_reactions_croisees ON tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1)
-            # Ne prendre que les éléments des est_dans qui ont un lien avec tbl_reactions_croisees en source
+            # Ne prendre que les elements des est_dans qui ont un lien avec tbl_reactions_croisees en source
     INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_reactions_croisees.id_produit2 = tbl_est_dans_1.id_item
-            # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intéresse)
+            # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intï¿½resse)
     INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item
     WHERE (
 				    # RC avec id_produit1 comme fils des elements du penta, et id_produit2 qui n'est pas dans la famille
@@ -56,11 +56,11 @@ function liste_des_suggestions($produits_penta) {
 UNION
 
 # Sens inverse : on prend tous ceux qui pointent (en rc->id_produit2) vers un fils des produits du penta
-(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.nom_court
+(SELECT DISTINCT tbl_est_dans.est_dans_id_item AS id_item_penta, tbl_items_3.id_item, tbl_items_3.nom, tbl_items_3.nom_court,tbl_items_3.id_minitexte
     FROM (tbl_est_dans INNER JOIN tbl_reactions_croisees ON tbl_est_dans.id_item = tbl_reactions_croisees.id_produit2)
-            # Ne prendre que les éléments des est_dans qui ont un lien avec tbl_reactions_croisees en source
+            # Ne prendre que les elements des est_dans qui ont un lien avec tbl_reactions_croisees en source
     INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_reactions_croisees.id_produit1 = tbl_est_dans_1.id_item
-            # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intéresse)
+            # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous intï¿½resse)
     INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item
     WHERE (
 				# RC avec id_produit2 comme fils des elements du penta, et id_produit1 qui n'est pas dans la famille
@@ -71,7 +71,7 @@ UNION
         AND tbl_items_3.id_item Not In ($produits)
             # La cible ne doit pas contenir le produit du pentagramme
         AND ((tbl_items_3.id_type_item)=5 Or (tbl_items_3.id_type_item)=13)
-            # La source est un produit de type "produit" ou "espèce" (c'est ce dernier qui nous intéresse)
+            # La source est un produit de type "produit" ou "espece" (c'est ce dernier qui nous interesse)
         AND (
 					tbl_reactions_croisees.fleche_sens1=1
 					OR
@@ -91,7 +91,8 @@ EOQ;
 			$t_suggestions[$row['id_item']] = array(
 					'nom' => (($row['nom_court']=='')?$row['nom']:$row['nom_court']),
 					'source' => sql_getfetsel("nom","tbl_items","id_item=".intval(penta_ascendant_le_plus_proche($row['id_item'],'source'))),
-					'id_mol' => $row['id_item']);
+					'id_mol' => $row['id_item'],
+					'mt' => $row['id_minitexte']?$row['id_minitexte']:'');
 		}
     $reactif_avec[$row['id_item']][$row['id_item_penta']] = $row['id_item_penta'];
 	}
