@@ -2,6 +2,7 @@
 #INCLURE{fond=inclure/footer_xiti}
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('img.biblio').Tooltip({showURL:false, showBody:" - "});
+		if (jQuery.Tooltip)
+			$('img.biblio').Tooltip({showURL:false, showBody:" - "});
 	});
 </script>
