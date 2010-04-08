@@ -38,7 +38,7 @@
 	<script type='text/javascript'>
 		function loadFormPenta(){
 			<BOUCLE_pour(POUR){tableau 1:5}><BOUCLE_p(tbl_items){id_item=#ENV{p#VALEUR}}>
-					ZONES_SAISIE.combo[#VALEUR].setValue('[(#NOM|texte_script)]');
+					ZONES_SAISIE.combo[#VALEUR].setValue('[(#NOM|textebrut|texte_script)]');
 					ZONES_SAISIE.combo[#VALEUR].triggers[0].show();
 					jQuery('#p#VALEUR').val('[(#ENV{p#VALEUR}|texte_script)]');
 			</BOUCLE_p></BOUCLE_pour>
