@@ -1,10 +1,10 @@
 #CACHE{30*24*3600}
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
-/*#ENV{date}*/
+/*#ENV{date}*/#SET{virg,''}
 {liste_des_noms:[[
-{"index":1,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p1}})},][
-{"index":2,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p2}})},][
-{"index":3,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p3}})},][
-{"index":4,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p4}})},][
-{"index":5,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p5}})},]
+{"index":1,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p1}})}#SET{virg,','}][#GET{virg}
+{"index":2,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p2}})}#SET{virg,','}][#GET{virg}
+{"index":3,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p3}})}#SET{virg,','}][#GET{virg}
+{"index":4,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p4}})}#SET{virg,','}][#GET{virg}
+{"index":5,(#INCLURE{fond=inc/nom_source_item.json}{id_item=#ENV{p5}})}]
 ]}
