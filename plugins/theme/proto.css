@@ -104,7 +104,7 @@ body {
 #info-s4 {position:absolute; top:280px; left:20px;}
 #info-s5 {position:absolute; top:93px; left:20px;}
 .info {background:transparent url('img/fd_infos.gif') top left no-repeat; width:25px; height:25px; display:none;cursor: pointer;}
-.info.hasMT {background-image:url('img/fd_infos_on.png');}
+a.hasMT {background-image:url('img/fd_infos_on.gif');}
 
 .lien.hasMT img {visibility: hidden;}
 .lien.hasMT {background:transparent url('img/lien_on.png') no-repeat center; width:33px; height:33px; display:block;}
