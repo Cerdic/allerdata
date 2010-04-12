@@ -81,6 +81,35 @@ function minitext_upgrade($nom_meta_base_version,$version_cible){
 			}
 			ecrire_meta($nom_meta_base_version,$current_version='0.1.1.0','non');
 		}
+		if (version_compare($current_version,'0.1.2.0','<')){
+			$importer_csv = charger_fonction('importer_csv','inc');
+			$mts = $importer_csv(find_in_path('base/mt_import_v2.csv'),true);
+			include_spip('action/editer_tbl_minitexte');
+			foreach($mts as $mt){
+				$id = $mt['id_mini_texte'];
+				if (!sql_getfetsel('id_minitexte', 'tbl_minitextes', 'id_minitexte='.intval($id)))
+					$id = insert_tbl_minitexte($id);
+				if ($id){
+					$texte = str_replace("\n- ","\n-* ","\n".$mt['Intro']);
+					$texte = trim(str_replace("\n* ","\n-** ",$texte));
+					$texte = "{{{".$mt['titre_mini_texte']."}}}\n".$texte."\n\n";
+					if (strlen($s = $mt['Allerg_principaux']))
+						$texte .= "[*Allergènes principaux*] : $s\n\n";
+					if (strlen($s = $mt['Diagn_molec']))
+						$texte .= "[*Diagnostic moléculaire*] : $s\n\n";
+					if (strlen($s = $mt['Allerg_representatifs']))
+						$texte .= "[*Allergènes représentatifs*] : $s\n\n";
+					if (strlen($s = $mt['Lien']))
+						$texte .= "[/Voir aussi : [->$s]/]";
+					$set = array(
+						'type' => ($mt['type_mini_texte'] == 'P')?1:(($mt['type_mini_texte'] == 'RC')?2:3),
+						'texte' => $texte,
+						);
+					tbl_minitextes_set($id,$set);
+				}
+			}
+			ecrire_meta($nom_meta_base_version,$current_version='0.1.2.0','non');
+		}
 
 	}
 }

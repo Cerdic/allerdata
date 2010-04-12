@@ -1,0 +1,289 @@
+"id_mini_texte","titre_mini_texte","type_mini_texte","Intro","RAV","Allerg_principaux","Diagn_molec","Lien","Allerg_représentatifs"
+1,"noisette","P","- Une allergie à la noisette est fréquemment rencontrée chez les polliniques au bouleau. Elle met en jeu la réactivité croisée entre 2 PR-10 : Bet v 1 du bouleau et Cor a 1.04 de la noisette. 
+- L’allergie à la noisette peut résulter d’une sensibilisation aux LTP et cette forme a été décrite surtout dans les régions méditerranéennes (mais pas exclusivement). 
+- Les réactions sont alors potentiellement plus sévères qu’en cas d’association bouleau -> noisette (stabilité des LTP). Le rôle clinique des protéines de stockage semble limité (en Europe).","+++","Cor a 1.04 (PR-10) et accessoirement Cor a 8 (LTP)","un petit avantage pour rCor a 1.04 ? (mais le CAP noisette est dorénavant surchargé en Cor a 1.04). rCor a 8 pour éliminer un risque de réaction sévère ?","106#noisette-intro",
+2,"cajou","P","- La noix de cajou est la cause d’un nombre important de réactions alimentaires sévères (2ème cause après l’arachide dans le RAV). L’allergie débute souvent avant l’âge de 3 ans. Le risque d’une allergie à un autre fruit à coque existe (mais % = ?).  
+- L’association arachide-cajou a surtout été décrite aux USA. Il semble que ce soient 2 allergies indépendantes.","++++","aucun en particulier = les protéines de stockage Ana o 1, o 2 et o 3","aucun disponible (seulement Ana o 2 sur l’ISAC)","106#cajou-intro",
+3,"soja","P","- Au moins 2 formes d’allergie alimentaire au soja : dans l’enfance (plutôt transitoire) et plus tard en association avec une pollinose au bouleau (ex. avec isolats de soja). 
+- De très nombreux dérivés : aliments (ex. tofu), ingrédients (ex. soja texturé), lécithines, etc..  
+- A noter:  les pousses de soja proviennent d’une autre espèce de Fabacée. 
+- La cuisson diminue l’IgE-réactivité de la PR-10 du soja (mais ne l’abolit pas). La sauce soja semble dénuée d’allergénicité résiduelle.","++","aucun en particulier : des protéines de stockage et Gly m 4 (PR-10) chez certains patients","rGly m 4 si suspicion de bouleau -> soja (CAP soja peu pertinent). Sinon = ? (A noter : Gly 5 et Gly m 6 sur ISAC)","110",
+4,"arachide","P","- L’arachide est une cause majeure d’allergie alimentaire et la 1ère cause d’anaphylaxie alimentaire.  
+- Une allergie à l’arachide s’accompagne volontiers d’une allergie à des fruits à coque (10% des patients ?), ou au lupin, plus rarement au soja, mais pas au sésame semble-t-il. 
+- Une pollinose au bouleau peut parfois conduire à des réactions cliniques avec l’arachide. De même dans le cadre d’une sensibilisation aux LTP (milieu méditerranéen).","++++++++++","Ara h 2 et Ara h 6 (2S-albumines très résistantes à la chaleur et à la digestion). Souvent on observe une positivité aussi pour Ara h 1 et Ara h 3","rAra h 2 +++ (abandonner le test global F13). Associer rAra h 1 et 3 pour estimer un risque de sévérité ? : contesté. Tester sinon rAra h 8 (si lien bouleau suspecté). Tester rAra h 9 : peu d’intérêt","111",
+5,"abeille et bourdons","P","- Il n’existe qu’une espèce d’abeille domestique en France (Apis mellifera), mais plusieurs espèces de bourdons. Les piqûres de bourdons sont vues avant tout en serres.  
+- La réactivité croisée entre abeille et bourdons est très partielle. De même que celle avec les Vespides (guêpes, frelons), si l’on met de côté la fréquente présence d’IgE anti-CCD.",,"des PLA2 (Api m 1 pour l’abeille). Le rôle clinique des hyaluronidases (ex. Api m 2) est contesté. D’autres allergènes importants ? : probable","seulement rApi m 1 est disponible pour l’instant","53",
+6,"guêpes vespula","P","- Les guêpes Vespula croisent aisément entre elles, moins bien avec les guêpes Polistes et inconstamment avec l’abeille ou le frelon (attention aux CCD en cas de doubles positivités).  
+- Les tests diagnostiques correspondent à des mélanges de différentes espèces de Vespula.",,"groupe 1 (phospholipases A1) et groupe 5 (Ag5)","aucun pour l’instant (attention aux CCD avec les tests sur extraits)","53",
+7,"guêpes polistes","P","- Les guêpes Polistes sont vues au sud de l’Europe.  
+- Elles croisent en grande partie avec les Guêpes Vespula. Un croisement partiel avec l’abeille est probable (non étudié).  
+- Pour le diagnostic et une IT une espèce européenne (ex. P dominulus) est préférable aux espèces américaines.",,"groupe 1 (phospholipases A1) et groupe 5 (Ag5)","aucun pour l’instant (attention aux CCD avec les tests sur extraits)","53",
+8,"latex","P","- On distingue 2 causes principales d’allergie au latex d’hévéa :  
+* les contacts muqueux répétés (ex. chirurgie du spina), avec réactivité notamment pour des allergènes accompagnant les particules de caoutchouc (Hev b 1 et 3) 
+* et les contacts cutanés et/ou respiratoires dans un cadre le plus souvent d’usage professionnel :la réactivité concerne alors surtout Hev b 6 et Hev b 5. 
+- La sensibilisation vis à vis d’Hev b 6 entraîne un risque d’allergie à divers aliments, pas seulement des fruits exotiques : c’est le [syndrome latex-aliments->99]",,"Hev b 6.01/6.02, Hev b 5 (et Hev b 1 et Hev b 3 dans un contexte particulier)","rHev b 6.01 ou 6.02 (sert notamment pour explorer un éventuel lien latex-aliments). En complément : rHev b 5 ou rHev b 1 et rHev b 3.","67",
+9,"sésame","P","- Les graines de sésame peuvent générer des réactions très sévères. La présence de sésame peut être méconnue (ex. huile). 
+- Pas d’association sésame-arachide ou sésame-fruits à coque : ce sont des allergies indépendantes en règle générale.","+++","aucun n’est dominant","aucun pour l’instant (seulement Ses i 1 sur l’ISAC)","98",
+10,"sarrasin","P","- Le sarrasin est une cause non négligeable de réactions alimentaires sévères. Sa présence peut être méconnue.  
+- Association avec le latex : rare mais semble réelle (allergènes en cause = ?)","++++","aucun n’est dominant","aucun pour l’instant","113",
+11,"lupin","P","- Le lupin est souvent un ingrédient méconnu dans les aliments manufacturés (ex. boulangerie).  
+- L’allergie à l’arachide est un facteur de risque pour une allergie au lupin (allergènes en cause = ?).  
+- Une association bouleau-lupin est envisageable (peu de données actuellement).","++++","aucun n’est dominant","aucun pour l’instant","109",
+12,"poissons","P","- La morue est souvent présentée comme modèle d’une réactivité aux poissons. Mais tous les poissons sont allergisants.  
+- Une allergie sélective à un/certains poissons est possible (fréquence = ? plutôt poissons cartilagineux ?). 
+- Pas d’allergie croisée entre poissons et autres produits de la mer (crustacés, mollusques).  
+- Cf. aussi [le cas du thon->46#thon-monogr]","++","parvalbumines","rGad c 1 (morue) comme témoin pour une réactivité aux poissons en général (mais gain peu évident par rapport aux tests sur extrait global)","46",
+13,"thon","P","- Le thon, particulièrement en boîte, est présenté parfois comme moins allergisant que d’autres poissons.  
+- Cette innocuité est très variable d’un patient à un autre. Elle pourrait dépendre aussi de la chair consommée (blanche vs rouge).","?","une parvalbumine ? d’autres allergènes ?","aucun pour tester spécifiquement le thon (rGad c 1 sinon).","46#thon-monogr",
+14,"crustacés","P","- Les crustacés les plus courants (crevettes, crabes, homards, langoustines) peuvent être considérés comme un groupe homogène : l’allergie à l’un s’accompagne a priori d’une allergie aux autres.  
+- Quelques observations d’allergie à certaines crevettes mais pas à d’autres (ex. locales vs tropicales).","crevette ++++ , crabe +, langoustine +","des tropomyosines ; accessoirement des arginine kinases","rPen a 1 (tropomyosine de crevette), surtout comme témoin d’une réactivité à d’autres crustacés car le CAP global crevette contient à présent un mélange de crevettes tropicales et d’eau froide","49",
+15,"D ptero + farinae","P","- D. pteronyssinus et D. farinae cohabitent en règle générale dans les habitations en Europe. Il est rare d’observer une dissociation avec les tests diagnostiques.  
+- En climat tropical, Blomia s’ajoute aux Dermatophagoides dans la faune principale des acariens domestiques. 
+- L’allergie aux acariens est-elle susceptible de générer une allergie alimentaire ? : 
+* pour les crustacés la réponse est a priori non, y compris sous IT.  
+* pour l’escargot de même, bien que l’IT puisse parfois majorer les réactions cliniques d’une allergie pré-existante à l’escargot (allergènes croisants = ?).",,"pas d’allergène vraiment dominant (groupes 1 et 2, mais aussi groupes 5 et 7 semblent importants).","nDer p 1 et rDer p 2. Mais l’avantage par rapport aux tests/extraits = ? ? rDer p 10 dans le cas d’une allergie aux crustacés pour expliquer un test acarien positif sans clinique convaincante ? ? ?","63",
+16,"blomia","P","- Blomia tropicalis est un acarien domestique en climat chaud.  
+- Les allergènes de B. tropicalis croisent mal avec ceux des Dermatophagoides. Aussi, une positivité pour ces 2 sortes d’acariens représente plutôt une double sensibilisation (double IT éventuelle).",,"Blo t 5, Blo t 1, Blo t 2, etc..","aucun pour l’instant","63",
+17,"escargots","P","- De nombreux cas d’allergie sévère avec les escargots malgré une consommation limitée. Allergènes en cause = ? ? Facteurs adjuvants ?  
+- Il est classique d’associer escargots et acariens :  
+* la plupart des patients ayant montré une réaction clinique avec les escargots sont positifs en acariens.  
+* mais à l’inverse, chez les allergiques aux acariens, la prévalence d’une allergie aux escargots est faible (<< aux TC positifs). 
+* et l’IT aux acariens ne semble pas générer de novo une allergie aux escargots (mais plutôt révéler/majorer une allergie déjà existante).  
+- Pas d’allergie croisée escargots-crustacés. Mais possibilité de réaction avec les gastéropodes marins.","+++","? ? (probablement pas une tropomyosine)","aucun pour l’instant","50",
+18,"blé farine","P","- Les cadres cliniques d’hypersensibilité au blé sont multiples : asthme professionnel, dermatite atopique, eczéma chronique, allergie associée à l’effort (et bien sûr maladie coeliaque).  
+- Dans l’allergie alimentaire au blé ne pas négliger les formes retardées.  
+- Des dérivés du blé sont des composants « cachés » importants aussi : gluten, isolats, hydrolysats (cosmétiques),.. 
+- Une allergie aux farines d’autres céréales est surtout vue dans un cadre professionnel.  
+- Il ne semble pas qu’il y ait d’allergie croisée pollens de graminées -> farines.","++++ (et isolats ++)","aucun n’est dominant. Plutôt des allergènes solubles (ex. ATI) dans les formes respiratoires ; plutôt des protéines du gluten dans l’allergie alimentaire","rTri a 19 (omega-5 gliadine) pour l’allergie au blé associée à l’exercice (et l’urticaire chronique ?). Sinon, un test gluten plutôt que l’extrait global blé (sensible aux CCD) ? Pour isolats : rien pour l’instant","126",
+19,"graminées fourragères","P","- Il n’est pas possible de distinguer une réactivité pour une graminée particulière (ex. ivraie, dactyle) parmi les graminées commensales de climat tempéré (= les Pooidées) : ces espèces croisent très largement entre elles.",,"en fréquence de positivité les groupes 1, 4 et 5 ; en pertinence clinique les groupes 1, 5 et ± 2","pour confirmer une sensibilisation aux Pooidées le test rPhl p 1+rPhl p 5 suffit en première intention (abandonner les extraits ivraie, fléole, etc.. sensibles aux CCD)","57",
+20,"graminées céréalières","P","- Il est rare d’observer une positivité pour les graminées céréalières (blé, seigle, orge, avoine) sans réactivité pour les graminées fourragères (Pooidées).",,"idem graminées fourragères = groupes 1 et 5","aucun spécifiquement (rPhl p 1+rPhl p 5 sert indirectement)","57",
+21,"cynodon chiendent","P","- Le chiendent digité (ou pied-de-poule) est une espèce de graminée très répandue en climat chaud.  
+- En France c’est une « mauvaise herbe » d’extension limitée à inexistante, très minoritaire comparativement aux graminées classiques (Pooidées).  
+- Les allergènes du pollen de Cynodon croisent partiellement avec ceux des Pooidées.",,"Cyn d 1, Cyn d 4","tester nCyn d 1 est sans intérêt en Europe tempérée (quasiment jamais positif sans Phl p 1 positif ; et sensible aux CCD)","57",
+22,"chat","P","- Fel d 1 est l’allergène dominant des phanères de chat.  
+- Une sensibilisation à l’albumine de chat peut conduire à une allergie à des viandes (le porc surtout a été décrit). Rare. 
+- La réactivité croisée entre chat et chien est fréquente",,"Fel d 1","rFel d 1 pourrait remplacer l’extrait chat en 1ère intention. Tester nFel d 2 (albumine) en cas de suspicion de « syndrome porc-chat » ? (on peut tester aussi l’albumine de porc)","124",
+23,"porc viande","P","- Une sensibilisation à l’albumine de chat peut conduire à une allergie à la viande de porc : c’est le « syndrome porc-chat », en fait assez rare.  
+- Cette allergie à la viande, plutôt rencontrée chez l’adulte, est normalement dissociée de l’allergie aux abats (ex. rognons), laquelle semble ressortir d’allergènes différents.  
+- Dans les 2 cas on note un rôle fréquent de facteurs adjuvants (ex. alcool). 
+- Quelques patients réagissent ± à d’autres viandes de mammifères (mais pas avec les viandes de volaille).","± (à noter : rognons : ++)","albumine surtout (autres ? : Ig ?)","tester l’albumine de porc plutôt que celle de chat (nFel d 2) ?","58",
+24,"chien","P","En cas de double réactivité (cutanée et/ou sérique) chien et chat, il n’est pas toujours facile de distinguer une vraie double sensibilisation chat + chien d’une sensibilisation à l’un des animaux + simple réactivité croisée pour l’autre. De plus, malgré l'absence d'animal à la maison, il peut y avoir persistance des allergènes dans l’habitat, contacts intermittents ou par procuration, etc.. 
+- Quels allergènes homologues dans les phanères de chat et de chien ? : les albumines ont une réactivité croisée bien établie, mais pas les lipocalines ou les Fel d 1-like.",,"les lipocalines (Can f 1 et f 2). Mais sûrement d’autres allergènes aussi","rCan f 1 et rCan f 2 sont insuffisants (même si l’extrait chien manque de sensibilité aussi). Tester l’albumine nCan f 3 pour expliquer une positivité au chien chez un allergique au chat ?","124",
+25,"bœuf viande","P","- Quels allergènes homologues dans les phanères de chat et de chien ? : les albumines ont une réactivité croisée bien établie, mais pas les lipocalines ou les Fel d 1-like","±","albumine","albumine (= bovalbumine)","58",
+26,"poulet viande","P","- L’allergie à la viande de poulet est rare.  
+- Elle touche plutôt les adultes et peut s’étendre à d’autres volailles (mais pas aux viandes de mammifères).  
+- En général l’œuf est toléré.","±","albumine (et autres ?)","? tester le sérum de poulet ?","58",
+27,"œuf poule","P","- On distingue 2 cadres pour l’allergie à l’œuf :  
+* chez le jeune enfant l’allergie concerne avant tout le blanc d’œuf et est le plus souvent transitoire 
+* chez l’adulte, une allergie sélective aux allergènes du jaune d’œuf est possible, en lien avec une sensibilisation par voie respiratoire (poussières de volières). C’est le « syndrome oiseau-œuf » (très peu fréquent). 
+- La cuisson diminue mieux l’allergénicité du jaune que du blanc (ex. Gal d 1 résiste très bien). Une température >100°C peut permettre la tolérance chez certains enfants (ex. gâteaux). Nécessite TPO.
+- L’allergie à l’œuf de poule peut s’étendre à d’autres œufs. Oiseaux et œufs peuvent être d’espèces différentes.","++","pour le blanc : ovomucoïde surtout (Gal d 1) ; pour le jaune : des « livétines » (vitellogénines = albumine-like)","un petit avantage à tester Gal d 1 (ovomucoïde) plutôt que l’extrait global blanc d’œuf ? Peut-être.","55",
+28,"carotte","P","- La carotte peut donner des réactions alimentaires chez les polliniques au bouleau et/ou à l’armoise, principalement dans le cadre d’un « syndrome bouleau-armoise-céleri » :  
+* réactivité croisée entre PR-10 (Bet v 1 du bouleau et Dau c 1 de la carotte)  
+* et/ou entre profilines. Ces dernières sont en jeu notamment dans les régions méditerranéennes (pas de LTP dans la carotte mature). 
+- Tolérance après cuisson : a priori oui (mais pas assez d’études).","±","PR-10 (Dau c 1) et profiline (Dau c 4)","aucun pour l’instant (sauf rDau c 101 sur l’ISAC, mais Dau c 1.02 serait préférable).","91",
+29,"poivron","P","- Très rares cas d’allergie alimentaire (idem avec son dérivé séché = le paprika).  
+- Un lien latex-poivron a été évoqué mais non résolu.","0","Cap a 1 (thaumatine-like) (notamment dans paprika) ? Profiline (Cap a 2) ?","aucun pour l’instant","94#poivron-intro",
+30,"pomme de terre","P","- L’allergie à la pomme de terre est mal cernée : cas décrits surtout chez l’enfant (avec dermatite atopique), manque de TPO, pollinose inconstante, tests avec extraits crus, etc..  
+- Le lien avec une sensibilisation au latex n’est pas prouvé.","0","aucun dominant. Pas de LTP","aucun pour l’instant","95",
+31,"pomme","P","- On ne présente plus le classique syndrome « bouleau-pomme » : cette allergie croisée entre PR-10 (Bet v 1 du bouleau et Mal d 1 de la pomme) s’étend, en fait, à de nombreux autres aliments contenant des PR-10 (autres [fruits des Rosacées->68], noisette, céleri, kiwi, soja, etc..).  
+- Il s’agit dans le cas de la pomme d’un syndrome oral avec tolérance après cuisson. 
+- Plus généralement, la réactivité à des profilines d’origine pollinique peut s’accompagner de réactions alimentaires avec la pomme, en général peu sévères.  
+- Ce n’est pas le cas si le patient s’est sensibilisé aux LTP car les LTP résistent très bien à la chaleur et à la digestion. Le « syndrome LTP », souvent dominé par la pêche, est possible mais assez rare en dehors des régions méditerranéennes (ex. Espagne).","+","en France : Mal d 1, sinon Mal d 4 (profiline)","rPru p 3 (LTP) pour apprécier indirectement un risque de gravité (NB : rMal d 1 sur l’ISAC mais intérêt = ? ?)","77",
+32,"pêche","P","- La pêche est le modèle des « aliments LTP » et probablement un initiateur fréquent d’une réactivité élargie à d’autres aliments (et pollens ?) : c’est le « syndrome LTP », classiquement méditerranéen, avec réactions volontiers sévères (stabilité des LTP), où la pollinose est fréquente mais pas obligatoire. 
+- En dehors de ce contexte régional, l’allergie à la pêche est similaire à celle de la pomme (mais moins fréquente) : PR-10 en cas de pollinose au bouleau, profilines plus généralement si pollinose. 
+- L’association latex-pêche n’est pas démontrée.  
+- Celle d’une éventuelle réactivité croisée avec des allergènes de Cupressacées n’est pas résolue.","±","Pru p 3 (++ dans la peau), sinon Pru p 1 et/ou Pru p 4","rPru p 3 pour évaluer une éventuelle gravité. Intérêt de rPru p 1 (au lieu de Bet v 1) et de rPru p 4 (au lieu de rBet v 2 ou rPhl p 12) = ? ? ?","76",
+33,"figue","P","- Les cas d’allergie à la figue sont peu fréquents mais potentiellement sévères. Peu de différence entre figue fraîche et figue sèche. 
+- Une association avec le latex (chitinase ?) et/ou avec le ficus (syndrome ficus-figue-etc) est possible.","+","la ficine (cystéine protéase) ? Une LTP (non encore identifiée) ?","aucun pour l’instant","81#figue-intro",
+34,"moutardes","P","- Les cas avérés d’allergie à la moutarde ont surtout été décrits en France chez l’enfant.  
+- C’est un « allergène caché » important.  
+- En Espagne, l’allergie à la moutarde semble s’insérer dans un syndrome LTP (Rosacées, armoise, choux) et est possiblement sévère.","±","les 2S-albumines (Bra j 1, Sin a 1) et la LTP (Sin a 3)","aucun pour l’instant","86",
+35,"melons","P","- Le melon est l’une des premières causes d’allergie alimentaire en Espagne, avec réactions souvent limitées à la sphère orale et positivité pour les profilines (pollinose olivier, graminées, etc..). 
+- Le melon (avec d’autres Cucurbitacées) n’est pas considéré comme un « aliment LTP »","±","profiline (Cuc m 2)","aucun pour l’instant (hormis de tester indirectement une profiline pollinique, ex. Phl p 12).","93",
+36,"céleri","P","- Bulbe (céleri-rave) et tiges foliaires donnent des réactions alimentaires qui peuvent être sévères.  
+- L’allergie céleri est avant tout associée à une pollinose : c’est le « syndrome bouleau-armoise-céleri-épices » qui met en jeu des PR-10 (Bet v 1 du bouleau et Api g 1 du céleri) et un/des allergènes d’armoise mal identifiés et expliquant les cas d’allergénicité après cuisson (un homologue d’Api g 5 ?).  
+- Les profilines ont un rôle aussi (ex. autres pollinoses).","++++","Api g 1 (PR-10), Api g 4 (profiline) et ? ?","l’intérêt de rApi g 1 comparativement au CAP céleri n’est pas prouvé (même si ce dernier est sensible aux CCD).","92",
+37,"ananas","P","- Les cas d’allergie à l’ananas sont très rares.  
+- Il est possible que l’ananas en conserve soit moins allergisant du fait d’une dénaturation thermique.  
+- Bien qu’étant un « fruit exotique », l’ananas n’est pas un fruit associé au latex mais plutôt à une sensibilisation aux profilines (pollinose). 
+- On tire de la tige et du fruit de l’ananas un produit enzymatique, plus ou moins hétérogène, et destiné à des applications industrielles : la broméline.  
+* Cette dernière est connue en allergologie moléculaire comme un témoin de la présence d’IgE anti-CCD : c’est un [« glyco-reporter »->31] au même titre que la peroxydase extraite de la racine de raifort (HRP). 
+* L’allergie à la broméline est avant tout par contact respiratoire dans un cadre professionnel.","0","Ana c 1 (profiline)","tester une profiline (ex. rPhl p 12) ? Pour être en mesure de rechercher une sensibilisation à la broméline il faut déjà montrer l’absence d’IgE anti-CCD (HRP négative).","80#ananas-intro",
+38,"litchi","P","- Très rares cas décrits, mais forte suspicion d’une association avec une pollinose aux Astéracées (ex. armoise).","±","une profiline, et ? ?","aucun pour l’instant","80#litchi-monogr",
+39,"mangue","P","- Allergie peu fréquente mais réactions sévères possibles.  
+- Un lien avec le latex et plus encore avec l’armoise est évoqué. A confirmer.","+","Man i 1 et 2 ? Profiline","aucun pour l’instant","80#mangue-intro",
+40,"kiwis","P","- Deux sortes de kiwis sont consommées : le kiwi vert (A. deliciosa) et le kiwi doré (ou Gold® = A. chinensis). Ce dernier n’est pas moins allergisant.  
+- Bien que classiquement présenté comme un fruit associé à une allergie au latex, le kiwi donne des réactions également du fait d’autres allergènes qu’une chitinase : une PR-10 (en cas de pollinose au bouleau), une profiline, une LTP et des allergènes qui lui sont propres (ex. actinidine). 
+- Les réactions peuvent être sévères (mais pas d’allergène précis en cause) : plus souvent chez les patients mono-kiwi ?  
+- L’allergénicité résiduelle dans les aliments manufacturés est variable : pas de règle.","++","plus ou moins tous (dépend du contexte)","aucun pour le moment (NB : malgré 4 allergènes présents, l’ISAC ne fait pas mieux que le CAP kiwi)","116",
+41,"banane","P","- Deux étiologies pour une allergie à la banane : le latex (chitinase) et une pollinose (profiline).  
+- La banane semble exclue du syndrome LTP.","+","chitinase et/ou profiline","indirect : rHev b 6.01 ou 6.02 (si contexte latex), rBet v 2 ou rPhl p 12 sinon","114",
+42,"avocat","P","- L’avocat est le fruit-type du syndrome latex-aliments.  
+- La relevance clinique d’une sensibilisation aux profilines (pollens) est mal établie.","+","Pers a 1 (chitinase)","indirect : rHev b 6.01 ou 6.02 (si contexte latex). Une profiline (rBet v 2 ou rPhl p 12) en dernier recours.","100",
+43,"bouleau","P","- On ne présente plus le pollen de bouleau. Sa responsabilité dans une pollinose élargie aux autres Bétulacées est bien établie (ex. IT avec le seul pollen de bouleau).  
+- De même pour les multiples réactions alimentaires avec des aliments contenant des allergènes analogues à Bet v 1 (les PR-10) : pomme et autres Rosacées, noisette, Apiacées, kiwi, soja, etc..  
+- Ce syndrome bouleau-aliments a une expression clinique souvent modérée (sphère orale, tolérance après cuisson) le distinguant pour les mêmes aliments d’une sensibilisation aux LTP. D’où l’importance du diagnostic moléculaire.",,"Bet v 1 +++. Pas de LTP dans le pollen de bouleau","rBet v 1 (à la place de l’extrait, sensible aux CCD) ; rBet v 2 pour tester une réactivité à des profilines alimentaires (mais rPhl p 12 est souvent adapté) ; rBet v 4 (polcalcine) en cas de poly-positivités polliniques peu pertinentes cliniquement","61",
+44,"raisin","P","- L’allergie au raisin est rare mais pas réservée aux régions méditerranéennes. Elle peut s’avérer sévère et concerner adultes comme enfants.  
+- L’association entre raisin et syndrome LTP est nette.  
+- Mais d’autres sensibilisations sont envisageables : profilines, protéines thaumatine-like ( ?).  
+- Un lien entre raisin et latex ? : a priori non, malgré la présence d’une chitinase.","±","LTP","indirect : rPru p 3 (LTP). Accessoirement une profiline (ex. rPhl p 12)","89#raisin-intro",
+45,"platane","P","- L’impact du platane chez un patient pollinique est difficile à isoler car une positivité pour d’autres pollens est très fréquente.  
+- La pollinose au platane semble cependant significative dans certaines régions (ex. Catalogne).  
+- Ce pollen contient différents allergènes dont une LTP. Cependant, celle-ci ne semble pas apte à générer la sensibilisation aux LTP alimentaires (ex. pêche) rencontrée dans le syndrome LTP méditerranéen.",,"Pla a 1 et 2 (pour la pollinose au platane). Pas de PR-10 dans ce pollen","aucun pour l’instant (à noter cependant rPla a 1 et 2 sur l’ISAC)","129",
+46,"olivier","P","- Le pollen d’olivier est responsable de très nombreux cas de pollinose tout autour du bassin méditerranéen.  
+- Il ne semble pas générer en soi des allergies alimentaires précises : celles-ci sont plus généralement le résultat d’une sensibilisation aux profilines polliniques (olivier, graminées, diverses herbacées).  
+- Le rôle de la LTP de l’olivier dans ces réactions alimentaires semble très mineur.  
+- Celui d’Ole e 9 (beta 1,3-glucanase) est mal cerné.",,"Ole e 1 ++, Ole e 2 (profiline) et d’autres plus accessoirement. Pas de PR-10 dans le pollen d’olivier","nOle e 1 pour confirmer un diagnostic direct (olivier) ou indirect (frêne). Mais tenir compte de l'éventuelle présence d'IgE anti-CCD.","65",
+47,"frêne","P","- En Europe on rencontre surtout l’espèce Fraxinus excelsior, le frêne élevé : c’est elle qu’il faut tester.  
+- La pollinose au frêne est parfois difficile à discerner en cas de pollinose au bouleau.  
+- Le frêne contient un allergène homologue d’Ole e 1 (olivier) : une positivité pour nOle e 1 peut donc servir de témoin indirect d’une sensibilisation au frêne (… dans les régions sans olivier). Il faut se garder cependant d’une possible sensibilisation à l’olivier dans les ATCD.",,"Fra e 1 (une protéine Ole e 1-like), Fra e 2 (profiline). Pas de protéine PR-10","faute de test avec Fra e 1 on utilise nOle e 1 (Mais tenir compte de l'éventuelle présence d'IgE anti-CCD). En second lieu, si nOle e 1 négatif, on peut tester une pertinence clinique douteuse avec : profiline (rBet v 2 ou rPhl p 12), polcalcine (rBet v 4 ou rPhl p 7)","65#frêne-monogr",
+48,"pariétaires","P","- La pollinose aux pariétaires est surtout rencontrée en milieu méditerranéen. Elle se distingue par une saisonalité peu marquée et par la fréquence d’une mono-pollinose.  
+- Pas d’allergie croisée alimentaire vraiment attestée pour le moment.",,"ce sont des LTP. Elles sont assez particulières et ne croisent pas ou peu avec la LTP-modèle Pru p 3.","tester rPar j 2 (pariétaire de Judée) suffit pour caractériser une sensibilisation aux différentes espèces de pariétaires","85",
+49,"plantains","P","- Les plantains sont présents un peu partout mais leur impact clinique est mal cerné. En effet, d’autres pollens sont souvent positifs en même temps (ex. graminées).  
+- Pas d’allergie croisée alimentaire démontrée.",,"Pla l 1 (une protéine Ole e 1-like ne croisant pas avec Ole e 1 de l’olivier). Pas de PR-10 semble-t-il.","aucun disponible pour l’instant","79",
+50,"ambroisies","P","- La pollinose aux pollens d’ambroisies pose un problème grave dans plusieurs régions d’Europe (en plus de l’Amérique du Nord) du fait de son extension à des zones jusque-là indemnes.  
+- Bien qu’appartenant à la même famille que l’armoise (Astéracées = ex-Composées), l’ambroisie présente une réactivité croisée très partielle avec l’armoise.  
+- Pas d’allergie croisée ambroisie-aliments démontrée jusqu’à présent.",,"Amb a 1 domine (pectate lyase), mais d’autres allergènes ont une importance probable. Pas de PR-10","nAmb a 1 (mais ± sensible aux CCD). Sinon tester une profiline (rPhl p 12) en cas de poly-réactivité pollinique","72",
+51,"armoise","P","- L’armoise est présente en Europe sous des climats assez divers (ex. Suisse aussi bien qu’Espagne).  
+- La pollinose à l’armoise est rarement isolée. Mais la réactivité croisée armoise-ambroisie est limitée. 
+- L’armoise est impliquée dans le « syndrome bouleau-armoise-Apiacées » qui inclut des réactions avec le céleri et des épices notamment. Les allergènes en cause dans l’armoise sont encore mal compris, en dehors de profilines.  
+- En milieu méditerranéen, la LTP du pollen d’armoise ne semble pas apte à générer à elle seule un « syndrome LTP » (allergie à la pêche, etc..).",,"Art v 1 domine. Pas de PR-10 semble-t-il","nArt v 1 (mais ± sensible aux CCD). Sinon tester une profiline (rBet v 2 ou rPhl p 12) en cas de poly-réactivité pollinique.","73",
+52,"lait de vache","P","- L’allergie au lait de vache (voire à ses hydrolysats) chez le nourrisson est bien connue. Elle met en jeu plusieurs protéines (lactoglobuline, caséines, lacatalbumine, etc..) de sorte que l’on parle d’APLV (allergie aux protéines du lait de vache).  
+- La chaleur ne diminue pas significativement l’allergénicité du lait de vache. Il en est de même après ferments lactiques. 
+- La réactivité croisée du lait de vache avec d’autres laits est à considérer comme la règle, même si l’on constate parfois des cas de dissociation (ex. allergie aux fromages [de brebis ou de chèvre->56# laitCB-ASSO-laitV] sans APLV).","++++","pas d’allergène vraiment dominant","pas de profil de réactivité orientant vers telle ou telle forme clinique ou évolutivité. Sauf peut-être les caséines chez l’enfant plus âgé","56",
+53,"lait brebis + chèvre","P","- Les laits de chèvre (LC) et de brebis (LB) sont contre-indiqués en cas d’allergie aux lait de vache (APLV).  
+- Mais on rencontre des cas d’allergie au LC et/ou LB sans APLV. Ces réactions ont quelques différences avec l’allergie classique aux laits :  
+* réactions volontiers sévères, enfants plutôt plus âgés (n’ayant pas eu d’APLV ou étant devenus tolérants au LV), souvent il s’agit de fromages (et de plats cuisinés).  
+* les caséines semblent être en jeu dans cette allergie aux LB et LC dissociée du LV.","brebis ++ / chèvre ++","les mêmes que pour le LV. Les caséines en cas d’allergie LB/LC sans APLV ?","pas de tests disponibles. Il ne semble pas logique de tester la caséine du LV en cas de dissociation LB/LC - LV","56# laitCB-ASSO-laitV",
+54,"cupressacées","P","- Les pollens Cupressacées se distinguent d’autres pollens par une absence (apparente) quasi-générale de profilines et de polcalcines.  
+- De fait, si les Cupressacées croisent aisément entre elles, elles présentent des croisements inconstants avec les pollens d’autres familles botaniques. 
+- Cette singularité se retrouve dans l’absence d’association Cupressacées-aliments bien prouvée.",,"pas d’allergènes vraiment dominants : chacun des groupes 1 (pectate lyases), 2 (polygalacturonases) et 3 (thaumatine-like) semblent importants","nCup a 1 pourrait servir d’allergène-test d’une réactivité au cyprès et à d’autres Cupressacées. Mais attention à la réactivité de type CCD. Et nCup a 1 ne couvre qu’une partie des allergènes importants.","66",
+55,"profilines","FM","Les profilines sont des panallergènes végétaux : elles ont montré leur IgE-réactivité dans de nombreux pollens et aliments (et dans le latex). Résultat d’une sensibilisation pollinique, la réactivité aux profilines croît du nord au sud de l’Europe. La réactivité croisée entre profilines est aisée, rendant parfois difficile l’interprétation de tests positifs sur extraits.
+La relevance clinique d’une réactivité pour les profilines est parfois contestée. S’il est vrai que les réactions cliniques qu’elles suscitent sont en règle générale modérées, les profilines sont de réels allergènes chez certains patients, tant polliniques que présentant des réactions alimentaires (Rosacées, Cucurbitacées, tomate, banane, etc..).",,,,"32","Selon les régions et le pollen dominant : rBet v 2 (bouleau) ou rPhl p 12 (fléole)."
+56,"tropomyosines","FM","Les tropomyosines sont essentiellement des allergènes d’Invertébrés : Crustacés, mollusques marins, insectes, acariens, nématodes, etc..
+Le degré d’homologie entre tropomyosines est maximal au sein des Crustacés. Et cela justifie l’allergie croisée communément observée entre crevettes, crabes, homards, etc..
+La responsabilité des tropomyosines dans une allergie croisée entre acariens et crustacés ou mollusques, etc.. n’est pas démontrée.",,,,"34","rPen a 1 (crevette)"
+57,"LTP","FM","Les LTP (Lipid Transfer Proteins) sont des allergènes dans de nombreux aliments et quelques pollens (armoise, platane, pariétaires, ..).
+Le « syndrome LTP » correspond à une allergie croisée associant des fruits des Rosacées (pêche ++) et des aliments aussi divers que le maïs, la noisette, le raisin, les choux, la grenade, etc.. etc.. et même la bière !
+Les LTP sont des protéines très stables : des réactions non limitées à un syndrome oral sont possibles.
+Bien que classiquement rencontrée en milieu méditerranéen, cette sensibilisation aux LTP ne doit pas être méconnue sous d’autres climats (ex. si réaction avec aliment cuit).",,,,"33","rPru p 3 (pêche). Sélectivement rCor a 8 (noisette) peut être plus pertinent."
+58,"PR-10","FM","Le chef de file des protéines PR-10 est Bet v 1 (bouleau). Cet allergène est capable d’initier une allergie croisée à de nombreux aliments : fruits des Rosacées (ex. pomme), Apiacées (ex. céleri), Fabacées (ex. soja), noisette, kiwi, etc..
+Cette réactivité croisée concerne aussi les pollens de Fagales.",,,,"60","rBet v 1 (bouleau)"
+59,"2S albumines","FM","Les protéines dites « 2S » font partie de la super-famille des prolamines, à côté des LTP, par exemple. Comme ces dernières, les 2S-albumines sont très stables (chaleur, digestion) et présentent fréquemment une forte allergénicité.
+Ce sont les allergènes principaux de l’arachide (notamment Ara h 2), de la moutarde, de la noix du Brésil, des noix, etc..
+Les réactivités croisées entre 2S-albumines sont très mal connues (hormis entre moutarde et colza, qui sont 2 Brassicacées).",,,,"127","Pas d’allergène représentatif pour cette famille."
+60,"parvalbumines","FM","Protéines présentes chez tous les Vertébrés, les parvalbumines sont les allergènes principaux de la chair des poissons.
+La plupart des études montrent une fréquente réactivité croisée entre parvalbumines de différents poissons. Mais cette réactivité croisée n’est pas systématique, ce qui explique que quelques patients puissent tolérer certains poissons.",,,,"51","il semble plus logique de choisir rGad c 1 (morue) plutôt que rCyp c 1 (carpe)"
+61,"polcalcines","FM","Les polcalcines transportent du calcium : ce sont des « 2EF-hand » car elles présentent 2 sites de liaison pour le calcium. Pas de ressemblance avec d’autres « calcium binding proteins » comme les parvalbumines 2EF des poissons, les 3EF ou les 4EF de certains pollens (Bet v 3, Ole e 8, Cup a 4, etc..).
+Les polcalcines croisent aisément entre elles et sont, de ce fait, un marqueur intéressant en cas de poly-réactivité pollinique: leur positivité permet d’expliquer certains tests positifs sur extraits (in vitro, TC) avec une clinique peu concordante.",,,,,"Selon les régions et le pollen dominant : rBet v 4 (bouleau) ou rPhl p 7 (fléole)"
+62,"lipocalines","FM","Les lipocalines transportent des molécules hydrophobes et sont les allergènes principaux des phanères de nombreux mammifères : chien, cheval, cobaye, lapin, etc… La béta-lactoglobuline est aussi une lipocaline.
+En règle générale, peu ou pas de réactivité croisée entre phanères de mammifères du fait de lipocalines.",,,,"125","Pas d’allergène représentatif"
+63,"albumines mammifères","FM","Principales protéines du sérum, les albumines se retrouvent dans la viande, le lait et diverses sécrétions (sueur, salive).
+Elles croisent assez bien entre elles d’un animal à un autre (ex. chat – chien).
+La bovalbumine est une cause très mineure d’allergie au lait de vache. Les albumines des phanères de chat (et de chien ?) sont la cause d’une (rare) allergie croisée aux viandes (ex. porc)",,,,"71","nFel d 2 (chat). Mais, selon le contexte, nCan f 3 (chien), nBos d 6 (bœuf) ou l’albumine de porc pourraient s’avérer plus pertinents"
+64,"Ole e 1-like","FM","Les pollens d’Oléacées contiennent des protéines homologues à l’allergène principal de l’olivier, Ole e 1. On ne connaît pas la fonction biochimique de ces protéines : on les appelle donc « Ole e 1-like ».
+Si ces Ole e 1-like croisent aisément entre elles au sein de la famille des Oléacées, les protéines Ole e 1-like détectées dans des pollens d’autres familles botaniques ne croisent pas avec celles des Oléacées. Il s’agit notamment de Phl p 11 (fléole), Pla l 1 (plantain) et Che a 1 (chénopode).
+Cette spécificité permet de considérer l’allergène Ole e 1 comme un témoin indirect d’une réactivité à d’autres Oléacées, au premier rang desquels celui de frêne.",,,,,"Ole e 1 (en attendant de pouvoir disposer de Fra e 1 pour le frêne). Attention le test disponible, nOle e 1, est très sensible à la présence d’IgE anti-CCD."
+65,"chitinases","FM","On distingue plusieurs classes de chitinases. Les plus importantes pour l’allergologie sont les chitinases de classe 1. En effet, leur portion N-terminale, ou « domaine hévéine » est homologue d’une lectine, l’hévéine (Hev b 6.02) trouvée dans le latex. C’est cette homologie qui entraîne une allergie à des aliments variés chez les certains patients allergiques au latex : banane, kiwi, etc..",,,,"102","L’hévéine (rHev b 6.02) ou son parent la pro-hévéine (rHev b 6.01) en cas de suspicion de « syndrome latex(aliments ». Ces 2 protéines servent aussi pour étayer un diagnostic d’allergie au latex."
+66,"abeille - vespula","RC","Dans toutes les études (sauf une) au moins certains patients ont une RC positive (2 sens). Bien sûr CCD non pris en compte.",,,,,
+67,"alternaria - cladosporium","RC","Des RC possibles entre différents allergènes (ex. énolases)",,,,,
+68,"amande - arachide","RC","RC inconstantes. Pas d’étude en Europe. Manque de résultats arachide -> amande",,,,,
+69,"amande - noisette","RC","Trop peu de données",,,,,
+70,"amande - noix","RC","Peu d’études. RC apparemment limitées",,,,,
+71,"amande - cajou","RC","Trop peu de données",,,,,
+72,"amande - brésil","RC","Trop peu de données",,,,,
+73,"amande - pistache","RC","Quelques RC positives (2 sens). Implication clinique = ?",,,,,
+74,"ambroisies - armoise","RC","Les études ont révélé plutôt des RC entre profilines qu’entre allergènes plus spécifiques (ex. Amb a 1-like ou Art v 1-like).
+A priori une double positivité est plutôt en faveur d’une double sensibilisation (à moins d’une poly-réactivité pollinique)",,,,,
+75,"arachide - bouleau","RC","Chez les polliniques, une positivité in vitro pour l’arachide est possible par RC avec Bet v 1 (bouleau) ou avec les profilines de divers pollens (ex. graminées). Sans compter les CCD ! La RC bouleau -> arachide est cliniquement relevante chez quelques patients",,,,,
+76,"arachide - lupin","RC","A peu d’exceptions près, l’arachide inhibe le lupin et cela reflète la clinique : beaucoup de patients allergiques au lupin sont allergiques à l’arachide (allergènes en cause = ?).
+La RC dans l’autre sens (lupin -> arachide) n’a pas été bien étudiée",,,,,
+77,"arachide - noisette","RC","Une RC entre noisette et arachide insuffisamment étudiée",,,,,
+78,"arachide - noix","RC","La plupart des études proviennent des USA et montrent plutôt une absence de RC significative",,,,,
+79,"arachide - cajou","RC","Pas d’étude de RC menée en Europe. Les résultats orientent vers une absence de RC significative",,,,,
+80,"arachide - brésil","RC","RC inconstantes. Etudes surtout hors d’Europe. RC possibles entre 2S-albumines (Ber e 1 et Ara h 2) ?",,,,,
+81,"arachide - pêche","RC","Les études proviennent d’une même équipe (Milan) et montrent une RC due à des LTP. Impact clinique : peut-être, au sein d’un syndrome LTP",,,,,
+82,"arachide - pistache","RC","Très peu d’études. Résultats disparates",,,,,
+83,"arachide - soja","RC","Trop peu d’études, et dans des contextes variés. Relevance clinique et molécules en cause non suffisamment démontrées, notamment chez l’enfant",,,,,
+84,"armoise - bouleau","RC","Les RC observées entre armoise et bouleau sont principalement dues à des profilines",,,,,
+85,"armoise - céleri","RC","Les RC armoise-céleri soulignent le rôle initiateur de l’armoise dans l’association clinique armoise-céleri. Les allergènes en cause restent en partie non élucidés (hormis des profilines)",,,,,
+86,"armoise - graminées x5","RC","Les RC observées entre armoise et graminées fourragères (dactyle, ivraie, etc..) sont engrande partie dues à des profilines … et à des CCD",,,,,
+87,"armoise - pêche","RC","Etudes espagnoles uniquement. Les RC montrent clairement le lien LTP entre armoise et pêche ches les patients allergiques à la pêche.",,,,,
+88,"armoise - pomme","RC","Trop peu d’études, et recrutements des patients disparates",,,,,
+89,"avocat - banane","RC","Globalement, la RC avocat-banane est quasi-constante dans le cadre d’un syndrome latex-aliments",,,,,
+90,"avocat - kiwis","RC","Assez peu d’études, mais une RC avocat-kiwi existe en cas de syndrome latex-aliments (mais pas si bouleau-kiwi)",,,,,
+91,"avocat - latex","RC","De multiples études qui pointent toutes vers une RC entre Hev b 6.01/6.02 du latex et la chitinase Pers a 1 de l’avocat.",,,,,
+92,"banane - latex","RC","De multiples études qui pointent toutes vers une RC entre Hev b 6.01/6.02 du latex et la chitinase de la banane. Un certain déséquilibre des RC montre que le latex est en règle générale à l’origine de la réactivité à la banane.",,,,,
+93,"blé farine - graminées x5","RC","Des résultats de RC positifs (hors profilines et hors CCD) ont été obtenus dans un seul travail, non confirmé jusqu’à présent",,,,,
+94,"blé farine - maïs","RC","Des RC existent qui ne sont pas toutes entre profilines ou CCD. Mais travaux épars (pays, recrutements). Difficile de conclure",,,,,
+95,"blé farine - seigle farine","RC","RC probables entre allergènes homologues, tant dans l’asthme du boulanger qu’en cas d’allergie alimentaire. peu d’études cependant",,,,,
+96,"blomia - D ptero + farinae","RC","La grande majorité des études conclut à l’absence de RC chez de nombreux patients. Plus spécifiquement, la RC entre Der p 5 et Blo t 5 (allergène important chez Blomia) a donné des résultats variables, avec RC possible chez certains patients.
+Globalement c’est plutôt la dissociation qui prévaut (= 2 sensibilisations indépendantes)",,,,,
+97,"bouleau - carotte","RC","Les RC bouleau -> carotte sont bien démontrées, avec intervention de Bet v 1 (PR-10) et de Bet v 2 (profiline). Trop peu d’études dans le sens carotte -> bouleau",,,,,
+98,"bouleau - céleri","RC","De multiples études qui confirment la clinique : le céleri croise avec le bouleau par des PR-10 et des profilines.",,,,,
+99,"bouleau - cerise","RC","Les études confirment un lien entre bouleau et cerise par PR- (syndrome bouleau-fruits des Rosacées)",,,,,
+100,"bouleau - chêne","RC","Les quelques études confirment un lien entre ces 2 pollens de Fagales (par PR-10) à la faveur de celui du bouleau",,,,,
+101,"bouleau - frêne","RC","Les études de RC entre bouleau et frêne montrent : une absence apparente de PR-10 dans le frêne ; et une RC possible par profilines",,,,,
+102,"bouleau - graminées x5","RC","Les études de RC confirment les liens entre bouleau et graminées (ivraie, dactyle, etc..) par profilines et polcalcines, c’est-à-dire par des allergènes non spécifiques",,,,,
+103,"bouleau - kiwis","RC","De très nombreuses études de RC ont montré qu’une réactivité au kiwi pouvait avoir un lien avec une pollinose au bouleau par le truchement de PR-10 : Bet v 1 -> Act d8/c8",,,,,
+104,"bouleau - noisetier","RC","Toutes les études montrent une RC bouleau -> noisetier par PR-10. Mais la RC dans l’autre sens n’a pas été étudiée ! !",,,,,
+105,"bouleau - noisette","RC","Les RC bouleau -> noisette confirment le rôle des PR-10. Une étude semble indiquer une absence de RC : mais elle ne fait que montrer l’absence de LTP dans le pollen de bouleau. 
+La RC dans le sens noisete -> bouleau n’a pas été étudiée !",,,,,
+106,"bouleau - pêche","RC","Il n’est pas surprenant que les études menées en Espagne trouvent peu de RC bouleau -> pêche (pas de LTP dans le pollen de bouleau). Ailleurs on a bien des RC s’inscrivant dans un syndrome bouleau-Rosacées (PR-10)",,,,,
+107,"bouleau - poire","RC","Les études menées en Allemagne et en Autriche montrent une large RC bouleau-poire chez les patients polliniques au bouleau. En plus des PR-10, d’autres allergènes peuvent participer aux RC : des profilines et des isoflavone réductaes. On ne connaît pas l’impact clinique réel de la réactivité à ces dernières.",,,,,
+108,"bouleau - pomme","RC","Une des RC les plus étudiées ! Les résultats traduisent un  déséquilibre à l’avantage du bouleau (l’initiateur)",,,,,
+109,"bouleau - soja","RC","Le support d’une association clinique bouleau-soja est ici montré à travers quelques études de RC entre PR-10 (Bet v 1 et Gly m 4). Elles viennent toutes d’Allemagne, cependant.",,,,,
+110,"lait brebis - lait chèvre","RC","La plupart des études ont été menées dans le cadre particulier d’une allergie au lait de chèvre (et souvent de brebis) sans allergie contemporaine avec le lait de vache. Et des RC entre caséines ont été montrées.
+On manque d’études dans le cadre plus classique d’une allergie au lait de vache (les RC sont-elles plus larges, incluant les protéines du petit lait ?)",,,,,
+111,"lait brebis - lait vache","RC","Les études de RC confirment la réactivité au lait de brebis chez les sujets avec allergie au lait de vache. On manque d’études portant sur les RC entre protéines du petit lait.",,,,,
+112,"carotte - céleri","RC","En Europe les quelques études chez des sujets allergiques à la carotte ont montré des RC carotte-céleri par PR-10 (Dau c 1 et Api g 1)",,,,,
+113,"chat - cheval","RC","Peu d’études. Une RC plutôt en faveur du chat (biais de recrutement)",,,,,
+114,"chat - chien","RC","La plupart des études montrent que chat et chien croisent souvent. Si le cas des albumines est bien vérifié, celui des homologues réciproques est encore insuffisamment établi : entre lipocalines (Fel d 4 et Can f 1) et entre Fel d 1 et son équivalent dans le chien",,,,,
+115,"chat - porc viande","RC","Le syndrome porc-chat est bien décrit dans ces quelques études de RC : il ne concerne pas Fel d 1. Pas de RC entre albumines chez les allergiques au chat mais sans allergie au porc. D’autres allergènes dans le porc-chat ? A confirmer",,,,,
+116,"châtaigne - latex","RC","Pas de surprise : les études de RC montrent bien que les réactions à la châtaigne chez les allergiques au latex ont comme support la chitinase de châtaigne Cas s 5",,,,,
+117,"cheval - chien","RC","Un nombre limité d’études. Le rôle des albumines est suspecté",,,,,
+118,"lait chèvre - lait vache","RC","Larges RC chez des sujets allergiques au lait de vache. RC entre entre protéines du petit lait en plus des caséines ? Pas assez étudié",,,,,
+119,"cynodon - gramnées x5","RC","Des travaux souvent menés dans des régions où le Cynodon est très prévalent (Sud USA, Australie) : une RC significative est presque toujours absente. En Europe, une RC est parfois vue, entre tel et tel allergène, avec une prédominance des graminées dominantes, les Pooïdées (ex. fléole). Les résultats dépendent donc de la pression pollinique locale.",,,,,
+120,"crevettes - escargots","RC","Trop peu d’études pour conclure, mais plutôt peu de RC",,,,,
+121,"crevettes - homards","RC","RC bien établies. Entre tropomyosines, au moins.",,,,,
+122,"D ptero - D farinae","RC","Finalement peu d’études, mais toutes confirment une large réactivité croisée",,,,,
+123,"D ptero + farinae - crevettes","RC","Des recrutements très différents. Résultats disparates.
+En cas de RC, suspicion de tropomyosines. Mais la pertinence clinique de ces RC n’est pas claire.
+A noter : tous les travaux avec D. pteronyssinus seulement",,,,,
+124,"D ptero + farinae - escargots","RC","Les études de RC donnent en général une inhibition de l’escargot par les acariens, que les patients soient cliniquement allergiques aux acariens ou non. Allergènes en cause : pas résolu.
+A noter : peu d’études dans le sens escargot -> acarien",,,,,
+125,"D ptero + farinae - lepidoglyphus","RC","Les RC entre Dermatophagoides et Lepidoglyphus ont été amplement explorées. Globalement, une absence de RC se dégage. Si une RC est observée, c’est plus dans le sens Dermatophagoides -> Lepidoglyphus (NB : parfois le recrutement était juste une positivité in vitro)",,,,,
+126,"ficus - figue","RC","Dans la plupart des cas, la réactivité croisée entre Ficus et figue confirme la clinique. Pas assez d’éléments pour spécifier l’allergène en cause, cependant.",,,,,
+127,"ficus - latex","RC","Des résultats disparates qui font penser à un double cadre de réactivité pour le ficus : parfois un lien avec le latex (une chitinase ?), parfois pas de RC (ex. chez des patients avec ficus-figue)",,,,,
+128,"frêne - graminées x5","RC","Trop peu d’études",,,,,
+129,"frêne - olivier","RC","Les RC entre frêne et olivier sont extensives et semblent mettre en jeu plusieurs allergènes homologues (pas seulement Fra e 1 et Ole e 1)",,,,,
+130,"graminées x5 - latex","RC","Les RC observées sont soit banales (profilines), soit en rapport avec des CCD",,,,,
+131,"graminées x5 - olivier","RC","Des résultats disparates où, souvent, le pollen de graminée inhibe mieux celui d’olivier que l’inverse. Recrutements des patients peu superposables d’une étude à l’autre",,,,,
+132,"graminées x5 - pêche","RC","Les RC observées font penser à des profilines et/ou des CCD",,,,,
+133,"graminées x5 - pomme","RC","Les RC observées font penser à des profilines et/ou des CCD",,,,,
+134,"graminées x5 - seigle pollen","RC","Toutes les études montrent des RC réciproques",,,,,
+135,"guêpes polistes - vespula","RC","Des RC existent mais pas pour tous les patients. Certaines RC positives peuvent être dues simplement à des CCD",,,,,
+136,"kiwis - latex","RC","Les RC sont fréquentes chez des patients allergiques au latex (mais pas forcément allergiques au kiwi). On pense à une chitinase, mais pas prouvé",,,,,
+137,"kiwis - pomme","RC","Peu de résultats. L’étude Italienne pointe une LTP dans le kiwi (c’est Act d 10)",,,,,
+138,"latex - poivron","RC","Peu de résultats. Une RC par profilines parfois, mais cela est-il suffisant pour une réaction clinique associant latex et poivron ?",,,,,
+139,"latex - pomme de terre","RC","Quelques RC ont été trouvées entre les patatines du latex (Hev b 7) et de pomme de terre (Sola t 1). Mais il n’est pas sûr que cette RC soit cliniquement pertinente",,,,,
+140,"latex - sarrasin","RC","Des RC assez constantes. Elles suggèrent une inhibition en faveur du latex. Allergène(s) en cause = ?",,,,,
+141,"lieu # esp - morue # esp","RC","Des résultats disparates et peu informatifs (une même équipe qui trouve une RC avec la parvalbumine naturelle mais pas avec son recombinant)",,,,,
+142,"maïs - pêche","RC","Peu d’études, toutes italiennes. Elles montrent une RC due à des LTP (y compris chez des patients non allergiques au maïs). En Italie, la pollenta fait partie des aliments du syndrome LTP",,,,,
+143,"morue # esp - saumons","RC","Trop peu d’études",,,,,
+144,"morue # esp - thons","RC","Trop peu d’études",,,,,
+145,"noisette - noix","RC","Cette RC a été étudiée essentiellement chez des patients allergiques à la noix. Pas d’étude en France. Le support des RC est probablement des protéines de stockage des graines. LTP peut-être",,,,,
+146,"noisette - cajou","RC","Trop peu d’études",,,,,
+147,"noisette - brésil","RC","Trop peu d’études",,,,,
+148,"noisette - pêche","RC","Les études de RC proviennent d’Espagne et d’Italie. Elles ont trouvé des RC entre LTP (Cor a 8 et Pru p 3). La noisette fait partie du syndrome LTP en milieu méditerranéen",,,,,
+149,"noisette - pistache","RC","Trop peu d’études",,,,,
+150,"noix - cajou","RC","Toutes les études proviennent des USA. Les RC ne sont pas systématiques. Suspicion pour une RC entre 11S globulines (Jug r 4 et Ana o 2). Transposable en France ?",,,,,
+151,"noix - brésil","RC","Trop peu d’études",,,,,
+152,"noix - pistache","RC","Trop peu d’études",,,,,
+153,"cajou - brésil","RC","Trop peu d’études",,,,,
+154,"cajou - pistache","RC","Les RC sont constantes entre les graines de ces 2 plantes provenant de la même famille botanique",,,,,
+155,"brésil - pistache","RC","Trop peu d’études",,,,,
+156,"pêche - pomme","RC","Les études de RC ont été menées dans les « régions LTP » (Espagne, Italie) et ont conclu à une large réactivité croisée (LTP). Pas d’étude dans d’autres cadres (ex. pollinose au bouleau ou aux graminées)",,,,,
+157,"œuf blanc - jaune","RC","Les différents travaux de RC entre blanc et jaune d’œuf plaident en faveur d’une quasi-absence de RC. Dans certains études on peut suspecter une contamination des protéines utilisées pour les inhibitions.",,,,,
+158,"saumons - thons","RC","Trop peu d’études",,,,,
