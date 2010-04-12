@@ -16,13 +16,13 @@
  * @return array
  */
 function minitext_rechercher_liste_des_champs($liste){
-	$liste['tbl_minitexte'] = array('texte'=>2);
+	$liste['tbl_minitexte'] = array();
 	return $liste;
 }
 
 function minitext_rechercher_liste_des_jointures($liste){
 	$liste['tbl_minitexte'] = array(
-	'tbl_item' => array('chaine_alpha'=>1),
+	'tbl_item' => array('chaine_alpha'=>2,'nom'=>1),
 	);
 	return $liste;
 }
