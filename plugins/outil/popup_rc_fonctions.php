@@ -80,7 +80,9 @@ function rc($p1,$p2,$type_etude) {
 
 	if (!sql_count($res)) {
   		$title .= " (0)";
-    	return "<div id='main'><h1 class='title' style='display:none;'>$title</h1><h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1></div>";
+    	return "<div id='main'><h1 class='title' style='display:none;'>$title</h1><h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1>"
+			  .get_minitexte($p1,$p2)
+			  ."</div>";
   }
     
 	while ($row = sql_fetch($res)){
@@ -149,7 +151,8 @@ function rc($p1,$p2,$type_etude) {
 		  .'<table class="spip" width=100%><thead><tr class="row_first"><th style="width:50px;">Biblio</th><th style="width:285px" colspan="2">'.produit($p1).'</th><th style="width:325px" colspan="2">'.produit($p2).'</th></tr></thead><tbody>'.$result.'</tbody></table></div>';
 		if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:titre_bibliographies_popup_rc').'</h2><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><tbody>'.$biblio.'</tbody></table><br class="nettoyeur"/></div>';
   } else
-		$result = "<h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1>";
+		$result = "<h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1>"
+			.get_minitexte($p1,$p2);
 		
 	return "<div id='main'><h1 class='title' style='display:none;'>$title</h1>".$result."</div>";
 }

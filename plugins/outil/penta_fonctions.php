@@ -69,4 +69,12 @@ function penta_ascendant_le_plus_proche($id_item, $type_item){
 	return 0;
 }
 
+function targetblank($texte){
+	$links = extraire_balises($texte,'a');
+	foreach ($links as $link){
+		$tlink = inserer_attribut($link, 'target', '_blank');
+		$texte = str_replace($link, $tlink, $texte);
+	}
+	return $texte;
+}
 ?>

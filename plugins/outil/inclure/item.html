@@ -6,24 +6,13 @@
 					<h1 class="titArticle">[(#NOM|sinon{NA})]</h1>
 				</div>
 
-				<B_famille_taxo>
-				<div class="blocContenuArticle famille_taxo">
-				<h2><:allerdata:famille_taxo:></h2>
-				<p style="text-align:center;"><i>
-				<BOUCLE_famille_taxo(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{id_item!=#ID_ITEM}{', '}{!isnull nom}{par nom}>
-					<a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a>
-				</BOUCLE_famille_taxo>
-				</i></p>
-				</div>
-				</B_famille_taxo>
-
 				<BOUCLE_it_ft(tbl_items){id_item}{type_item famille_taxo}>
 					<div class="blocContenuArticle">
 					<h2><:allerdata:famille_taxo_contient_produits:></h2>
 					<table summary="Les allerg&egrave;nes de [(#NOM|sinon{NA})]" class="spip">
 						<thead><tr class="row_first">
-						<th>Nom</th>
-						<th>Source</th>
+						<th>Produit</th>
+						<th>Organisme Source</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -42,7 +31,7 @@
 				<BOUCLE_it3(tbl_items){id_item}{id_type_item=3}>
 					<BOUCLE_minitexte(tbl_minitextes){id_minitexte}>
 					[<div class="blocContenuArticle minitexte">
-					(#TEXTE)
+					(#TEXTE|targetblank)
 					</div>]
 					</BOUCLE_minitexte>
 
@@ -78,10 +67,20 @@
 					<BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{', '}{!isnull nom}{par nom}>#NOM</BOUCLE_sources>
 					</i></p>
 					</div>
+					<B_famille_taxo>
+					<div class="blocContenuArticle famille_taxo">
+					<h2><:allerdata:famille_taxo:></h2>
+					<p style="text-align:center;"><i>
+					<BOUCLE_famille_taxo(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{id_item!=#ID_ITEM}{', '}{!isnull nom}{par nom}>
+						<a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a>
+					</BOUCLE_famille_taxo>
+					</i></p>
+					</div>
+					</B_famille_taxo>
 					</B_sources>
 					<BOUCLE_minitexte2(tbl_minitextes){id_minitexte}>
 					[<div class="blocContenuArticle minitexte">
-					(#TEXTE)
+					(#TEXTE|targetblank)
 					</div>]
 					</BOUCLE_minitexte2>
 

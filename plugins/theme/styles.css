@@ -704,14 +704,15 @@ label.over-apply {
 	margin: 0 0 20px 0;
 	background: transparent url(images/bg_listeArticles.gif) bottom center no-repeat;
 }
-.blocContenuArticle.famille_taxo {background:none;margin-bottom:5px;padding:0;text-align: center;}
-.blocContenuArticle.source {text-align: center;}
+.blocContenuArticle.source {background:none;margin-bottom:5px;padding:0;text-align: center;}
+.blocContenuArticle.famille_taxo {text-align: center;}
 .blocContenuArticle.famille_taxo h2,.blocContenuArticle.famille_taxo p {display:inline;}
 .blocContenuArticle.source h2,.blocContenuArticle.source p {display:inline;}
 
 .blocContenuArticle.minitexte {text-align:left;font-size:90%;width:80%;margin-left:auto;margin-right:auto;}
 #main .blocContenuArticle.minitexte h2.spip {padding:5px 0;}
 .blocContenuArticle.minitexte h2:first-child {display:none;}
+.blocContenuArticle.minitexte p,.blocContenuArticle.minitexte ul {margin-bottom:0.5em;}
 
 
 .blocMoreArticle {
