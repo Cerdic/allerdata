@@ -101,6 +101,103 @@
 				}
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.1.3','non');
 			}
+
+			if (version_compare($current_version,'0.1.2.0','<')){
+				include_spip('base/abstract_sql');
+				include_spip('action/editer_tbl_item');
+				$importer_csv = charger_fonction('importer_csv','inc');
+				$ft = $importer_csv(find_in_path('base/familles_taxo_20100406.csv'),true);
+				$ids = array();
+				foreach($ft as $f){
+					if ($row = sql_fetsel('id_item,nom,statut','tbl_items','id_item='.intval($f['id_item']))){
+						if ($row['nom']!==$f['nom']) {
+							echo $f['id_item']." : nom ".$row['nom']." => ".$f['nom']." <br />";
+							tbl_items_set($f['id_item'], array('nom'=>$f['nom'],'statut'=>'publie'));
+						}
+					}
+					else {
+						echo "+".$f['id_item']. ' ' .$f['nom']." <br />";
+						insert_tbl_item(2, $f['id_item']);
+						tbl_items_set($f['id_item'], array('nom'=>$f['nom'],'statut'=>'publie'));
+					}
+					$ids[] = $f['id_item'];
+				}
+				$del = sql_allfetsel("id_item", "tbl_items", "id_type_item=2 AND ".sql_in('id_item',$ids,"NOT"));
+				$del = array_map('reset',$del);
+				foreach ($del as $d){
+					echo "Suppression $d<br />";
+					sql_delete('tbl_est_dans', 'est_dans_id_item='.intval($d));
+					tbl_items_set($d, array('statut'=>'poubelle'));
+				}
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.2.0','non');
+			}
+			if (version_compare($current_version,'0.1.2.1','<')){
+				include_spip('base/abstract_sql');
+				include_spip('action/editer_tbl_item');
+				$importer_csv = charger_fonction('importer_csv','inc');
+				$ft = $importer_csv(find_in_path('base/sources_20100406.csv'),true);
+				$ids = array();
+				foreach($ft as $f){
+					if ($row = sql_fetsel('id_item,nom,autre_nom,remarques,statut','tbl_items','id_item='.intval($f['id_item']))){
+						if (
+								 $row['nom']!=$f['nom']
+							OR $row['autre_nom']!=$f['autre_nom']
+							OR $row['remarques']!=$f['remarques_item']
+							) {
+							echo $f['id_item']." : nom ".$row['nom']." => ".$f['nom']." <br />";
+							tbl_items_set($f['id_item'], array('nom'=>$f['nom'],'autre_nom'=>$f['autre_nom'],'remarques'=>$f['remarques_item'],'statut'=>'publie'));
+						}
+					}
+					else {
+						echo "+".$f['id_item']. ' ' .$f['nom']." <br />";
+						insert_tbl_item(4, $f['id_item']);
+						tbl_items_set($f['id_item'], array('nom'=>$f['nom'],'autre_nom'=>$f['autre_nom'],'remarques'=>$f['remarques_item'],'statut'=>'publie'));
+					}
+					$ids[] = $f['id_item'];
+				}
+				include_spip('inc/allerdata_arbo');
+				$del = sql_allfetsel("id_item", "tbl_items", "id_type_item=4 AND ".sql_in('id_item',$ids,"NOT"));
+				$del = array_map('reset',$del);
+				foreach ($del as $d){
+					echo "Suppression $d<br />";
+					$enfants = allerdata_les_enfants($d,'',true, true);
+					foreach($enfants as $e) {
+						$p = allerdata_les_parents($e, 'source', true, true);
+						echo "$e>".implode(',',$p).' => ';
+						$p = array_diff($p,array($d));
+						echo "$e>".implode(',',$p) . '<br />';
+						tbl_items_set($e, array('id_parent'=>$p));
+					}
+					tbl_items_set($d, array('statut'=>'poubelle'));
+				}
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.2.1','non');
+			}
+			if (version_compare($current_version,'0.1.2.2','<')){
+				include_spip('base/abstract_sql');
+				include_spip('action/editer_tbl_item');
+				$importer_csv = charger_fonction('importer_csv','inc');
+				$liens = $importer_csv(find_in_path('base/parents_20100406.csv'),true);
+				$parents = array();
+				foreach($liens as $lien){
+					$parents[$lien['id_item']][] = $lien['est_dans_id_item'];
+				}
+				$del = sql_allfetsel("id_item", "tbl_items", "id_type_item=4 AND ".sql_in('id_item',array_keys($parents),"NOT"));
+				$del = array_map('reset',$del);
+				foreach($del as $d){
+					if (isset($parents[$d])) die('Erreur !');
+					$parents[$d] = array(); // supprimer les parents pour ces items
+				}
+				include_spip('inc/allerdata_arbo');
+				foreach($parents as $id => $ps){
+					$po = allerdata_les_parents($id, '', true, true);
+					if (count(array_diff($po,$ps)) OR count(array_diff($ps,$po))){
+						echo "$id>".implode(',',$po)." => ";
+						echo "$id>".implode(',',$ps)."<br />";
+						tbl_items_set($id, array('id_parent'=>$ps));
+					}
+				}
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.2.2','non');
+			}
 		}
 	}
 	
