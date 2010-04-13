@@ -18,7 +18,7 @@ $GLOBALS['tables_principales']['spip_auteurs']['pass_clair']="tinytext DEFAULT '
  */
 function allerdata_item_sans_enfant($id_item){
 	include_spip('base/abstract_sql');
-	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_item','ed.est_dans_id_item='.intval($id_item)." AND directement_contenu=1");
+	return !sql_countsel('tbl_est_dans as ed JOIN tbl_items AS i ON i.id_item=ed.id_item',"i.statut='publie' AND ed.est_dans_id_item=".intval($id_item)." AND directement_contenu=1");
 }
 /**
  * Regarder si un item a des parents designes par la table de liaison tbl_est_dans.
