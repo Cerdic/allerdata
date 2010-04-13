@@ -6,6 +6,7 @@ html, body {
 	font-size: 12px;
 	text-align : center;
 	width: 100%;
+	background:#fff;
 }
 
 div, img, table, td, fieldset, legend, form, h1, h2, h3, h4, h5, h6, p, ul  {
@@ -336,7 +337,7 @@ input, select, textarea {
 /** Structure **/
 /***************/
 
-/* blocs flott�s */
+/* blocs flottes */
 
 .floatLeft {
 	float: left;
@@ -351,7 +352,7 @@ input, select, textarea {
 }
 
 body {
-	background: #000 url(images/bg_body.gif) top left repeat-x;
+	background: #fff top left repeat-x;
 	padding: 5px 0 5px 0;
 }
 
@@ -368,7 +369,6 @@ body {
 }
 
 #header {
-	background: transparent url(images/bg_header.gif) top left no-repeat;
 	margin: 0 0 25px 0;
 	position: relative;
 }
@@ -393,7 +393,7 @@ a:visited:after {
   font-size: 90%;
   text-decoration : none;
 }
-}
+
 
 #footer {
 	padding : 5px;
@@ -405,7 +405,7 @@ a:visited:after {
 }
 
 
-/* d�tails des blocs principaux dans l'ordre de l'html */
+/* details des blocs principaux dans l'ordre de l'html */
 
 #prelude {display : none;
 }
@@ -451,7 +451,7 @@ label.over-apply {
 }
 
 #main {
-	float: right;
+	float: left;
 	width: 95%;
 	margin: 30px 0 0 0;
 }
@@ -476,7 +476,7 @@ label.over-apply {
 
 
 /****************************************************/
-/* Blocs sp�cifiques (sous-nav, sommaire, 404, etc) */
+/* Blocs specifiques (sous-nav, sommaire, 404, etc) */
 /****************************************************/
 
 /* Page 404 */
@@ -499,7 +499,7 @@ label.over-apply {
 	line-height: 1.5em;
 }
 
-/* Acc�s � l'espace priv� */
+/* Acces a l'espace prive */
 
 #accesPrive {
 	width: 445px;
@@ -652,7 +652,7 @@ label.over-apply {
 	font-weight: bold;
 }
 
-/* articles de la m�me rubrique */
+/* articles de la meme rubrique */
 
 #memeRubrique {
 	margin: 20px 0 0 0;
@@ -694,7 +694,7 @@ label.over-apply {
 	text-decoration: none;
 }
 
-/*listes imbriqu�es dans les articles de spip*/
+/*listes imbriquees dans les articles de spip*/
 
 .spip li { 
 	background: transparent url(images/pucearticle01.png) left .6em no-repeat;
@@ -851,3 +851,11 @@ text-decoration:none;
 }
 
 #contenu a {text-decoration : none;}
+
+/* elements a enlever de l'impression */
+.spip-admin-float, .formulaire_favori, #xiti-logo {display:none;}
+
+/* notes biblio */
+/* Par defaut non imprimees */
+#footnotes { display:none;}
+a img.biblio {display:none;}
