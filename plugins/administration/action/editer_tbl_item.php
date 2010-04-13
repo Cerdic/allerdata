@@ -37,18 +37,22 @@ function action_editer_tbl_item_dist() {
 // Appelle toutes les fonctions de modification d'un tbl_item
 // $err est de la forme '&trad_err=1'
 // http://doc.spip.org/@tbl_items_set
-function tbl_items_set($id_item) {
+function tbl_items_set($id_item, $set=null) {
 	$err = '';
 
-	$c = array();
-	foreach (array(
-		'id_type_item', 'nom', 'source', 'famille', 'autre_nom', 'nom_complet', 'chaine_alpha', 
-		'interrogeable', 'testable', 'code_test', 'iuis', 'masse', 'glyco',
-		'id_niveau_allergenicite', 'affichage_suggestion', 'representatif',
-		'ccd_possible', 'information', 'fonction_classification', 'nom_court', 'nom_anglosaxon',
-		'remarques', 'url'
-	) as $champ)
-		$c[$champ] = _request($champ);
+	if (!$set) {
+		$c = array();
+		foreach (array(
+			'id_type_item', 'nom', 'source', 'famille', 'autre_nom', 'nom_complet', 'chaine_alpha',
+			'interrogeable', 'testable', 'code_test', 'iuis', 'masse', 'glyco',
+			'id_niveau_allergenicite', 'affichage_suggestion', 'representatif',
+			'ccd_possible', 'information', 'fonction_classification', 'nom_court', 'nom_anglosaxon',
+			'remarques', 'url'
+		) as $champ)
+			$c[$champ] = _request($champ);
+	}
+	else
+		$c = $set;
 
 	include_spip('inc/modifier');
 	revision_tbl_item($id_item, $c);
@@ -58,7 +62,7 @@ function tbl_items_set($id_item) {
 	foreach (array(
 		'date_item', 'id_parent', 'statut'
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = _request($champ, $set);
 	$err .= instituer_tbl_item($id_item, $c);
 
 	// Un lien de trad a prendre en compte
@@ -67,7 +71,7 @@ function tbl_items_set($id_item) {
 	return $err;
 }
 
-function insert_tbl_item($id_type_item) {
+function insert_tbl_item($id_type_item, $id_item=null) {
 
 	$max_id = array('produit'=>9999,'allergene'=>19999,'source'=>29999,'famille_taxo'=>39999,1=>59999,'famille_mol'=>49999);
 	
@@ -77,7 +81,16 @@ function insert_tbl_item($id_type_item) {
 		'date_item' => 'NOW()',
 		'statut'=>'publie', // pour le moment
 	);
-	// trouver un id coherent !
+
+	// si un id_item est passe mais existe, echouer
+	if ($id_item AND sql_getfetsel('id_item', "tbl_items", 'id_item='.intval($id_item)))
+		return false;
+
+	// sinon isnerer avec l'id_item demande ou echouer
+	if ($id_item)
+		return sql_insertq("tbl_items", array_merge($set,array('id_item'=>$id_item)));
+
+	// sinon trouver un id coherent avec le type !
 	// recuperer la borne max fonction de id_type ou du type au sens large :
 	$max = 0;
 	include_spip('allerdata_fonctions');
