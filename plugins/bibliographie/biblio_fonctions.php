@@ -99,14 +99,20 @@ function extraire_biblios_notes($texte){
 				"\n<div class='footnote'><a name='note$n'></a>[<a href='#nlink$n' title='retour au texte'>$n</a>] - "
 				. "<a href='#' class='citation' onclick='jQuery(this).next().toggle(\"fast\");return false;'>".$refs[$id_biblio]['citation']."</a>"
 				. "<div class='abstract'>" . $refs[$id_biblio]['abstract'] . "</div>"
-				. " <a href='#nlink$n' title='retour au texte'>&#8617;</a></div>"
+				. " <a class='retour' href='#nlink$n' title='retour au texte'>&#8617;</a></div>"
 			;
 		}
 		$n++;
 	}
 
 
-	$notes = "<div id='footnotes'>" . $notes . "</div>";
+	if ($notes){
+		$notes = "<div id='footnotes'>" 
+		  . $notes
+		  . "<a class='imprimer_biblio' href='#' onclick='jQuery(\"h1.titArticle, #footnotes\").addClass(\"print\").jqprint();jQuery(\"h1.titArticle, #footnotes\").removeClass(\"print\");return false;'>"
+		  . _T('allerdata:imprimer_biblio') ."</a>"
+		  . "</div>";
+	}
 	return $texte . $notes;
 }
 ?>

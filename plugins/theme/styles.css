@@ -968,6 +968,7 @@ text-decoration:none;
 .footnote {padding:2px 0;}
 .footnote a.citation {}
 .footnote .abstract {font-size:0.9em;padding:5px;display:none;}
+#footnotes .imprimer_biblio {display:block;text-align: right;margin:1em 0;}
 
 #spip-debug {color:#000;}
 #spip-debug a {color:#303;}

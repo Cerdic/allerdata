@@ -50,6 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_minitexte_et_associer_famille' => 'Creer un mini-texte pour cette famille',
 'icone_creer_minitexte_et_associer_rc' => '+ creer un mini-texte',
 
+'imprimer_biblio' => 'Imprimer la bibliographie',
+
 // L
 'label_commentaires' => 'Commentaires sur la modification',
 'label_statut' => 'Statut',

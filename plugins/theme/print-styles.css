@@ -4,7 +4,7 @@ html, body {
 	color: black; 
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 	font-size: 12px;
-	text-align : center;
+	text-align : left;
 	width: 100%;
 	background:#fff;
 }
@@ -176,7 +176,7 @@ h2.spip {
 	padding: 30px 0 20px 0;
 }
 
-#main h1.titArticle, #main h2.titArticle {
+#main h1.titArticle, #main h2.titArticle, h1.titArticle.print {
 	font-size: 24px;
 	text-align: left;
 	color: #666567;
@@ -859,3 +859,11 @@ text-decoration:none;
 /* Par defaut non imprimees */
 #footnotes { display:none;}
 a img.biblio {display:none;}
+
+.print {margin-left:30px !important;margin-right:30px !important;}
+#footnotes.print {display:block;text-align:left;color:#444;}
+#footnotes.print a {color:#000;}
+#footnotes.print .footnote {border-top:1px solid #ddd;padding:0.7em 0;}
+#footnotes.print .abstract {margin-top:0.5em;font-size:90%;}
+#footnotes.print .footnote a.retour {display:none;}
+#footnotes.print .imprimer_biblio {display:none;}
