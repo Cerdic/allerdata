@@ -124,6 +124,7 @@
 				}
 				$del = sql_allfetsel("id_item", "tbl_items", "id_type_item=2 AND ".sql_in('id_item',$ids,"NOT"));
 				$del = array_map('reset',$del);
+				include_spip('inc/allerdata_arbo');
 				foreach ($del as $d){
 					echo "Suppression $d<br />";
 					$enfants = allerdata_les_enfants($d,'',true, true);
