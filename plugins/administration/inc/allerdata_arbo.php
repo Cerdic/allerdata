@@ -144,7 +144,7 @@ function allerdata_verifier_filiations($id_item){
 			$enfants = array_merge($enfants,allerdata_verifier_filiations($id_enfant));
 	}
 	// ajouter lui meme dans la liste des enfants indirect pour creer l'auto lien
-	$enfants = array_merge($enfants,array($id_item));
+	$enfants = array_unique(array_merge($enfants,array($id_item)));
 	// creer les liens manquants eventuels
 	allerdata_create_filiation($enfants, $id_item, false, false);
 	// completer avec les enfants directs
@@ -155,7 +155,8 @@ function allerdata_verifier_filiations($id_item){
 	// enlever les eventuels sur numeraires errones
 	allerdata_remove_filiation(array_diff($les_enfants,$enfants),$id_item,false);
 
-	#SELECT est_dans_id_item,count(est_dans_id_item) as total FROM `tbl_est_dans` WHERE id_item=163 group by est_dans_id_item having total>1
+	// securite eventuelle a implementer : supprimer les liens en double
+	#SELECT id_item,count(id_item) as total FROM `tbl_est_dans` WHERE est_dans_id_item=30218 group by id_item having total>1
 
 	// renvoyer tous les enfants indirects de cet item pour que le parent se les recuperes
 	return $enfants;
