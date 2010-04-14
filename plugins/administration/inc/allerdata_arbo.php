@@ -62,7 +62,7 @@ function allerdata_modifier_les_parents($id_item,$parents){
 	foreach ($remove as $id_parent)
 		allerdata_remove_filiation($id_item,$id_parent);
 	// ajouter les nouveaux
-	$add = array_diff($parents,$anciens);
+	$add = array_unique(array_diff($parents,$anciens));
 	foreach ($add as $id_parent)
 		allerdata_create_filiation($id_item,$id_parent);
 }
@@ -154,6 +154,8 @@ function allerdata_verifier_filiations($id_item){
 	$les_enfants = allerdata_les_enfants($id_item,'',false);
 	// enlever les eventuels sur numeraires errones
 	allerdata_remove_filiation(array_diff($les_enfants,$enfants),$id_item,false);
+
+	#SELECT est_dans_id_item,count(est_dans_id_item) as total FROM `tbl_est_dans` WHERE id_item=163 group by est_dans_id_item having total>1
 
 	// renvoyer tous les enfants indirects de cet item pour que le parent se les recuperes
 	return $enfants;

@@ -169,7 +169,7 @@
 					echo "Suppression $d<br />";
 					$enfants = allerdata_les_enfants($d,'',true, true);
 					foreach($enfants as $e) {
-						$p = allerdata_les_parents($e, 'source', true, true);
+						$p = allerdata_les_parents($e, '', true, true);
 						echo "$e>".implode(',',$p).' => ';
 						$p = array_diff($p,array($d));
 						echo "$e>".implode(',',$p) . '<br />';
