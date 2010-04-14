@@ -126,7 +126,14 @@
 				$del = array_map('reset',$del);
 				foreach ($del as $d){
 					echo "Suppression $d<br />";
-					sql_delete('tbl_est_dans', 'est_dans_id_item='.intval($d));
+					$enfants = allerdata_les_enfants($d,'',true, true);
+					foreach($enfants as $e) {
+						$p = allerdata_les_parents($e, '', true, true);
+						echo "$e>".implode(',',$p).' => ';
+						$p = array_diff($p,array($d));
+						echo "$e>".implode(',',$p) . '<br />';
+						tbl_items_set($e, array('id_parent'=>$p));
+					}
 					tbl_items_set($d, array('statut'=>'poubelle'));
 				}
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.2.0','non');
