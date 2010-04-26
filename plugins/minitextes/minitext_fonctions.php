@@ -54,11 +54,21 @@ function critere_tbl_minitextes_rc_dist($idb, &$boucles, $crit) {
 
 
 function minitext_find_rc($p1,$p2){
-	if ($id = sql_getfetsel("id_minitexte", "tbl_minitextes_items AS rc",
-					'(rc.id_item_1='.intval($p1).' AND rc.id_item_2='.intval($p2).
-					') OR ('.
-					'rc.id_item_1='.intval($p2).' AND rc.id_item_2='.intval($p1).')'))
-		return $id;
-	return '';
+	if ($row = sql_fetsel("M.id_minitexte,M.texte",
+						"tbl_minitextes AS M JOIN tbl_minitextes_items as L ON L.id_minitexte=M.id_minitexte",
+						"(L.id_item_1=".intval($p1)." AND L.id_item_2=".intval($p2).") OR (L.id_item_1=".intval($p2)." AND L.id_item_2=".intval($p1).")"))
+		return $row;
+
+	// chercher parmis les parents
+	include_spip('inc/allerdata_arbo');
+	$p1s = allerdata_les_parents($p1, "produit_et_categorie");
+	$p2s = allerdata_les_parents($p2, "produit_et_categorie");
+	if ($row= sql_fetsel("M.id_minitexte,M.texte",
+					"tbl_minitextes AS M JOIN tbl_minitextes_items as L ON L.id_minitexte=M.id_minitexte",
+					"(".sql_in('L.id_item_1',$p1s)." AND ".sql_in('L.id_item_2',$p2s)
+					.") OR (".sql_in('L.id_item_1',$p2s)." AND ".sql_in('L.id_item_2',$p1s).")"))
+		return $row;
+
+	return false;
 }
 ?>

@@ -120,6 +120,11 @@ LISTE_DES_RC = {
 					if (rc[i].mt) {
 						$('#liens_infos #infos_'+ id_s[i] + '-' + id_d[i]).addClass('hasMT');
 					}
+					else {
+						// retirer dans les deux sens car si on a qu'un demi lien il en restera une
+						$('#liens_infos #infos_'+ id_s[i] + '-' + id_d[i]).removeClass('hasMT');
+						$('#liens_infos #infos_'+ id_d[i] + '-' + id_s[i]).removeClass('hasMT');
+					}
       }
       	
 

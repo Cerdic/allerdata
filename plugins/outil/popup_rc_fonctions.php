@@ -158,11 +158,10 @@ function rc($p1,$p2,$type_etude) {
 }
 
 function get_minitexte($p1,$p2){
-	$texte = sql_getfetsel("texte",
-					"tbl_minitextes AS M JOIN tbl_minitextes_items as L ON L.id_minitexte=M.id_minitexte",
-					"(L.id_item_1=".intval($p1)." AND L.id_item_2=".intval($p2).") OR (L.id_item_1=".intval($p2)." AND L.id_item_2=".intval($p1).")");
-	if (!$texte) return "";
-	$texte = '<div class="blocContenuArticle minitexte">'.interdire_scripts(propre($texte)).'</div>';
+	if (!$row = minitext_find_rc($p1,$p2))
+		return "";
+
+	$texte = '<div class="blocContenuArticle minitexte">'.interdire_scripts(propre($row['texte'])).'</div>';
 	return $texte;
 }
 

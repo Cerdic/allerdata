@@ -106,8 +106,11 @@
   			if ($valeur == 1) $className = 'rc_toujours';
   			elseif ($valeur == 0) $className = 'rc_jamais';
   			else $className = 'rc_discordant';
-  			
-  			$liste_des_rc[] = array('source' => $origine, 'dest' => $destination, 'classe' => $className, 'mt'=>minitext_find_rc($origine,$destination));
+
+				$mt = "";
+				if ($row = minitext_find_rc($origine,$destination))
+					$mt = $row['id_minitexte'];
+  			$liste_des_rc[] = array('source' => $origine, 'dest' => $destination, 'classe' => $className, 'mt'=>$mt);
   		}
   	}
   	
