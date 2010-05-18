@@ -95,7 +95,7 @@ function minitext_modifier_les_parents($id_minitexte,$id_parent){
 		$sum = reset($c)+end($c);
 		sql_delete("tbl_minitextes_items",
 			"id_minitexte=".intval($id_minitexte).
-			" AND id_item_1+id_item_2=".intval($sum()).
+			" AND id_item_1+id_item_2=".intval($sum).
 			" AND ".sql_in('id_item_1',$c));
 	}
 

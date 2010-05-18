@@ -210,6 +210,28 @@ function instituer_tbl_item($id_item, $c) {
 	return ''; // pas d'erreur
 }
 
+
+/**
+ * Comparer 2 items qui peuvent etre des chaines, tableau, ou tableau de tableau
+ * @param <type> $i1
+ * @param <type> $i2
+ * @return bool
+ */
+function allerdata_compare($i1,$i2) {
+	$change = ($i1!=$i2);
+	if (is_array($i1) AND is_array($i2)) {
+		foreach ($i1 as $k=>$v)
+			if (is_array($i1[$k]))
+				$i1[$k] = implode(',',$i1[$k]);
+		foreach ($i2 as $k=>$v)
+			if (is_array($i2[$k]))
+				$i2[$k] = implode(',',$i2[$k]);
+		$change = count(array_diff($i1,$i2)) + count(array_diff($i2,$i1));
+	}
+	return $change;
+}
+
+
 /**
  * Versionner la mise a jour d'un item
  * en enregistrant dans tbl_items_versions les changements pour chaque champ
@@ -250,9 +272,7 @@ function allerdata_versionne_item($x){
 				$diff = array();
 				foreach ($row as $k=>$v) {
 					if (isset($x['data'][$k])) {
-						$change = $row[$k]!=$x['data'][$k];
-						if (is_array($row[$k]) AND is_array($x['data'][$k]))
-							$change = count(array_diff($row[$k],$x['data'][$k])) + count(array_diff($x['data'][$k],$row[$k]));
+						$change = allerdata_compare($row[$k],$x['data'][$k]);
 						if ($change)
 							$diff[$k] = array($row[$k],$x['data'][$k]);
 						else 
