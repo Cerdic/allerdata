@@ -218,7 +218,7 @@ body .x-dlg-mask {
 .x-panel-body .popup_aide .blocContenuArticle {text-align: left;}
 .x-panel-body #main h2 {text-align:center;padding:0 0 4px;}
 
-.x-panel-body table.spip {border: 1px solid silver;}
+.x-panel-body table.spip {border: 1px solid silver;max-width:95%;}
 .x-panel-body table.spip tr.row_first { background: #B1D3DE none repeat scroll 0% 50%; }
 .x-panel-body table.spip tr.row_odd { background: #EEE; }
 .x-panel-body table.spip tr.row_even { background: #DDD; }
