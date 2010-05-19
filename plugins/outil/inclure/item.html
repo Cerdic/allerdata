@@ -62,14 +62,14 @@
 				<BOUCLE_it5(tbl_items){id_item}{id_type_item=5}>
 					<B_sources>
 					<div class="blocContenuArticle source">
-					<h2>Organisme Source</h2>
+					<h2>Organisme Source&nbsp;:</h2>
 					<p style="text-align:center;"><i>
 					<BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{', '}{!isnull nom}{par nom}>#NOM</BOUCLE_sources>
 					</i></p>
 					</div>
 					<B_famille_taxo>
 					<div class="blocContenuArticle famille_taxo">
-					<h2><:allerdata:famille_taxo:></h2>
+					<h2><:allerdata:famille_taxo:>&nbsp;:</h2>
 					<p style="text-align:center;"><i>
 					<BOUCLE_famille_taxo(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{id_item!=#ID_ITEM}{', '}{!isnull nom}{par nom}>
 						<a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a>
