@@ -31,6 +31,9 @@
 </ul>
 [(#TOTAL_BOUCLE|>{1}|oui)
 <div class="actions">
+	[(#GRAND_TOTAL|>{20}|oui)
+		[&#91;(#BOUTON_ACTION{#VAL{allerdata:accepter_toutes_revisions}|_T{#ARRAY{total,#GRAND_TOTAL}},#URL_ACTION_AUTEUR{accepter_revision,tbl_items_versions-ALL:ALL,#SELF},ajax,#VAL{allerdata:accepter_ces_n_revisions_confirm}|_T{#ARRAY{total,#GRAND_TOTAL}}})&#93;]
+	]
 	[&#91;(#BOUTON_ACTION{#VAL{allerdata:accepter_ces_n_revisions}|_T{#ARRAY{total,#TOTAL_BOUCLE}},#URL_ACTION_AUTEUR{accepter_revision,tbl_items_versions#GET{tous},#SELF},ajax})&#93;]
 </div>
 ]

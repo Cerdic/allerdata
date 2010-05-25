@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'accepter_revision' => 'Lu',
 'accepter_toutes_revisions' => 'Tout Lu',
 'accepter_ces_n_revisions' => '@total@ modifications lues',
+'accepter_ces_n_revisions_confirm' => '&Ecirc;tes vous s&ucirc;r de vouloir accepter toutes ces @total@ modifications ?',
 
 // B
 'bouton_supprimer' => 'Supprimer',
