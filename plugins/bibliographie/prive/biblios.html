@@ -1,17 +1,21 @@
 <h1><:allerdata:bibliographie:></h1>
 [(#REM|biblio_trous)]
+#SET{noresults,'Aucun r&eacute;sultat'}
 
 [(#ENV{edit}|non)
-#FORMULAIRE_RECHERCHE{#SELF}
-[(#ENV{recherche}|ou{#ENV{id_bibliographie}}|oui)<a href='[(#SELF|parametre_url{recherche|id_bibliographie|id_groupes_patient|x|y,''})]'><:allerdata:annuler_recherche:></a>]
+	#FORMULAIRE_RECHERCHE{#SELF}
+	[(#ENV{recherche}|ou{#ENV{id_bibliographie}}|oui)<a href='[(#SELF|parametre_url{recherche|id_bibliographie|id_groupes_patient|x|y,''})]'><:allerdata:annuler_recherche:></a>]
 
-[<div class="bouton_creer">(#VAL{allerdata:icone_creer_biblio}|_T|icone_inline{#URL_ECRIRE{allerdata,page=biblios&edit=new},#CHEMIN{img_pack/bibliographie-24.png},'creer.gif','right'})</div>]
-<INCLURE{fond=prive/listes/biblios}{statut=#ARRAY{0,publie,1,prop}}{env}{ajax}>
+	[<div class="bouton_creer">(#VAL{allerdata:icone_creer_biblio}|_T|icone_inline{#URL_ECRIRE{allerdata,page=biblios&edit=new},#CHEMIN{img_pack/bibliographie-24.png},'creer.gif','right'})</div>]
+	[(#INCLURE{fond=prive/listes/biblios}{statut=#ARRAY{0,publie,1,prop}}{env}{ajax})#SET{noresults,''}]
 
-[<h1><:allerdata:bibliographie_poubelle:></h1>
-(#INCLURE{fond=prive/listes/biblios}{statut=poubelle}{env}{ajax})]
-<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+	[<h1><:allerdata:bibliographie_poubelle:></h1>
+	(#INCLURE{fond=prive/listes/biblios}{statut=poubelle}{env}{ajax})#SET{noresults,''}]
+	<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+	[(#ENV{recherche}|oui)
+	[<h3>(#GET{noresults})</h3>]
+	]
 ]
 [(#ENV{edit}|oui)
-[(#INCLURE{fond=prive/editer/biblio}{edit}{redirect=#SELF|parametre_url{edit,''}}{retour})]
+	[(#INCLURE{fond=prive/editer/biblio}{edit}{redirect=#SELF|parametre_url{edit,''}}{retour})]
 ]

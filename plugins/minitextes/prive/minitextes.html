@@ -1,17 +1,20 @@
 <h1><:allerdata:minitextes:></h1>
-
+#SET{noresults,'Aucun r&eacute;sultat'}
 [(#ENV{edit}|non)
-#FORMULAIRE_RECHERCHE{#SELF}
-[(#ENV{recherche}|ou{#ENV{id_item}}|oui)<a href='[(#SELF|parametre_url{recherche|id_minitexte|x|y,''})]'><:allerdata:annuler_recherche:></a>]
+	#FORMULAIRE_RECHERCHE{#SELF}
+	[(#ENV{recherche}|ou{#ENV{id_item}}|oui)<a href='[(#SELF|parametre_url{recherche|id_minitexte|x|y,''})]'><:allerdata:annuler_recherche:></a>]
 
-[<div class="bouton_creer">(#VAL{allerdata:icone_creer_minitexte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=minitextes&edit=new},#CHEMIN{img_pack/minitexte-24.png},'creer.gif','right'})</div>]
-<INCLURE{fond=prive/listes/minitextes}{statut=#ARRAY{0,publie,1,prop}}{env}{ajax}>
-[(#REM)<h1><:allerdata:minitextes_poubelle:></h1>
-(# INCLURE{fond=prive/listes/minitextes}{statut=poubelle}{env}{ajax})]
+	[<div class="bouton_creer">(#VAL{allerdata:icone_creer_minitexte}|_T|icone_inline{#URL_ECRIRE{allerdata,page=minitextes&edit=new},#CHEMIN{img_pack/minitexte-24.png},'creer.gif','right'})</div>]
+	[(#INCLURE{fond=prive/listes/minitextes}{statut=#ARRAY{0,publie,1,prop}}{env}{ajax})#SET{noresults,''}]
+	[(#REM)<h1><:allerdata:minitextes_poubelle:></h1>
+	(# INCLURE{fond=prive/listes/minitextes}{statut=poubelle}{env}{ajax})#SET{noresults,''}]
+	[(#ENV{recherche}|oui)
+	[<h3>(#GET{noresults})</h3>]
+	]
 
-<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
+	<script type='text/javascript' src='#CHEMIN{js/allerdata.repliable.js}'></script>
 
 ]
 [(#ENV{edit}|oui)
-[(#INCLURE{fond=prive/editer/minitexte}{edit}{parent=0}{redirect=#SELF|parametre_url{edit,''}}{retour})]
+	[(#INCLURE{fond=prive/editer/minitexte}{edit}{parent=0}{redirect=#SELF|parametre_url{edit,''}}{retour})]
 ]

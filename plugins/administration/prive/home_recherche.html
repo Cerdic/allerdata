@@ -15,7 +15,7 @@
 [<div id="resultsProduit" class="tabListe">(#INCLURE{fond=prive/listes/items}{type_item=produit}{env}{ajax})</div>#SET{noresults,''}]
 [<div id="resultsAllergene" class="tabListe">(#INCLURE{fond=prive/listes/items}{type_item=allergene}{env}{ajax})</div>#SET{noresults,''}]
 
-[<strong>(#GET{noresults})</strong>]
+[<h3>(#GET{noresults})</h3>]
 </div>
 <BOUCLE_test(CONDITION){si #GET{noresults}|non}>
 <script type='text/javascript' src='[(#CHEMIN{js/allerdata.repliable.js}|compacte)]'></script>
