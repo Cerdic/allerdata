@@ -74,6 +74,7 @@ LISTE_DES_RC = {
       $('.rc').removeClass('rc_jamais');
       $('.rc').removeClass('rc_discordant');
       $('#liens_infos div').hide();
+			$('#liens_infos .hasMT').removeClass('hasMT');
       
   	  var dejavus = new Array(),
   		  last = null, s = null, d = null,
@@ -120,11 +121,6 @@ LISTE_DES_RC = {
 					if (rc[i].mt) {
 						$('#liens_infos #infos_'+ id_s[i] + '-' + id_d[i]).addClass('hasMT');
 					}
-					else {
-						// retirer dans les deux sens car si on a qu'un demi lien il en restera une
-						$('#liens_infos #infos_'+ id_s[i] + '-' + id_d[i]).removeClass('hasMT');
-						$('#liens_infos #infos_'+ id_d[i] + '-' + id_s[i]).removeClass('hasMT');
-					}
       }
       	
 
@@ -137,7 +133,7 @@ LISTE_DES_RC = {
 			if (LISTE_DES_RC.nbErrorTry > 5) {
 				alert(ERROR_GOTDATA);
 			} else {
-				// On relance (jusqu'� 5 essais) -- utile lors de l'initialisation d'une page pr�remplie
+				// On relance (jusqu'a 5 essais) -- utile lors de l'initialisation d'une page pr�remplie
 				LISTE_DES_RC.nbErrorTry += 1;
 				LISTE_DES_RC.getData();
 			}
