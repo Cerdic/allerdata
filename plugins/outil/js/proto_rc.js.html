@@ -120,6 +120,7 @@ LISTE_DES_RC = {
           $('#liens_infos div#lien_'+ id_s[i] + '-' + id_d[i] + '_').show();
 					if (rc[i].mt) {
 						$('#liens_infos #infos_'+ id_s[i] + '-' + id_d[i]).addClass('hasMT');
+						$('#liens_infos #infos_'+ id_d[i] + '-' + id_s[i]).addClass('hasMT');
 					}
       }
       	
