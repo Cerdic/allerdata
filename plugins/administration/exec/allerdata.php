@@ -61,27 +61,7 @@ function exec_allerdata_dist(){
 	}
 
 	switch ($page){
-		case 'cfg':
-			if (!$class || !class_exists($class)) 
-				$class = 'cfg';
-			$cfg = cfg_charger_classe($class);
-			$config = & new $cfg(
-				($nom = 'paiement'),
-				$nom,
-				''
-				);
-			if ($message = lire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'])) {
-				include_spip('inc/meta');
-				effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
-				ecrire_metas();
-				$config->message = $message;
-			}
-			$config->traiter();
-			echo debut_cadre_trait_couleur('',true);
-			echo $config->formulaire();
-			echo fin_cadre_trait_couleur(true);
-			break;
-		default:			
+		default:
 			$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],'message'=>$message);
 			$get = $_GET;
 			if (preg_match(',^#[0-9]+$,',$get['recherche']) AND $id = intval(substr($get['recherche'],1))){
