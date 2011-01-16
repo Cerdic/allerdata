@@ -327,7 +327,7 @@ var ZONES_SAISIE = {
         $('.concerne-p1').removeClass('rc_jamais');
         $('.concerne-p1').removeClass('rc_discordant');
         $('#liens_infos .concerne-p1').hide();
-
+				this.lastQuery = '';
       }
     );
 
@@ -351,7 +351,8 @@ var ZONES_SAISIE = {
         $('.concerne-p2').removeClass('rc_jamais');
         $('.concerne-p2').removeClass('rc_discordant');
         $('#liens_infos .concerne-p2').hide();
-      }
+				this.lastQuery = '';
+			}
     );
 
     this.combo[3] = new Ext.ux.TwinComboBox({
@@ -368,6 +369,7 @@ var ZONES_SAISIE = {
         $('.concerne-p3').removeClass('rc_jamais');
         $('.concerne-p3').removeClass('rc_discordant');
         $('#liens_infos .concerne-p3').hide();
+				this.lastQuery = '';
       }
     );
 
@@ -385,6 +387,7 @@ var ZONES_SAISIE = {
         $('.concerne-p4').removeClass('rc_jamais');
         $('.concerne-p4').removeClass('rc_discordant');
         $('#liens_infos .concerne-p4').hide();
+				this.lastQuery = '';
       }
     );
 
@@ -402,6 +405,7 @@ var ZONES_SAISIE = {
         $('.concerne-p5').removeClass('rc_jamais');
         $('.concerne-p5').removeClass('rc_discordant');
         $('#liens_infos .concerne-p5').hide();
+				this.lastQuery = '';
       }
     );
 
