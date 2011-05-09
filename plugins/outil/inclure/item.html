@@ -52,7 +52,7 @@
 							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></td>
 							<td><i><BOUCLE_sources5(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5></i></td>
 							<td><BOUCLE_famille_taxo5(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par nom}{!isnull nom}{', '}><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></BOUCLE_famille_taxo5></td>
-							<td style="text-align:center;font-size:1.5em;">[(#GET{testable}|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+							<td style="text-align:center;font-size:1.5em;">[(#GET{testable}|oui)[(#CHEMIN{img/icon_accept.gif}|balise_img{<:ad:testable:>})]]</td>
 							</tr>
 							</BOUCLE_t5>
 						</tbody>
@@ -99,7 +99,7 @@
 						<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 						<td>[(#FONCTION_CLASSIFICATION|=={#NOM}|non)[(#NOM_COMPLET|sinon{#NOM})]]</td>
 						<td>#FONCTION_CLASSIFICATION</td>
-						<td style="text-align:center;font-size:1.5em;">[(#GLYCO|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+						<td style="text-align:center;font-size:1.5em;">[(#GLYCO|oui)[(#CHEMIN{img/icon_accept.gif}|balise_img{<:ad:glyco:>})]]</td>
 						</tr>
 						</BOUCLE_allergenes_testables>
 						</tbody>
@@ -124,8 +124,8 @@
 							<td>[(#FONCTION_CLASSIFICATION|=={#NOM}|non)#NOM]</td>
 							<td>#FONCTION_CLASSIFICATION</td>
 							<td style="text-align:right;">#MASSE</td>
-							<td style="text-align:center;font-size:1.5em;">[(#IUIS|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
-							<td style="text-align:center;font-size:1.5em;">[(#GLYCO|oui)<img src="#CHEMIN{img/icon_accept.gif}" />]</td>
+							<td style="text-align:center;font-size:1.5em;">[(#IUIS|oui)[(#CHEMIN{img/icon_accept.gif}|balise_img{<:ad:iuis:>})]]</td>
+							<td style="text-align:center;font-size:1.5em;">[(#GLYCO|oui)[(#CHEMIN{img/icon_accept.gif}|balise_img{<:ad:glyco:>})]]</td>
 							</tr>
 						</BOUCLE_allergenes>
 						</tbody>

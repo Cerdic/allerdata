@@ -3,15 +3,16 @@
 <?php if ($GLOBALS['auteur_session']) { ?>
 	
 				<div id="blocTitArticle">
-					<h1 class="titArticle" style="text-align:center"><:bibliographie:></h1>
+					<h1 class="titArticle" style="text-align:center"><:ad:bibliographie:></h1>
 				</div>
 				<div class="blocContenuArticle" style="margin:0; padding:0">
-					<p><strong><:citation:></strong>: [(#CITATION|sinon{NA})]</p>
-					<p><strong><:annee:></strong>: [(#ANNEE|sinon{NA})]</p>
+					<p><strong><:ad:citation:></strong>: [(#CITATION|sinon{NA})]</p>
+					<p><strong><:ad:annee:></strong>: [(#ANNEE|sinon{NA})]</p>
 				</div>
 
 <?php } else { ?>
-<INCLURE{fond=inclure/acces_reserve}{letitre=<:bibliographie:>}>
+[(#SET{letitre,<:ad:bibliographie:>})]
+<INCLURE{fond=inclure/acces_reserve,letitre=#GET{letitre}}>
 <?php } ?>
 </div>
 </BOUCLE_Biblio>

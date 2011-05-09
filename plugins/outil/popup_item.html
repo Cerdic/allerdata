@@ -6,7 +6,7 @@
 				[(#INCLURE{fond=inclure/item}{id_item})]
 
 <?php } else { ?>
-[(#SET{letitre,[<:name:>: (#NOM|sinon{NA})]})]
+[(#SET{letitre,[<:ad:name:>: (#NOM|sinon{NA})]})]
 <INCLURE{fond=inclure/acces_reserve,letitre=#GET{letitre}}>
 <?php } ?>
 </div>

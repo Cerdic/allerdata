@@ -3,7 +3,8 @@
 <?php if ($GLOBALS['auteur_session']) { ?>
 [(#ENV{p1}|rc{#ENV{p2},#ENV{etude}})]
 <?php } else { ?>
-<div id="main">	
-<INCLURE{fond=inclure/acces_reserve}{letitre=<:reactivites_croisees:>}>
+<div id="main">
+[(#SET{letitre,<:ad:reactivites_croisees:>})]
+<INCLURE{fond=inclure/acces_reserve}{letitre=#GET{letitre}}>
 </div>
 <?php } ?>

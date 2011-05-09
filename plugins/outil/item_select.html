@@ -1,5 +1,5 @@
 <B_Items>
 <select name="s#ENV{option}" id="s#ENV{option}">
-	<option value=""><:choisissez:></option><BOUCLE_Items(tbl_items){par nom}{nom!=}{interrogeable=1}><option value="#ID_ITEM"[(#ENV{s}|=={#ID_ITEM}|?{' '})selected="selected"]>#NOM</option></BOUCLE_Items>
+	<option value=""><:ad:choisissez:></option><BOUCLE_Items(tbl_items){par nom}{nom!=}{interrogeable=1}><option value="#ID_ITEM"[(#ENV{s}|=={#ID_ITEM}|?{' '})selected="selected"]>#NOM</option></BOUCLE_Items>
 </select>
 </B_Items>
