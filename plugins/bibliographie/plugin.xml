@@ -43,7 +43,7 @@ _ &#169; 2008 - Licence GPL
 	</pipeline>
 	<bouton id='biblio' parent='allerdata'>
 		<titre>allerdata:bibliographie</titre>
-		<icone>img_pack/bibliographie-24.png</icone>
+		<icone>img_pack/bibliographie-16.png</icone>
 		<url>allerdata</url>
 		<args>page=biblios</args>
 	</bouton>

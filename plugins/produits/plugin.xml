@@ -17,7 +17,7 @@ _ &#169; 2008 - Licence GPL
 	</pipeline>
 	<bouton id='produits' parent='allerdata'>
 		<titre>allerdata:produits</titre>
-		<icone>img_pack/produit-24.png</icone>
+		<icone>img_pack/produit-16.png</icone>
 		<url>allerdata</url>
 		<args>page=produits</args>
 	</bouton>

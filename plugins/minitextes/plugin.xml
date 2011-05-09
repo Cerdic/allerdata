@@ -39,7 +39,7 @@ _ &#169; 2008 - Licence GPL
 	</pipeline>
 	<bouton id='minitext' parent='allerdata'>
 		<titre>allerdata:minitextes</titre>
-		<icone>img_pack/minitexte-24.png</icone>
+		<icone>img_pack/minitexte-16.png</icone>
 		<url>allerdata</url>
 		<args>page=minitextes</args>
 	</bouton>

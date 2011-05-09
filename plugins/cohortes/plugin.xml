@@ -35,7 +35,7 @@ _ &#169; 2008 - Licence GPL
 	</pipeline>
 	<bouton id='cohorte' parent='allerdata'>
 		<titre>allerdata:cohortes</titre>
-		<icone>img_pack/cohorte-24.png</icone>
+		<icone>img_pack/cohorte-16.png</icone>
 		<url>allerdata</url>
 		<args>page=cohortes</args>
 	</bouton>

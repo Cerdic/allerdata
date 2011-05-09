@@ -16,12 +16,18 @@ _ &#169; 2008 - Licence GPL
 	<install>base/allerdata_upgrade.php</install>
 	<bouton id='allerdata'>
 		<titre>Allerdata</titre>
-		<icone>img_pack/allerdata-48.gif</icone>
+		<icone>img_pack/allerdata-48.png</icone>
+		<url>navigation</url>
+		<args>menu=allerdata</args>
+	</bouton>
+	<bouton id='allerdataboard' parent='allerdata'>
+		<titre>Allerdata</titre>
+		<icone>img_pack/allerdata-16.png</icone>
 		<url>allerdata</url>
 	</bouton>
 	<bouton id='comptes' parent='allerdata'>
 		<titre>allerdata:comptes</titre>
-		<icone>img_pack/compte-24.gif</icone>
+		<icone>img_pack/compte-16.png</icone>
 		<url>allerdata</url>
 		<args>page=comptes</args>
 	</bouton>
@@ -62,4 +68,5 @@ _ &#169; 2008 - Licence GPL
 		<nom>afficher_contenu_objet</nom>
 		<inclure>allerdata_pipelines.php</inclure>
 	</pipeline>
+	<utilise id='bando' />
 </plugin>

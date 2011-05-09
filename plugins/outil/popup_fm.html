@@ -85,7 +85,8 @@
 				</B_LienArticle>
 
 <?php } else { ?>
-<INCLURE{fond=inclure/acces_reserve}{letitre=<:name:>: [(#NOM|sinon{NA})]}>
+[(#SET{letitre,[<:name:>: (#NOM|sinon{NA})]})]
+<INCLURE{fond=inclure/acces_reserve,letitre=#GET{letitre}}>
 <?php } ?>
 
 </div>

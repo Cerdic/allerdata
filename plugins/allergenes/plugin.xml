@@ -17,7 +17,7 @@ _ &#169; 2008 - Licence GPL
 	</pipeline>
 	<bouton id='allergenes' parent='allerdata'>
 		<titre>allerdata:allergenes</titre>
-		<icone>img_pack/allergene-24.png</icone>
+		<icone>img_pack/allergene-16.png</icone>
 		<url>allerdata</url>
 		<args>page=allergenes</args>
 	</bouton>
