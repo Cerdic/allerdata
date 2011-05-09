@@ -1,6 +1,6 @@
 <?php
 # les webmestres
-define('_ID_WEBMESTRES', '1:2');
+#define('_ID_WEBMESTRES', '1:2');
 
 $GLOBALS['ligne_horizontale'] = "\n<div class='hrspip'><hr /></div>\n";
 
