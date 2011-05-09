@@ -1,4 +1,4 @@
-#SET{noresults,'Aucun r&eacute;sultat'}
+[(#SET{noresults,<:allerdata:aucun_resultat:>})]
 <B_items><h2>#GRAND_TOTAL [ (#VAL{allerdata:}|concat{#ENV{type_item},s}|_T) ]</h2>
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_item,''},recherche})</p>]
 <p class='pagination tri'>[(#TRI{<,#CHEMIN{img_pack/tri_asc-16.png}|tag_img}) | ][(#TRI{>,#CHEMIN{img_pack/tri_desc-16.png}|tag_img}) | ]
@@ -20,7 +20,7 @@
 </B_items>[
 (#ENV{id_item}|oui)
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id_item,recherche}|unique)</p>]
-]#SET{noresults,'Aucun r&eacute;sultat'}<//B_items>
+][(#SET{noresults,<:allerdata:aucun_resultat:>})]<//B_items>
 <B_items_poubelle><h2>#GRAND_TOTAL [ (#VAL{allerdata:}|concat{#ENV{type_item},s}|_T) ]<:allerdata:a_la_poubelle:></h2>
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id_item,recherche}|unique)</p>]
 [<p class='pagination'>(#PAGINATION)</p>]

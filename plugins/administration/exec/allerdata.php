@@ -20,7 +20,7 @@ function exec_allerdata_dist(){
 	$page = _request('page');
 	echo $commencer_page("&laquo; $titre &raquo;", "allerdata", "allerdata $page","");
 	if (!autoriser('administrer','allerdata')) {
-		echo _T('acces_interdit');
+		echo _T('info_acces_interdit');
 		echo fin_page();
 		exit();
 	}
@@ -30,8 +30,8 @@ function exec_allerdata_dist(){
 	echo debut_gauche('allerdata',true);
 	include_spip('inc/allerdata');
 	$barre = array(
-		array('titre'=>_L('Allerdata'),'page'=>'allerdata','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/allerdata-64.gif"),
-		array('titre'=>_L("Comptes"),'page'=>'comptes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/compte-64.gif",'url'=>generer_url_ecrire('allerdata','page=comptes'))
+		array('titre'=>_T('allerdata:allerdata'),'page'=>'allerdata','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/allerdata-64.gif"),
+		array('titre'=>_T("allerdata:comptes"),'page'=>'comptes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/compte-64.gif",'url'=>generer_url_ecrire('allerdata','page=comptes'))
 		);
 	if (defined('_DIR_PLUGIN_BIBLIO'))
 		$barre[] = array('titre'=>_T("allerdata:bibliographie"),'page'=>'biblios','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/bibliographie-64.png",'url'=>generer_url_ecrire('allerdata','page=biblios'));
@@ -50,7 +50,6 @@ function exec_allerdata_dist(){
 		$barre[] = array('titre'=>_T("allerdata:allergenes"),'page'=>'allergenes','icone'=>_DIR_PLUGIN_ALLERDATA."img_pack/allergene-64.png",'url'=>generer_url_ecrire('allerdata','page=allergenes'));
 	if (defined('_DIR_PLUGIN_MINITEXT'))
 		$barre[] = array('titre'=>_T("allerdata:minitextes"),'page'=>'minitextes','icone'=>_DIR_PLUGIN_MINITEXT."img_pack/minitexte-64.png",'url'=>generer_url_ecrire('allerdata','page=minitextes'));
-	//array('titre'=>_L("Configuration"),'page'=>'cfg','icone'=>_DIR_PLUGIN_BOUTIQUE."img_pack/config-64.png",'url'=>generer_url_ecrire('allerdata','page=cfg')),
 	echo allerdata_barre_nav_gauche($page,$barre);
 
 	echo debut_droite('allerdata',true);

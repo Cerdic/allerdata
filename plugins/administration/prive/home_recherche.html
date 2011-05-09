@@ -7,7 +7,7 @@
 ]
 <a href='[(#SELF|parametre_url{recherche|id_item|x|y,''})]'><:allerdata:annuler_recherche:></a>
 <div id="listes" class="ui-tabs">
-#SET{noresults,'Aucun r&eacute;sultat'}
+[(#SET{noresults,<:allerdata:aucun_resultat:>})]
 
 [<div id="resultsTaxo" class="tabListe">(#INCLURE{fond=prive/listes/items}{type_item=famille_taxo}{env}{ajax})</div>#SET{noresults,''}]
 [<div id="resultsMol" class="tabListe">(#INCLURE{fond=prive/listes/items}{type_item=famille_mol}{env}{ajax})</div>#SET{noresults,''}]

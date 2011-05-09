@@ -7,7 +7,7 @@
 			<option value="#ID_ITEM">#NOM<span> (##ID_ITEM)</span>[(#ID_TYPE_ITEM|in_array{#ENV{type_att}}|oui)&#91;En attente&#93;]</option>
 		</BOUCLE_items_attente>
 	</select>
-	<button onclick="jQuery(this).siblings('select').pick_selected('#ENV{name}');return false;">Selectionner</button>
+	<button onclick="jQuery(this).siblings('select').pick_selected('#ENV{name}');return false;"><:allerdate:selectionner:></button>
 	<script type="text/javascript">
 		jQuery("select[name=selector-#ENV{name}]").keydown(function(event){
 				if (event.keyCode == 32) {

@@ -17,7 +17,7 @@ function action_editer_tbl_item_dist() {
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_item = intval($arg)) {
 		$id_item = insert_tbl_item(_request('id_type_item'));
-		if (!$id_item) return array(0,_L('impossible d\'ajouter un item'));
+		if (!$id_item) return array(0,_T('allerdata:erreur_insert_item'));
 	}
 
 	// Enregistre l'envoi dans la BD

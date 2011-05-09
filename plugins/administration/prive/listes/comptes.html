@@ -1,6 +1,6 @@
 [(#FORMULAIRE_RECHERCHE{#SELF})]
 <B_visiteurs>
-#GRAND_TOTAL utilisateurs inscrits &agrave; Allerdata
+[(#GRAND_TOTAL|singulier_ou_pluriel{label_1_utilisateur_allerdata,label_nb_utilisateurs_allerdata})]
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
 <BOUCLE_visiteurs(AUTEURS){tout}{id_zone=2}{pagination 20}{par nom}{recherche?}>

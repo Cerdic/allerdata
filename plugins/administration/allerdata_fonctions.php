@@ -239,7 +239,6 @@ function allerdata_puce_statut($statut){
 	$res .=
 	  "<ul id='instituer_article-$id_article' class='instituer_article instituer'>" 
 	  . "<li>" 
-	  //. _T('allerdata:texte_item_statut')
 	  ."<ul>";
 	
 	foreach($etats as $affiche => $s){

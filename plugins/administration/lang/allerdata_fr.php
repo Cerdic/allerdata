@@ -4,6 +4,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
+'allerdata' => 'Allerdata',
 'allergenes' => 'Allerg&egrave;nes',
 'ajouter_est_dans' => 'Modifier',
 'annuler_recherche'=> 'Annuler la recherche',
@@ -11,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'accepter_toutes_revisions' => 'Tout Lu',
 'accepter_ces_n_revisions' => '@total@ modifications lues',
 'accepter_ces_n_revisions_confirm' => '&Ecirc;tes vous s&ucirc;r de vouloir accepter toutes ces @total@ modifications ?',
+'a_la_poubelle' => 'A la poubelle',
+'aucune_revision' => 'Aucune modification',
+'aucun_resultat' => 'Aucun r&eacute;sultat',
 
 // B
 'bouton_supprimer' => 'Supprimer',
@@ -24,10 +28,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cohorte_interdit_instituer' => 'Ce groupe de patient est associ&eacute; a des RC et ne peut &ecirc;tre depubli&eacute;',
 'ce_produit_associe_au_minitexte' => 'Ce produit est associ&eacute; au mini-texte :',
 'cette_famille_associee_au_minitexte' => 'Cette famille est associ&eacute;e au mini-texte :',
+'comptes' => 'Comptes',
+
+// D
+'dernieres_revisions_a_relire' => 'Derni&egrave;res modifications &agrave; relire',
 
 // E
 'un_enfant' => '1 descendant',
 'enfants' => '@nb@ descendants',
+'erreur_insert_item' => 'Impossible d\'ajouter un item',
 
 // F
 'famille_taxo' => 'Famille Taxonomique',
@@ -54,8 +63,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'imprimer_biblio' => 'Imprimer la bibliographie',
 
 // L
+'label_1_utilisateur_allerdata' => '1 utilisateur inscrits &agrave; Allerdata',
+'label_abbr_biblios' => 'Biblios',
+'label_abbr_cohortes' => 'Groupes',
+'label_abbr_items' => 'Items',
+'label_abbr_rc' => 'RC',
 'label_commentaires' => 'Commentaires sur la modification',
+'label_nb_utilisateurs_allerdata' => '@nb@ utilisateurs inscrits &agrave; Allerdata',
 'label_statut' => 'Statut',
+'label_creer_comptes_email' => 'Creer les comptes visiteurs pour les emails&nbsp;:',
+
 
 'minitexte' => 'Mini-texte',
 'minitextes' => 'Mini-textes',
@@ -69,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'produits_nb' => '@nb@ produits',
 
 // S
+'selectionner' => 'Selectionner',
 'sources' => 'Organismes Sources',
 'sans_nom_francais' => 'Nom fran&ccedil;ais manquant',
 
@@ -84,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_cadre_ajouter_produit' => 'Ajouter un produit',
 'titre_cadre_modifier_allergene' => 'Modifier l\'allerg&egrave;ne',
 'titre_cadre_ajouter_allergene' => 'Ajouter un allerg&egrave;ne',
+'titre_admin_allerdata' => 'Administration d\'Allerdata',
 
 // V
 'version' => 'Version',

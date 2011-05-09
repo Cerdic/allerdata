@@ -1,6 +1,6 @@
-<h2>Derni&egrave;res modifications &agrave; relire</h2>
+<h2><:allerdata:dernieres_revisions_a_relire:></h2>
 <div id="listes" class="ui-tabs">
-#SET{nomodif,'Aucune modification'}
+[(#SET{nomodif,<:allerdata:aucune_revision:>})]
 
 [<div id="modifItems" class="tabListe">(#INCLURE{fond=prive/listes/revisions_alire_items}{env}{ajax})</div>
 #SET{nomodif,''}]
