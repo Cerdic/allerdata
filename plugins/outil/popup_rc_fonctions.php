@@ -57,18 +57,18 @@ function rc($p1,$p2,$type_etude) {
   switch ($type_etude) {
     case 'pp' :
       $query .= "AND (tbl_items.id_type_item IN (5,3,13)) AND (tbl_items_1.id_type_item IN (5,3,13))";
-      $title = "&Eacute;tudes Produits - Produits";
+      $title = _T("ad:titre_onglet_etudes_produits_produits");
     break;
     case 'pa' :
       $query .= "AND (
                   ((tbl_items.id_type_item IN (5,3,13)) AND (tbl_items_1.id_type_item NOT IN (5,3,13)))
                   OR ((tbl_items.id_type_item NOT IN (5,3,13)) AND (tbl_items_1.id_type_item IN (5,3,13)))
                 )";
-      $title = "&Eacute;tudes Produits - Allerg&egrave;nes";
+      $title = _T("ad:titre_onglet_etudes_produits_allergenes");
     break;
     case 'aa' :
       $query .= "AND (tbl_items.id_type_item NOT IN (5,3,13)) AND (tbl_items_1.id_type_item NOT IN (5,3,13))";
-      $title = "&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes";
+      $title = _T("ad:titre_onglet_etudes_allergenes_allergenes");
     break;
   }
 
@@ -108,7 +108,17 @@ function rc($p1,$p2,$type_etude) {
 							  AND tbl_reactions_croisees.statut='publie'";
 							
 			$resbiblio = spip_query($querybiblio);
-			
+
+			$label_pays = _T('ad:label_pays');//Pays
+			$label_nb_sujets = _T('ad:label_nb_sujets');//Nb sujets
+			$label_test_individuels = _T('ad:label_test_individuels');//S&eacute;rums test&eacute;s individuellement
+			$label_test_quantitatif = _T('ad:label_test_quantitatif');//Test quantitatif
+			$label_produit1 = _T('ad:label_produit1');//Produit1
+			$label_rc1v2 = _T('ad:label_rc1v2');//RC 1-&gt; 2
+			$label_rc2v1 = _T('ad:label_rc2v1');//RC 2-&gt; 1
+			$label_produit2 = _T('ad:label_produit2');//Produit2
+			$label_remarques = _T('ad:label_remarques');//Remarques
+
 			while ($rowbiblio = sql_fetch($resbiblio)){
 				$linkbiblio = '<a href="#biblio'.$row['id_reactions_croisee'].'">';
 				if (!$premiere_ligne) $biblio .= '<tr><td colspan="5">&nbsp;</td></tr>';
@@ -118,10 +128,19 @@ function rc($p1,$p2,$type_etude) {
 				."<a onclick=\"jQuery(this).next().toggle('fast');return false;\">".$rowbiblio['citation']."</a>"
 				."<div style='display:none;padding:5px;font-size:0.9em;'>".$rowbiblio['abstract']."</div>"
 				. '</td></tr>
-								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Pays</b>: '.$rowbiblio['pays'].'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
-								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Nb sujets</b>: '.$rowbiblio['nb_sujets'].'</td><td colspan="2" rowspan="1"><b>S&eacute;rums test&eacute;s individuellement</b>: '.(($rowbiblio['pool']==1)?'Non':'Oui').'</td><td colspan="2" rowspan="1"><b>Test quantitatif</b>: '.(($rowbiblio['qualitatif']==1)?'Non':'Oui').'</td></tr>
-								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td><b>Produit1</b></td><td><b>RC 1-&gt; 2</b></td><td><b>RC 2-&gt;1</b></td><td><b>Produit2</b></td><td><b>Remarques</b></td></tr>
-								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_rc_sens1'].'</td><td>'.$rowbiblio['niveau_rc_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
+				           .'><td><b>'.$label_pays.'</b>: '.$rowbiblio['pays']
+				           .'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
+				           .'><td><b>'.$label_nb_sujets.'</b>: '.$rowbiblio['nb_sujets']
+				           .'</td><td colspan="2" rowspan="1"><b>'.$label_test_individuels.'</b>: '.(($rowbiblio['pool']==1)?'Non':'Oui')
+				           .'</td><td colspan="2" rowspan="1"><b>'.$label_test_quantitatif.'</b>: '.(($rowbiblio['qualitatif']==1)?'Non':'Oui').'</td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
+				           .'><td><b>'.$label_produit1.'</b></td><td><b>'.$label_rc1v2
+				           .'</b></td><td><b>'.$label_rc2v1.'</b></td><td><b>'.$label_produit2.'</b></td><td><b>'.$label_remarques.'</b></td></tr>
+								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
+				           .'><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_rc_sens1'].'</td><td>'
+				           .$rowbiblio['niveau_rc_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
 								';
 			}
 			
@@ -149,7 +168,9 @@ function rc($p1,$p2,$type_etude) {
 		$result = '<div class="blocContenuArticle"><a name="top_'.$type_etude.'" id="top_'.$type_etude.'"></a><h1 class="titArticle">'._T('ad:titre_synthese_popup_rc').'</h1>'
 		  .get_minitexte($p1,$p2)
 		  .'<table class="spip" width="95%"><thead><tr class="row_first"><th style="width:50px;">Biblio</th><th style="width:285px" colspan="2">'.produit($p1).'</th><th style="width:325px" colspan="2">'.produit($p2).'</th></tr></thead><tbody>'.$result.'</tbody></table></div>';
-		if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:titre_bibliographies_popup_rc').'</h2><table summary="D&eacute;tails des donn&eacute;es bibiliographiques" class="bibliographie spip"><tbody>'.$biblio.'</tbody></table><br class="nettoyeur"/></div>';
+		if ($biblio) $result .= '<div class="blocContenuArticle"><h2 class="titArticle">'._T('ad:titre_bibliographies_popup_rc')
+		                        .'</h2><table summary="'._T('ad:titre_detail_biblio').'" class="bibliographie spip"><tbody>'
+		                        .$biblio.'</tbody></table><br class="nettoyeur"/></div>';
   } else
 		$result = "<h1 class='titArticle'>"._T('ad:aucune_etude_de_ce_type')."</h1>"
 			.get_minitexte($p1,$p2);

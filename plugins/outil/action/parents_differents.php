@@ -6,7 +6,7 @@
  */
 
 function action_parents_differents(){
-
+die();
 	set_time_limit(0);
 	
 	$query_liste_produits = "SELECT tbl_reactions_croisees.id_reactions_croisee, tbl_reactions_croisees.id_produit1, tbl_reactions_croisees.id_produit2 FROM tbl_reactions_croisees WHERE statut='publie' ORDER By tbl_reactions_croisees.id_produit1";

@@ -5,7 +5,7 @@
 <script>
 var dsp_popup = function() {
   var link = 'spip.php?page=popup_ccd&p=#ENV{p}';
-  main_panel.updateTab('tab1','D&eacute;tails', link);
+  main_panel.updateTab('tab1','<:ad:label_details|ucfirst|texte_script:>', link);
   dialog_avec_tab.setTitle('CCD');
   dialog_avec_tab.show(Ext.get('infos_ccd'));
 }

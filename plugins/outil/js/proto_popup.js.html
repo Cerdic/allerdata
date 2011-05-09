@@ -1,4 +1,5 @@
 #HTTP_HEADER{'Content-Type: application/x-javascript'}
+[(#REM)<script>//]
 /* --------------------------------------------- POPUP -------------------------------------------- */
 /* ux.IFrameComponent : link. http://extjs.com/forum/showthread.php?p=54322 */
 /* ux.ManagedIframe : link. http://extjs.com/forum/showthread.php?t=16590 */
@@ -8,7 +9,7 @@ var dialog_avec_tab, main_panel;
 Ext.onReady(function() {
 
   main_panel = new Ext.TabPanel({
-    title: 'R&eacute;activit&eacute;s crois&eacute;es',
+    title: '<:ad:titre_reactivites|texte_script:>',
     autoScroll: true,
     activeTab: 0,
     plugins: new Ext.ux.TabCloseMenu(),
@@ -17,7 +18,7 @@ Ext.onReady(function() {
 		items: [{ 
 	 	      id: 'tab1', 
 	 	      border: false, 
-	 	      title: 'd&eacute;tails',
+	 	      title: '<:ad:label_details|texte_script:>',
 	 	      closable: false, 
 	 	      autoScroll: true 
 	 	}],

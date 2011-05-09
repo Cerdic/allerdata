@@ -5,11 +5,12 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accueil' => 'Accueil',
 	'accueil_ad' => 'Accueil Allerdata',
-	'allergenicite' => "Allergenicit&eacute;",
+	'allergenicite' => "Allergenicité",
 	'annee' => 'année',
 	'assistant_moleculaire' => "Outil",
-	'aucun_resultat' => "Aucun r&eacute;sultat",
-	'ajoute_le' => 'Ajout&eacute; le',
+	'aucun_resultat' => "Aucun résultat",
+	'ajoute_le' => 'Ajouté le',
+	'acces_reserve' => 'Accès réservé',
 
 	'articlesconnexes' => 'Articles connexes',
 	'acces_reserve_abonnes' => '<br />Page à accès réservé aux abonnés',
@@ -24,6 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'choisissez' => 'Choisissez',
 	'citation' => 'Citation',
+
+	'en_savoir_plus' => 'En savoir plus',
 
 	// G
 	'get_url' => "Obtenir l'adresse de cette page",
@@ -64,6 +67,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'loading' => 'Chargement en cours..',
 	'liste_items' => 'Liste des Items',
+	'lien_logout' => 'Se déconnecter',
+	'lien_login' => 'Se connecter',
+	'lire_la_suite' => 'Lire la suite',
+	'lire_la_suite_edito' => 'Edito, Lire la suite',
+	'label_les_allergenes_de' => 'Les allergènes de @nom@',
+	'label_les_allergenes_testables_de' => 'Les allergènes testables in vitreo de @nom@',
+	'label_produit' => 'Produit',
+	'label_organisme_source' => 'Organisme Source',
+	'label_nom' => 'Nom',
+	'label_famille_taxo' => 'Famille taxonomique',
+	'label_famille_mol' => 'Famille mol&eacute;culaire',
+	'label_testable' => 'Testable',
+	'label_details' => 'd&eacute;tails',
+
+	'ad:label_pays' => 'Pays',
+	'ad:label_nb_sujets' => 'Nb sujets',
+	'ad:label_test_individuels' => 'S&eacute;rums test&eacute;s individuellement',
+	'ad:label_test_quantitatif' => 'Test quantitatif',
+	'ad:label_produit1' => 'Produit1',
+	'ad:label_rc1v2' => 'RC 1-&gt; 2',
+	'ad:label_rc2v1' => 'RC 2-&gt; 1',
+	'ad:label_produit2' => 'Produit2',
+	'ad:label_remarques' => 'Remarques',
 	
 	// M
 	'memerubrique' => 'Dans la même rubrique',
@@ -75,12 +101,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 	// R
-	'reactivites_croisees' => "R&eacute;activit&eacute; crois&eacute;e",
+	'reactivites_croisees' => "Réactivité croisée",
+	'retour_accueil' => 'Retour à l\'accueil',
+
 
 	// T
 	'titre_bibliographies_popup_rc' => 'Méthodes et résultats',
 	'titre_synthese_popup_rc' => 'Synthèse des résultats',
 	'testable' => "Testable in vitro",
+	'titre_organisme_source' => 'Organisme Source&nbsp;:',
+	'titre_famille_taxo' => 'Famille taxonomique&nbsp;:',
+	'titre_ce_groupe_contient_des_produits' => 'Ce groupe générique contient les produits',
+	'titre_famille_taxo_contient_produits' => 'Exemples de produits issus d’organismes appartenant &agrave; cette famille',
+	'titre_famille_mol_contient_allergenes' => 'Cette famille mol&eacute;culaire contient les allerg&egrave;nes suivants',
+	'titre_allergenes_testables' => 'Allergènes testables in vitro',
+	'titre_allergenes_contenus' => 'Allergènes contenus dans ce produit',
+	'titre_onglet_etudes_produits_allergenes' => '&Eacute;tudes Produits - Allerg&egrave;nes',
+	'titre_onglet_etudes_allergenes_allergenes' => '&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes',
+	'titre_onglet_etudes_produits_produits' => '&Eacute;tudes Produits - Produits',
+	'titre_detail_reactivites' => 'D&eacute;tail des r&eacute;activit&eacute;s crois&eacute;es',
+	'titre_reactivites' => 'R&eacute;activit&eacute;s crois&eacute;es',
+	'titre_detail_biblio' => 'D&eacute;tails des donn&eacute;es bibiliographiques',
+
 
 	// W
 	'work_liste_items_interrogeables' => 'La liste des items interrogeables',

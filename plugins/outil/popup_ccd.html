@@ -6,12 +6,6 @@
 <div>#TEXTE</div>
 </BOUCLE_ArticleCCD>
 
-[(#REM) Suppression a la demande de #151
-la fonction ccd etait definie dans le fichier _fonctions associe au skel
-[<h2>Origine des CCD</h2>
-<ul>(#ENV{p}|ccd)</ul>]
-]
-
 <?php } else { ?>
 [(#SET{letitre,[<:ad:name:>: (#NOM|sinon{NA})]})]
 <INCLURE{fond=inclure/acces_reserve,letitre=#GET{letitre}}>

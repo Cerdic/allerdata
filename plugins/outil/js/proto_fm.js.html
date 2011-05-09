@@ -90,8 +90,8 @@ var LISTE_DES_FAMILLES = {
   // Infos d'une FM
   popup_fm : function(id_fm) {
     var link = 'spip.php?page=popup_fm&id_fm=' + id_fm;
-	  main_panel.updateTab('tab1','D&eacute;tails', link);
-	  dialog_avec_tab.setTitle('Famille mol&eacute;culaire');
+	  main_panel.updateTab('tab1','<:ad:label_details|ucfirst|texte_script:>', link);
+	  dialog_avec_tab.setTitle('<:ad:label_famille_mol|ucfirst|texte_script:>');
 	  dialog_avec_tab.show(Ext.get('info_fm_' + id_fm));
 		return false;
   },

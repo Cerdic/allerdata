@@ -5,6 +5,7 @@
  *
  */
 function action_descendants_en_direct() {
+die();
 	spip_query("alter table `tbl_est_dans` add index `couple` (`id_item`, `est_dans_id_item`)");
 	spip_query("alter table `tbl_est_dans` add index `id_item` (`id_item`)");
 	spip_query("alter table `tbl_est_dans` add index `est_dans_id_item` (`est_dans_id_item`)");

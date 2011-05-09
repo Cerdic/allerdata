@@ -15,8 +15,8 @@
 
 				<B_allergenes_testables>
 				<div class="blocContenuArticle">
-					<h2>Allerg&egrave;nes testables in vitro</h2>
-					<table summary="Les allerg&egrave;nes testables in vitro de [(#NOM|sinon{NA})]" class="spip">
+					<h2><:ad:titre_allergenes_testables:></h2>
+					<table summary="<:ad:label_les_allergenes_testables_de{nom=#NOM|sinon{NA}}|attribut_html:>" class="spip">
 						<thead>
 						<tr class="row_first">
 						<th>Nom</th>
@@ -43,7 +43,7 @@
 				</B_allergenes>
 				<B_allergenes>
 				<div class="blocContenuArticle">
-					<h2>Cette famille mol&eacute;culaire contient les allerg&egrave;nes suivants</h2>
+					<h2><:ad:titre_famille_mol_contient_allergenes:></h2>
 					<table class="spip" width=90%>
 						<thead>
 						<tr class="row_first">
@@ -75,7 +75,7 @@
 				</B_allergenes>
 				<B_LienArticle>
 				<div class="blocContenuArticle">
-				<h2>En savoir plus</h2>
+				<h2><:ad:en_savoir_plus:></h2>
 				<ul>
 				<BOUCLE_LienArticle(ARTICLES){type_mot=_Liens_ArticleItem}{titre_mot=#ID_ITEM}>
 				[<li><a href="#URL_ARTICLE" onclick="main_panel.updateTab(null,'[(#_Items:NOM|addslashes)]','#URL_PAGE{article_popup,id_article=#ID_ARTICLE}'); return false;">(#TITRE)</a></li>]

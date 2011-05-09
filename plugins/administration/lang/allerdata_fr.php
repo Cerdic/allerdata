@@ -40,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'famille_taxo' => 'Famille Taxonomique',
-'famille_taxo_contient_produits' => 'Exemples de produits issus d’organismes appartenant &agrave; cette famille',
 'famille_taxos' => 'Familles Taxonomiques',
 'famille_mol' => 'Famille Mol&eacute;culaire',
 'famille_mols' => 'Familles Mol&eacute;culaires',
