@@ -65,7 +65,7 @@ function formulaires_editer_minitexte_charger_dist($id_minitexte='new', $id_pare
 }
 
 function formulaires_editer_minitexte_verifier_dist($id_minitexte='new', $id_parent=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$oblis = array('texte','type');
+	$oblis = array('texte_fr','type');
 	$erreurs = formulaires_editer_objet_verifier('tbl_minitextes',$id_minitexte,$oblis);
 
 	switch ($type=_request('type')){
@@ -130,6 +130,8 @@ function formulaires_editer_minitexte_verifier_dist($id_minitexte='new', $id_par
 			break;
 	}
 
+	include_spip('inc/allerdata_fonctions');
+	allerdata_multiplexe_erreurs_trad('texte',$erreurs);
 	return $erreurs;
 }
 

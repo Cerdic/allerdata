@@ -6,6 +6,18 @@
  *
  */
 
+/**
+ * Dans une boucle minitextes, le champ #TEXTE est traduit en texte_fr, texte_en...
+ * @param object $p
+ * @return
+ */
+function balise_TEXTE_dist($p){
+	if ($p->boucles[$p->id_boucle]->type_requete=='tbl_minitextes')
+		$p->code = allerdata_champ_sql_trad('texte',$p);
+	else
+		$p->code = champ_sql('texte', $p);
+	return $p;
+}
 
 
 function critere_tbl_minitextes_derniere_version_dist($idb, &$boucles, $crit){

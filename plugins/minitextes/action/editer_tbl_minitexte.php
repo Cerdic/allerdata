@@ -41,10 +41,10 @@ function tbl_minitextes_set($id_minitexte,$set=null) {
 	$err = '';
 
 	if (is_null($set)){
+		include_spip('inc/allerdata_fonctions');
 		$c = array();
-		foreach (array(
-			"texte",'incidence_rav'
-		) as $champ)
+		foreach (array_merge(allerdata_liste_champs_trad('texte'),array('incidence_rav'))
+			as $champ)
 			$c[$champ] = _request($champ);
 	}
 	else

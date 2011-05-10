@@ -110,7 +110,12 @@ function minitext_upgrade($nom_meta_base_version,$version_cible){
 			}
 			ecrire_meta($nom_meta_base_version,$current_version='0.1.2.0','non');
 		}
-
+		if (version_compare($current_version,'0.2.0','<')){
+			include_spip('base/abstract_sql');
+			sql_alter("TABLE tbl_minitextes CHANGE texte texte_fr longtext DEFAULT '' NOT NULL");
+			sql_alter("TABLE tbl_minitextes ADD texte_en longtext DEFAULT '' NOT NULL");
+			ecrire_meta($nom_meta_base_version,$current_version='0.2.0','non');
+		}
 	}
 }
 
@@ -131,13 +136,12 @@ function minitext_declarer_tables_interfaces($interface){
 
 function minitext_declarer_tables_principales($tables_principales){
   
-	//-- Table tbl_journals ------------------------------------------
-	// une grosse faute de francais pour rester spipien ...
+	//-- Table tbl_minitextes ------------------------------------------
 	$minitextes = array(
 	  'id_minitexte' => "bigint(21) NOT NULL",
 	  'type' => "tinyint(1) NOT NULL",
-		"texte"	=> "longtext DEFAULT '' NOT NULL",
-		#'incidence_rav' => "bigint(21) NOT NULL",
+		"texte_fr"	=> "longtext DEFAULT '' NOT NULL",
+		"texte_en"	=> "longtext DEFAULT '' NOT NULL",
 		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 		'date' => "datetime default NULL",
 		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",

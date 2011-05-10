@@ -3,7 +3,6 @@
 	[(#ENV{editable}|non)
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	]
-	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -70,12 +69,17 @@
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<textarea name='#GET{name}' id='#GET{name}' rows='12'>#ENV{#GET{name}}</textarea>
+				<BOUCLE_trads(POUR){tableau #GET{name}|allerdata_liste_champs_trad}>
+				<div class="editer_trad">
+				<span class="langue_saisie">[#CLE]</span>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{#VALEUR})</span>]
+				<textarea name='#VALEUR' id='#VALEUR' rows='12'>#ENV{#VALEUR}</textarea>
+				</div>
+				</BOUCLE_trads>
 	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='[(#ENV{id_minitexte}|intval|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
 	</div></form>
-	]
 </div>

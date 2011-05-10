@@ -9,6 +9,68 @@
 include_spip('base/serial');
 $GLOBALS['tables_principales']['spip_auteurs']['pass_clair']="tinytext DEFAULT '' NOT NULL";
 
+
+
+
+
+/**
+ * Lister les langues traduites en base
+ * un champ par langue, suffixe par la langue :
+ * texte_fr, texte_en
+ * @return array
+ */
+function allerdata_langes(){	return array('fr','en'); }
+
+function allerdata_liste_champs_trad($champ){
+	$liste = array();
+	foreach(allerdata_langes() as $l)
+		$liste[$l] = $champ . '_' .$l;
+	return $liste;
+}
+/**
+ * Compiler un champ traduit :
+ * - requeter chaque langue
+ * - recuperer la valeur au calcul, en fonction de la langue courante
+ *
+ * @param string $champ
+ * @param object $p
+ * @return string
+ */
+function allerdata_champ_sql_trad($champ,$p){
+	$code = 'array(';
+	foreach(allerdata_liste_champs_trad($champ) as $l=>$c)
+		$code .= "'$l'=> &".champ_sql($c, $p).",";
+	$code .= ")";
+	$code = "allerdata_traduit_champ(\$GLOBALS['spip_lang'],$code)";
+	return $code;
+}
+
+if (!defined('_ALLERDATA_DEBUG_LANG')) define('_ALLERDATA_DEBUG_LANG',true);
+/**
+ * Recuperer la traduction d'un champ en fonction de la langue courante
+ *
+ * @param string $lang
+ * @param array $trads
+ * @return string
+ */
+function allerdata_traduit_champ($lang,$trads){
+	// si langue connue et traduite, la renvoyer
+	if (isset($trads[$lang]) AND strlen($trads[$lang]))
+		return $trads[$lang];
+
+	// sinon renvoyer la langue par defaut, avec un marquer pour le debug
+	return (_ALLERDATA_DEBUG_LANG?"[$lang]":'').reset($trads);
+}
+
+function allerdata_multiplexe_erreurs_trad($champ,&$erreurs){
+	foreach(allerdata_liste_champs_trad($champ) as $l=>$c){
+		if (!isset($erreurs[$champ]) AND isset($erreurs[$c]))
+			$erreurs[$champ] = $erreurs[$c];
+	}
+}
+
+
+
 /**
  * Regarder si un item a des enfants designes par la table de liaison tbl_est_dans.
  * On fait une jointure sur les enfants presumes pour verifier son existence reelle
