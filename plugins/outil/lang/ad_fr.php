@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assistant_moleculaire' => "Outil",
 	'aucun_resultat' => "Aucun résultat",
 	'ajoute_le' => 'Ajouté le',
+	'acces_libre' => 'Accès libre',
 	'acces_reserve' => 'Accès réservé',
 
 	'articlesconnexes' => 'Articles connexes',
@@ -22,6 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 					<p>Il contient des informations qui, mal interprétées, pourraient conduire à un diagnostic et une prise en charge erronés.</p>
 					<p>C\'est pour cela qu\'il est exclusivement réservé aux professionnels de santé compétents en allergologie après vérification de leurs données.</p>
 					<p>Si vous êtes allergologue ou travaillez dans le domaine de l\'allergie, vous pouvez demander à bénéficier d\'un accès complet en remplissant le formulaire ci-dessous.</p>',
+	'bouton_annuler' => 'Annuler',
+	'bouton_valider' => 'Valider',
 
 	'choisissez' => 'Choisissez',
 	'citation' => 'Citation',
