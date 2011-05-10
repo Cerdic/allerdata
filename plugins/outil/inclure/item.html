@@ -1,6 +1,7 @@
 
 
-
+#SET{ordernom,nom_#LANG}
+#SET{ordernomcomplet,nom_#LANG}
 <BOUCLE_Items(tbl_items){id_item}>
 				<div id="blocTitArticle">
 					<h1 class="titArticle">[(#NOM|sinon{NA})]</h1>
@@ -16,11 +17,11 @@
 						</tr>
 						</thead>
 						<tbody>
-							<BOUCLE_t5ft(tbl_items){id_type_item=5}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
+							<BOUCLE_t5ft(tbl_items){id_type_item=5}{est_dans #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}>
 							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 							#SET{testable,0}
 							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></td>
-							<td><i><BOUCLE_sources5ft(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5ft></i></td>
+							<td><i><BOUCLE_sources5ft(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5ft></i></td>
 							</tr>
 							</BOUCLE_t5ft>
 						</tbody>
@@ -46,12 +47,12 @@
 						</tr>
 						</thead>
 						<tbody>
-							<BOUCLE_t5(tbl_items){id_type_item=5}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
+							<BOUCLE_t5(tbl_items){id_type_item=5}{est_dans #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}>
 							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 							#SET{testable,0}
 							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></td>
-							<td><i><BOUCLE_sources5(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5></i></td>
-							<td><BOUCLE_famille_taxo5(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par nom}{!isnull nom}{', '}><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></BOUCLE_famille_taxo5></td>
+							<td><i><BOUCLE_sources5(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5></i></td>
+							<td><BOUCLE_famille_taxo5(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}{', '}><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></BOUCLE_famille_taxo5></td>
 							<td style="text-align:center;font-size:1.5em;">[(#GET{testable}|oui)[(#CHEMIN{img/icon_accept.gif}|balise_img{<:ad:testable:>})]]</td>
 							</tr>
 							</BOUCLE_t5>
@@ -64,14 +65,14 @@
 					<div class="blocContenuArticle source">
 					<h2><:ad:titre_organisme_source:></h2>
 					<p style="text-align:center;"><i>
-					<BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{', '}{!isnull nom}{par nom}>#NOM</BOUCLE_sources>
+					<BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{', '}{!isnull nom_fr}{par nom_#LANG}>#NOM</BOUCLE_sources>
 					</i></p>
 					</div>
 					<B_famille_taxo>
 					<div class="blocContenuArticle famille_taxo">
 					<h2><:ad:titre_famille_taxo:></h2>
 					<p style="text-align:center;"><i>
-					<BOUCLE_famille_taxo(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{id_item!=#ID_ITEM}{', '}{!isnull nom}{par nom}>
+					<BOUCLE_famille_taxo(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{id_item!=#ID_ITEM}{', '}{!isnull nom_fr}{par nom_#LANG}>
 						<a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a>
 					</BOUCLE_famille_taxo>
 					</i></p>
@@ -95,7 +96,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<BOUCLE_allergenes_testables(tbl_items){type_item allergene}{est_dans #ID_ITEM}{par nom_complet}{!isnull nom_complet}{testable!=0}>
+						<BOUCLE_allergenes_testables(tbl_items){type_item allergene}{est_dans #ID_ITEM}{par nom_complet_#LANG}{!isnull nom_complet_fr}{testable!=0}>
 						<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 						<td>[(#FONCTION_CLASSIFICATION|=={#NOM}|non)[(#NOM_COMPLET|sinon{#NOM})]]</td>
 						<td>#FONCTION_CLASSIFICATION</td>
@@ -119,7 +120,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<BOUCLE_allergenes(tbl_items){type_item allergene}{!type_item allergene_recombinant}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
+						<BOUCLE_allergenes(tbl_items){type_item allergene}{!type_item allergene_recombinant}{est_dans #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}>
 							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 							<td>[(#FONCTION_CLASSIFICATION|=={#NOM}|non)#NOM]</td>
 							<td>#FONCTION_CLASSIFICATION</td>

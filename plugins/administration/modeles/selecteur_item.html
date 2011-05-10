@@ -1,8 +1,9 @@
+#SET{order,nom_#LANG}
 <B_selecteur>
 <select[ name='(#ENV{name})'][ id='(#ENV{id})']>
 [(#ENV{obli,oui}|=={oui}|?{'',' '})
 <option value=''>-</option>]
-<BOUCLE_selecteur(tbl_items){type_item #ENV{type_item}}{par nom}>
+<BOUCLE_selecteur(tbl_items){type_item #ENV{type_item}}{par #GET{order}}>
 <option value='#ID_ITEM'[ (#EXPOSE{' '})selected='selected']>#NOM</option>
 </BOUCLE_selecteur>
 </select>

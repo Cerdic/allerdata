@@ -51,6 +51,7 @@ function exec_allerdata_dist(){
 	if (defined('_DIR_PLUGIN_MINITEXT'))
 		$barre[] = array('titre'=>_T("allerdata:minitextes"),'page'=>'minitextes','icone'=>_DIR_PLUGIN_MINITEXT."img_pack/minitexte-64.png",'url'=>generer_url_ecrire('allerdata','page=minitextes'));
 	echo allerdata_barre_nav_gauche($page,$barre);
+	echo "<div class='nettoyeur'></div> ";
 
 	echo debut_droite('allerdata',true);
 	$message = "";

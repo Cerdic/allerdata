@@ -11,7 +11,8 @@
 <div id="page">
 
 <ul>
-<BOUCLE_Items(tbl_items tbl_types_items){par nom}>
+#SET{order,nom_#LANG}
+<BOUCLE_Items(tbl_items tbl_types_items){par #GET{order}}>
 	<li>#NOM (#NOM_TYPE_ITEM)</li>
 </BOUCLE_Items>
 </ul>

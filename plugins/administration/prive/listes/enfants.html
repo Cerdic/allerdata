@@ -1,4 +1,7 @@
-#SET{virgule,''}#SET{fin,''}<B_enfants>[(#TOTAL_BOUCLE|allerdata_affiche_un_ou_plusieurs{allerdata:un_enfant,allerdata:enfants})]<ul><BOUCLE_enfants(tbl_items){est_directement_dans #ID_ITEM}{}{par id_type_item,nom}>
+#SET{ordernom,nom_#LANG}
+#SET{virgule,''}
+#SET{fin,''}
+<B_enfants>[(#TOTAL_BOUCLE|allerdata_affiche_un_ou_plusieurs{allerdata:un_enfant,allerdata:enfants})]<ul><BOUCLE_enfants(tbl_items){est_directement_dans #ID_ITEM}{}{par id_type_item,#GET{ordernom}}>
 [(#ID_TYPE_ITEM|unique{e#ENV{id_item}}|oui)#GET{fin}<li class='enumeration[ (#ID_TYPE_ITEM|allerdata_type_item{s})]'>[(#MODELE{type_item_nom,id_type_item}) ]<ul>#SET{fin,'</ul></li>'}#SET{virgule,''}]
 <li>#GET{virgule}<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a> <BOUCLE_prod(tbl_items){type_item produit}{contient_directement #ID_ITEM}><small>(#NOM)</small></BOUCLE_prod>#SET{virgule,'<em>, </em>'}</li>
 </BOUCLE_enfants>[(#GET{fin})</ul>]

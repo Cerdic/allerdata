@@ -13,11 +13,11 @@
 
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Travail</div>
-
+#SET{order,nom_#LANG}
 <B_Items>
 <h2><:ad:work_liste_items_interrogeables:> (#TOTAL_BOUCLE)</h2>
 <ul>
-<BOUCLE_Items(tbl_items){par nom}{nom!=}{interrogeable=1}>
+<BOUCLE_Items(tbl_items){par #GET{order}}{nom_fr!=}{interrogeable=1}>
 	<li><a href="#URL_PAGE{items_detail,id_item=#ID_ITEM}">#NOM</a>
 		<B_ItemContient>
 		<ul>

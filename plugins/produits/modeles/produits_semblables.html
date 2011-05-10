@@ -4,7 +4,8 @@
   (c) 2009 xxx
   Distribue sous licence GPL
 
-]<B_items>
+]#SET{ordernom,nom_#LANG}
+<B_items>
 	Verifiez la n&eacute;cessit&eacute; de cr&eacute;er un produit g&eacute;n&eacute;rique.
 	<input type="hidden" name="check_generique" value="[(#ENV*{items}|implode{','})]" />
 	<table class="spip">
@@ -18,7 +19,7 @@
 			</tr>
 		</thead>
 		<tbody>
-<BOUCLE_items(tbl_items){id_item IN #ENV{items}}{type_item produit}{par nom}>
+<BOUCLE_items(tbl_items){id_item IN #ENV{items}}{type_item produit}{par #GET{ordernom}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td>#NOM</td>
 				<td><BOUCLE_type(tbl_types_items){id_type_item}>#NOM_TYPE_ITEM</BOUCLE_type></td>

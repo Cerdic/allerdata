@@ -19,7 +19,7 @@ function formulaires_editer_famille_mol_charger_dist($id_item='new', $id_parent=
 }
 
 function formulaires_editer_famille_mol_verifier_dist($id_item='new', $id_parent=0, $retour='', $lier=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,intval($it_item)?array('nom','commentaires'):array('nom'));
+	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,intval($it_item)?array('nom_fr','commentaires'):array('nom_fr'));
 	if ($url = _request('url')){
 		include_spip('inc/distant');
 		if (!recuperer_page($url)){
@@ -29,16 +29,18 @@ function formulaires_editer_famille_mol_verifier_dist($id_item='new', $id_parent
 	
 	// verifier qu'une famille moleculaire n'existe pas deja avec ce nom
 	if ($rows = sql_allfetsel("id_item,nom",'tbl_items',
-	  "id_type_item=6 AND nom=".sql_quote(_request('nom'))." AND NOT(id_item=".intval($id_item).")")
+	  "id_type_item=6 AND nom_fr=".sql_quote(_request('nom_fr'))." AND NOT(id_item=".intval($id_item).")")
 	  ){
 		$liens = array();
 		foreach($rows as $row){
-			$liens[] = "<a href='".generer_url_ecrire('allerdata','page=famille_mols&id_item='.$row['id_item'])."' title='#".$row['id_item']."'>".$row['nom']."</a>";
+			$liens[] = "<a href='".generer_url_ecrire('allerdata','page=famille_mols&id_item='.$row['id_item'])."' title='#".$row['id_item']."'>".$row['nom_fr']."</a>";
 		}
 		$liens = implode(", ",$liens);
-		$erreurs['nom'] = _T("editer_famille_mol:item_deja_existant_avec_meme_nom").$liens;
+		$erreurs['nom_fr'] = _T("editer_famille_mol:item_deja_existant_avec_meme_nom").$liens;
 	}
 
+	allerdata_multiplexe_erreurs_trad('nom',$erreurs);
+	allerdata_multiplexe_erreurs_trad('representatif',$erreurs);
 	return $erreurs;
 }
 

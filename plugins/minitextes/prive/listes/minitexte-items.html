@@ -6,9 +6,10 @@
 
 ]
 #SET{virgule,''}
+#SET{order,nom_#LANG}
 <B_prod>
 	[(#TOTAL_BOUCLE|singulier_ou_pluriel{allerdata:produit,allerdata:produits_nb})]
-	<ul><BOUCLE_prod(tbl_items){id_minitexte}{type_item produit_et_categorie}{par nom}>
+	<ul><BOUCLE_prod(tbl_items){id_minitexte}{type_item produit_et_categorie}{par #GET{order}}>
 	<li>#GET{virgule}<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>#SET{virgule,'<em>, </em>'}</li>
 	</BOUCLE_prod>[(#GET{fin})</ul>]
 </B_prod>

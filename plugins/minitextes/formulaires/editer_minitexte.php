@@ -130,7 +130,7 @@ function formulaires_editer_minitexte_verifier_dist($id_minitexte='new', $id_par
 			break;
 	}
 
-	include_spip('inc/allerdata_fonctions');
+	include_spip('allerdata_fonctions');
 	allerdata_multiplexe_erreurs_trad('texte',$erreurs);
 	return $erreurs;
 }

@@ -206,6 +206,28 @@
 				}
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.2.2','non');
 			}
+			if (version_compare($current_version,'0.2.0','<')){
+				sql_alter("TABLE tbl_items CHANGE nom nom_fr varchar(255) default NULL");
+				sql_alter("TABLE tbl_items ADD nom_en varchar(255) default NULL AFTER nom_fr");
+				sql_alter("TABLE tbl_items CHANGE autre_nom autre_nom_fr varchar(255) default NULL");
+				sql_alter("TABLE tbl_items ADD autre_nom_en varchar(255) default NULL AFTER autre_nom_fr");
+				sql_alter("TABLE tbl_items CHANGE nom_complet nom_complet_fr varchar(255) default NULL");
+				sql_alter("TABLE tbl_items ADD nom_complet_en varchar(255) default NULL AFTER nom_complet_fr");
+				sql_alter("TABLE tbl_items CHANGE nom_court nom_court_fr varchar(50) default NULL");
+				sql_alter("TABLE tbl_items ADD nom_court_en varchar(50) default NULL AFTER nom_court_fr");
+				sql_alter("TABLE tbl_items CHANGE chaine_alpha chaine_alpha_fr varchar(255) default NULL");
+				sql_alter("TABLE tbl_items ADD chaine_alpha_en varchar(255) default NULL AFTER chaine_alpha_fr");
+				sql_alter("TABLE tbl_items CHANGE representatif representatif_fr varchar(50) default NULL");
+				sql_alter("TABLE tbl_items ADD representatif_en varchar(50) default NULL AFTER representatif_fr");
+				sql_alter("TABLE tbl_items CHANGE fonction_classification fonction_classification_fr varchar(50) default NULL");
+				sql_alter("TABLE tbl_items ADD fonction_classification_en varchar(50) default NULL AFTER fonction_classification_fr");
+
+				sql_alter("TABLE tbl_items CHANGE source old_source varchar(100) NOT NULL");
+				sql_alter("TABLE tbl_items CHANGE source_sans_accent old_source_sans_accent varchar(100) NOT NULL");
+				sql_alter("TABLE tbl_items CHANGE famille old_famille varchar(100) NOT NULL");
+
+				#ecrire_meta($nom_meta_base_version,$current_version='0.2.0','non');
+			}
 		}
 	}
 	

@@ -6,9 +6,10 @@
 
 ]
 <div class="nettoyeur"></div>#SET{id,#VAL{proposer_}|concat{#ENV{name},'_',#ENV{id_minitexte}}}
+#SET{order,nom_#LANG}
 <B_suggest>
 <div class="proposer_#ENV{name}" id="#GET{id}">
-<BOUCLE_suggest(tbl_items){type_item produit_et_categorie}{par nom}{est_dans #ENV{selected}}{fusion tbl_items.id_item}>
+<BOUCLE_suggest(tbl_items){type_item produit_et_categorie}{par #GET{order}}{est_dans #ENV{selected}}{fusion tbl_items.id_item}>
 	<div class="choix[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
 		#SET{nohas,#ID_MINITEXTE|non|ou{#ID_MINITEXTE|=={#ENV{id_minitexte}}|oui}}
 		[(#GET{nohas})

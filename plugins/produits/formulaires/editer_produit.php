@@ -26,21 +26,28 @@ function formulaires_editer_produit_verifier_dist($id_item='new', $id_parent=0, 
 
 	$oblis = array();
 	if (!in_array(_request('id_type_item'),array(23,25)))
-		$oblis[] = 'nom';
+		$oblis[] = 'nom_fr';
 
 	if (intval($id_item))
 		$oblis[] = 'commentaires';
 
 	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,$oblis);
 
-	if ((strlen(_request('nom_court'))>25
-	 OR (!_request('nom_court') AND strlen(_request('nom'))>25))
-	 // le nom court n'est pas necessaire pour les produits en attente
-   AND (!in_array(_request('id_type_item'),array(23,25))))
-	 	$erreurs['nom_court'] = _T('editer_produit:erreur_nom_court_trop_long');
+	include_spip('allerdata_fonctions');
+	foreach(allerdata_langes() as $l){
+		if ((strlen(_request('nom_court_'.$l))>25
+		 OR (!_request('nom_court_'.$l) AND strlen(_request('nom_'.$l))>25))
+		 // le nom court n'est pas necessaire pour les produits en attente
+		 AND (!in_array(_request('id_type_item'),array(23,25))))
+			$erreurs['nom_court_'.$l] = _T('editer_produit:erreur_nom_court_trop_long');
+	}
 
 	verifier_produit_coherent($id_item,_request('id_type_item'),_request('id_parent'),$erreurs);
 
+	include_spip('allerdata_fonctions');
+	allerdata_multiplexe_erreurs_trad('nom',$erreurs);
+	allerdata_multiplexe_erreurs_trad('nom_court',$erreurs);
+	allerdata_multiplexe_erreurs_trad('chaine_alpha',$erreurs);
 	return $erreurs;
 }
 

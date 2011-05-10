@@ -26,13 +26,13 @@
 						</tr>
 						</thead>
 						<tbody>
-						<BOUCLE_allergenes_testables(tbl_items){type_item allergene}{est_dans #ID_ITEM}{par nom}{!isnull nom}{testable!=0}>
-						<BOUCLE_prod0(tbl_items){type_item produit_simple}{contient #ID_ITEM}{par nom_court}{!isnull nom_court}>
+						<BOUCLE_allergenes_testables(tbl_items){type_item allergene}{est_dans #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}{testable!=0}>
+						<BOUCLE_prod0(tbl_items){type_item produit_simple}{contient #ID_ITEM}{par nom_court_#LANG}{!isnull nom_court_fr}>
 						#SET{tot,#GET{tot}|plus{1}}
 						<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 						<td>#_allergenes_testables:NOM</td>
 						<td>#_prod0:NOM_COURT</td>
-						<td><BOUCLE_sources0(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_sources0></td>
+						<td><BOUCLE_sources0(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}{', '}>#NOM</BOUCLE_sources0></td>
 						<td style="text-align:center;font-size:1.5em;">[(#_allergenes_testables:GLYCO|oui)[(#CHEMIN{img/icon_accept.gif}|balise_img{<:ad:glyco:>})]]</td>
 						</tr>
 						</BOUCLE_prod0>
@@ -56,13 +56,13 @@
 						</tr>
 						</thead>
 						<tbody>
-						<BOUCLE_allergenes(tbl_items){type_item allergene}{id_type_item!=9}{est_dans #ID_ITEM}{par nom}{!isnull nom}>
-						<BOUCLE_prod(tbl_items){type_item produit_simple}{contient #ID_ITEM}{par nom_court}{!isnull nom_court}>
+						<BOUCLE_allergenes(tbl_items){type_item allergene}{id_type_item!=9}{est_dans #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}>
+						<BOUCLE_prod(tbl_items){type_item produit_simple}{contient #ID_ITEM}{par nom_court_#LANG}{!isnull nom_court_fr}>
 						#SET{tot,#GET{tot}|plus{1}}
 						<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 						<td>#_allergenes:NOM</td>
 						<td>#_prod:NOM_COURT</td>
-						<td><BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom}{!isnull nom}{', '}>#NOM</BOUCLE_sources></td>
+						<td><BOUCLE_sources(tbl_items){type_item source}{contient_directement #ID_ITEM}{par nom_#LANG}{!isnull nom_fr}{', '}>#NOM</BOUCLE_sources></td>
 						<td style="text-align:right;">#_allergenes:MASSE</td>
 						<td style="text-align:center;font-size:1.5em;">[(#_allergenes:IUIS|oui)[(#CHEMIN{img/icon_accept.gif}|balise_img{<:ad:iuis:>})]]</td>
 						<td style="text-align:center;font-size:1.5em;">[(#_allergenes:GLYCO|oui)[(#CHEMIN{img/icon_accept.gif}|balise_img{<:ad:glyco:>})]]</td>

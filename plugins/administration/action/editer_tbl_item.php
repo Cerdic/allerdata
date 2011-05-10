@@ -42,13 +42,25 @@ function tbl_items_set($id_item, $set=null) {
 
 	if (!$set) {
 		$c = array();
-		foreach (array(
-			'id_type_item', 'nom', 'source', 'famille', 'autre_nom', 'nom_complet', 'chaine_alpha',
+		include_spip('inc/allerdata_fonctions');
+		$champs = array_merge(
+			allerdata_liste_champs_trad('nom'),
+			allerdata_liste_champs_trad('autre_nom'),
+			allerdata_liste_champs_trad('nom_complet'),
+			allerdata_liste_champs_trad('nom_court'),
+			allerdata_liste_champs_trad('chaine_alpha'),
+			allerdata_liste_champs_trad('representatif'),
+			allerdata_liste_champs_trad('fonction_classification'),
+			array(
+			'id_type_item',
+			//'source', 'famille',
 			'interrogeable', 'testable', 'code_test', 'iuis', 'masse', 'glyco',
-			'id_niveau_allergenicite', 'affichage_suggestion', 'representatif',
-			'ccd_possible', 'information', 'fonction_classification', 'nom_court', 'nom_anglosaxon',
+			'id_niveau_allergenicite', 'affichage_suggestion',
+			'ccd_possible', 'information', 'nom_anglosaxon',
 			'remarques', 'url'
-		) as $champ)
+			)
+		);
+		foreach ($champs as $champ)
 			$c[$champ] = _request($champ);
 	}
 	else

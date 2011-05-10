@@ -70,7 +70,7 @@
 	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<BOUCLE_trads(POUR){tableau #GET{name}|allerdata_liste_champs_trad}>
-				<div class="editer_trad">
+				<div class="editer_trad lang_#CLE">
 				<span class="langue_saisie">[#CLE]</span>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{#VALEUR})</span>]
 				<textarea name='#VALEUR' id='#VALEUR' rows='12'>#ENV{#VALEUR}</textarea>

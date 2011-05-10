@@ -1,12 +1,13 @@
 [(#SET{noresults,<:allerdata:aucun_resultat:>})]
+#SET{ordernom,nom_#LANG}
 <B_items><h2>#GRAND_TOTAL [ (#VAL{allerdata:}|concat{#ENV{type_item},s}|_T) ]</h2>
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id=#ENV{id_item,''},recherche})</p>]
 <p class='pagination tri'>[(#TRI{<,#CHEMIN{img_pack/tri_asc-16.png}|tag_img}) | ][(#TRI{>,#CHEMIN{img_pack/tri_desc-16.png}|tag_img}) | ]
-[(#TRI{id_item,'#id'}) | ][(#TRI{nom,nom}) | ][(#ENV{type_item}|=={produit}|oui)[(#TRI{nom_anglosaxon,'nom anglosaxon'}) | ]]
+[(#TRI{id_item,'#id'}) | ][(#TRI{#GET{ordernom},nom}) | ][(#ENV{type_item}|=={produit}|oui)[(#TRI{nom_anglosaxon,'nom anglosaxon'}) | ]]
 </p>
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
-<BOUCLE_items(tbl_items){type_item #ENV{type_item}}{tout}{id_item?}{pagination 10}{tri nom}{recherche?}{statut IN prop,publie}>
+<BOUCLE_items(tbl_items){type_item #ENV{type_item}}{tout}{id_item?}{pagination 10}{tri #GET{ordernom}}{recherche?}{statut IN prop,publie}>
 <li class='item[ (#EXPOSE)][ statut_(#STATUT)][(#ID_TYPE_ITEM|in_array{#ENV{type_item}|concat{_en_attente}|allerdata_id_type_item}|oui)attente]' id="item#ID_ITEM">
 #MODELE{item_parents}
 [(#INCLURE{fond=modeles/item_#ENV{type_item}}{id_item})]
@@ -25,7 +26,7 @@
 [<p class='plier_replier'>(#MODELE{liens_plier_deplier,id_item,recherche}|unique)</p>]
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste_items'>
-<BOUCLE_items_poubelle(tbl_items){tout}{type_item #ENV{type_item}}{statut=poubelle}{id_item?}{pagination 10}{par #ENV{tri,nom}}{recherche?}>
+<BOUCLE_items_poubelle(tbl_items){tout}{type_item #ENV{type_item}}{statut=poubelle}{id_item?}{pagination 10}{par #ENV{tri,#GET{ordernom}}}{recherche?}>
 <li class='item[ (#EXPOSE)][ statut_(#STATUT)]' id="item#ID_ITEM">
 #MODELE{item_parents}
 [(#INCLURE{fond=modeles/item_#ENV{type_item}}{id_item})]

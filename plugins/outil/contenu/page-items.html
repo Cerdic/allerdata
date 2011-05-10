@@ -1,9 +1,9 @@
 [(#REM) Fil d'Ariane ]
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:ad:accueil:></a> &gt; <:ad:liste_items:></div>
-
+#SET{order,nom_#LANG}
 <B_Items>
 <ul>
-<BOUCLE_Items(tbl_items){par nom}{nom!=}{pagination 30}>
+<BOUCLE_Items(tbl_items){par #GET{order}}{nom_fr!=}{pagination 30}>
 	<li><a href="#URL_PAGE{items_detail,id_item=#ID_ITEM}">#NOM</a></li>
 </BOUCLE_Items>
 </ul>

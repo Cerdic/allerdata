@@ -59,16 +59,35 @@ function allerdata_traduit_champ($lang,$trads){
 		return $trads[$lang];
 
 	// sinon renvoyer la langue par defaut, avec un marquer pour le debug
-	return (_ALLERDATA_DEBUG_LANG?"[$lang]":'').reset($trads);
+	$t = reset($trads);
+	return (_ALLERDATA_DEBUG_LANG AND strlen($t)?"[$lang]":'').$t;
 }
 
 function allerdata_multiplexe_erreurs_trad($champ,&$erreurs){
-	foreach(allerdata_liste_champs_trad($champ) as $l=>$c){
+	$champs = allerdata_liste_champs_trad($champ);
+	foreach($champs as $l=>$c){
 		if (!isset($erreurs[$champ]) AND isset($erreurs[$c]))
 			$erreurs[$champ] = $erreurs[$c];
 	}
 }
 
+
+/**
+ * traduction des des champs en fonction de la langue :
+ * Dans une boucle tbl_items, le champ #c est traduit en c_fr, c_en...
+ * on generer une fonction de surcharge par champ concerne
+ * @param object $p
+ * @return
+ */
+foreach(array('nom','autre_nom','nom_complet','nom_court','chaine_alpha','representatif','fonction_classification') as $c){
+	$f = "balise_".strtoupper($c)."_dist";
+	eval(
+'function '.$f.'($p){
+	if ($p->boucles[$p->id_boucle]->type_requete=="tbl_items") $p->code = allerdata_champ_sql_trad("'.$c.'",$p);
+	else $p->code = champ_sql("'.$c.'", $p);
+	return $p;
+}');
+}
 
 
 /**

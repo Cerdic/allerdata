@@ -1,9 +1,10 @@
+#SET{order,nom_#LANG}
 <B_items>
 	<select name="selector-#ENV{name}" size="10">
-		<BOUCLE_items(tbl_items){type_item #ENV{type_item,''}}{tout}{par nom}{doublons}{nom!=''}>
+		<BOUCLE_items(tbl_items){type_item #ENV{type_item,''}}{tout}{par #GET{order}}{doublons}{nom_fr!=''}>
 			<option value="#ID_ITEM">#NOM<span> (##ID_ITEM)</span>[(#ID_TYPE_ITEM|in_array{#ENV{type_att}}|oui)&#91;En attente&#93;]</option>
 		</BOUCLE_items>
-		<BOUCLE_items_attente(tbl_items){type_item #ENV{type_item,''}}{tout}{par nom}{doublons}>
+		<BOUCLE_items_attente(tbl_items){type_item #ENV{type_item,''}}{tout}{par #GET{order}}{doublons}>
 			<option value="#ID_ITEM">#NOM<span> (##ID_ITEM)</span>[(#ID_TYPE_ITEM|in_array{#ENV{type_att}}|oui)&#91;En attente&#93;]</option>
 		</BOUCLE_items_attente>
 	</select>

@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})
+
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
@@ -45,13 +45,25 @@
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				<BOUCLE_trads(POUR){tableau #GET{name}|allerdata_liste_champs_trad}>
+				<div class="editer_trad lang_#CLE">
+					<span class="langue_saisie">[#CLE]</span>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{#VALEUR})</span>]
+					<input type='text' class='text' name='#VALEUR' id='#VALEUR' value="#ENV{#VALEUR}" />
+				</div>
+				</BOUCLE_trads>
 	    </li>
 	  	#SET{name,nom_complet}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				<BOUCLE_trads2(POUR){tableau #GET{name}|allerdata_liste_champs_trad}>
+				<div class="editer_trad lang_#CLE">
+					<span class="langue_saisie">[#CLE]</span>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{#VALEUR})</span>]
+					<input type='text' class='text' name='#VALEUR' id='#VALEUR' value="#ENV{#VALEUR}" />
+				</div>
+				</BOUCLE_trads2>
 	    </li>
 	  	#SET{name,masse}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -73,7 +85,13 @@
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="#GET{name}">[(#FORM|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+				<BOUCLE_trads3(POUR){tableau #GET{name}|allerdata_liste_champs_trad}>
+				<div class="editer_trad lang_#CLE">
+					<span class="langue_saisie">[#CLE]</span>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{#VALEUR})</span>]
+					<input type='text' class='text' name='#VALEUR' id='#VALEUR' value="#ENV{#VALEUR}" />
+				</div>
+				</BOUCLE_trads3>
 	    </li>
 	  	#SET{name,remarques}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -110,7 +128,7 @@
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='[(#ENV{id_item}|intval|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
 	</div></form>
-	]
+
 </div>
 [<div class='descendants'>
 (#INCLURE{fond=prive/listes/enfants}{id_item})
