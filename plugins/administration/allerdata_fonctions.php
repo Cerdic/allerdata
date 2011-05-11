@@ -21,6 +21,12 @@ $GLOBALS['tables_principales']['spip_auteurs']['pass_clair']="tinytext DEFAULT '
  */
 function allerdata_langues(){	return array('fr','en'); }
 
+/**
+ * Donner le nom de la vue a utiliser en fonction du nom de la table et de la langue
+ * @param string $table
+ * @param string $langue
+ * @return string
+ */
 function allerdata_vue($table,$langue=null){
 	if (is_null($langue))
 		$langue = $GLOBALS['spip_lang'];
@@ -29,6 +35,12 @@ function allerdata_vue($table,$langue=null){
 	return "fr_".$table;
 }
 
+/**
+ * Lister les declinaisons traduites d'un champ
+ * nom => nom_fr, nom_en
+ * @param string $champ
+ * @return array
+ */
 function allerdata_liste_champs_trad($champ){
 	$liste = array();
 	foreach(allerdata_langues() as $l)
@@ -53,9 +65,10 @@ function allerdata_champ_sql_trad($champ,$p){
 	return $code;
 }
 
-if (!defined('_ALLERDATA_DEBUG_LANG')) define('_ALLERDATA_DEBUG_LANG',true);
 /**
  * Recuperer la traduction d'un champ en fonction de la langue courante
+ * Si la langue courante n'est pas traduite, passer par la trad a la volee sur le champ francais
+ * qui est la reference
  *
  * @param string $lang
  * @param array $trads
@@ -66,9 +79,8 @@ function allerdata_traduit_champ($lang,$trads){
 	if (isset($trads[$lang]) AND strlen($trads[$lang]))
 		return $trads[$lang];
 
-	// sinon renvoyer la langue par defaut, avec un marquer pour le debug
-	$t = reset($trads);
-	return ((_ALLERDATA_DEBUG_LANG AND strlen($t))?"[$lang]":'').$t;
+	// sinon renvoyer la langue par defaut traduite a la volee
+	return aT(reset($trads),$lang);
 }
 
 function allerdata_multiplexe_erreurs_trad($champ,&$erreurs){
@@ -79,11 +91,28 @@ function allerdata_multiplexe_erreurs_trad($champ,&$erreurs){
 	}
 }
 
-function aT($texte,$langue_cible){
-	if ($langue_cible=='fr')
+if (!defined('_ALLERDATA_DEBUG_LANG')) define('_ALLERDATA_DEBUG_LANG',true);
+/**
+ * Fonction de traduction a la volee pour les contenus non traduits
+ * avec mise en cache
+ * @param string $texte
+ * @param string $langue_cible
+ * @param string $lang_ref
+ * @return string
+ */
+function aT($texte, $langue_cible, $lang_ref='fr'){
+	if ($langue_cible==$lang_ref)
 		return $texte;
 	// TODO : google translate avec cache ici
-	return "<span style='color:red'>$texte</span>";
+	#include_spip('inc/translate');
+	#if ($t = translate($texte, $lang_ref, $langue_cible))
+	#	return $t;
+
+	// sinon, non traduit
+	if (_ALLERDATA_DEBUG_LANG AND strlen($texte))
+		return "<span style='color:red'>[$langue_cible]$texte</span>";
+
+	return $texte;
 }
 
 /**

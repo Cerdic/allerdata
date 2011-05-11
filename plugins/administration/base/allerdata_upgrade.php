@@ -270,6 +270,7 @@
 				ecrire_meta($nom_meta_base_version,$current_version='0.2.1','non');
 			}
 			if (version_compare($current_version,'0.2.2','<')){
+				include_spip('inc/translate');
 				$champs = array('nom_fr','autre_nom_fr','nom_complet_fr','nom_court_fr','chaine_alpha_fr','representatif_fr','fonction_classification_fr');
 				$id_type_item=1;
 				while ($id_type_item<13){
@@ -332,26 +333,4 @@
 		return '';
 	}
 
-	function translate($q,$lang_src,$lang_dest){
-		$url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyDwdmOUIFWdfwqMadQcFxHElAmATG40S-Y";
-		$url .= "&source=$lang_src&target=$lang_dest";
-		foreach(is_string($q)?array($q):$q as $s)
-			$url .= "&q=".urlencode($s);
-
-		include_spip('inc/distant');
-		$res = recuperer_page($url);
-		$translations = json_decode($res);
-		$translations = $translations->data->translations;
-		$t = array();
-		foreach($translations as $translation)
-			$t[] = str_replace("#esp","#spp",$translation->translatedText);
-
-		if (is_string($q))
-			return reset($t);
-
-		foreach($q as $k=>$v)
-			$q[$k] = array_shift($t);
-
-		return $q;
-	}
 ?>
