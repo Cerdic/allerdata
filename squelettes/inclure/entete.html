@@ -6,7 +6,13 @@
 
 ]
 <ul id="prelude">
-	<li><a href="#URL_PAGE{plan}"><:plan_site:></a></li><li><a href="" onclick="javascript:imprimer();"><:ad:imprimer:></a></li>
+	<li class="langues">
+	<BOUCLE_langues(POUR){tableau #REM|allerdata_langues}{' | '}>
+	<a href='[(#SELF|parametre_url{lang,#VALEUR})]'[(#LANG|=={#VALEUR}|oui)class='on']>[(#VALEUR|traduire_nom_langue)]</a>
+	</BOUCLE_langues>
+	</li>
+	<li><a href="#URL_PAGE{plan}"><:plan_site:></a></li>
+	<li><a href="" onclick="javascript:imprimer();"><:ad:imprimer:></a></li>
 	<!--<li><a href="accesspol.htm">politique d'accessibilit&eacute;</a></li>-->
 </ul>
 <p id="logo"><a href="./"><img src="#CHEMIN{images/logo.gif}" alt="<:ad:retour_accueil:>" /></a></p>
