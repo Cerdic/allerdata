@@ -35,25 +35,24 @@ function allerdata_rechercher_liste_des_jointures($liste){
 			);
 	}
 
-	/**
-	 * definition dynamique des fonctions de jointure de recherches
-	 */
-	
-	foreach(allerdata_langues() as $l){
-		$f = preg_replace(',s$,', '', allerdata_vue('tbl_items',$l));
-		$f = "inc_rechercher_joints_{$f}_{$f}_dist";
-
-		eval(
-		'function '.$f.'($table,$table_liee,$ids_trouves, $serveur="") {
-			$g = charger_fonction("rechercher_joints_tbl_item_tbl_item","inc");
-			return $g($table,$table_liee,$ids_trouves,$serveur);
-		}'
-		);
-	}
-
 	return $liste;
 }
 
+/**
+ * definition dynamique des fonctions de jointure de recherches
+ */
+
+foreach(allerdata_langues() as $l){
+	$f = preg_replace(',s$,', '', allerdata_vue('tbl_items',$l));
+	$f = "inc_rechercher_joints_{$f}_{$f}_dist";
+
+	eval(
+	'function '.$f.'($table,$table_liee,$ids_trouves, $serveur="") {
+		$g = charger_fonction("rechercher_joints_tbl_item_tbl_item","inc");
+		return $g($table,$table_liee,$ids_trouves,$serveur);
+	}'
+	);
+}
 
 function allerdata_afficher_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur'){
