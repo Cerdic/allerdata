@@ -1,0 +1,50 @@
+<h1>Langue : Anlais[ | [(#ID_TYPE_ITEM|allerdata_type_item)] (#ID_TYPE_ITEM)][ | "(#ENV{recherche})"]</h1>
+<B_trad>
+	<h3>#GRAND_TOTAL Items</h3>
+	[<p class="pagination">(#PAGINATION)</p>]
+	<table class="spip">
+		<thead>
+			<tr class="first_row">
+				<th>#</th>
+				<th>type</th>
+				<th>Nom</th>
+				<th>court</th>
+				<th>complet</th>
+				<th>autre</th>
+				<th>Chaine alpha</th>
+				<th>fonction classification</th>
+				<th>representatif</th>
+			</tr>
+		</thead>
+		<tbody>
+			<BOUCLE_trad(tbl_items){id_item?}{id_type_item?}{recherche?}{pagination 50}{par id_item}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td>#ID_ITEM</td>
+				<td>#ID_TYPE_ITEM</td>
+				<td><span class="#EDIT{nom_en}">[(#NOM_EN|sinon{[<blink style='color:red'>(#NOM_FR)</blink>]})]</span>[<em>&#91;fr&#93;(#NOM_FR)</em>]</td>
+				<td><span class="#EDIT{nom_court_en}">[(#NOM_COURT_EN|sinon{[<blink style='color:red'>(#NOM_COURT_FR)</blink>]})]</span>[<em>&#91;fr&#93;(#NOM_COURT_FR)</em>]</td>
+				<td><span class="#EDIT{nom_complet_en}">[(#NOM_COMPLET_EN|sinon{[<blink style='color:red'>(#NOM_COMPLET_FR)</blink>]})]</span>[<em>&#91;fr&#93;(#NOM_COMPLET_FR)</em>]</td>
+				<td><span class="#EDIT{autre_nom_en}">[(#AUTRE_NOM_EN|sinon{[<blink style='color:red'>(#AUTRE_NOM_FR)</blink>]})]</span>[<em>&#91;fr&#93;(#AUTRE_NOM_FR)</em>]</td>
+				<td><span class="#EDIT{chaine_alpha_en}">[(#CHAINE_ALPHA_EN|sinon{[<blink style='color:red'>(#CHAINE_ALPHA_FR)</blink>]})]</span>[<em>&#91;fr&#93;(#CHAINE_ALPHA_FR)</em>]</td>
+				<td><span class="#EDIT{fonction_classification_en}">[(#FONCTION_CLASSIFICATION_EN|sinon{[<blink style='color:red'>(#FONCTION_CLASSIFICATION_FR)</blink>]})]</span>[<em>&#91;fr&#93;(#FONCTION_CLASSIFICATION_FR)</em>]</td>
+				<td><span class="#EDIT{representatif_en}">[(#REPRESENTATIF_EN|sinon{[<blink style='color:red'>(#REPRESENTATIF_FR)</blink>]})]</span>[<em>&#91;fr&#93;(#REPRESENTATIF_FR)</em>]</td>
+			</tr>
+			</BOUCLE_trad>
+		</tbody>
+	</table>
+	[<p class="pagination">(#PAGINATION)</p>]
+</B_trad>
+<style type="text/css">
+	#sidebar {display:none;}
+	#main {width:930px;margin:0 0 0 -50px;float:none;background:white;}
+	#contenu{padding-left:0;padding-right:0;}
+	.crayon-html .formulaire_spip {padding:0}
+	em {color:#999;display:block;}
+</style>
+
+#FORMULAIRE_RECHERCHE{#SELF|parametre_url{debut_trad,''}}
+<ul>
+<BOUCLE_nav_type(tbl_items){fusion id_type_item}{id_type_item>0}>
+	<li>[(#SELF|parametre_url{debut_trad,''}|parametre_url{id_type_item,#ID_TYPE_ITEM}|lien_ou_expose{[(#ID_TYPE_ITEM|allerdata_type_item) #ID_TYPE_ITEM],#ID_TYPE_ITEM|=={#ENV{id_type_item}}})]</li>
+</BOUCLE_nav_type>
+</ul>
