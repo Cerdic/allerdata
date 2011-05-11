@@ -126,36 +126,39 @@ function rc($p1,$p2,$type_etude) {
 			$label_rc2v1 = _T('ad:label_rc2v1');//RC 2-&gt; 1
 			$label_produit2 = _T('ad:label_produit2');//Produit2
 			$label_remarques = _T('ad:label_remarques');//Remarques
+			$label_retour_synthese = _T('ad:label_retour_synthese');//Retour &agrave; la synth&egrave;se
 
 			while ($rowbiblio = sql_fetch($resbiblio)){
 				$linkbiblio = '<a href="#biblio'.$row['id_reactions_croisee'].'">';
 				if (!$premiere_ligne) $biblio .= '<tr><td colspan="5">&nbsp;</td></tr>';
 				$premiere_ligne = false;
-				$biblio .= '<tr class="row_first"><th colspan="5"><a name="biblio'.$row['id_reactions_croisee'].'" id="biblio'.$row['id_reactions_croisee'].'"></a><span class="left">'.$row['id_reactions_croisee'].' : </span><a class="small right" href="#top_'.$type_etude.'">Retour &agrave; la synth&egrave;se <img src="'.find_in_path('img/arrow_up.gif').'" style="margin-bottom:-2px"/></a></th></tr>
+				$biblio .= '<tr class="row_first"><th colspan="5"><a name="biblio'.$row['id_reactions_croisee'].'" id="biblio'
+				           .$row['id_reactions_croisee'].'"></a><span class="left">'.$row['id_reactions_croisee']
+				           .' : </span><a class="small right" href="#top_'.$type_etude.'">'.$label_retour_synthese.' <img src="'.find_in_path('img/arrow_up.gif').'" style="margin-bottom:-2px"/></a></th></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"').'><td colspan="5" rowspan="1">'
 				."<a onclick=\"jQuery(this).next().toggle('fast');return false;\">".$rowbiblio['citation']."</a>"
 				."<div style='display:none;padding:5px;font-size:0.9em;'>".$rowbiblio['abstract']."</div>"
 				. '</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
-				           .'><td><b>'.$label_pays.'</b>: '.$rowbiblio['pays']
-				           .'</td><td colspan="4" rowspan="1">'.$rowbiblio['description_groupe'].'</td></tr>
+				           .'><td><b>'.$label_pays.'</b>: '.aT($rowbiblio['pays'],$GLOBALS['spip_lang'])
+				           .'</td><td colspan="4" rowspan="1">'.aT($rowbiblio['description_groupe'],$GLOBALS['spip_lang']).'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
 				           .'><td><b>'.$label_nb_sujets.'</b>: '.$rowbiblio['nb_sujets']
-				           .'</td><td colspan="2" rowspan="1"><b>'.$label_test_individuels.'</b>: '.(($rowbiblio['pool']==1)?'Non':'Oui')
-				           .'</td><td colspan="2" rowspan="1"><b>'.$label_test_quantitatif.'</b>: '.(($rowbiblio['qualitatif']==1)?'Non':'Oui').'</td></tr>
+				           .'</td><td colspan="2" rowspan="1"><b>'.$label_test_individuels.'</b>: '.(($rowbiblio['pool']==1)?_T('ad:non'):_T('ad:oui'))
+				           .'</td><td colspan="2" rowspan="1"><b>'.$label_test_quantitatif.'</b>: '.(($rowbiblio['qualitatif']==1)?_T('ad:non'):_T('ad:oui')).'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
 				           .'><td><b>'.$label_produit1.'</b></td><td><b>'.$label_rc1v2
 				           .'</b></td><td><b>'.$label_rc2v1.'</b></td><td><b>'.$label_produit2.'</b></td><td><b>'.$label_remarques.'</b></td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
 				           .'><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_rc_sens1'].'</td><td>'
-				           .$rowbiblio['niveau_rc_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.$rowbiblio['remarques'].'</td></tr>
+				           .$rowbiblio['niveau_rc_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.aT($rowbiblio['remarques'],$GLOBALS['spip_lang']).'</td></tr>
 								';
 			}
 			
 			$flag_no_color = ($type_etude == 'pp')?'':'_nb';
-      if (!in_array($row['type2'],array(7,8,9,10,13))) $link2 = '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'spip.php?page=popup_item&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].($row['p2_fonction']?' ('.$row['p2_fonction'].')':'').'</a>';
+      if (!in_array($row['type2'],array(7,8,9,10,13))) $link2 = '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p2']).'\',\'spip.php?page=popup_item&amp;lang='.$GLOBALS['spip_lang'].'&amp;id_item='.$row['idp2'].'\'); return false">'.$row['p2'].($row['p2_fonction']?' ('.$row['p2_fonction'].')':'').'</a>';
       else $link2 = $row['p2'];
-      if (!in_array($row['type1'],array(7,8,9,10,13))) $link1 = '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'spip.php?page=popup_item&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].($row['p1_fonction']?' ('.$row['p1_fonction'].')':'').'</a>';
+      if (!in_array($row['type1'],array(7,8,9,10,13))) $link1 = '<a href="#" onclick="main_panel.updateTab(null,\''.addslashes($row['p1']).'\',\'spip.php?page=popup_item&amp;lang='.$GLOBALS['spip_lang'].'&amp;id_item='.$row['idp1'].'\'); return false">'.$row['p1'].($row['p1_fonction']?' ('.$row['p1_fonction'].')':'').'</a>';
 			else $link1 = $row['p1'];
       if ($p1 == $row['id_s1']) {
 				$fl1 = (($row['fleche_sens1'] === '0') ? '<img src="'.$css_path.'/img/rc_jamais_lr'.$flag_no_color.'2.gif" alt="" title="" />': (($row['fleche_sens1'] === '1') ? '<img src="'.$css_path.'/img/rc_toujours_lr'.$flag_no_color.'2.gif" alt="" title="" />': '<span></span>'));

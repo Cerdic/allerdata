@@ -19,19 +19,19 @@ $GLOBALS['tables_principales']['spip_auteurs']['pass_clair']="tinytext DEFAULT '
  * texte_fr, texte_en
  * @return array
  */
-function allerdata_langes(){	return array('fr','en'); }
+function allerdata_langues(){	return array('fr','en'); }
 
 function allerdata_vue($table,$langue=null){
 	if (is_null($langue))
 		$langue = $GLOBALS['spip_lang'];
-	if (in_array($langue,allerdata_langes()))
+	if (in_array($langue,allerdata_langues()))
 		return $langue ."_". $table;
 	return "fr_".$table;
 }
 
 function allerdata_liste_champs_trad($champ){
 	$liste = array();
-	foreach(allerdata_langes() as $l)
+	foreach(allerdata_langues() as $l)
 		$liste[$l] = $champ . '_' .$l;
 	return $liste;
 }
@@ -79,6 +79,12 @@ function allerdata_multiplexe_erreurs_trad($champ,&$erreurs){
 	}
 }
 
+function aT($texte,$langue_cible){
+	if ($langue_cible=='fr')
+		return $texte;
+	// TODO : google translate avec cache ici
+	return "<span style='color:red'>$texte</span>";
+}
 
 /**
  * traduction des des champs en fonction de la langue :

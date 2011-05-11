@@ -11,7 +11,7 @@ var CCD = {
     if (p.length)
 			p.sort();
 		p=p.join('%2C');
-		$('#ccd').load('spip.php?page=ccd&p=' + p);
+		$('#ccd').load('spip.php?page=ccd&lang=#LANG&p=' + p);
 		$('input').removeClass('actif');
 	},
 	outline_prod : function(array_prod, color) {

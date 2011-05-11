@@ -38,7 +38,7 @@ var LISTE_DES_SUGGESTIONS = {
           method:'GET',
           disableCaching:true
         }),
-        baseParams:{page:'liste_des_suggestions'},
+        baseParams:{page:'liste_des_suggestions',lang:'#LANG'},
         reader: new Ext.data.JsonReader({        
           root: 'liste_des_suggestions',
   				id: 'id_mol'
@@ -79,7 +79,7 @@ var LISTE_DES_SUGGESTIONS = {
     return this.grid;
   },
 
-  // La mise � jour se fait par json
+  // La mise a jour se fait par json
   show_query : function() {
     ds_s = this.grid.getStore();
     var p = [];
@@ -89,7 +89,7 @@ var LISTE_DES_SUGGESTIONS = {
     if (p.length)
 			p.sort();
 		p=p.join(',');
-    ds_s.baseParams = {page:'liste_des_suggestions',p:p};
+    ds_s.baseParams = {page:'liste_des_suggestions',lang:'#LANG',p:p};
     ds_s.reload({callback:dragdrop});
   }
 };

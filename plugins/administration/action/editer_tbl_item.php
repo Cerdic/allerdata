@@ -44,13 +44,13 @@ function tbl_items_set($id_item, $set=null) {
 		$c = array();
 		include_spip('inc/allerdata_fonctions');
 		$champs = array_merge(
-			allerdata_liste_champs_trad('nom'),
-			allerdata_liste_champs_trad('autre_nom'),
-			allerdata_liste_champs_trad('nom_complet'),
-			allerdata_liste_champs_trad('nom_court'),
-			allerdata_liste_champs_trad('chaine_alpha'),
-			allerdata_liste_champs_trad('representatif'),
-			allerdata_liste_champs_trad('fonction_classification'),
+			array_values(allerdata_liste_champs_trad('nom')),
+			array_values(allerdata_liste_champs_trad('autre_nom')),
+			array_values(allerdata_liste_champs_trad('nom_complet')),
+			array_values(allerdata_liste_champs_trad('nom_court')),
+			array_values(allerdata_liste_champs_trad('chaine_alpha')),
+			array_values(allerdata_liste_champs_trad('representatif')),
+			array_values(allerdata_liste_champs_trad('fonction_classification')),
 			array(
 			'id_type_item',
 			//'source', 'famille',

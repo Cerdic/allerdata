@@ -20,7 +20,7 @@ LISTE_DES_RC = {
     });
     
     this.rcStore = new Ext.data.Store({
-      proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_rc',method:'GET'}),
+      proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_rc&lang=#LANG',method:'GET'}),
       reader: new Ext.data.JsonReader(
         {root: 'liste_des_rc'},Ext.data.Record.create([
           {name:'source'},
@@ -38,9 +38,9 @@ LISTE_DES_RC = {
       p1 = jQuery(this).attr('id').substr(6,1);
       p2 = jQuery(this).attr('id').substr(8,1);
 			main_panel.beginUpdate();
-      main_panel.updateTab('tab2','<:ad:titre_onglet_etudes_produits_allergenes|texte_script:> (?)', 'spip.php?page=popup_rc&etude=pa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
-      main_panel.updateTab('tab3','<:ad:titre_onglet_etudes_allergenes_allergenes|texte_script:> (?)', 'spip.php?page=popup_rc&etude=aa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
-      main_panel.updateTab('tab1','<:ad:titre_onglet_etudes_produits_produits|texte_script:> (?)', 'spip.php?page=popup_rc&etude=pp&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+      main_panel.updateTab('tab2','<:ad:titre_onglet_etudes_produits_allergenes|texte_script:> (?)', 'spip.php?page=popup_rc&lang=#LANG&etude=pa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+      main_panel.updateTab('tab3','<:ad:titre_onglet_etudes_allergenes_allergenes|texte_script:> (?)', 'spip.php?page=popup_rc&lang=#LANG&etude=aa&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
+      main_panel.updateTab('tab1','<:ad:titre_onglet_etudes_produits_produits|texte_script:> (?)', 'spip.php?page=popup_rc&lang=#LANG&etude=pp&p1=' + $('#p'+p1).val() + '&p2=' + $('#p'+p2).val());
       dialog_avec_tab.setTitle('<:ad:titre_detail_reactivites|texte_script:>');
 			main_panel.endUpdate();
       dialog_avec_tab.show(Ext.get('lien_'+p1+'-'+p2+'_'));

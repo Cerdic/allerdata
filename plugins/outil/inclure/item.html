@@ -20,7 +20,7 @@
 							<BOUCLE_t5ft(tbl_items){id_type_item=5}{est_dans #ID_ITEM}{par #GET{ordernom}}{!isnull nom_fr}>
 							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 							#SET{testable,0}
-							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></td>
+							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','[(#URL_PAGE{popup_item,lang=#LANG}|parametre_url{id_item,#ID_ITEM})]'); return false">#NOM</a></td>
 							<td><i><BOUCLE_sources5ft(tbl_items){type_item source}{contient_directement #ID_ITEM}{par #GET{ordernom}}{!isnull nom_fr}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5ft></i></td>
 							</tr>
 							</BOUCLE_t5ft>
@@ -50,9 +50,9 @@
 							<BOUCLE_t5(tbl_items){id_type_item=5}{est_dans #ID_ITEM}{par #GET{ordernom}}{!isnull nom_fr}>
 							<tr[ class="(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})"]>
 							#SET{testable,0}
-							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></td>
+							<td><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','[(#URL_PAGE{popup_item,lang=#LANG}|parametre_url{id_item,#ID_ITEM})]'); return false">#NOM</a></td>
 							<td><i><BOUCLE_sources5(tbl_items){type_item source}{contient_directement #ID_ITEM}{par #GET{ordernom}}{!isnull nom_fr}{', '}>#NOM#SET{testable,#GET{testable}|ou{#TESTABLE}}</BOUCLE_sources5></i></td>
-							<td><BOUCLE_famille_taxo5(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par #GET{ordernom}}{!isnull nom_fr}{', '}><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a></BOUCLE_famille_taxo5></td>
+							<td><BOUCLE_famille_taxo5(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{par #GET{ordernom}}{!isnull nom_fr}{', '}><a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','[(#URL_PAGE{popup_item,lang=#LANG}|parametre_url{id_item,#ID_ITEM})]'); return false">#NOM</a></BOUCLE_famille_taxo5></td>
 							<td style="text-align:center;font-size:1.5em;">[(#GET{testable}|oui)[(#CHEMIN{img/icon_accept.gif}|balise_img{<:ad:testable:>})]]</td>
 							</tr>
 							</BOUCLE_t5>
@@ -73,7 +73,7 @@
 					<h2><:ad:titre_famille_taxo:></h2>
 					<p style="text-align:center;"><i>
 					<BOUCLE_famille_taxo(tbl_items){type_item famille_taxo}{contient #ID_ITEM}{id_item!=#ID_ITEM}{', '}{!isnull nom_fr}{par #GET{ordernom}}>
-						<a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','#URL_PAGE{popup_item,id_item=#ID_ITEM}'); return false">#NOM</a>
+						<a href="#" onclick="main_panel.updateTab(null,'[(#NOM|texte_script)]','[(#URL_PAGE{popup_item,lang=#LANG}|parametre_url{id_item,#ID_ITEM})]'); return false">#NOM</a>
 					</BOUCLE_famille_taxo>
 					</i></p>
 					</div>

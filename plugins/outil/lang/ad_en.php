@@ -5,67 +5,67 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accueil' => 'Home',
 	'accueil_ad' => 'Allerdata Home',
-	'allergenicite' => "[en]Allergenicité",
+	'allergenicite' => "Allergenicity",
 	'annee' => 'year',
 	'assistant_moleculaire' => "Tool",
 	'aucun_resultat' => "No Result",
-	'ajoute_le' => '[en]Ajouté le',
+	'ajoute_le' => 'Added',
 	'acces_libre' => 'Free access',
 	'acces_reserve' => 'Restricted access',
 
 	'articlesconnexes' => 'Related contents',
-	'acces_reserve_abonnes' => '[en]<br />Page à accès réservé aux abonnés',
-	'aucune_etude_de_ce_type' => '[en]Aucune étude de ce type',
+	'acces_reserve_abonnes' => '<br />Restricted access for subscribers only',
+	'aucune_etude_de_ce_type' => 'No such study',
 	
 	// B
-	'bibliographie' => '[en]Bibliographie',
-	'blabla_inscription' => '[en]<p>Ce site est la propriété exclusive de la société AllerData SARL.</p>
-					<p>Il contient des informations qui, mal interprétées, pourraient conduire à un diagnostic et une prise en charge erronés.</p>
-					<p>C\'est pour cela qu\'il est exclusivement réservé aux professionnels de santé compétents en allergologie après vérification de leurs données.</p>
-					<p>Si vous êtes allergologue ou travaillez dans le domaine de l\'allergie, vous pouvez demander à bénéficier d\'un accès complet en remplissant le formulaire ci-dessous.</p>',
+	'bibliographie' => 'Bibliography',
+	'blabla_inscription' => '<p> This site is the exclusive property of the company AllerData LLC. </p>
+<p>It contains information, that may lead to diagnosis and treatment errors if misinterpreted</p>
+<p>This is why it is reserved exclusively for healthcare professionals competent in allergy after verification of their data.</p>
+<p>If you are allergist or working in the field of allergy, you can apply for full access by filling out the form below. </p>',
 	'bouton_annuler' => 'Cancel',
 	'bouton_valider' => 'OK',
 
 	'choisissez' => 'Pick one',
-	'citation' => '[en]Citation',
+	'citation' => 'Citation',
 
 	'en_savoir_plus' => 'Read more',
 
 	// G
 	'get_url' => "Get URL of this view",
-	'glyco' => "[en]Glyco",
+	'glyco' => "Glyco",
 
 	'help_needed' => "Some Help?",
 
 	// I
-	'intro_login' => '[en]<p>Vous êtes déjà abonné ?</p>
-					<p>Afin d\'accéder au contenu intégral de ce site, identifiez-vous en entrant 
-					ci-dessous le nom d\'utilisateur et le mot de passe qui vous ont été envoyés.</p>',
-	'iuis' => "[en]IUIS",
+	'intro_login' => '<p> Are you already subscribed ?</p>
+<p> To access the full content of this site, please login by entering
+below the user name and password that you have been sent. </p>',
+	'iuis' => "IUIS",
 
 	'imprimer' => 'print',
 
 	// J	
-	'js_ccd_name' => '[en]Libellé',
+	'js_ccd_name' => 'Designation',
 	'js_ccd_resultat' => 'Result',
 	'js_ccd_resultats' => 'Results',
-	'js_ccd_title' => '[en]CCD prouvés',
+	'js_ccd_title' => 'Proven CCD',
 	'js_close_button' => 'Close',
 	'js_combo_emptytext' => 'Enter value...',
 	'js_combo_loadingtext' => 'Searching...',
-	'js_error_gotdata' => "[en]la liste des réactivités croisées n'a pas pu être calculée correctement. Veuillez rafraîchir la page ou réinitialiser le pentagramme.", // Garder les accents "en dur" car c'est pour un message d'alerte javascript
-	'js_fm_name' => "Label",
-	'js_fm_nb' => "Nb",
-	'js_fm_grid_title' => '[en]Familles moléculaires',
-	'js_load_mask' => "[en]modification en cours...",
-	'js_mol_title' => '[en]Molécules',
-	'js_sugg_grid_title' => '[en]Croisent également',
-	'js_sugg_p' => "[en]Produit",
-	'js_sugg_card' => "Nb",
-	'js_fm_tests' => "[en]Tests biologiques représentatifs",
-	'js_tests_cliniques_title' => "[en]Tests cliniques",
+	'js_error_gotdata' => "The list of cross-reactivity could not be calculated correctly. Please refresh page or reset the pentagram.", // Garder les accents "en dur" car c'est pour un message d'alerte javascript
+	'js_fm_name' => "Designation",
+	'js_fm_nb' => "No.",
+	'js_fm_grid_title' => 'Molecular families',
+	'js_load_mask' => "modification in progress...",
+	'js_mol_title' => 'Molecules',
+	'js_sugg_grid_title' => 'Also crossing',
+	'js_sugg_p' => "Product",
+	'js_sugg_card' => "No.",
+	'js_fm_tests' => "Biological representative tests",
+	'js_tests_cliniques_title' => "Clinical tests",
   'js_titre_onglet_par_defaut' => 'Detail',
-  'js_titre_popup_fm' => '[en]Famille moléculaire',
+  'js_titre_popup_fm' => 'Molecular families',
 
 	// L
 	'loading' => 'Loading..',
@@ -73,62 +73,65 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_logout' => 'Logout',
 	'lien_login' => 'Login',
 	'lire_la_suite' => 'Read more',
-	'lire_la_suite_edito' => '[en]Edito, Lire la suite',
-	'label_les_allergenes_de' => '[en]Les allergènes de @nom@',
-	'label_les_allergenes_testables_de' => '[en]Les allergènes testables in vitreo de @nom@',
-	'label_produit' => '[en]Produit',
-	'label_organisme_source' => '[en]Organisme Source',
+	'lire_la_suite_edito' => 'Editorial, Read more',
+	'label_les_allergenes_de' => 'Allergens for @nom@',
+	'label_les_allergenes_testables_de' => 'In vitro testable allergens for @nom@',
+	'label_produit' => 'Product',
+	'label_organisme_source' => 'Source organism',
 	'label_nom' => 'Name',
-	'label_famille_taxo' => '[en]Famille taxonomique',
-	'label_famille_mol' => '[en]Famille mol&eacute;culaire',
-	'label_testable' => '[en]Testable',
-	'label_details' => '[en]d&eacute;tails',
+	'label_famille_taxo' => 'Taxonomic family',
+	'label_famille_mol' => 'Molecular family',
+	'label_testable' => 'Testable',
+	'label_details' => 'Details',
 
-	'ad:label_pays' => 'State',
-	'ad:label_nb_sujets' => '[en]Nb sujets',
-	'ad:label_test_individuels' => '[en]S&eacute;rums test&eacute;s individuellement',
-	'ad:label_test_quantitatif' => '[en]Test quantitatif',
-	'ad:label_produit1' => '[en]Produit1',
-	'ad:label_rc1v2' => '[en]RC 1-&gt; 2',
-	'ad:label_rc2v1' => '[en]RC 2-&gt; 1',
-	'ad:label_produit2' => '[en]Produit2',
-	'ad:label_remarques' => '[en]Remarques',
-	
+	'label_pays' => 'State',
+	'label_nb_sujets' => 'No. subjects',
+	'label_test_individuels' => 'Individually tested serums',
+	'label_test_quantitatif' => 'Quantitative Test',
+	'label_produit1' => 'Product#1',
+	'label_rc1v2' => 'CR #1-&gt;#2',
+	'label_rc2v1' => 'CR #1&lt;-#2',
+	'label_produit2' => 'Product#2',
+	'label_remarques' => 'Notes',
+	'label_retour_synthese' => 'Back to summary',
+
 	// M
 	'memerubrique' => 'In same section',
 	'mon_profil' => 'My favorites',
 
 	//N
 	'name' => "Name",
-	'nothing_found' => "[en]Aucun élément n'a été trouvé",
+	'nothing_found' => "No item has been found",
+	'non' => 'No',
+	'oui' => 'Yes',
 
 
 	// R
-	'reactivites_croisees' => "[en]Réactivité croisée",
+	'reactivites_croisees' => "Cross-Reactivity",
 	'retour_accueil' => 'Back to home',
 
 
 	// T
-	'titre_bibliographies_popup_rc' => '[en]Méthodes et résultats',
-	'titre_synthese_popup_rc' => '[en]Synthèse des résultats',
-	'testable' => "[en]Testable in vitro",
-	'titre_organisme_source' => '[en]Organisme Source&nbsp;:',
-	'titre_famille_taxo' => '[en]Famille taxonomique&nbsp;:',
-	'titre_ce_groupe_contient_des_produits' => '[en]Ce groupe générique contient les produits',
-	'titre_famille_taxo_contient_produits' => '[en]Exemples de produits issus d’organismes appartenant &agrave; cette famille',
-	'titre_famille_mol_contient_allergenes' => '[en]Cette famille mol&eacute;culaire contient les allerg&egrave;nes suivants',
-	'titre_allergenes_testables' => '[en]Allergènes testables in vitro',
-	'titre_allergenes_contenus' => '[en]Allergènes contenus dans ce produit',
-	'titre_onglet_etudes_produits_allergenes' => '[en]&Eacute;tudes Produits - Allerg&egrave;nes',
-	'titre_onglet_etudes_allergenes_allergenes' => '[en]&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes',
-	'titre_onglet_etudes_produits_produits' => '[en]&Eacute;tudes Produits - Produits',
-	'titre_detail_reactivites' => '[en]D&eacute;tail des r&eacute;activit&eacute;s crois&eacute;es',
-	'titre_reactivites' => '[en]R&eacute;activit&eacute;s crois&eacute;es',
-	'titre_detail_biblio' => '[en]D&eacute;tails des donn&eacute;es bibiliographiques',
+	'titre_bibliographies_popup_rc' => 'Methods and results',
+	'titre_synthese_popup_rc' => 'Summary of results',
+	'testable' => "In vitro testable",
+	'titre_organisme_source' => 'Source organism:',
+	'titre_famille_taxo' => 'Taxonomic family:',
+	'titre_ce_groupe_contient_des_produits' => 'This generic group contains the products',
+	'titre_famille_taxo_contient_produits' => 'Examples of products derived from organisms belonging to this family',
+	'titre_famille_mol_contient_allergenes' => 'This molecular family contains the following allergens',
+	'titre_allergenes_testables' => 'In vitro testable allergens',
+	'titre_allergenes_contenus' => 'Allergens in this product',
+	'titre_onglet_etudes_produits_allergenes' => 'Products - Allergens Studies',
+	'titre_onglet_etudes_allergenes_allergenes' => 'Allergens - Allergens Studies',
+	'titre_onglet_etudes_produits_produits' => 'Products - Products Studies',
+	'titre_detail_reactivites' => 'Detail of Cross-Reactivity',
+	'titre_reactivites' => 'Cross-Reactivity',
+	'titre_detail_biblio' => 'Details of bibliography data',
 
 
 	// W
-	'work_liste_items_interrogeables' => '[en]La liste des items interrogeables',
+	'work_liste_items_interrogeables' => 'The list of searchable items',
 );
 
 

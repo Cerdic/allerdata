@@ -416,7 +416,7 @@ var ZONES_SAISIE = {
     if ($('#p5').val()) $('#info-s5').show();
 
     this.pStore = new Ext.data.Store({
-      proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_noms',method:'GET'}),
+      proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_noms&lang=#LANG',method:'GET'}),
       reader: new Ext.data.JsonReader(
         {root: 'liste_des_noms'},Ext.data.Record.create([
           {name:'index'},
@@ -437,7 +437,7 @@ var ZONES_SAISIE = {
   },
 
 	popupProd : function(id_item) {
-    main_panel.updateTab('tab1','Item', 'spip.php?page=popup_item&id_item=' + id_item);
+    main_panel.updateTab('tab1','Item', 'spip.php?page=popup_item&lang=#LANG&id_item=' + id_item);
     dialog_avec_tab.setTitle(TITRE_ONGLET_PAR_DEFAUT);
     dialog_avec_tab.show();
     return false;

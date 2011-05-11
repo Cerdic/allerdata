@@ -80,19 +80,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_organisme_source' => 'Organisme Source',
 	'label_nom' => 'Nom',
 	'label_famille_taxo' => 'Famille taxonomique',
-	'label_famille_mol' => 'Famille mol&eacute;culaire',
+	'label_famille_mol' => 'Famille moléculaire',
 	'label_testable' => 'Testable',
-	'label_details' => 'd&eacute;tails',
+	'label_details' => 'détails',
 
-	'ad:label_pays' => 'Pays',
-	'ad:label_nb_sujets' => 'Nb sujets',
-	'ad:label_test_individuels' => 'S&eacute;rums test&eacute;s individuellement',
-	'ad:label_test_quantitatif' => 'Test quantitatif',
-	'ad:label_produit1' => 'Produit1',
-	'ad:label_rc1v2' => 'RC 1-&gt; 2',
-	'ad:label_rc2v1' => 'RC 2-&gt; 1',
-	'ad:label_produit2' => 'Produit2',
-	'ad:label_remarques' => 'Remarques',
+	'label_pays' => 'Pays',
+	'label_nb_sujets' => 'Nb sujets',
+	'label_test_individuels' => 'Sérums testés individuellement',
+	'label_test_quantitatif' => 'Test quantitatif',
+	'label_produit1' => 'Produit1',
+	'label_rc1v2' => 'RC 1-&gt; 2',
+	'label_rc2v1' => 'RC 2-&gt; 1',
+	'label_produit2' => 'Produit2',
+	'label_remarques' => 'Remarques',
+	'label_retour_synthese' => 'Retour à la synthèse',
 	
 	// M
 	'memerubrique' => 'Dans la même rubrique',
@@ -101,6 +102,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//N
 	'name' => "Nom",
 	'nothing_found' => "Aucun élément n'a été trouvé",
+	'non' => 'Non',
+	'oui' => 'Oui',
 
 
 	// R
@@ -115,16 +118,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_organisme_source' => 'Organisme Source&nbsp;:',
 	'titre_famille_taxo' => 'Famille taxonomique&nbsp;:',
 	'titre_ce_groupe_contient_des_produits' => 'Ce groupe générique contient les produits',
-	'titre_famille_taxo_contient_produits' => 'Exemples de produits issus d’organismes appartenant &agrave; cette famille',
-	'titre_famille_mol_contient_allergenes' => 'Cette famille mol&eacute;culaire contient les allerg&egrave;nes suivants',
+	'titre_famille_taxo_contient_produits' => 'Exemples de produits issus d’organismes appartenant à cette famille',
+	'titre_famille_mol_contient_allergenes' => 'Cette famille moléculaire contient les allergènes suivants',
 	'titre_allergenes_testables' => 'Allergènes testables in vitro',
 	'titre_allergenes_contenus' => 'Allergènes contenus dans ce produit',
-	'titre_onglet_etudes_produits_allergenes' => '&Eacute;tudes Produits - Allerg&egrave;nes',
-	'titre_onglet_etudes_allergenes_allergenes' => '&Eacute;tudes Allerg&egrave;nes - Allerg&egrave;nes',
-	'titre_onglet_etudes_produits_produits' => '&Eacute;tudes Produits - Produits',
-	'titre_detail_reactivites' => 'D&eacute;tail des r&eacute;activit&eacute;s crois&eacute;es',
-	'titre_reactivites' => 'R&eacute;activit&eacute;s crois&eacute;es',
-	'titre_detail_biblio' => 'D&eacute;tails des donn&eacute;es bibiliographiques',
+	'titre_onglet_etudes_produits_allergenes' => 'études Produits - Allergènes',
+	'titre_onglet_etudes_allergenes_allergenes' => 'études Allergènes - Allergènes',
+	'titre_onglet_etudes_produits_produits' => 'études Produits - Produits',
+	'titre_detail_reactivites' => 'Détail des réactivités croisées',
+	'titre_reactivites' => 'Réactivités croisées',
+	'titre_detail_biblio' => 'Détails des données bibiliographiques',
 
 
 	// W

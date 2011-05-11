@@ -96,7 +96,7 @@ Ext.onReady(function() {
     plain: true,
     items: [main_panel],
     buttons: [{
-      text: 'Fermer',
+      text: CLOSE_BUTTON,
       handler: function() {
         dialog_avec_tab.hide();
       }
@@ -130,8 +130,8 @@ Ext.onReady(function() {
     echo "
       jQuery('#info-s$i').click(function() {
         if (jQuery('#p$i').val()) {
-          var link = 'spip.php?page=popup_item&id_item=' + jQuery('#p$i').val();
-          main_panel.updateTab('tab1','Produit', link);
+          var link = 'spip.php?page=popup_item&lang=#LANG&id_item=' + jQuery('#p$i').val();
+          main_panel.updateTab('tab1','<:ad:label_produit|texte_script:>', link);
           dialog_avec_tab.setTitle(jQuery('#prod_$i').val());
           dialog_avec_tab.show(Ext.get('prod_$i'));
         }

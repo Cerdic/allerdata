@@ -34,7 +34,7 @@ var LISTE_DES_FAMILLES = {
       };
 
       var ds = new Ext.data.Store({
-        proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_familles',method:'GET'}),
+        proxy: new Ext.data.HttpProxy({url:'spip.php?page=liste_des_familles&lang=#LANG',method:'GET'}),
         reader: new Ext.data.JsonReader({
           root: 'liste_des_familles',
           id : 'id_item'

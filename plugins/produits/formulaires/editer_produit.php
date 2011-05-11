@@ -34,7 +34,7 @@ function formulaires_editer_produit_verifier_dist($id_item='new', $id_parent=0, 
 	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,$oblis);
 
 	include_spip('allerdata_fonctions');
-	foreach(allerdata_langes() as $l){
+	foreach(allerdata_langues() as $l){
 		if ((strlen(_request('nom_court_'.$l))>25
 		 OR (!_request('nom_court_'.$l) AND strlen(_request('nom_'.$l))>25))
 		 // le nom court n'est pas necessaire pour les produits en attente

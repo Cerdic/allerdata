@@ -237,7 +237,7 @@
 				$desc = $GLOBALS['tables_principales']['tbl_items'];
 				$select = array_keys($desc['field']);
 				include_spip('allerdata_fonctions');
-				foreach(allerdata_langes() as $l){
+				foreach(allerdata_langues() as $l){
 					$sl = $select;
 					$remove = array();
 					// champs calcules en fonction de la langue
