@@ -7,6 +7,8 @@
     $tableau_produits = array_map('intval',explode(',',$produits));
   	$produits = implode(",", $tableau_produits);
   	
+	  include_spip('allerdata_fonctions');
+	  $vue = allerdata_vue('tbl_items',$GLOBALS['spip_lang']);
   	// Requete de recherche : il faut tenir compte des reactions entre elements de type 3 ou 5
   	$query = "SELECT DISTINCT 
   			tbl_reactions_croisees.id_reactions_croisee, 
@@ -26,8 +28,8 @@
   			tbl_est_dans.est_dans_id_item AS id_s1, 
   			tbl_est_dans_1.est_dans_id_item AS id_s2
   		FROM 
-        tbl_items as tbi3, 
-        tbl_items as tbi4, 
+        $vue as tbi3,
+        $vue as tbi4,
         (
           (
             (
@@ -38,11 +40,11 @@
                   ) 
                 ON tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2
               ) 
-              INNER JOIN tbl_items ON tbl_est_dans_1.id_item = tbl_items.id_item
+              INNER JOIN $vue AS tbl_items ON tbl_est_dans_1.id_item = tbl_items.id_item
             ) 
             INNER JOIN tbl_types_items ON tbl_items.id_type_item = tbl_types_items.id_type_item
           ) 
-          INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item
+          INNER JOIN $vue AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item
         ) 
         INNER JOIN tbl_types_items AS tbl_types_items_1 ON tbl_items_1.id_type_item = tbl_types_items_1.id_type_item
   		WHERE 

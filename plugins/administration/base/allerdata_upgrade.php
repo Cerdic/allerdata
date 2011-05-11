@@ -207,6 +207,10 @@
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.2.2','non');
 			}
 			if (version_compare($current_version,'0.2.0','<')){
+				include_spip('base/abstract_sql');
+				include_spip('base/serial');
+				include_spip('base/aux');
+
 				sql_alter("TABLE tbl_items CHANGE nom nom_fr varchar(255) default NULL");
 				sql_alter("TABLE tbl_items ADD nom_en varchar(255) default NULL AFTER nom_fr");
 				sql_alter("TABLE tbl_items CHANGE autre_nom autre_nom_fr varchar(255) default NULL");
@@ -225,6 +229,31 @@
 				sql_alter("TABLE tbl_items CHANGE source old_source varchar(100) NOT NULL");
 				sql_alter("TABLE tbl_items CHANGE source_sans_accent old_source_sans_accent varchar(100) NOT NULL");
 				sql_alter("TABLE tbl_items CHANGE famille old_famille varchar(100) NOT NULL");
+
+
+				// Creer une vue par langue, ou les champs traduits sont projetes sur leur nom racine :
+				// nom_en as nom, ...
+				// avec fallback sur le champ _fr quand le champ traduit est vide
+				$desc = $GLOBALS['tables_principales']['tbl_items'];
+				$select = array_keys($desc['field']);
+				include_spip('allerdata_fonctions');
+				foreach(allerdata_langes() as $l){
+					$sl = $select;
+					$remove = array();
+					// champs calcules en fonction de la langue
+					foreach(array('nom','autre_nom','nom_complet','nom_court','chaine_alpha','representatif','fonction_classification') as $c){
+						$sl[] = ($l=='fr')?"{$c}_fr AS {$c}":"IF(CHAR_LENGTH({$c}_{$l})>0,{$c}_{$l},{$c}_fr) AS {$c}";
+						$remove = array_merge($remove,array_values(allerdata_liste_champs_trad($c)));
+					}
+					$sl = array_diff($sl,$remove);
+					// la requete select
+					$sl = sql_select($sl,'tbl_items','','','','','','',false);
+					// creer la vue sur la langue
+					$view = 'tbl_items_'.$l;
+					// la supprimer d'abord, au cas ou
+					sql_drop_view($view,'if exists');
+					sql_create_view($view,$sl);
+				}
 
 				#ecrire_meta($nom_meta_base_version,$current_version='0.2.0','non');
 			}

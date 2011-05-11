@@ -29,7 +29,7 @@ function formulaires_editer_source_verifier_dist($id_item='new', $id_parent=0, $
 	$erreurs = formulaires_editer_objet_verifier('tbl_item',$id_item,intval($id_item)?array('nom_fr','commentaires'):array('nom_fr'));
 	
 	// verifier qu'une source n'existe pas deja avec ce nom
-	if ($rows = sql_allfetsel("id_item,nom",'tbl_items',
+	if ($rows = sql_allfetsel("id_item,nom_fr",'tbl_items',
 	  "id_type_item=4 AND nom_fr=".sql_quote(_request('nom_fr'))." AND NOT(id_item=".intval($id_item).")")
 	  ){
 		$liens = array();

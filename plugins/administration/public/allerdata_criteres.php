@@ -205,4 +205,20 @@ function critere_tbl_items_source_dist($idb, &$boucles, $crit) {
 
 }
 
+/**
+ * Critere {alphalike truc} pour la table tbl_items
+ * genere un chaine_alpha_xx LIKE truc
+ * ou xx est la langue courante
+ * 
+ * @param string $idb
+ * @param array $boucles
+ * @param array $crit
+ */
+function critere_tbl_items_alphalike_dist($idb, &$boucles, $crit) {
+	$boucle = $boucles[$idb];
+	$not = $crit->not;
+	$_like = calculer_liste($crit->param[0], array(), $boucles, $boucle->id_parent);
+	$where = "array('LIKE','chaine_alpha_'.\$GLOBALS['spip_lang'],sql_quote($_like))";
+	$boucle->where[] = ($not?"array('NOT',$where)":$where);
+}
 ?>

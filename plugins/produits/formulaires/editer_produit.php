@@ -79,28 +79,28 @@ function formulaires_editer_produit_traiter_dist($id_item='new', $id_parent=0, $
 function verifier_produit_coherent($id_item,$id_type_item,$id_parent,&$erreurs){
 		// verifier qu'un produit n'existe pas deja avec ce nom
 	include_spip('allerdata_fonctions');
-	if ($rows = sql_allfetsel("id_item,nom",'tbl_items',array(
+	if ($rows = sql_allfetsel("id_item,nom_fr AS nom",'tbl_items',array(
 		sql_in('id_type_item',allerdata_id_type_item('produit',true)),
-	  "nom=".sql_quote(_request('nom'))." AND NOT(id_item=".intval($id_item).")"))
+	  "nom_fr=".sql_quote(_request('nom_fr'))." AND NOT(id_item=".intval($id_item).")"))
 	  ){
 		$liens = array();
 		foreach($rows as $row){
 			$liens[] = "<a href='".generer_url_ecrire('allerdata','page=produits&id_item='.$row['id_item'])."' title='#".$row['id_item']."'>".$row['nom']."</a>";
 		}
 		$liens = implode(", ",$liens);
-		$erreurs['nom'] = _T("editer_produit:item_deja_existant_avec_meme_nom").$liens;
+		$erreurs['nom_fr'] = _T("editer_produit:item_deja_existant_avec_meme_nom").$liens;
 	}
 	elseif (in_array($id_type_item,array(5,13))){
 		$trace = "";
 		// trouver la categorie du produit
 		$id_type_item = allerdata_id_type_item('categorie_produit');
-		$categorie = sql_fetsel("id_item,nom","tbl_items",sql_in('id_type_item',$id_type_item)." AND ".sql_in('id_item',$id_parent));
+		$categorie = sql_fetsel("id_item,nom",allerdata_vue('tbl_items',$GLOBALS['spip_lang']),sql_in('id_type_item',$id_type_item)." AND ".sql_in('id_item',$id_parent));
 		$id_cat = $categorie['id_item'];
 		$trace .= "categorie : $id_cat<br />";
 
 		// trouver la source du produit
 		$id_type_item = allerdata_id_type_item('source');
-		$source = sql_fetsel("id_item,nom","tbl_items",sql_in('id_type_item',$id_type_item)." AND ".sql_in('id_item',$id_parent));
+		$source = sql_fetsel("id_item,nom",allerdata_vue('tbl_items',$GLOBALS['spip_lang']),sql_in('id_type_item',$id_type_item)." AND ".sql_in('id_item',$id_parent));
 		$id_source = $source['id_item'];
 		$nom_source = $source['nom'];
 		$trace .= "source :$id_source $nom_source<br />";
@@ -109,7 +109,7 @@ function verifier_produit_coherent($id_item,$id_type_item,$id_parent,&$erreurs){
 		$nom_source = explode(' ',$nom_source);
 		$nom_source = reset($nom_source);
 		$id_type_item = allerdata_id_type_item('source');
-		$sources = sql_allfetsel("id_item,nom","tbl_items",sql_in('id_type_item',$id_type_item)." AND nom LIKE ".sql_quote("$nom_source %"));
+		$sources = sql_allfetsel("id_item,nom",allerdata_vue('tbl_items',$GLOBALS['spip_lang']),sql_in('id_type_item',$id_type_item)." AND nom LIKE ".sql_quote("$nom_source %"));
 		$trace .= "sources :".implode(',',array_map('end',$sources))."<br />";
 		$sources = array_map('reset',$sources);
 

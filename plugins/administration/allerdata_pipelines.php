@@ -14,14 +14,22 @@
  * @return array
  */
 function allerdata_rechercher_liste_des_champs($liste){
-	$liste['tbl_item'] = array('nom'=>8,'nom_anglosaxon'=>8,'nom_court'=>4,'chaine_alpha'=>4,/*,'source'=>1,'famille'=>1*/);
+	#$liste['tbl_item'] = array('nom'=>8,'nom_anglosaxon'=>8,'nom_court'=>4,'chaine_alpha'=>4,/*,'source'=>1,'famille'=>1*/);
+	include_spip('allerdata_fonctions');
+	foreach(allerdata_langes() as $l)
+		$liste['tbl_item_'.$l] = array('nom'=>8,'nom_anglosaxon'=>8,'nom_court'=>4,'chaine_alpha'=>4,/*,'source'=>1,'famille'=>1*/);
 	return $liste;
 }
 
 function allerdata_rechercher_liste_des_jointures($liste){
-	$liste['tbl_item'] = array(
-		'tbl_item' => array('nom'=>2,'nom_anglosaxon'=>2,'nom_court'=>1,'chaine_alpha'=>1,/*,'source'=>1,'famille'=>1*/)
-		);
+	#$liste['tbl_item'] = array(
+	#	'tbl_item' => array('nom'=>2,'nom_anglosaxon'=>2,'nom_court'=>1,'chaine_alpha'=>1,/*,'source'=>1,'famille'=>1*/)
+	#	);
+	include_spip('allerdata_fonctions');
+	foreach(allerdata_langes() as $l)
+		$liste['tbl_item_'.$l] = array(
+			'tbl_item_'.$l => array('nom'=>2,'nom_anglosaxon'=>2,'nom_court'=>1,'chaine_alpha'=>1,/*,'source'=>1,'famille'=>1*/)
+			);
 	return $liste;
 }
 

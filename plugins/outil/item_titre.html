@@ -1,1 +1,2 @@
-<BOUCLE_Items(tbl_items tbl_types_items){par nom_#LANG}{nom_fr!=}{pentacle=1}{id_item=#ENV{s}}>#NOM</BOUCLE_Items>
+#SET{ordernom,nom_#LANG}
+<BOUCLE_Items(tbl_items tbl_types_items){par #GET{ordernom}}{nom_fr!=}{pentacle=1}{id_item=#ENV{s}}>#NOM</BOUCLE_Items>

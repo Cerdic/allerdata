@@ -25,6 +25,8 @@ function liste_des_suggestions($produits_penta) {
 	$tt = '';
 	
 	/* Liste des suggestions */
+	include_spip('allerdata_fonctions');
+	$vue = allerdata_vue('tbl_items',$GLOBALS['spip_lang']);
 	$query = <<<EOQ
 # Requete pour trouver les items a suggerer
 
@@ -32,8 +34,8 @@ function liste_des_suggestions($produits_penta) {
     FROM (tbl_est_dans INNER JOIN tbl_reactions_croisees ON tbl_est_dans.id_item = tbl_reactions_croisees.id_produit1)
             # Ne prendre que les elements des est_dans qui ont un lien avec tbl_reactions_croisees en source
     INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_reactions_croisees.id_produit2 = tbl_est_dans_1.id_item
-            # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous int�resse)
-    INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item
+            # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous interesse)
+    INNER JOIN $vue AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item
     WHERE (
 				    # RC avec id_produit1 comme fils des elements du penta, et id_produit2 qui n'est pas dans la famille
         tbl_est_dans.est_dans_id_item In ($produits_penta)
@@ -61,7 +63,7 @@ UNION
             # Ne prendre que les elements des est_dans qui ont un lien avec tbl_reactions_croisees en source
     INNER JOIN tbl_est_dans AS tbl_est_dans_1 ON tbl_reactions_croisees.id_produit1 = tbl_est_dans_1.id_item
             # Le produit cible de la RC est aussi en "contenu" du tbl_est_dans(1) (c'est le contenant qui nous int�resse)
-    INNER JOIN tbl_items AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item
+    INNER JOIN $vue AS tbl_items_3 ON tbl_items_3.id_item = tbl_est_dans_1.est_dans_id_item
     WHERE (
 				# RC avec id_produit2 comme fils des elements du penta, et id_produit1 qui n'est pas dans la famille
         tbl_est_dans.est_dans_id_item In ($produits_penta)
@@ -90,7 +92,7 @@ EOQ;
 		if (!isset($t_suggestions[$row['id_item']])) {
 			$t_suggestions[$row['id_item']] = array(
 					'nom' => (($row['nom_court']=='')?$row['nom']:$row['nom_court']),
-					'source' => sql_getfetsel("nom","tbl_items","id_item=".intval(penta_ascendant_le_plus_proche($row['id_item'],'source'))),
+					'source' => sql_getfetsel("nom",$vue,"id_item=".intval(penta_ascendant_le_plus_proche($row['id_item'],'source'))),
 					'id_mol' => $row['id_item'],
 					'mt' => $row['id_minitexte']?$row['id_minitexte']:'');
 		}

@@ -102,13 +102,14 @@ function formulaires_editer_minitexte_verifier_dist($id_minitexte='new', $id_par
 								.")");
 				if (count($semblables)){
 					$rcs = array();
+					include_spip('allerdata_fonctions');
 					foreach($semblables AS $s){
 						$m = _T('minitext:warning_mini_texte_existe_sur_RC',array('url'=>generer_url_ecrire("allerdata","minitextes&edit=".$s['id_minitexte'])));
 						$m .= '<a href="'.generer_url_ecrire('allerdata','page=produits&edit='.$s['id_item_1']).'" target="_blank">'
-										. sql_getfetsel('nom', 'tbl_items', 'id_item='.intval($s['id_item_1'])) . "</a>";
+										. sql_getfetsel('nom', allerdata_vue('tbl_items',$GLOBALS['spip_lang']), 'id_item='.intval($s['id_item_1'])) . "</a>";
 						$m .= " - ";
 						$m .= '<a href="'.generer_url_ecrire('allerdata','page=produits&edit='.$s['id_item_2']).'" target="_blank">'
-										. sql_getfetsel('nom', 'tbl_items', 'id_item='.intval($s['id_item_2'])) . "</a>";
+										. sql_getfetsel('nom', allerdata_vue('tbl_items',$GLOBALS['spip_lang']), 'id_item='.intval($s['id_item_2'])) . "</a>";
 						$rcs[] = $m;
 					}
 					$rcs = implode('<br />',$rcs);

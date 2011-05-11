@@ -35,9 +35,10 @@ function formulaires_editer_reactions_croisees_charger_dist($id_groupes_patient,
 
 			// recuperer les nom des produits
 			// purement indicatif -> sans valeur de controle
-			$n = sql_fetsel('nom_court,nom','tbl_items','id_item='.intval($row['id_produit1']));
+			include_spip('allerdata_fonctions');
+			$n = sql_fetsel('nom_court,nom',allerdata_vue('tbl_items',$GLOBALS['spip_lang']),'id_item='.intval($row['id_produit1']));
 			$valeurs["produit1-$id"] = $n['nom_court']?$n['nom_court']:$n['nom'];
-			$n = sql_fetsel('nom_court,nom','tbl_items','id_item='.intval($row['id_produit2']));
+			$n = sql_fetsel('nom_court,nom',allerdata_vue('tbl_items',$GLOBALS['spip_lang']),'id_item='.intval($row['id_produit2']));
 			$valeurs["produit2-$id"] = $n['nom_court']?$n['nom_court']:$n['nom'];
 			
 			// proposer le dernier produit1 pour la prochaine saisie

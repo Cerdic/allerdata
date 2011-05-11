@@ -21,6 +21,14 @@ $GLOBALS['tables_principales']['spip_auteurs']['pass_clair']="tinytext DEFAULT '
  */
 function allerdata_langes(){	return array('fr','en'); }
 
+function allerdata_vue($table,$langue=null){
+	if (is_null($langue))
+		$langue = $GLOBALS['spip_lang'];
+	if (in_array($langue,allerdata_langes()))
+		return $table."_".$langue;
+	return $table."_fr";
+}
+
 function allerdata_liste_champs_trad($champ){
 	$liste = array();
 	foreach(allerdata_langes() as $l)

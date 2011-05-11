@@ -15,7 +15,7 @@
 </B_prod>
 	<B_fmol>
 	[(#TOTAL_BOUCLE|singulier_ou_pluriel{allerdata:famille_moleculaire,allerdata:famille_mols_nb})]
-	<ul><BOUCLE_fmol(tbl_items){id_minitexte}{par id_type_item,nom}>
+	<ul><BOUCLE_fmol(tbl_items){id_minitexte}{par id_type_item}{par #GET{order}}>
 	<li>#GET{virgule}<span>##ID_ITEM</span><a href='[(#URL_ECRIRE{allerdata}|parametre_url{page,#ID_TYPE_ITEM|allerdata_type_item{s}}|parametre_url{debut_items,@#ID_ITEM}|ancre_url{item#ID_ITEM})]' title='##ID_ITEM / #ID_TYPE_ITEM'>[(#NOM|sinon{<:allerdata:sans_nom_francais:>})]</a>#SET{virgule,'<em>, </em>'}</li>
 	</BOUCLE_fmol>[(#GET{fin})</ul>]
 	</B_fmol>

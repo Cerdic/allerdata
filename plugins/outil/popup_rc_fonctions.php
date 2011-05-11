@@ -11,8 +11,10 @@ function rc($p1,$p2,$type_etude) {
 	 
 	$produits = implode(",", $tableau_produits);
 	
+	include_spip('allerdata_fonctions');
+	$vue = allerdata_vue('tbl_items',$GLOBALS['spip_lang']);
 	foreach ($tableau_produits as $id_item_source) {
-		$query = "SELECT tbl_items.id_item FROM tbl_items, tbl_est_dans 
+		$query = "SELECT tbl_items.id_item FROM $vue AS tbl_items, tbl_est_dans
 			WHERE est_dans_id_item = $id_item_source
 			AND tbl_est_dans.id_item = tbl_items.id_item
 			AND tbl_items.statut='publie'";
@@ -43,7 +45,13 @@ function rc($p1,$p2,$type_etude) {
       tbl_reactions_croisees.produits_differents, 
 			tbl_est_dans.est_dans_id_item AS id_s1, 
 			tbl_est_dans_1.est_dans_id_item AS id_s2
-		FROM tbl_items as tbi3, tbl_items as tbi4, ((((tbl_est_dans AS tbl_est_dans_1 INNER JOIN (tbl_reactions_croisees INNER JOIN tbl_est_dans ON tbl_reactions_croisees.id_produit1 = tbl_est_dans.id_item) ON tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2) INNER JOIN tbl_items ON tbl_est_dans_1.id_item = tbl_items.id_item) INNER JOIN tbl_types_items ON tbl_items.id_type_item = tbl_types_items.id_type_item) INNER JOIN tbl_items AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item) INNER JOIN tbl_types_items AS tbl_types_items_1 ON tbl_items_1.id_type_item = tbl_types_items_1.id_type_item
+		FROM $vue as tbi3, $vue as tbi4,
+			(((
+				(tbl_est_dans AS tbl_est_dans_1 INNER JOIN (tbl_reactions_croisees INNER JOIN tbl_est_dans ON tbl_reactions_croisees.id_produit1 = tbl_est_dans.id_item) ON tbl_est_dans_1.id_item = tbl_reactions_croisees.id_produit2)
+				INNER JOIN $vue AS tbl_items ON tbl_est_dans_1.id_item = tbl_items.id_item)
+					INNER JOIN tbl_types_items ON tbl_items.id_type_item = tbl_types_items.id_type_item)
+						INNER JOIN $vue AS tbl_items_1 ON tbl_est_dans.id_item = tbl_items_1.id_item)
+							INNER JOIN tbl_types_items AS tbl_types_items_1 ON tbl_items_1.id_type_item = tbl_types_items_1.id_type_item
 		WHERE (
 				((tbl_est_dans.est_dans_id_item) In ($produits)) AND ((tbl_est_dans_1.est_dans_id_item) In ($produits))
 				
@@ -95,8 +103,8 @@ function rc($p1,$p2,$type_etude) {
 								tbl_groupes_patients.id_groupes_patient, tbl_groupes_patients.pays, tbl_groupes_patients.description as description_groupe, tbl_groupes_patients.nb_sujets, tbl_groupes_patients.pool, tbl_groupes_patients.qualitatif,
 								tbl_reactions_croisees.id_reactions_croisee, tbl_items.id_item as i1, tbl_items.nom as p1,tbl_items.fonction_classification as p1_fonction, tbl_reactions_croisees.niveau_rc_sens1, 
 									tbl_reactions_croisees.niveau_rc_sens2, tbl_items_1.id_item as i2, tbl_items_1.nom as p2,tbl_items_1.fonction_classification as p2_fonction, tbl_reactions_croisees.remarques
-								FROM tbl_items AS tbl_items_1 
-									INNER JOIN (tbl_items 
+								FROM $vue AS tbl_items_1
+									INNER JOIN ($vue AS tbl_items
 										INNER JOIN ((tbl_reactions_croisees 
 											INNER JOIN tbl_groupes_patients ON tbl_reactions_croisees.id_groupes_patient = tbl_groupes_patients.id_groupes_patient) 
 											INNER JOIN tbl_bibliographies ON tbl_groupes_patients.id_bibliographie = tbl_bibliographies.id_bibliographie) 
@@ -191,5 +199,5 @@ function produit($produits) {
 	include_spip('base/abstract_sql');
 	
 	$result = '';
-	return sql_getfetsel('nom','tbl_items','id_item='.intval($produits)." AND statut='publie'");
+	return sql_getfetsel('nom',allerdata_vue('tbl_items',$GLOBALS['spip_lang']),'id_item='.intval($produits)." AND statut='publie'");
 }

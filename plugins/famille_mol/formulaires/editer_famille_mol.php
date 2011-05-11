@@ -28,7 +28,7 @@ function formulaires_editer_famille_mol_verifier_dist($id_item='new', $id_parent
 	}
 	
 	// verifier qu'une famille moleculaire n'existe pas deja avec ce nom
-	if ($rows = sql_allfetsel("id_item,nom",'tbl_items',
+	if ($rows = sql_allfetsel("id_item,nom_fr",'tbl_items',
 	  "id_type_item=6 AND nom_fr=".sql_quote(_request('nom_fr'))." AND NOT(id_item=".intval($id_item).")")
 	  ){
 		$liens = array();
