@@ -221,4 +221,23 @@ function critere_tbl_items_alphalike_dist($idb, &$boucles, $crit) {
 	$where = "array('LIKE','chaine_alpha_'.\$GLOBALS['spip_lang'],sql_quote($_like))";
 	$boucle->where[] = ($not?"array('NOT',$where)":$where);
 }
+
+
+/**
+ * (tbl_items){recherche} ou {recherche susan}
+ * http://www.spip.net/@recherche
+ * http://doc.spip.org/@critere_recherche_dist
+ *
+ * @param string $idb
+ * @param array $boucles
+ * @param array $crit
+ */
+function critere_tbl_items_recherche_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+
+	$f = charger_fonction('critere_recherche','');
+	$f($idb, $boucles, $crit);
+
+	$boucle->hash = str_replace('"'.$boucle->id_table.'"','allerdata_vue("'.$boucle->id_table.'",$GLOBALS[\'spip_lang\'])',$boucle->hash);
+}
 ?>

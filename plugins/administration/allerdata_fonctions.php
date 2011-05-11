@@ -25,8 +25,8 @@ function allerdata_vue($table,$langue=null){
 	if (is_null($langue))
 		$langue = $GLOBALS['spip_lang'];
 	if (in_array($langue,allerdata_langes()))
-		return $table."_".$langue;
-	return $table."_fr";
+		return $langue ."_". $table;
+	return "fr_".$table;
 }
 
 function allerdata_liste_champs_trad($champ){
@@ -68,7 +68,7 @@ function allerdata_traduit_champ($lang,$trads){
 
 	// sinon renvoyer la langue par defaut, avec un marquer pour le debug
 	$t = reset($trads);
-	return (_ALLERDATA_DEBUG_LANG AND strlen($t)?"[$lang]":'').$t;
+	return ((_ALLERDATA_DEBUG_LANG AND strlen($t))?"[$lang]":'').$t;
 }
 
 function allerdata_multiplexe_erreurs_trad($champ,&$erreurs){

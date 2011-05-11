@@ -249,13 +249,13 @@
 					// la requete select
 					$sl = sql_select($sl,'tbl_items','','','','','','',false);
 					// creer la vue sur la langue
-					$view = 'tbl_items_'.$l;
+					$view = allerdata_vue('tbl_items',$l);
 					// la supprimer d'abord, au cas ou
 					sql_drop_view($view,'if exists');
 					sql_create_view($view,$sl);
 				}
 
-				#ecrire_meta($nom_meta_base_version,$current_version='0.2.0','non');
+				ecrire_meta($nom_meta_base_version,$current_version='0.2.0','non');
 			}
 		}
 	}

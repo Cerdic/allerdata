@@ -16,8 +16,10 @@
 function allerdata_rechercher_liste_des_champs($liste){
 	#$liste['tbl_item'] = array('nom'=>8,'nom_anglosaxon'=>8,'nom_court'=>4,'chaine_alpha'=>4,/*,'source'=>1,'famille'=>1*/);
 	include_spip('allerdata_fonctions');
-	foreach(allerdata_langes() as $l)
-		$liste['tbl_item_'.$l] = array('nom'=>8,'nom_anglosaxon'=>8,'nom_court'=>4,'chaine_alpha'=>4,/*,'source'=>1,'famille'=>1*/);
+	foreach(allerdata_langes() as $l){
+		$type = preg_replace(',s$,', '', allerdata_vue('tbl_items',$l));
+		$liste[$type] = array('nom'=>8,'nom_anglosaxon'=>8,'nom_court'=>4,'chaine_alpha'=>4,/*,'source'=>1,'famille'=>1*/);
+	}
 	return $liste;
 }
 
@@ -26,10 +28,29 @@ function allerdata_rechercher_liste_des_jointures($liste){
 	#	'tbl_item' => array('nom'=>2,'nom_anglosaxon'=>2,'nom_court'=>1,'chaine_alpha'=>1,/*,'source'=>1,'famille'=>1*/)
 	#	);
 	include_spip('allerdata_fonctions');
-	foreach(allerdata_langes() as $l)
-		$liste['tbl_item_'.$l] = array(
-			'tbl_item_'.$l => array('nom'=>2,'nom_anglosaxon'=>2,'nom_court'=>1,'chaine_alpha'=>1,/*,'source'=>1,'famille'=>1*/)
+	foreach(allerdata_langes() as $l){
+		$type = preg_replace(',s$,', '', allerdata_vue('tbl_items',$l));
+		$liste[$type] = array(
+			$type => array('nom'=>2,'nom_anglosaxon'=>2,'nom_court'=>1,'chaine_alpha'=>1,/*,'source'=>1,'famille'=>1*/)
 			);
+	}
+
+	/**
+	 * definition dynamique des fonctions de jointure de recherches
+	 */
+	
+	foreach(allerdata_langes() as $l){
+		$f = preg_replace(',s$,', '', allerdata_vue('tbl_items',$l));
+		$f = "inc_rechercher_joints_{$f}_{$f}_dist";
+
+		eval(
+		'function '.$f.'($table,$table_liee,$ids_trouves, $serveur="") {
+			$g = charger_fonction("rechercher_joints_tbl_item_tbl_item","inc");
+			return $g($table,$table_liee,$ids_trouves,$serveur);
+		}'
+		);
+	}
+
 	return $liste;
 }
 

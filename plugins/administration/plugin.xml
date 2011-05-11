@@ -6,7 +6,7 @@ _ pour Allerdata SARL
 _ &#169; 2008 - Licence GPL
 	</auteur>
 	<icon>img_pack/allerdata-32.png</icon>
-	<version>0.3.0</version>
+	<version>0.4.0</version>
 	<version_base>0.2.0</version_base>
 	<etat>stable</etat>
 	<description>Admin d'Allerdata</description>
