@@ -176,6 +176,9 @@ function allerdata_type_item($id_type_item,$plur=''){
 		case 25:
 			return 'produit'.$plur;
 			break;
+		case 11:
+			return 'testcomposite'.$plur;
+			break;
 		case 4:
 			return 'source'.$plur;
 			break;
