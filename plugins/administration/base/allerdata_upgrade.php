@@ -257,6 +257,65 @@
 
 				ecrire_meta($nom_meta_base_version,$current_version='0.2.0','non');
 			}
+			if (version_compare($current_version,'0.2.1','<')){
+				$champs = array('nom_fr','autre_nom_fr','nom_complet_fr','nom_court_fr','chaine_alpha_fr','representatif_fr','fonction_classification_fr');
+				$autoset = array();
+				foreach($champs as $k)
+					$autoset[preg_replace(',_fr$,','_en',$k)] = $k;
+				// sur les familles taxo c'est facile !
+				sql_update('tbl_items',$autoset,'id_type_item=2');
+				// idem sur les organismes sources
+				sql_update('tbl_items',$autoset,'id_type_item=4');
+				echo "OK 0.2.1";
+				ecrire_meta($nom_meta_base_version,$current_version='0.2.1','non');
+			}
+			if (version_compare($current_version,'0.2.2','<')){
+				$champs = array('nom_fr','autre_nom_fr','nom_complet_fr','nom_court_fr','chaine_alpha_fr','representatif_fr','fonction_classification_fr');
+				$id_type_item=1;
+				while ($id_type_item<13){
+
+					$res = sql_select('id_item,nom_anglosaxon,'.implode(',',$champs),
+														'tbl_items',
+														'nom_en is null AND NOT nom_fr is null AND id_type_item='.intval($id_type_item),'','','0,80');
+					while($row = sql_fetch($res)){
+						$id_item = $row['id_item'];
+						$nom_anglosaxon = ucfirst($row['nom_anglosaxon']);
+						unset($row['id_item']);
+						unset($row['nom_anglosaxon']);
+						
+						$set = array();
+						foreach($row as $k=>$v)
+							if (strlen($v))
+								$set[preg_replace(',_fr$,','_en',$k)] = $v;
+							else
+								unset($row[$k]);
+
+						$translate = $set;
+						if ($nom_anglosaxon) {
+							$set['nom_en'] = $nom_anglosaxon;
+							if (isset($translate['nom_court_en']) AND $translate['nom_en']==$translate['nom_court_en']){
+								$set['nom_court_en'] = $nom_anglosaxon;
+								unset($translate['nom_court_en']);
+							}
+							unset($translate['nom_en']);
+						}
+
+						if (count($translate)){
+							$translate = translate($translate,'fr','en');
+							$set = array_merge($set,$translate);
+						}
+
+						sql_updateq('tbl_items',$set,'id_item='.intval($id_item));
+						echo "#$id_item ";
+					}
+					$id_type_item++;
+				}
+				$n = sql_countsel('tbl_items',
+														'nom_en is null AND NOT nom_fr is null AND id_type_item<13');
+				echo "$n restant a traduire<br />";
+				if ($n==0)
+					ecrire_meta($nom_meta_base_version,$current_version='0.2.2','non');
+			}
 		}
 	}
 	
@@ -271,5 +330,28 @@
 				return $mot.$i;
 		}
 		return '';
+	}
+
+	function translate($q,$lang_src,$lang_dest){
+		$url = "https://www.googleapis.com/language/translate/v2?key=AIzaSyDwdmOUIFWdfwqMadQcFxHElAmATG40S-Y";
+		$url .= "&source=$lang_src&target=$lang_dest";
+		foreach(is_string($q)?array($q):$q as $s)
+			$url .= "&q=".urlencode($s);
+
+		include_spip('inc/distant');
+		$res = recuperer_page($url);
+		$translations = json_decode($res);
+		$translations = $translations->data->translations;
+		$t = array();
+		foreach($translations as $translation)
+			$t[] = str_replace("#esp","#spp",$translation->translatedText);
+
+		if (is_string($q))
+			return reset($t);
+
+		foreach($q as $k=>$v)
+			$q[$k] = array_shift($t);
+
+		return $q;
 	}
 ?>
