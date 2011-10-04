@@ -51,8 +51,9 @@ function critere_tbl_reactions_croisees_produits_dist($idb, &$boucles, $crit) {
 }
 
 
-function traduit_pays($texte){
-	$lang = $GLOBALS['spip_lang'];
+function traduit_pays($texte, $lang=null){
+	if (!$lang)
+		$lang = $GLOBALS['spip_lang'];
 	if ($lang=='fr')
 		return $texte;
 
