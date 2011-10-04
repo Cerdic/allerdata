@@ -116,11 +116,44 @@ function minitext_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE tbl_minitextes ADD texte_en longtext DEFAULT '' NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version='0.2.0','non');
 		}
+		if (version_compare($current_version,'0.2.1','<')){
+			include_spip('base/abstract_sql');
+			minitext_import_trad_en();
+			ecrire_meta($nom_meta_base_version,$current_version='0.2.1','non');
+		}
 	}
 }
 
 function minitext_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
+}
+
+
+function minitext_import_trad_en(){
+	lire_fichier(find_in_path('base/mt_traden.txt'),$contenu);
+	$splits = preg_split(",\s([0-9\/]+)::,",$contenu,null,PREG_SPLIT_DELIM_CAPTURE);
+	array_shift($splits);// on enleve le premier, vide
+	
+	$mt = array();
+	while (count($splits)){
+		$ns = array_shift($splits);
+		$ns =explode("/",$ns);
+		$t = trim(array_shift($splits));
+
+		$t = str_replace("\r\n","\n",$t);
+		$t = str_replace("\r","\n",$t);
+		$t = explode("\n",$t);
+		$t = "{{{".array_shift($t)."}}}\n".implode("\n\n",$t);
+		$t = str_replace("Principal allergens:","[*Principal allergens*]:",$t);
+		$t = str_replace("Molecular diagnosis:","[*Molecular diagnosis*]:",$t);
+
+		foreach($ns as $n)
+			$mt[$n] = $t;
+	}
+
+	foreach($mt as $n=>$t){
+		sql_updateq('tbl_minitextes',array('texte_en'=>$t),'id_minitexte='.intval($n));
+	}
 }
 
 
