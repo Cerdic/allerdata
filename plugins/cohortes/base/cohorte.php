@@ -37,7 +37,7 @@ function cohorte_declarer_tables_principales($tables_principales){
 	);
 	
 	$groupes_patients_key = array(
-			"PRIMARY KEY"	=> "id_bibliographie",
+			"PRIMARY KEY"	=> "id_groupes_patient",
 			"INDEX"	=> "id_bibliographie",
 	);
 	

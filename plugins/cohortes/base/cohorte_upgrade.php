@@ -80,6 +80,25 @@
 		echo "Nombre de groupes en base :".sql_countsel('tbl_groupes_patients')."<br />";
 	}
 
+	function cohorte_importetraden(){
+		$importer_csv = charger_fonction('importer_csv','inc');
+		$trads = $importer_csv(find_in_path('base/cohortestrad_en.csv'),true);
+
+		foreach($trads as $t){
+			$id_groupes_patient = $t['ID_GROUPES_PATIENT'];
+			$set = array();
+			if (strlen($t['DESCRIPTION_FR']) OR strlen($t['DESCRIPTION_EN'])){
+				$set['description']="<multi>[fr]".$t['DESCRIPTION_FR']."[en]".$t['DESCRIPTION_EN']."</multi>";
+			}
+			if (strlen($t['REMARQUES_FR']) OR strlen($t['REMARQUES_EN'])){
+				$set['remarques']="<multi>[fr]".$t['REMARQUES_FR']."[en]".$t['REMARQUES_EN']."</multi>";
+			}
+			if (count($set)){
+				sql_updateq('tbl_groupes_patients',$set,'id_groupes_patient='.intval($id_groupes_patient));
+			}
+		}
+	}
+
 	function cohorte_upgrade($nom_meta_base_version,$version_cible){
 		$current_version = 0.0;
 		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
@@ -149,6 +168,11 @@
 				cohorte_importe_cohortes();
 				ecrire_meta($nom_meta_base_version,$current_version='0.1.0.6','non');
 			}
+			if (version_compare($current_version,'0.1.1.0','<')){
+				cohorte_importetraden();
+				ecrire_meta($nom_meta_base_version,$current_version='0.1.1.0','non');
+			}
+
 		}
 	}
 	

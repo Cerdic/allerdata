@@ -1,0 +1,4 @@
+#HTTP_HEADER{Content-type:text/plain;}
+ID_GROUPES_PATIENT;NOM;DESCRIPTION_FR;REMARQUES_FR
+<BOUCLE_export(tbl_groupes_patients){par id_groupes_patient}>#ID_GROUPES_PATIENT;"#NOM";"[(#DESCRIPTION**|replace{'"','""'})]";"[(#REMARQUES**|replace{'"','""'})]"
+</BOUCLE_export>
