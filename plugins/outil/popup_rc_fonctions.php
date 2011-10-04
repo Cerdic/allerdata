@@ -140,8 +140,8 @@ function rc($p1,$p2,$type_etude) {
 				."<div style='display:none;padding:5px;font-size:0.9em;'>".$rowbiblio['abstract']."</div>"
 				. '</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
-				           .'><td><b>'.$label_pays.'</b>: '.aT($rowbiblio['pays'],$GLOBALS['spip_lang'])
-				           .'</td><td colspan="4" rowspan="1">'.aT($rowbiblio['description_groupe'],$GLOBALS['spip_lang']).'</td></tr>
+				           .'><td><b>'.$label_pays.'</b>: '.traduit_pays($rowbiblio['pays'],$GLOBALS['spip_lang'])
+				           .'</td><td colspan="4" rowspan="1">'.extraire_multi($rowbiblio['description_groupe'],$GLOBALS['spip_lang']).'</td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
 				           .'><td><b>'.$label_nb_sujets.'</b>: '.$rowbiblio['nb_sujets']
 				           .'</td><td colspan="2" rowspan="1"><b>'.$label_test_individuels.'</b>: '.(($rowbiblio['pool']==1)?_T('ad:non'):_T('ad:oui'))
@@ -151,7 +151,7 @@ function rc($p1,$p2,$type_etude) {
 				           .'</b></td><td><b>'.$label_rc2v1.'</b></td><td><b>'.$label_produit2.'</b></td><td><b>'.$label_remarques.'</b></td></tr>
 								<tr'.((($count % 2) == 0)?' class="row_even"':' class="row_odd"')
 				           .'><td>'.$rowbiblio['p1'].'</td><td>'.$rowbiblio['niveau_rc_sens1'].'</td><td>'
-				           .$rowbiblio['niveau_rc_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.aT($rowbiblio['remarques'],$GLOBALS['spip_lang']).'</td></tr>
+				           .$rowbiblio['niveau_rc_sens2'].'</td><td>'.$rowbiblio['p2'].'</td><td>'.extraire_multi($rowbiblio['remarques'],$GLOBALS['spip_lang']).'</td></tr>
 								';
 			}
 			
