@@ -201,7 +201,7 @@ body .x-dlg-mask {
 
 /* POPUPS */
 
-.x-panel-body #main {
+.article_proto .x-panel-body #main {
 		margin:0;
 		padding:20px;
 		width:auto;
@@ -210,6 +210,7 @@ body .x-dlg-mask {
 		font-size:12px;
 		text-align:left
 }
+.x-panel-body #main a {color:#2F7190}
 
 .x-panel-body #main h1.titArticle, .x-panel-body #main h2.titArticle {text-align: center; margin: 1em 0;}
 .x-panel-body .blocContenuArticle {text-align: left;}
@@ -234,6 +235,8 @@ body .x-dlg-mask {
 .liste_rc td span {display:block; width: 50px}
 
 .x-tool-minimize {display:none}
+
+.x-panel-body #main .formulaire_favori {display: none;}
 
 /* Drag n' Drop */
 
