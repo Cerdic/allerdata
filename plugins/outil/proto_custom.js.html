@@ -33,14 +33,13 @@ function loadSpecificFunction() {
    de l'appli pour que les autres "classes" aient pu s'initialiser */
 
   loadFormPenta();
-  <BOUCLE_ModeEmploiAAM(ARTICLES){titre_mot=ModeEmploiAAM}{!par date}{0,1}>
-    jQuery('#lienAide').click(function() {
-      var link = 'spip.php?page=article_popup&id_article=#ID_ARTICLE';
-      main_panel.updateTab('tab1','Aide',link);
-      dialog_avec_tab.setTitle('Index');
-			dialog_avec_tab.show(Ext.get('lienAide'));
-    });
-  </BOUCLE_ModeEmploiAAM>
+	jQuery('#lienAide').click(function() {
+		var link = 'spip.php?page=article_popup&id_article='+jQuery(this).attr('data-id_article');
+		main_panel.updateTab('tab1','Aide',link);
+		dialog_avec_tab.setTitle('Index');
+		dialog_avec_tab.show(Ext.get('lienAide'));
+		return false;
+	});
 
 	/* chargement des images */
 	var content = '';
