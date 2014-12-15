@@ -330,6 +330,7 @@
 				  AND count($items)){
 					$n = 0;
 					$champs_trad = array('nom','autre_nom','nom_complet','chaine_alpha','representatif','fonction_classification','nom_court');
+					echo count($items)." Items a importer<br />";
 					while(count($items)
 					  AND $item = array_shift($items)){
 
