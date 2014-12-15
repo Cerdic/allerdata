@@ -9,7 +9,7 @@
 				</B_ListeArticles>
 				
 
-				<h1 class="h2"><:rubriques:></h1>
+				<h1 class="h2">[(#ID_RUBRIQUE|=={63}|?{#TITRE,<:rubriques:>})]</h1>
 				<B_ListeRubriques>
 				<ul class="listeArticles">
 					<BOUCLE_ListeRubriques(RUBRIQUES){id_parent}{par num titre}{tout_voir}>
