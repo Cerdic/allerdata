@@ -9,7 +9,12 @@
 include_spip('base/serial');
 $GLOBALS['tables_principales']['spip_auteurs']['pass_clair']="tinytext DEFAULT '' NOT NULL";
 
+/****/
+/* Compat fonctions 2.1 */
 
+function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false, $javascript=''){
+	return icone_base($lien,$texte,$fond,$fonction,"verticale $align",$javascript);
+}
 
 
 
@@ -275,18 +280,6 @@ function allerdata_item_racines($id_item){
 	else
 		// c'est une racine !
 		return array($id_item);
-}
-
-/**
- * Afficher un message "une truc"/"N trucs"
- *
- * @param int $nb
- * @return string
- */
-function allerdata_affiche_un_ou_plusieurs($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
-	if (!$nb=intval($nb)) return "";
-	if ($nb>1) return _T($chaine_plusieurs, array($var => $nb));
-	else return _T($chaine_un);
 }
 
 /**
