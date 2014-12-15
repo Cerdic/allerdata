@@ -319,7 +319,7 @@
 			}
 			if (version_compare($current_version,'0.3.0','<')){
 				$file_csv = find_in_path("base/tbl_items_en.csv");
-				$file_ser = _DIR_TMP.basename($file_csv,"csv")."-".md5($file_csv).".txt";
+				$file_ser = _DIR_TMP.basename($file_csv,".csv")."-".md5($file_csv).".txt";
 				if (!file_exists($file_ser)){
 					$importer_csv = charger_fonction("importer_csv","inc");
 					$items = $importer_csv($file_csv,true,";");
@@ -328,9 +328,93 @@
 				lire_fichier($file_ser,$data);
 				if ($items = unserialize($data)
 				  AND count($items)){
+					$seen = array();
 					$n = 0;
 					$champs_trad = array('nom','autre_nom','nom_complet','chaine_alpha','representatif','fonction_classification','nom_court');
 					echo count($items)." Items a importer<br />";
+					$last_seen = 0;
+					while(count($items)
+					  AND $item = array_shift($items)){
+
+						$item = array_map("allerdata_clean_null",$item);
+						if ($item['id_item']!=$last_seen OR count($items)==1){
+							$trads = array();
+							foreach($champs_trad as $c){
+								if ($v = $item[$c."_en"]){
+									$trads[$c] = $v;
+								}
+							}
+							if (count($trads)){
+								$set = array();
+								$row = sql_fetsel("*","tbl_items","id_item=".intval($item['id_item']));
+								foreach($trads as $k=>$v){
+									// quand fr=en des deux cotes, on ne fait RIEN
+									if($row[$k."_fr"]!==$row[$k."_en"] OR $item[$k."_fr"]!==$item[$k."_en"]){
+										if ($row[$k."_fr"]!==$item[$k."_fr"]){
+											$base = $csv = array('id_item'=>$item['id_item']);
+											foreach($row as $k=>$v){
+												if ($item[$k]!==$row[$k] AND !in_array($k,array('glyco','id_version'))){
+													$base[$k] = $row[$k];
+													$csv[$k] = $item[$k];
+												}
+											}
+											echo "BASE : ";
+											var_dump($base);
+											echo "CSV : ";
+											var_dump($csv);
+											echo "Item a change pour {$k}_fr !<br />";
+											if (in_array($item['id_item'],$seen)){
+												echo "<hr />";
+												echo count($items)." Item restants<br />";
+												var_dump($items);
+												die('On a fait le tour !');
+											}
+											$seen[] = $item['id_item'];
+											// on le remet en bout de chaine
+											$items[] = $item;
+											break;
+										}
+										elseif($row[$k."_en"]!==$v) {
+											$set[$k."_en"] = $v;
+										}
+									}
+								}
+								if (count($set)){
+									#var_dump($item);
+									#var_dump($row);
+									#var_dump($set);
+									#die('MODIF ?');
+									sql_updateq("tbl_items",$set,"id_item=".intval($item['id_item']));
+									echo ($s = "Mise a jour item=".$item['id_item']." <br />");
+									spip_log($s,"maj");
+								}
+							}
+							$last_seen = $item['id_item'];
+						}
+
+						if (++$n%20==0){
+							spip_log("sauve $file_ser ".count($items),"maj");
+							ecrire_fichier($file_ser,serialize($items));
+						}
+					}
+				}
+				die('?');
+				ecrire_meta($nom_meta_base_version,$current_version='0.3.0','non');
+			}
+			if (version_compare($current_version,'0.3.1','<')){
+				$file_csv = find_in_path("base/items-trad.csv");
+				$file_ser = _DIR_TMP.basename($file_csv,"csv")."-".md5($file_csv).".txt";
+				if (!file_exists($file_ser)){
+					$importer_csv = charger_fonction("importer_csv","inc");
+					$items = $importer_csv($file_csv,true,",");
+					ecrire_fichier($file_ser,serialize($items));
+				}
+				lire_fichier($file_ser,$data);
+				if ($items = unserialize($data)
+				  AND count($items)){
+					$n = 0;
+					$champs_trad = array('nom','autre_nom','nom_complet','chaine_alpha','representatif','fonction_classification','nom_court');
+					echo count($items)." Traductions a importer<br />";
 					while(count($items)
 					  AND $item = array_shift($items)){
 
@@ -346,8 +430,17 @@
 							$row = sql_fetsel("*","tbl_items","id_item=".intval($item['id_item']));
 							foreach($trads as $k=>$v){
 								if ($row[$k."_fr"]!==$item[$k."_fr"]){
-									var_dump($item);
-									var_dump($row);
+									$base = $csv = array();
+									foreach($row as $k=>$v){
+										if ($item[$k]!==$row[$k]){
+											$base = $row[$k];
+											$csv = $item[$k];
+										}
+									}
+									echo "BASE : ";
+									var_dump($base);
+									echo "CSV : ";
+									var_dump($csv);
 									die("Item a change !");
 								}
 								elseif($row[$k."_en"]!==$v) {
@@ -355,29 +448,31 @@
 								}
 							}
 							if (count($set)){
-								#var_dump($item);
-								#var_dump($row);
-								#var_dump($set);
-								#die('MODIF ?');
+								var_dump($item);
+								var_dump($row);
+								var_dump($set);
+								die('MODIF ?');
 								sql_updateq("tbl_items",$set,"id_item=".intval($item['id_item']));
 								echo "Mise a jour item=".$item['id_item']." <br />";
 							}
 						}
 
-						if ($n%10==0){
+						if (++$n%10==0){
 							ecrire_fichier($file_ser,serialize($items));
 						}
 					}
 				}
 				die('?');
-				ecrire_meta($nom_meta_base_version,$current_version='0.3.0','non');
+				ecrire_meta($nom_meta_base_version,$current_version='0.3.1','non');
 			}
-
 		}
 	}
 
 	function allerdata_clean_null($v){
-		return (($v==="NULL")?null:$v);
+		if ($v==="NULL") return null;
+		if (strpos($v,'\"')!==false)
+			$v = str_replace('\"','"',$v);
+		return $v;
 	}
 
 
