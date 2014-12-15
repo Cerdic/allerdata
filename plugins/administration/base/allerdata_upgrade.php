@@ -398,12 +398,15 @@
 						}
 					}
 				}
-				die('?');
 				ecrire_meta($nom_meta_base_version,$current_version='0.3.0','non');
 			}
 			if (version_compare($current_version,'0.3.1','<')){
-				$file_csv = find_in_path("base/items-trad.csv");
-				$file_ser = _DIR_TMP.basename($file_csv,"csv")."-".md5($file_csv).".txt";
+				sql_alter("TABLE tbl_items CHANGE nom_court_fr nom_court_fr varchar(100) default NULL");
+				sql_alter("TABLE tbl_items CHANGE nom_court_en nom_court_en varchar(100) default NULL");
+
+				include_spip("action/editer_tbl_item");
+				$file_csv = find_in_path("base/items-trad-diff.csv");
+				$file_ser = _DIR_TMP.basename($file_csv,".csv")."-".md5($file_csv).".txt";
 				if (!file_exists($file_ser)){
 					$importer_csv = charger_fonction("importer_csv","inc");
 					$items = $importer_csv($file_csv,true,",");
@@ -412,57 +415,43 @@
 				lire_fichier($file_ser,$data);
 				if ($items = unserialize($data)
 				  AND count($items)){
+					$seen = array();
 					$n = 0;
 					$champs_trad = array('nom','autre_nom','nom_complet','chaine_alpha','representatif','fonction_classification','nom_court');
-					echo count($items)." Traductions a importer<br />";
+					echo count($items)." Items a importer<br />";
 					while(count($items)
 					  AND $item = array_shift($items)){
 
 						$item = array_map("allerdata_clean_null",$item);
-						$trads = array();
+						$set = array();
 						foreach($champs_trad as $c){
-							if ($v = $item[$c."_en"]){
-								$trads[$c] = $v;
+							if ($v = trim($item[$c."_fr"])){
+								$set[$c."_fr"] = $v;
 							}
-						}
-						if (count($trads)){
-							$set = array();
-							$row = sql_fetsel("*","tbl_items","id_item=".intval($item['id_item']));
-							foreach($trads as $k=>$v){
-								if ($row[$k."_fr"]!==$item[$k."_fr"]){
-									$base = $csv = array();
-									foreach($row as $k=>$v){
-										if ($item[$k]!==$row[$k]){
-											$base = $row[$k];
-											$csv = $item[$k];
-										}
-									}
-									echo "BASE : ";
-									var_dump($base);
-									echo "CSV : ";
-									var_dump($csv);
-									die("Item a change !");
-								}
-								elseif($row[$k."_en"]!==$v) {
-									$set[$k."_en"] = $v;
-								}
-							}
-							if (count($set)){
-								var_dump($item);
-								var_dump($row);
-								var_dump($set);
-								die('MODIF ?');
-								sql_updateq("tbl_items",$set,"id_item=".intval($item['id_item']));
-								echo "Mise a jour item=".$item['id_item']." <br />";
+							if ($v = trim($item[$c."_en"])){
+								$set[$c."_en"] = $v;
 							}
 						}
 
-						if (++$n%10==0){
+						if (count($set)){
+							$row = sql_fetsel("*","tbl_items","id_item=".intval($item['id_item']));
+							#var_dump($row);
+							#var_dump($item);
+							#var_dump($set);
+							#die('MODIF ?');
+							tbl_items_set($item['id_item'],$set);
+							//sql_updateq("tbl_items",$set,"id_item=".intval($item['id_item']));
+							echo ($s = "Mise a jour item=".$item['id_item']." ".serialize($set)."<br />");
+							spip_log($s,"maj");
+						}
+
+						if (++$n%20==0){
+							spip_log("sauve $file_ser ".count($items),"maj");
 							ecrire_fichier($file_ser,serialize($items));
+							#die('???');
 						}
 					}
 				}
-				die('?');
 				ecrire_meta($nom_meta_base_version,$current_version='0.3.1','non');
 			}
 		}
@@ -472,6 +461,8 @@
 		if ($v==="NULL") return null;
 		if (strpos($v,'\"')!==false)
 			$v = str_replace('\"','"',$v);
+		if (strpos($v,' ')!==false)
+			$v = str_replace(' ',' ',$v);
 		return $v;
 	}
 
