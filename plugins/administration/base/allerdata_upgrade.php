@@ -302,8 +302,8 @@
 						}
 
 						if (count($translate)){
-							$translate = translate($translate,'fr','en');
-							$set = array_merge($set,$translate);
+							#$translate = translate($translate,'fr','en');
+							#$set = array_merge($set,$translate);
 						}
 
 						sql_updateq('tbl_items',$set,'id_item='.intval($id_item));
@@ -317,9 +317,69 @@
 				if ($n==0)
 					ecrire_meta($nom_meta_base_version,$current_version='0.2.2','non');
 			}
+			if (version_compare($current_version,'0.3.0','<')){
+				$file_csv = find_in_path("base/tbl_items_en.csv");
+				$file_ser = _DIR_TMP.basename($file_csv,"csv")."-".md5($file_csv).".txt";
+				if (!file_exists($file_ser)){
+					$importer_csv = charger_fonction("importer_csv","inc");
+					$items = $importer_csv($file_csv,true,";");
+					ecrire_fichier($file_ser,serialize($items));
+				}
+				lire_fichier($file_ser,$data);
+				if ($items = unserialize($data)
+				  AND count($items)){
+					$n = 0;
+					$champs_trad = array('nom','autre_nom','nom_complet','chaine_alpha','representatif','fonction_classification','nom_court');
+					while(count($items)
+					  AND $item = array_shift($items)){
+
+						$item = array_map("allerdata_clean_null",$item);
+						$trads = array();
+						foreach($champs_trad as $c){
+							if ($v = $item[$c."_en"]){
+								$trads[$c] = $v;
+							}
+						}
+						if (count($trads)){
+							$set = array();
+							$row = sql_fetsel("*","tbl_items","id_item=".intval($item['id_item']));
+							foreach($trads as $k=>$v){
+								if ($row[$k."_fr"]!==$item[$k."_fr"]){
+									var_dump($item);
+									var_dump($row);
+									die("Item a change !");
+								}
+								elseif($row[$k."_en"]!==$v) {
+									$set[$k."_en"] = $v;
+								}
+							}
+							if (count($set)){
+								#var_dump($item);
+								#var_dump($row);
+								#var_dump($set);
+								#die('MODIF ?');
+								sql_updateq("tbl_items",$set,"id_item=".intval($item['id_item']));
+								echo "Mise a jour item=".$item['id_item']." <br />";
+							}
+						}
+
+						if ($n%10==0){
+							ecrire_fichier($file_ser,serialize($items));
+						}
+					}
+				}
+				die('?');
+				ecrire_meta($nom_meta_base_version,$current_version='0.3.0','non');
+			}
+
 		}
 	}
-	
+
+	function allerdata_clean_null($v){
+		return (($v==="NULL")?null:$v);
+	}
+
+
 	function allerdata_vider_tables($nom_meta_base_version) {
 		effacer_meta($nom_meta_base_version);
 	}
