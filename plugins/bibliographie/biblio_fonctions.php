@@ -54,7 +54,11 @@ function balise_ID_AUTEUR_VERSION_dist($p) {
 
 
 function biblio_trous(){
+
 	$res = sql_fetsel("count(id_bibliographie) as n,max(id_bibliographie) as m","tbl_bibliographies");
+	if ($res['m']>2*$res['n']){
+		return "<p class='notice'><strong>Table tbl_bibliographies incoherente - Reparer les cles primaires</strong></p>";
+	}
 	if ($res['m']>$res['n']){
 		$max = intval($res['m']);
 		$i=0;
