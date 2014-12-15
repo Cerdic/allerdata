@@ -102,7 +102,7 @@ var LISTE_DES_FAMILLES = {
 		var t_el = [];
     while (num < lProd.length)
     {
-      var hidden_div = jQuery('#liste_des_produits input[@value='+lProd[num]+']');
+      var hidden_div = jQuery('#liste_des_produits input[value="'+lProd[num]+'"]');
 			t_el[num] = jQuery('#prod_' + hidden_div.attr('id').substr(1))[0];
       num+=1;
     }

@@ -18,7 +18,7 @@ var CCD = {
 		var oCouleur = color || "#69FF4F";
 		var t_el = [];
 		for (i=0;i < array_prod.length;i++) {
-			t_el[i] = $('input[@value=' + array_prod[i] + ']').next('.x-form-text')[0];
+			t_el[i] = $('input[value="' + array_prod[i] + '"]').next('.x-form-text')[0];
 		}
 		nohighlight();
 		setTimeout(function(){jQuery(t_el).highlight(oCouleur,5000);},200);
