@@ -1,0 +1,13 @@
+<div id="encart" class="liste articles sommaire">
+<h2 class="h2"><:derniere_publication_integree:></h2>
+<ul class="liste-items">
+<BOUCLE_BIBLIO(tbl_bibliographies){!par date}{0,1}>
+<li><span class="biblio-date">#DATE</span> - <span class="biblio-titre">#TITRE,</span> <span class="biblio-auteurs">#AUTEURS</span></li>
+</BOUCLE_BIBLIO>
+</ul>
+<hr class="separation">
+<h2 class="h2"><:le_saviez_vous:></h2>
+<BOUCLE_MINITEXTE(tbl_minitextes){par hasard}{0,1}>
+<p>#TEXTE</p>
+</BOUCLE_MINITEXTE>
+</div>
