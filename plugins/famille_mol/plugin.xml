@@ -18,7 +18,7 @@ _ &#169; 2008 - Licence GPL
 	</pipeline>
 	<bouton id='fmol' parent='allerdata'>
 		<titre>allerdata:famille_mols</titre>
-		<icone>img_pack/famille_mol-16.png</icone>
+		<icone>images/famille_mol-16.png</icone>
 		<url>allerdata</url>
 		<args>page=famille_mols</args>
 	</bouton>
