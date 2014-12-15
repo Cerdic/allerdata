@@ -12,8 +12,8 @@ function cohorte_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['groupes_patients']='tbl_groupes_patients';
 
 	// jointures
-	$interface['tables_jointures']['tbl_groupes_patients']='tbl_reactions_croisees';
-	$interface['tables_jointures']['tbl_reactions_croisees']='tbl_groupes_patients';
+	$interface['tables_jointures']['tbl_groupes_patients'][]='tbl_reactions_croisees';
+	$interface['tables_jointures']['tbl_reactions_croisees'][]='tbl_groupes_patients';
 	$interface['table_des_traitements']['DESCRIPTION']['tbl_groupes_patients']=  _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['REMARQUES']['tbl_groupes_patients']=  _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['PAYS']['tbl_groupes_patients']= "traduit_pays(%s)";
