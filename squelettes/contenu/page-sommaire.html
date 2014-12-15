@@ -1,46 +1,60 @@
-<p id="ariane"><:ad:accueil:></p>
+<p id="ariane"><:accueil:></p>
 <div id="edito" class="clearfix">
 	<h1><:ad:accueil_ad:></h1>
 	<BOUCLE_Edito(ARTICLES){titre_mot=Edito}{!par date}{lang}{0,1}>
 	<h2><a href="#URL_ARTICLE" class="formation">#TITRE[ - <:par_auteur:> (#LESAUTEURS)]</a></h2>
 	<p>[(#TEXTE|couper{280})]</p>
-	<p class="lireSuite"><a href="#URL_ARTICLE" title="<:ad:lire_la_suite_edito:>">[(#CHEMIN{images/lire_suite_big.gif}|balise_img{<:ad:lire_la_suite_edito:>})]></a></p>
+	<p class="lireSuite"><a href="#URL_ARTICLE"><img src="#CHEMIN{images/lire_suite_big.gif}" alt="Edito, Lien Lire la suite" title="Edito, Lire la suite" /></a></p>
 	<img src="#CHEMIN{images/plume.gif}" alt="" id="plume" />
 	</BOUCLE_Edito>
 </div>
-
-<BOUCLE_AccueilGauche(RUBRIQUES){titre_mot=AccueilGauche}>
-<div id="sommaire1" class="sommaire">
-	<h2><img src="#CHEMIN{images/picto_ouvert_big.gif}" alt="<:ad:acces_libre:>" /> <a href="#URL_RUBRIQUE">#TITRE</a></h2>
-	<B_ArticlesAccueilGauche>
-	<ul class="listeArticles">
-		<BOUCLE_ArticlesAccueilGauche(ARTICLES){branche}{!par date}{0,2}>
-		<li class="listeFormation">
-			<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE</a></h3>
-			<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
-			<p class="txtSommaire">[(#TEXTE|couper{280})]</p>
-			<p class="lireSuite"><a href="#URL_ARTICLE" title="<:ad:lire_la_suite:>">[(#CHEMIN{images/lire_suite.gif}|balise_img{<:ad:lire_la_suite:>})]</a></p>
-		</li>
-		</BOUCLE_ArticlesAccueilGauche>
+<!-- contact -->
+<h2 class="mise-a-jour">Travaillons ensemble</h2>
+	<div id="Sugg-presenter" style="padding-top : 5px;">
+	<p>Les connaissances en matière d’allergologie moléculaire et de réactivité croisée sont constamment remaniées.</p>
+	<p>Nous nous efforçons de surveiller les nouvelles publications mais il est possible que certaines informations nous échappent.</br>
+	Si vous constatez que sur notre site manque un test d’IgE réactivité pour un allergène ou  une publication importante, signalez le nous grâce au formulaire ci-dessous et nous ferons au plus vite pour corriger notre oubli.</p>
+	<p>Allerdata est la plus importante encyclopédie francophone en matière d’allergologie. Nous comptons aussi sur vous pour qu’elle le reste.</p></div>
+	<div id="Sugg-formulaire">
+		<BOUCLE_ecrire_auteur(AUTEURS){id_auteur=5}>
+		#FORMULAIRE_ECRIRE_AUTEUR
+		</BOUCLE_ecrire_auteur>
+	</div>
+	</div>
+<!-- défilé des actualités -->
+	<h2 class="mise-a-jour">Actualités</h2>
+	<!-- Start allerdata-news-slider -->
+	<ul id="ticker">
+		<BOUCLE_ACTUS(ARTICLES){id_rubrique=63}{0,3}{!par date}>
+			<li><strong>[(#TITRE)<br/>]</strong>[(#TEXTE|couper{500})]<p class="lireSuite"><a href="#URL_RUBRIQUE" alt="lire toutes les actualités"><img src="plugins/allerdata/theme/images/lire_suite_big.gif"/></a></p></li>
+		</BOUCLE_ACTUS>
 	</ul>
-	</B_ArticlesAccueilGauche>
-</div>
-</BOUCLE_AccueilGauche>
+	<script> 
+		function tick(){
+			$('#ticker li:first').slideUp( function () { $(this).appendTo($('#ticker')).slideDown(); });
+		}
+		setInterval(function(){ tick () }, 15000);
+	</script>
+<!-- Le sommaire du site limité aux articles de fond -->
+	<h1 class="mise-a-jour">#NOM_SITE_SPIP</h1>
+	<div id="sommaire-site">
+	<BOUCLE_Secteurs(RUBRIQUES){id_secteur=12}{doublons}{tout_voir}>
+		<B_SsRubriques>
+		<ul>
+		<BOUCLE_SsRubriques(RUBRIQUES){id_parent}{par num titre}{doublons}{tout_voir}>
+			<li><h3 class="plan-accueil"><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+				<BOUCLE_SsRubriquesRecursives(BOUCLE_SsRubriques)></BOUCLE_SsRubriquesRecursives>
 
-<BOUCLE_AccueilDroite(RUBRIQUES){titre_mot=AccueilDroite}{tout_voir}>
-<div id="sommaire2" class="sommaire">
-	<h2><img src="#CHEMIN{images/picto_ferme_big.gif}" alt="<:ad:acces_reserve:>" /> <a href="#URL_RUBRIQUE">#TITRE</a></h2>
-	<B_ArticlesAccueilDroite>
-	<ul class="listeArticles">
-		<BOUCLE_ArticlesAccueilDroite(ARTICLES){branche}{!par date}{0,2}{tout_voir}>
-		<li class="listeOutils">
-			<h3 class="titSommaire"><a href="#URL_ARTICLE" class="formation">#TITRE</a></h3>
-			<p class="dateSommaire">[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
-			<p class="txtSommaire">[(#TEXTE|couper{280})]</p>
-			<p class="lireSuite"><a href="#URL_ARTICLE" title="<:ad:lire_la_suite:>">[(#CHEMIN{images/lire_suite.gif}|balise_img{<:ad:lire_la_suite:>})]</a></p>
-		</li>
-		</BOUCLE_ArticlesAccueilDroite>
-	</ul>
-	</B_ArticlesAccueilDroite>
+			<B_articles_rubrique>
+			<ul>
+			<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par num titre}{tout_voir}{doublons}>
+				<li><a href="#URL_ARTICLE">#TITRE</a></li>
+			</BOUCLE_articles_rubrique>
+			</ul>
+			</B_articles_rubrique>
+			</li>
+		</BOUCLE_SsRubriques>
+		</ul>
+		</B_SsRubriques>
+	</BOUCLE_Secteurs>
 </div>
-</BOUCLE_AccueilDroite>

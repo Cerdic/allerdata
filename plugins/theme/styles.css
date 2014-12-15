@@ -975,3 +975,52 @@ text-decoration:none;
 
 #spip-debug {color:#000;}
 #spip-debug a {color:#303;}
+
+
+/* Page sommaire */
+.page_sommaire .mise-a-jour {
+	color: #2f7190;
+	background-image: url(images/bg_top_menu.gif);
+	background-repeat-x: no-repeat;
+	background-repeat-y: no-repeat;
+	background-attachment: initial;
+	background-position-x: 50%;
+	background-position-y: 0%;
+	background-origin: initial;
+	background-clip: initial;
+	background-color: transparent;
+	margin :0;
+	padding : 0;
+}
+.page_sommaire #main h2,
+.page_sommaire #main .h2,
+.page_sommaire #main h2.spip {
+	padding: 0;
+}
+.page_sommaire #contenu ul,
+.page_sommaire #ticker ul{
+	margin: 20px 0 20px 30px;
+	padding: 15px 35px 5px 20px;
+	}
+.page_sommaire #ticker {
+	height: 175px;
+	overflow: hidden;
+	border: 2px dotted #98B8C8;
+	border-radius: 12px 12px 12px 12px;
+	line-height: 1.5em;
+	position: center;
+	width: 654px;
+}
+.page_sommaire #ticker li {
+	padding : 5px;
+	height: 185px;
+	position : center;
+}
+
+.page_sommaire #sommaire-site ul {
+	padding : 5px 0 0 50px;
+	margin : 5px;
+}
+.page_sommaire #sommaire-site li{
+	height : 1.5 em;
+}
