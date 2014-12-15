@@ -13,7 +13,8 @@ $GLOBALS['tables_principales']['spip_auteurs']['pass_clair']="tinytext DEFAULT '
 /* Compat fonctions 2.1 */
 
 function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false, $javascript=''){
-	return icone_base($lien,$texte,$fond,$fonction,"verticale $align",$javascript);
+	$ft = array('creer.gif'=>'add');
+	return icone_base($lien,$texte,$fond,isset($ft[$fonction])?$ft[$fonction]:$fonction,"verticale $align",$javascript);
 }
 
 
