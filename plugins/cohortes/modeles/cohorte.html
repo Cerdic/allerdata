@@ -2,6 +2,6 @@
 <div class='cohorte'><span class='numero'>##ID_GROUPES_PATIENT</span>
 <h3 class='repliable'>#NOM[ (#INCLURE{fond=modeles/biblio}{id=#ID_BIBLIOGRAPHIE})]</h3>
 [<div class='description'>(#DESCRIPTION)</div>]
-<BOUCLE_rcs(tbl_reactions_croisees){id_groupes_patient} />[(#TOTAL_BOUCLE|oui)[<span class='rcs'>(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{cohorte:une_rc,cohorte:des_rc})</span>]]<//B_rcs>
+<BOUCLE_rcs(tbl_reactions_croisees){id_groupes_patient} />[(#TOTAL_BOUCLE|oui)[<span class='rcs'>(#TOTAL_BOUCLE|singulier_ou_pluriel{cohorte:une_rc,cohorte:des_rc})</span>]]<//B_rcs>
 </div>
 </BOUCLE_cohorte>

@@ -1,5 +1,5 @@
 <B_utilisations>
-<h3>[(#GRAND_TOTAL|affiche_un_ou_plusieurs{biblio:une_utilisation,biblio:des_utilisations})]</h3>
+<h3>[(#GRAND_TOTAL|singulier_ou_pluriel{biblio:une_utilisation,biblio:des_utilisations})]</h3>
 [<p class='pagination'>(#PAGINATION{page})</p>]
 <ul class='liste_items'>
 <BOUCLE_utilisations(ARTICLES){id_bibliographie}{pagination 10}{par titre}{statut?}>
