@@ -117,21 +117,10 @@ function dragdrop(){
 		tolerance: 'touch',
 
 		drop: function (ev, ui){
-			console.log('dropped');
-			console.log(ev);
-			console.log(ui);
-
-
 			var idMol = jQuery("span", ui.draggable).remove().text();
-			console.log(idMol);
-			console.log(jQuery(ui.draggable));
 			var nom = jQuery(ui.draggable).text();
-			console.log(nom);
 			var idDiv = jQuery(this).attr('id');
-			console.log(idDiv);
 			var lId = idDiv.replace('div-s', 'p');
-			console.log(lId);
-			console.log(jQuery('#'+lId).val());
 			if (!parseInt(jQuery('#'+lId).val())){
 				var pos = idDiv.substr(5, 1);
 				ZONES_SAISIE.combo[pos].setValue(nom);
