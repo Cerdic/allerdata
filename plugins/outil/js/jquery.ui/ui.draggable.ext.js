@@ -6,7 +6,12 @@
 
 (function($) {
 
-	$.ui.plugin.add("draggable", "stop", "effect", function(e,ui) {
+	$.ui.plugin.oldadd = function(w, c, o, p) {
+		$.ui[w].prototype.plugins = $.ui[w].prototype.plugins || {};
+		$.ui.plugin.add(w,o,{c:p});
+	};
+
+	$.ui.plugin.oldadd("draggable", "stop", "effect", function(e,ui) {
 		var t = ui.helper;
 		if(ui.options.effect[1]) {
 			if(t != this) {
@@ -23,7 +28,7 @@
 		}
 	});
 	
-	$.ui.plugin.add("draggable", "start", "effect", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "start", "effect", function(e,ui) {
 		if(ui.options.effect[0]) {
 			switch(ui.options.effect[0]) {
 				case 'fade':
@@ -35,44 +40,44 @@
 
 //----------------------------------------------------------------
 
-	$.ui.plugin.add("draggable", "start", "cursor", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "start", "cursor", function(e,ui) {
 		var t = $('body');
 		if (t.css("cursor")) ui.options.ocursor = t.css("cursor");
 		t.css("cursor", ui.options.cursor);
 	});
 
-	$.ui.plugin.add("draggable", "stop", "cursor", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "stop", "cursor", function(e,ui) {
 		if (ui.options.ocursor) $('body').css("cursor", ui.options.ocursor);
 	});
 
 //----------------------------------------------------------------
 	
-	$.ui.plugin.add("draggable", "start", "zIndex", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "start", "zIndex", function(e,ui) {
 		var t = $(ui.helper);
 		if(t.css("zIndex")) ui.options.ozIndex = t.css("zIndex");
 		t.css('zIndex', ui.options.zIndex);
 	});
 	
-	$.ui.plugin.add("draggable", "stop", "zIndex", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "stop", "zIndex", function(e,ui) {
 		if(ui.options.ozIndex) $(ui.helper).css('zIndex', ui.options.ozIndex);
 	});
 
 
 //----------------------------------------------------------------
 
-	$.ui.plugin.add("draggable", "start", "opacity", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "start", "opacity", function(e,ui) {
 		var t = $(ui.helper);
 		if(t.css("opacity")) ui.options.oopacity = t.css("opacity");
 		t.css('opacity', ui.options.opacity);
 	});
 	
-	$.ui.plugin.add("draggable", "stop", "opacity", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "stop", "opacity", function(e,ui) {
 		if(ui.options.oopacity) $(ui.helper).css('opacity', ui.options.oopacity);
 	});
 
 //----------------------------------------------------------------
 
-	$.ui.plugin.add("draggable", "stop", "revert", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "stop", "revert", function(e,ui) {
 	
 		var o = ui.options;
 		var rpos = { left: 0, top: 0 };
@@ -108,7 +113,7 @@
 
 //----------------------------------------------------------------
 
-	$.ui.plugin.add("draggable", "start", "iframeFix", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "start", "iframeFix", function(e,ui) {
 
 		var o = ui.options;
 		if(!ui.draggable.slowMode) { // Make clones on top of iframes (only if we are not in slowMode)
@@ -127,13 +132,13 @@
 
 	});
 	
-	$.ui.plugin.add("draggable","stop", "iframeFix", function(e,ui) {
+	$.ui.plugin.oldadd("draggable","stop", "iframeFix", function(e,ui) {
 		if(ui.options.iframeFix) $("div.DragDropIframeFix").each(function() { this.parentNode.removeChild(this); }); //Remove frame helpers	
 	});
 		
 //----------------------------------------------------------------
 
-	$.ui.plugin.add("draggable", "start", "containment", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "start", "containment", function(e,ui) {
 
 		var o = ui.options;
 
@@ -162,7 +167,7 @@
 
 	});
 	
-	$.ui.plugin.add("draggable", "drag", "containment", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "drag", "containment", function(e,ui) {
 		
 		var o = ui.options;
 		if(!o.cursorAtIgnore) return;
@@ -192,7 +197,7 @@
 
 //----------------------------------------------------------------
 
-	$.ui.plugin.add("draggable", "drag", "grid", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "drag", "grid", function(e,ui) {
 		var o = ui.options;
 		if(!o.cursorAtIgnore) return;
 		ui.draggable.pos[0] = o.co.left + o.margins.left - o.po.left + Math.round((ui.draggable.pos[0] - o.co.left - o.margins.left + o.po.left) / o.grid[0]) * o.grid[0];
@@ -201,7 +206,7 @@
 
 //----------------------------------------------------------------
 
-	$.ui.plugin.add("draggable", "drag", "axis", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "drag", "axis", function(e,ui) {
 		var o = ui.options;
 		if(!o.cursorAtIgnore) return;
 		if(o.constraint) o.axis = o.constraint; //Legacy check
@@ -210,7 +215,7 @@
 
 //----------------------------------------------------------------
 
-	$.ui.plugin.add("draggable", "drag", "scroll", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "drag", "scroll", function(e,ui) {
 
 		var o = ui.options;
 		o.scrollSensitivity	= o.scrollSensitivity || 20;
@@ -229,7 +234,7 @@
 
 //----------------------------------------------------------------
 
-	$.ui.plugin.add("draggable", "drag", "wrapHelper", function(e,ui) {
+	$.ui.plugin.oldadd("draggable", "drag", "wrapHelper", function(e,ui) {
 
 		var o = ui.options;
 		if(o.cursorAtIgnore) return;
