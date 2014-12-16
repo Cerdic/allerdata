@@ -17,5 +17,7 @@ if ($lang = _request('lang')){
 	include_spip('inc/cookie');
 	spip_setcookie('spip_lang',$_COOKIE['spip_lang']=$lang);
 }
-
-?>
+else {
+	if (isset($_COOKIE['spip_lang']))
+		$_GET['lang'] = $_COOKIE['spip_lang'];
+}
