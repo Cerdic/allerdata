@@ -96,43 +96,53 @@ var LISTE_DES_SUGGESTIONS = {
 
 function dragdrop(){
 
-  jQuery('.cell_mol').not('.info_mol').draggable({
-    helper: 'clone',
-    appendTo: 'body',
-    effect: 'fade'
-  });
+	jQuery('.cell_mol').not('.info_mol').draggable({
+		helper: 'clone',
+		appendTo: 'body',
+		effect: 'fade'
+	});
 
-  jQuery('#div-s1,#div-s2,#div-s3,#div-s4,#div-s5').filter(function() {
-		  lId=$(this).attr('id').replace('div-s','#p');
-		  lValue=$(this).find(lId).val();
-		  if (lValue > 0){
-			$(this).filter('.ui-droppable').droppableDestroy();
+	jQuery('#div-s1,#div-s2,#div-s3,#div-s4,#div-s5').filter(function (){
+		lId = $(this).attr('id').replace('div-s', '#p');
+		lValue = $(this).find(lId).val();
+		if (lValue>0){
+			$(this).filter('.ui-droppable').droppable("destroy");
 			return false;
-		  }
-		  return true;
-		}).not('.ui-droppable').droppable({
-    accept: '.cell_mol',
-    activeClass: 'activedrop',
-    hoverClass: 'hoverdrop',
-    tolerance: 'touch',
+		}
+		return true;
+	}).not('.ui-droppable').droppable({
+		accept: '.cell_mol',
+		activeClass: 'activedrop',
+		hoverClass: 'hoverdrop',
+		tolerance: 'touch',
 
-    drop: function(ev, ui) {
+		drop: function (ev, ui){
+			console.log('dropped');
+			console.log(ev);
+			console.log(ui);
 
-	  var idMol = jQuery("span",ui.draggable.element).remove().text();
-      var nom = jQuery(ui.draggable.element).text();
-      var idDiv = jQuery(this).attr('id');
-      var lId = idDiv.replace('div-s','p');
-      if (!jQuery('#'+lId).val()) {
-        var pos = idDiv.substr(5,1);
-        ZONES_SAISIE.combo[pos].setValue(nom);
-        jQuery('#'+lId).val(idMol);
-        ZONES_SAISIE.combo[pos].triggers[0].show();
-        reload_penta();
-      }
 
-    }
+			var idMol = jQuery("span", ui.draggable).remove().text();
+			console.log(idMol);
+			console.log(jQuery(ui.draggable));
+			var nom = jQuery(ui.draggable).text();
+			console.log(nom);
+			var idDiv = jQuery(this).attr('id');
+			console.log(idDiv);
+			var lId = idDiv.replace('div-s', 'p');
+			console.log(lId);
+			console.log(jQuery('#'+lId).val());
+			if (!parseInt(jQuery('#'+lId).val())){
+				var pos = idDiv.substr(5, 1);
+				ZONES_SAISIE.combo[pos].setValue(nom);
+				jQuery('#'+lId).val(idMol);
+				ZONES_SAISIE.combo[pos].triggers[0].show();
+				reload_penta();
+			}
 
-  });
+		}
+
+	});
 }
 
 Ext.onReady(LISTE_DES_SUGGESTIONS.init, LISTE_DES_SUGGESTIONS);

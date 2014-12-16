@@ -1,237 +1,165 @@
-(function($) {
-	
-	//If the UI scope is not availalable, add it
-	$.ui = $.ui || {};
-	
-	//Add methods that are vital for all mouse interaction stuff (plugin registering)
-	$.extend($.ui, {
-		plugin: {
-			add: function(w, c, o, p) {
-				var a = $.ui[w].prototype; if(!a.plugins[c]) a.plugins[c] = [];
-				a.plugins[c].push([o,p]);
-			},
-			call: function(instance, name, arguments) {
-				var c = instance.plugins[name]; if(!c) return;
-				var o = instance.interaction ? instance.interaction.options : instance.options;
-				var e = instance.interaction ? instance.interaction.element : instance.element;
-				
-				for (var i = 0; i < c.length; i++) {
-					if (o[c[i][0]]) c[i][1].apply(e, arguments);
-				}	
-			}	
-		}
-	});
-	
-	$.fn.mouseInteractionDestroy = function() {
-		this.each(function() {
-			if($.data(this, "ui-mouse")) $.data(this, "ui-mouse").destroy(); 	
-		});
-	}
-	
-	$.ui.mouseInteraction = function(el,o) {
-	
-		if(!o) var o = {};
-		this.element = el;
-		$.data(this.element, "ui-mouse", this);
-		
-		this.options = {};
-		$.extend(this.options, o);
-		$.extend(this.options, {
-			handle : o.handle ? ($(o.handle, el)[0] ? $(o.handle, el) : $(el)) : $(el),
-			helper: o.helper || 'original',
-			preventionDistance: o.preventionDistance || 0,
-			dragPrevention: o.dragPrevention ? o.dragPrevention.toLowerCase().split(',') : ['input','textarea','button','select','option'],
-			cursorAt: { top: ((o.cursorAt && o.cursorAt.top) ? o.cursorAt.top : 0), left: ((o.cursorAt && o.cursorAt.left) ? o.cursorAt.left : 0), bottom: ((o.cursorAt && o.cursorAt.bottom) ? o.cursorAt.bottom : 0), right: ((o.cursorAt && o.cursorAt.right) ? o.cursorAt.right : 0) },
-			cursorAtIgnore: (!o.cursorAt) ? true : false, //Internal property
-			appendTo: o.appendTo || 'parent'			
-		})
-		o = this.options; //Just Lazyness
-		
-		if(!this.options.nonDestructive && (o.helper == 'clone' || o.helper == 'original')) {
+/*!
+ * jQuery UI Mouse 1.8.21
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Mouse
+ *
+ * Depends:
+ *	jquery.ui.widget.js
+ */
+(function( $, undefined ) {
 
-			// Let's save the margins for better reference
-			o.margins = {
-				top: parseInt($(el).css('marginTop')) || 0,
-				left: parseInt($(el).css('marginLeft')) || 0,
-				bottom: parseInt($(el).css('marginBottom')) || 0,
-				right: parseInt($(el).css('marginRight')) || 0
-			};
+var mouseHandled = false;
+$( document ).mouseup( function( e ) {
+	mouseHandled = false;
+});
 
-			// We have to add margins to our cursorAt
-			if(o.cursorAt.top != 0) o.cursorAt.top = o.margins.top;
-			if(o.cursorAt.left != 0) o.cursorAt.left += o.margins.left;
-			if(o.cursorAt.bottom != 0) o.cursorAt.bottom += o.margins.bottom;
-			if(o.cursorAt.right != 0) o.cursorAt.right += o.margins.right;
-			
-			
-			if(o.helper == 'original')
-				o.wasPositioned = $(el).css('position');
-			
-		} else {
-			o.margins = { top: 0, left: 0, right: 0, bottom: 0 };
-		}
-		
+$.widget("ui.mouse", {
+	options: {
+		cancel: ':input,option',
+		distance: 1,
+		delay: 0
+	},
+	_mouseInit: function() {
 		var self = this;
-		this.mousedownfunc = function(e) { // Bind the mousedown event
-			return self.click.apply(self, [e]);	
+
+		this.element
+			.bind('mousedown.'+this.widgetName, function(event) {
+				return self._mouseDown(event);
+			})
+			.bind('click.'+this.widgetName, function(event) {
+				if (true === $.data(event.target, self.widgetName + '.preventClickEvent')) {
+				    $.removeData(event.target, self.widgetName + '.preventClickEvent');
+					event.stopImmediatePropagation();
+					return false;
+				}
+			});
+
+		this.started = false;
+	},
+
+	// TODO: make sure destroying one instance of mouse doesn't mess with
+	// other instances of mouse
+	_mouseDestroy: function() {
+		this.element.unbind('.'+this.widgetName);
+		$(document)
+			.unbind('mousemove.'+this.widgetName, this._mouseMoveDelegate)
+			.unbind('mouseup.'+this.widgetName, this._mouseUpDelegate);
+	},
+
+	_mouseDown: function(event) {
+		// don't let more than one widget handle mouseStart
+		if( mouseHandled ) { return };
+
+		// we may have missed mouseup (out of window)
+		(this._mouseStarted && this._mouseUp(event));
+
+		this._mouseDownEvent = event;
+
+		var self = this,
+			btnIsLeft = (event.which == 1),
+			// event.target.nodeName works around a bug in IE 8 with
+			// disabled inputs (#7620)
+			elIsCancel = (typeof this.options.cancel == "string" && event.target.nodeName ? $(event.target).closest(this.options.cancel).length : false);
+		if (!btnIsLeft || elIsCancel || !this._mouseCapture(event)) {
+			return true;
 		}
-		o.handle.bind('mousedown', this.mousedownfunc);
-		
-		//Prevent selection of text when starting the drag in IE
-		if($.browser.msie) $(this.element).attr('unselectable', 'on');
-		
-	}
-	
-	$.extend($.ui.mouseInteraction.prototype, {
-		plugins: {},
-		currentTarget: null,
-		lastTarget: null,
-		timer: null,
-		slowMode: false,
-		init: false,
-		destroy: function() {
-			this.options.handle.unbind('mousedown', this.mousedownfunc);
-		},
-		trigger: function(e) {
-			return this.click.apply(this, arguments);
-		},
-		click: function(e) {
 
-			var o = this.options;
-			
-			window.focus();
-			if(e.which != 1) return true; //only left click starts dragging
-		
-			// Prevent execution on defined elements
-			var targetName = (e.target) ? e.target.nodeName.toLowerCase() : e.srcElement.nodeName.toLowerCase();
-			for(var i=0;i<o.dragPrevention.length;i++) {
-				if(targetName == o.dragPrevention[i]) return true;
-			}
-
-			//Prevent execution on condition
-			if(o.startCondition && !o.startCondition.apply(this, [e])) return true;
-
-			var self = this;
-			this.mouseup = function(e) { return self.stop.apply(self, [e]); }
-			this.mousemove = function(e) { return self.drag.apply(self, [e]); }
-
-			var initFunc = function() { //This function get's called at bottom or after timeout
-				$(document).bind('mouseup', self.mouseup);
-				$(document).bind('mousemove', self.mousemove);
-				self.opos = [e.pageX,e.pageY]; // Get the original mouse position
-			}
-			
-			if(o.preventionTimeout) { //use prevention timeout
-				if(this.timer) clearInterval(this.timer);
-				this.timer = setTimeout(function() { initFunc(); }, o.preventionTimeout);
-				return false;
-			}
-		
-			initFunc();
-			return false;
-			
-		},
-		start: function(e) {
-			
-			var o = this.options; var a = this.element;
-			o.co = $(a).offset(); //get the current offset
-				
-			this.helper = typeof o.helper == 'function' ? $(o.helper.apply(a, [e,this]))[0] : (o.helper == 'clone' ? $(a).clone()[0] : a);
-
-			if(o.appendTo == 'parent') { // Let's see if we have a positioned parent
-				var cp = a.parentNode;
-				while (cp) {
-					if(cp.style && ($(cp).css('position') == 'relative' || $(cp).css('position') == 'absolute')) {
-						o.pp = cp;
-						o.po = $(cp).offset();
-						o.ppOverflow = !!($(o.pp).css('overflow') == 'auto' || $(o.pp).css('overflow') == 'scroll'); //TODO!
-						break;	
-					}
-					cp = cp.parentNode ? cp.parentNode : null;
-				};
-				
-				if(!o.pp) o.po = { top: 0, left: 0 };
-			}
-			
-			this.pos = [this.opos[0],this.opos[1]]; //Use the relative position
-			this.rpos = [this.pos[0],this.pos[1]]; //Save the absolute position
-			
-			if(o.cursorAtIgnore) { // If we want to pick the element where we clicked, we borrow cursorAt and add margins
-				o.cursorAt.left = this.pos[0] - o.co.left + o.margins.left;
-				o.cursorAt.top = this.pos[1] - o.co.top + o.margins.top;
-			}
-
-
-
-			if(o.pp) { // If we have a positioned parent, we pick the draggable relative to it
-				this.pos[0] -= o.po.left;
-				this.pos[1] -= o.po.top;
-			}
-			
-			this.slowMode = (o.cursorAt && (o.cursorAt.top-o.margins.top > 0 || o.cursorAt.bottom-o.margins.bottom > 0) && (o.cursorAt.left-o.margins.left > 0 || o.cursorAt.right-o.margins.right > 0)) ? true : false; //If cursorAt is within the helper, set slowMode to true
-			
-			if(!o.nonDestructive) $(this.helper).css('position', 'absolute');
-			if(o.helper != 'original') $(this.helper).appendTo((o.appendTo == 'parent' ? a.parentNode : o.appendTo)).show();
-
-			// Remap right/bottom properties for cursorAt to left/top
-			if(o.cursorAt.right && !o.cursorAt.left) o.cursorAt.left = this.helper.offsetWidth+o.margins.right+o.margins.left - o.cursorAt.right;
-			if(o.cursorAt.bottom && !o.cursorAt.top) o.cursorAt.top = this.helper.offsetHeight+o.margins.top+o.margins.bottom - o.cursorAt.bottom;
-		
-			this.init = true;	
-
-			if(o._start) o._start.apply(a, [this.helper, this.pos, o.cursorAt, this, e]); // Trigger the start callback
-			this.helperSize = { width: $(this.helper).outerWidth(), height: $(this.helper).outerHeight() }; //Set helper size property
-			return false;
-						
-		},
-		stop: function(e) {			
-			
-			var o = this.options; var a = this.element; var self = this;
-
-			$(document).unbind('mouseup', self.mouseup);
-			$(document).unbind('mousemove', self.mousemove);
-
-			if(this.init == false) return this.opos = this.pos = null;
-			if(o._beforeStop) o._beforeStop.apply(a, [this.helper, this.pos, o.cursorAt, this, e]);
-
-			if(this.helper != a && !o.beQuietAtEnd) { // Remove helper, if it's not the original node
-				$(this.helper).remove(); this.helper = null;
-			}
-			
-			if(!o.beQuietAtEnd) {
-				//if(o.wasPositioned)	$(a).css('position', o.wasPositioned);
-				if(o._stop) o._stop.apply(a, [this.helper, this.pos, o.cursorAt, this, e]);
-			}
-
-			this.init = false;
-			this.opos = this.pos = null;
-			return false;
-			
-		},
-		drag: function(e) {
-
-			if (!this.opos || ($.browser.msie && !e.button)) return this.stop.apply(this, [e]); // check for IE mouseup when moving into the document again
-			var o = this.options;
-			
-			this.pos = [e.pageX,e.pageY]; //relative mouse position
-			if(this.rpos && this.rpos[0] == this.pos[0] && this.rpos[1] == this.pos[1]) return false;
-			this.rpos = [this.pos[0],this.pos[1]]; //absolute mouse position
-			
-			if(o.pp) { //If we have a positioned parent, use a relative position
-				this.pos[0] -= o.po.left;
-				this.pos[1] -= o.po.top;	
-			}
-			
-			if( (Math.abs(this.rpos[0]-this.opos[0]) > o.preventionDistance || Math.abs(this.rpos[1]-this.opos[1]) > o.preventionDistance) && this.init == false) //If position is more than x pixels from original position, start dragging
-				this.start.apply(this,[e]);			
-			else {
-				if(this.init == false) return false;
-			}
-		
-			if(o._drag) o._drag.apply(this.element, [this.helper, this.pos, o.cursorAt, this, e]);
-			return false;
-			
+		this.mouseDelayMet = !this.options.delay;
+		if (!this.mouseDelayMet) {
+			this._mouseDelayTimer = setTimeout(function() {
+				self.mouseDelayMet = true;
+			}, this.options.delay);
 		}
-	});
 
- })(jQuery);
+		if (this._mouseDistanceMet(event) && this._mouseDelayMet(event)) {
+			this._mouseStarted = (this._mouseStart(event) !== false);
+			if (!this._mouseStarted) {
+				event.preventDefault();
+				return true;
+			}
+		}
+
+		// Click event may never have fired (Gecko & Opera)
+		if (true === $.data(event.target, this.widgetName + '.preventClickEvent')) {
+			$.removeData(event.target, this.widgetName + '.preventClickEvent');
+		}
+
+		// these delegates are required to keep context
+		this._mouseMoveDelegate = function(event) {
+			return self._mouseMove(event);
+		};
+		this._mouseUpDelegate = function(event) {
+			return self._mouseUp(event);
+		};
+		$(document)
+			.bind('mousemove.'+this.widgetName, this._mouseMoveDelegate)
+			.bind('mouseup.'+this.widgetName, this._mouseUpDelegate);
+
+		event.preventDefault();
+		
+		mouseHandled = true;
+		return true;
+	},
+
+	_mouseMove: function(event) {
+		// IE mouseup check - mouseup happened when mouse was out of window
+		if ($.browser.msie && !(document.documentMode >= 9) && !event.button) {
+			return this._mouseUp(event);
+		}
+
+		if (this._mouseStarted) {
+			this._mouseDrag(event);
+			return event.preventDefault();
+		}
+
+		if (this._mouseDistanceMet(event) && this._mouseDelayMet(event)) {
+			this._mouseStarted =
+				(this._mouseStart(this._mouseDownEvent, event) !== false);
+			(this._mouseStarted ? this._mouseDrag(event) : this._mouseUp(event));
+		}
+
+		return !this._mouseStarted;
+	},
+
+	_mouseUp: function(event) {
+		$(document)
+			.unbind('mousemove.'+this.widgetName, this._mouseMoveDelegate)
+			.unbind('mouseup.'+this.widgetName, this._mouseUpDelegate);
+
+		if (this._mouseStarted) {
+			this._mouseStarted = false;
+
+			if (event.target == this._mouseDownEvent.target) {
+			    $.data(event.target, this.widgetName + '.preventClickEvent', true);
+			}
+
+			this._mouseStop(event);
+		}
+
+		return false;
+	},
+
+	_mouseDistanceMet: function(event) {
+		return (Math.max(
+				Math.abs(this._mouseDownEvent.pageX - event.pageX),
+				Math.abs(this._mouseDownEvent.pageY - event.pageY)
+			) >= this.options.distance
+		);
+	},
+
+	_mouseDelayMet: function(event) {
+		return this.mouseDelayMet;
+	},
+
+	// These are placeholder methods, to be overriden by extending plugin
+	_mouseStart: function(event) {},
+	_mouseDrag: function(event) {},
+	_mouseStop: function(event) {},
+	_mouseCapture: function(event) { return true; }
+});
+
+})(jQuery);
