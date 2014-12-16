@@ -20,7 +20,7 @@
 	    <li class="editer_parent picker[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_1})]">[(#FORM|concat{':label_',#GET{name}|concat{_1}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				#MODELE{picker_item,name=id_parent,selected=#ENV{#GET{name}},type_item=source,select=1,img_unpick=#CHEMIN{images/croix-rouge.gif}}
+				#MODELE{picker_item,name=id_parent,selected=#ENV{#GET{name}},type_item=source,select=1,img_unpick=#CHEMIN_IMAGE{supprimer-12.png}}
 	    </li>
 	  	#SET{name,id_type_item}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -86,13 +86,13 @@
 	    <li class="editer_parent picker[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_2})]">[(#FORM|concat{':label_',#GET{name}|concat{_2}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				#MODELE{picker_item,name=id_parent,selected=#ENV{#GET{name}},select=1,type_item=categorie_produit,img_unpick=#CHEMIN{images/croix-rouge.gif}}	    
+				#MODELE{picker_item,name=id_parent,selected=#ENV{#GET{name}},select=1,type_item=categorie_produit,img_unpick=#CHEMIN_IMAGE{supprimer-12.png}}
 	    </li>
 	  	#SET{name,id_parent}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 	    <li class="editer_parent picker[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label for="[(#GET{name}|concat{_3})]">[(#FORM|concat{':label_',#GET{name}|concat{_3}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				#MODELE{picker_item,name=id_parent,selected=#ENV{#GET{name}},type_item=produit_generique,img_unpick=#CHEMIN{images/croix-rouge.gif}}	    
+				#MODELE{picker_item,name=id_parent,selected=#ENV{#GET{name}},type_item=produit_generique,img_unpick=#CHEMIN_IMAGE{supprimer-12.png}}
 	    </li>
 	  	#SET{name,commentaires}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,#ENV{id_item}|intval|?{obligatoire}}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
