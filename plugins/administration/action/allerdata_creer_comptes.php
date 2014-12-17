@@ -75,8 +75,8 @@ function allerdata_creer_comptes(){
 				."</tr>";
 				
 				// verifier les droits d'acces aux zones restreintes
-				if ($droit AND !sql_getfetsel('id_zone','spip_zones_auteurs','id_auteur='.intval($row['id_auteur']).' AND id_zone=2')){
-					sql_insertq('spip_zones_auteurs',array('id_auteur'=>$row['id_auteur'],'id_zone'=>2));
+				if ($droit AND !sql_getfetsel('id_zone','spip_zones_liens',"objet='auteur' AND id_objet=".intval($row['id_auteur']).' AND id_zone=2')){
+					sql_insertq('spip_zones_liens',array('objet'=>'auteur','id_objet'=>$row['id_auteur'],'id_zone'=>2));
 				}
 			}
 		}
